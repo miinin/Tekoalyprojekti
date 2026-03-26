@@ -1,20 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Outfit:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700;900&display=swap');
 
 :root {
-  --primary-color: #6366f1; /* Indigo */
-  --primary-hover: #4f46e5;
-  --secondary-color: #ec4899; /* Pink */
-  --accent-color: #06b6d4; /* Cyan */
-  --bg-color: #0f172a; /* Slate 900 */
-  --surface-color: #1e293b; /* Slate 800 */
-  --surface-hover: #334155;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
+  --primary-color: #0072C6; /* Raikas sininen */
+  --primary-hover: #005A9E;
+  --secondary-color: #F2A900; /* Pirteä keltainen/oranssi */
+  --accent-color: #78BE20; /* Eduks vihreä */
+  --bg-color: #f7fbff; /* Vaalea, raikas tausta */
+  --surface-color: #ffffff; /* Puhdas valkoinen elementeille */
+  --surface-hover: #f1f5f9;
+  --text-main: #2b3a4a;
+  --text-muted: #64748b;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --font-main: 'Inter', system-ui, sans-serif;
-  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-main: 'Roboto', sans-serif;
+  --font-display: 'Bebas Neue', sans-serif;
 }
 
 * {
@@ -26,8 +26,9 @@
 body {
   font-family: var(--font-main);
   background-color: var(--bg-color);
-  background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.15), transparent 40%),
-                    radial-gradient(circle at bottom left, rgba(236, 72, 153, 0.1), transparent 40%);
+  background-image: 
+    radial-gradient(at 100% 0%, rgba(0, 114, 198, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(120, 190, 32, 0.05) 0px, transparent 50%);
   color: var(--text-main);
   line-height: 1.5;
   min-height: 100vh;
@@ -45,27 +46,26 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 400;
   margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+  letter-spacing: 1px;
 }
 
 h1 {
-  font-size: 2.5rem;
-  background: linear-gradient(135deg, #fff, #a5b4fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  color: var(--primary-color);
 }
 
 button {
   cursor: pointer;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0.75rem 1.5rem;
   font-weight: 700;
-  font-size: 1rem;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  font-family: inherit;
+  font-size: 1.1rem;
+  transition: all 0.2s ease-in-out;
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -81,34 +81,33 @@ button:active {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  background: var(--primary-color);
   color: white;
-  box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+  box-shadow: 0 4px 12px rgba(0, 114, 198, 0.2);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.5);
+  background: var(--primary-hover);
+  box-shadow: 0 6px 16px rgba(0, 114, 198, 0.3);
 }
 
 .btn-secondary {
   background: var(--surface-color);
-  color: var(--text-main);
-  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
 
 .btn-secondary:hover {
-  background: var(--surface-hover);
-  border-color: rgba(255,255,255,0.2);
+  background: var(--primary-color);
+  color: white;
 }
 
 .glass-panel {
-  background: rgba(30, 41, 59, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
+  background: var(--surface-color);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
   padding: 1.5rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
 
 /* Animations */

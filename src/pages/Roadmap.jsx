@@ -1,3 +1,4 @@
+import { categories } from '../data/questions';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Map, Wrench, Flame } from 'lucide-react';
@@ -5,12 +6,14 @@ import { Map, Wrench, Flame } from 'lucide-react';
 export default function Roadmap() {
   const navigate = useNavigate();
   
-  const stages = [
-    { id: 1, title: 'Tekoälyn perusteet', completed: true },
-    { id: 2, title: 'Konepellin alla', active: true },
-    { id: 3, title: 'Tekoäly arjessamme', locked: true },
-    { id: 4, title: 'Etiikka ja turvallisuus', locked: true }
-  ];
+  // Oletetaan, että ensimmäinen on "suoritettu", toinen on "aktiivinen", loput "lukossa" demon vuoksi
+  const stages = categories.map((cat, index) => ({
+    id: index + 1,
+    title: cat.name,
+    completed: index < 1,
+    active: index === 1,
+    locked: index > 1
+  }));
 
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
@@ -18,8 +21,8 @@ export default function Roadmap() {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h1 style={{ fontSize: '2.5rem', margin: 0 }}>Tiekartta</h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--warning)', fontWeight: 'bold', marginTop: '0.5rem' }}>
+          <h1 style={{ margin: 0 }}>Tiekartta</h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--secondary-color)', fontWeight: '700', marginTop: '0.5rem', fontFamily: 'var(--font-main)' }}>
             <Flame size={20} /> Vauhtiputki: 3x kerroin
           </div>
         </div>
@@ -31,34 +34,35 @@ export default function Roadmap() {
       {/* Map Nodes */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', marginTop: '2rem' }}>
         {/* Line behind nodes */}
-        <div style={{ position: 'absolute', left: '24px', top: '24px', bottom: '24px', width: '4px', background: 'rgba(255,255,255,0.05)', zIndex: 0, borderRadius: '4px' }}></div>
+        <div style={{ position: 'absolute', left: '32px', top: '24px', bottom: '24px', width: '4px', background: '#e2e8f0', zIndex: 0, borderRadius: '4px' }}></div>
         
         {stages.map((stage) => (
           <div key={stage.id} style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', position: 'relative', zIndex: 1 }}>
             <div style={{ 
-              width: '52px', 
-              height: '52px', 
+              width: '64px', 
+              height: '64px', 
               borderRadius: '50%', 
               display: 'flex', 
               alignItems: 'center', 
               justifyContent: 'center',
-              fontWeight: '900',
-              fontSize: '1.2rem',
-              background: stage.completed ? 'var(--success)' : stage.active ? 'linear-gradient(135deg, var(--primary-color), var(--accent-color))' : 'var(--surface-color)',
+              fontFamily: 'var(--font-display)',
+              fontSize: '1.8rem',
+              background: stage.completed ? 'var(--accent-color)' : stage.active ? 'var(--primary-color)' : '#e2e8f0',
               color: stage.locked ? 'var(--text-muted)' : 'white',
-              border: stage.active ? '4px solid rgba(99, 102, 241, 0.3)' : '4px solid var(--bg-color)',
-              boxShadow: stage.active ? '0 0 20px rgba(99, 102, 241, 0.5)' : 'none'
+              border: '4px solid white',
+              boxShadow: stage.active ? '0 0 0 4px rgba(0, 114, 198, 0.2)' : '0 4px 6px rgba(0,0,0,0.05)'
             }}>
               {stage.id}
             </div>
-            <div className="glass-panel" style={{ flexGrow: 1, opacity: stage.locked ? 0.5 : 1, padding: '1.2rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="glass-panel" style={{ flexGrow: 1, opacity: stage.locked ? 0.6 : 1, padding: '1.2rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderLeft: stage.active ? '4px solid var(--primary-color)' : '1px solid rgba(0,0,0,0.05)' }}>
               <div>
-                <h3 style={{ margin: 0, color: stage.locked ? 'var(--text-muted)' : 'white', fontSize: '1.25rem' }}>{stage.title}</h3>
-                {stage.active && <p style={{ color: 'var(--accent-color)', margin: '0.25rem 0 0 0', fontWeight: '600', fontSize: '0.9rem' }}>Seuraava etappi!</p>}
-                {stage.completed && <p style={{ color: 'var(--success)', margin: '0.25rem 0 0 0', fontWeight: '600', fontSize: '0.9rem' }}>Suoritettu</p>}
+                <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.6rem' }}>{stage.title}</h3>
+                {stage.active && <p style={{ color: 'var(--primary-color)', margin: '0.25rem 0 0 0', fontWeight: '500', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Seuraava etappi!</p>}
+                {stage.completed && <p style={{ color: 'var(--accent-color)', margin: '0.25rem 0 0 0', fontWeight: '500', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Suoritettu</p>}
+                {stage.locked && <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0 0', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Lukittu</p>}
               </div>
               {stage.active && (
-                <button className="btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Pelaa</button>
+                <button className="btn-primary" style={{ padding: '0.5rem 1.5rem' }}>Pelaa</button>
               )}
             </div>
           </div>
