@@ -1,70 +1,13 @@
-<!DOCTYPE html>
-<html lang="fi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World</title>
-</head>
-<body>
-    <h1>Hello World!</h1>
-    <p>Tämä on testitiedosto GitHub-yhteyden testaamiseksi.</p>
-
-    <!-- Tietokantayhteyden tilan näyttö -->
-    <h2>Tietokannan tila:</h2>
-    <p id="db-status">Yhdistetään tietokantaan...</p>
-
-    <!-- Firebase SDK (ES Moduulit) -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
-
-        // Tässä on antamasi API-key ja config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCn2eOxOWRbUNKefuTVFWGM9WrNaLaT5ac",
-            authDomain: "aivan-a9d6e.firebaseapp.com",
-            projectId: "aivan-a9d6e",
-            storageBucket: "aivan-a9d6e.firebasestorage.app",
-            messagingSenderId: "689041328881",
-            appId: "1:689041328881:web:6a83c55a38be334fda7750"
-        };
-
-        try {
-            // Alustetaan Firebase
-            const app = initializeApp(firebaseConfig);
-            // Haetaan Firestore-tietokantayhteys
-            const db = getFirestore(app);
-
-            // Testaa yhteyttä yrittämällä lukea "test" kokoelmaa
-            async function testConnection() {
-                const statusEl = document.getElementById("db-status");
-                try {
-                    // Yritetään hakea data, jotta nähdään toimiiko yhteys
-                    await getDocs(collection(db, "test"));
-                    statusEl.innerText = "✅ Yhteys tietokantaan onnistui! Kaikki toimii.";
-                    statusEl.style.color = "green";
-                    console.log("Firebase yhteys ok.");
-                } catch (error) {
-                    // Jos tulee virhe, tulostetaan se näytölle
-                    let errorMsg = "❌ Virhe tietokantayhteydessä:\n\nVirhekoodi: " + error.code + "\n\nViesti: " + error.message;
-                    
-                    if (error.code === 'permission-denied') {
-                        errorMsg += "\n\n(Huomio: Tämä 'permission-denied' -virhekoodi tarkoittaa yleensä sitä, että itse yhteys Firebaseen toimii, mutta Firebasen tietokannan turvasäännöt (Security Rules) estävät lukemisen. Kerro tämä, niin korjataan säännöt!)";
-                    }
-                    
-                    statusEl.innerText = errorMsg;
-                    statusEl.style.color = "red";
-                    statusEl.style.fontWeight = "bold";
-                    console.error("Firebase virhe:", error);
-                }
-            }
-
-            testConnection();
-        } catch (initError) {
-            const statusEl = document.getElementById("db-status");
-            statusEl.innerText = "❌ Virhe Firebasen alustamisessa:\n\nVirhekoodi: " + initError.code + "\n\nViesti: " + initError.message;
-            statusEl.style.color = "red";
-            console.error("Firebase alustusvirhe:", initError);
-        }
-    </script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tekoalyprojekti</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
