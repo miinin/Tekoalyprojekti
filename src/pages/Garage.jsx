@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Map, Zap, Car, Eye, Droplets, PaintBucket, Cpu, Navigation, Layers, ShieldCheck, BatteryCharging, Radio } from 'lucide-react';
+import { store } from '../services/store';
 
 export default function Garage() {
   const navigate = useNavigate();
   const [sparks, setSparks] = useState(0);
 
   useEffect(() => {
-    setSparks(parseInt(localStorage.getItem('aivan_sparks') || '0', 10));
+    store.getSparks().then(val => setSparks(val));
+    
+    // Polling to keep sparks updated if playing co-op and someone else scores
+    const interval = setInterval(() => {
+      store.getSparks().then(val => setSparks(val));
+    }, 3000);
+    return () => clearInterval(interval);
   }, []);
 
   const upgrades = [
@@ -76,12 +83,14 @@ export default function Garage() {
               <button 
                 className="btn-primary" 
                 style={{ padding: '0.6rem 1.2rem', fontSize: '1.1rem', background: sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0', color: sparks >= item.price ? 'white' : 'var(--text-muted)', boxShadow: sparks >= item.price ? '' : 'none', cursor: sparks >= item.price ? 'pointer' : 'not-allowed' }}
-                onClick={() => {
+                onClick={async () => {
                   if (sparks >= item.price) {
-                    const newTotal = sparks - item.price;
-                    setSparks(newTotal);
-                    localStorage.setItem('aivan_sparks', newTotal);
-                    alert('Asennettu autoon: ' + item.name + '!');
+                    const success = await store.spendSparks(item.price);
+                    if (success) {
+                      const updated = await store.getSparks();
+                      setSparks(updated);
+                      alert('Asennettu autoon: ' + item.name + '!');
+                    }
                   }
                 }}
               >

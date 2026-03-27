@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categories } from '../data/questions';
+import { store } from '../services/store';
 import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap } from 'lucide-react';
 
 export default function Quiz() {
@@ -54,8 +55,7 @@ export default function Quiz() {
     }
     
     if (correct) {
-      const currentSparks = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
-      localStorage.setItem('aivan_sparks', currentSparks + 50);
+      store.addSparks(50);
     }
     
     setIsCorrect(correct);
