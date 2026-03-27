@@ -27,7 +27,7 @@ export default function Roadmap() {
         position: 'relative',
         width: '100%',
         aspectRatio: '16/9',
-        backgroundImage: 'url("./map-bg.jpg")',
+        backgroundImage: 'url("/map-bg.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         marginTop: '2rem',
