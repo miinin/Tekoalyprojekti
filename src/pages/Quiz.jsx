@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categories } from '../data/questions';
-import { CheckCircle2, XCircle, ArrowRight, Brain, ChevronLeft, Lightbulb } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap } from 'lucide-react';
 
 export default function Quiz() {
   const { categoryId } = useParams();
@@ -53,6 +53,11 @@ export default function Quiz() {
       correct = answer === currentQuestion.correctAnswer;
     }
     
+    if (correct) {
+      const currentSparks = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
+      localStorage.setItem('aivan_sparks', currentSparks + 50);
+    }
+    
     setIsCorrect(correct);
     setShowExplanation(true);
   };
@@ -91,19 +96,19 @@ export default function Quiz() {
     setOrderedItems(newItems);
   };
 
-  const getQuestionBadge = (type) => {
-    const badges = {
-      'true_false': 'Oikein vai Väärin',
-      'multiple_choice': 'Monivalinta',
-      'scenario': 'Miten toimit?',
-      'drag_drop': 'Raahaa ja Pudota',
-      'ordering': 'Järjestä oikein',
-      'spot_the_ai': 'Tunnista Tekoäly',
-      'reverse_prompt': 'Käänteinen Kehote',
-      'spot_the_lie': 'Hallusinaation Metsästys',
-      'jailbreak': 'Jailbreak -hakkerointi'
+  const getQuestionStyle = (type) => {
+    const styles = {
+      'true_false': { text: 'Oikein vai Väärin', icon: <Scale size={18} />, color: '#0072C6', bg: '#e0f2fe' },
+      'multiple_choice': { text: 'Monivalinta', icon: <List size={18} />, color: '#0072C6', bg: '#e0f2fe' },
+      'scenario': { text: 'Miten toimit?', icon: <Compass size={18} />, color: '#d97706', bg: '#fef3c7' },
+      'drag_drop': { text: 'Raahaa ja Pudota', icon: <Move size={18} />, color: '#16a34a', bg: '#dcfce7' },
+      'ordering': { text: 'Järjestä oikein', icon: <ArrowUpDown size={18} />, color: '#16a34a', bg: '#dcfce7' },
+      'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={18} />, color: '#7c3aed', bg: '#ede9fe' },
+      'reverse_prompt': { text: 'Käänteinen Kehote', icon: <Terminal size={18} />, color: '#db2777', bg: '#fce7f3' },
+      'spot_the_lie': { text: 'Hallusinaation Metsästys', icon: <Search size={18} />, color: '#dc2626', bg: '#fee2e2' },
+      'jailbreak': { text: 'Jailbreak -hakkerointi', icon: <Unlock size={18} />, color: '#0d9488', bg: '#ccfbf1' }
     };
-    return badges[type] || 'Kysymys';
+    return styles[type] || { text: 'Kysymys', icon: <Brain size={18} />, color: '#0072C6', bg: '#e0f2fe' };
   };
 
   return (
@@ -122,10 +127,15 @@ export default function Quiz() {
       </div>
 
       <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
-        <div style={{ display: 'inline-block', backgroundColor: 'rgba(0, 114, 198, 0.1)', color: 'var(--primary-color)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1.5rem', fontFamily: 'var(--font-main)' }}>
-          <Brain size={16} style={{ display: 'inline', marginRight: '5px', verticalAlign: 'middle' }} />
-          {getQuestionBadge(currentQuestion.type)}
-        </div>
+        {(() => {
+          const styleInfo = getQuestionStyle(currentQuestion.type);
+          return (
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: styleInfo.bg, color: styleInfo.color, padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1.5rem', fontFamily: 'var(--font-main)' }}>
+              {styleInfo.icon}
+              {styleInfo.text}
+            </div>
+          );
+        })()}
         
         <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.5', color: 'var(--text-main)' }}>
           {currentQuestion.question}
@@ -136,7 +146,7 @@ export default function Quiz() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {currentQuestion.options.map((option, idx) => {
               const isSelected = selectedAnswer === option;
-              let btnStyle = { padding: '1rem', textAlign: 'left', background: 'white', border: '2px solid #e2e8f0', color: 'var(--text-main)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', fontSize: '1rem', lineHeight: '1.4' };
+              let btnStyle = { padding: '1rem', textAlign: 'left', background: 'white', border: '2px solid #e2e8f0', color: 'var(--text-main)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', fontSize: '1.05rem', lineHeight: '1.4', fontFamily: 'var(--font-main)', fontWeight: '500' };
               
               if (showExplanation) {
                 if (option === currentQuestion.correctAnswer) {
@@ -255,11 +265,18 @@ export default function Quiz() {
 
       {showExplanation && (
         <div className="animate-fade-in" style={{ padding: '2rem', background: isCorrect ? 'rgba(76, 175, 80, 0.1)' : 'rgba(239, 68, 68, 0.1)', border: isCorrect ? '2px solid var(--accent-color)' : '2px solid #ef4444', borderRadius: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-            {isCorrect ? <CheckCircle2 size={32} color="var(--accent-color)" /> : <XCircle size={32} color="#ef4444" />}
-            <h2 style={{ margin: 0, color: isCorrect ? 'var(--accent-color)' : '#ef4444' }}>
-              {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
-            </h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              {isCorrect ? <CheckCircle2 size={32} color="var(--accent-color)" /> : <XCircle size={32} color="#ef4444" />}
+              <h2 style={{ margin: 0, color: isCorrect ? 'var(--accent-color)' : '#ef4444' }}>
+                {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
+              </h2>
+            </div>
+            {isCorrect && (
+              <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#fef3c7', color: '#d97706', padding: '0.5rem 1rem', borderRadius: '20px', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>
+                <Zap size={20} fill="#d97706" /> +50 Kipinää
+              </div>
+            )}
           </div>
           
           <div style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
