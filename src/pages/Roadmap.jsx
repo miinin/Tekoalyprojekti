@@ -22,84 +22,99 @@ export default function Roadmap() {
         </button>
       </div>
 
-      {/* Modern non-linear Map layout using CSS Flex Wrap to simulate floating nodes */}
+      {/* Visual Illustrated Map Container */}
       <div style={{ 
-        display: 'flex', 
-        flexWrap: 'wrap', 
-        justifyContent: 'center', 
-        gap: '2.5rem', 
-        marginTop: '3rem',
-        padding: '2rem',
-        background: 'rgba(255, 255, 255, 0.4)',
+        position: 'relative',
+        width: '100%',
+        aspectRatio: '16/9',
+        backgroundImage: 'url("./map-bg.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        marginTop: '2rem',
         borderRadius: '24px',
-        border: '2px dashed rgba(0, 114, 198, 0.2)'
+        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        border: '4px solid rgba(0, 114, 198, 0.1)',
+        overflow: 'hidden'
       }}>
+        {/* Adds a slight dark overlay if needed to make points pop, but keeping it completely transparent for now to let illustration shine */}
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }}></div>
+
         {categories.map((cat, index) => {
-          // Creating an uneven grid look by bumping every alternate item down
-          const marginTop = index % 2 === 1 ? '40px' : '0px';
-          // Rotate slightly for a fun "map" sticky-note feel
-          const rotation = index % 2 === 0 ? '-1.5deg' : '2deg';
+          // Define precise coordinates based on the user's illustration landmarks
+          const positions = [
+            { top: '35%', left: '18%' }, // Kategoria 1: Metsä/joki alue
+            { top: '75%', left: '25%' }, // Kategoria 2: Viidakon rauniot
+            { top: '65%', left: '75%' }, // Kategoria 3: Satama/Majakka
+            { top: '25%', left: '80%' }, // Kategoria 4: Lumihuippuinen vuori
+            { top: '30%', left: '50%' }  // Kategoria 5: Linna vuorella
+          ];
+
+          const pos = positions[index] || { top: '50%', left: '50%' };
 
           return (
             <div 
               key={cat.id} 
-              className="glass-panel"
+              className="map-node group animate-fade-in"
               onClick={() => navigate(`/quiz/${cat.id}`)}
               style={{ 
-                width: '100%',
-                maxWidth: '300px',
-                marginTop,
-                transform: `rotate(${rotation})`,
+                position: 'absolute',
+                top: pos.top,
+                left: pos.left,
+                transform: 'translate(-50%, -50%)',
                 cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 display: 'flex', 
                 flexDirection: 'column',
-                justifyContent: 'space-between',
-                padding: '2rem',
-                borderTop: '6px solid var(--primary-color)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = `scale(1.05) translateY(-10px) rotate(0deg)`;
-                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
-                e.currentTarget.style.borderTop = '6px solid var(--accent-color)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = `rotate(${rotation})`;
-                e.currentTarget.style.boxShadow = '0 8px 32px rgba(31, 38, 135, 0.07)';
-                e.currentTarget.style.borderTop = '6px solid var(--primary-color)';
+                alignItems: 'center',
+                gap: '0.8rem',
+                zIndex: 10
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
-                <div style={{ 
-                  width: '48px', 
-                  height: '48px', 
-                  borderRadius: '12px', 
-                  background: 'var(--primary-color)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontWeight: 'bold',
-                  fontSize: '1.4rem'
-                }}>
-                  {index + 1}
-                </div>
-                <div style={{ background: '#fef3c7', padding: '0.4rem 0.8rem', borderRadius: '20px', color: '#d97706', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.85rem', fontWeight: 'bold' }}>
-                  <Star size={14} /> Kysymyksiä
-                </div>
+              {/* Floating Marker */}
+              <div style={{
+                width: '60px',
+                height: '60px',
+                background: 'var(--primary-color)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'white',
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                border: '4px solid white',
+                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)';
+                e.currentTarget.style.backgroundColor = 'var(--accent-color)';
+                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                e.currentTarget.style.backgroundColor = 'var(--primary-color)';
+                e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.3)';
+              }}>
+                {index + 1}
               </div>
-              
-              <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.4rem', lineHeight: '1.3' }}>
-                {cat.name}
-              </h3>
-              
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>
-                Ratkaise tekoälyn tehtäviä ja kerrytä pisteitä autotalliisi tässä kategoriassa.
-              </p>
 
-              <button className="btn-primary" style={{ width: '100%' }}>
-                Mene Sisään
-              </button>
+              {/* Title Badge Below Marker */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.95)',
+                padding: '0.6rem 1rem',
+                borderRadius: '16px',
+                fontWeight: 'bold',
+                color: 'var(--text-main)',
+                fontFamily: 'var(--font-display)',
+                fontSize: '1rem',
+                boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                textAlign: 'center',
+                maxWidth: '180px',
+                pointerEvents: 'none',
+                border: '2px solid rgba(0,0,0,0.05)'
+              }}>
+                {cat.name}
+              </div>
             </div>
           );
         })}
