@@ -1,29 +1,20 @@
 import { categories } from '../data/questions';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Wrench, Flame } from 'lucide-react';
+import { Map, Wrench, Flame, Star } from 'lucide-react';
 
 export default function Roadmap() {
   const navigate = useNavigate();
   
-  // Oletetaan, että ensimmäinen on "suoritettu", toinen on "aktiivinen", loput "lukossa" demon vuoksi
-  const stages = categories.map((cat, index) => ({
-    id: index + 1,
-    title: cat.name,
-    completed: index < 1,
-    active: index === 1,
-    locked: index > 1
-  }));
-
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h1 style={{ margin: 0 }}>Tiekartta</h1>
+          <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)' }}>Valitse Seuraava Kohde</h1>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--secondary-color)', fontWeight: '700', marginTop: '0.5rem', fontFamily: 'var(--font-main)' }}>
-            <Flame size={20} /> Vauhtiputki: 3x kerroin
+            <Map size={20} /> Löydä reittisi oppimisen maailmassa
           </div>
         </div>
         <button className="btn-secondary" onClick={() => navigate('/garage')}>
@@ -31,42 +22,87 @@ export default function Roadmap() {
         </button>
       </div>
 
-      {/* Map Nodes */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', marginTop: '2rem' }}>
-        {/* Line behind nodes */}
-        <div style={{ position: 'absolute', left: '32px', top: '24px', bottom: '24px', width: '4px', background: '#e2e8f0', zIndex: 0, borderRadius: '4px' }}></div>
-        
-        {stages.map((stage) => (
-          <div key={stage.id} style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', position: 'relative', zIndex: 1 }}>
-            <div style={{ 
-              width: '64px', 
-              height: '64px', 
-              borderRadius: '50%', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center',
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.8rem',
-              background: stage.completed ? 'var(--accent-color)' : stage.active ? 'var(--primary-color)' : '#e2e8f0',
-              color: stage.locked ? 'var(--text-muted)' : 'white',
-              border: '4px solid white',
-              boxShadow: stage.active ? '0 0 0 4px rgba(0, 114, 198, 0.2)' : '0 4px 6px rgba(0,0,0,0.05)'
-            }}>
-              {stage.id}
-            </div>
-            <div className="glass-panel" style={{ flexGrow: 1, opacity: stage.locked ? 0.6 : 1, padding: '1.2rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderLeft: stage.active ? '4px solid var(--primary-color)' : '1px solid rgba(0,0,0,0.05)' }}>
-              <div>
-                <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.6rem' }}>{stage.title}</h3>
-                {stage.active && <p style={{ color: 'var(--primary-color)', margin: '0.25rem 0 0 0', fontWeight: '500', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Seuraava etappi!</p>}
-                {stage.completed && <p style={{ color: 'var(--accent-color)', margin: '0.25rem 0 0 0', fontWeight: '500', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Suoritettu</p>}
-                {stage.locked && <p style={{ color: 'var(--text-muted)', margin: '0.25rem 0 0 0', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Lukittu</p>}
+      {/* Modern non-linear Map layout using CSS Flex Wrap to simulate floating nodes */}
+      <div style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        justifyContent: 'center', 
+        gap: '2.5rem', 
+        marginTop: '3rem',
+        padding: '2rem',
+        background: 'rgba(255, 255, 255, 0.4)',
+        borderRadius: '24px',
+        border: '2px dashed rgba(0, 114, 198, 0.2)'
+      }}>
+        {categories.map((cat, index) => {
+          // Creating an uneven grid look by bumping every alternate item down
+          const marginTop = index % 2 === 1 ? '40px' : '0px';
+          // Rotate slightly for a fun "map" sticky-note feel
+          const rotation = index % 2 === 0 ? '-1.5deg' : '2deg';
+
+          return (
+            <div 
+              key={cat.id} 
+              className="glass-panel"
+              onClick={() => navigate(`/quiz/${cat.id}`)}
+              style={{ 
+                width: '100%',
+                maxWidth: '300px',
+                marginTop,
+                transform: `rotate(${rotation})`,
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                display: 'flex', 
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '2rem',
+                borderTop: '6px solid var(--primary-color)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = `scale(1.05) translateY(-10px) rotate(0deg)`;
+                e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+                e.currentTarget.style.borderTop = '6px solid var(--accent-color)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = `rotate(${rotation})`;
+                e.currentTarget.style.boxShadow = '0 8px 32px rgba(31, 38, 135, 0.07)';
+                e.currentTarget.style.borderTop = '6px solid var(--primary-color)';
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  borderRadius: '12px', 
+                  background: 'var(--primary-color)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: '1.4rem'
+                }}>
+                  {index + 1}
+                </div>
+                <div style={{ background: '#fef3c7', padding: '0.4rem 0.8rem', borderRadius: '20px', color: '#d97706', display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                  <Star size={14} /> Kysymyksiä
+                </div>
               </div>
-              {stage.active && (
-                <button className="btn-primary" style={{ padding: '0.5rem 1.5rem' }}>Pelaa</button>
-              )}
+              
+              <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.4rem', lineHeight: '1.3' }}>
+                {cat.name}
+              </h3>
+              
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>
+                Ratkaise tekoälyn tehtäviä ja kerrytä pisteitä autotalliisi tässä kategoriassa.
+              </p>
+
+              <button className="btn-primary" style={{ width: '100%' }}>
+                Mene Sisään
+              </button>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
