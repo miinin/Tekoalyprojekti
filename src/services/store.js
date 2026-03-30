@@ -45,6 +45,28 @@ export const store = {
     return false;
   },
 
+  getPurchasedItems: async () => {
+    const room = store.getRoomCode();
+    const key = room ? `aivan_items_${room}` : 'aivan_items';
+    const items = localStorage.getItem(key);
+    return items ? JSON.parse(items) : [];
+  },
+
+  purchaseItem: async (itemId, price) => {
+    const success = await store.spendSparks(price);
+    if (success) {
+      const room = store.getRoomCode();
+      const key = room ? `aivan_items_${room}` : 'aivan_items';
+      const items = await store.getPurchasedItems();
+      if (!items.includes(itemId)) {
+        items.push(itemId);
+        localStorage.setItem(key, JSON.stringify(items));
+      }
+      return true;
+    }
+    return false;
+  },
+
   hasProgress: () => {
     // Check if user has single player progress saved
     return localStorage.getItem('aivan_sparks') !== null;
@@ -52,6 +74,7 @@ export const store = {
   
   clearSinglePlayer: () => {
     localStorage.setItem('aivan_sparks', '0');
+    localStorage.removeItem('aivan_items');
     store.setRoomCode(null);
   }
 };

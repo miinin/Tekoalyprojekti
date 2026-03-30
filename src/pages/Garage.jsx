@@ -7,13 +7,17 @@ export default function Garage() {
   const navigate = useNavigate();
   const [sparks, setSparks] = useState(0);
 
+  const [purchased, setPurchased] = useState([]);
+
   useEffect(() => {
-    store.getSparks().then(val => setSparks(val));
+    const fetchData = async () => {
+      setSparks(await store.getSparks());
+      setPurchased(await store.getPurchasedItems());
+    };
+    fetchData();
     
-    // Polling to keep sparks updated if playing co-op and someone else scores
-    const interval = setInterval(() => {
-      store.getSparks().then(val => setSparks(val));
-    }, 3000);
+    // Polling to keep sparks and inventory updated if playing co-op
+    const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -48,20 +52,35 @@ export default function Garage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
         
-        {/* Your Van Preview */}
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '450px', background: 'radial-gradient(circle at center, rgba(120, 190, 32, 0.1), transparent)', border: '2px solid rgba(120, 190, 32, 0.3)', position: 'relative', overflow: 'hidden' }}>
+        {/* Your Van Preview (Layered Visuals) */}
+        <div style={{ 
+          position: 'relative', 
+          width: '100%', 
+          aspectRatio: '16/9', 
+          minHeight: '450px',
+          borderRadius: '24px', 
+          overflow: 'hidden', 
+          border: '4px solid rgba(0, 114, 198, 0.2)',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          backgroundColor: '#f8fafc'
+        }}>
+          {/* BASE LAYER (Garage + Base Van) */}
+          <img src="/autotalli1-base.PNG" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
           
-          <div style={{ position: 'absolute', top: '-50px', left: '-50px', width: '200px', height: '200px', background: 'var(--primary-color)', opacity: '0.1', filter: 'blur(50px)', borderRadius: '50%' }}></div>
-          <div style={{ position: 'absolute', bottom: '-50px', right: '-50px', width: '300px', height: '300px', background: 'var(--accent-color)', opacity: '0.1', filter: 'blur(60px)', borderRadius: '50%' }}></div>
+          {/* DYNAMIC LAYERS */}
+          {upgrades.map(item => {
+            if (purchased.includes(item.id)) {
+               // Render the upgrade layer PNG, assuming user names it exactly like 'layer-u1.PNG' and puts it in public/
+               return <img key={item.id} src={`/layer-${item.id}.PNG`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 2 }} />;
+            }
+            return null;
+          })}
 
-          <Car size={200} color="var(--primary-color)" style={{ filter: 'drop-shadow(0 20px 25px rgba(0,114,198,0.3))', zIndex: 1 }} />
-          
-          <h2 style={{ marginTop: '3rem', fontSize: '2.5rem', color: 'var(--text-main)', zIndex: 1 }}>AIvan "TurboKissa"</h2>
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem', zIndex: 1 }}>
-            <span style={{ background: '#e0f2fe', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>
+          <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10, display: 'flex', gap: '1rem' }}>
+            <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
               Taso 1
             </span>
-            <span style={{ background: '#fce7f3', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: '#db2777', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>
+            <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: '#db2777', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
               Eduks-Spesialisti
             </span>
           </div>
@@ -82,19 +101,26 @@ export default function Garage() {
               </div>
               <button 
                 className="btn-primary" 
-                style={{ padding: '0.6rem 1.2rem', fontSize: '1.1rem', background: sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0', color: sparks >= item.price ? 'white' : 'var(--text-muted)', boxShadow: sparks >= item.price ? '' : 'none', cursor: sparks >= item.price ? 'pointer' : 'not-allowed' }}
+                style={{ 
+                  padding: '0.6rem 1.2rem', 
+                  fontSize: '1.1rem', 
+                  background: purchased.includes(item.id) ? '#10b981' : (sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0'), 
+                  color: purchased.includes(item.id) || sparks >= item.price ? 'white' : 'var(--text-muted)', 
+                  boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '' : 'none', 
+                  cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed') 
+                }}
                 onClick={async () => {
-                  if (sparks >= item.price) {
-                    const success = await store.spendSparks(item.price);
+                  if (sparks >= item.price && !purchased.includes(item.id)) {
+                    const success = await store.purchaseItem(item.id, item.price);
                     if (success) {
-                      const updated = await store.getSparks();
-                      setSparks(updated);
+                      setSparks(await store.getSparks());
+                      setPurchased(await store.getPurchasedItems());
                       alert('Asennettu autoon: ' + item.name + '!');
                     }
                   }
                 }}
               >
-                OSTA ({item.price})
+                {purchased.includes(item.id) ? 'OSTETTU' : `OSTA (${item.price})`}
               </button>
             </div>
           ))}
