@@ -65,7 +65,7 @@ export default function Garage() {
           backgroundColor: '#f8fafc'
         }}>
           {/* BASE LAYER (Garage + Base Van) */}
-          <img src="/autotalli1-base.PNG" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
+          <img src="/van1-base.PNG" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
           
           {/* DYNAMIC LAYERS */}
           {upgrades.map(item => {
