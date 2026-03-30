@@ -65,13 +65,13 @@ export default function Garage() {
           backgroundColor: '#f8fafc'
         }}>
           {/* BASE LAYER (Garage + Base Van) */}
-          <img src="/van1-base.PNG" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
+          <img src="/van1-base.png" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
           
           {/* DYNAMIC LAYERS */}
           {upgrades.map(item => {
             if (purchased.includes(item.id)) {
                // Render the upgrade layer PNG, assuming user names it exactly like 'layer-u1.PNG' and puts it in public/
-               return <img key={item.id} src={`/layer-${item.id}.PNG`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 2 }} />;
+               return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 2 }} />;
             }
             return null;
           })}
