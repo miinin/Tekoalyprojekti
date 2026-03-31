@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, Car, Eye, Droplets, PaintBucket, Cpu, Navigation, Layers, ShieldCheck, BatteryCharging, Radio } from 'lucide-react';
+import { Map, Zap, Car, Eye, Droplets, PaintBucket, Cpu, Navigation, Layers, ShieldCheck, BatteryCharging, Radio, Sparkles, Wrench, Grid, Disc, Aperture, Gamepad2, TrendingDown } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Garage() {
@@ -22,19 +22,18 @@ export default function Garage() {
   }, []);
 
   const carUpgrades = [
-    { id: 'u1', name: 'Turboahdettu Prosessori', desc: 'Laskentateho maksimiin.', price: 500, icon: <Cpu size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'u2', name: 'Kvanttitutka', desc: 'Näkee viidakon läpi.', price: 800, icon: <Navigation size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
-    { id: 'u3', name: 'Hologrammikojelauta', desc: 'Lisättyä todellisuutta.', price: 1200, icon: <Layers size={28} />, color: '#06b6d4', bg: '#cffafe' },
-    { id: 'u4', name: 'Titaani-alusta', desc: 'Kestää kovimmat bugit.', price: 1500, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'u5', name: 'Itseoppiva Autopilotti', desc: 'Apukuski joka ohjaa.', price: 2500, icon: <Radio size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'u6', name: 'Plasma-akustot', desc: 'Max kipinä-kapasiteetti.', price: 2000, icon: <BatteryCharging size={28} />, color: '#10b981', bg: '#d1fae5' },
-    { id: 'u7', name: 'Neon-maalaus', desc: 'Oma asenne.', price: 600, icon: <PaintBucket size={28} />, color: '#f59e0b', bg: '#fef3c7' }
+    { id: 'u1', name: 'Uusi Maalipinta', desc: 'Kiiltävä ja ruosteeton kuori.', price: 1000, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'u2', name: 'Kromiosat', desc: 'Kiiltävät puskurit ja säleikkö.', price: 800, icon: <ShieldCheck size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
+    { id: 'u3', name: 'Original Vanteet', desc: 'Tehdaspuhtaat peltivanteet.', price: 400, icon: <Disc size={28} />, color: '#06b6d4', bg: '#cffafe' },
+    { id: 'u4', name: 'Alumiinivanteet', desc: 'Kevyet erikoisvanteet.', price: 900, icon: <Aperture size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'u5', name: 'Karvanopat', desc: 'Taustapeilin tunnelmanluoja.', price: 150, icon: <Gamepad2 size={28} />, color: '#ef4444', bg: '#fee2e2' },
+    { id: 'u6', name: 'Alustasarja', desc: 'Urheilullinen jousitus.', price: 1200, icon: <TrendingDown size={28} />, color: '#10b981', bg: '#d1fae5' }
   ];
 
   const garageUpgrades = [
-    { id: 'g1', name: 'Mekaanikko-botti', desc: 'Apulainen talliin.', price: 1000, icon: <Cpu size={28} />, color: '#a855f7', bg: '#f3e8ff' },
-    { id: 'g2', name: 'Kvanttisorvi', desc: 'Tulevaisuuden asennus.', price: 2000, icon: <Zap size={28} />, color: '#eab308', bg: '#fef08a' },
-    { id: 'g3', name: 'Neon-kyltti', desc: 'Tunnelmavalaistusta seinälle.', price: 800, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' }
+    { id: 'g1', name: 'Siisteys', desc: 'Lakaistu lattia, roskat pois.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
+    { id: 'g2', name: 'Autotallin työkalut', desc: 'Perus hylsysarja ja tunkki.', price: 500, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
+    { id: 'g3', name: 'Työkaluseinä', desc: 'Työkalut nätisti järjestykseen.', price: 1000, icon: <Grid size={28} />, color: '#ec4899', bg: '#fbcfe8' }
   ];
 
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
@@ -136,15 +135,23 @@ export default function Garage() {
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
             {/* GARAGE BACKGROUND LAYER */}
-            <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+            <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, pointerEvents: 'none' }} />
+
+            {/* GARAGE LAYERS (Behind car) */}
+            {garageUpgrades.map(item => {
+              if (purchased.includes(item.id)) {
+                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem', pointerEvents: 'none' }} />;
+              }
+              return null;
+            })}
 
             {/* BASE LAYER (Base Van) */}
-            <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
+            <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
             
-            {/* DYNAMIC LAYERS */}
-            {allUpgrades.map(item => {
+            {/* CAR LAYERS (Top of car) */}
+            {carUpgrades.map(item => {
               if (purchased.includes(item.id)) {
-                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem' }} />;
+                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />;
               }
               return null;
             })}
