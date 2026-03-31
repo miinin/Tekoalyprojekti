@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { categories } from '../data/questions';
 import { store } from '../services/store';
 import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap } from 'lucide-react';
 
 export default function Quiz() {
-  const { categoryId } = useParams();
+  const { mainCategory, subCategory } = useParams();
   const navigate = useNavigate();
   
-  const category = categories.find(c => c.id === categoryId);
-  const questions = category ? category.questions : [];
+  const category = categories.find(c => c.id === mainCategory);
+  const sub = category ? category.subcategories?.find(s => s.id === subCategory) : null;
   
+  const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (sub && sub.questions) {
+      // Satunnaisesti valitse tasan 5 kysymystä
+      const shuffled = [...sub.questions].sort(() => Math.random() - 0.5);
+      setQuestions(shuffled.slice(0, 5));
+    }
+  }, [mainCategory, subCategory, sub]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -20,14 +29,16 @@ export default function Quiz() {
   const [orderedItems, setOrderedItems] = useState([]);
   const [dragTargets, setDragTargets] = useState({}); // { itemName: targetName }
 
-  if (!category || questions.length === 0) {
+  if (!category || !sub) {
     return (
       <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>Kategoriaa ei löydy!</h2>
+        <h2>Tasoa ei löydy!</h2>
         <button className="btn-secondary" onClick={() => navigate('/roadmap')}>Palaa kartalle</button>
       </div>
     );
   }
+
+  if (questions.length === 0) return <div style={{ padding: '2rem', textAlign: 'center', fontSize: '1.2rem', fontFamily: 'var(--font-display)' }}>Valmistellaan tietovisaa...</div>;
 
   const currentQuestion = questions[currentIndex];
   
@@ -72,7 +83,7 @@ export default function Quiz() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      navigate('/roadmap');
+      navigate(`/roadmap/${mainCategory}`);
     }
   };
 
@@ -115,11 +126,11 @@ export default function Quiz() {
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
       
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate('/roadmap')}>
+        <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap/${mainCategory}`)}>
           <ChevronLeft size={24} /> 
         </button>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--primary-color)' }}>
-          {category.name}
+          {sub.name}
         </span>
         <div style={{ color: 'var(--text-muted)' }}>
           {currentIndex + 1} / {questions.length}

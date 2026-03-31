@@ -11,8 +11,9 @@ function App() {
       <Routes>
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/roadmap" element={<Roadmap />} />
+        <Route path="/roadmap/:mainCategory" element={<Roadmap />} />
         <Route path="/garage" element={<Garage />} />
-        <Route path="/quiz/:categoryId" element={<Quiz />} />
+        <Route path="/quiz/:mainCategory/:subCategory" element={<Quiz />} />
         <Route path="/" element={<Navigate to="/lobby" replace />} />
       </Routes>
     </Router>
