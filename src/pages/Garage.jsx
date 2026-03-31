@@ -60,18 +60,22 @@ export default function Garage() {
           minHeight: '450px',
           borderRadius: '24px', 
           overflow: 'hidden', 
-          border: '4px solid rgba(0, 114, 198, 0.2)',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-          backgroundColor: '#f8fafc'
+          border: '4px solid rgba(0, 114, 198, 0.4)',
+          boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+          background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
         }}>
+          {/* Lattia-varjo ja kohdevalo (Temporary Garage Ambiance) */}
+          <div style={{ position: 'absolute', bottom: '15%', left: '50%', transform: 'translateX(-50%)', width: '80%', height: '40px', background: 'rgba(0,0,0,0.6)', filter: 'blur(15px)', borderRadius: '50%', zIndex: 0 }}></div>
+          <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '300px', height: '300px', background: 'var(--primary-color)', opacity: '0.2', filter: 'blur(80px)', borderRadius: '50%', zIndex: 0 }}></div>
+
           {/* BASE LAYER (Garage + Base Van) */}
-          <img src="/van1-base.png" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }} />
+          <img src="/van1-base.png" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
           
           {/* DYNAMIC LAYERS */}
           {upgrades.map(item => {
             if (purchased.includes(item.id)) {
                // Render the upgrade layer PNG, assuming user names it exactly like 'layer-u1.PNG' and puts it in public/
-               return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 2 }} />;
+               return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem' }} />;
             }
             return null;
           })}
