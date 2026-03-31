@@ -75,7 +75,25 @@ export default function Garage() {
   );
 
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+      <style>{`
+        .garage-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          align-items: start;
+        }
+        @media (min-width: 1100px) {
+          .garage-grid {
+            grid-template-columns: 280px 1fr 280px;
+          }
+        }
+        @media (max-width: 1099px) {
+          .garage-left { order: 2; }
+          .garage-center { order: 1; }
+          .garage-right { order: 3; }
+        }
+      `}</style>
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -93,16 +111,16 @@ export default function Garage() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'stretch' }}>
+      <div className="garage-grid">
         
         {/* LEFT COLUMN: Garage Items */}
-        <div style={{ flex: '1 1 250px', display: 'flex', flexDirection: 'column', gap: '1rem', order: 1 }}>
-          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)' }}>Tallin varusteet</h3>
+        <div className="garage-left" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
           {garageUpgrades.map(item => renderUpgradeItem(item))}
         </div>
 
         {/* CENTER COLUMN: Visual Preview */}
-        <div style={{ flex: '3 1 400px', order: 2 }}>
+        <div className="garage-center">
           <div style={{ 
             position: 'relative', 
             width: '100%', 
@@ -140,8 +158,8 @@ export default function Garage() {
         </div>
 
         {/* RIGHT COLUMN: Car Upgrades */}
-        <div style={{ flex: '1 1 250px', display: 'flex', flexDirection: 'column', gap: '1rem', order: 3 }}>
-          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)' }}>Auton osat</h3>
+        <div className="garage-right" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
           {carUpgrades.map(item => renderUpgradeItem(item))}
         </div>
 
