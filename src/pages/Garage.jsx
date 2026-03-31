@@ -40,24 +40,26 @@ export default function Garage() {
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
 
   const renderUpgradeItem = (item) => (
-    <div key={item.id} className="glass-panel" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; }}>
-      <div style={{ background: item.bg, padding: '1rem', borderRadius: '14px', color: item.color, minWidth: '60px', textAlign: 'center' }}>
-        {item.icon}
-      </div>
-      <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
-        <h3 style={{ margin: 0, fontSize: '1rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
-        <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{item.desc}</p>
+    <div key={item.id} className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+        <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {React.cloneElement(item.icon, { size: 20 })}
+        </div>
+        <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
+          <h3 style={{ margin: 0, fontSize: '0.95rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
+          <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.75rem', color: 'var(--text-muted)' }}>{item.desc}</p>
+        </div>
       </div>
       <button 
         className="btn-primary" 
         style={{ 
-          padding: '0.5rem 0.8rem', 
-          fontSize: '0.9rem', 
+          padding: '0.4rem', 
+          fontSize: '0.85rem', 
+          width: '100%',
           background: purchased.includes(item.id) ? '#10b981' : (sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0'), 
           color: purchased.includes(item.id) || sparks >= item.price ? 'white' : 'var(--text-muted)', 
-          boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '' : 'none', 
-          cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed'),
-          minWidth: '70px'
+          boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '0 4px 6px rgba(0,0,0,0.1)' : 'none', 
+          cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed')
         }}
         onClick={async () => {
           if (sparks >= item.price && !purchased.includes(item.id)) {
@@ -69,23 +71,24 @@ export default function Garage() {
           }
         }}
       >
-        {purchased.includes(item.id) ? 'ON' : `${item.price} ⚡`}
+        {purchased.includes(item.id) ? 'ASENNETTU' : `OSTA ⚡ ${item.price}`}
       </button>
     </div>
   );
 
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1400px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '1800px', margin: '0 auto', width: '100%' }}>
       <style>{`
         .garage-grid {
           display: grid;
           grid-template-columns: 1fr;
-          gap: 2rem;
+          gap: 1.5rem;
           align-items: start;
         }
         @media (min-width: 1100px) {
           .garage-grid {
-            grid-template-columns: 280px 1fr 280px;
+            /* Keskusta vie ~70-80% tilasta, sivut minimoitu */
+            grid-template-columns: minmax(180px, 1.5fr) 7fr minmax(180px, 1.5fr);
           }
         }
         @media (max-width: 1099px) {
