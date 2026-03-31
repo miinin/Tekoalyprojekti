@@ -1,5 +1,6 @@
+import { categories as defaultCategories } from '../data/questions';
+
 // A simple abstraction over local storage that simulates an async backend like Firebase
-// Will be expanded when Firebase is connected
 export const store = {
   // Check if there is an active co-op session
   getRoomCode: () => localStorage.getItem('aivan_room') || null,
@@ -76,5 +77,51 @@ export const store = {
     localStorage.setItem('aivan_sparks', '0');
     localStorage.removeItem('aivan_items');
     store.setRoomCode(null);
+  },
+
+  // --- ADMIN METHODS ---
+  getAllRooms: () => {
+    const rooms = new Set();
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('aivan_sparks_')) {
+        rooms.add(key.replace('aivan_sparks_', ''));
+      }
+    }
+    return Array.from(rooms);
+  },
+
+  setRoomSparks: (room, newAmount) => {
+    localStorage.setItem(`aivan_sparks_${room}`, newAmount);
+  },
+
+  deleteRoom: (room) => {
+    localStorage.removeItem(`aivan_sparks_${room}`);
+    localStorage.removeItem(`aivan_items_${room}`);
+    // If we're deleting our current room, clear it
+    if (store.getRoomCode() === room) store.setRoomCode(null);
+  },
+
+  getQuestions: () => {
+    const customData = localStorage.getItem('aivan_custom_questions');
+    if (customData) {
+      try {
+        return JSON.parse(customData);
+      } catch (e) {
+        console.error('Failed to parse custom questions', e);
+      }
+    }
+    // Deep clone default to avoid reference mutations
+    return JSON.parse(JSON.stringify(defaultCategories));
+  },
+
+  saveQuestions: (newCategoriesData) => {
+    localStorage.setItem('aivan_custom_questions', JSON.stringify(newCategoriesData));
+    return true;
+  },
+  
+  resetQuestionsToDefault: () => {
+    localStorage.removeItem('aivan_custom_questions');
+    return JSON.parse(JSON.stringify(defaultCategories));
   }
 };

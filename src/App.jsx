@@ -4,6 +4,7 @@ import Lobby from './pages/Lobby';
 import Roadmap from './pages/Roadmap';
 import Garage from './pages/Garage';
 import Quiz from './pages/Quiz';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/roadmap/:mainCategory" element={<Roadmap />} />
         <Route path="/garage" element={<Garage />} />
         <Route path="/quiz/:mainCategory/:subCategory" element={<Quiz />} />
+        <Route path="/admin" element={<Admin />} />
         <Route path="/" element={<Navigate to="/lobby" replace />} />
       </Routes>
     </Router>

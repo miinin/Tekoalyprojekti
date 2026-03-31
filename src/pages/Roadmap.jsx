@@ -1,5 +1,5 @@
-import { categories } from '../data/questions';
-import React from 'react';
+import { store } from '../services/store';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Map, Wrench, Flame, Star, ChevronLeft } from 'lucide-react';
 
@@ -7,7 +7,13 @@ export default function Roadmap() {
   const navigate = useNavigate();
   const { mainCategory } = useParams();
   
-  const currentCategory = mainCategory ? categories.find(c => c.id === mainCategory) : null;
+  const [categories, setCategories] = useState([]);
+  
+  useEffect(() => {
+    setCategories(store.getQuestions());
+  }, []);
+  
+  const currentCategory = (mainCategory && categories.length > 0) ? categories.find(c => c.id === mainCategory) : null;
   
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>

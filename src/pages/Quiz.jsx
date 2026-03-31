@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { categories } from '../data/questions';
 import { store } from '../services/store';
 import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap } from 'lucide-react';
 
@@ -8,19 +7,30 @@ export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
   const navigate = useNavigate();
   
-  const category = categories.find(c => c.id === mainCategory);
-  const sub = category ? category.subcategories?.find(s => s.id === subCategory) : null;
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState(null);
+  const [sub, setSub] = useState(null);
   
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (sub && sub.questions) {
+    // Load dynamic questions from local DB instead of hardcoded file
+    const loadedCategories = store.getQuestions();
+    setCategories(loadedCategories);
+    
+    const cat = loadedCategories.find(c => c.id === mainCategory);
+    setCategory(cat);
+    
+    const s = cat ? cat.subcategories?.find(sc => sc.id === subCategory) : null;
+    setSub(s);
+    
+    if (s && s.questions) {
       // Satunnaisesti valitse tasan 5 kysymystä
-      const shuffled = [...sub.questions].sort(() => Math.random() - 0.5);
+      const shuffled = [...s.questions].sort(() => Math.random() - 0.5);
       setQuestions(shuffled.slice(0, 5));
     }
-  }, [mainCategory, subCategory, sub]);
+  }, [mainCategory, subCategory]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
