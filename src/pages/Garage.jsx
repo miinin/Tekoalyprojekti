@@ -21,15 +21,58 @@ export default function Garage() {
     return () => clearInterval(interval);
   }, []);
 
-  const upgrades = [
+  const carUpgrades = [
     { id: 'u1', name: 'Turboahdettu Prosessori', desc: 'Laskentateho maksimiin.', price: 500, icon: <Cpu size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'u2', name: 'Kvanttitutka', desc: 'Näkee algoritmiviidakon läpi.', price: 800, icon: <Navigation size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
-    { id: 'u3', name: 'Hologrammikojelauta', desc: 'Lisättyä todellisuutta hyttiin.', price: 1200, icon: <Layers size={28} />, color: '#06b6d4', bg: '#cffafe' },
-    { id: 'u4', name: 'Titaani-alusta', desc: 'Kestää kovimmatkin koodibugit.', price: 1500, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'u5', name: 'Itseoppiva Autopilotti', desc: 'Apukuski joka ohjaa puolestasi.', price: 2500, icon: <Radio size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'u6', name: 'Plasma-akustot', desc: 'Maksimaalinen kipinä-kapasiteetti.', price: 2000, icon: <BatteryCharging size={28} />, color: '#10b981', bg: '#d1fae5' },
-    { id: 'u7', name: 'Neon-maalaus', desc: 'Luo pimeässä hohtavan asenteen.', price: 600, icon: <PaintBucket size={28} />, color: '#f59e0b', bg: '#fef3c7' }
+    { id: 'u2', name: 'Kvanttitutka', desc: 'Näkee viidakon läpi.', price: 800, icon: <Navigation size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
+    { id: 'u3', name: 'Hologrammikojelauta', desc: 'Lisättyä todellisuutta.', price: 1200, icon: <Layers size={28} />, color: '#06b6d4', bg: '#cffafe' },
+    { id: 'u4', name: 'Titaani-alusta', desc: 'Kestää kovimmat bugit.', price: 1500, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'u5', name: 'Itseoppiva Autopilotti', desc: 'Apukuski joka ohjaa.', price: 2500, icon: <Radio size={28} />, color: '#ef4444', bg: '#fee2e2' },
+    { id: 'u6', name: 'Plasma-akustot', desc: 'Max kipinä-kapasiteetti.', price: 2000, icon: <BatteryCharging size={28} />, color: '#10b981', bg: '#d1fae5' },
+    { id: 'u7', name: 'Neon-maalaus', desc: 'Oma asenne.', price: 600, icon: <PaintBucket size={28} />, color: '#f59e0b', bg: '#fef3c7' }
   ];
+
+  const garageUpgrades = [
+    { id: 'g1', name: 'Mekaanikko-botti', desc: 'Apulainen talliin.', price: 1000, icon: <Cpu size={28} />, color: '#a855f7', bg: '#f3e8ff' },
+    { id: 'g2', name: 'Kvanttisorvi', desc: 'Tulevaisuuden asennus.', price: 2000, icon: <Zap size={28} />, color: '#eab308', bg: '#fef08a' },
+    { id: 'g3', name: 'Neon-kyltti', desc: 'Tunnelmavalaistusta seinälle.', price: 800, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' }
+  ];
+
+  const allUpgrades = [...carUpgrades, ...garageUpgrades];
+
+  const renderUpgradeItem = (item) => (
+    <div key={item.id} className="glass-panel" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; }}>
+      <div style={{ background: item.bg, padding: '1rem', borderRadius: '14px', color: item.color, minWidth: '60px', textAlign: 'center' }}>
+        {item.icon}
+      </div>
+      <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
+        <h3 style={{ margin: 0, fontSize: '1rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
+        <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.8rem', color: 'var(--text-muted)' }}>{item.desc}</p>
+      </div>
+      <button 
+        className="btn-primary" 
+        style={{ 
+          padding: '0.5rem 0.8rem', 
+          fontSize: '0.9rem', 
+          background: purchased.includes(item.id) ? '#10b981' : (sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0'), 
+          color: purchased.includes(item.id) || sparks >= item.price ? 'white' : 'var(--text-muted)', 
+          boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '' : 'none', 
+          cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed'),
+          minWidth: '70px'
+        }}
+        onClick={async () => {
+          if (sparks >= item.price && !purchased.includes(item.id)) {
+            const success = await store.purchaseItem(item.id, item.price);
+            if (success) {
+              setSparks(await store.getSparks());
+              setPurchased(await store.getPurchasedItems());
+            }
+          }
+        }}
+      >
+        {purchased.includes(item.id) ? 'ON' : `${item.price} ⚡`}
+      </button>
+    </div>
+  );
 
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
@@ -50,85 +93,58 @@ export default function Garage() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '3rem' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', alignItems: 'stretch' }}>
         
-        {/* Your Van Preview (Layered Visuals) */}
-        <div style={{ 
-          position: 'relative', 
-          width: '100%', 
-          aspectRatio: '16/9', 
-          minHeight: '450px',
-          borderRadius: '24px', 
-          overflow: 'hidden', 
-          border: '4px solid rgba(0, 114, 198, 0.4)',
-          boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-          background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
-        }}>
-          {/* GARAGE BACKGROUND LAYER */}
-          <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
+        {/* LEFT COLUMN: Garage Items */}
+        <div style={{ flex: '1 1 250px', display: 'flex', flexDirection: 'column', gap: '1rem', order: 1 }}>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)' }}>Tallin varusteet</h3>
+          {garageUpgrades.map(item => renderUpgradeItem(item))}
+        </div>
 
-          {/* BASE LAYER (Base Van) */}
-          <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
-          
-          {/* DYNAMIC LAYERS */}
-          {upgrades.map(item => {
-            if (purchased.includes(item.id)) {
-               // Render the upgrade layer PNG, assuming user names it exactly like 'layer-u1.PNG' and puts it in public/
-               return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem' }} />;
-            }
-            return null;
-          })}
+        {/* CENTER COLUMN: Visual Preview */}
+        <div style={{ flex: '3 1 400px', order: 2 }}>
+          <div style={{ 
+            position: 'relative', 
+            width: '100%', 
+            aspectRatio: '16/10', 
+            minHeight: '350px',
+            borderRadius: '24px', 
+            overflow: 'hidden', 
+            border: '4px solid rgba(0, 114, 198, 0.4)',
+            boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+            background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
+          }}>
+            {/* GARAGE BACKGROUND LAYER */}
+            <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
 
-          <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10, display: 'flex', gap: '1rem' }}>
-            <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              Taso 1
-            </span>
-            <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.5rem 1.2rem', borderRadius: '20px', fontSize: '1rem', color: '#db2777', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-              Eduks-Spesialisti
-            </span>
+            {/* BASE LAYER (Base Van) */}
+            <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
+            
+            {/* DYNAMIC LAYERS */}
+            {allUpgrades.map(item => {
+              if (purchased.includes(item.id)) {
+                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem' }} />;
+              }
+              return null;
+            })}
+
+            <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10, display: 'flex', gap: '1rem' }}>
+              <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                Taso 1
+              </span>
+              <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', color: '#db2777', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                Eduks-Spesialisti
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Upgrades List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
-          <h3 style={{ fontSize: '1.8rem', color: 'var(--text-main)', marginBottom: '0.5rem' }}>Päivitysluettelo</h3>
-          
-          {upgrades.map((item) => (
-            <div key={item.id} className="glass-panel" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', padding: '1.25rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; }}>
-              <div style={{ background: item.bg, padding: '1.2rem', borderRadius: '16px', color: item.color }}>
-                {item.icon}
-              </div>
-              <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
-                <h3 style={{ margin: 0, fontSize: '1.3rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)' }}>{item.name}</h3>
-                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.9rem', color: 'var(--text-muted)' }}>{item.desc}</p>
-              </div>
-              <button 
-                className="btn-primary" 
-                style={{ 
-                  padding: '0.6rem 1.2rem', 
-                  fontSize: '1.1rem', 
-                  background: purchased.includes(item.id) ? '#10b981' : (sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0'), 
-                  color: purchased.includes(item.id) || sparks >= item.price ? 'white' : 'var(--text-muted)', 
-                  boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '' : 'none', 
-                  cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed') 
-                }}
-                onClick={async () => {
-                  if (sparks >= item.price && !purchased.includes(item.id)) {
-                    const success = await store.purchaseItem(item.id, item.price);
-                    if (success) {
-                      setSparks(await store.getSparks());
-                      setPurchased(await store.getPurchasedItems());
-                      alert('Asennettu autoon: ' + item.name + '!');
-                    }
-                  }
-                }}
-              >
-                {purchased.includes(item.id) ? 'OSTETTU' : `OSTA (${item.price})`}
-              </button>
-            </div>
-          ))}
-
+        {/* RIGHT COLUMN: Car Upgrades */}
+        <div style={{ flex: '1 1 250px', display: 'flex', flexDirection: 'column', gap: '1rem', order: 3 }}>
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)' }}>Auton osat</h3>
+          {carUpgrades.map(item => renderUpgradeItem(item))}
         </div>
+
       </div>
     </div>
   );
