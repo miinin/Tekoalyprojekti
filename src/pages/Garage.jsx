@@ -64,12 +64,11 @@ export default function Garage() {
           boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
           background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
         }}>
-          {/* Lattia-varjo ja kohdevalo (Temporary Garage Ambiance) */}
-          <div style={{ position: 'absolute', bottom: '15%', left: '50%', transform: 'translateX(-50%)', width: '80%', height: '40px', background: 'rgba(0,0,0,0.6)', filter: 'blur(15px)', borderRadius: '50%', zIndex: 0 }}></div>
-          <div style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', width: '300px', height: '300px', background: 'var(--primary-color)', opacity: '0.2', filter: 'blur(80px)', borderRadius: '50%', zIndex: 0 }}></div>
+          {/* GARAGE BACKGROUND LAYER */}
+          <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }} />
 
-          {/* BASE LAYER (Garage + Base Van) */}
-          <img src="/van1-base.png" alt="Autotalli base" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
+          {/* BASE LAYER (Base Van) */}
+          <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem' }} />
           
           {/* DYNAMIC LAYERS */}
           {upgrades.map(item => {
