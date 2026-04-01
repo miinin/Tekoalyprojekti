@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronLeft, 
   Map as MapIcon, 
   Settings, 
   Trophy, 
-  Star, 
-  Info,
   Car,
-  Home,
   CheckCircle2,
   Lock,
   PlayCircle
@@ -22,7 +18,7 @@ const Roadmap = () => {
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
   const [dataVersion] = useState("7-LEVEL-FIX-v1");
-  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0 });
+  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0, isTunnel: false });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
@@ -135,7 +131,7 @@ const Roadmap = () => {
             setVanPos(prev => ({ ...prev, top: node.top, left: node.left }));
             await new Promise(r => setTimeout(r, 500));
             setIsMoving(false);
-            navigate(`/quiz/${nodeId}`);
+            navigate(`/quiz/${currentMap}/${nodeId}`);
         }
     }
   };
@@ -151,30 +147,18 @@ const Roadmap = () => {
   };
 
   const renderVan = () => (
-    <motion.div
+    <div
+      className="absolute transition-all duration-300 ease-linear flex items-center justify-center"
       style={{
-        position: 'absolute',
         top: vanPos.top,
         left: vanPos.left,
         width: '60px',
         height: '40px',
         zIndex: 50,
         pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        transform: `rotate(${vanPos.rotate}deg)`,
         opacity: vanPos.isTunnel ? 0.3 : 1,
         filter: vanPos.isTunnel ? 'blur(2px)' : 'none'
-      }}
-      animate={{ 
-          top: vanPos.top, 
-          left: vanPos.left, 
-          rotate: vanPos.rotate 
-      }}
-      transition={{ 
-          type: 'tween', 
-          ease: 'linear', 
-          duration: isMoving ? 0.3 : 0.8 
       }}
     >
       <div className="relative">
@@ -183,7 +167,7 @@ const Roadmap = () => {
               AI VAN
           </div>
       </div>
-    </motion.div>
+    </div>
   );
 
   const renderMapNodes = () => {
@@ -320,24 +304,17 @@ const Roadmap = () => {
       </div>
 
       {/* Bottom Shortcuts */}
-      <AnimatePresence>
-          {currentMap !== 'main' && (
-              <motion.div 
-                initial={{ y: 100 }}
-                animate={{ y: 0 }}
-                exit={{ y: 100 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[100]"
+      {currentMap !== 'main' && (
+          <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[100] transition-transform animate-bounce">
+              <button 
+                onClick={handleBackToMain}
+                className="flex items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-full font-black shadow-2xl hover:scale-105 transition-transform"
               >
-                  <button 
-                    onClick={handleBackToMain}
-                    className="flex items-center gap-2 px-8 py-4 bg-white text-slate-900 rounded-full font-black shadow-2xl hover:scale-105 transition-transform"
-                  >
-                    <MapIcon size={20} />
-                    PALAA MAAILMALLE
-                  </button>
-              </motion.div>
-          )}
-      </AnimatePresence>
+                <MapIcon size={20} />
+                PALAA MAAILMALLE
+              </button>
+          </div>
+      )}
     </div>
   );
 };
