@@ -146,6 +146,30 @@ const Roadmap = () => {
       navigate('/roadmap');
   };
 
+  const [purchasedItems, setPurchasedItems] = useState([]);
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      setPurchasedItems(await store.getPurchasedItems());
+      const savedCompletions = store.getCompletions();
+      setCompletedLessons(savedCompletions);
+    };
+    fetchProgress();
+    
+    // Polling or re-fetch when returning from quiz
+    const interval = setInterval(fetchProgress, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const mainMapOrder = [
+    'perusteet',
+    'konepellin',
+    'arjessa',
+    'etiikka',
+    'kayttotaidot',
+    'huippu'
+  ];
+
   const getMapAsset = (mapId) => {
     const assets = {
       'main': '/map-bg.jpg',
@@ -178,9 +202,30 @@ const Roadmap = () => {
         opacity: vanPos.isTunnel ? 0.3 : 1,
       }}
     >
-      <div style={{ position: 'relative' }}>
-          <Car size={36} color="var(--secondary-color)" fill="var(--secondary-color)" />
-          <div style={{ position: 'absolute', top: '-1.8rem', left: '-1rem', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}>
+      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+          {/* Base Van */}
+          <img 
+            src="/carparts/van1-base.png" 
+            alt="Van" 
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
+          />
+          
+          {/* Custom Parts Layers */}
+          {purchasedItems.map(itemId => {
+            if (itemId.startsWith('van-')) {
+               return (
+                 <img 
+                    key={itemId} 
+                    src={`/carparts/${itemId}.png`} 
+                    alt="Part" 
+                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
+                 />
+               );
+            }
+            return null;
+          })}
+
+          <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
               AI VAN
           </div>
       </div>
@@ -198,7 +243,6 @@ const Roadmap = () => {
       const category = categories.find(c => c.id === currentMap);
       const subcategory = category?.subcategories.find(s => s.id === node.id);
       
-      // On main map, use the name of the sub-map destination
       const mainMapLabel = categories.find(c => c.id === node.id)?.name;
       const labelText = currentMap === 'main' 
           ? (mainMapLabel || node.id).toUpperCase()
@@ -208,6 +252,9 @@ const Roadmap = () => {
                       node.id !== `${currentMap}_1` && 
                       !completedLessons.includes(`${currentMap}_${parseInt(node.id.split('_')[1]) - 1}`);
       const isCompleted = completedLessons.includes(node.id);
+
+      // Numeric logic for main map
+      const mainNumber = mainMapOrder.indexOf(node.id) + 1;
 
       return (
         <div 
@@ -242,10 +289,9 @@ const Roadmap = () => {
             }}
           >
             {isLocked ? <Lock size={20} color="white" /> : 
-             isCompleted ? <CheckCircle2 size={32} color="white" /> : 
+             isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
              <span style={{ color: 'white', fontWeight: 900, fontSize: currentMap === 'main' ? '1.8rem' : '1.5rem', fontFamily: 'var(--font-display)' }}>
-                 {node.id.includes('_') ? node.id.split('_')[1] : ''}
-                 {!node.id.includes('_') && <PlayCircle size={32} />}
+                 {currentMap === 'main' ? mainNumber : (node.id.includes('_') ? node.id.split('_')[1] : mainNumber)}
              </span>}
           </button>
           

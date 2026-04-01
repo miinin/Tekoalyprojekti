@@ -53,6 +53,25 @@ export default function Lobby() {
                 JATKA PELIÄ
               </button>
             )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '0.5rem', background: 'rgba(255,255,255,0.5)', borderRadius: '10px', marginTop: '0.5rem' }}>
+              <input 
+                type="checkbox" 
+                id="testilaatikko"
+                checked={store.getTestMode()}
+                onChange={(e) => {
+                    store.setTestMode(e.target.checked);
+                    // Force a re-render by using a local state if needed, or just let the button handlers handle it
+                    window.dispatchEvent(new Event('storage')); // Simple hack to notify other potential listeners
+                    // Actually, let's just use local state for better UI responsiveness
+                    setJoinCode(joinCode); // Dummy to trigger re-render
+                }}
+                style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+              />
+              <label htmlFor="testilaatikko" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
+                TESTILAATIKKO (500 Kipinää / vastaus)
+              </label>
+            </div>
+
             <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.2rem' }}>
               {store.hasProgress() ? 'ALOITA ALUSTA' : 'UUSI PELI'}
             </button>

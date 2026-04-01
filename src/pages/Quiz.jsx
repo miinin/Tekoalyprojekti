@@ -92,7 +92,8 @@ export default function Quiz() {
     }
     
     if (correct) {
-      store.addSparks(50);
+      const reward = store.getTestMode() ? 500 : 50;
+      store.addSparks(reward);
     }
     
     setIsCorrect(correct);
@@ -313,7 +314,7 @@ export default function Quiz() {
             </div>
             {isCorrect && (
               <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#fef3c7', color: '#d97706', padding: '0.5rem 1rem', borderRadius: '20px', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>
-                <Zap size={20} fill="#d97706" /> +50 Kipinää
+                <Zap size={20} fill="#d97706" /> +{store.getTestMode() ? 500 : 50} Kipinää
               </div>
             )}
           </div>

@@ -144,6 +144,10 @@ export const store = {
     return JSON.parse(JSON.stringify(defaultCategories));
   },
 
+  // --- TEST MODE ---
+  getTestMode: () => localStorage.getItem('aivan_test_mode') === 'true',
+  setTestMode: (val) => localStorage.setItem('aivan_test_mode', val ? 'true' : 'false'),
+
   saveQuestions: (newCategoriesData) => {
     localStorage.setItem('aivan_custom_questions', JSON.stringify(newCategoriesData));
     return true;
