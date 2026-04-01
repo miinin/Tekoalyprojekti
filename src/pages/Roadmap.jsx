@@ -148,7 +148,7 @@ const Roadmap = () => {
 
   const getMapAsset = (mapId) => {
     const assets = {
-      'main': '/map-metsa.png',
+      'main': '/map-bg.jpg',
       'perusteet': '/map-metsa.png',
       'arjessa': '/map-aavikko.png',
       'kayttotaidot': '/map-jaa.png',
@@ -157,7 +157,7 @@ const Roadmap = () => {
       'huippu': '/map-viidakko.png',
       'sea': '/map-linna.png'
     };
-    return assets[mapId] || '/map-metsa.png';
+    return assets[mapId] || '/map-bg.jpg';
   };
 
   const renderVan = () => (
@@ -197,7 +197,12 @@ const Roadmap = () => {
     return nodesToRender.map(node => {
       const category = categories.find(c => c.id === currentMap);
       const subcategory = category?.subcategories.find(s => s.id === node.id);
-      const labelText = subcategory ? subcategory.name.toUpperCase() : node.id.toUpperCase();
+      
+      // On main map, use the name of the sub-map destination
+      const mainMapLabel = categories.find(c => c.id === node.id)?.name;
+      const labelText = currentMap === 'main' 
+          ? (mainMapLabel || node.id).toUpperCase()
+          : (subcategory ? subcategory.name : node.id).toUpperCase();
 
       const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
                       node.id !== `${currentMap}_1` && 
@@ -223,8 +228,8 @@ const Roadmap = () => {
             id={node.id}
             onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
             style={{
-                width: '3.6rem',
-                height: '3.6rem',
+                width: currentMap === 'main' ? '4.5rem' : '3.6rem',
+                height: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
@@ -238,28 +243,26 @@ const Roadmap = () => {
           >
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted ? <CheckCircle2 size={32} color="white" /> : 
-             <span style={{ color: 'white', fontWeight: 900, fontSize: '1.5rem', fontFamily: 'var(--font-display)' }}>
+             <span style={{ color: 'white', fontWeight: 900, fontSize: currentMap === 'main' ? '1.8rem' : '1.5rem', fontFamily: 'var(--font-display)' }}>
                  {node.id.includes('_') ? node.id.split('_')[1] : ''}
                  {!node.id.includes('_') && <PlayCircle size={32} />}
              </span>}
           </button>
           
-          {currentMap !== 'main' && (
-              <div 
-                className="glass-panel" 
-                style={{ 
-                    padding: '0.4rem 1rem', 
-                    borderRadius: '10px', 
-                    backgroundColor: 'white', 
-                    border: '1px solid rgba(0,0,0,0.1)',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                }}
-              >
-                  <span style={{ fontSize: '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
-                      {labelText}
-                  </span>
-              </div>
-          )}
+          <div 
+            className="glass-panel" 
+            style={{ 
+                padding: '0.4rem 1rem', 
+                borderRadius: '10px', 
+                backgroundColor: 'white', 
+                border: '1px solid rgba(0,0,0,0.1)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            }}
+          >
+              <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
+                  {labelText}
+              </span>
+          </div>
         </div>
       );
     });
@@ -346,10 +349,21 @@ const Roadmap = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', pointerEvents: 'auto' }}>
           <button 
             className="btn-secondary" 
-            style={{ padding: '0.8rem', borderRadius: '15px', background: 'white', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+            style={{ 
+                padding: '0.8rem 1.5rem', 
+                borderRadius: '15px', 
+                background: 'white', 
+                border: 'none', 
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+            }}
             onClick={() => currentMap === 'main' ? navigate('/lobby') : handleBackToMain()}
           >
             <ChevronLeft size={28} color="var(--primary-color)" />
+            {currentMap !== 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>MAAILMANKARTTA</span>}
+            {currentMap === 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>LOBBY</span>}
           </button>
           <div>
             <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, color: 'var(--primary-color)', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
@@ -421,5 +435,6 @@ const Roadmap = () => {
     </div>
   );
 };
+;
 
 export default Roadmap;
