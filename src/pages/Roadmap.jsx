@@ -14,50 +14,57 @@ import {
   Lock,
   PlayCircle
 } from 'lucide-react';
-import { ROADMAP_PATHS } from '../data/roadmapPaths';
+import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 import { categories } from '../data/questions';
 
 const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [currentMap, setCurrentMap] = useState('main'); // 'main' or category slug (e.g., 'arjessa')
-  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0 }); // Initial position: Bottom Center
+  const [currentMap, setCurrentMap] = useState('main');
+  const [dataVersion] = useState("7-LEVEL-FIX-v1");
+  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
     return saved ? JSON.parse(saved) : [];
   });
-  const [currentLocationId, setCurrentLocationId] = useState('start_point'); // Track van's location
+  const [currentLocationId, setCurrentLocationId] = useState('start_point');
   const mapRef = useRef(null);
 
-  // Adjacency for main map routing
-  const mainAdjacency = {
-    perusteet: ['viidakko', 'junc_forest'],
-    viidakko: ['perusteet', 'junc_forest'],
-    junc_forest: ['perusteet', 'viidakko', 'etiikka', 'arjessa'],
-    etiikka: ['junc_forest', 'sea', 'junc_east'],
-    arjessa: ['junc_forest', 'konepellin'],
-    konepellin: ['arjessa', 'junc_east'],
-    junc_east: ['konepellin', 'etiikka', 'kayttotaidot'],
-    sea: ['etiikka', 'kayttotaidot'],
-    kayttotaidot: ['junc_east', 'sea']
-  };
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const mapParam = params.get('map');
+    if (mapParam && AI_ROADMAP_DATA.sub[mapParam]) {
+      setCurrentMap(mapParam);
+    } else {
+      setCurrentMap('main');
+    }
+  }, [location]);
 
-  // BFS to find the shortest path of segments between two nodes
-  const findPathBFS = (start, end) => {
-    if (start === end) return [];
-    const queue = [[start]];
-    const visited = new Set([start]);
+  const mainAdjacency = {};
+  AI_ROADMAP_DATA.main.nodes.forEach(node => {
+    mainAdjacency[node.id] = [];
+  });
+  Object.keys(AI_ROADMAP_DATA.main.paths).forEach(pathKey => {
+    const [start, end] = pathKey.split('-');
+    if (mainAdjacency[start] && mainAdjacency[end]) {
+      mainAdjacency[start].push(end);
+      mainAdjacency[end].push(start);
+    }
+  });
+
+  const findPathBFS = (startNode, endNode) => {
+    if (startNode === endNode) return [startNode];
+    const queue = [[startNode]];
+    const visited = new Set([startNode]);
 
     while (queue.length > 0) {
       const path = queue.shift();
-      const node = path[path.length - 1];
+      const lastNode = path[path.length - 1];
 
-      if (node === end) return path;
-
-      const neighbors = mainAdjacency[node] || [];
-      for (const neighbor of neighbors) {
+      for (const neighbor of (mainAdjacency[lastNode] || [])) {
         if (!visited.has(neighbor)) {
+          if (neighbor === endNode) return [...path, neighbor];
           visited.add(neighbor);
           queue.push([...path, neighbor]);
         }
@@ -66,99 +73,48 @@ const Roadmap = () => {
     return null;
   };
 
-  // Determine current map from URL if applicable
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const mapParam = params.get('map');
-    if (mapParam && ROADMAP_PATHS.sub[mapParam]) {
-      setCurrentMap(mapParam);
-      // If entering sub-map, start with entry animation if from node 1
-      if (!isMoving) {
-          handleEntryAnimation(mapParam);
-      }
-    } else {
-      setCurrentMap('main');
-      // On main map, ensure van is at the last known location
-      const lastNode = ROADMAP_PATHS.main.nodes.find(n => n.id === currentLocationId);
-      if (lastNode && !isMoving) {
-          setVanPos(prev => ({ 
-              ...prev, 
-              top: lastNode.top, 
-              left: lastNode.left,
-              isTunnel: false
-          }));
-      }
-    }
-  }, [location.search, currentLocationId, isMoving]);
-
-  const handleEntryAnimation = async (mapSlug) => {
-      const entryPath = ROADMAP_PATHS.sub[mapSlug]?.entry;
-      if (!entryPath) return;
-      
-      setIsMoving(true);
-      await moveAlongPath(entryPath, 500);
-      setIsMoving(false);
-  };
-
   const moveAlongPath = async (waypoints, totalDuration = 2000) => {
     if (!waypoints || waypoints.length < 2) return;
-    
-    // Smooth out movement: handle segments correctly
     const stepDuration = totalDuration / (waypoints.length - 1);
-    
     for (let i = 0; i < waypoints.length; i++) {
       const target = waypoints[i];
       const prev = waypoints[i-1];
-      
       let rotation = 0;
       if (prev) {
           const dx = parseFloat(target.left) - parseFloat(prev.left);
           const dy = parseFloat(target.top) - parseFloat(prev.top);
           rotation = Math.atan2(dy, dx) * (180 / Math.PI);
       }
-      
       setVanPos(prevPos => ({ 
           top: target.top, 
           left: target.left, 
           rotate: rotation,
           isTunnel: target.tunnel || false
       }));
-      
       await new Promise(r => setTimeout(r, stepDuration));
     }
   };
 
   const handleNodeClick = async (nodeId, isMain = false) => {
     if (isMoving) return;
+    const currentData = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     
     if (isMain) {
-        if (nodeId === currentLocationId) {
-            navigate(`?map=${nodeId}`);
-            return;
-        }
-
         const pathSequence = findPathBFS(currentLocationId, nodeId);
         if (!pathSequence) return;
-
         setIsMoving(true);
-
-        // Collect all waypoints into a single sequence for smooth movement
         let allWaypoints = [];
         for (let i = 0; i < pathSequence.length - 1; i++) {
             const start = pathSequence[i];
             const end = pathSequence[i+1];
-            
-            let segmentWaypoints = ROADMAP_PATHS.main.paths[`${start}-${end}`];
+            let segmentWaypoints = AI_ROADMAP_DATA.main.paths[`${start}-${end}`];
             let reverse = false;
-            
             if (!segmentWaypoints) {
-                segmentWaypoints = ROADMAP_PATHS.main.paths[`${end}-${start}`];
+                segmentWaypoints = AI_ROADMAP_DATA.main.paths[`${end}-${start}`];
                 reverse = true;
             }
-
             if (segmentWaypoints) {
                 const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
-                // Avoid duplicating the junction point
                 if (allWaypoints.length > 0) {
                     allWaypoints.push(...finalWaypoints.slice(1));
                 } else {
@@ -166,22 +122,14 @@ const Roadmap = () => {
                 }
             }
         }
-
         if (allWaypoints.length > 0) {
             await moveAlongPath(allWaypoints, 800 * (pathSequence.length - 1));
         }
-
         setCurrentLocationId(nodeId);
         setIsMoving(false);
-        // Delay slightly before entering
         setTimeout(() => navigate(`?map=${nodeId}`), 300);
     } else {
-        // Sub-map node click (e.g. 'perusteet_1')
-        const currentSubMap = ROADMAP_PATHS.sub[currentMap];
-        if (!currentSubMap) return;
-        
-        // Simple direct move for sub-map nodes for now
-        const node = currentSubMap.nodes.find(n => n.id === nodeId);
+        const node = currentData.nodes.find(n => n.id === nodeId);
         if (node) {
             setIsMoving(true);
             setVanPos(prev => ({ ...prev, top: node.top, left: node.left }));
@@ -193,7 +141,7 @@ const Roadmap = () => {
   };
 
   const handleBackToMain = async () => {
-      const exitPath = ROADMAP_PATHS.sub[currentMap]?.exit;
+      const exitPath = AI_ROADMAP_DATA.sub[currentMap]?.exit;
       if (exitPath) {
           setIsMoving(true);
           await moveAlongPath(exitPath, 1000);
@@ -229,7 +177,6 @@ const Roadmap = () => {
           duration: isMoving ? 0.3 : 0.8 
       }}
     >
-      {/* AI Van Asset Placeholder */}
       <div className="relative">
           <Car size={40} className="text-yellow-500 fill-yellow-500" />
           <div className="absolute -top-6 -left-2 bg-white/90 px-2 py-0.5 rounded-full text-[10px] font-bold border border-yellow-500 shadow-sm whitespace-nowrap">
@@ -240,24 +187,19 @@ const Roadmap = () => {
   );
 
   const renderMapNodes = () => {
-    const data = currentMap === 'main' ? ROADMAP_PATHS.main : ROADMAP_PATHS.sub[currentMap];
+    const data = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     if (!data) return null;
-
-    // Filter out hidden junctions for main map
     const nodesToRender = currentMap === 'main' 
         ? data.nodes.filter(n => !n.isJunction) 
         : data.nodes;
 
     return nodesToRender.map(node => {
-      // Find subcategory name from questions data
       const category = categories.find(c => c.id === currentMap);
       const subcategory = category?.subcategories.find(s => s.id === node.id);
       const labelText = subcategory ? subcategory.name.toUpperCase() : node.id.toUpperCase();
-
       const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
                       node.id !== `${currentMap}_1` && 
                       !completedLessons.includes(`${currentMap}_${parseInt(node.id.split('_')[1]) - 1}`);
-      
       const isCompleted = completedLessons.includes(node.id);
 
       return (
@@ -282,7 +224,6 @@ const Roadmap = () => {
                  {!node.id.includes('_') && <PlayCircle size={28} className="animate-pulse" />}
              </span>}
           </button>
-          
           {currentMap !== 'main' && (
               <div className="bg-white px-3 py-1 rounded-lg shadow-lg border border-gray-200">
                   <span className="text-[10px] font-black text-gray-800 tracking-tight whitespace-nowrap">
@@ -296,9 +237,8 @@ const Roadmap = () => {
   };
 
   const renderPaths = () => {
-    const data = currentMap === 'main' ? ROADMAP_PATHS.main : ROADMAP_PATHS.sub[currentMap];
+    const data = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     if (!data || !data.paths) return null;
-
     return (
       <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }}>
         {Object.entries(data.paths).map(([key, waypoints]) => {
@@ -306,7 +246,6 @@ const Roadmap = () => {
           waypoints.slice(1).forEach(point => {
             pathString += ` L ${point.left} ${point.top}`;
           });
-
           return (
             <path
               key={key}
@@ -325,7 +264,6 @@ const Roadmap = () => {
 
   return (
     <div className="relative min-h-screen bg-slate-900 text-white overflow-hidden font-sans">
-      {/* Background Layer */}
       <div 
         className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none"
         style={{
@@ -335,7 +273,6 @@ const Roadmap = () => {
         }}
       />
 
-      {/* Header */}
       <div className="absolute top-0 left-0 right-0 p-6 flex justify-between items-center z-[100] pointer-events-auto">
         <div className="flex items-center gap-4">
           <button 
@@ -346,10 +283,10 @@ const Roadmap = () => {
           </button>
           <div>
             <h1 className="text-2xl font-black tracking-tighter text-white drop-shadow-lg">
-              {currentMap === 'main' ? 'MAAILMANKARTTA' : currentMap.toUpperCase()}
+              {currentMap === 'main' ? 'AIvan Tie' : categories.find(c => c.id === currentMap)?.name}
             </h1>
             <p className="text-[10px] font-bold text-yellow-400 tracking-widest uppercase opacity-80">
-              {currentMap === 'main' ? 'Valitse seikkailu' : 'Etene reitillä'}
+              {currentMap === 'main' ? 'Pääreitti' : 'Alueen tutkimus'} | {dataVersion}
             </p>
           </div>
         </div>

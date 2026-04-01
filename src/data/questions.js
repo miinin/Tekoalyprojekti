@@ -96,26 +96,26 @@ export const categories = [
     "id": "etiikka",
     "name": "Etiikka ja turvallisuus",
     "subcategories": [
-      { "id": "etiikka_1", "name": "Taso 1", "questions": [] },
-      { "id": "etiikka_2", "name": "Taso 2", "questions": [] },
-      { "id": "etiikka_3", "name": "Taso 3", "questions": [] },
-      { "id": "etiikka_4", "name": "Taso 4", "questions": [] },
-      { "id": "etiikka_5", "name": "Taso 5", "questions": [] },
-      { "id": "etiikka_6", "name": "Taso 6", "questions": [] },
-      { "id": "etiikka_7", "name": "Taso 7", "questions": [] }
+      { "id": "etiikka_1", "name": "Taso 1: Alkeet", "questions": [] },
+      { "id": "etiikka_2", "name": "Taso 2: Syvä", "questions": [] },
+      { "id": "etiikka_3", "name": "Taso 3: Mestari", "questions": [] },
+      { "id": "etiikka_4", "name": "Taso 4: Tutkija", "questions": [] },
+      { "id": "etiikka_5", "name": "Taso 5: Innovaattori", "questions": [] },
+      { "id": "etiikka_6", "name": "Taso 6: Visionääri", "questions": [] },
+      { "id": "etiikka_7", "name": "Taso 7: Legenda", "questions": [] }
     ]
   },
   {
     "id": "kayttotaidot",
     "name": "Tekoälyn käyttötaidot",
     "subcategories": [
-      { "id": "kayttotaidot_1", "name": "Taso 1", "questions": [] },
-      { "id": "kayttotaidot_2", "name": "Taso 2", "questions": [] },
-      { "id": "kayttotaidot_3", "name": "Taso 3", "questions": [] },
-      { "id": "kayttotaidot_4", "name": "Taso 4", "questions": [] },
-      { "id": "kayttotaidot_5", "name": "Taso 5", "questions": [] },
-      { "id": "kayttotaidot_6", "name": "Taso 6", "questions": [] },
-      { "id": "kayttotaidot_7", "name": "Taso 7", "questions": [] }
+      { "id": "kayttotaidot_1", "name": "Taso 1: Alkeet", "questions": [] },
+      { "id": "kayttotaidot_2", "name": "Taso 2: Syvä", "questions": [] },
+      { "id": "kayttotaidot_3", "name": "Taso 3: Mestari", "questions": [] },
+      { "id": "kayttotaidot_4", "name": "Taso 4: Tutkija", "questions": [] },
+      { "id": "kayttotaidot_5", "name": "Taso 5: Innovaattori", "questions": [] },
+      { "id": "kayttotaidot_6", "name": "Taso 6: Visionääri", "questions": [] },
+      { "id": "kayttotaidot_7", "name": "Taso 7: Legenda", "questions": [] }
     ]
   },
   {
