@@ -249,6 +249,11 @@ const Roadmap = () => {
         : data.nodes;
 
     return nodesToRender.map(node => {
+      // Find subcategory name from questions data
+      const category = categories.find(c => c.id === currentMap);
+      const subcategory = category?.subcategories.find(s => s.id === node.id);
+      const labelText = subcategory ? subcategory.name.toUpperCase() : node.id.toUpperCase();
+
       const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
                       node.id !== `${currentMap}_1` && 
                       !completedLessons.includes(`${currentMap}_${parseInt(node.id.split('_')[1]) - 1}`);
@@ -256,24 +261,36 @@ const Roadmap = () => {
       const isCompleted = completedLessons.includes(node.id);
 
       return (
-        <button
-          key={node.id}
-          id={node.id}
-          onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
-          className={`absolute transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl ${
-            isLocked ? 'bg-gray-400 cursor-not-allowed opacity-60' : 
-            isCompleted ? 'bg-green-500 hover:scale-110' : 'bg-red-500 hover:scale-110 hover:bg-yellow-400'
-          }`}
+        <div 
+          key={node.id} 
+          className="absolute transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-2"
           style={{ top: node.top, left: node.left, zIndex: 40 }}
         >
-          {isLocked ? <Lock size={16} className="text-white" /> : 
-           isCompleted ? <CheckCircle2 size={24} className="text-white" /> : 
-           <PlayCircle size={24} className="text-white animate-pulse" />}
-           
-           <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-black/70 text-white text-[10px] px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-               {node.id}
-           </div>
-        </button>
+          <button
+            id={node.id}
+            onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
+            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 shadow-xl border-4 ${
+              isLocked ? 'bg-gray-400 border-gray-500 cursor-not-allowed opacity-60' : 
+              isCompleted ? 'bg-green-500 border-green-600 hover:scale-110' : 
+              'bg-blue-500 border-blue-600 hover:scale-110 hover:bg-yellow-400 hover:border-yellow-500'
+            }`}
+          >
+            {isLocked ? <Lock size={18} className="text-white" /> : 
+             isCompleted ? <CheckCircle2 size={28} className="text-white" /> : 
+             <span className="text-white font-black text-lg">
+                 {node.id.includes('_') ? node.id.split('_')[1] : ''}
+                 {!node.id.includes('_') && <PlayCircle size={28} className="animate-pulse" />}
+             </span>}
+          </button>
+          
+          {currentMap !== 'main' && (
+              <div className="bg-white px-3 py-1 rounded-lg shadow-lg border border-gray-200">
+                  <span className="text-[10px] font-black text-gray-800 tracking-tight whitespace-nowrap">
+                      {labelText}
+                  </span>
+              </div>
+          )}
+        </div>
       );
     });
   };
