@@ -61,6 +61,58 @@ export const ROADMAP_PATHS = {
     }
   },
   sub: {
+    perusteet: {
+      entry: [
+        { top: '0%', left: '50%' },
+        { top: '20%', left: '40%' },
+        { top: '34.2%', left: '23.1%' } // Node 2
+      ],
+      exit: [
+        { top: '20%', left: '40%' },
+        { top: '0%', left: '50%' }
+      ],
+      nodes: [
+        { id: 'perusteet_1', top: '75.3%', left: '21.1%' },
+        { id: 'perusteet_2', top: '34.2%', left: '23.1%' },
+        { id: 'perusteet_3', top: '22.3%', left: '35.4%' },
+        { id: 'perusteet_4', top: '48.5%', left: '48.2%' },
+        { id: 'perusteet_5', top: '75.8%', left: '50.2%' },
+        { id: 'perusteet_6', top: '65.4%', left: '74.1%' },
+        { id: 'perusteet_7', top: '35.2%', left: '85.4%' }
+      ],
+      paths: {
+        'perusteet_1-perusteet_2': [
+          { top: '75.3%', left: '21.1%' },
+          { top: '55%', left: '24%', tunnel: true },
+          { top: '34.2%', left: '23.1%' }
+        ],
+        'perusteet_2-perusteet_3': [
+          { top: '34.2%', left: '23.1%' },
+          { top: '28%', left: '28%' },
+          { top: '22.3%', left: '35.4%' }
+        ],
+        'perusteet_3-perusteet_4': [
+          { top: '22.3%', left: '35.4%' },
+          { top: '35%', left: '48%' },
+          { top: '48.5%', left: '48.2%' }
+        ],
+        'perusteet_4-perusteet_5': [
+          { top: '48.5%', left: '48.2%' },
+          { top: '62%', left: '45%' },
+          { top: '75.8%', left: '50.2%' }
+        ],
+        'perusteet_5-perusteet_6': [
+          { top: '75.8%', left: '50.2%' },
+          { top: '72%', left: '62%', tunnel: true },
+          { top: '65.4%', left: '74.1%' }
+        ],
+        'perusteet_6-perusteet_7': [
+          { top: '65.4%', left: '74.1%' },
+          { top: '50%', left: '85%', tunnel: true },
+          { top: '35.2%', left: '85.4%' }
+        ]
+      }
+    },
     arjessa: {
       entry: [
         { top: '55%', left: '0%' },
@@ -187,7 +239,8 @@ export const ROADMAP_PATHS = {
         { id: 'etiikka_3', top: '32.5%', left: '50.4%' },
         { id: 'etiikka_4', top: '42.5%', left: '67.4%' },
         { id: 'etiikka_5', top: '85.5%', left: '60.4%' },
-        { id: 'etiikka_6', top: '77.5%', left: '78.4%' }
+        { id: 'etiikka_6', top: '77.5%', left: '78.4%' },
+        { id: 'etiikka_7', top: '55.5%', left: '88.4%' }
       ],
       paths: {
         'etiikka_2-etiikka_1': [
@@ -209,6 +262,11 @@ export const ROADMAP_PATHS = {
             { top: '42.5%', left: '67.4%' },
             { top: '60%', left: '72%' },
             { top: '77.5%', left: '78.4%' }
+        ],
+        'etiikka_6-etiikka_7': [
+            { top: '77.5%', left: '78.4%' },
+            { top: '68%', left: '85%' },
+            { top: '55.5%', left: '88.4%' }
         ],
         'etiikka_6-etiikka_5': [
             { top: '77.5%', left: '78.4%' },
@@ -233,7 +291,8 @@ export const ROADMAP_PATHS = {
           { id: 'kayttotaidot_3', top: '48.5%', left: '64.5%' },
           { id: 'kayttotaidot_4', top: '75.5%', left: '35.5%' },
           { id: 'kayttotaidot_5', top: '80.5%', left: '72%' },
-          { id: 'kayttotaidot_6', top: '66%', left: '68%' }
+          { id: 'kayttotaidot_6', top: '66%', left: '68%' },
+          { id: 'kayttotaidot_7', top: '35%', left: '78%' }
         ],
         paths: {
             'kayttotaidot_4-kayttotaidot_1': [
@@ -258,6 +317,11 @@ export const ROADMAP_PATHS = {
                 { top: '80.5%', left: '72%' },
                 { top: '73%', left: '77%' },
                 { top: '66%', left: '68%' }
+            ],
+            'kayttotaidot_6-kayttotaidot_7': [
+                { top: '66%', left: '68%' },
+                { top: '50%', left: '75%' },
+                { top: '35%', left: '78%' }
             ]
         }
     },
