@@ -8,12 +8,104 @@ export default function Roadmap() {
   const { mainCategory } = useParams();
   
   const [categories, setCategories] = useState([]);
-  
+  const [purchased, setPurchased] = useState([]);
+  const [vanPos, setVanPos] = useState({ top: '100%', left: '0%' });
+  const [vanFacingRight, setVanFacingRight] = useState(true);
+  const [isDriving, setIsDriving] = useState(false);
+
+  const mainPositions = [
+    { top: '35%', left: '18%' },
+    { top: '75%', left: '25%' },
+    { top: '65%', left: '75%' },
+    { top: '25%', left: '80%' },
+    { top: '30%', left: '50%' }
+  ];
+
   useEffect(() => {
-    setCategories(store.getQuestions());
-  }, []);
+    const cats = store.getQuestions();
+    setCategories(cats);
+    store.getPurchasedItems().then(p => setPurchased(p));
+    
+    const lastLoc = store.getLastLocation();
+    let startPos = { top: '90%', left: '5%' }; // Default position
+    
+    if (mainCategory) {
+       if (lastLoc.sub) {
+          const cat = cats.find(c => c.id === mainCategory);
+          const sub = cat ? cat.subcategories.find(s => s.id === lastLoc.sub) : null;
+          if (sub) startPos = { top: sub.top || '50%', left: sub.left || '50%' };
+       }
+    } else {
+       if (lastLoc.main) {
+          const cIdx = cats.findIndex(c => c.id === lastLoc.main);
+          if (cIdx >= 0 && mainPositions[cIdx]) {
+             startPos = mainPositions[cIdx];
+          }
+       }
+    }
+    setVanPos(startPos);
+  }, [mainCategory]);
   
   const currentCategory = (mainCategory && categories.length > 0) ? categories.find(c => c.id === mainCategory) : null;
+
+  const handleNodeClick = (targetId, isSub, targetTop, targetLeft) => {
+    if (isDriving) return;
+    setIsDriving(true);
+    
+    const tTop = parseFloat(targetTop);
+    const tLeft = parseFloat(targetLeft);
+    const currentLeft = parseFloat(vanPos.left);
+    
+    if (tLeft !== currentLeft) {
+      setVanFacingRight(tLeft > currentLeft);
+    }
+    setVanPos({ top: targetTop, left: targetLeft });
+    
+    store.setLastLocation(mainCategory || targetId, isSub ? targetId : null);
+    
+    setTimeout(() => {
+      setIsDriving(false);
+      if (isSub) {
+        navigate(`/quiz/${mainCategory}/${targetId}`);
+      } else {
+        navigate(`/roadmap/${targetId}`);
+      }
+    }, 1500); // Wait for the van CSS transitio to finish
+  };
+
+  const renderVan = () => {
+    const carLayers = purchased.filter(id => id.startsWith('u'));
+    return (
+      <div style={{
+        position: 'absolute',
+        top: vanPos.top,
+        left: vanPos.left,
+        width: '120px', 
+        height: '100px',
+        transform: `translate(-50%, -85%) scaleX(${vanFacingRight ? 1 : -1})`, 
+        transition: 'all 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
+        zIndex: 20,
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'center'
+      }}>
+        {isDriving && (
+           <div style={{ position: 'absolute', bottom: '15px', left: vanFacingRight ? '-5px' : 'auto', right: vanFacingRight ? 'auto' : '-5px', width: '20px', height: '10px', background: 'rgba(255,255,255,0.8)', borderRadius: '50%', filter: 'blur(3px)', animation: 'smoke 0.4s infinite' }}></div>
+        )}
+        <div style={{ position: 'relative', width: '100%', height: '100%', animation: isDriving ? 'driveBounce 0.2s infinite alternate' : 'none' }}>
+           <img src="/van1-base.png" alt="Van" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
+           {carLayers.map(layer => (
+              <img key={layer} src={`/layer-${layer}.png`} alt={layer} style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 }} />
+           ))}
+        </div>
+        <style>{`
+          @keyframes driveBounce { from { transform: translateY(0); } to { transform: translateY(-4px); } }
+          @keyframes smoke { 0% { opacity: 0; transform: scale(0.5) translate(0, 0); } 50% { opacity: 1; transform: scale(1.5) translate(${vanFacingRight ? '-10px' : '10px'}, -5px); } 100% { opacity: 0; transform: scale(2) translate(${vanFacingRight ? '-20px' : '20px'}, -10px); } }
+        `}</style>
+      </div>
+    );
+  };
   
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
@@ -57,13 +149,15 @@ export default function Roadmap() {
         {/* Adds a slight dark overlay if needed to make points pop, but keeping it completely transparent for now to let illustration shine */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(255,255,255,0.05)', pointerEvents: 'none' }}></div>
 
+        {renderVan()}
+
         {(() => {
           if (currentCategory) {
             return currentCategory.subcategories.map((sub, index) => (
               <div 
                 key={sub.id} 
-                className="map-node group animate-fade-in"
-                onClick={() => navigate(`/quiz/${mainCategory}/${sub.id}`)}
+                className={`map-node group animate-fade-in ${isDriving ? 'pointer-events-none' : ''}`}
+                onClick={() => handleNodeClick(sub.id, true, sub.top || '50%', sub.left || '50%')}
                 style={{ position: 'absolute', top: sub.top || '50%', left: sub.left || '50%', transform: 'translate(-50%, -50%)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', zIndex: 10 }}
               >
                 {/* Floating Marker */}
@@ -80,21 +174,13 @@ export default function Roadmap() {
             ));
           } else {
             return categories.map((cat, index) => {
-              // Define precise coordinates based on the user's illustration landmarks
-              const positions = [
-                { top: '35%', left: '18%' }, // Metsä/joki
-                { top: '75%', left: '25%' }, // Viidakon rauniot
-                { top: '65%', left: '75%' }, // Satama/Majakka
-                { top: '25%', left: '80%' }, // Lumihuippuinen vuori
-                { top: '30%', left: '50%' }  // Linna
-              ];
-              const pos = positions[index] || { top: '50%', left: '50%' };
+              const pos = mainPositions[index] || { top: '50%', left: '50%' };
 
               return (
                 <div 
                   key={cat.id} 
-                  className="map-node group animate-fade-in"
-                  onClick={() => navigate(`/roadmap/${cat.id}`)}
+                  className={`map-node group animate-fade-in ${isDriving ? 'pointer-events-none' : ''}`}
+                  onClick={() => handleNodeClick(cat.id, false, pos.top, pos.left)}
                   style={{ position: 'absolute', top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', zIndex: 10 }}
                 >
                   {/* Floating Marker */}

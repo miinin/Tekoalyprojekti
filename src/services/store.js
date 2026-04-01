@@ -20,6 +20,22 @@ export const store = {
     return code;
   },
 
+  // Map Animation Location Tracking
+  getLastLocation: () => {
+    return {
+      main: localStorage.getItem('aivan_last_main') || null,
+      sub: localStorage.getItem('aivan_last_sub') || null
+    };
+  },
+  
+  setLastLocation: (main, sub) => {
+    if (main) localStorage.setItem('aivan_last_main', main);
+    else localStorage.removeItem('aivan_last_main');
+    
+    if (sub) localStorage.setItem('aivan_last_sub', sub);
+    else localStorage.removeItem('aivan_last_sub');
+  },
+
   getSparks: async () => {
     const room = store.getRoomCode();
     // Simulate fetching from shared DB. Right now just local storage with room key
