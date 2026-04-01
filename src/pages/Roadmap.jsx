@@ -362,6 +362,27 @@ const Roadmap = () => {
         </div>
 
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
+          <button 
+            onClick={() => navigate('/garage')}
+            style={{ 
+                backgroundColor: 'white', 
+                border: 'none', 
+                padding: '0.8rem 1.2rem', 
+                borderRadius: '20px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                gap: '0.6rem', 
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                cursor: 'pointer',
+                transition: 'transform 0.2s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            <Car size={24} color="var(--primary-color)" />
+            <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--primary-color)', fontFamily: 'var(--font-main)' }}>AUTOTALLI</span>
+          </button>
+
           <div style={{ backgroundColor: 'white', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid var(--secondary-color)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
             <span style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--text-main)', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
