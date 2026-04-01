@@ -4,59 +4,79 @@
  * - nodes: Precise coordinates of red dots (matching question.js subcategory IDs)
  * - entry: Path from edge of screen to Node 1 (used when arriving from main map)
  * - exit: Path from current node to edge of screen (used when returning to main map)
- * - paths: Waypoints between specific node IDs
+ * - paths: Waypoints between specific node IDs or junctions
  */
 
 export const ROADMAP_PATHS = {
   main: {
     nodes: [
-      { id: 'perusteet', top: '37.2%', left: '22.8%' },
-      { id: 'konepellin', top: '76.5%', left: '23.5%' },
-      { id: 'arjessa', top: '83.2%', left: '52.4%' },
-      { id: 'etiikka', top: '64.8%', left: '74.2%' },
-      { id: 'kayttotaidot', top: '24.6%', left: '74.2%' },
-      { id: 'volcano', top: '35.4%', left: '50.4%' },
-      { id: 'sea', top: '20.6%', left: '42.1%', isSecret: true }
+      { id: 'perusteet', top: '35.2%', left: '21.5%' }, // Forest (Top-Left)
+      { id: 'viidakko', top: '78.5%', left: '23.8%' },  // Ancient Ruins (Bottom-Left)
+      { id: 'arjessa', top: '83.2%', left: '52.4%' },   // Desert (Bottom-Middle)
+      { id: 'konepellin', top: '64.8%', left: '74.2%' }, // Industrial Harbor (Bottom-Right)
+      { id: 'etiikka', top: '35.4%', left: '50.4%' },   // Volcano (Center)
+      { id: 'kayttotaidot', top: '24.6%', left: '74.2%' }, // Observatory (Top-Right)
+      { id: 'sea', top: '20.6%', left: '42.1%' },        // Castle (Top-Center)
+      // Hidden junctions for routing
+      { id: 'junc_forest', top: '51%', left: '36%', isJunction: true },
+      { id: 'junc_east', top: '53%', left: '62%', isJunction: true }
     ],
     paths: {
-      'perusteet-konepellin': [
-        { top: '37.2%', left: '22.8%' },
-        { top: '45%', left: '26%' },
-        { top: '53%', left: '29%' },
-        { top: '65%', left: '27%', tunnel: true },
-        { top: '76.5%', left: '23.5%' }
+      'perusteet-viidakko': [
+        { top: '35.2%', left: '21.5%' },
+        { top: '45%', left: '24%' },
+        { top: '60%', left: '21%' },
+        { top: '78.5%', left: '23.8%' }
       ],
-      'konepellin-arjessa': [
-        { top: '76.5%', left: '23.5%' },
-        { top: '78%', left: '38%' },
-        { top: '83.2%', left: '52.4%' }
+      'perusteet-junc_forest': [
+        { top: '35.2%', left: '21.5%' },
+        { top: '42%', left: '32%' },
+        { top: '51%', left: '36%' }
       ],
-      'arjessa-etiikka': [
-        { top: '83.2%', left: '52.4%' },
-        { top: '80%', left: '65%', tunnel: true },
-        { top: '70%', left: '72%' },
-        { top: '64.8%', left: '74.2%' }
+      'viidakko-junc_forest': [
+        { top: '78.5%', left: '23.8%' },
+        { top: '65%', left: '32%' },
+        { top: '51%', left: '36%' }
       ],
-      'etiikka-kayttotaidot': [
-        { top: '64.8%', left: '74.2%' },
-        { top: '52%', left: '80%', tunnel: true },
-        { top: '38%', left: '81%' },
-        { top: '24.6%', left: '74.2%' }
-      ],
-      'kayttotaidot-volcano': [
-        { top: '24.6%', left: '74.2%' },
-        { top: '27%', left: '62%', tunnel: true },
+      'junc_forest-etiikka': [
+        { top: '51%', left: '36%' },
+        { top: '42%', left: '45%' },
         { top: '35.4%', left: '50.4%' }
       ],
-      'volcano-perusteet': [
-        { top: '35.4%', left: '50.4%' },
-        { top: '32%', left: '36%', tunnel: true },
-        { top: '37.2%', left: '22.8%' }
+      'junc_forest-arjessa': [
+        { top: '51%', left: '36%' },
+        { top: '65%', left: '42%' },
+        { top: '83.2%', left: '52.4%' }
       ],
-      'volcano-sea': [
+      'arjessa-konepellin': [
+        { top: '83.2%', left: '52.4%' },
+        { top: '75%', left: '65%' },
+        { top: '64.8%', left: '74.2%' }
+      ],
+      'konepellin-junc_east': [
+        { top: '64.8%', left: '74.2%' },
+        { top: '58%', left: '68%' },
+        { top: '53%', left: '62%' }
+      ],
+      'etiikka-junc_east': [
         { top: '35.4%', left: '50.4%' },
-        { top: '28%', left: '42%' },
+        { top: '45%', left: '55%' },
+        { top: '53%', left: '62%' }
+      ],
+      'junc_east-kayttotaidot': [
+        { top: '53%', left: '62%' },
+        { top: '40%', left: '68%' },
+        { top: '24.6%', left: '74.2%' }
+      ],
+      'etiikka-sea': [
+        { top: '35.4%', left: '50.4%' },
+        { top: '28%', left: '45%' },
         { top: '20.6%', left: '42.1%' }
+      ],
+      'sea-kayttotaidot': [
+        { top: '20.6%', left: '42.1%' },
+        { top: '22%', left: '58%' },
+        { top: '24.6%', left: '74.2%' }
       ]
     }
   },

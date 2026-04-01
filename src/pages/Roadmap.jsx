@@ -27,7 +27,44 @@ const Roadmap = () => {
     const saved = localStorage.getItem('completed_lessons');
     return saved ? JSON.parse(saved) : [];
   });
+  const [currentLocationId, setCurrentLocationId] = useState('perusteet'); // Track van's location
   const mapRef = useRef(null);
+
+  // Adjacency for main map routing
+  const mainAdjacency = {
+    perusteet: ['viidakko', 'junc_forest'],
+    viidakko: ['perusteet', 'junc_forest'],
+    junc_forest: ['perusteet', 'viidakko', 'etiikka', 'arjessa'],
+    etiikka: ['junc_forest', 'sea', 'junc_east'],
+    arjessa: ['junc_forest', 'konepellin'],
+    konepellin: ['arjessa', 'junc_east'],
+    junc_east: ['konepellin', 'etiikka', 'kayttotaidot'],
+    sea: ['etiikka', 'kayttotaidot'],
+    kayttotaidot: ['junc_east', 'sea']
+  };
+
+  // BFS to find the shortest path of segments between two nodes
+  const findPathBFS = (start, end) => {
+    if (start === end) return [];
+    const queue = [[start]];
+    const visited = new Set([start]);
+
+    while (queue.length > 0) {
+      const path = queue.shift();
+      const node = path[path.length - 1];
+
+      if (node === end) return path;
+
+      const neighbors = mainAdjacency[node] || [];
+      for (const neighbor of neighbors) {
+        if (!visited.has(neighbor)) {
+          visited.add(neighbor);
+          queue.push([...path, neighbor]);
+        }
+      }
+    }
+    return null;
+  };
 
   // Determine current map from URL if applicable
   useEffect(() => {
@@ -41,8 +78,13 @@ const Roadmap = () => {
       }
     } else {
       setCurrentMap('main');
+      // On main map, ensure van is at the last known location
+      const lastNode = ROADMAP_PATHS.main.nodes.find(n => n.id === currentLocationId);
+      if (lastNode) {
+          setVanPos({ top: lastNode.top, left: lastNode.left, rotate: 0 });
+      }
     }
-  }, [location.search]);
+  }, [location.search, currentLocationId]);
 
   const handleEntryAnimation = async (mapSlug) => {
       const entryPath = ROADMAP_PATHS.sub[mapSlug]?.entry;
@@ -56,6 +98,7 @@ const Roadmap = () => {
   const moveAlongPath = async (waypoints, totalDuration = 2000) => {
     if (!waypoints || waypoints.length < 2) return;
     
+    // Smooth out movement: handle segments correctly
     const stepDuration = totalDuration / (waypoints.length - 1);
     
     for (let i = 0; i < waypoints.length; i++) {
@@ -69,12 +112,12 @@ const Roadmap = () => {
           rotation = Math.atan2(dy, dx) * (180 / Math.PI);
       }
       
-      setVanPos({ 
+      setVanPos(prevPos => ({ 
           top: target.top, 
           left: target.left, 
           rotate: rotation,
           isTunnel: target.tunnel || false
-      });
+      }));
       
       await new Promise(r => setTimeout(r, stepDuration));
     }
@@ -84,30 +127,54 @@ const Roadmap = () => {
     if (isMoving) return;
     
     if (isMain) {
-        // NodeId is the category slug (e.g. 'perusteet')
-        // Move to the node first
-        const node = ROADMAP_PATHS.main.nodes.find(n => n.id === nodeId);
-        if (!node) return;
-        
+        if (nodeId === currentLocationId) {
+            navigate(`?map=${nodeId}`);
+            return;
+        }
+
+        const pathSequence = findPathBFS(currentLocationId, nodeId);
+        if (!pathSequence) return;
+
         setIsMoving(true);
-        // Simplified: just move to node. In a real app, you'd find a path.
-        setVanPos({ top: node.top, left: node.left, rotate: 0 });
-        await new Promise(r => setTimeout(r, 800));
-        
-        // After reaching node, enter sub-map
-        navigate(`?map=${nodeId}`);
+
+        // Move through each segment in the path
+        for (let i = 0; i < pathSequence.length - 1; i++) {
+            const start = pathSequence[i];
+            const end = pathSequence[i+1];
+            
+            // Try different key combinations for segments
+            let segmentWaypoints = ROADMAP_PATHS.main.paths[`${start}-${end}`];
+            let reverse = false;
+            
+            if (!segmentWaypoints) {
+                segmentWaypoints = ROADMAP_PATHS.main.paths[`${end}-${start}`];
+                reverse = true;
+            }
+
+            if (segmentWaypoints) {
+                const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
+                await moveAlongPath(finalWaypoints, 800);
+            }
+        }
+
+        setCurrentLocationId(nodeId);
         setIsMoving(false);
+        // Delay slightly before entering
+        setTimeout(() => navigate(`?map=${nodeId}`), 300);
     } else {
         // Sub-map node click (e.g. 'perusteet_1')
         const currentSubMap = ROADMAP_PATHS.sub[currentMap];
         if (!currentSubMap) return;
         
-        const nodeIndex = currentSubMap.nodes.findIndex(n => n.id === nodeId);
-        const currentNodeId = locations.nodeId || currentSubMap.nodes[0].id; // Fallback
-        
-        // Animation logic would go here to move between nodes
-        // For now, simple transition
-        navigate(`/quiz/${nodeId}`);
+        // Simple direct move for sub-map nodes for now
+        const node = currentSubMap.nodes.find(n => n.id === nodeId);
+        if (node) {
+            setIsMoving(true);
+            setVanPos(prev => ({ ...prev, top: node.top, left: node.left }));
+            await new Promise(r => setTimeout(r, 500));
+            setIsMoving(false);
+            navigate(`/quiz/${nodeId}`);
+        }
     }
   };
 
