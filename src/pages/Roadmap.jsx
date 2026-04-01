@@ -21,7 +21,7 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main'); // 'main' or category slug (e.g., 'arjessa')
-  const [vanPos, setVanPos] = useState({ top: '37.2%', left: '22.8%', rotate: 0 });
+  const [vanPos, setVanPos] = useState({ top: '35.2%', left: '21.5%', rotate: 0 }); // Initial position: Forest
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
@@ -80,11 +80,16 @@ const Roadmap = () => {
       setCurrentMap('main');
       // On main map, ensure van is at the last known location
       const lastNode = ROADMAP_PATHS.main.nodes.find(n => n.id === currentLocationId);
-      if (lastNode) {
-          setVanPos({ top: lastNode.top, left: lastNode.left, rotate: 0 });
+      if (lastNode && !isMoving) {
+          setVanPos(prev => ({ 
+              ...prev, 
+              top: lastNode.top, 
+              left: lastNode.left,
+              isTunnel: false
+          }));
       }
     }
-  }, [location.search, currentLocationId]);
+  }, [location.search, currentLocationId, isMoving]);
 
   const handleEntryAnimation = async (mapSlug) => {
       const entryPath = ROADMAP_PATHS.sub[mapSlug]?.entry;
@@ -137,12 +142,12 @@ const Roadmap = () => {
 
         setIsMoving(true);
 
-        // Move through each segment in the path
+        // Collect all waypoints into a single sequence for smooth movement
+        let allWaypoints = [];
         for (let i = 0; i < pathSequence.length - 1; i++) {
             const start = pathSequence[i];
             const end = pathSequence[i+1];
             
-            // Try different key combinations for segments
             let segmentWaypoints = ROADMAP_PATHS.main.paths[`${start}-${end}`];
             let reverse = false;
             
@@ -153,8 +158,17 @@ const Roadmap = () => {
 
             if (segmentWaypoints) {
                 const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
-                await moveAlongPath(finalWaypoints, 800);
+                // Avoid duplicating the junction point
+                if (allWaypoints.length > 0) {
+                    allWaypoints.push(...finalWaypoints.slice(1));
+                } else {
+                    allWaypoints.push(...finalWaypoints);
+                }
             }
+        }
+
+        if (allWaypoints.length > 0) {
+            await moveAlongPath(allWaypoints, 800 * (pathSequence.length - 1));
         }
 
         setCurrentLocationId(nodeId);
@@ -229,7 +243,12 @@ const Roadmap = () => {
     const data = currentMap === 'main' ? ROADMAP_PATHS.main : ROADMAP_PATHS.sub[currentMap];
     if (!data) return null;
 
-    return data.nodes.map(node => {
+    // Filter out hidden junctions for main map
+    const nodesToRender = currentMap === 'main' 
+        ? data.nodes.filter(n => !n.isJunction) 
+        : data.nodes;
+
+    return nodesToRender.map(node => {
       const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
                       node.id !== `${currentMap}_1` && 
                       !completedLessons.includes(`${currentMap}_${parseInt(node.id.split('_')[1]) - 1}`);
