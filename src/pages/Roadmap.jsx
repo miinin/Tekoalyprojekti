@@ -60,6 +60,7 @@ export default function Roadmap() {
       'arjessa': 'map-aavikko.png',
       'etiikka': 'map-linna.png',
       'kayttotaidot': 'map-jaa.png',
+      'viidakko': 'map-viidakko.png',
       'default': 'map-bg.jpg'
     };
     return backgrounds[categoryId] || backgrounds['default'];
