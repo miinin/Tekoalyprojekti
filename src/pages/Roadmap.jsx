@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 import { categories } from '../data/questions';
+import { store } from '../services/store';
 
 const Roadmap = () => {
   const navigate = useNavigate();

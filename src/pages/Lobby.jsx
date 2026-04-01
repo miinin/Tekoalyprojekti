@@ -11,7 +11,7 @@ export default function Lobby() {
   const [testMode, setTestMode] = useState(store.getTestMode());
 
   const handleNewSinglePlayer = () => {
-    store.clearProgress();
+    store.clearSinglePlayer();
     navigate('/roadmap');
   };
 
@@ -67,7 +67,7 @@ export default function Lobby() {
                 }}
                 style={{ width: '20px', height: '20px', cursor: 'pointer' }}
               />
-              <label htmlFor="testilaatikko" style={{ subtitle: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
+              <label htmlFor="testilaatikko" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
                 TESTILAATIKKO (500 Kipinää / vastaus)
               </label>
             </div>

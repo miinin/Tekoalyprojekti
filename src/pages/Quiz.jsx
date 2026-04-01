@@ -111,7 +111,7 @@ export default function Quiz() {
       setCurrentIndex(currentIndex + 1);
     } else {
       // Save progress
-      store.addCompletion(sub.id);
+      store.markCompleted(sub.id);
       
       // Smooth transition back
       setTimeout(() => {
