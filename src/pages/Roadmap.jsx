@@ -21,13 +21,13 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main'); // 'main' or category slug (e.g., 'arjessa')
-  const [vanPos, setVanPos] = useState({ top: '35.2%', left: '21.5%', rotate: 0 }); // Initial position: Forest
+  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0 }); // Initial position: Bottom Center
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
     return saved ? JSON.parse(saved) : [];
   });
-  const [currentLocationId, setCurrentLocationId] = useState('perusteet'); // Track van's location
+  const [currentLocationId, setCurrentLocationId] = useState('start_point'); // Track van's location
   const mapRef = useRef(null);
 
   // Adjacency for main map routing
