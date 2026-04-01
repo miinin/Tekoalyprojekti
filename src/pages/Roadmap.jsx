@@ -73,6 +73,7 @@ const Roadmap = () => {
   const moveAlongPath = async (waypoints, totalDuration = 2000) => {
     if (!waypoints || waypoints.length < 2) return;
     const stepDuration = totalDuration / (waypoints.length - 1);
+    setIsMoving(true);
     for (let i = 0; i < waypoints.length; i++) {
         const target = waypoints[i];
         const prev = waypoints[i-1];
@@ -81,29 +82,30 @@ const Roadmap = () => {
             const dx = parseFloat(target.left) - parseFloat(prev.left);
             const dy = parseFloat(target.top) - parseFloat(prev.top);
             rotation = Math.atan2(dy, dx) * (180 / Math.PI);
-            
-            // Spawn smoke puff
-            if (!target.tunnel) {
-                const newPuff = {
-                    id: Date.now() + Math.random(),
-                    top: target.top,
-                    left: target.left,
-                    size: 10 + Math.random() * 20
-                };
-                setPuffs(prev => [...prev.slice(-15), newPuff]);
-                setTimeout(() => {
-                    setPuffs(prev => prev.filter(p => p.id !== newPuff.id));
-                }, 1000);
-            }
         }
-        setVanPos(prevPos => ({ 
+        
+        // Spawn smoke puff logic remains but we use it sparingly to avoid lag
+        if (prev && !target.tunnel && i % 2 === 0) {
+            const newPuff = {
+                id: Date.now() + Math.random(),
+                top: target.top,
+                left: target.left,
+                size: 8 + Math.random() * 12
+            };
+            setPuffs(p => [...p.slice(-10), newPuff]);
+            setTimeout(() => setPuffs(p => p.filter(x => x.id !== newPuff.id)), 800);
+        }
+
+        setVanPos({ 
             top: target.top, 
             left: target.left, 
             rotate: rotation,
-            isTunnel: target.tunnel || false
-        }));
+            isTunnel: target.tunnel || false,
+            stepTime: stepDuration
+        });
         await new Promise(r => setTimeout(r, stepDuration));
     }
+    setIsMoving(false);
   };
 
   const handleNodeClick = async (nodeId, isMain = false) => {
@@ -234,7 +236,7 @@ const Roadmap = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          transition: 'all 0.15s ease-out',
+          transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : 'all 0.5s ease-out',
           transform: `translate(-50%, -50%) rotate(${vanPos.rotate}deg)`,
           opacity: vanPos.isTunnel ? 0.3 : 1,
         }}

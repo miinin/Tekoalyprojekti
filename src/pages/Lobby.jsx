@@ -8,8 +8,10 @@ export default function Lobby() {
   const [showMultiplayer, setShowMultiplayer] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   
+  const [testMode, setTestMode] = useState(store.getTestMode());
+
   const handleNewSinglePlayer = () => {
-    store.clearSinglePlayer();
+    store.clearProgress();
     navigate('/roadmap');
   };
 
@@ -57,17 +59,15 @@ export default function Lobby() {
               <input 
                 type="checkbox" 
                 id="testilaatikko"
-                checked={store.getTestMode()}
+                checked={testMode}
                 onChange={(e) => {
-                    store.setTestMode(e.target.checked);
-                    // Force a re-render by using a local state if needed, or just let the button handlers handle it
-                    window.dispatchEvent(new Event('storage')); // Simple hack to notify other potential listeners
-                    // Actually, let's just use local state for better UI responsiveness
-                    setJoinCode(joinCode); // Dummy to trigger re-render
+                    const newVal = e.target.checked;
+                    setTestMode(newVal);
+                    store.setTestMode(newVal);
                 }}
                 style={{ width: '20px', height: '20px', cursor: 'pointer' }}
               />
-              <label htmlFor="testilaatikko" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
+              <label htmlFor="testilaatikko" style={{ subtitle: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
                 TESTILAATIKKO (500 Kipinää / vastaus)
               </label>
             </div>
