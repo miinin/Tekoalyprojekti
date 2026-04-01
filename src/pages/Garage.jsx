@@ -22,12 +22,26 @@ export default function Garage() {
   }, []);
 
   const carUpgrades = [
-    { id: 'u1', name: 'Uusi Maalipinta', desc: 'Kiiltävä ja ruosteeton kuori.', price: 1000, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'u2', name: 'Kromiosat', desc: 'Kiiltävät puskurit ja säleikkö.', price: 800, icon: <ShieldCheck size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
-    { id: 'u3', name: 'Original Vanteet', desc: 'Tehdaspuhtaat peltivanteet.', price: 400, icon: <Disc size={28} />, color: '#06b6d4', bg: '#cffafe' },
-    { id: 'u4', name: 'Alumiinivanteet', desc: 'Kevyet erikoisvanteet.', price: 900, icon: <Aperture size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'u5', name: 'Karvanopat', desc: 'Taustapeilin tunnelmanluoja.', price: 150, icon: <Gamepad2 size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'u6', name: 'Alustasarja', desc: 'Urheilullinen jousitus.', price: 1200, icon: <TrendingDown size={28} />, color: '#10b981', bg: '#d1fae5' }
+    // MAALIPINNAT
+    { id: 'van-body01', name: 'Sininen Salama', desc: 'Sähkönsininen erikoismaali.', price: 1000, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'van-body02', name: 'Punainen Liekki', desc: 'Räiskyvän punainen pinta.', price: 1000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
+    { id: 'van-body03', name: 'Vihreä Voima', desc: 'Luonnonläheinen vihreä.', price: 1000, icon: <PaintBucket size={28} />, color: '#10b981', bg: '#d1fae5' },
+    { id: 'van-body04', name: 'Kultanen Kimalle', desc: 'Ylellinen kultainen viimeistely.', price: 1200, icon: <PaintBucket size={28} />, color: '#eab308', bg: '#fef08a' },
+    
+    // PUSKURIT
+    { id: 'van-bumper01', name: 'Peruspuskuri', desc: 'Luotettava perussuoja.', price: 400, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'van-bumper02', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä.', price: 600, icon: <ShieldCheck size={28} />, color: '#94a3b8', bg: '#f8fafc' },
+    { id: 'van-bumper03', name: 'Urheilupuskuri', desc: 'Aerodynaaminen muotoilu.', price: 800, icon: <ShieldCheck size={28} />, color: '#475569', bg: '#e2e8f0' },
+    { id: 'van-bumper04', name: 'Maastopuskuri', desc: 'Kestää kovempaakin menoa.', price: 900, icon: <ShieldCheck size={28} />, color: '#1e293b', bg: '#cbd5e1' },
+    { id: 'van-bumper05', name: 'Erikoispuskuri', desc: 'Huipputason designia.', price: 1200, icon: <ShieldCheck size={28} />, color: '#0f172a', bg: '#94a3b8' },
+
+    // VANTEET
+    { id: 'van-wheel01', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 400, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
+    { id: 'van-wheel02', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'van-wheel03', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
+
+    // EXTRA
+    { id: 'van-extra01', name: 'Turbo-Ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' }
   ];
 
   const garageUpgrades = [
@@ -146,15 +160,23 @@ export default function Garage() {
             })}
 
             {/* BASE LAYER (Base Van) */}
-            <img src="/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+            <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
             
             {/* CAR LAYERS (Top of car) */}
-            {carUpgrades.map(item => {
-              if (purchased.includes(item.id)) {
-                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />;
-              }
-              return null;
-            })}
+            {/* Sort upgrades by ID to ensure consistent layering (Body -> Bumper/Wheels -> Extra) */}
+            {[...carUpgrades]
+              .sort((a, b) => {
+                const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+                const getPrefix = id => id.split('-')[1].replace(/[0-9]/g, '');
+                return (order[getPrefix(a.id)] || 99) - (order[getPrefix(b.id)] || 99);
+              })
+              .map(item => {
+                if (purchased.includes(item.id)) {
+                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />;
+                }
+                return null;
+              })
+            }
 
             <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10, display: 'flex', gap: '1rem' }}>
               <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
@@ -170,7 +192,9 @@ export default function Garage() {
         {/* RIGHT COLUMN: Car Upgrades */}
         <div className="garage-right" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
-          {carUpgrades.map(item => renderUpgradeItem(item))}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
+            {carUpgrades.map(item => renderUpgradeItem(item))}
+          </div>
         </div>
 
       </div>
