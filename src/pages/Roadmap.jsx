@@ -146,6 +146,20 @@ const Roadmap = () => {
       navigate('/roadmap');
   };
 
+  const getMapAsset = (mapId) => {
+    const assets = {
+      'main': '/map-metsa.png',
+      'perusteet': '/map-metsa.png',
+      'arjessa': '/map-aavikko.png',
+      'kayttotaidot': '/map-jaa.png',
+      'etiikka': '/map-satama.png',
+      'konepellin': '/map-viidakko.png',
+      'huippu': '/map-viidakko.png',
+      'sea': '/map-linna.png'
+    };
+    return assets[mapId] || '/map-metsa.png';
+  };
+
   const renderVan = () => (
     <div
       style={{
@@ -165,8 +179,8 @@ const Roadmap = () => {
       }}
     >
       <div style={{ position: 'relative' }}>
-          <Car size={40} color="var(--secondary-color)" fill="var(--secondary-color)" />
-          <div style={{ position: 'absolute', top: '-1.5rem', left: '-1rem', backgroundColor: 'white', padding: '0.1rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 'bold', border: '1px solid var(--secondary-color)', whiteSpace: 'nowrap', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>
+          <Car size={36} color="var(--secondary-color)" fill="var(--secondary-color)" />
+          <div style={{ position: 'absolute', top: '-1.8rem', left: '-1rem', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)' }}>
               AI VAN
           </div>
       </div>
@@ -202,37 +216,46 @@ const Roadmap = () => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              gap: '0.5rem'
+              gap: '0.66rem'
           }}
         >
           <button
             id={node.id}
             onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
             style={{
-                width: '3.5rem',
-                height: '3.5rem',
+                width: '3.6rem',
+                height: '3.6rem',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 border: '4px solid white',
-                boxShadow: '0 5px 15px rgba(0,0,0,0.15)',
-                backgroundColor: isLocked ? '#cbd5e1' : isCompleted ? 'var(--accent-color)' : 'var(--primary-color)',
-                opacity: isLocked ? 0.7 : 1,
+                boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
+                backgroundColor: isLocked ? '#94a3b8' : isCompleted ? 'var(--accent-color)' : 'var(--primary-color)',
+                opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
           >
             {isLocked ? <Lock size={20} color="white" /> : 
-             isCompleted ? <CheckCircle2 size={30} color="white" /> : 
-             <span style={{ color: 'white', fontWeight: 900, fontSize: '1.4rem' }}>
+             isCompleted ? <CheckCircle2 size={32} color="white" /> : 
+             <span style={{ color: 'white', fontWeight: 900, fontSize: '1.5rem', fontFamily: 'var(--font-display)' }}>
                  {node.id.includes('_') ? node.id.split('_')[1] : ''}
-                 {!node.id.includes('_') && <PlayCircle size={30} />}
+                 {!node.id.includes('_') && <PlayCircle size={32} />}
              </span>}
           </button>
           
           {currentMap !== 'main' && (
-              <div className="glass-panel" style={{ padding: '0.3rem 0.8rem', borderRadius: '8px', backgroundColor: 'white' }}>
-                  <span style={{ fontSize: '0.7rem', fontWeight: 900, color: '#334155', whiteSpace: 'nowrap' }}>
+              <div 
+                className="glass-panel" 
+                style={{ 
+                    padding: '0.4rem 1rem', 
+                    borderRadius: '10px', 
+                    backgroundColor: 'white', 
+                    border: '1px solid rgba(0,0,0,0.1)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                }}
+              >
+                  <span style={{ fontSize: '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
                       {labelText}
                   </span>
               </div>
@@ -268,10 +291,10 @@ const Roadmap = () => {
               key={key}
               d={pathString}
               fill="none"
-              stroke="white"
-              strokeWidth="4"
-              strokeDasharray="8,8"
-              opacity="0.25"
+              stroke="#FFF"
+              strokeWidth="6"
+              strokeDasharray="12,12"
+              opacity="0.4"
               strokeLinecap="round"
             />
           );
@@ -285,7 +308,7 @@ const Roadmap = () => {
     top: 0,
     left: 0,
     right: 0,
-    padding: '1.5rem',
+    padding: '2rem',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -295,59 +318,56 @@ const Roadmap = () => {
 
   const mapContainerStyle = {
     position: 'absolute',
-    inset: '80px 20px 20px 20px',
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    borderRadius: '24px',
-    border: '1px solid rgba(0, 0, 0, 0.05)',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
+    inset: '100px 30px 40px 30px',
+    backgroundColor: '#cbd5e1',
+    borderRadius: '30px',
+    border: '8px solid rgba(255, 255, 255, 0.3)',
+    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.2)',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: '2rem'
+    justifyContent: 'center'
   };
 
   const mapInnerStyle = {
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundImage: `url('/assets/maps/${currentMap}-map.png')`,
+    backgroundImage: `url('${getMapAsset(currentMap)}')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    borderRadius: '16px',
-    boxShadow: 'inset 0 0 40px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden'
   };
 
   return (
-    <div className="animate-fade-in" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
+    <div className="animate-fade-in" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
       {/* Header Controls */}
       <div style={headerStyle}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', pointerEvents: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', pointerEvents: 'auto' }}>
           <button 
             className="btn-secondary" 
-            style={{ padding: '0.8rem', borderRadius: '12px' }}
+            style={{ padding: '0.8rem', borderRadius: '15px', background: 'white', border: 'none', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
             onClick={() => currentMap === 'main' ? navigate('/lobby') : handleBackToMain()}
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={28} color="var(--primary-color)" />
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: '2.2rem', lineHeight: 1 }}>
+            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, color: 'var(--primary-color)', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
               {currentMap === 'main' ? 'AIVAN TIE' : categories.find(c => c.id === currentMap)?.name}
             </h1>
-            <p style={{ margin: 0, fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>
-              {currentMap === 'main' ? 'Pääreitti' : 'Alueen tutkimus'} | {dataVersion}
+            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: '#334155', letterSpacing: '1px' }}>
+              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | {dataVersion}
             </p>
           </div>
         </div>
 
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
-          <div className="glass-panel" style={{ padding: '0.6rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.6rem', borderTop: '4px solid var(--secondary-color)' }}>
-            <Trophy size={20} color="var(--secondary-color)" />
-            <span style={{ fontWeight: 'black', fontSize: '1.1rem' }}>{completedLessons.length} / 42</span>
+          <div style={{ backgroundColor: 'white', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid var(--secondary-color)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+            <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
+            <span style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--text-main)', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
           </div>
-          <button className="btn-secondary" style={{ padding: '0.7rem' }}>
-            <Settings size={22} />
+          <button style={{ backgroundColor: 'white', border: 'none', width: '50px', height: '50px', borderRadius: '50%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+            <Settings size={28} color="var(--text-muted)" />
           </button>
         </div>
       </div>
@@ -356,7 +376,7 @@ const Roadmap = () => {
       <div style={mapContainerStyle}>
         <div style={mapInnerStyle}>
             {/* Grid Overlay */}
-            <div style={{ position: 'absolute', inset: 0, opacity: 0.03, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+            <div style={{ position: 'absolute', inset: 0, opacity: 0.05, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
             
             {renderPaths()}
             {renderMapNodes()}
@@ -366,13 +386,13 @@ const Roadmap = () => {
 
       {/* Back to Main Navigation Shortcut */}
       {currentMap !== 'main' && (
-          <div style={{ position: 'absolute', bottom: '40px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
+          <div style={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
               <button 
                 className="btn-primary" 
-                style={{ borderRadius: '40px', padding: '1rem 2.5rem', boxShadow: '0 10px 25px rgba(0, 114, 198, 0.3)' }}
+                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(0, 114, 198, 0.4)', fontSize: '1.2rem' }}
                 onClick={handleBackToMain}
               >
-                <MapIcon size={20} />
+                <MapIcon size={24} />
                 PALAA MAAILMALLE
               </button>
           </div>
