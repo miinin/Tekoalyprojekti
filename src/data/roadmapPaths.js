@@ -297,51 +297,54 @@ export const ROADMAP_PATHS = {
     },
     kayttotaidot: {
         entry: [
-          { top: '90%', left: '0%' },
-          { top: '80%', left: '20%' },
-          { top: '75.5%', left: '35.5%' } // Node 4
+          { top: '92%', left: '16%' },
+          { top: '85%', left: '25%' },
+          { top: '76%', left: '35%' } // Node 1
         ],
         exit: [
-          { top: '80%', left: '20%' },
-          { top: '90%', left: '0%' }
+          { top: '85%', left: '25%' },
+          { top: '92%', left: '16%' }
         ],
         nodes: [
-          { id: 'kayttotaidot_1', top: '48.5%', left: '43%' },
-          { id: 'kayttotaidot_2', top: '47%', left: '52%' },
-          { id: 'kayttotaidot_3', top: '48.5%', left: '64.5%' },
-          { id: 'kayttotaidot_4', top: '75.5%', left: '35.5%' },
-          { id: 'kayttotaidot_5', top: '80.5%', left: '72%' },
-          { id: 'kayttotaidot_6', top: '66%', left: '68%' },
-          { id: 'kayttotaidot_7', top: '35%', left: '78%' }
+          { id: 'kayttotaidot_1', top: '76%', left: '35.5%' },
+          { id: 'kayttotaidot_2', top: '50.5%', left: '42.8%' },
+          { id: 'kayttotaidot_3', top: '48.2%', left: '52.3%' },
+          { id: 'kayttotaidot_4', top: '49.8%', left: '63.5%' },
+          { id: 'kayttotaidot_5', top: '65.8%', left: '68.2%' },
+          { id: 'kayttotaidot_6', top: '82.8%', left: '74.2%' },
+          { id: 'kayttotaidot_7', top: '24.5%', left: '51.5%' }
         ],
         paths: {
-            'kayttotaidot_4-kayttotaidot_1': [
-                { top: '75.5%', left: '35.5%' },
-                { top: '60%', left: '38%' },
-                { top: '48.5%', left: '43%' }
-            ],
             'kayttotaidot_1-kayttotaidot_2': [
-                { top: '48.5%', left: '43%' },
-                { top: '47%', left: '52%' }
+                { top: '76%', left: '35.5%' },
+                { top: '68%', left: '42%' },
+                { top: '55%', left: '42%', tunnel: true },
+                { top: '50.5%', left: '42.8%' }
             ],
             'kayttotaidot_2-kayttotaidot_3': [
-                { top: '47%', left: '52%' },
-                { top: '48.5%', left: '64.5%' }
+                { top: '50.5%', left: '42.8%' },
+                { top: '48.5%', left: '47%' },
+                { top: '48.2%', left: '52.3%' }
             ],
-            'kayttotaidot_3-kayttotaidot_5': [
-                { top: '48.5%', left: '64.5%' },
-                { top: '68%', left: '66%', tunnel: true },
-                { top: '80.5%', left: '72%' }
+            'kayttotaidot_3-kayttotaidot_4': [
+                { top: '48.2%', left: '52.3%' },
+                { top: '49%', left: '58%' },
+                { top: '49.8%', left: '63.5%' }
+            ],
+            'kayttotaidot_4-kayttotaidot_5': [
+                { top: '49.8%', left: '63.5%' },
+                { top: '58%', left: '65%' },
+                { top: '65.8%', left: '68.2%' }
             ],
             'kayttotaidot_5-kayttotaidot_6': [
-                { top: '80.5%', left: '72%' },
-                { top: '73%', left: '77%' },
-                { top: '66%', left: '68%' }
+                { top: '65.8%', left: '68.2%' },
+                { top: '75%', left: '72%' },
+                { top: '82.8%', left: '74.2%' }
             ],
-            'kayttotaidot_6-kayttotaidot_7': [
-                { top: '66%', left: '68%' },
-                { top: '50%', left: '75%' },
-                { top: '35%', left: '78%' }
+            'kayttotaidot_3-kayttotaidot_7': [
+                { top: '48.2%', left: '52.3%' },
+                { top: '35%', left: '51%' },
+                { top: '24.5%', left: '51.5%' }
             ]
         }
     },
