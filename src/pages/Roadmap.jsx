@@ -25,6 +25,7 @@ const Roadmap = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [currentLocationId, setCurrentLocationId] = useState('start_point');
+  const [puffs, setPuffs] = useState([]);
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -73,21 +74,35 @@ const Roadmap = () => {
     if (!waypoints || waypoints.length < 2) return;
     const stepDuration = totalDuration / (waypoints.length - 1);
     for (let i = 0; i < waypoints.length; i++) {
-      const target = waypoints[i];
-      const prev = waypoints[i-1];
-      let rotation = 0;
-      if (prev) {
-          const dx = parseFloat(target.left) - parseFloat(prev.left);
-          const dy = parseFloat(target.top) - parseFloat(prev.top);
-          rotation = Math.atan2(dy, dx) * (180 / Math.PI);
-      }
-      setVanPos(prevPos => ({ 
-          top: target.top, 
-          left: target.left, 
-          rotate: rotation,
-          isTunnel: target.tunnel || false
-      }));
-      await new Promise(r => setTimeout(r, stepDuration));
+        const target = waypoints[i];
+        const prev = waypoints[i-1];
+        let rotation = 0;
+        if (prev) {
+            const dx = parseFloat(target.left) - parseFloat(prev.left);
+            const dy = parseFloat(target.top) - parseFloat(prev.top);
+            rotation = Math.atan2(dy, dx) * (180 / Math.PI);
+            
+            // Spawn smoke puff
+            if (!target.tunnel) {
+                const newPuff = {
+                    id: Date.now() + Math.random(),
+                    top: target.top,
+                    left: target.left,
+                    size: 10 + Math.random() * 20
+                };
+                setPuffs(prev => [...prev.slice(-15), newPuff]);
+                setTimeout(() => {
+                    setPuffs(prev => prev.filter(p => p.id !== newPuff.id));
+                }, 1000);
+            }
+        }
+        setVanPos(prevPos => ({ 
+            top: target.top, 
+            left: target.left, 
+            rotate: rotation,
+            isTunnel: target.tunnel || false
+        }));
+        await new Promise(r => setTimeout(r, stepDuration));
     }
   };
 
@@ -185,51 +200,74 @@ const Roadmap = () => {
   };
 
   const renderVan = () => (
-    <div
-      style={{
-        position: 'absolute',
-        top: vanPos.top,
-        left: vanPos.left,
-        width: '60px',
-        height: '40px',
-        zIndex: 50,
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        transition: 'all 0.3s ease-linear',
-        transform: `translate(-50%, -50%) rotate(${vanPos.rotate}deg)`,
-        opacity: vanPos.isTunnel ? 0.3 : 1,
-      }}
-    >
-      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-          {/* Base Van */}
-          <img 
-            src="/carparts/van1-base.png" 
-            alt="Van" 
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
+    <>
+      {/* Smoke Puffs */}
+      {puffs.map(puff => (
+          <div 
+              key={puff.id}
+              className="animate-pulse"
+              style={{
+                  position: 'absolute',
+                  top: puff.top,
+                  left: puff.left,
+                  width: puff.size,
+                  height: puff.size,
+                  backgroundColor: 'rgba(255,255,255,0.6)',
+                  borderRadius: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  filter: 'blur(8px)',
+                  zIndex: 45,
+                  pointerEvents: 'none'
+              }}
           />
-          
-          {/* Custom Parts Layers */}
-          {purchasedItems.map(itemId => {
-            if (itemId.startsWith('van-')) {
-               return (
-                 <img 
-                    key={itemId} 
-                    src={`/carparts/${itemId}.png`} 
-                    alt="Part" 
-                    style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
-                 />
-               );
-            }
-            return null;
-          })}
+      ))}
 
-          <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
-              AI VAN
-          </div>
+      <div
+        style={{
+          position: 'absolute',
+          top: vanPos.top,
+          left: vanPos.left,
+          width: '74px',
+          height: '52px',
+          zIndex: 50,
+          pointerEvents: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          transition: 'all 0.15s ease-out',
+          transform: `translate(-50%, -50%) rotate(${vanPos.rotate}deg)`,
+          opacity: vanPos.isTunnel ? 0.3 : 1,
+        }}
+      >
+        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            {/* Base Van */}
+            <img 
+              src="/carparts/van1-base.png" 
+              alt="Van" 
+              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
+            />
+            
+            {/* Custom Parts Layers */}
+            {purchasedItems.map(itemId => {
+              if (itemId.startsWith('van-')) {
+                 return (
+                   <img 
+                      key={itemId} 
+                      src={`/carparts/${itemId}.png`} 
+                      alt="Part" 
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
+                   />
+                 );
+              }
+              return null;
+            })}
+
+            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
+                AI VAN
+            </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 
   const renderMapNodes = () => {
@@ -383,7 +421,7 @@ const Roadmap = () => {
     width: '100%',
     height: '100%',
     backgroundImage: `url('${getMapAsset(currentMap)}')`,
-    backgroundSize: 'cover',
+    backgroundSize: '100% 100%', // Fixed scaling for full visibility
     backgroundPosition: 'center',
     overflow: 'hidden'
   };
