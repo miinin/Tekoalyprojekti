@@ -48,6 +48,8 @@ export default function Roadmap() {
     setVanPos(startPos);
   }, [mainCategory]);
   
+  const currentCategory = (mainCategory && categories.length > 0) ? categories.find(c => c.id === mainCategory) : null;
+
   const isCatCompleted = (cat) => {
     if (!cat.subcategories || cat.subcategories.length === 0) return completions.includes(cat.id);
     return cat.subcategories.every(sub => completions.includes(sub.id));
