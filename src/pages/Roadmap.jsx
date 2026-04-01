@@ -94,7 +94,19 @@ export default function Roadmap() {
   };
 
   const renderVan = () => {
-    const carLayers = purchased.filter(id => id.startsWith('u'));
+    // New items start with 'van-', old ones with 'u' (supported for backward compatibility if needed)
+    // We sort them to ensure correct layering: Body -> Wheels -> Bumpers -> Extra
+    const carLayers = purchased
+      .filter(id => id.startsWith('van-') || id.startsWith('u'))
+      .sort((a, b) => {
+        const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+        const getCat = id => {
+          if (id.startsWith('u')) return 'body'; // Old items mapped to body for simplicity
+          return id.split('-')[1].replace(/[0-9]/g, '');
+        };
+        return (order[getCat(a)] || 99) - (order[getCat(b)] || 99);
+      });
+
     return (
       <div style={{
         position: 'absolute',
@@ -114,10 +126,11 @@ export default function Roadmap() {
            <div style={{ position: 'absolute', bottom: '15px', left: vanFacingRight ? '-5px' : 'auto', right: vanFacingRight ? 'auto' : '-5px', width: '20px', height: '10px', background: 'rgba(255,255,255,0.8)', borderRadius: '50%', filter: 'blur(3px)', animation: 'smoke 0.4s infinite' }}></div>
         )}
         <div style={{ position: 'relative', width: '100%', height: '100%', animation: isDriving ? 'driveBounce 0.2s infinite alternate' : 'none' }}>
-           <img src="/van1-base.png" alt="Van" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
-           {carLayers.map(layer => (
-              <img key={layer} src={`/layer-${layer}.png`} alt={layer} style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 }} />
-           ))}
+           <img src="/carparts/van1-base.png" alt="Van" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1 }} />
+           {carLayers.map(layer => {
+              const path = layer.startsWith('u') ? `/layer-${layer}.png` : `/carparts/${layer}.png`;
+              return <img key={layer} src={path} alt={layer} style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 }} />;
+           })}
         </div>
         <style>{`
           @keyframes driveBounce { from { transform: translateY(0); } to { transform: translateY(-4px); } }
