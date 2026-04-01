@@ -41,14 +41,30 @@ export default function Quiz() {
 
   if (!category || !sub) {
     return (
-      <div style={{ padding: '2rem', textAlign: 'center' }}>
-        <h2>Tasoa ei löydy!</h2>
+      <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <h2 style={{ color: '#ef4444', marginBottom: '1rem' }}>Tasoa ei löydy!</h2>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Pahoittelut, tätä tasoa ei voitu ladata.</p>
         <button className="btn-secondary" onClick={() => navigate('/roadmap')}>Palaa kartalle</button>
       </div>
     );
   }
 
-  if (questions.length === 0) return <div style={{ padding: '2rem', textAlign: 'center', fontSize: '1.2rem', fontFamily: 'var(--font-display)' }}>Valmistellaan tietovisaa...</div>;
+  if (questions.length === 0) {
+    return (
+      <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--primary-color)', marginBottom: '1.5rem' }} className="animate-pulse">
+            Valmistellaan tietovisaa...
+        </div>
+        {/* Safety timeout button appears after 3 seconds if still loading */}
+        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', maxWidth: '400px', marginBottom: '2rem' }}>
+            Jos lataus kestää kauan, tasolla ei välttämättä ole vielä kysymyksiä.
+        </p>
+        <button className="btn-secondary" onClick={() => navigate(`/roadmap/${mainCategory}`)}>
+            <ChevronLeft size={20} /> Keskeytä ja palaa kartalle
+        </button>
+      </div>
+    );
+  }
 
   const currentQuestion = questions[currentIndex];
   
