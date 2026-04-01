@@ -142,10 +142,10 @@ export default function Roadmap() {
   };
   
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '1rem', maxWidth: '1800px', margin: '0 auto', width: '100%' }}>
       
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)' }}>
              {currentCategory ? currentCategory.name : 'Valitse Seuraava Kohde'}
