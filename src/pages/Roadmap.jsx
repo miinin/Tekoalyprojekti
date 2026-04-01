@@ -1,7 +1,7 @@
 import { store } from '../services/store';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Map, Wrench, Flame, Star, ChevronLeft } from 'lucide-react';
+import { Map, Wrench, Flame, Star, ChevronLeft, CheckCircle2 } from 'lucide-react';
 
 export default function Roadmap() {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ export default function Roadmap() {
   
   const [categories, setCategories] = useState([]);
   const [purchased, setPurchased] = useState([]);
+  const [completions, setCompletions] = useState([]);
   const [vanPos, setVanPos] = useState({ top: '100%', left: '0%' });
   const [vanFacingRight, setVanFacingRight] = useState(true);
   const [isDriving, setIsDriving] = useState(false);
@@ -25,6 +26,7 @@ export default function Roadmap() {
     const cats = store.getQuestions();
     setCategories(cats);
     store.getPurchasedItems().then(p => setPurchased(p));
+    setCompletions(store.getCompletions());
     
     const lastLoc = store.getLastLocation();
     let startPos = { top: '90%', left: '5%' }; // Default position
@@ -46,7 +48,22 @@ export default function Roadmap() {
     setVanPos(startPos);
   }, [mainCategory]);
   
-  const currentCategory = (mainCategory && categories.length > 0) ? categories.find(c => c.id === mainCategory) : null;
+  const isCatCompleted = (cat) => {
+    if (!cat.subcategories || cat.subcategories.length === 0) return completions.includes(cat.id);
+    return cat.subcategories.every(sub => completions.includes(sub.id));
+  };
+
+  const getMapBackground = (categoryId) => {
+    const backgrounds = {
+      'perusteet': 'map-metsa.png',
+      'konepellin': 'map-satama.png',
+      'arjessa': 'map-aavikko.png',
+      'etiikka': 'map-linna.png',
+      'kayttotaidot': 'map-jaa.png',
+      'default': 'map-bg.jpg'
+    };
+    return backgrounds[categoryId] || backgrounds['default'];
+  };
 
   const handleNodeClick = (targetId, isSub, targetTop, targetLeft) => {
     if (isDriving) return;
@@ -102,6 +119,7 @@ export default function Roadmap() {
         <style>{`
           @keyframes driveBounce { from { transform: translateY(0); } to { transform: translateY(-4px); } }
           @keyframes smoke { 0% { opacity: 0; transform: scale(0.5) translate(0, 0); } 50% { opacity: 1; transform: scale(1.5) translate(${vanFacingRight ? '-10px' : '10px'}, -5px); } 100% { opacity: 0; transform: scale(2) translate(${vanFacingRight ? '-20px' : '20px'}, -10px); } }
+          @keyframes pulseGlow { 0% { box-shadow: 0 0 10px rgba(16,185,129,0.5); transform: scale(1); } 50% { box-shadow: 0 0 25px rgba(16,185,129,1); transform: scale(1.1); } 100% { box-shadow: 0 0 10px rgba(16,185,129,0.5); transform: scale(1); } }
         `}</style>
       </div>
     );
@@ -137,7 +155,7 @@ export default function Roadmap() {
         position: 'relative',
         width: '100%',
         aspectRatio: '16/9',
-        backgroundImage: currentCategory ? `url("/map-bg-${mainCategory}.jpg"), url("/map-bg.jpg")` : 'url("/map-bg.jpg")',
+        backgroundImage: currentCategory ? `url("/${getMapBackground(mainCategory)}")` : 'url("/map-bg.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         marginTop: '2rem',
@@ -160,6 +178,11 @@ export default function Roadmap() {
                 onClick={() => handleNodeClick(sub.id, true, sub.top || '50%', sub.left || '50%')}
                 style={{ position: 'absolute', top: sub.top || '50%', left: sub.left || '50%', transform: 'translate(-50%, -50%)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', zIndex: 10 }}
               >
+                {completions.includes(sub.id) && (
+                   <div style={{ position: 'absolute', top: '-15px', right: '-15px', background: '#10b981', color: 'white', borderRadius: '50%', padding: '4px', zIndex: 30, border: '2px solid white', animation: 'pulseGlow 2s infinite' }}>
+                     <CheckCircle2 size={24} />
+                   </div>
+                )}
                 {/* Floating Marker */}
                 <div style={{ width: '50px', height: '50px', background: 'var(--accent-color)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.2rem', fontWeight: 'bold', border: '3px solid white', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
                  onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)'; e.currentTarget.style.backgroundColor = 'var(--primary-color)'; e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.4)'; }}
@@ -183,6 +206,11 @@ export default function Roadmap() {
                   onClick={() => handleNodeClick(cat.id, false, pos.top, pos.left)}
                   style={{ position: 'absolute', top: pos.top, left: pos.left, transform: 'translate(-50%, -50%)', cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem', zIndex: 10 }}
                 >
+                  {isCatCompleted(cat) && (
+                     <div style={{ position: 'absolute', top: '-15px', right: '-15px', background: '#10b981', color: 'white', borderRadius: '50%', padding: '6px', zIndex: 30, border: '3px solid white', animation: 'pulseGlow 2s infinite' }}>
+                       <CheckCircle2 size={28} />
+                     </div>
+                  )}
                   {/* Floating Marker */}
                   <div style={{ width: '60px', height: '60px', background: 'var(--primary-color)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.5rem', fontWeight: 'bold', border: '4px solid white', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3)', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' }}
                   onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.15) translateY(-8px)'; e.currentTarget.style.backgroundColor = 'var(--accent-color)'; e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.4)'; }}

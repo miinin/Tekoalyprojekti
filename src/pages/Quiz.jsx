@@ -93,6 +93,8 @@ export default function Quiz() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
+      // Mark level as completed BEFORE leaving
+      store.markCompleted(subCategory || mainCategory);
       navigate(`/roadmap/${mainCategory}`);
     }
   };

@@ -36,6 +36,19 @@ export const store = {
     else localStorage.removeItem('aivan_last_sub');
   },
 
+  // Map Progress / Completions Tracking
+  getCompletions: () => {
+    return JSON.parse(localStorage.getItem('aivan_completions') || '[]');
+  },
+
+  markCompleted: (id) => {
+    const comps = store.getCompletions();
+    if (!comps.includes(id)) {
+      comps.push(id);
+      localStorage.setItem('aivan_completions', JSON.stringify(comps));
+    }
+  },
+
   getSparks: async () => {
     const room = store.getRoomCode();
     // Simulate fetching from shared DB. Right now just local storage with room key
