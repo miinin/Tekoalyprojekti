@@ -217,7 +217,7 @@ export default function Garage() {
           <div style={{ 
             position: 'relative', 
             width: '100%', 
-            aspectRatio: '16/10', 
+            aspectRatio: '16/9', 
             minHeight: '350px',
             borderRadius: '24px', 
             overflow: 'hidden', 
@@ -250,15 +250,7 @@ export default function Garage() {
               })
             }
 
-            <div style={{ position: 'absolute', bottom: '20px', left: '20px', zIndex: 10, display: 'flex', gap: '1rem' }}>
-              <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', color: 'var(--primary-hover)', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                Taso 1
-              </span>
-              <span style={{ background: 'rgba(255,255,255,0.9)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', color: '#db2777', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
-                Eduks-Spesialisti
-              </span>
-            </div>
-          </div>
+           </div>
         </div>
 
         {/* RIGHT COLUMN: Car Upgrades (Collapsible) */}

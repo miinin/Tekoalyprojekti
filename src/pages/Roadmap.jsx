@@ -62,14 +62,8 @@ const Roadmap = () => {
                 // Etsi seuraava reitti tästä pisteestä
                 const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
                 if (nextPathKey) {
-                    const pathToNext = subData.paths[nextPathKey];
                     // Siivoa URL, ettei toistu refreshillä
                     window.history.replaceState({}, '', `/roadmap?map=${currentMap}`);
-                    
-                    // Aja seuraavaan pisteeseen lyhyen lataustauon jälkeen
-                    setTimeout(() => {
-                        moveAlongPath(pathToNext);
-                    }, 600);
                 }
             }
         } else {
@@ -220,6 +214,28 @@ const Roadmap = () => {
     } else {
         const node = currentData.nodes.find(n => n.id === nodeId);
         if (node) {
+            // Etsitään edellinen completed-rasti, jotta tiedetään voidaanko ajaa pitkin viivaa
+            const mapNodes = currentData.nodes.map(n => n.id);
+            const userDone = mapNodes.filter(id => completedLessons.includes(id));
+            const lastDone = userDone.length > 0 ? userDone[userDone.length - 1] : null;
+            
+            // Onko olemassa polku edellisestä rastista tähän nykyiseen? (vain eteenpäin)
+            let pathObj = null;
+            if (lastDone && lastDone !== nodeId) {
+                pathObj = currentData.paths[`${lastDone}-${nodeId}`] || currentData.paths[`${nodeId}-${lastDone}`];
+            } else if (!lastDone && nodeId === mapNodes[0]) {
+                // Eka rasti
+                pathObj = null; 
+            }
+            
+            if (pathObj) {
+                // Aja animaatio valmiiksi ja mene sitten quiz:iin
+                setIsMoving(true);
+                // Tarkista pitääkö polku kääntää
+                const finalPath = (pathObj.length > 0 && parseFloat(pathObj[0].left) === parseFloat(node.left) && parseFloat(pathObj[0].top) === parseFloat(node.top)) ? [...pathObj].reverse() : pathObj;
+                await moveAlongPath(finalPath);
+                setIsMoving(false);
+            }
             navigate(`/quiz/${currentMap}/${nodeId}`);
         }
     }
@@ -318,6 +334,7 @@ const Roadmap = () => {
             <img 
               src="/carparts/van1-base.png" 
               alt="Van" 
+              className={!isMoving ? "van-idle" : ""}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
             />
             
@@ -329,6 +346,7 @@ const Roadmap = () => {
                       key={itemId} 
                       src={`/carparts/${itemId}.png`} 
                       alt="Part" 
+                      className={!isMoving ? "van-idle" : ""}
                       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
                    />
                  );
@@ -336,10 +354,6 @@ const Roadmap = () => {
               return null;
             })}
 
-            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: `translateX(-50%) scaleX(${vanPos.direction === -1 ? -1 : 1})`, backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60, display: 'flex', gap: '0.3rem' }}>
-                <span style={{ color: '#db2777' }}>AI</span>
-                <span style={{ color: 'var(--text-main)' }}>Van!</span>
-            </div>
         </div>
       </div>
     </>
@@ -502,7 +516,16 @@ const Roadmap = () => {
   };
 
   return (
-    <div className="animate-fade-in" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
+    <div className="roadmap-container" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
+      <style>{`
+        @keyframes vanIdle {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-2px) rotate(-0.5deg); }
+        }
+        .van-idle {
+          animation: vanIdle 1.5s ease-in-out infinite;
+        }
+      `}</style>
       {/* Header Controls */}
       <div style={headerStyle}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', pointerEvents: 'auto' }}>
