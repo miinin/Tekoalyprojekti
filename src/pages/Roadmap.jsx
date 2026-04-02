@@ -71,39 +71,41 @@ const Roadmap = () => {
     return null;
   };
 
-  const moveAlongPath = async (waypoints, totalDuration = 2000) => {
+  const moveAlongPath = async (waypoints, totalDuration = 1500) => {
     if (!waypoints || waypoints.length < 2) return;
     const stepDuration = totalDuration / (waypoints.length - 1);
     setIsMoving(true);
+    
     for (let i = 0; i < waypoints.length; i++) {
         const target = waypoints[i];
         const prev = waypoints[i-1];
         let rotation = 0;
+        
         if (prev) {
             const dx = parseFloat(target.left) - parseFloat(prev.left);
             const dy = parseFloat(target.top) - parseFloat(prev.top);
             rotation = Math.atan2(dy, dx) * (180 / Math.PI);
         }
         
-        // Spawn smoke puff logic remains but we use it sparingly to avoid lag
-        if (prev && !target.tunnel && i % 2 === 0) {
+        // Spawn smoke puff at previous position so it trails the van
+        if (prev && !target.tunnel) {
             const newPuff = {
                 id: Date.now() + Math.random(),
-                top: target.top,
-                left: target.left,
-                size: 8 + Math.random() * 12
+                top: prev.top,
+                left: prev.left,
+                size: 15 + Math.random() * 20
             };
-            setPuffs(p => [...p.slice(-10), newPuff]);
-            setTimeout(() => setPuffs(p => p.filter(x => x.id !== newPuff.id)), 800);
+            setPuffs(p => [...p.slice(-15), newPuff]);
+            setTimeout(() => setPuffs(p => p.filter(x => x.id !== newPuff.id)), 700);
         }
 
         setVanPos({ 
             top: target.top, 
             left: target.left, 
             rotate: rotation,
-            isTunnel: target.tunnel || false,
-            stepTime: stepDuration
+            isTunnel: target.tunnel || false
         });
+        
         await new Promise(r => setTimeout(r, stepDuration));
     }
     setIsMoving(false);
@@ -237,7 +239,7 @@ const Roadmap = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : 'all 0.5s ease-out',
+          transition: isMoving ? 'all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)' : 'all 0.6s ease-out',
           transform: `translate(-50%, -50%) rotate(${vanPos.rotate}deg)`,
           opacity: vanPos.isTunnel ? 0.3 : 1,
         }}
