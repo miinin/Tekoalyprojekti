@@ -475,23 +475,30 @@ const Roadmap = () => {
           >
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
-             (() => {
-                const iconProps = { color: 'white', strokeWidth: 1.5, style: { width: '65%', height: '65%' } };
-                if (currentMap === 'main') {
+             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+               {(() => {
+                  const fSize = currentMap === 'main' ? '2.5rem' : '1.8rem';
+                  const MatIcon = ({ name }) => (
+                      <span className="material-symbols-outlined" style={{ fontSize: fSize, color: 'white', fontVariationSettings: "'wght' 300, 'FILL' 0", userSelect: 'none' }}>
+                          {name}
+                      </span>
+                  );
+                  if (currentMap === 'main') {
                     switch(node.id) {
-                        case 'perusteet': return <Type {...iconProps} />;
-                        case 'konepellin': return <Settings {...iconProps} />;
-                        case 'arjessa': return <CalendarDays {...iconProps} />;
-                        case 'reilu_peli': return <Scale {...iconProps} />;
-                        case 'kayttotaidot': return <ThumbsUp {...iconProps} />;
-                        case 'aivoterveys': return <Brain {...iconProps} />;
-                        case 'digiturva': return <ShieldCheck {...iconProps} />;
-                        default: return <Sparkles {...iconProps} />;
+                        case 'perusteet': return <MatIcon name="abc" />;
+                        case 'konepellin': return <MatIcon name="settings" />;
+                        case 'arjessa': return <MatIcon name="calendar_month" />;
+                        case 'reilu_peli': return <MatIcon name="balance" />;
+                        case 'kayttotaidot': return <MatIcon name="thumb_up" />;
+                        case 'aivoterveys': return <MatIcon name="psychology" />;
+                        case 'digiturva': return <MatIcon name="shield" />;
+                        default: return <MatIcon name="stars" />;
                     }
                 } else {
-                    return <Sparkles {...iconProps} />;
+                    return <MatIcon name="stars" />;
                 }
              })()}
+             </div>}
           </button>
           
           <div 
