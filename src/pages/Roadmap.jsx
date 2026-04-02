@@ -432,13 +432,14 @@ const Roadmap = () => {
           ? (mainMapLabel || node.id).toUpperCase()
           : (subcategory ? subcategory.name : node.id).toUpperCase();
 
-      const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
-                      node.id !== `${currentMap}_1` && 
-                      !completedLessons.includes(`${currentMap}_${parseInt(node.id.split('_')[1]) - 1}`);
-      const isCompleted = completedLessons.includes(node.id);
+      const nodeIndexParts = node.id.split('_');
+      const nodeIndexNum = parseInt(nodeIndexParts[nodeIndexParts.length - 1]);
+      const prevNodeId = nodeIndexParts.slice(0, -1).join('_') + '_' + (nodeIndexNum - 1);
 
-      // Numeric logic for main map
-      const mainNumber = mainMapOrder.indexOf(node.id) + 1;
+      const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
+                      nodeIndexNum !== 1 && 
+                      !completedLessons.includes(prevNodeId);
+      const isCompleted = completedLessons.includes(node.id);
 
       return (
         <div 
@@ -503,7 +504,7 @@ const Roadmap = () => {
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
             }}
           >
-              <span style={{ fontSize: isMain ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
+              <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
                   {labelText}
               </span>
           </div>
