@@ -336,8 +336,9 @@ const Roadmap = () => {
               return null;
             })}
 
-            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: `translateX(-50%) scaleX(${vanPos.direction === -1 ? -1 : 1})`, backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
-                AI VAN
+            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: `translateX(-50%) scaleX(${vanPos.direction === -1 ? -1 : 1})`, backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60, display: 'flex', gap: '0.3rem' }}>
+                <span style={{ color: '#db2777' }}>AI</span>
+                <span style={{ color: 'var(--text-main)' }}>Van!</span>
             </div>
         </div>
       </div>
@@ -524,8 +525,10 @@ const Roadmap = () => {
             {currentMap === 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>LOBBY</span>}
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, color: 'var(--primary-color)', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
-              {currentMap === 'main' ? 'AIVAN TIE' : categories.find(c => c.id === currentMap)?.name}
+            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, textShadow: '0 2px 4px rgba(255,255,255,0.8)', fontFamily: 'var(--font-display)' }}>
+              {currentMap === 'main' ? (
+                  <><span style={{ color: '#db2777' }}>AI</span> <span style={{ color: 'var(--primary-color)' }}>Van!</span></>
+              ) : <span style={{ color: 'var(--primary-color)' }}>{categories.find(c => c.id === currentMap)?.name}</span>}
             </h1>
             <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '1px' }}>
               {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | <span style={{ color: versionColor, fontWeight: '900', background: 'rgba(139, 92, 246, 0.1)', padding: '0.2rem 0.6rem', borderRadius: '12px' }}>{dataVersion}</span>
