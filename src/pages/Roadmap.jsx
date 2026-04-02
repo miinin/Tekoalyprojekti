@@ -338,10 +338,10 @@ const Roadmap = () => {
       'perusteet': '/map-metsa.png',
       'arjessa': '/map-aavikko.png',
       'kayttotaidot': '/map-jaa.png',
-      'etiikka': '/map-satama.png',
+      'reilu_peli': '/map-satama.png',
       'konepellin': '/map-viidakko.png',
-      'huippu': '/map-viidakko.png',
-      'sea': '/map-linna.png'
+      'aivoterveys': '/map-viidakko.png',
+      'digiturva': '/map-linna.png'
     };
     return assets[mapId] || '/map-bg.jpg';
   };
@@ -476,7 +476,7 @@ const Roadmap = () => {
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
              (() => {
-                const iconProps = { size: currentMap === 'main' ? 28 : 22, color: 'white' };
+                const iconProps = { size: currentMap === 'main' ? 44 : 32, color: 'white' };
                 if (currentMap === 'main') {
                     switch(node.id) {
                         case 'perusteet': return <Type {...iconProps} />;
@@ -620,9 +620,9 @@ const Roadmap = () => {
             {currentMap === 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>LOBBY</span>}
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, textShadow: '0 2px 4px rgba(255,255,255,0.8)', fontFamily: 'var(--font-display)' }}>
+            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, textShadow: '0 2px 4px rgba(255,255,255,0.8)', fontFamily: 'var(--font-main)', fontWeight: 900 }}>
               {currentMap === 'main' ? (
-                  <><span style={{ color: '#db2777' }}>AI</span> <span style={{ color: 'var(--primary-color)' }}>Van!</span></>
+                  <><span style={{ color: 'var(--accent-color)' }}>AI</span> <span style={{ color: 'var(--primary-color)' }}>Van!</span></>
               ) : <span style={{ color: 'var(--primary-color)' }}>{categories.find(c => c.id === currentMap)?.name}</span>}
             </h1>
             <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '1px' }}>

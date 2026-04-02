@@ -1,4 +1,4 @@
-﻿export const categories = [
+export const categories = [
   {
     "id": "perusteet",
     "name": "Tekoälyn perusteet",
@@ -134,7 +134,7 @@
   },
   {
     "id": "reilu_peli",
-    "name": "reilu_peli ja turvallisuus",
+    "name": "Reilu peli",
     "subcategories": [
       { "id": "reilu_peli_1", "name": "Taso 1: Puolueellisuus", "questions": [
           { "id": "q_e1_1", "type": "multiple_choice", "question": "Miksi tekoäly voi olla ennakkoluuloinen (bias)?", "options": ["Koska sen opetusdata on ollut yksipuolista", "Koska se on vihainen", "Se on mahdotonta", "Koska se on tehty koneella"], "correctAnswer": "Koska sen opetusdata on ollut yksipuolista", "explanation": "Jos mallille opetetaan vain tietynlaisia esimerkkejä, se oppii suosimaan niitä eettisesti väärin." }
@@ -188,7 +188,7 @@
   },
   {
     "id": "aivoterveys",
-    "name": "Tekoälyn aivoterveys",
+    "name": "Aivoterveys",
     "subcategories": [
       { "id": "aivoterveys_1", "name": "Taso 1: Turingin testi", "questions": [
           { "id": "q_h1_1", "type": "multiple_choice", "question": "Mikä on Turingin testin tavoite?", "options": ["Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "Testata koneen nopeutta", "Katsoa osaako kone uida", "Testata internet-yhteyttä"], "correctAnswer": "Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "explanation": "Alan Turing kehitti tämän kokeen määritelläkseen, voiko kone ajatella." }
