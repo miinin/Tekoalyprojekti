@@ -18,7 +18,8 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState("7-LEVEL-FIX-v1");
+  const [dataVersion] = useState(`Versio 02.04. klo 21:55`);
+  const [versionColor] = useState('#8b5cf6'); // Päivitetään violetiksi tässä versiossa
   const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0, isTunnel: false });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
@@ -458,8 +459,8 @@ const Roadmap = () => {
             <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, color: 'var(--primary-color)', textShadow: '0 2px 4px rgba(255,255,255,0.8)' }}>
               {currentMap === 'main' ? 'AIVAN TIE' : categories.find(c => c.id === currentMap)?.name}
             </h1>
-            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: '#334155', letterSpacing: '1px' }}>
-              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | {dataVersion}
+            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '1px' }}>
+              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | <span style={{ color: versionColor, fontWeight: '900', background: 'rgba(139, 92, 246, 0.1)', padding: '0.2rem 0.6rem', borderRadius: '12px' }}>{dataVersion}</span>
             </p>
           </div>
         </div>
@@ -490,9 +491,6 @@ const Roadmap = () => {
             <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
             <span style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--text-main)', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
           </div>
-          <button style={{ backgroundColor: 'white', border: 'none', width: '50px', height: '50px', borderRadius: '50%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-            <Settings size={28} color="var(--text-muted)" />
-          </button>
         </div>
       </div>
 
