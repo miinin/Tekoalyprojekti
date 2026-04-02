@@ -434,11 +434,23 @@ const Roadmap = () => {
 
       const nodeIndexParts = node.id.split('_');
       const nodeIndexNum = parseInt(nodeIndexParts[nodeIndexParts.length - 1]);
-      const prevNodeId = nodeIndexParts.slice(0, -1).join('_') + '_' + (nodeIndexNum - 1);
 
-      const isLocked = currentMap !== 'main' && !completedLessons.includes(node.id) && 
-                      nodeIndexNum !== 1 && 
-                      !completedLessons.includes(prevNodeId);
+      let isLastNode = false;
+      let isLocked = false;
+      if (currentMap !== 'main') {
+          isLastNode = node.id === data.nodes[data.nodes.length - 1].id;
+      }
+
+      if (currentMap !== 'main' && !completedLessons.includes(node.id)) {
+          if (isLastNode) {
+              // Avataan vain jos kaikki muut solmut tässä alakartassa on suoritettu
+              const otherNodes = data.nodes.filter(n => n.id !== node.id);
+              const allOthersDone = otherNodes.every(n => completedLessons.includes(n.id));
+              isLocked = !allOthersDone;
+          } else {
+              isLocked = false; // Muut vapaasti auki
+          }
+      }
       const isCompleted = completedLessons.includes(node.id);
 
       return (
@@ -466,9 +478,9 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: '4px solid white',
-                boxShadow: '0 8px 20px rgba(0,0,0,0.2)',
-                backgroundColor: isLocked ? '#94a3b8' : isCompleted ? 'var(--accent-color)' : 'var(--primary-color)',
+                border: isLastNode ? '4px solid #fef08a' : '4px solid white',
+                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)',
+                backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
@@ -483,20 +495,23 @@ const Roadmap = () => {
                           {name}
                       </span>
                   );
-                  if (currentMap === 'main') {
-                    switch(node.id) {
-                        case 'perusteet': return <MatIcon name="abc" />;
-                        case 'konepellin': return <MatIcon name="settings" />;
-                        case 'arjessa': return <MatIcon name="calendar_month" />;
-                        case 'reilu_peli': return <MatIcon name="balance" />;
-                        case 'kayttotaidot': return <MatIcon name="thumb_up" />;
-                        case 'aivoterveys': return <MatIcon name="psychology" />;
-                        case 'digiturva': return <MatIcon name="shield" />;
-                        default: return <MatIcon name="stars" />;
-                    }
-                } else {
-                    return <MatIcon name="stars" />;
-                }
+                  const getIconString = (mapId) => {
+                      switch(mapId) {
+                          case 'perusteet': return 'abc';
+                          case 'konepellin': return 'settings';
+                          case 'arjessa': return 'calendar_month';
+                          case 'reilu_peli': return 'balance';
+                          case 'kayttotaidot': return 'thumb_up';
+                          case 'aivoterveys': return 'psychology';
+                          case 'digiturva': return 'shield';
+                          default: return 'stars';
+                      }
+                  };
+                  if (isLastNode) {
+                      return <MatIcon name="emoji_events" />; // Pokaali/kulta -ikoni pomolle
+                  }
+                  const iconName = getIconString(currentMap === 'main' ? node.id : currentMap);
+                  return <MatIcon name={iconName} />;
              })()}
              </div>}
           </button>
