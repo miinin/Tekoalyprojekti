@@ -72,24 +72,28 @@ const Roadmap = () => {
     return null;
   };
 
-  const moveAlongPath = async (waypoints, totalDuration = 1500) => {
+  const moveAlongPath = async (waypoints) => {
     if (!waypoints || waypoints.length < 2) return;
-    const stepDuration = totalDuration / (waypoints.length - 1);
     setIsMoving(true);
     
-    for (let i = 0; i < waypoints.length; i++) {
+    for (let i = 1; i < waypoints.length; i++) {
         const target = waypoints[i];
         const prev = waypoints[i-1];
-        let rotation = 0;
         
-        if (prev) {
-            const dx = parseFloat(target.left) - parseFloat(prev.left);
-            const dy = parseFloat(target.top) - parseFloat(prev.top);
-            rotation = Math.atan2(dy, dx) * (180 / Math.PI);
+        const dx = parseFloat(target.left) - parseFloat(prev.left);
+        const dy = parseFloat(target.top) - parseFloat(prev.top);
+        
+        let targetRotation = 0;
+        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+            targetRotation = Math.atan2(dy, dx) * (180 / Math.PI);
         }
-        
+
+        // VAKIONOPEUS: Lasketaan todellinen etäisyys, jolloin vauhti pysyy tasaisena
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const stepDuration = Math.max(distance * 35, 150); // 35ms per 1% etäisyys
+
         // Spawn smoke puff at previous position so it trails the van
-        if (prev && !target.tunnel) {
+        if (!target.tunnel) {
             const newPuff = {
                 id: Date.now() + Math.random(),
                 top: prev.top,
@@ -100,11 +104,20 @@ const Roadmap = () => {
             setTimeout(() => setPuffs(p => p.filter(x => x.id !== newPuff.id)), 700);
         }
 
-        setVanPos({ 
-            top: target.top, 
-            left: target.left, 
-            rotate: rotation,
-            isTunnel: target.tunnel || false
+        setVanPos(currentPos => {
+            let newRot = targetRotation;
+            if (currentPos && currentPos.rotate !== undefined) {
+                // Estetään 360 asteen vahinkopyörimiset "yli 180" käännöksissä
+                while (newRot - currentPos.rotate > 180) newRot -= 360;
+                while (newRot - currentPos.rotate < -180) newRot += 360;
+            }
+            return { 
+                top: target.top, 
+                left: target.left, 
+                rotate: newRot,
+                isTunnel: target.tunnel || false,
+                stepTime: stepDuration + 50 // CSS vie hieman pidempään kuin askel -> jatkuva liike!
+            };
         });
         
         await new Promise(r => setTimeout(r, stepDuration));
@@ -140,7 +153,7 @@ const Roadmap = () => {
             }
         }
         if (allWaypoints.length > 0) {
-            await moveAlongPath(allWaypoints, 800 * (pathSequence.length - 1));
+            await moveAlongPath(allWaypoints);
         }
         setCurrentLocationId(nodeId);
         setIsMoving(false);
@@ -161,7 +174,7 @@ const Roadmap = () => {
       const exitPath = AI_ROADMAP_DATA.sub[currentMap]?.exit;
       if (exitPath) {
           setIsMoving(true);
-          await moveAlongPath(exitPath, 1000);
+          await moveAlongPath(exitPath);
           setIsMoving(false);
       }
       navigate('/roadmap');
@@ -240,8 +253,8 @@ const Roadmap = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          transition: isMoving ? 'all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)' : 'all 0.6s ease-out',
-          transform: `translate(-50%, -50%) rotate(${vanPos.rotate}deg)`,
+          transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : 'all 0.6s ease-out',
+          transform: `translate(-50%, -50%) rotate(${vanPos.rotate || 0}deg)`,
           opacity: vanPos.isTunnel ? 0.3 : 1,
         }}
       >
