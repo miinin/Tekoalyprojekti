@@ -26,8 +26,8 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState(`Versio 1.00`);
-  const [versionColor] = useState('var(--secondary-color)'); // Keltainen
+  const [dataVersion] = useState(`Versio 1.07`);
+  const [versionColor] = useState('var(--danger)'); // Punainen
   const [vanPos, setVanPos] = useState({ top: '50%', left: '50%', direction: 1, isTunnel: false, stepTime: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
@@ -475,25 +475,23 @@ const Roadmap = () => {
           >
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
-             <div style={{ width: currentMap === 'main' ? '3rem' : '2.2rem', height: currentMap === 'main' ? '3rem' : '2.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               {(() => {
-                  const iconProps = { size: '100%', color: 'white', strokeWidth: 2 };
-                  if (currentMap === 'main') {
-                      switch(node.id) {
-                          case 'perusteet': return <Type {...iconProps} />;
-                          case 'konepellin': return <Settings {...iconProps} />;
-                          case 'arjessa': return <CalendarDays {...iconProps} />;
-                          case 'reilu_peli': return <Scale {...iconProps} />;
-                          case 'kayttotaidot': return <ThumbsUp {...iconProps} />;
-                          case 'aivoterveys': return <Brain {...iconProps} />;
-                          case 'digiturva': return <ShieldCheck {...iconProps} />;
-                          default: return <Sparkles {...iconProps} />;
-                      }
-                  } else {
-                      return <Sparkles {...iconProps} />;
-                  }
-               })()}
-             </div>}
+             (() => {
+                const iconProps = { color: 'white', strokeWidth: 1.5, style: { width: '65%', height: '65%' } };
+                if (currentMap === 'main') {
+                    switch(node.id) {
+                        case 'perusteet': return <Type {...iconProps} />;
+                        case 'konepellin': return <Settings {...iconProps} />;
+                        case 'arjessa': return <CalendarDays {...iconProps} />;
+                        case 'reilu_peli': return <Scale {...iconProps} />;
+                        case 'kayttotaidot': return <ThumbsUp {...iconProps} />;
+                        case 'aivoterveys': return <Brain {...iconProps} />;
+                        case 'digiturva': return <ShieldCheck {...iconProps} />;
+                        default: return <Sparkles {...iconProps} />;
+                    }
+                } else {
+                    return <Sparkles {...iconProps} />;
+                }
+             })()}
           </button>
           
           <div 
@@ -628,7 +626,7 @@ const Roadmap = () => {
               ) : <span style={{ color: 'var(--primary-color)' }}>{categories.find(c => c.id === currentMap)?.name}</span>}
             </h1>
             <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '1px' }}>
-              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | <span style={{ color: versionColor, fontWeight: '900', background: 'rgba(242, 169, 0, 0.1)', padding: '0.3rem 0.8rem', borderRadius: '12px' }}>{dataVersion}</span>
+              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | <span style={{ color: versionColor, fontWeight: '900', background: 'rgba(239, 68, 68, 0.1)', padding: '0.3rem 0.8rem', borderRadius: '12px' }}>{dataVersion}</span>
             </p>
           </div>
         </div>
