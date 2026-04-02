@@ -8,9 +8,18 @@ import {
   Car,
   CheckCircle2,
   Lock,
-  PlayCircle
+  PlayCircle,
+  Leaf,
+  Cpu,
+  Coffee,
+  Shield,
+  Compass,
+  Flame,
+  Anchor,
+  Sparkles
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
+
 import { categories } from '../data/questions';
 import { store } from '../services/store';
 
@@ -88,11 +97,19 @@ const Roadmap = () => {
             }
         }
     } else if (currentMap === 'main') {
-        const lastNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === currentLocationId);
+        const returnedFrom = params.get('returnedFrom');
+        const lastNodeId = returnedFrom || currentLocationId;
+        const lastNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === lastNodeId);
         if (lastNode) {
             setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
+            if (returnedFrom) {
+                window.history.replaceState({}, '', `/roadmap`);
+            }
+            if (returnedFrom !== currentLocationId && returnedFrom) {
+                setCurrentLocationId(returnedFrom);
+            }
         } else {
-            setVanPos(prev => ({ ...prev, top: '98%', left: '47.5%', stepTime: 0 })); // Start point
+            setVanPos(prev => ({ ...prev, top: '50%', left: '50%', stepTime: 0 })); // Start point
         }
     }
   }, [currentMap, currentLocationId, location.search]);
@@ -217,24 +234,65 @@ const Roadmap = () => {
             // Etsitään edellinen completed-rasti, jotta tiedetään voidaanko ajaa pitkin viivaa
             const mapNodes = currentData.nodes.map(n => n.id);
             const userDone = mapNodes.filter(id => completedLessons.includes(id));
-            const lastDone = userDone.length > 0 ? userDone[userDone.length - 1] : null;
+            const startNode = userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0];
             
-            // Onko olemassa polku edellisestä rastista tähän nykyiseen? (vain eteenpäin)
-            let pathObj = null;
-            if (lastDone && lastDone !== nodeId) {
-                pathObj = currentData.paths[`${lastDone}-${nodeId}`] || currentData.paths[`${nodeId}-${lastDone}`];
-            } else if (!lastDone && nodeId === mapNodes[0]) {
-                // Eka rasti
-                pathObj = null; 
-            }
-            
-            if (pathObj) {
-                // Aja animaatio valmiiksi ja mene sitten quiz:iin
-                setIsMoving(true);
-                // Tarkista pitääkö polku kääntää
-                const finalPath = (pathObj.length > 0 && parseFloat(pathObj[0].left) === parseFloat(node.left) && parseFloat(pathObj[0].top) === parseFloat(node.top)) ? [...pathObj].reverse() : pathObj;
-                await moveAlongPath(finalPath);
-                setIsMoving(false);
+            if (startNode && startNode !== nodeId) {
+                // BFS-polunhaku alakartan risteäviin lompakkoihin (esim. etiikka/satama)
+                const subAdjacency = {};
+                mapNodes.forEach(id => subAdjacency[id] = []);
+                Object.keys(currentData.paths).forEach(pathKey => {
+                    const [s, e] = pathKey.split('-');
+                    if (subAdjacency[s] && subAdjacency[e]) {
+                        subAdjacency[s].push(e);
+                        subAdjacency[e].push(s);
+                    }
+                });
+
+                const queue = [[startNode]];
+                const visited = new Set([startNode]);
+                let pathSequence = null;
+
+                while (queue.length > 0) {
+                    const path = queue.shift();
+                    const lastN = path[path.length - 1];
+                    if (lastN === nodeId) {
+                        pathSequence = path;
+                        break;
+                    }
+                    for (const neighbor of (subAdjacency[lastN] || [])) {
+                        if (!visited.has(neighbor)) {
+                            visited.add(neighbor);
+                            queue.push([...path, neighbor]);
+                        }
+                    }
+                }
+
+                if (pathSequence && pathSequence.length > 1) {
+                    setIsMoving(true);
+                    let allWaypoints = [];
+                    for (let i = 0; i < pathSequence.length - 1; i++) {
+                        const s = pathSequence[i];
+                        const e = pathSequence[i+1];
+                        let segmentWaypoints = currentData.paths[`${s}-${e}`];
+                        let reverse = false;
+                        if (!segmentWaypoints) {
+                             segmentWaypoints = currentData.paths[`${e}-${s}`];
+                             reverse = true;
+                        }
+                        if (segmentWaypoints) {
+                             const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
+                             if (allWaypoints.length > 0) {
+                                 allWaypoints.push(...finalWaypoints.slice(1));
+                             } else {
+                                 allWaypoints.push(...finalWaypoints);
+                             }
+                        }
+                    }
+                    if (allWaypoints.length > 0) {
+                         await moveAlongPath(allWaypoints);
+                    }
+                    setIsMoving(false);
+                }
             }
             navigate(`/quiz/${currentMap}/${nodeId}`);
         }
@@ -248,7 +306,7 @@ const Roadmap = () => {
           await moveAlongPath(exitPath);
           setIsMoving(false);
       }
-      navigate('/roadmap');
+      navigate(`/roadmap?returnedFrom=${currentMap}`);
   };
 
   const [purchasedItems, setPurchasedItems] = useState([]);
