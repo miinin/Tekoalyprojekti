@@ -260,9 +260,28 @@ export default function Garage() {
             <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
 
             {garageUpgrades.map(item => {
-              if (purchased.includes(item.id)) {
+              const isHovered = hoveredItem === item.id;
+              const isOwned = purchased.includes(item.id);
+              const hoverActiveCategoryItem = Object.values(garageUpgrades).find(u => u.id === hoveredItem);
+              
+              let shouldShow = false;
+              let isPreview = false;
+
+              if (isHovered) {
+                  shouldShow = true;
+                  if (!isOwned) isPreview = true;
+              } else if (isOwned) {
+                  if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
+                      shouldShow = false;
+                  } else {
+                      shouldShow = true;
+                  }
+              }
+
+              if (shouldShow) {
                  const fileName = item.id.replace('g-', 'autotalli1-');
-                 return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none' }} />;
+                 const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
+                 return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
               }
               return null;
             })}
@@ -302,7 +321,7 @@ export default function Garage() {
             }
 
             {hoveredItem && !purchased.includes(hoveredItem) && (
-              <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(59, 130, 246, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+              <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(16, 185, 129, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
                  ESIKATSELU
               </div>
             )}
