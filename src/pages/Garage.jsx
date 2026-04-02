@@ -28,8 +28,8 @@ export default function Garage() {
     // MAALIPINNAT
     { id: 'van-body01', category: 'body', categoryName: 'Maalipinnat', name: 'Sininen Salama', desc: 'Sähkönsininen erikoismaali.', price: 1000, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-body02', category: 'body', categoryName: 'Maalipinnat', name: 'Punainen Liekki', desc: 'Räiskyvän punainen pinta.', price: 1000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Vihreä Voima', desc: 'Luonnonläheinen vihreä.', price: 1000, icon: <PaintBucket size={28} />, color: '#10b981', bg: '#d1fae5' },
-    { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kultanen Kimalle', desc: 'Ylellinen kultainen viimeistely.', price: 1200, icon: <PaintBucket size={28} />, color: '#eab308', bg: '#fef08a' },
+    { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 1000, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1200, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
     
     // PUSKURIT
     { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja.', price: 400, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
@@ -280,11 +280,11 @@ export default function Garage() {
                 const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
                 
                 let shouldShow = false;
-                let opacity = 1;
+                let isPreview = false;
 
                 if (isHovered) {
                     shouldShow = true;
-                    if (!purchased.includes(item.id)) opacity = 0.5; // Preview mode opacity if not bought
+                    if (!purchased.includes(item.id)) isPreview = true;
                 } else if (isItemEquipped) {
                     // Check if we are hovering something else in the same category
                     if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
@@ -295,11 +295,17 @@ export default function Garage() {
                 }
 
                 if (shouldShow) {
-                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none', opacity, transition: 'opacity 0.2s' }} />;
+                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none', opacity: 1, filter: isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none', transition: 'all 0.2s' }} />;
                 }
                 return null;
               })
             }
+
+            {hoveredItem && !purchased.includes(hoveredItem) && (
+              <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(59, 130, 246, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
+                 ESIKATSELU
+              </div>
+            )}
 
            </div>
         </div>
