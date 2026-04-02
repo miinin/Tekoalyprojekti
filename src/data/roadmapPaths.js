@@ -1,13 +1,13 @@
-export const AI_ROADMAP_DATA = {
+﻿export const AI_ROADMAP_DATA = {
   main: {
     nodes: [
       { id: 'perusteet', top: '35.2%', left: '21.5%' },   // 1: Forest
       { id: 'konepellin', top: '78.5%', left: '23.8%' },  // 2: Ruins (Konepellin alla)
       { id: 'arjessa', top: '83.2%', left: '52.4%' },     // 3: Desert
-      { id: 'etiikka', top: '64.8%', left: '74.2%' },    // 4: Harbor (Etiikka ja turvallisuus)
+      { id: 'reilu_peli', top: '64.8%', left: '74.2%' },    // 4: Harbor (reilu_peli ja turvallisuus)
       { id: 'kayttotaidot', top: '24.6%', left: '74.2%' }, // 5: Ice
-      { id: 'huippu', top: '35.4%', left: '50.4%' },      // 6: Volcano (Tekoälyn huippu)
-      { id: 'sea', top: '20.6%', left: '42.1%' },         // ?: Castle (Salainen meri)
+      { id: 'aivoterveys', top: '35.4%', left: '50.4%' },      // 6: Volcano (Tekoälyn aivoterveys)
+      { id: 'digiturva', top: '20.6%', left: '42.1%' },         // ?: Castle (Digiturva)
       { id: 'start_point', top: '50%', left: '50%', isJunction: true },
       { id: 'junc_forest', top: '51%', left: '36%', isJunction: true },
       { id: 'junc_east', top: '53%', left: '62%', isJunction: true }
@@ -18,14 +18,14 @@ export const AI_ROADMAP_DATA = {
       'perusteet-konepellin': [{ top: '35.2%', left: '21.5%' }, { top: '45%', left: '24%' }, { top: '60%', left: '21%' }, { top: '78.5%', left: '23.8%' }],
       'perusteet-junc_forest': [{ top: '35.2%', left: '21.5%' }, { top: '42%', left: '32%' }, { top: '51%', left: '36%' }],
       'konepellin-junc_forest': [{ top: '78.5%', left: '23.8%' }, { top: '65%', left: '32%' }, { top: '51%', left: '36%' }],
-      'junc_forest-huippu': [{ top: '51%', left: '36%' }, { top: '42%', left: '45%' }, { top: '35.4%', left: '50.4%' }],
+      'junc_forest-aivoterveys': [{ top: '51%', left: '36%' }, { top: '42%', left: '45%' }, { top: '35.4%', left: '50.4%' }],
       'junc_forest-arjessa': [{ top: '51%', left: '36%' }, { top: '65%', left: '42%' }, { top: '83.2%', left: '52.4%' }],
-      'arjessa-etiikka': [{ top: '83.2%', left: '52.4%' }, { top: '75%', left: '65%' }, { top: '64.8%', left: '74.2%' }],
-      'etiikka-junc_east': [{ top: '64.8%', left: '74.2%' }, { top: '58%', left: '68%' }, { top: '53%', left: '62%' }],
-      'huippu-junc_east': [{ top: '35.4%', left: '50.4%' }, { top: '45%', left: '55%' }, { top: '53%', left: '62%' }],
+      'arjessa-reilu_peli': [{ top: '83.2%', left: '52.4%' }, { top: '75%', left: '65%' }, { top: '64.8%', left: '74.2%' }],
+      'reilu_peli-junc_east': [{ top: '64.8%', left: '74.2%' }, { top: '58%', left: '68%' }, { top: '53%', left: '62%' }],
+      'aivoterveys-junc_east': [{ top: '35.4%', left: '50.4%' }, { top: '45%', left: '55%' }, { top: '53%', left: '62%' }],
       'junc_east-kayttotaidot': [{ top: '53%', left: '62%' }, { top: '40%', left: '68%' }, { top: '24.6%', left: '74.2%' }],
-      'huippu-sea': [{ top: '35.4%', left: '50.4%' }, { top: '28%', left: '45%' }, { top: '20.6%', left: '42.1%' }],
-      'sea-kayttotaidot': [{ top: '20.6%', left: '42.1%' }, { top: '22%', left: '58%' }, { top: '24.6%', left: '74.2%' }]
+      'aivoterveys-digiturva': [{ top: '35.4%', left: '50.4%' }, { top: '28%', left: '45%' }, { top: '20.6%', left: '42.1%' }],
+      'digiturva-kayttotaidot': [{ top: '20.6%', left: '42.1%' }, { top: '22%', left: '58%' }, { top: '24.6%', left: '74.2%' }]
     }
   },
   sub: {
@@ -113,67 +113,67 @@ export const AI_ROADMAP_DATA = {
             'konepellin_4-konepellin_6': [{ top: '45.5%', left: '43.1%' }, { top: '24.5%', left: '27.1%' }]
         }
     },
-    etiikka: {
+    reilu_peli: {
       entry: [{ top: '0%', left: '30%' }, { top: '42%', left: '52%' }],
       exit: [{ top: '0%', left: '30%' }],
       nodes: [
-        { id: 'etiikka_1', top: '83%', left: '28%' },
-        { id: 'etiikka_2', top: '70%', left: '37%' },
-        { id: 'etiikka_3', top: '72%', left: '50%' },
-        { id: 'etiikka_4', top: '42%', left: '52%' },
-        { id: 'etiikka_5', top: '41%', left: '65%' },
-        { id: 'etiikka_6', top: '79%', left: '72%' },
-        { id: 'etiikka_7', top: '40%', left: '83%' }
+        { id: 'reilu_peli_1', top: '83%', left: '28%' },
+        { id: 'reilu_peli_2', top: '70%', left: '37%' },
+        { id: 'reilu_peli_3', top: '72%', left: '50%' },
+        { id: 'reilu_peli_4', top: '42%', left: '52%' },
+        { id: 'reilu_peli_5', top: '41%', left: '65%' },
+        { id: 'reilu_peli_6', top: '79%', left: '72%' },
+        { id: 'reilu_peli_7', top: '40%', left: '83%' }
       ],
       paths: {
-        'etiikka_4-etiikka_5': [{ top: '42%', left: '52%' }, { top: '41%', left: '65%' }],
-        'etiikka_5-etiikka_7': [{ top: '41%', left: '65%' }, { top: '40%', left: '83%' }],
-        'etiikka_4-etiikka_2': [{ top: '42%', left: '52%' }, { top: '70%', left: '37%' }],
-        'etiikka_2-etiikka_1': [{ top: '70%', left: '37%' }, { top: '83%', left: '28%' }],
-        'etiikka_2-etiikka_3': [{ top: '70%', left: '37%' }, { top: '72%', left: '50%' }],
-        'etiikka_5-etiikka_6': [{ top: '41%', left: '65%' }, { top: '79%', left: '72%' }]
+        'reilu_peli_4-reilu_peli_5': [{ top: '42%', left: '52%' }, { top: '41%', left: '65%' }],
+        'reilu_peli_5-reilu_peli_7': [{ top: '41%', left: '65%' }, { top: '40%', left: '83%' }],
+        'reilu_peli_4-reilu_peli_2': [{ top: '42%', left: '52%' }, { top: '70%', left: '37%' }],
+        'reilu_peli_2-reilu_peli_1': [{ top: '70%', left: '37%' }, { top: '83%', left: '28%' }],
+        'reilu_peli_2-reilu_peli_3': [{ top: '70%', left: '37%' }, { top: '72%', left: '50%' }],
+        'reilu_peli_5-reilu_peli_6': [{ top: '41%', left: '65%' }, { top: '79%', left: '72%' }]
       }
     },
-    huippu: {
+    aivoterveys: {
       entry: [{ top: '55%', left: '0%' }, { top: '49.3%', left: '42.4%' }],
       exit: [{ top: '55%', left: '0%' }],
       nodes: [
-        { id: 'huippu_1', top: '83.5%', left: '45.4%' },
-        { id: 'huippu_2', top: '49.3%', left: '42.4%' },
-        { id: 'huippu_3', top: '32.5%', left: '50.4%' },
-        { id: 'huippu_4', top: '42.5%', left: '67.4%' },
-        { id: 'huippu_5', top: '85.5%', left: '60.4%' },
-        { id: 'huippu_6', top: '77.5%', left: '78.4%' },
-        { id: 'huippu_7', top: '55.5%', left: '88.4%' }
+        { id: 'aivoterveys_1', top: '83.5%', left: '45.4%' },
+        { id: 'aivoterveys_2', top: '49.3%', left: '42.4%' },
+        { id: 'aivoterveys_3', top: '32.5%', left: '50.4%' },
+        { id: 'aivoterveys_4', top: '42.5%', left: '67.4%' },
+        { id: 'aivoterveys_5', top: '85.5%', left: '60.4%' },
+        { id: 'aivoterveys_6', top: '77.5%', left: '78.4%' },
+        { id: 'aivoterveys_7', top: '55.5%', left: '88.4%' }
       ],
       paths: {
-        'huippu_2-huippu_1': [{ top: '49.3%', left: '42.4%' }, { top: '83.5%', left: '45.4%' }],
-        'huippu_2-huippu_3': [{ top: '49.3%', left: '42.4%' }, { top: '32.5%', left: '50.4%' }],
-        'huippu_3-huippu_4': [{ top: '32.5%', left: '50.4%' }, { top: '42.5%', left: '67.4%' }],
-        'huippu_4-huippu_6': [{ top: '42.5%', left: '67.4%' }, { top: '77.5%', left: '78.4%' }],
-        'huippu_6-huippu_7': [{ top: '77.5%', left: '78.4%' }, { top: '55.5%', left: '88.4%' }],
-        'huippu_6-huippu_5': [{ top: '77.5%', left: '78.4%' }, { top: '85.5%', left: '60.4%' }]
+        'aivoterveys_2-aivoterveys_1': [{ top: '49.3%', left: '42.4%' }, { top: '83.5%', left: '45.4%' }],
+        'aivoterveys_2-aivoterveys_3': [{ top: '49.3%', left: '42.4%' }, { top: '32.5%', left: '50.4%' }],
+        'aivoterveys_3-aivoterveys_4': [{ top: '32.5%', left: '50.4%' }, { top: '42.5%', left: '67.4%' }],
+        'aivoterveys_4-aivoterveys_6': [{ top: '42.5%', left: '67.4%' }, { top: '77.5%', left: '78.4%' }],
+        'aivoterveys_6-aivoterveys_7': [{ top: '77.5%', left: '78.4%' }, { top: '55.5%', left: '88.4%' }],
+        'aivoterveys_6-aivoterveys_5': [{ top: '77.5%', left: '78.4%' }, { top: '85.5%', left: '60.4%' }]
       }
     },
-    sea: {
+    digiturva: {
         entry: [{ top: '0%', left: '50%' }, { top: '34.2%', left: '23.1%' }],
         exit: [{ top: '0%', left: '50%' }],
         nodes: [
-          { id: 'sea_1', top: '75.3%', left: '21.1%' },
-          { id: 'sea_2', top: '34.2%', left: '23.1%' },
-          { id: 'sea_3', top: '22.3%', left: '35.4%' },
-          { id: 'sea_4', top: '48.5%', left: '48.2%' },
-          { id: 'sea_5', top: '75.8%', left: '50.2%' },
-          { id: 'sea_6', top: '65.4%', left: '74.1%' },
-          { id: 'sea_7', top: '35.2%', left: '85.4%' }
+          { id: 'digiturva_1', top: '75.3%', left: '21.1%' },
+          { id: 'digiturva_2', top: '34.2%', left: '23.1%' },
+          { id: 'digiturva_3', top: '22.3%', left: '35.4%' },
+          { id: 'digiturva_4', top: '48.5%', left: '48.2%' },
+          { id: 'digiturva_5', top: '75.8%', left: '50.2%' },
+          { id: 'digiturva_6', top: '65.4%', left: '74.1%' },
+          { id: 'digiturva_7', top: '35.2%', left: '85.4%' }
         ],
         paths: {
-          'sea_1-sea_2': [{ top: '75.3%', left: '21.1%' }, { top: '34.2%', left: '23.1%' }],
-          'sea_2-sea_3': [{ top: '34.2%', left: '23.1%' }, { top: '22.3%', left: '35.4%' }],
-          'sea_3-sea_4': [{ top: '22.3%', left: '35.4%' }, { top: '48.5%', left: '48.2%' }],
-          'sea_4-sea_5': [{ top: '48.5%', left: '48.2%' }, { top: '75.8%', left: '50.2%' }],
-          'sea_5-sea_6': [{ top: '75.8%', left: '50.2%' }, { top: '65.4%', left: '74.1%' }],
-          'sea_6-sea_7': [{ top: '65.4%', left: '74.1%' }, { top: '35.2%', left: '85.4%' }]
+          'digiturva_1-digiturva_2': [{ top: '75.3%', left: '21.1%' }, { top: '34.2%', left: '23.1%' }],
+          'digiturva_2-digiturva_3': [{ top: '34.2%', left: '23.1%' }, { top: '22.3%', left: '35.4%' }],
+          'digiturva_3-digiturva_4': [{ top: '22.3%', left: '35.4%' }, { top: '48.5%', left: '48.2%' }],
+          'digiturva_4-digiturva_5': [{ top: '48.5%', left: '48.2%' }, { top: '75.8%', left: '50.2%' }],
+          'digiturva_5-digiturva_6': [{ top: '75.8%', left: '50.2%' }, { top: '65.4%', left: '74.1%' }],
+          'digiturva_6-digiturva_7': [{ top: '65.4%', left: '74.1%' }, { top: '35.2%', left: '85.4%' }]
         }
     }
   }

@@ -1,4 +1,4 @@
-export const categories = [
+﻿export const categories = [
   {
     "id": "perusteet",
     "name": "Tekoälyn perusteet",
@@ -133,28 +133,28 @@ export const categories = [
     ]
   },
   {
-    "id": "etiikka",
-    "name": "Etiikka ja turvallisuus",
+    "id": "reilu_peli",
+    "name": "reilu_peli ja turvallisuus",
     "subcategories": [
-      { "id": "etiikka_1", "name": "Taso 1: Puolueellisuus", "questions": [
+      { "id": "reilu_peli_1", "name": "Taso 1: Puolueellisuus", "questions": [
           { "id": "q_e1_1", "type": "multiple_choice", "question": "Miksi tekoäly voi olla ennakkoluuloinen (bias)?", "options": ["Koska sen opetusdata on ollut yksipuolista", "Koska se on vihainen", "Se on mahdotonta", "Koska se on tehty koneella"], "correctAnswer": "Koska sen opetusdata on ollut yksipuolista", "explanation": "Jos mallille opetetaan vain tietynlaisia esimerkkejä, se oppii suosimaan niitä eettisesti väärin." }
       ] },
-      { "id": "etiikka_2", "name": "Taso 2: Yksityisyys", "questions": [
+      { "id": "reilu_peli_2", "name": "Taso 2: Yksityisyys", "questions": [
           { "id": "q_e2_1", "type": "true_false", "question": "Onko turvallista syöttää henkilötietoja julkiseen tekoälyyn?", "options": ["Ei, tiedot voivat päätyä osaksi opetusmateriaalia", "Kyllä, se on täysin salattua"], "correctAnswer": "Ei, tiedot voivat päätyä osaksi opetusmateriaalia", "explanation": "Monet tekoälyt tallentavat käydyt keskustelut kehitystä varten, joten varo salaisuuksia!" }
       ] },
-      { "id": "etiikka_3", "name": "Taso 3: Syväväärennökset", "questions": [
+      { "id": "reilu_peli_3", "name": "Taso 3: Syväväärennökset", "questions": [
           { "id": "q_e3_1", "type": "multiple_choice", "question": "Mikä on syväväärennös (Deepfake)?", "options": ["Tekoälyllä luotu aidolta näyttävä huijausvideo tai -kuva", "Hyvin syvä reikä", "Väärennetty passi", "Tietokonepeli"], "correctAnswer": "Tekoälyllä luotu aidolta näyttävä huijausvideo tai -kuva", "explanation": "Deepfaket voivat laittaa ihmiset sanomaan asioita, joita he eivät oikeasti ole sanoneet." }
       ] },
-      { "id": "etiikka_4", "name": "Taso 4: Tekijänoikeudet", "questions": [
+      { "id": "reilu_peli_4", "name": "Taso 4: Tekijänoikeudet", "questions": [
           { "id": "q_e4_1", "type": "multiple_choice", "question": "Kuka omistaa tekoälyn luoman taideteoksen koodin?", "options": ["Tämä on monimutkainen ja uusi lakikysymys", "Aina tekoäly itse", "Aina ihminen joka painoi nappia", "Valtio"], "correctAnswer": "Tämä on monimutkainen ja uusi lakikysymys", "explanation": "Tällä hetkellä laki etsii vielä vastausta siihen, kuka omistaa 'koneen luovuuden'." }
       ] },
-      { "id": "etiikka_5", "name": "Taso 5: Avoimuus", "questions": [
+      { "id": "reilu_peli_5", "name": "Taso 5: Avoimuus", "questions": [
           { "id": "q_e5_1", "type": "true_false", "question": "Pitäisikö meidän aina tietää, puhummeko ihmisen vai tekoälyn kanssa?", "options": ["Kyllä, se on eettisesti suositeltavaa", "Ei se ole tärkeää"], "correctAnswer": "Kyllä, se on eettisesti suositeltavaa", "explanation": "Läpinäkyvyys rakentaa luottamusta teknologian ja ihmisten välille." }
       ] },
-      { "id": "etiikka_6", "name": "Taso 6: Työelämän muutos", "questions": [
+      { "id": "reilu_peli_6", "name": "Taso 6: Työelämän muutos", "questions": [
           { "id": "q_e6_1", "type": "multiple_choice", "question": "Miten tekoäly vaikuttaa tulevaisuuden töihin?", "options": ["Se poistaa joitain töitä, mutta luo täysin uusia", "Kaikki työt loppuvat", "Mikään ei muutu", "Töitä on enemmän kaikille"], "correctAnswer": "Se poistaa joitain töitä, mutta luo täysin uusia", "explanation": "Rutiinitehtävät vähenevät, mutta tarve tekoälyä osaaville ihmisille kasvaa." }
       ] },
-      { "id": "etiikka_7", "name": "Taso 7: Kohdistaminen", "questions": [
+      { "id": "reilu_peli_7", "name": "Taso 7: Kohdistaminen", "questions": [
           { "id": "q_e7_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan AI Alignmentilla?", "options": ["Tekoälyn tavoitteiden kohdistamista ihmiskunnan parhaaksi", "Tekoälyn asettamista riveihin", "Netin korjaamista", "Tiedon suodatusta"], "correctAnswer": "Tekoälyn tavoitteiden kohdistamista ihmiskunnan parhaaksi", "explanation": "Alignment on tavoite varmistaa, ettei tekoäly vahingossakaan toimi ihmisten arvoja vastaan." }
       ] }
     ]
@@ -187,43 +187,43 @@ export const categories = [
     ]
   },
   {
-    "id": "huippu",
-    "name": "Tekoälyn huippu",
+    "id": "aivoterveys",
+    "name": "Tekoälyn aivoterveys",
     "subcategories": [
-      { "id": "huippu_1", "name": "Taso 1: Turingin testi", "questions": [
+      { "id": "aivoterveys_1", "name": "Taso 1: Turingin testi", "questions": [
           { "id": "q_h1_1", "type": "multiple_choice", "question": "Mikä on Turingin testin tavoite?", "options": ["Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "Testata koneen nopeutta", "Katsoa osaako kone uida", "Testata internet-yhteyttä"], "correctAnswer": "Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "explanation": "Alan Turing kehitti tämän kokeen määritelläkseen, voiko kone ajatella." }
       ] },
-      { "id": "huippu_2", "name": "Taso 2: Emergenssi", "questions": [
+      { "id": "aivoterveys_2", "name": "Taso 2: Emergenssi", "questions": [
           { "id": "q_h2_1", "type": "multiple_choice", "question": "Mitä tarkoittaa emergenssi tekoälyssä?", "options": ["Uusien, odottamattomien taitojen syntymistä mallin kasvaessa", "Koneen hajoamista", "Tiedon poistumista", "Hidastumista"], "correctAnswer": "Uusien, odottamattomien taitojen syntymistä mallin kasvaessa", "explanation": "Erittäin suuret mallit saattavat alkaa osata taitoja (kuten vitsit tai koodaus), joita niille ei suoraan opetettu." }
       ] },
-      { "id": "huippu_3", "name": "Taso 3: Singularity", "questions": [
+      { "id": "aivoterveys_3", "name": "Taso 3: Singularity", "questions": [
           { "id": "q_h3_1", "type": "multiple_choice", "question": "Mikä on teknologinen singulariteetti?", "options": ["Hetki jolloin tekoäly ylittää ihmisälyn ja kehitys kiihtyy hallitsemattomaksi", "Avaruusmatka", "Pelin loppu", "Tekoälyn sammuminen"], "correctAnswer": "Hetki jolloin tekoäly ylittää ihmisälyn ja kehitys kiihtyy hallitsemattomaksi", "explanation": "Tämä on tulevaisuusfuturologien ennustus, jonka toteutumisesta kiistellään." }
       ] },
-      { "id": "huippu_4", "name": "Taso 4: Tekoälyn talvet", "questions": [
+      { "id": "aivoterveys_4", "name": "Taso 4: Tekoälyn talvet", "questions": [
           { "id": "q_h4_1", "type": "multiple_choice", "question": "Mitä oli 'AI Winter'?", "options": ["Aika jolloin tekoälyn rahoitus ja kiinnostus lopuivat vuosiksi", "Loma-aika", "Pohjoisnapa", "Varkaus"], "correctAnswer": "Aika jolloin tekoälyn rahoitus ja kiinnostus lopuivat vuosiksi", "explanation": "Historiassa on ollut useita jaksoja, jolloin tekoälyyn ei enää uskottu." }
       ] },
-      { "id": "huippu_5", "name": "Taso 5: Superäly", "questions": [
+      { "id": "aivoterveys_5", "name": "Taso 5: Superäly", "questions": [
           { "id": "q_h5_1", "type": "true_false", "question": "Pidetäänkö superälyä potentiaalisena riskinä ihmiskunnalle?", "options": ["Kyllä, se on merkittävä tutkimuskohde", "Ei, se on mahdotonta"], "correctAnswer": "Kyllä, se on merkittävä tutkimuskohde", "explanation": "Superäly (Superintelligence) vaatii tarkat turvasäännöt toimiakseen ihmisen hyväksi." }
       ] },
-      { "id": "huippu_6", "name": "Taso 6: Kvanteista tekoälyyn", "questions": [
+      { "id": "aivoterveys_6", "name": "Taso 6: Kvanteista tekoälyyn", "questions": [
           { "id": "q_h6_1", "type": "multiple_choice", "question": "Miten kvanttitietokoneet voisivat auttaa tekoälyä?", "options": ["Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "Ne tekisivät niistä pienempiä", "Ne eivät auta", "Ne tekisivät niistä vihreitä"], "correctAnswer": "Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "explanation": "Kvanttilaskenta voisi mullistaa sen, miten nopeasti ja monimutkaisia asioita tekoäly osaa." }
       ] },
-      { "id": "huippu_7", "name": "Taso 7: Suurmestari", "questions": [
+      { "id": "aivoterveys_7", "name": "Taso 7: Suurmestari", "questions": [
           { "id": "q_h7_1", "type": "true_false", "question": "Oletko nyt valmis kohtaamaan tekoälyn tulevaisuuden?", "options": ["Aina valmis oppimaan uutta", "En vielä"], "correctAnswer": "Aina valmis oppimaan uutta", "explanation": "Hienoa! Tekoälyn suurin taito on kyky pysyä uteliaana." }
       ] }
     ]
   },
   {
-    "id": "sea",
-    "name": "Salainen meri",
+    "id": "digiturva",
+    "name": "Digiturva",
     "subcategories": [
-      { "id": "sea_1", "name": "Taso 1: Syvyydet", "questions": [ { "id": "q_s1_1", "type": "multiple_choice", "question": "Mitä meri opettaa tekoälystä?", "options": ["Että tieto on syvää ja se kätkee paljon salaisuuksia", "Että siellä on kaloja", "Että vesi on märkää", "Ei mitään"], "correctAnswer": "Että tieto on syvää ja se kätkee paljon salaisuuksia", "explanation": "Salainen meri edustaa tuntematonta ja uutta tietoa." } ] },
-      { "id": "sea_2", "name": "Taso 2: Heijastus", "questions": [ { "id": "q_s2_1", "type": "true_false", "question": "Onko tekoäly vain meidän ihmisten heijastus?", "options": ["Kyllä, se on oppinut kaiken meiltä", "Ei, se on itsenäinen olennto"], "correctAnswer": "Kyllä, se on oppinut kaiken meiltä", "explanation": "Tekoäly opiskelee meidän kirjoittamaa tekstiä ja historiaa." } ] },
-      { "id": "sea_3", "name": "Taso 3: Luovuus", "questions": [ { "id": "q_s3_1", "type": "multiple_choice", "question": "Voiko tekoäly olla todella luova?", "options": ["Se yhdistelee asioita uusilla tavoilla", "Ei koskaan", "Vain perjantaisin", "Kyllä se on ihminen"], "correctAnswer": "Se yhdistelee asioita uusilla tavoilla", "explanation": "Tekoälyn luovuus perustuu valtavien tietomäärien uudenlaiseen yhdistelyyn." } ] },
-      { "id": "sea_4", "name": "Taso 4: Tunteet", "questions": [ { "id": "q_s4_1", "type": "true_false", "question": "Voiko koodi tuntea surua?", "options": ["Ei, se voi vain simuloida sitä", "Kyllä"], "correctAnswer": "Ei, se voi vain simuloida sitä", "explanation": "Koneilla ei ole biologista kehoa tai tunteita, vain matemaattisia malleja." } ] },
-      { "id": "sea_5", "name": "Taso 5: Yhteistyö", "questions": [ { "id": "q_s5_1", "type": "multiple_choice", "question": "Mikä on paras tapa käyttää tekoälyä?", "options": ["Ihmisen ja koneen yhteistyönä (Copilot)", "Antamalla koneen tehdä kaikki", "Välttämällä sitä", "Vain koodaamiseen"], "correctAnswer": "Ihmisen ja koneen yhteistyönä (Copilot)", "explanation": "Yhdessä ihminen ja tekoäly ovat vahvempia kuin kumpikaan yksin." } ] },
-      { "id": "sea_6", "name": "Taso 6: Vastuullisuus", "questions": [ { "id": "q_s6_1", "type": "multiple_choice", "question": "Kuka on viime kädessä vastuussa tekoälyn teoista?", "options": ["Ihminen joka sitä käyttää tai kehitti sen", "Tekoäly itse", "Tietokone", "Kukaan ei ole"], "correctAnswer": "Ihminen joka sitä käyttää tai kehitti sen", "explanation": "Vastuu on aina ihmisellä, vaikka työkalu olisi kuinka kehittynyt." } ] },
-      { "id": "sea_7", "name": "Taso 7: Loppusanat", "questions": [ { "id": "q_s7_1", "type": "multiple_choice", "question": "Mikä on tärkein oppi tästä matkasta?", "options": ["Uteliaisuus ja kriittisyys", "Että osaan vastata kysymyksiin", "Että auto osaa ajaa", "Pelin loppu"], "correctAnswer": "Uteliaisuus ja kriittisyys", "explanation": "Olet suorittanut AIVAN tien! Muista: maailma muuttuu, mutta oppiminen jatkuu." } ] }
+      { "id": "digiturva_1", "name": "Taso 1: Syvyydet", "questions": [ { "id": "q_s1_1", "type": "multiple_choice", "question": "Mitä meri opettaa tekoälystä?", "options": ["Että tieto on syvää ja se kätkee paljon salaisuuksia", "Että siellä on kaloja", "Että vesi on märkää", "Ei mitään"], "correctAnswer": "Että tieto on syvää ja se kätkee paljon salaisuuksia", "explanation": "Digiturva edustaa tuntematonta ja uutta tietoa." } ] },
+      { "id": "digiturva_2", "name": "Taso 2: Heijastus", "questions": [ { "id": "q_s2_1", "type": "true_false", "question": "Onko tekoäly vain meidän ihmisten heijastus?", "options": ["Kyllä, se on oppinut kaiken meiltä", "Ei, se on itsenäinen olennto"], "correctAnswer": "Kyllä, se on oppinut kaiken meiltä", "explanation": "Tekoäly opiskelee meidän kirjoittamaa tekstiä ja historiaa." } ] },
+      { "id": "digiturva_3", "name": "Taso 3: Luovuus", "questions": [ { "id": "q_s3_1", "type": "multiple_choice", "question": "Voiko tekoäly olla todella luova?", "options": ["Se yhdistelee asioita uusilla tavoilla", "Ei koskaan", "Vain perjantaisin", "Kyllä se on ihminen"], "correctAnswer": "Se yhdistelee asioita uusilla tavoilla", "explanation": "Tekoälyn luovuus perustuu valtavien tietomäärien uudenlaiseen yhdistelyyn." } ] },
+      { "id": "digiturva_4", "name": "Taso 4: Tunteet", "questions": [ { "id": "q_s4_1", "type": "true_false", "question": "Voiko koodi tuntea surua?", "options": ["Ei, se voi vain simuloida sitä", "Kyllä"], "correctAnswer": "Ei, se voi vain simuloida sitä", "explanation": "Koneilla ei ole biologista kehoa tai tunteita, vain matemaattisia malleja." } ] },
+      { "id": "digiturva_5", "name": "Taso 5: Yhteistyö", "questions": [ { "id": "q_s5_1", "type": "multiple_choice", "question": "Mikä on paras tapa käyttää tekoälyä?", "options": ["Ihmisen ja koneen yhteistyönä (Copilot)", "Antamalla koneen tehdä kaikki", "Välttämällä sitä", "Vain koodaamiseen"], "correctAnswer": "Ihmisen ja koneen yhteistyönä (Copilot)", "explanation": "Yhdessä ihminen ja tekoäly ovat vahvempia kuin kumpikaan yksin." } ] },
+      { "id": "digiturva_6", "name": "Taso 6: Vastuullisuus", "questions": [ { "id": "q_s6_1", "type": "multiple_choice", "question": "Kuka on viime kädessä vastuussa tekoälyn teoista?", "options": ["Ihminen joka sitä käyttää tai kehitti sen", "Tekoäly itse", "Tietokone", "Kukaan ei ole"], "correctAnswer": "Ihminen joka sitä käyttää tai kehitti sen", "explanation": "Vastuu on aina ihmisellä, vaikka työkalu olisi kuinka kehittynyt." } ] },
+      { "id": "digiturva_7", "name": "Taso 7: Loppusanat", "questions": [ { "id": "q_s7_1", "type": "multiple_choice", "question": "Mikä on tärkein oppi tästä matkasta?", "options": ["Uteliaisuus ja kriittisyys", "Että osaan vastata kysymyksiin", "Että auto osaa ajaa", "Pelin loppu"], "correctAnswer": "Uteliaisuus ja kriittisyys", "explanation": "Olet suorittanut AIVAN tien! Muista: maailma muuttuu, mutta oppiminen jatkuu." } ] }
     ]
   }
 ];

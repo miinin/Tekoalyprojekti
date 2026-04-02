@@ -9,13 +9,12 @@ import {
   CheckCircle2,
   Lock,
   PlayCircle,
-  Leaf,
-  Cpu,
-  Coffee,
-  Shield,
-  Compass,
-  Flame,
-  Anchor,
+  Type,
+  CalendarDays,
+  Scale,
+  ThumbsUp,
+  Brain,
+  ShieldCheck,
   Sparkles
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
@@ -475,9 +474,23 @@ const Roadmap = () => {
           >
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
-             <span style={{ color: 'white', fontWeight: 900, fontSize: currentMap === 'main' ? '1.8rem' : '1.5rem', fontFamily: 'var(--font-display)' }}>
-                 {currentMap === 'main' ? mainNumber : (node.id.includes('_') ? node.id.split('_')[1] : mainNumber)}
-             </span>}
+             (() => {
+                const iconProps = { size: currentMap === 'main' ? 28 : 22, color: 'white' };
+                if (currentMap === 'main') {
+                    switch(node.id) {
+                        case 'perusteet': return <Type {...iconProps} />;
+                        case 'konepellin': return <Settings {...iconProps} />;
+                        case 'arjessa': return <CalendarDays {...iconProps} />;
+                        case 'reilu_peli': return <Scale {...iconProps} />;
+                        case 'kayttotaidot': return <ThumbsUp {...iconProps} />;
+                        case 'aivoterveys': return <Brain {...iconProps} />;
+                        case 'digiturva': return <ShieldCheck {...iconProps} />;
+                        default: return <Sparkles {...iconProps} />;
+                    }
+                } else {
+                    return <Sparkles {...iconProps} />;
+                }
+             })()}
           </button>
           
           <div 
@@ -490,7 +503,7 @@ const Roadmap = () => {
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
             }}
           >
-              <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
+              <span style={{ fontSize: isMain ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
                   {labelText}
               </span>
           </div>
