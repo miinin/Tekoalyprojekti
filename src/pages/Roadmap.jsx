@@ -18,8 +18,8 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState(`Versio 02.04. klo 22:30`);
-  const [versionColor] = useState('#ec4899'); // Vaihdetaan pinkkiin korjauksien merkiksi
+  const [dataVersion] = useState(`Versio 02.04. klo 23:05`);
+  const [versionColor] = useState('#10b981'); // Vihreä väri uudelle korjatulle versiolle
   const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', direction: 1, isTunnel: false });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
