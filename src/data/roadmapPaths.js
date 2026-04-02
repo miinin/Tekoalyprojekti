@@ -8,13 +8,13 @@ export const AI_ROADMAP_DATA = {
       { id: 'kayttotaidot', top: '24.6%', left: '74.2%' }, // 5: Ice
       { id: 'huippu', top: '35.4%', left: '50.4%' },      // 6: Volcano (Tekoälyn huippu)
       { id: 'sea', top: '20.6%', left: '42.1%' },         // ?: Castle (Salainen meri)
-      { id: 'start_point', top: '98%', left: '47.5%', isJunction: true },
+      { id: 'start_point', top: '50%', left: '50%', isJunction: true },
       { id: 'junc_forest', top: '51%', left: '36%', isJunction: true },
       { id: 'junc_east', top: '53%', left: '62%', isJunction: true }
     ],
     paths: {
-      'start_point-junc_forest': [{ top: '98%', left: '47.5%' }, { top: '75%', left: '45%' }, { top: '51%', left: '36%' }],
-      'start_point-arjessa': [{ top: '98%', left: '47.5%' }, { top: '90%', left: '50%' }, { top: '83.2%', left: '52.4%' }],
+      'start_point-junc_forest': [{ top: '50%', left: '50%' }, { top: '51%', left: '36%' }],
+      'start_point-arjessa': [{ top: '50%', left: '50%' }, { top: '65%', left: '51%' }, { top: '83.2%', left: '52.4%' }],
       'perusteet-konepellin': [{ top: '35.2%', left: '21.5%' }, { top: '45%', left: '24%' }, { top: '60%', left: '21%' }, { top: '78.5%', left: '23.8%' }],
       'perusteet-junc_forest': [{ top: '35.2%', left: '21.5%' }, { top: '42%', left: '32%' }, { top: '51%', left: '36%' }],
       'konepellin-junc_forest': [{ top: '78.5%', left: '23.8%' }, { top: '65%', left: '32%' }, { top: '51%', left: '36%' }],

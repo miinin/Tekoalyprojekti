@@ -18,9 +18,9 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState(`Versio 02.04. klo 23:05`);
-  const [versionColor] = useState('#10b981'); // Vihreä väri uudelle korjatulle versiolle
-  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', direction: 1, isTunnel: false });
+  const [dataVersion] = useState(`Versio 03.04. klo 09:30`);
+  const [versionColor] = useState('#f59e0b'); // Oranssi merkinnäksi spawni-korjauksesta
+  const [vanPos, setVanPos] = useState({ top: '50%', left: '50%', direction: 1, isTunnel: false, stepTime: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
@@ -324,7 +324,7 @@ const Roadmap = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : 'all 0.6s ease-out',
+          transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : (vanPos.stepTime === 0 ? 'none' : 'all 0.6s ease-out'),
           transform: `translate(-50%, -50%) scaleX(${vanPos.direction || 1})`,
           opacity: vanPos.isTunnel ? 0.3 : 1,
         }}
