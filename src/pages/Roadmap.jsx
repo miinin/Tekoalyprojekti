@@ -476,7 +476,7 @@ const Roadmap = () => {
             {isLocked ? <Lock size={20} color="white" /> : 
              isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
              (() => {
-                const iconProps = { size: currentMap === 'main' ? 44 : 32, color: 'white' };
+                const iconProps = { size: 44, color: 'white', strokeWidth: 2, style: { width: currentMap === 'main' ? '2.8rem' : '2rem', height: currentMap === 'main' ? '2.8rem' : '2rem' } };
                 if (currentMap === 'main') {
                     switch(node.id) {
                         case 'perusteet': return <Type {...iconProps} />;
