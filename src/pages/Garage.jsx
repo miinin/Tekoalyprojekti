@@ -45,10 +45,11 @@ export default function Garage() {
   ];
 
   const garageUpgrades = [
-    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Lakaistu lattia, roskat pois.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
-    { id: 'g-floor', category: 'g_floor', categoryName: 'Lattia', name: 'Korjaa säröt', desc: 'Paikkaa betonin halkeamat.', price: 500, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
-    { id: 'g-walls', category: 'g_walls', categoryName: 'Seinät', name: 'Kunnosta', desc: 'Uusi maalipinta seiniin.', price: 1000, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
-    { id: 'g-tools', category: 'g_tools', categoryName: 'Työkalut', name: 'Perustyökalut', desc: 'Hylsysarja ja tunkki.', price: 800, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
+    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Tuo autotalliin uusi ilme siivoamalla.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
+    { id: 'g-floor', category: 'g_floor', categoryName: 'Lattia', name: 'Korjaa säröt', desc: 'Paikkaa betonin halkeamat.', price: 400, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
+    { id: 'g-floor2', category: 'g_floor', categoryName: 'Lattia', name: 'Uusi lattia', desc: 'Hieno pinnoitettu lattia.', price: 800, icon: <Droplets size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'g-walls', category: 'g_walls', categoryName: 'Seinät', name: 'Kunnosta seinät', desc: 'Uusi maalipinta seiniin.', price: 1000, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
+    { id: 'g-tools', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkaluseinä', desc: 'Perustyökalut hienosti esillä.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
   ];
 
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
@@ -224,7 +225,7 @@ export default function Garage() {
             boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
-            <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, pointerEvents: 'none' }} />
+            <img src="/talli/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0, pointerEvents: 'none' }} />
 
             {garageUpgrades.map(item => {
               if (purchased.includes(item.id)) {
