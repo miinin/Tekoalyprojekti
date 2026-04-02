@@ -45,9 +45,10 @@ export default function Garage() {
   ];
 
   const garageUpgrades = [
-    { id: 'g1', name: 'Siisteys', desc: 'Lakaistu lattia, roskat pois.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
-    { id: 'g2', name: 'Autotallin työkalut', desc: 'Perus hylsysarja ja tunkki.', price: 500, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
-    { id: 'g3', name: 'Työkaluseinä', desc: 'Työkalut nätisti järjestykseen.', price: 1000, icon: <Grid size={28} />, color: '#ec4899', bg: '#fbcfe8' }
+    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Lakaistu lattia, roskat pois.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
+    { id: 'g-floor', category: 'g_floor', categoryName: 'Lattia', name: 'Korjaa säröt', desc: 'Paikkaa betonin halkeamat.', price: 500, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
+    { id: 'g-walls', category: 'g_walls', categoryName: 'Seinät', name: 'Kunnosta', desc: 'Uusi maalipinta seiniin.', price: 1000, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
+    { id: 'g-tools', category: 'g_tools', categoryName: 'Työkalut', name: 'Perustyökalut', desc: 'Hylsysarja ja tunkki.', price: 800, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
   ];
 
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
@@ -97,7 +98,15 @@ export default function Garage() {
   );
 
   // Group items by category for rendering
-  const categorisedUpgrades = carUpgrades.reduce((acc, item) => {
+  const categorisedCar = carUpgrades.reduce((acc, item) => {
+    if (!acc[item.category]) {
+      acc[item.category] = { name: item.categoryName, items: [] };
+    }
+    acc[item.category].items.push(item);
+    return acc;
+  }, {});
+
+  const categorisedGarage = garageUpgrades.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = { name: item.categoryName, items: [] };
     }
@@ -169,10 +178,37 @@ export default function Garage() {
 
       <div className="garage-grid">
         
-        {/* LEFT COLUMN: Garage Items */}
-        <div className="garage-left" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.2rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
-          {garageUpgrades.map(item => renderUpgradeItem(item))}
+        {/* LEFT COLUMN: Garage Items (Collapsible) */}
+        <div className="garage-left">
+          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
+          
+          {Object.entries(categorisedGarage).map(([catId, category]) => (
+            <div key={catId} style={{ marginBottom: '0.5rem' }}>
+              <div 
+                className="category-header" 
+                onClick={() => toggleCategory(catId)}
+                style={{ 
+                  borderColor: expandedCategories.includes(catId) ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
+                  background: expandedCategories.includes(catId) ? '#f5f3ff' : 'rgba(255,255,255,0.7)'
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                   {catId === 'g_clean' && <Sparkles size={18} color="#a855f7" />}
+                   {catId === 'g_floor' && <Grid size={18} color="#6366f1" />}
+                   {catId === 'g_walls' && <Layers size={18} color="#ec4899" />}
+                   {catId === 'g_tools' && <Wrench size={18} color="#eab308" />}
+                   <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
+                </div>
+                <ChevronDown size={20} style={{ transition: 'transform 0.3s', transform: expandedCategories.includes(catId) ? 'rotate(180deg)' : 'rotate(0)' }} />
+              </div>
+              
+              {expandedCategories.includes(catId) && (
+                <div className="category-content animate-fade-in" style={{ padding: '0 0.5rem' }}>
+                  {category.items.map(item => renderUpgradeItem(item))}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* CENTER COLUMN: Visual Preview */}
@@ -192,7 +228,8 @@ export default function Garage() {
 
             {garageUpgrades.map(item => {
               if (purchased.includes(item.id)) {
-                 return <img key={item.id} src={`/layer-${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, padding: '2rem', pointerEvents: 'none' }} />;
+                 const fileName = item.id.replace('g-', 'autotalli1-');
+                 return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none' }} />;
               }
               return null;
             })}
@@ -227,7 +264,7 @@ export default function Garage() {
         <div className="garage-right">
           <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
           
-          {Object.entries(categorisedUpgrades).map(([catId, category]) => (
+          {Object.entries(categorisedCar).map(([catId, category]) => (
             <div key={catId} style={{ marginBottom: '0.5rem' }}>
               <div 
                 className="category-header" 
