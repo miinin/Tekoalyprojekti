@@ -7,12 +7,15 @@ export default function Garage() {
   const navigate = useNavigate();
   const [sparks, setSparks] = useState(0);
   const [purchased, setPurchased] = useState([]);
+  const [equipped, setEquipped] = useState({});
+  const [hoveredItem, setHoveredItem] = useState(null);
   const [expandedCategories, setExpandedCategories] = useState(['body']); // Default open: Body
 
   useEffect(() => {
     const fetchData = async () => {
       setSparks(await store.getSparks());
       setPurchased(await store.getPurchasedItems());
+      setEquipped(await store.getEquippedItems());
     };
     fetchData();
     
@@ -60,43 +63,72 @@ export default function Garage() {
     );
   };
 
-  const renderUpgradeItem = (item) => (
-    <div key={item.id} className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} onMouseOver={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; }} onMouseOut={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-        <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          {React.cloneElement(item.icon, { size: 20 })}
+  const renderUpgradeItem = (item) => {
+    const isCarItem = item.id.startsWith('van-');
+    const isOwned = purchased.includes(item.id);
+    const isEquipped = isCarItem ? equipped[item.category] === item.id : isOwned;
+    
+    let btnText = `OSTA ⚡ ${item.price}`;
+    let btnBg = sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0';
+    let btnColor = sparks >= item.price ? 'white' : 'var(--text-muted)';
+    const canBuy = sparks >= item.price && !isOwned;
+    let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
+    let cursor = canBuy ? 'pointer' : 'not-allowed';
+
+    if (isEquipped) {
+       btnText = 'ASENNETTU';
+       btnBg = '#10b981';
+       btnColor = 'white';
+       cursor = 'default';
+    } else if (isOwned && isCarItem) {
+       btnText = 'ASENNA';
+       btnBg = '#8b5cf6';
+       btnColor = 'white';
+       cursor = 'pointer';
+    }
+
+    return (
+      <div key={item.id} className="glass-panel" 
+           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} 
+           onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; setHoveredItem(item.id); }} 
+           onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+          <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {React.cloneElement(item.icon, { size: 20 })}
+          </div>
+          <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
+            <h3 style={{ margin: 0, fontSize: '0.9rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
+            <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{item.desc}</p>
+          </div>
         </div>
-        <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
-          <h3 style={{ margin: 0, fontSize: '0.9rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
-          <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{item.desc}</p>
-        </div>
-      </div>
-      <button 
-        className="btn-primary" 
-        style={{ 
-          padding: '0.3rem', 
-          fontSize: '0.75rem', 
-          width: '100%',
-          background: purchased.includes(item.id) ? '#10b981' : (sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0'), 
-          color: purchased.includes(item.id) || sparks >= item.price ? 'white' : 'var(--text-muted)', 
-          boxShadow: sparks >= item.price && !purchased.includes(item.id) ? '0 4px 6px rgba(0,0,0,0.1)' : 'none', 
-          cursor: purchased.includes(item.id) ? 'default' : (sparks >= item.price ? 'pointer' : 'not-allowed')
-        }}
-        onClick={async (e) => {
-          e.stopPropagation();
-          if (sparks >= item.price && !purchased.includes(item.id)) {
-            const success = await store.purchaseItem(item.id, item.price);
-            if (success) {
-              setSparks(await store.getSparks());
-              setPurchased(await store.getPurchasedItems());
+        <button 
+          className="btn-primary" 
+          style={{ 
+            padding: '0.3rem', fontSize: '0.75rem', width: '100%',
+            background: btnBg, color: btnColor, boxShadow: btnShadow, cursor
+          }}
+          onClick={async (e) => {
+            e.stopPropagation();
+            if (canBuy) {
+              const success = await store.purchaseItem(item.id, item.price, isCarItem ? item.category : null);
+              if (success) {
+                setSparks(await store.getSparks());
+                setPurchased(await store.getPurchasedItems());
+                setEquipped(await store.getEquippedItems());
+              }
+            } else if (isOwned && !isEquipped && isCarItem) {
+               const success = await store.equipItem(item.id, item.category);
+               if (success) {
+                  setEquipped(await store.getEquippedItems());
+               }
             }
-          }
-        }}
-      >
-        {purchased.includes(item.id) ? 'ASENNETTU' : `OSTA ⚡ ${item.price}`}
-      </button>
-    </div>
-  );
+          }}
+        >
+          {btnText}
+        </button>
+      </div>
+    );
+  };
 
   // Group items by category for rendering
   const categorisedCar = carUpgrades.reduce((acc, item) => {
@@ -243,8 +275,27 @@ export default function Garage() {
                 return (order[a.category] || 99) - (order[b.category] || 99);
               })
               .map(item => {
-                if (purchased.includes(item.id)) {
-                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />;
+                const isHovered = hoveredItem === item.id;
+                const isItemEquipped = equipped[item.category] === item.id;
+                const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
+                
+                let shouldShow = false;
+                let opacity = 1;
+
+                if (isHovered) {
+                    shouldShow = true;
+                    if (!purchased.includes(item.id)) opacity = 0.5; // Preview mode opacity if not bought
+                } else if (isItemEquipped) {
+                    // Check if we are hovering something else in the same category
+                    if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
+                        shouldShow = false; // Hide equipped item because we are previewing another
+                    } else {
+                        shouldShow = true;
+                    }
+                }
+
+                if (shouldShow) {
+                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none', opacity, transition: 'opacity 0.2s' }} />;
                 }
                 return null;
               })

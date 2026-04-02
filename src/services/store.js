@@ -82,7 +82,23 @@ export const store = {
     return items ? JSON.parse(items) : [];
   },
 
-  purchaseItem: async (itemId, price) => {
+  getEquippedItems: async () => {
+    const room = store.getRoomCode();
+    const key = room ? `aivan_equipped_${room}` : 'aivan_equipped';
+    const items = localStorage.getItem(key);
+    return items ? JSON.parse(items) : {};
+  },
+
+  equipItem: async (itemId, category) => {
+    const room = store.getRoomCode();
+    const key = room ? `aivan_equipped_${room}` : 'aivan_equipped';
+    const items = await store.getEquippedItems();
+    items[category] = itemId;
+    localStorage.setItem(key, JSON.stringify(items));
+    return true;
+  },
+
+  purchaseItem: async (itemId, price, category = null) => {
     const success = await store.spendSparks(price);
     if (success) {
       const room = store.getRoomCode();
@@ -91,6 +107,9 @@ export const store = {
       if (!items.includes(itemId)) {
         items.push(itemId);
         localStorage.setItem(key, JSON.stringify(items));
+      }
+      if (category) {
+          await store.equipItem(itemId, category);
       }
       return true;
     }
@@ -105,6 +124,7 @@ export const store = {
   clearSinglePlayer: () => {
     localStorage.setItem('aivan_sparks', '0');
     localStorage.removeItem('aivan_items');
+    localStorage.removeItem('aivan_equipped');
     store.setRoomCode(null);
   },
 
@@ -127,6 +147,7 @@ export const store = {
   deleteRoom: (room) => {
     localStorage.removeItem(`aivan_sparks_${room}`);
     localStorage.removeItem(`aivan_items_${room}`);
+    localStorage.removeItem(`aivan_equipped_${room}`);
     // If we're deleting our current room, clear it
     if (store.getRoomCode() === room) store.setRoomCode(null);
   },

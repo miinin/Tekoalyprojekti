@@ -308,11 +308,11 @@ const Roadmap = () => {
       navigate(`/roadmap?returnedFrom=${currentMap}`);
   };
 
-  const [purchasedItems, setPurchasedItems] = useState([]);
+  const [equippedItems, setEquippedItems] = useState({});
 
   useEffect(() => {
     const fetchProgress = async () => {
-      setPurchasedItems(await store.getPurchasedItems());
+      setEquippedItems(await store.getEquippedItems());
       const savedCompletions = store.getCompletions();
       setCompletedLessons(savedCompletions);
     };
@@ -396,7 +396,7 @@ const Roadmap = () => {
             />
             
             {/* Custom Parts Layers */}
-            {purchasedItems.map(itemId => {
+            {Object.values(equippedItems).map(itemId => {
               if (itemId.startsWith('van-')) {
                  return (
                    <img 
