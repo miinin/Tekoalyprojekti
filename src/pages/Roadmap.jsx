@@ -18,9 +18,9 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState(`Versio 02.04. klo 21:55`);
-  const [versionColor] = useState('#8b5cf6'); // Päivitetään violetiksi tässä versiossa
-  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', rotate: 0, isTunnel: false });
+  const [dataVersion] = useState(`Versio 02.04. klo 22:30`);
+  const [versionColor] = useState('#ec4899'); // Vaihdetaan pinkkiin korjauksien merkiksi
+  const [vanPos, setVanPos] = useState({ top: '98%', left: '47.5%', direction: 1, isTunnel: false });
   const [isMoving, setIsMoving] = useState(false);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
@@ -39,6 +39,69 @@ const Roadmap = () => {
       setCurrentMap('main');
     }
   }, [location]);
+
+  // Kartan vaihdon yhteydessä: Saavutaan alakarttaan sisääntuloreittiä (entry) pitkin!
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const completedNodeId = params.get('completed');
+
+    if (currentMap !== 'main' && AI_ROADMAP_DATA.sub[currentMap]) {
+        const subData = AI_ROADMAP_DATA.sub[currentMap];
+        
+        if (completedNodeId) {
+            // Tultiin juuri tasolta: aseta paku viimeksi suoritetulle pisteelle
+            const completedNode = subData.nodes.find(n => n.id === completedNodeId);
+            if (completedNode) {
+                setVanPos(prev => ({ 
+                    ...prev, 
+                    top: completedNode.top, 
+                    left: completedNode.left, 
+                    stepTime: 0 
+                }));
+
+                // Etsi seuraava reitti tästä pisteestä
+                const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
+                if (nextPathKey) {
+                    const pathToNext = subData.paths[nextPathKey];
+                    // Siivoa URL, ettei toistu refreshillä
+                    window.history.replaceState({}, '', `/roadmap?map=${currentMap}`);
+                    
+                    // Aja seuraavaan pisteeseen lyhyen lataustauon jälkeen
+                    setTimeout(() => {
+                        moveAlongPath(pathToNext);
+                    }, 600);
+                }
+            }
+        } else {
+            // Normaali saapuminen alakarttaan
+            const entryPath = subData.entry;
+            if (entryPath && entryPath.length > 0) {
+                let initialDirection = 1;
+                if (entryPath.length > 1 && parseFloat(entryPath[1].left) < parseFloat(entryPath[0].left)) {
+                    initialDirection = -1;
+                }
+                setVanPos(prev => ({ 
+                    ...prev, 
+                    top: entryPath[0].top, 
+                    left: entryPath[0].left, 
+                    direction: initialDirection,
+                    stepTime: 0 
+                }));
+                
+                setTimeout(() => {
+                    moveAlongPath(entryPath);
+                }, 100);
+            }
+        }
+    } else if (currentMap === 'main') {
+        const lastNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === currentLocationId);
+        if (lastNode) {
+            setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
+        } else {
+            setVanPos(prev => ({ ...prev, top: '98%', left: '47.5%', stepTime: 0 })); // Start point
+        }
+    }
+  }, [currentMap, currentLocationId, location.search]);
 
   const mainAdjacency = {};
   AI_ROADMAP_DATA.main.nodes.forEach(node => {
@@ -83,10 +146,9 @@ const Roadmap = () => {
         const dx = parseFloat(target.left) - parseFloat(prev.left);
         const dy = parseFloat(target.top) - parseFloat(prev.top);
         
-        let targetRotation = 0;
-        if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-            targetRotation = Math.atan2(dy, dx) * (180 / Math.PI);
-        }
+        let targetDirection = 1;
+        if (dx < -0.5) targetDirection = -1;
+        else if (dx > 0.5) targetDirection = 1;
 
         // VAKIONOPEUS: Lasketaan todellinen etäisyys, jolloin vauhti pysyy tasaisena
         const distance = Math.sqrt(dx * dx + dy * dy);
@@ -98,23 +160,20 @@ const Roadmap = () => {
                 id: Date.now() + Math.random(),
                 top: prev.top,
                 left: prev.left,
-                size: 15 + Math.random() * 20
+                size: 20 + Math.random() * 30 // Isompi savu isommalle autolle
             };
             setPuffs(p => [...p.slice(-15), newPuff]);
             setTimeout(() => setPuffs(p => p.filter(x => x.id !== newPuff.id)), 700);
         }
 
         setVanPos(currentPos => {
-            let newRot = targetRotation;
-            if (currentPos && currentPos.rotate !== undefined) {
-                // Estetään 360 asteen vahinkopyörimiset "yli 180" käännöksissä
-                while (newRot - currentPos.rotate > 180) newRot -= 360;
-                while (newRot - currentPos.rotate < -180) newRot += 360;
-            }
+            let dir = targetDirection || currentPos?.direction || 1;
+            if (Math.abs(dx) < 0.5 && currentPos) dir = currentPos.direction;
+
             return { 
                 top: target.top, 
                 left: target.left, 
-                rotate: newRot,
+                direction: dir,
                 isTunnel: target.tunnel || false,
                 stepTime: stepDuration + 50 // CSS vie hieman pidempään kuin askel -> jatkuva liike!
             };
@@ -161,10 +220,6 @@ const Roadmap = () => {
     } else {
         const node = currentData.nodes.find(n => n.id === nodeId);
         if (node) {
-            setIsMoving(true);
-            setVanPos(prev => ({ ...prev, top: node.top, left: node.left }));
-            await new Promise(r => setTimeout(r, 500));
-            setIsMoving(false);
             navigate(`/quiz/${currentMap}/${nodeId}`);
         }
     }
@@ -246,15 +301,15 @@ const Roadmap = () => {
           position: 'absolute',
           top: vanPos.top,
           left: vanPos.left,
-          width: '74px',
-          height: '52px',
+          width: '148px',
+          height: '104px',
           zIndex: 50,
           pointerEvents: 'none',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           transition: isMoving ? `all ${vanPos.stepTime || 400}ms linear` : 'all 0.6s ease-out',
-          transform: `translate(-50%, -50%) rotate(${vanPos.rotate || 0}deg)`,
+          transform: `translate(-50%, -50%) scaleX(${vanPos.direction || 1})`,
           opacity: vanPos.isTunnel ? 0.3 : 1,
         }}
       >
@@ -281,7 +336,7 @@ const Roadmap = () => {
               return null;
             })}
 
-            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: 'translateX(-50%)', backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.7rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
+            <div style={{ position: 'absolute', top: '-1.8rem', left: '50%', transform: `translateX(-50%) scaleX(${vanPos.direction === -1 ? -1 : 1})`, backgroundColor: 'white', padding: '0.2rem 0.6rem', borderRadius: '20px', fontSize: '0.8rem', fontWeight: 900, border: '2px solid var(--secondary-color)', whiteSpace: 'nowrap', color: 'var(--text-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', zIndex: 60 }}>
                 AI VAN
             </div>
         </div>

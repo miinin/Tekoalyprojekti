@@ -101,22 +101,18 @@ export default function Quiz() {
   };
 
   const handleNext = () => {
-    setSelectedAnswer(null);
-    setShowExplanation(false);
-    setIsCorrect(false);
-    setOrderedItems([]);
-    setDragTargets({});
-    
     if (currentIndex < questions.length - 1) {
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+      setIsCorrect(false);
+      setOrderedItems([]);
+      setDragTargets({});
       setCurrentIndex(currentIndex + 1);
     } else {
       // Save progress
       store.markCompleted(sub.id);
-      
-      // Smooth transition back
-      setTimeout(() => {
-        navigate(`/roadmap?map=${mainCategory}`);
-      }, 1500);
+      // Navigate immediately with 'completed' param
+      navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`);
     }
   };
 
