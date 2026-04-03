@@ -3,19 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   ChevronLeft, 
   Map as MapIcon, 
-  Settings, 
   Trophy, 
   Car,
   CheckCircle2,
-  Lock,
-  PlayCircle,
-  Type,
-  CalendarDays,
-  Scale,
-  ThumbsUp,
-  Brain,
-  ShieldCheck,
-  Sparkles
+  Lock
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 

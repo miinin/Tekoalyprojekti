@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, Car, Eye, Droplets, PaintBucket, Cpu, Navigation, Layers, ShieldCheck, BatteryCharging, Radio, Sparkles, Wrench, Grid, Disc, Aperture, Gamepad2, TrendingDown, ChevronDown } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Garage() {
