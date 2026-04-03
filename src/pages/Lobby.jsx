@@ -9,10 +9,18 @@ export default function Lobby() {
   const [joinCode, setJoinCode] = useState('');
   
   const [testMode, setTestMode] = useState(store.getTestMode());
+  const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
 
-  const handleNewSinglePlayer = () => {
+  const handleNewSinglePlayer = async () => {
     store.clearSinglePlayer();
-    navigate('/roadmap');
+    store.setTutorialSkipped(skipTutorial);
+    
+    if (!skipTutorial) {
+        await store.addSparks(200);
+        navigate('/garage');
+    } else {
+        navigate('/roadmap');
+    }
   };
 
   const handleContinueSinglePlayer = () => {
@@ -55,24 +63,43 @@ export default function Lobby() {
                 JATKA PELIÄ
               </button>
             )}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', padding: '0.5rem', background: 'rgba(255,255,255,0.5)', borderRadius: '10px', marginTop: '0.5rem' }}>
-              <input 
-                type="checkbox" 
-                id="testilaatikko"
-                checked={testMode}
-                onChange={(e) => {
-                    const newVal = e.target.checked;
-                    setTestMode(newVal);
-                    store.setTestMode(newVal);
-                    if (newVal) {
-                        store.addSparks(100000); // Instantly grant 100k sparks for Garage testing
-                    }
-                }}
-                style={{ width: '20px', height: '20px', cursor: 'pointer' }}
-              />
-              <label htmlFor="testilaatikko" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
-                TESTITILA (+100 000 Kipinää tilille heti!)
-              </label>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem', background: 'rgba(255,255,255,0.5)', borderRadius: '10px' }}>
+                <input 
+                  type="checkbox" 
+                  id="skiptut"
+                  checked={skipTutorial}
+                  onChange={(e) => {
+                      const newVal = e.target.checked;
+                      setSkipTutorial(newVal);
+                      store.setTutorialSkipped(newVal);
+                  }}
+                  style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                />
+                <label htmlFor="skiptut" style={{ fontSize: '0.85rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)', lineHeight: '1.2' }}>
+                  Olen nopea oppimaan (Ohita alkuopastus)
+                </label>
+              </div>
+
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem', background: 'rgba(255,255,255,0.5)', borderRadius: '10px' }}>
+                <input 
+                  type="checkbox" 
+                  id="testilaatikko"
+                  checked={testMode}
+                  onChange={(e) => {
+                      const newVal = e.target.checked;
+                      setTestMode(newVal);
+                      store.setTestMode(newVal);
+                      if (newVal) {
+                          store.addSparks(100000); // Instantly grant 100k sparks for Garage testing
+                      }
+                  }}
+                  style={{ width: '20px', height: '20px', cursor: 'pointer' }}
+                />
+                <label htmlFor="testilaatikko" style={{ fontSize: '0.85rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)', lineHeight: '1.2' }}>
+                  TESTITILA (Devaus)
+                </label>
+              </div>
             </div>
 
             <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.2rem' }}>

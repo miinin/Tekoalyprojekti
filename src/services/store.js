@@ -71,6 +71,22 @@ export const store = {
     return parseInt(val || '0', 10);
   },
 
+  getTutorialSkipped: () => {
+    return localStorage.getItem('aivan_tutorial_skipped') === 'true';
+  },
+
+  setTutorialSkipped: (skipped) => {
+    localStorage.setItem('aivan_tutorial_skipped', skipped ? 'true' : 'false');
+  },
+
+  getTutorialCompleted: () => {
+    return localStorage.getItem('aivan_tutorial_completed') === 'true';
+  },
+
+  completeTutorial: () => {
+    localStorage.setItem('aivan_tutorial_completed', 'true');
+  },
+
   addSparks: async (amount) => {
     const room = store.getRoomCode();
     const current = await store.getSparks();
@@ -142,6 +158,7 @@ export const store = {
     localStorage.removeItem('aivan_equipped');
     localStorage.removeItem('aivan_completions');
     localStorage.removeItem('aivan_node_records');
+    localStorage.removeItem('aivan_tutorial_completed');
     store.setRoomCode(null);
   },
 

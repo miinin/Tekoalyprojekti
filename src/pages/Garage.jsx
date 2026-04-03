@@ -9,7 +9,11 @@ export default function Garage() {
   const [purchased, setPurchased] = useState([]);
   const [equipped, setEquipped] = useState({});
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [expandedCategories, setExpandedCategories] = useState(['body']); // Default open: Body
+  
+  const tutorialSkipped = store.getTutorialSkipped();
+  const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
+
+  const [expandedCategories, setExpandedCategories] = useState(['g_clean', 'body']); // Default open: Body
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,6 +123,10 @@ export default function Garage() {
                 setSparks(await store.getSparks());
                 setPurchased(await store.getPurchasedItems());
                 setEquipped(await store.getEquippedItems());
+                if (item.id === 'g-clean' && isTutorialActive) {
+                    store.completeTutorial();
+                    setIsTutorialActive(false);
+                }
               }
             } else if (isOwned && !isEquipped && isCarItem) {
                const success = await store.equipItem(item.id, item.category);
@@ -207,7 +215,12 @@ export default function Garage() {
           <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
-          <button className="btn-secondary" onClick={() => navigate('/roadmap')}>
+          <button 
+             className={`btn-secondary ${!isTutorialActive && sparks === 0 ? 'animate-pulse' : ''}`} 
+             onClick={() => navigate('/roadmap')}
+             disabled={isTutorialActive}
+             style={{ opacity: isTutorialActive ? 0.3 : 1, cursor: isTutorialActive ? 'not-allowed' : 'pointer' }}
+          >
             <Map size={20} /> Tiekartta
           </button>
         </div>
@@ -219,14 +232,17 @@ export default function Garage() {
         <div className="garage-left">
           <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
           
-          {Object.entries(categorisedGarage).map(([catId, category]) => (
+          {Object.entries(categorisedGarage).map(([catId, category]) => {
+            if (isTutorialActive && catId !== 'g_clean') return null;
+            return (
             <div key={catId} style={{ marginBottom: '0.5rem' }}>
               <div 
                 className="category-header" 
                 onClick={() => toggleCategory(catId)}
                 style={{ 
                   borderColor: expandedCategories.includes(catId) ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                  background: expandedCategories.includes(catId) ? '#f5f3ff' : 'rgba(255,255,255,0.7)'
+                  background: expandedCategories.includes(catId) ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
+                  pointerEvents: isTutorialActive ? 'none' : 'auto'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -245,7 +261,7 @@ export default function Garage() {
                 </div>
               )}
             </div>
-          ))}
+          );})}
         </div>
 
         {/* CENTER COLUMN: Visual Preview */}
@@ -261,7 +277,25 @@ export default function Garage() {
             boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
-            <img src="/autotalli1-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+              {isTutorialActive && (
+                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '0.8rem 1.5rem', borderRadius: '12px', border: '3px solid #f59e0b', color: 'var(--text-main)', fontSize: '0.9rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+                   <b>Löysit hylätyn autotallin ja laatikollisen kipinöitä! ✨</b><br/>
+                   Hämähäkinseittien takia emme pääse kunnolla töihin. Osta sivupaneelista "Siivous" nähdäksesi mitä kaikkea pölyn alta paljastuu...
+                </div>
+              )}
+              
+              {!isTutorialActive && sparks === 0 && store.getTutorialCompleted() && !tutorialSkipped && (
+                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '0.8rem 1.5rem', borderRadius: '12px', border: '3px solid #10b981', color: 'var(--text-main)', fontSize: '0.9rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+                   <b>Huippua! Auto on paljastettu. 🚐</b><br/>
+                   Kipinät loppuivat kesken. Tienaa varallisuutta viemällä paku testeihin klikkaamalla vihreää "Tiekartta" -painiketta!
+                </div>
+              )}
+
+              {isTutorialActive ? (
+                <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+              ) : (
+                <img src={store.getTutorialCompleted() && !tutorialSkipped ? "/tutorial2.png" : "/autotalli1-base.png"} alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+              )}
 
             {garageUpgrades.map(item => {
               const isHovered = hoveredItem === item.id;
@@ -283,6 +317,9 @@ export default function Garage() {
               }
 
               if (shouldShow) {
+                 if (item.id === 'g-clean' && store.getTutorialCompleted() && !tutorialSkipped) {
+                    return null; // For tutorial path, the background base tutorial2.png contains the clean state organically. Let's not render the generic g-clean item over it.
+                 }
                  const fileName = item.id.replace('g-', 'autotalli1-');
                  const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
                  return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
@@ -290,16 +327,21 @@ export default function Garage() {
               return null;
             })}
 
-            <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+            {isTutorialActive ? (
+                <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+            ) : (
+                <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+            )}
             
-            {[...carUpgrades]
+            {!isTutorialActive && [...carUpgrades]
               .sort((a, b) => {
                 const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
                 return (order[a.category] || 99) - (order[b.category] || 99);
               })
               .map(item => {
                 const isHovered = hoveredItem === item.id;
-                const isItemEquipped = equipped[item.category] === item.id;
+                const isOwned = purchased.includes(item.id);
+                const isEquipped = equipped[item.category] === item.id;
                 const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
                 
                 let shouldShow = false;
@@ -307,22 +349,22 @@ export default function Garage() {
 
                 if (isHovered) {
                     shouldShow = true;
-                    if (!purchased.includes(item.id)) isPreview = true;
-                } else if (isItemEquipped) {
-                    // Check if we are hovering something else in the same category
+                    if (!isOwned || !isEquipped) isPreview = true;
+                } else if (isEquipped) {
                     if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
-                        shouldShow = false; // Hide equipped item because we are previewing another
+                        shouldShow = false;
                     } else {
                         shouldShow = true;
                     }
                 }
 
                 if (shouldShow) {
-                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none', opacity: 1, filter: isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none', transition: 'all 0.2s' }} />;
+                   const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+                   const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
+                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
                 }
                 return null;
-              })
-            }
+              })}
 
             {hoveredItem && !purchased.includes(hoveredItem) && (
               <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(16, 185, 129, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
