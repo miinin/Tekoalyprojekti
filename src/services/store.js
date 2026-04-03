@@ -49,6 +49,21 @@ export const store = {
     }
   },
 
+  getNodeRecords: () => {
+    return JSON.parse(localStorage.getItem('aivan_node_records') || '{}');
+  },
+
+  saveNodeRecord: (nodeId, newScore) => {
+    const records = store.getNodeRecords();
+    const currentScore = records[nodeId] || 0;
+    if (newScore > currentScore) {
+       records[nodeId] = newScore;
+       localStorage.setItem('aivan_node_records', JSON.stringify(records));
+       return newScore - currentScore; // Return the amount of NEW sparks earned
+    }
+    return 0; // No new sparks earned
+  },
+
   getSparks: async () => {
     const room = store.getRoomCode();
     // Simulate fetching from shared DB. Right now just local storage with room key
@@ -125,6 +140,8 @@ export const store = {
     localStorage.setItem('aivan_sparks', '0');
     localStorage.removeItem('aivan_items');
     localStorage.removeItem('aivan_equipped');
+    localStorage.removeItem('aivan_completions');
+    localStorage.removeItem('aivan_node_records');
     store.setRoomCode(null);
   },
 
@@ -148,6 +165,8 @@ export const store = {
     localStorage.removeItem(`aivan_sparks_${room}`);
     localStorage.removeItem(`aivan_items_${room}`);
     localStorage.removeItem(`aivan_equipped_${room}`);
+    localStorage.removeItem('aivan_completions');
+    localStorage.removeItem('aivan_node_records');
     // If we're deleting our current room, clear it
     if (store.getRoomCode() === room) store.setRoomCode(null);
   },

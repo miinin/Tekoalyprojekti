@@ -35,6 +35,13 @@ export default function Quiz() {
   const [showExplanation, setShowExplanation] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
 
+  // Pedagogical variables
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [showSummary, setShowSummary] = useState(false);
+  const [earnedSparks, setEarnedSparks] = useState(0);
+  const [grindSparks, setGrindSparks] = useState(0);
+  const [results, setResults] = useState([]);
+
   // States for special types
   const [orderedItems, setOrderedItems] = useState([]);
   const [dragTargets, setDragTargets] = useState({}); // { itemName: targetName }
@@ -80,27 +87,42 @@ export default function Quiz() {
     setSelectedAnswer(answer);
     
     let correct = false;
+    let earned = 0;
+    let max = 50;
+    
+    // Define max sparks per type
+    if (currentQuestion.type === 'true_false') max = 25;
+    else if (currentQuestion.type === 'multiple_choice') max = 50;
+    else if (currentQuestion.type === 'scenario' || currentQuestion.type === 'spot_the_ai' || currentQuestion.type === 'reverse_prompt') max = 75;
+    else if (currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') max = 100;
+
     if (currentQuestion.type === 'drag_drop') {
-      // Check if all items are in their specified targets
-      const allCorrect = currentQuestion.options.every(opt => dragTargets[opt.item] === opt.target);
-      const allPlaced = currentQuestion.options.every(opt => dragTargets[opt.item] !== undefined);
-      correct = allCorrect && allPlaced;
+      const correctTargets = currentQuestion.options.filter(opt => dragTargets[opt.item] === opt.target).length;
+      const totalTargets = currentQuestion.options.length;
+      earned = Math.floor((correctTargets / totalTargets) * max);
+      correct = correctTargets === totalTargets && totalTargets > 0;
     } else if (currentQuestion.type === 'ordering') {
-      correct = JSON.stringify(answer) === JSON.stringify(currentQuestion.correctAnswer);
+      let correctPositions = 0;
+      answer.forEach((item, idx) => {
+          if (item === currentQuestion.correctAnswer[idx]) correctPositions++;
+      });
+      earned = Math.floor((correctPositions / answer.length) * max);
+      correct = correctPositions === answer.length && answer.length > 0;
     } else {
       correct = answer === currentQuestion.correctAnswer;
+      earned = correct ? max : 0;
     }
     
     if (correct) {
-      const reward = store.getTestMode() ? 500 : 50;
-      store.addSparks(reward);
+      setCorrectAnswersCount(prev => prev + 1);
     }
     
+    setResults(prev => [...prev, { earned, max, type: currentQuestion.type }]);
     setIsCorrect(correct);
     setShowExplanation(true);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentIndex < questions.length - 1) {
       setSelectedAnswer(null);
       setShowExplanation(false);
@@ -109,10 +131,26 @@ export default function Quiz() {
       setDragTargets({});
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Save progress
+      // End of quiz handling: calculate dynamic high score delta + grind reward
+      let totalEarned = results.reduce((acc, curr) => acc + curr.earned, 0);
+      const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
+      totalEarned = totalEarned * sparkRewardMultiplier;
+
+      const newSparksEarned = await store.saveNodeRecord(sub.id, totalEarned);
+      
+      // Calculate continuous loop reward (grind reward): 
+      const grindRewardCount = results.filter(r => r.earned > 0).length;
+      const grindSparksEarned = grindRewardCount * 10 * sparkRewardMultiplier; // 10 sparks base per partially/fully right question
+      
+      const totalToBank = newSparksEarned + grindSparksEarned;
+
+      if (totalToBank > 0) {
+         await store.addSparks(totalToBank);
+      }
+      setEarnedSparks(newSparksEarned);
+      setGrindSparks(grindSparksEarned);
       store.markCompleted(sub.id);
-      // Navigate immediately with 'completed' param
-      navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`);
+      setShowSummary(true);
     }
   };
 
@@ -124,6 +162,43 @@ export default function Quiz() {
     setDragTargets(prev => ({ ...prev, [item]: target }));
   };
   const handleDragOver = (e) => e.preventDefault();
+
+  if (showSummary) {
+      return (
+        <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <h2 style={{ fontSize: '2.5rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', marginBottom: '1rem' }}>Taso Suoritettu!</h2>
+          <div style={{ background: 'white', padding: '2rem', borderRadius: '24px', boxShadow: '0 10px 40px rgba(0,0,0,0.1)', maxWidth: '500px', width: '100%' }}>
+              <div style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--text-main)' }}>Oikein meni <b>{correctAnswersCount} / {questions.length}</b></div>
+              
+              {earnedSparks > 0 && (
+                <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981', marginBottom: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Zap fill="#10b981" /> Uusi kipinäennätys!</div>
+                    <div style={{ fontSize: '2rem' }}>+{earnedSparks} kipinää</div>
+                </div>
+              )}
+              
+              {earnedSparks === 0 && (
+                <div style={{ fontSize: '1.2rem', color: '#f59e0b', marginBottom: '1rem', padding: '1rem', background: '#fef3c7', borderRadius: '12px' }}>
+                    {correctAnswersCount === questions.length ? 
+                      'Huippusuoritus! Olet kerännyt jo kaikki ennätyskipinät tältä tasolta.' : 
+                      'Et rikkonut ennätystäsi tällä kertaa... Vastauksiasi kannattaa pohtia uudelleen!'}
+                </div>
+              )}
+              
+              {grindSparks > 0 && (
+                <div style={{ fontSize: '1.1rem', color: 'var(--primary-color)', marginBottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
+                    <div>Reiluuslisä (Osallistuminen & osittaiset oikeat vastaukset, ei riipu ennätyksistäsi)</div>
+                    <div style={{ fontWeight: 'bold' }}>+{grindSparks} kipinää</div>
+                </div>
+              )}
+
+              <button className="btn-primary" onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)} style={{ fontSize: '1.2rem', padding: '1rem 2rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                  Palaa kartalle <ArrowRight size={20} />
+              </button>
+          </div>
+        </div>
+      );
+  }
 
   // Ordering helpers
   const moveItem = (index, direction) => {
