@@ -690,10 +690,10 @@ const Roadmap = () => {
             {showMapTutorial && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.5rem', borderRadius: '15px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', boxShadow: '0 10px 40px rgba(0,0,0,0.4)', width: '90%', maxWidth: '450px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                    <MapIcon size={28} /> Olet perillä!
+                    <MapIcon size={28} /> Seikkailu alkaa!
                 </div>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                    Tässä on Tekoälyn Tiekartta. Valitse ensimmäinen auki oleva kohde, suorita visailu ja ansaitse rahaa autotalliin!
+                    Tässä on Tekoälyn Tiekartta. Valitse minne ajetaan ensin, suorita visailu ja ansaitse puhdasta rahaa autotalliin!
                 </div>
                 <button 
                    className="btn-primary" 

@@ -9,10 +9,10 @@ export default function Garage() {
   const [purchased, setPurchased] = useState([]);
   const [equipped, setEquipped] = useState({});
   const [hoveredItem, setHoveredItem] = useState(null);
-  
   const tutorialSkipped = store.getTutorialSkipped();
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
+  const [flashScreen, setFlashScreen] = useState(false);
 
   const [expandedCategories, setExpandedCategories] = useState(['g_clean', 'body']); // Default open: Body
 
@@ -64,7 +64,9 @@ export default function Garage() {
     { id: 'g-floor3', category: 'g_floor', categoryName: 'Lattia', name: 'Betonilattia', desc: 'Uusi kestävä betonivalu.', price: 1500, icon: <Grid size={28} />, color: '#3730a3', bg: '#e0e7ff' },
     
     { id: 'g-walls-base', category: 'g_walls', categoryName: 'Seinät', name: 'Seinien pesu', desc: 'Pesee lian seiniltä.', price: 500, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
-    { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#db2777', bg: '#fbcfe8' }
+    { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#db2777', bg: '#fbcfe8' },
+
+    { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkaluseinä', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
   ];
 
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
@@ -130,6 +132,7 @@ export default function Garage() {
                 if (item.id === 'g-clean' && isTutorialActive) {
                     store.completeTutorial();
                     setIsTutorialActive(false);
+                    setFlashScreen(true);
                     setTimeout(() => {
                         setShowGreenPulse(true);
                     }, 1500);
@@ -210,7 +213,18 @@ export default function Garage() {
           gap: 0.5rem;
           margin-bottom: 1rem;
         }
+        @keyframes flashBang {
+          0% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .flash-bang {
+          animation: flashBang 2s ease-out forwards;
+        }
       `}</style>
+
+      {flashScreen && (
+         <div className="flash-bang" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'white', zIndex: 9999, pointerEvents: 'none' }}></div>
+      )}
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -297,7 +311,7 @@ export default function Garage() {
                 </div>
               )}
               
-              {!isTutorialActive && sparks === 0 && store.getTutorialCompleted() && !tutorialSkipped && (
+              {showGreenPulse && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '0.8rem 1.5rem', borderRadius: '12px', border: '3px solid #10b981', color: 'var(--text-main)', fontSize: '0.9rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
                    <b>Huippua! Auto on paljastettu. 🚐</b><br/>
                    Kipinät loppuivat kesken. Tienaa varallisuutta viemällä paku testeihin klikkaamalla vihreää "Tiekartta" -painiketta!
