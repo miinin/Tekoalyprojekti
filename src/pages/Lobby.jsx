@@ -15,10 +15,13 @@ export default function Lobby() {
     store.clearSinglePlayer();
     store.setTutorialSkipped(skipTutorial);
     
+    // Antigravity fix: clearSinglePlayer pyyhkii kaikki rahat (ml. testirahat), 
+    // joten testitilan 100k lisätään vasta nollaamisen jälkeen!
     if (!skipTutorial) {
-        await store.addSparks(200);
+        await store.addSparks(testMode ? 100200 : 200);
         navigate('/garage');
     } else {
+        if (testMode) await store.addSparks(100000);
         navigate('/roadmap');
     }
   };

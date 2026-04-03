@@ -35,6 +35,9 @@ const Roadmap = () => {
     return saved ? JSON.parse(saved) : [];
   });
   const [currentLocationId, setCurrentLocationId] = useState('start_point');
+  const [showMapTutorial, setShowMapTutorial] = useState(
+      store.getTutorialCompleted() && !store.getTutorialSkipped() && !store.getMapTutorialCompleted()
+  );
   const [puffs, setPuffs] = useState([]);
   const mapRef = useRef(null);
 
@@ -682,8 +685,28 @@ const Roadmap = () => {
         </div>
       </div>
 
-      {/* Main Map Box */}
+      {/* Map Content */}
       <div style={mapContainerStyle}>
+            {showMapTutorial && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.5rem', borderRadius: '15px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', boxShadow: '0 10px 40px rgba(0,0,0,0.4)', width: '90%', maxWidth: '450px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.5rem' }}>
+                    <MapIcon size={28} /> Olet perillä!
+                </div>
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                    Tässä on Tekoälyn Tiekartta. Valitse ensimmäinen auki oleva kohde, suorita visailu ja ansaitse rahaa autotalliin!
+                </div>
+                <button 
+                   className="btn-primary" 
+                   style={{ width: '100%', background: '#10b981', fontSize: '1.2rem', padding: '1rem' }} 
+                   onClick={() => {
+                       store.completeMapTutorial();
+                       setShowMapTutorial(false);
+                   }}
+                >
+                   Selvä homma, mennään!
+                </button>
+              </div>
+            )}
         <div style={mapInnerStyle}>
             {/* Grid Overlay */}
             <div style={{ position: 'absolute', inset: 0, opacity: 0.05, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }} />

@@ -87,6 +87,14 @@ export const store = {
     localStorage.setItem('aivan_tutorial_completed', 'true');
   },
 
+  getMapTutorialCompleted: () => {
+    return localStorage.getItem('aivan_map_tutorial_completed') === 'true';
+  },
+
+  completeMapTutorial: () => {
+    localStorage.setItem('aivan_map_tutorial_completed', 'true');
+  },
+
   addSparks: async (amount) => {
     const room = store.getRoomCode();
     const current = await store.getSparks();
@@ -159,6 +167,7 @@ export const store = {
     localStorage.removeItem('aivan_completions');
     localStorage.removeItem('aivan_node_records');
     localStorage.removeItem('aivan_tutorial_completed');
+    localStorage.removeItem('aivan_map_tutorial_completed');
     store.setRoomCode(null);
   },
 

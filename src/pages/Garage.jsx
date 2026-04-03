@@ -12,6 +12,7 @@ export default function Garage() {
   
   const tutorialSkipped = store.getTutorialSkipped();
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
+  const [showGreenPulse, setShowGreenPulse] = useState(false);
 
   const [expandedCategories, setExpandedCategories] = useState(['g_clean', 'body']); // Default open: Body
 
@@ -126,6 +127,9 @@ export default function Garage() {
                 if (item.id === 'g-clean' && isTutorialActive) {
                     store.completeTutorial();
                     setIsTutorialActive(false);
+                    setTimeout(() => {
+                        setShowGreenPulse(true);
+                    }, 1500);
                 }
               }
             } else if (isOwned && !isEquipped && isCarItem) {
@@ -216,10 +220,16 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           <button 
-             className={`btn-secondary ${!isTutorialActive && sparks === 0 ? 'animate-pulse' : ''}`} 
+             className={`btn-secondary ${showGreenPulse ? 'animate-pulse' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}
              disabled={isTutorialActive}
-             style={{ opacity: isTutorialActive ? 0.3 : 1, cursor: isTutorialActive ? 'not-allowed' : 'pointer' }}
+             style={{ 
+                 opacity: isTutorialActive ? 0.3 : 1, 
+                 cursor: isTutorialActive ? 'not-allowed' : 'pointer',
+                 background: showGreenPulse ? '#10b981' : '',
+                 color: showGreenPulse ? 'white' : '#64748b',
+                 borderColor: showGreenPulse ? '#10b981' : ''
+             }}
           >
             <Map size={20} /> Tiekartta
           </button>
