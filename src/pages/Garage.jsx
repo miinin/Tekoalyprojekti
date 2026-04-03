@@ -57,11 +57,14 @@ export default function Garage() {
   ];
 
   const garageUpgrades = [
-    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Tuo autotalliin uusi ilme siivoamalla.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
-    { id: 'g-floor', category: 'g_floor', categoryName: 'Lattia', name: 'Korjaa säröt', desc: 'Paikkaa betonin halkeamat.', price: 400, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
-    { id: 'g-floor2', category: 'g_floor', categoryName: 'Lattia', name: 'Uusi lattia', desc: 'Hieno pinnoitettu lattia.', price: 800, icon: <Droplets size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'g-walls', category: 'g_walls', categoryName: 'Seinät', name: 'Kunnosta seinät', desc: 'Uusi maalipinta seiniin.', price: 1000, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
-    { id: 'g-tools', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkaluseinä', desc: 'Perustyökalut hienosti esillä.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
+    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Raivaa seittien ja lian pahin kerros.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
+    
+    { id: 'g-floor-base', category: 'g_floor', categoryName: 'Lattia', name: 'Öljytahrojen poisto', desc: 'Siivoaa öljyläikät.', price: 400, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
+    { id: 'g-floor2', category: 'g_floor', categoryName: 'Lattia', name: 'Säröjen korjaus', desc: 'Korjaa lattian säröt.', price: 800, icon: <Grid size={28} />, color: '#4f46e5', bg: '#e0e7ff' },
+    { id: 'g-floor3', category: 'g_floor', categoryName: 'Lattia', name: 'Betonilattia', desc: 'Uusi kestävä betonivalu.', price: 1500, icon: <Grid size={28} />, color: '#3730a3', bg: '#e0e7ff' },
+    
+    { id: 'g-walls-base', category: 'g_walls', categoryName: 'Seinät', name: 'Seinien pesu', desc: 'Pesee lian seiniltä.', price: 500, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
+    { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#db2777', bg: '#fbcfe8' }
   ];
 
   const allUpgrades = [...carUpgrades, ...garageUpgrades];
@@ -304,7 +307,7 @@ export default function Garage() {
               {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               ) : (
-                <img src={store.getTutorialCompleted() && !tutorialSkipped ? "/tutorial2.png" : "/autotalli1-base.png"} alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+                <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               )}
 
             {garageUpgrades.map(item => {
@@ -327,10 +330,10 @@ export default function Garage() {
               }
 
               if (shouldShow) {
-                 if (item.id === 'g-clean' && store.getTutorialCompleted() && !tutorialSkipped) {
-                    return null; // For tutorial path, the background base tutorial2.png contains the clean state organically. Let's not render the generic g-clean item over it.
+                 if (item.id === 'g-clean') {
+                    return null; // Siivous-tutoriaalivaiheen "tavara" ei piirrä uutta render-tasoa, sillä taustakuva vaihtuu automaattisesti!
                  }
-                 const fileName = item.id.replace('g-', 'autotalli1-');
+                 const fileName = item.id.replace('g-', '');
                  const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
                  return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
               }
