@@ -30,6 +30,7 @@ export default function Garage() {
     { id: 'van-body02', category: 'body', categoryName: 'Maalipinnat', name: 'Punainen Liekki', desc: 'Räiskyvän punainen pinta.', price: 1000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
     { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 1000, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
     { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1200, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
+    { id: 'van-body05', category: 'body', categoryName: 'Maalipinnat', name: 'Seikkailija', desc: 'Sulaudu täydellisesti maastoon.', price: 1500, icon: <PaintBucket size={28} />, color: '#4d7c0f', bg: '#ecfccb' },
     
     // PUSKURIT
     { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja.', price: 400, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
