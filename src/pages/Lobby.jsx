@@ -64,11 +64,14 @@ export default function Lobby() {
                     const newVal = e.target.checked;
                     setTestMode(newVal);
                     store.setTestMode(newVal);
+                    if (newVal) {
+                        store.addSparks(100000); // Instantly grant 100k sparks for Garage testing
+                    }
                 }}
                 style={{ width: '20px', height: '20px', cursor: 'pointer' }}
               />
               <label htmlFor="testilaatikko" style={{ fontSize: '0.9rem', color: 'var(--text-main)', cursor: 'pointer', fontFamily: 'var(--font-main)' }}>
-                TESTILAATIKKO (500 Kipinää / vastaus)
+                TESTITILA (+100 000 Kipinää tilille heti!)
               </label>
             </div>
 
