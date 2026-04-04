@@ -69,7 +69,7 @@ export default function Garage() {
     { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkaluseinä', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
   ];
 
-  const allUpgrades = [...carUpgrades, ...garageUpgrades];
+
 
   const toggleCategory = (cat) => {
     setExpandedCategories(prev => 
