@@ -65,11 +65,14 @@ export default function Garage() {
     
     { id: 'g-walls-base', category: 'g_walls', categoryName: 'Seinät', name: 'Seinien pesu', desc: 'Pesee lian seiniltä.', price: 500, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
     { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#db2777', bg: '#fbcfe8' },
+    { id: 'g-walls3', category: 'g_walls', categoryName: 'Seinät', name: 'Nykyaikainen talli', desc: 'Luotettava ja puhdas moderni tyyli.', price: 2000, icon: <Layers size={28} />, color: '#9d174d', bg: '#fbcfe8' },
+    { id: 'g-walls4', category: 'g_walls', categoryName: 'Seinät', name: 'Futuristinen halli', desc: 'Korkean teknologian ja lasin liitto.', price: 5000, icon: <Sparkles size={28} />, color: '#831843', bg: '#fbcfe8' },
     
     // TYÖKALUSARJAT (Mutually Exclusive)
     { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkalusarja', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
     { id: 'g-walltools2', category: 'g_tools', categoryName: 'Työkalut', name: 'Parannetut työkalut', desc: 'Kattavampi setti harrastajalle.', price: 1200, icon: <Wrench size={28} />, color: '#ca8a04', bg: '#fef08a' },
     { id: 'g-walltools3', category: 'g_tools', categoryName: 'Työkalut', name: 'Huipputyökalut', desc: 'Kaikki mitä ammattilainen tarvitsee.', price: 2500, icon: <Sparkles size={28} />, color: '#a16207', bg: '#fef08a' },
+    { id: 'g-walltools4', category: 'g_tools', categoryName: 'Työkalut', name: 'Tulevaisuuden työkalut', desc: 'Tulevaisuuden tekijöille.', price: 3000, icon: <Zap size={28} />, color: '#854d0e', bg: '#fef08a' },
 
     // TUNKIT (Mutually Exclusive)
     { id: 'g-jack1', category: 'g_jack', categoryName: 'Tunkit', name: 'Perustunkki', desc: 'Nostaa auton turvallisesti.', price: 500, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
@@ -86,7 +89,7 @@ export default function Garage() {
 
   const renderUpgradeItem = (item) => {
     const isCarItem = carUpgrades.some(u => u.id === item.id);
-    const equippableGarageCategories = ['g_tools', 'g_jack'];
+    const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
     const isEquippableGarage = equippableGarageCategories.includes(item.category);
     const isOwned = purchased.includes(item.id);
     const isEquipped = isCarItem ? equipped[item.category] === item.id : (isEquippableGarage ? equipped[item.category] === item.id : isOwned);
@@ -346,7 +349,7 @@ export default function Garage() {
                   shouldShow = true;
                   if (!isOwned) isPreview = true;
                } else if (isOwned) {
-                  const equippableGarageCategories = ['g_tools', 'g_jack'];
+                  const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
                   if (equippableGarageCategories.includes(item.category)) {
                       // Only show if equipped
                       if (equipped[item.category] === item.id) {
