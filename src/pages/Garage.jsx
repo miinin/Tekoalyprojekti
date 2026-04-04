@@ -65,8 +65,15 @@ export default function Garage() {
     
     { id: 'g-walls-base', category: 'g_walls', categoryName: 'Seinät', name: 'Seinien pesu', desc: 'Pesee lian seiniltä.', price: 500, icon: <Layers size={28} />, color: '#ec4899', bg: '#fbcfe8' },
     { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#db2777', bg: '#fbcfe8' },
+    
+    // TYÖKALUSARJAT (Mutually Exclusive)
+    { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkalusarja', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
+    { id: 'g-walltools2', category: 'g_tools', categoryName: 'Työkalut', name: 'Parannetut työkalut', desc: 'Kattavampi setti harrastajalle.', price: 1200, icon: <Wrench size={28} />, color: '#ca8a04', bg: '#fef08a' },
+    { id: 'g-walltools3', category: 'g_tools', categoryName: 'Työkalut', name: 'Huipputyökalut', desc: 'Kaikki mitä ammattilainen tarvitsee.', price: 2500, icon: <Sparkles size={28} />, color: '#a16207', bg: '#fef08a' },
 
-    { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkaluseinä', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' }
+    // TUNKIT (Mutually Exclusive)
+    { id: 'g-jack1', category: 'g_jack', categoryName: 'Tunkit', name: 'Perustunkki', desc: 'Nostaa auton turvallisesti.', price: 500, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'g-jack2', category: 'g_jack', categoryName: 'Tunkit', name: 'Laatutunkki', desc: 'Nopea ja vahva hallitunkki.', price: 1000, icon: <Disc size={28} />, color: '#475569', bg: '#f1f5f9' }
   ];
 
 
@@ -78,9 +85,11 @@ export default function Garage() {
   };
 
   const renderUpgradeItem = (item) => {
-    const isCarItem = item.id.startsWith('van-');
+    const isCarItem = carUpgrades.some(u => u.id === item.id);
+    const equippableGarageCategories = ['g_tools', 'g_jack'];
+    const isEquippableGarage = equippableGarageCategories.includes(item.category);
     const isOwned = purchased.includes(item.id);
-    const isEquipped = isCarItem ? equipped[item.category] === item.id : isOwned;
+    const isEquipped = isCarItem ? equipped[item.category] === item.id : (isEquippableGarage ? equipped[item.category] === item.id : isOwned);
     
     let btnText = `OSTA ⚡ ${item.price}`;
     let btnBg = sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0';
@@ -94,7 +103,7 @@ export default function Garage() {
        btnBg = '#10b981';
        btnColor = 'white';
        cursor = 'default';
-    } else if (isOwned && isCarItem) {
+    } else if (isOwned && (isCarItem || isEquippableGarage)) {
        btnText = 'ASENNA';
        btnBg = '#8b5cf6';
        btnColor = 'white';
@@ -124,7 +133,7 @@ export default function Garage() {
           onClick={async (e) => {
             e.stopPropagation();
             if (canBuy) {
-              const success = await store.purchaseItem(item.id, item.price, isCarItem ? item.category : null);
+              const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? item.category : null);
               if (success) {
                 setSparks(await store.getSparks());
                 setPurchased(await store.getPurchasedItems());
@@ -138,10 +147,10 @@ export default function Garage() {
                     }, 1500);
                 }
               }
-            } else if (isOwned && !isEquipped && isCarItem) {
+            } else if (isOwned && (isCarItem || isEquippableGarage) && !isEquipped) {
                const success = await store.equipItem(item.id, item.category);
                if (success) {
-                  setEquipped(await store.getEquippedItems());
+                 setEquipped(await store.getEquippedItems());
                }
             }
           }}
@@ -277,6 +286,7 @@ export default function Garage() {
                    {catId === 'g_floor' && <Grid size={18} color="#6366f1" />}
                    {catId === 'g_walls' && <Layers size={18} color="#ec4899" />}
                    {catId === 'g_tools' && <Wrench size={18} color="#eab308" />}
+                   {catId === 'g_jack' && <Disc size={18} color="#64748b" />}
                    <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
                 </div>
                 <ChevronDown size={20} style={{ transition: 'transform 0.3s', transform: expandedCategories.includes(catId) ? 'rotate(180deg)' : 'rotate(0)' }} />
@@ -335,8 +345,16 @@ export default function Garage() {
               if (isHovered) {
                   shouldShow = true;
                   if (!isOwned) isPreview = true;
-              } else if (isOwned) {
-                  if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
+               } else if (isOwned) {
+                  const equippableGarageCategories = ['g_tools', 'g_jack'];
+                  if (equippableGarageCategories.includes(item.category)) {
+                      // Only show if equipped
+                      if (equipped[item.category] === item.id) {
+                          shouldShow = true;
+                      } else {
+                          shouldShow = false;
+                      }
+                  } else if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
                       shouldShow = false;
                   } else {
                       shouldShow = true;
