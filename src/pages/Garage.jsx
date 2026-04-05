@@ -31,7 +31,7 @@ export default function Garage() {
 
   const carUpgrades = [
     // MAALIPINNAT
-    { id: 'van-body01', category: 'body', categoryName: 'Maalipinnat', name: 'Sininen Salama', desc: 'Sähkönsininen erikoismaali.', price: 1000, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'van-body01', category: 'body', categoryName: 'Maalipinnat', name: 'Sininen Salama', desc: 'Kotimainen ja luotettava perusväri.', price: 0, isDefault: true, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-body02', category: 'body', categoryName: 'Maalipinnat', name: 'Punainen Liekki', desc: 'Räiskyvän punainen pinta.', price: 1000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
     { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 1000, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
     { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1200, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
@@ -41,6 +41,7 @@ export default function Garage() {
     { id: 'van-body08', category: 'body', categoryName: 'Maalipinnat', name: 'Neon-Unelma', desc: 'Kasarin kyberyötä huokuva retro.', price: 2500, icon: <Radio size={28} />, color: '#c026d3', bg: '#fae8ff' },
     { id: 'van-body09', category: 'body', categoryName: 'Maalipinnat', name: 'Sateenkaari', desc: 'Väriä ja iloa teille.', price: 1800, icon: <PaintBucket size={28} />, color: '#fbbf24', bg: '#fef3c7' },
     { id: 'van-body10', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkaniitty', desc: 'Tyylitelty ja kaunis kuosi.', price: 2200, icon: <PaintBucket size={28} />, color: '#f472b6', bg: '#fce7f3' },
+    { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön Ritari', desc: 'Tumma ja puhuva mattamusta.', price: 1000, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
     
     // PUSKURIT
     { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja.', price: 400, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
@@ -93,15 +94,15 @@ export default function Garage() {
     const isCarItem = carUpgrades.some(u => u.id === item.id);
     const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
     const isEquippableGarage = equippableGarageCategories.includes(item.category);
-    const isOwned = purchased.includes(item.id);
-    const isEquipped = isCarItem ? equipped[item.category] === item.id : (isEquippableGarage ? equipped[item.category] === item.id : isOwned);
+    const isOwned = purchased.includes(item.id) || item.isDefault;
+    const isEquipped = isCarItem ? (equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault)) : (isEquippableGarage ? (equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault)) : isOwned);
     
-    let btnText = `OSTA ⚡ ${item.price}`;
-    let btnBg = sparks >= item.price ? 'var(--primary-color)' : '#e2e8f0';
-    let btnColor = sparks >= item.price ? 'white' : 'var(--text-muted)';
-    const canBuy = sparks >= item.price && !isOwned;
+    let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
+    let btnBg = (sparks >= item.price || item.isDefault) ? 'var(--primary-color)' : '#e2e8f0';
+    let btnColor = (sparks >= item.price || item.isDefault) ? 'white' : 'var(--text-muted)';
+    const canBuy = sparks >= item.price && !isOwned && !item.isDefault;
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
-    let cursor = canBuy ? 'pointer' : 'not-allowed';
+    let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
 
     if (isEquipped) {
        btnText = 'ASENNETTU';
@@ -391,7 +392,7 @@ export default function Garage() {
               .map(item => {
                 const isHovered = hoveredItem === item.id;
                 const isOwned = purchased.includes(item.id);
-                const isEquipped = equipped[item.category] === item.id;
+                const isEquipped = equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault);
                 const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
                 
                 let shouldShow = false;
