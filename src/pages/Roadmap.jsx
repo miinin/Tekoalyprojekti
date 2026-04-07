@@ -596,11 +596,14 @@ const Roadmap = () => {
   const mapInnerStyle = {
     position: 'relative',
     width: '100%',
-    height: '100%',
+    maxWidth: 'calc((100vh - 140px) * 16 / 9)',
+    aspectRatio: '16/9',
     backgroundImage: `url('${getMapAsset(currentMap)}')`,
-    backgroundSize: '100% 100%', // Fixed scaling for full visibility
+    backgroundSize: '100% 100%', // Fixed scaling for full visibility natively without stretching
     backgroundPosition: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    borderRadius: '20px',
+    boxShadow: '0 0 30px rgba(0,0,0,0.1)'
   };
 
   return (
@@ -684,7 +687,7 @@ const Roadmap = () => {
                     <MapIcon size={28} /> Seikkailu alkaa!
                 </div>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                    Tässä on Tekoälyn Tiekartta. Valitse minne ajetaan ensin, suorita visailu ja ansaitse puhdasta rahaa autotalliin!
+                    Edessäsi aukeaa tiekartta. Valitse haluamasi kohde kartalta, suorita visailu ja tienaa kipinöitä autotalliin! Takaisin autotalliin pääset oikean ylänurkan painikkeesta.
                 </div>
                 <button 
                    className="btn-primary" 
