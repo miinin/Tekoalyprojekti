@@ -77,10 +77,7 @@ const Roadmap = () => {
 
                 // Etsi seuraava reitti tästä pisteestä
                 const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
-                if (nextPathKey) {
-                    // Siivoa URL, ettei toistu refreshillä ja pidä React Router state synkassa
-                    navigate(`/roadmap?map=${currentMap}`, { replace: true });
-                }
+                // Odotetaan käyttäjän klikkausta jos reitti on, jotta vanhanaikainen automagia ei sotke paluuta
             }
         } else {
             // Normaali saapuminen alakarttaan
@@ -109,10 +106,6 @@ const Roadmap = () => {
         const lastNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === lastNodeId);
         if (lastNode) {
             setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
-            if (returnedFrom) {
-                // Tällä varmistetaan, että React Router ymmärtää sivuhistorian puhdistuneen
-                navigate(`/roadmap`, { replace: true });
-            }
             if (returnedFrom !== currentLocationId && returnedFrom) {
                 setCurrentLocationId(returnedFrom);
             }
