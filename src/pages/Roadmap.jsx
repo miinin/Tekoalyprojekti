@@ -310,7 +310,12 @@ const Roadmap = () => {
       if (exitPath) {
           setIsMoving(true);
           await moveAlongPath(exitPath);
-          setIsMoving(false);
+      }
+      setIsMoving(false);
+      const mainNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === currentMap);
+      if (mainNode) {
+          setVanPos(prev => ({ ...prev, top: mainNode.top, left: mainNode.left, stepTime: 0 }));
+      } else {
           setVanPos(prev => ({ ...prev, stepTime: 0 }));
       }
       navigate(`/roadmap?returnedFrom=${currentMap}`);
@@ -378,6 +383,7 @@ const Roadmap = () => {
       ))}
 
       <div
+        key={`van-${currentMap}`}
         style={{
           position: 'absolute',
           top: vanPos.top,
