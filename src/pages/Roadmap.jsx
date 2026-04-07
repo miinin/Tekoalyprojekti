@@ -32,6 +32,20 @@ const Roadmap = () => {
   const [puffs, setPuffs] = useState([]);
   const mapRef = useRef(null);
 
+  // Edit Mode States
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editWaypoints, setEditWaypoints] = useState([]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.shiftKey && e.key.toLowerCase() === 'e') {
+        setIsEditMode(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const mapParam = params.get('map');
@@ -606,6 +620,17 @@ const Roadmap = () => {
     boxShadow: '0 0 30px rgba(0,0,0,0.1)'
   };
 
+  const handleMapClick = (e) => {
+    if (!isEditMode) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const leftPerc = ((x / rect.width) * 100).toFixed(1);
+    const topPerc = ((y / rect.height) * 100).toFixed(1);
+    
+    setEditWaypoints(prev => [...prev, { top: `${topPerc}%`, left: `${leftPerc}%` }]);
+  };
+
   return (
     <div className="roadmap-container" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
       <style>{`
@@ -701,15 +726,54 @@ const Roadmap = () => {
                 </button>
               </div>
             )}
-        <div style={mapInnerStyle}>
+        <div style={mapInnerStyle} onClick={handleMapClick}>
             {/* Grid Overlay */}
             <div style={{ position: 'absolute', inset: 0, opacity: 0.05, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
             
             {renderPaths()}
             {renderMapNodes()}
             {renderVan()}
+
+            {/* Edit Mode Overlay */}
+            {isEditMode && (
+              <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 90 }}>
+                {editWaypoints.length > 0 && (
+                  <path
+                    d={`M ${editWaypoints[0].left} ${editWaypoints[0].top} ${editWaypoints.slice(1).map(p => `L ${p.left} ${p.top}`).join(' ')}`}
+                    fill="none"
+                    stroke="#ef4444"
+                    strokeWidth="4"
+                    strokeDasharray="5,5"
+                  />
+                )}
+                {editWaypoints.map((p, i) => (
+                  <circle key={i} cx={p.left} cy={p.top} r="6" fill="#ef4444" stroke="white" strokeWidth="2" />
+                ))}
+              </svg>
+            )}
         </div>
       </div>
+
+      {/* Edit Mode Panel */}
+      {isEditMode && (
+          <div style={{ position: 'fixed', bottom: '20px', right: '20px', background: 'rgba(0,0,0,0.85)', color: 'white', padding: '1.2rem', borderRadius: '12px', zIndex: 1000, width: '400px', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', fontFamily: 'var(--font-main)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+               <h3 style={{ margin: 0, color: '#ef4444', fontWeight: 900 }}>[EDIT MODE]</h3>
+               <button style={{ background: 'none', border: 'none', color: '#ef4444', fontSize: '1.5rem', cursor: 'pointer', lineHeight: 1 }} onClick={() => setIsEditMode(false)}>×</button>
+            </div>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: '#cbd5e1' }}>Klikkaa karttaa pientareen mukaan luodaksesi reittipisteitä. Kopioi koodit ja sijoita <code>roadmapPaths.js</code> -tiedostoon alkuperäisen reitin tilalle.</p>
+            <div style={{ background: '#0f172a', padding: '1rem', borderRadius: '8px', fontSize: '0.85rem', fontFamily: 'monospace', overflowY: 'auto', maxHeight: '150px', whiteSpace: 'pre-wrap', border: '1px solid #334155' }}>
+              {editWaypoints.length > 0 ? JSON.stringify(editWaypoints).replace(/"([^"]+)":/g, '$1:') : 'Klikkaa karttaa ensimmäisen pisteen asettamiseksi...'}
+            </div>
+            <div style={{ display: 'flex', gap: '0.8rem' }}>
+              <button style={{ flex: 1, padding: '0.6rem', fontSize: '0.9rem', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => navigator.clipboard.writeText(JSON.stringify(editWaypoints).replace(/"([^"]+)":/g, '$1:'))}>Kopioi Reittikoodi</button>
+              <button style={{ padding: '0.6rem 1rem', fontSize: '0.9rem', background: '#ef4444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => setEditWaypoints([])}>Tyhjennä</button>
+              <button style={{ padding: '0.6rem 1rem', fontSize: '0.9rem', background: '#475569', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => {
+                 setEditWaypoints(prev => prev.slice(0, -1)); // Undo painike
+              }}>Kumoa</button>
+            </div>
+          </div>
+      )}
 
       {/* Back to Main Navigation Shortcut */}
       {currentMap !== 'main' && (
