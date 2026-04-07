@@ -25,13 +25,13 @@ export const AI_ROADMAP_DATA = {
       entry: [{ top: '0%', left: '50%' }, { top: '20%', left: '40%' }, { top: '34.2%', left: '23.1%' }],
       exit: [{ top: '20%', left: '40%' }, { top: '0%', left: '50%' }],
       nodes: [
-        { id: 'perusteet_1', top: '75.3%', left: '21.1%' },
-        { id: 'perusteet_2', top: '34.2%', left: '23.1%' },
-        { id: 'perusteet_3', top: '22.3%', left: '35.4%' },
-        { id: 'perusteet_4', top: '48.5%', left: '48.2%' },
-        { id: 'perusteet_5', top: '75.8%', left: '50.2%' },
-        { id: 'perusteet_6', top: '65.4%', left: '74.1%' },
-        { id: 'perusteet_7', top: '35.2%', left: '85.4%' }
+        { id: 'perusteet_1', top: '75.9%', left: '52.1%' },
+        { id: 'perusteet_2', top: '72.5%', left: '23.1%' },
+        { id: 'perusteet_3', top: '41.3%', left: '23.6%' },
+        { id: 'perusteet_4', top: '27.3%', left: '44.3%' },
+        { id: 'perusteet_5', top: '20.0%', left: '63.2%' },
+        { id: 'perusteet_6', top: '60.8%', left: '86.1%' },
+        { id: 'perusteet_7', top: '43.8%', left: '65.7%' }
       ],
       paths: {
         'perusteet_1-perusteet_2': [{ top: '75.3%', left: '21.1%' }, { top: '55%', left: '24%', tunnel: true }, { top: '34.2%', left: '23.1%' }],
