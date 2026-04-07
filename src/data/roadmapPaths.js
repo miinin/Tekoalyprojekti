@@ -44,24 +44,26 @@ export const AI_ROADMAP_DATA = {
       }
     },
     arjessa: {
-      entry: [{ top: '55%', left: '0%' }, { top: '88.5%', left: '24.1%' }],
-      exit: [{ top: '55%', left: '0%' }],
+      entry: [{top:"54.0%",left:"4.8%"},{top:"56.8%",left:"7.4%"},{top:"58.8%",left:"9.9%"},{top:"59.8%",left:"13.0%"},{top:"62.1%",left:"16.2%"},{top:"62.1%",left:"18.8%"},{top:"62.1%",left:"23.2%"},{top:"60.8%",left:"26.7%"},{top:"64.5%",left:"29.3%"},{top:"69.9%",left:"32.1%"},{top:"73.3%",left:"35.7%"},{top:"80.0%",left:"35.9%"},{top:"86.5%",left:"33.3%"},{top:"88.9%",left:"30.6%"},{top:"88.0%",left:"26.2%"}],
+      exit: [{top:"88.0%",left:"26.2%"},{top:"88.9%",left:"30.6%"},{top:"86.5%",left:"33.3%"},{top:"80.0%",left:"35.9%"},{top:"73.3%",left:"35.7%"},{top:"69.9%",left:"32.1%"},{top:"64.5%",left:"29.3%"},{top:"60.8%",left:"26.7%"},{top:"62.1%",left:"23.2%"},{top:"62.1%",left:"18.8%"},{top:"62.1%",left:"16.2%"},{top:"59.8%",left:"13.0%"},{top:"58.8%",left:"9.9%"},{top:"56.8%",left:"7.4%"},{top:"54.0%",left:"4.8%"}],
       nodes: [
-        { id: 'arjessa_1', top: '88.5%', left: '24.1%' },
-        { id: 'arjessa_2', top: '56.4%', left: '43.1%' },
-        { id: 'arjessa_3', top: '38.3%', left: '33.1%' },
-        { id: 'arjessa_4', top: '45.1%', left: '60.1%' },
-        { id: 'arjessa_5', top: '66.2%', left: '60.1%' },
-        { id: 'arjessa_6', top: '33.3%', left: '76.2%' },
-        { id: 'arjessa_7', top: '18.2%', left: '90.1%' }
+        { id: 'arjessa_1', top: '88.0%', left: '26.2%' },
+        { id: 'arjessa_2', top: '55.6%', left: '44.9%' },
+        { id: 'arjessa_3', top: '38.6%', left: '34.4%' },
+        { id: 'arjessa_4', top: '45.9%', left: '59.5%' },
+        { id: 'arjessa_5', top: '66.6%', left: '61.1%' },
+        { id: 'arjessa_6', top: '34.1%', left: '75.6%' },
+        { id: 'arjessa_7', top: '19.4%', left: '89.8%' }
       ],
       paths: {
-        'arjessa_1-arjessa_2': [{ top: '88.5%', left: '24.1%' }, { top: '56.4%', left: '43.1%' }],
-        'arjessa_2-arjessa_3': [{ top: '56.4%', left: '43.1%' }, { top: '38.3%', left: '33.1%' }],
-        'arjessa_3-arjessa_4': [{ top: '38.3%', left: '33.1%' }, { top: '45.1%', left: '60.1%' }],
-        'arjessa_4-arjessa_5': [{ top: '45.1%', left: '60.1%' }, { top: '66.2%', left: '60.1%' }],
-        'arjessa_5-arjessa_6': [{ top: '66.2%', left: '60.1%' }, { top: '33.3%', left: '76.2%' }],
-        'arjessa_6-arjessa_7': [{ top: '33.3%', left: '76.2%' }, { top: '18.2%', left: '90.1%' }]
+        'arjessa_1-arjessa_2': [{top: '88.0%', left: '26.2%'}, {top:"88.9%",left:"30.6%"},{top:"86.5%",left:"33.3%"},{top:"80.0%",left:"35.9%"},{top:"73.3%",left:"35.7%"},{top:"69.9%",left:"32.1%"},{top:"64.5%",left:"29.3%"},{top:"60.8%",left:"26.7%"}, {top:"57.4%",left:"28.4%"},{top:"54.0%",left:"30.4%"},{top:"51.0%",left:"33.2%"},{top:"47.6%",left:"35.6%"},{top:"46.0%",left:"39.4%"}, {top:"43.0%",left:"41.8%"},{top:"45.9%",left:"41.7%"},{top:"49.2%",left:"43.8%"},{top:"51.8%",left:"45.7%"},{top:"55.6%",left:"44.9%"}],
+        'arjessa_2-arjessa_3': [{top:"55.6%",left:"44.9%"},{top:"51.8%",left:"45.7%"},{top:"49.2%",left:"43.8%"},{top:"45.9%",left:"41.7%"},{top:"43.0%",left:"41.8%"}, {top:"40.0%",left:"42.9%"},{top:"40.2%",left:"39.6%"},{top:"38.6%",left:"34.4%"}],
+        'arjessa_2-arjessa_4': [{top:"55.6%",left:"44.9%"}, {top:"52.6%",left:"48.3%"},{top:"52.9%",left:"50.6%"},{top:"54.1%",left:"53.2%"},{top:"53.6%",left:"55.9%"},{top:"50.2%",left:"58.0%"},{top:"45.9%",left:"59.5%"}],
+        'arjessa_4-arjessa_5': [{top:"45.9%",left:"59.5%"}, {top:"56.4%",left:"57.6%"},{top:"59.8%",left:"59.2%"}, {top:"72.3%",left:"59.5%"},{top:"66.6%",left:"61.1%"}],
+        'arjessa_1-arjessa_5': [{top:"88.0%",left:"26.2%"}, {top:"74.6%",left:"39.6%"},{top:"76.3%",left:"42.7%"},{top:"77.3%",left:"45.8%"},{top:"77.6%",left:"49.8%"},{top:"75.5%",left:"53.1%"},{top:"74.2%",left:"55.6%"},{top:"72.3%",left:"59.5%"},{top:"66.6%",left:"61.1%"}],
+        'arjessa_3-arjessa_6': [{top: '38.6%', left: '34.4%'}, {top:"40.2%",left:"39.6%"},{top:"40.0%",left:"42.9%"},{top:"35.8%",left:"44.9%"},{top:"33.3%",left:"46.9%"},{top:"30.6%",left:"51.2%"},{top:"28.9%",left:"53.5%"},{top:"23.8%",left:"57.6%"},{top:"21.6%",left:"62.3%"},{top:"22.5%",left:"64.8%"},{top:"24.9%",left:"68.8%"}, {top:"30.9%",left:"73.6%"},{top:"27.7%",left:"71.4%"},{top:"30.8%",left:"71.0%"},{top:"34.4%",left:"70.9%"},{top:"38.0%",left:"74.0%"}, {top:"34.1%",left:"75.6%"}],
+        'arjessa_5-arjessa_6': [{top:"66.6%",left:"61.1%"}, {top:"71.5%",left:"61.6%"},{top:"71.2%",left:"65.1%"},{top:"70.4%",left:"70.8%"},{top:"70.4%",left:"74.6%"},{top:"68.9%",left:"79.2%"},{top:"65.1%",left:"81.6%"},{top:"57.3%",left:"84.1%"},{top:"52.6%",left:"86.0%"},{top:"49.2%",left:"86.5%"},{top:"45.9%",left:"83.5%"},{top:"43.8%",left:"80.8%"},{top:"40.7%",left:"78.6%"},{top:"39.3%",left:"75.5%"},{top:"34.1%",left:"75.6%"}],
+        'arjessa_6-arjessa_7': [{top:"34.1%",left:"75.6%"},{top:"39.3%",left:"75.5%"},{top:"40.7%",left:"78.6%"},{top:"43.8%",left:"80.8%"},{top:"45.9%",left:"83.5%"},{top:"49.2%",left:"86.5%"}, {top:"47.6%",left:"89.1%"},{top:"44.8%",left:"91.4%"},{top:"40.4%",left:"94.0%"},{top:"36.5%",left:"93.7%"},{top:"31.7%",left:"93.0%"},{top:"27.7%",left:"91.1%"},{top:"25.1%",left:"89.7%"},{top:"19.4%",left:"89.8%"}]
       }
     },
     kayttotaidot: {
