@@ -234,6 +234,7 @@ export default function Garage() {
           gap: 1rem;
           padding: 1rem 0.5rem;
           margin-top: 1rem;
+          min-height: 150px;
           scrollbar-width: thin;
           scrollbar-color: var(--primary-color) rgba(0,0,0,0.1);
         }
@@ -332,7 +333,8 @@ export default function Garage() {
             position: 'relative', 
             width: '100%', 
             aspectRatio: '16/9', 
-            minHeight: '350px',
+            maxHeight: '50vh',
+            minHeight: '300px',
             borderRadius: '24px', 
             overflow: 'hidden', 
             border: '4px solid rgba(0, 114, 198, 0.4)',
