@@ -86,24 +86,24 @@ export const AI_ROADMAP_DATA = {
         }
     },
     konepellin: {
-        entry: [{ top: '10%', left: '85%' }, { top: '24.5%', left: '56.3%' }],
-        exit: [{ top: '10%', left: '85%' }],
+        entry: [{top:"44.8%",left:"94.9%"},{top:"46.1%",left:"91.3%"},{top:"46.9%",left:"87.8%"},{top:"47.6%",left:"85.5%"},{top:"49.2%",left:"82.8%"},{top:"49.8%",left:"78.2%"},{top:"52.2%",left:"73.7%"},{top:"55.8%",left:"69.7%"},{top:"58.9%",left:"66.8%"},{top:"62.6%",left:"66.1%"},{top:"68.1%",left:"67.2%"},{top:"70.9%",left:"70.9%"},{top:"73.3%",left:"74.1%"},{top:"75.9%",left:"77.2%"}],
+        exit: [{top:"75.9%",left:"77.2%"},{top:"73.3%",left:"74.1%"},{top:"70.9%",left:"70.9%"},{top:"68.1%",left:"67.2%"},{top:"62.6%",left:"66.1%"},{top:"58.9%",left:"66.8%"},{top:"55.8%",left:"69.7%"},{top:"52.2%",left:"73.7%"},{top:"49.8%",left:"78.2%"},{top:"49.2%",left:"82.8%"},{top:"47.6%",left:"85.5%"},{top:"46.9%",left:"87.8%"},{top:"46.1%",left:"91.3%"},{top:"44.8%",left:"94.9%"}],
         nodes: [
-          { id: 'konepellin_1', top: '77.5%', left: '79.2%' },
-          { id: 'konepellin_2', top: '66.5%', left: '57.2%' },
-          { id: 'konepellin_3', top: '45.5%', left: '59.2%' },
-          { id: 'konepellin_4', top: '45.5%', left: '43.1%' },
-          { id: 'konepellin_5', top: '66.5%', left: '36.1%' },
-          { id: 'konepellin_6', top: '24.5%', left: '27.1%' },
-          { id: 'konepellin_7', top: '24.5%', left: '56.3%' }
+          { id: 'konepellin_1', top: '75.9%', left: '77.2%' },
+          { id: 'konepellin_2', top: '64.1%', left: '58.8%' },
+          { id: 'konepellin_3', top: '46.1%', left: '60.1%' },
+          { id: 'konepellin_4', top: '46.1%', left: '44.5%' },
+          { id: 'konepellin_5', top: '67.4%', left: '36.9%' },
+          { id: 'konepellin_6', top: '25.1%', left: '26.6%' },
+          { id: 'konepellin_7', top: '23.6%', left: '54.0%' }
         ],
         paths: {
-            'konepellin_7-konepellin_3': [{ top: '24.5%', left: '56.3%' }, { top: '45.5%', left: '59.2%' }],
-            'konepellin_3-konepellin_2': [{ top: '45.5%', left: '59.2%' }, { top: '66.5%', left: '57.2%' }],
-            'konepellin_2-konepellin_1': [{ top: '66.5%', left: '57.2%' }, { top: '77.5%', left: '79.2%' }],
-            'konepellin_3-konepellin_4': [{ top: '45.5%', left: '59.2%' }, { top: '45.5%', left: '43.1%' }],
-            'konepellin_4-konepellin_5': [{ top: '45.5%', left: '43.1%' }, { top: '66.5%', left: '36.1%' }],
-            'konepellin_4-konepellin_6': [{ top: '45.5%', left: '43.1%' }, { top: '24.5%', left: '27.1%' }]
+            'konepellin_1-konepellin_2': [{ top: '75.9%', left: '77.2%' }, { top: '73.3%', left: '74.1%' }, { top: '70.9%', left: '70.9%' }, { top: '68.1%', left: '67.2%' }, { top: '62.6%', left: '66.1%' }, {top:"61.2%",left:"64.3%"}, {top:"61.4%",left:"61.5%"},{top:"61.6%",left:"59.4%"},{top:"64.1%",left:"58.8%"}],
+            'konepellin_2-konepellin_5': [{top:"64.1%",left:"58.8%"},{top:"60.9%",left:"57.5%"},{top:"60.4%",left:"54.0%"},{top:"59.0%",left:"51.5%"},{top:"58.4%",left:"48.9%"},{top:"58.7%",left:"46.6%"},{top:"61.3%",left:"43.4%"},{top:"64.2%",left:"42.2%"},{top:"67.1%",left:"40.1%"},{top:"67.4%",left:"36.9%"}],
+            'konepellin_2-konepellin_4': [{top:"64.1%",left:"58.8%"},{top:"60.9%",left:"57.5%"},{top:"60.4%",left:"54.0%"},{top:"59.0%",left:"51.5%"},{top:"58.4%",left:"48.9%"}, {top:"56.5%",left:"48.5%"},{top:"53.3%",left:"47.3%"},{top:"51.1%",left:"46.1%"},{top:"46.1%",left:"44.5%"}],
+            'konepellin_2-konepellin_3': [{top:"64.1%",left:"58.8%"},{top:"60.9%",left:"57.5%"},{top:"60.4%",left:"54.0%"},{top:"59.0%",left:"51.5%"},{top:"58.4%",left:"48.9%"}, {top:"55.1%",left:"49.6%"},{top:"54.3%",left:"52.0%"},{top:"53.1%",left:"54.4%"},{top:"51.7%",left:"56.1%"},{top:"50.5%",left:"58.5%"},{top:"46.1%",left:"60.1%"}],
+            'konepellin_2-konepellin_7': [{top:"64.1%",left:"58.8%"},{top:"60.9%",left:"57.5%"},{top:"60.4%",left:"54.0%"},{top:"59.0%",left:"51.5%"},{top:"58.4%",left:"48.9%"}, {top:"49.7%",left:"54.5%"},{top:"47.8%",left:"53.7%"},{top:"43.9%",left:"52.1%"},{top:"39.4%",left:"53.3%"},{top:"35.1%",left:"54.2%"},{top:"31.0%",left:"55.4%"},{top:"23.6%",left:"54.0%"}],
+            'konepellin_7-konepellin_6': [{top:"23.6%",left:"54.0%"}, {top:"31.0%",left:"55.4%"}, {top:"30.2%",left:"53.5%"},{top:"27.3%",left:"49.2%"},{top:"23.2%",left:"46.1%"},{top:"19.7%",left:"42.9%"},{top:"18.1%",left:"39.1%"},{top:"19.4%",left:"34.1%"},{top:"21.3%",left:"32.2%"},{top:"24.0%",left:"29.2%"},{top:"25.1%",left:"26.6%"}]
         }
     },
     reilu_peli: {
