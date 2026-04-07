@@ -60,6 +60,11 @@ const Roadmap = () => {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const completedNodeId = params.get('completed');
+    const mapParam = params.get('map');
+
+    // Jos URL:n mukainen kartta ei täsmää komponentin tilaan, odotetaan että React päivittää tilan.
+    const expectedMap = (mapParam && AI_ROADMAP_DATA.sub[mapParam]) ? mapParam : 'main';
+    if (expectedMap !== currentMap) return;
 
     if (currentMap !== 'main' && AI_ROADMAP_DATA.sub[currentMap]) {
         const subData = AI_ROADMAP_DATA.sub[currentMap];
@@ -305,12 +310,7 @@ const Roadmap = () => {
     }
   };
 
-  const handleBackToMain = async () => {
-      const exitPath = AI_ROADMAP_DATA.sub[currentMap]?.exit;
-      if (exitPath) {
-          setIsMoving(true);
-          await moveAlongPath(exitPath);
-      }
+  const handleBackToMain = () => {
       setIsMoving(false);
       const mainNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === currentMap);
       if (mainNode) {
