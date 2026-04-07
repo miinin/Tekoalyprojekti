@@ -318,6 +318,7 @@ const Roadmap = () => {
           setIsMoving(true);
           await moveAlongPath(exitPath);
           setIsMoving(false);
+          setVanPos(prev => ({ ...prev, stepTime: 0 }));
       }
       navigate(`/roadmap?returnedFrom=${currentMap}`);
   };

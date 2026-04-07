@@ -51,7 +51,7 @@ export default function Quiz() {
       <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <h2 style={{ color: '#ef4444', marginBottom: '1rem' }}>Tasoa ei löydy!</h2>
         <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Pahoittelut, tätä tasoa ei voitu ladata.</p>
-        <button className="btn-secondary" onClick={() => navigate('/roadmap')}>Palaa kartalle</button>
+        <button className="btn-secondary" onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa kartalle</button>
       </div>
     );
   }
@@ -66,7 +66,7 @@ export default function Quiz() {
         <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)', maxWidth: '400px', marginBottom: '2rem' }}>
             Jos lataus kestää kauan, tasolla ei välttämättä ole vielä kysymyksiä.
         </p>
-        <button className="btn-secondary" onClick={() => navigate(`/roadmap/${mainCategory}`)}>
+        <button className="btn-secondary" onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>
             <ChevronLeft size={20} /> Keskeytä ja palaa kartalle
         </button>
       </div>
@@ -230,7 +230,7 @@ export default function Quiz() {
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
       
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap/${mainCategory}`)}>
+        <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>
           <ChevronLeft size={24} /> 
         </button>
         <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--primary-color)' }}>
