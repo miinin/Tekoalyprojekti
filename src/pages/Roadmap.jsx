@@ -78,8 +78,8 @@ const Roadmap = () => {
                 // Etsi seuraava reitti tästä pisteestä
                 const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
                 if (nextPathKey) {
-                    // Siivoa URL, ettei toistu refreshillä
-                    window.history.replaceState({}, '', `/roadmap?map=${currentMap}`);
+                    // Siivoa URL, ettei toistu refreshillä ja pidä React Router state synkassa
+                    navigate(`/roadmap?map=${currentMap}`, { replace: true });
                 }
             }
         } else {
@@ -110,13 +110,19 @@ const Roadmap = () => {
         if (lastNode) {
             setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
             if (returnedFrom) {
-                window.history.replaceState({}, '', `/roadmap`);
+                // Tällä varmistetaan, että React Router ymmärtää sivuhistorian puhdistuneen
+                navigate(`/roadmap`, { replace: true });
             }
             if (returnedFrom !== currentLocationId && returnedFrom) {
                 setCurrentLocationId(returnedFrom);
             }
         } else {
-            setVanPos(prev => ({ ...prev, top: '50%', left: '50%', stepTime: 0 })); // Start point
+            const startNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === 'start_point');
+            if (startNode) {
+                setVanPos(prev => ({ ...prev, top: startNode.top, left: startNode.left, stepTime: 0 }));
+            } else {
+                setVanPos(prev => ({ ...prev, top: '50%', left: '50%', stepTime: 0 })); // Start point fallback
+            }
         }
     }
   }, [currentMap, currentLocationId, location.search]);
