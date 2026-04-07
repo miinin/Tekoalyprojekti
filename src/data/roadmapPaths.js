@@ -22,8 +22,8 @@ export const AI_ROADMAP_DATA = {
   },
   sub: {
     perusteet: {
-      entry: [{ top: '0%', left: '50%' }, { top: '20%', left: '40%' }, { top: '34.2%', left: '23.1%' }],
-      exit: [{ top: '20%', left: '40%' }, { top: '0%', left: '50%' }],
+      entry: [{top:"94.8%",left:"43.1%"},{top:"89.2%",left:"45.7%"},{top:"83.8%",left:"48.2%"},{top:"78.0%",left:"49.1%"},{top:"75.8%",left:"51.0%"}, { top: '75.9%', left: '52.1%' }],
+      exit: [{ top: '75.9%', left: '52.1%' }, {top:"75.8%",left:"51.0%"},{top:"78.0%",left:"49.1%"},{top:"83.8%",left:"48.2%"},{top:"89.2%",left:"45.7%"},{top:"94.8%",left:"43.1%"}],
       nodes: [
         { id: 'perusteet_1', top: '75.9%', left: '52.1%' },
         { id: 'perusteet_2', top: '72.5%', left: '23.1%' },
@@ -34,12 +34,13 @@ export const AI_ROADMAP_DATA = {
         { id: 'perusteet_7', top: '43.8%', left: '65.7%' }
       ],
       paths: {
-        'perusteet_1-perusteet_2': [{ top: '75.3%', left: '21.1%' }, { top: '55%', left: '24%', tunnel: true }, { top: '34.2%', left: '23.1%' }],
-        'perusteet_2-perusteet_3': [{ top: '34.2%', left: '23.1%' }, { top: '22.3%', left: '35.4%' }],
-        'perusteet_3-perusteet_4': [{ top: '22.3%', left: '35.4%' }, { top: '48.5%', left: '48.2%' }],
-        'perusteet_4-perusteet_5': [{ top: '48.5%', left: '48.2%' }, { top: '75.8%', left: '50.2%' }],
-        'perusteet_5-perusteet_6': [{ top: '75.8%', left: '50.2%' }, { top: '65.4%', left: '74.1%' }],
-        'perusteet_6-perusteet_7': [{ top: '65.4%', left: '74.1%' }, { top: '35.2%', left: '85.4%' }]
+        'perusteet_1-perusteet_6': [{ top: '75.9%', left: '52.1%' }, {top:"81.9%",left:"51.4%"},{top:"84.8%",left:"54.5%"},{top:"84.2%",left:"59.0%"},{top:"85.5%",left:"63.5%"},{top:"87.6%",left:"68.8%"},{top:"86.4%",left:"73.5%"},{top:"84.2%",left:"77.1%"},{top:"82.4%",left:"82.1%"},{top:"79.6%",left:"84.3%"},{top:"73.3%",left:"85.3%"},{top:"67.7%",left:"86.0%"},{top:"62.2%",left:"86.5%"}, { top: '60.8%', left: '86.1%' }],
+        'perusteet_1-perusteet_2': [{ top: '75.9%', left: '52.1%' }, {top:"79.5%",left:"47.9%"},{top:"76.7%",left:"46.0%"},{top:"72.2%",left:"45.5%"},{top:"69.3%",left:"46.4%"},{top:"66.6%",left:"47.0%"},{top:"63.2%",left:"46.2%"},{top:"63.5%",left:"41.8%"},{top:"64.3%",left:"38.1%"},{top:"63.1%",left:"34.3%"},{top:"63.9%",left:"30.6%"},{top:"60.2%",left:"28.0%"},{top:"56.1%",left:"26.8%"},{top:"54.4%",left:"25.2%"},{top:"56.8%",left:"24.7%"},{top:"59.0%",left:"24.0%"},{top:"59.5%",left:"22.2%"},{top:"59.7%",left:"20.4%"},{top:"59.5%",left:"18.1%"},{top:"59.5%",left:"16.3%"},{top:"59.9%",left:"14.3%"},{top:"62.8%",left:"13.1%"},{top:"66.0%",left:"13.0%"},{top:"69.5%",left:"13.3%"},{top:"72.0%",left:"14.2%"},{top:"73.9%",left:"15.0%"},{top:"76.1%",left:"16.6%"},{top:"77.3%",left:"20.1%"},{top:"73.3%",left:"23.6%"}, { top: '72.5%', left: '23.1%' }],
+        'perusteet_2-perusteet_3': [{ top: '72.5%', left: '23.1%' }, {top:"55.2%",left:"23.6%"},{top:"54.2%",left:"22.1%"},{top:"53.4%",left:"19.3%"},{top:"50.4%",left:"16.5%"},{top:"47.3%",left:"15.4%"},{top:"43.7%",left:"18.2%"},{top:"41.7%",left:"23.0%"}, { top: '41.3%', left: '23.6%' }],
+        'perusteet_3-perusteet_4': [{ top: '41.3%', left: '23.6%' }, {top:"39.4%",left:"27.2%"},{top:"37.4%",left:"28.9%"},{top:"37.0%",left:"32.4%"},{top:"36.2%",left:"34.9%"},{top:"35.0%",left:"36.5%"},{top:"32.8%",left:"38.5%"},{top:"28.5%",left:"41.2%"},{top:"27.6%",left:"42.3%"}, { top: '27.3%', left: '44.3%' }],
+        'perusteet_4-perusteet_5': [{ top: '27.3%', left: '44.3%' }, {top:"32.2%",left:"44.8%"},{top:"31.2%",left:"49.2%"},{top:"27.8%",left:"51.6%"},{top:"26.2%",left:"53.0%"},{top:"25.8%",left:"56.3%"},{top:"25.1%",left:"59.5%"},{top:"21.0%",left:"61.9%"},{top:"20.5%",left:"65.3%"}, { top: '20.0%', left: '63.2%' }],
+        'perusteet_5-perusteet_7': [{ top: '20.0%', left: '63.2%' }, {top:"25.3%",left:"68.2%"},{top:"27.4%",left:"69.1%"},{top:"29.4%",left:"67.6%"},{top:"30.7%",left:"65.1%"},{top:"33.4%",left:"66.4%"},{top:"38.1%",left:"67.6%"},{top:"45.0%",left:"65.4%"}, { top: '43.8%', left: '65.7%' }],
+        'perusteet_7-perusteet_1': [{ top: '43.8%', left: '65.7%' }, {top:"49.5%",left:"63.4%"},{top:"51.3%",left:"61.8%"},{top:"52.3%",left:"59.1%"},{top:"53.5%",left:"57.0%"},{top:"54.5%",left:"54.7%"},{top:"55.8%",left:"52.5%"},{top:"57.1%",left:"50.9%"},{top:"59.8%",left:"48.6%"},{top:"62.5%",left:"47.1%"}, { top: '75.9%', left: '52.1%' }]
       }
     },
     arjessa: {
