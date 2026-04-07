@@ -133,13 +133,13 @@ export const AI_ROADMAP_DATA = {
       entry: [{ top: '55%', left: '0%' }, { top: '49.3%', left: '42.4%' }],
       exit: [{ top: '55%', left: '0%' }],
       nodes: [
-        { id: 'aivoterveys_1', top: '83.5%', left: '45.4%' },
-        { id: 'aivoterveys_2', top: '49.3%', left: '42.4%' },
-        { id: 'aivoterveys_3', top: '32.5%', left: '50.4%' },
-        { id: 'aivoterveys_4', top: '42.5%', left: '67.4%' },
-        { id: 'aivoterveys_5', top: '85.5%', left: '60.4%' },
-        { id: 'aivoterveys_6', top: '77.5%', left: '78.4%' },
-        { id: 'aivoterveys_7', top: '55.5%', left: '88.4%' }
+        { id: 'aivoterveys_1', top: '84.2%', left: '45.6%' },
+        { id: 'aivoterveys_2', top: '54.2%', left: '43.6%' },
+        { id: 'aivoterveys_3', top: '37.0%', left: '50.3%' },
+        { id: 'aivoterveys_4', top: '50.1%', left: '67.0%' },
+        { id: 'aivoterveys_5', top: '86.4%', left: '60.7%' },
+        { id: 'aivoterveys_6', top: '77.6%', left: '80.0%' },
+        { id: 'aivoterveys_7', top: '63.7%', left: '80.6%' }
       ],
       paths: {
         'aivoterveys_2-aivoterveys_1': [{ top: '49.3%', left: '42.4%' }, { top: '83.5%', left: '45.4%' }],
@@ -154,13 +154,13 @@ export const AI_ROADMAP_DATA = {
         entry: [{ top: '0%', left: '50%' }, { top: '34.2%', left: '23.1%' }],
         exit: [{ top: '0%', left: '50%' }],
         nodes: [
-          { id: 'digiturva_1', top: '75.3%', left: '21.1%' },
-          { id: 'digiturva_2', top: '34.2%', left: '23.1%' },
-          { id: 'digiturva_3', top: '22.3%', left: '35.4%' },
-          { id: 'digiturva_4', top: '48.5%', left: '48.2%' },
-          { id: 'digiturva_5', top: '75.8%', left: '50.2%' },
-          { id: 'digiturva_6', top: '65.4%', left: '74.1%' },
-          { id: 'digiturva_7', top: '35.2%', left: '85.4%' }
+          { id: 'digiturva_1', top: '67.5%', left: '20.7%' },
+          { id: 'digiturva_2', top: '84.2%', left: '46.1%' },
+          { id: 'digiturva_3', top: '48.2%', left: '34.8%' },
+          { id: 'digiturva_4', top: '31.6%', left: '53.1%' },
+          { id: 'digiturva_5', top: '69.7%', left: '85.6%' },
+          { id: 'digiturva_6', top: '41.8%', left: '86.7%' },
+          { id: 'digiturva_7', top: '66.2%', left: '59.8%' }
         ],
         paths: {
           'digiturva_1-digiturva_2': [{ top: '75.3%', left: '21.1%' }, { top: '34.2%', left: '23.1%' }],
