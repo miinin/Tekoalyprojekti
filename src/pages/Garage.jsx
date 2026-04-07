@@ -36,9 +36,9 @@ export default function Garage() {
     { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 1000, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
     { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1200, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
     { id: 'van-body05', category: 'body', categoryName: 'Maalipinnat', name: 'Seikkailija', desc: 'Sulaudu täydellisesti maastoon.', price: 1500, icon: <PaintBucket size={28} />, color: '#4d7c0f', bg: '#ecfccb' },
-    { id: 'van-body06', category: 'body', categoryName: 'Maalipinnat', name: 'VIP-Kyyti', desc: 'Hopean ja kullan ylellinen liitto.', price: 2000, icon: <Sparkles size={28} />, color: '#d97706', bg: '#fef3c7' },
-    { id: 'van-body07', category: 'body', categoryName: 'Maalipinnat', name: 'Varikkomestari', desc: 'Vauhdikas tuki kisaradoille.', price: 1400, icon: <Wrench size={28} />, color: '#dc2626', bg: '#fee2e2' },
-    { id: 'van-body08', category: 'body', categoryName: 'Maalipinnat', name: 'Neon-Unelma', desc: 'Kasarin kyberyötä huokuva retro.', price: 2500, icon: <Radio size={28} />, color: '#c026d3', bg: '#fae8ff' },
+    { id: 'van-body06', category: 'body', categoryName: 'Maalipinnat', name: 'VIP-Kyyti', desc: 'Hopean ja kullan ylellinen liitto.', price: 2000, icon: <PaintBucket size={28} />, color: '#d97706', bg: '#fef3c7' },
+    { id: 'van-body07', category: 'body', categoryName: 'Maalipinnat', name: 'Varikkomestari', desc: 'Vauhdikas tuki kisaradoille.', price: 1400, icon: <PaintBucket size={28} />, color: '#dc2626', bg: '#fee2e2' },
+    { id: 'van-body08', category: 'body', categoryName: 'Maalipinnat', name: 'Neon-Unelma', desc: 'Kasarin kyberyötä huokuva retro.', price: 2500, icon: <PaintBucket size={28} />, color: '#c026d3', bg: '#fae8ff' },
     { id: 'van-body09', category: 'body', categoryName: 'Maalipinnat', name: 'Sateenkaari', desc: 'Väriä ja iloa teille.', price: 1800, icon: <PaintBucket size={28} />, color: '#fbbf24', bg: '#fef3c7' },
     { id: 'van-body10', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkaniitty', desc: 'Tyylitelty ja kaunis kuosi.', price: 2200, icon: <PaintBucket size={28} />, color: '#f472b6', bg: '#fce7f3' },
     { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön Ritari', desc: 'Tumma ja puhuva mattamusta.', price: 1000, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
@@ -231,6 +231,7 @@ export default function Garage() {
         .item-carousel {
           display: flex;
           overflow-x: auto;
+          scroll-behavior: smooth;
           gap: 1rem;
           padding: 1rem 0.5rem;
           margin-top: 1rem;
@@ -250,6 +251,7 @@ export default function Garage() {
           border-radius: 4px;
         }
         .carousel-item {
+          width: 250px;
           min-width: 250px;
           flex-shrink: 0;
         }
@@ -331,7 +333,9 @@ export default function Garage() {
         <div className="garage-center">
           <div style={{ 
             position: 'relative', 
-            width: '100%', 
+            width: '100%',
+            maxWidth: '1000px',
+            margin: '0 auto',
             aspectRatio: '16/9', 
             maxHeight: '50vh',
             minHeight: '300px',
