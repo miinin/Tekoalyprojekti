@@ -14,7 +14,7 @@ export default function Garage() {
   const [showGreenPulse, setShowGreenPulse] = useState(false);
   const [flashScreen, setFlashScreen] = useState(false);
 
-  const [expandedCategories, setExpandedCategories] = useState(['g_clean', 'body']); // Default open: Body
+  const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_clean' : 'body'); // Default open: Body (or g_clean in tutorial)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,10 +84,9 @@ export default function Garage() {
 
 
 
-  const toggleCategory = (cat) => {
-    setExpandedCategories(prev => 
-      prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
-    );
+  const setCategory = (cat) => {
+    if (isTutorialActive && cat !== 'g_clean') return;
+    setActiveCategory(cat);
   };
 
   const renderUpgradeItem = (item) => {
@@ -117,7 +116,7 @@ export default function Garage() {
     }
 
     return (
-      <div key={item.id} className="glass-panel" 
+      <div key={item.id} className="carousel-item glass-panel" 
            style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} 
            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; setHoveredItem(item.id); }} 
            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
@@ -147,6 +146,7 @@ export default function Garage() {
                 if (item.id === 'g-clean' && isTutorialActive) {
                     store.completeTutorial();
                     setIsTutorialActive(false);
+                    setActiveCategory('body'); // Auto-switch to car body painting!
                     setFlashScreen(true);
                     setTimeout(() => {
                         setShowGreenPulse(true);
@@ -228,6 +228,30 @@ export default function Garage() {
           gap: 0.5rem;
           margin-bottom: 1rem;
         }
+        .item-carousel {
+          display: flex;
+          overflow-x: auto;
+          gap: 1rem;
+          padding: 1rem 0.5rem;
+          margin-top: 1rem;
+          scrollbar-width: thin;
+          scrollbar-color: var(--primary-color) rgba(0,0,0,0.1);
+        }
+        .item-carousel::-webkit-scrollbar {
+          height: 8px;
+        }
+        .item-carousel::-webkit-scrollbar-track {
+          background: rgba(0,0,0,0.1);
+          border-radius: 4px;
+        }
+        .item-carousel::-webkit-scrollbar-thumb {
+          background: var(--primary-color);
+          border-radius: 4px;
+        }
+        .carousel-item {
+          min-width: 250px;
+          flex-shrink: 0;
+        }
         @keyframes flashBang {
           0% { opacity: 1; }
           100% { opacity: 0; }
@@ -275,16 +299,18 @@ export default function Garage() {
           <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
           
           {Object.entries(categorisedGarage).map(([catId, category]) => {
-            if (isTutorialActive && catId !== 'g_clean') return null;
+            const isLocked = isTutorialActive && catId !== 'g_clean';
             return (
             <div key={catId} style={{ marginBottom: '0.5rem' }}>
               <div 
                 className="category-header" 
-                onClick={() => toggleCategory(catId)}
+                onClick={() => setCategory(catId)}
                 style={{ 
-                  borderColor: expandedCategories.includes(catId) ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                  background: expandedCategories.includes(catId) ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
-                  pointerEvents: isTutorialActive ? 'none' : 'auto'
+                  borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
+                  background: activeCategory === catId ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
+                  pointerEvents: isLocked ? 'none' : 'auto',
+                  opacity: isLocked ? 0.4 : 1,
+                  filter: isLocked ? 'grayscale(100%)' : 'none'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -295,14 +321,7 @@ export default function Garage() {
                    {catId === 'g_jack' && <Disc size={18} color="#64748b" />}
                    <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
                 </div>
-                <ChevronDown size={20} style={{ transition: 'transform 0.3s', transform: expandedCategories.includes(catId) ? 'rotate(180deg)' : 'rotate(0)' }} />
               </div>
-              
-              {expandedCategories.includes(catId) && (
-                <div className="category-content animate-fade-in" style={{ padding: '0 0.5rem' }}>
-                  {category.items.map(item => renderUpgradeItem(item))}
-                </div>
-              )}
             </div>
           );})}
         </div>
@@ -424,20 +443,31 @@ export default function Garage() {
             )}
 
            </div>
+
+           {/* Carousel Below the Image */}
+           <div className="item-carousel animate-fade-in">
+             {activeCategory && categorisedGarage[activeCategory]?.items.map(item => renderUpgradeItem(item))}
+             {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderUpgradeItem(item))}
+           </div>
         </div>
 
         {/* RIGHT COLUMN: Car Upgrades (Collapsible) */}
         <div className="garage-right">
           <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
           
-          {Object.entries(categorisedCar).map(([catId, category]) => (
+          {Object.entries(categorisedCar).map(([catId, category]) => {
+            const isLocked = isTutorialActive;
+             return (
             <div key={catId} style={{ marginBottom: '0.5rem' }}>
               <div 
                 className="category-header" 
-                onClick={() => toggleCategory(catId)}
+                onClick={() => setCategory(catId)}
                 style={{ 
-                  borderColor: expandedCategories.includes(catId) ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                  background: expandedCategories.includes(catId) ? '#f8fafc' : 'rgba(255,255,255,0.7)'
+                  borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
+                  background: activeCategory === catId ? '#f8fafc' : 'rgba(255,255,255,0.7)',
+                  pointerEvents: isLocked ? 'none' : 'auto',
+                  opacity: isLocked ? 0.4 : 1,
+                  filter: isLocked ? 'grayscale(100%)' : 'none'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
@@ -447,16 +477,9 @@ export default function Garage() {
                    {catId === 'extra' && <Zap size={18} />}
                    <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
                 </div>
-                <ChevronDown size={20} style={{ transition: 'transform 0.3s', transform: expandedCategories.includes(catId) ? 'rotate(180deg)' : 'rotate(0)' }} />
               </div>
-              
-              {expandedCategories.includes(catId) && (
-                <div className="category-content animate-fade-in" style={{ padding: '0 0.5rem' }}>
-                  {category.items.map(item => renderUpgradeItem(item))}
-                </div>
-              )}
             </div>
-          ))}
+          )})}
         </div>
 
       </div>
