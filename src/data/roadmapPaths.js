@@ -67,25 +67,25 @@ export const AI_ROADMAP_DATA = {
       }
     },
     kayttotaidot: {
-        entry: [{ top: '92%', left: '16%' }, { top: '76%', left: '35.5%' }],
-        exit: [{ top: '92%', left: '16%' }],
-        nodes: [
-          { id: 'kayttotaidot_1', top: '76%', left: '35.5%' },
-          { id: 'kayttotaidot_2', top: '50.5%', left: '42.8%' },
-          { id: 'kayttotaidot_3', top: '48.2%', left: '52.3%' },
-          { id: 'kayttotaidot_4', top: '49.8%', left: '63.5%' },
-          { id: 'kayttotaidot_5', top: '65.8%', left: '68.2%' },
-          { id: 'kayttotaidot_6', top: '82.8%', left: '74.2%' },
-          { id: 'kayttotaidot_7', top: '24.5%', left: '51.5%' }
-        ],
-        paths: {
-            'kayttotaidot_1-kayttotaidot_2': [{ top: '76%', left: '35.5%' }, { top: '50.5%', left: '42.8%' }],
-            'kayttotaidot_2-kayttotaidot_3': [{ top: '50.5%', left: '42.8%' }, { top: '48.2%', left: '52.3%' }],
-            'kayttotaidot_3-kayttotaidot_4': [{ top: '48.2%', left: '52.3%' }, { top: '49.8%', left: '63.5%' }],
-            'kayttotaidot_4-kayttotaidot_5': [{ top: '49.8%', left: '63.5%' }, { top: '65.8%', left: '68.2%' }],
-            'kayttotaidot_5-kayttotaidot_6': [{ top: '65.8%', left: '68.2%' }, { top: '82.8%', left: '74.2%' }],
-            'kayttotaidot_6-kayttotaidot_7': [{ top: '82.8%', left: '74.2%' }, { top: '50%', left: '80%' }, { top: '24.5%', left: '51.5%' }]
-        }
+      entry: [{top:"93.3%",left:"10.9%"},{top:"88.5%",left:"14.1%"},{top:"86.5%",left:"16.9%"},{top:"86.4%",left:"21.7%"},{top:"84.1%",left:"26.7%"},{top:"79.9%",left:"29.2%"},{top:"75.2%",left:"32.3%"},{top:"73.5%",left:"33.4%"},{top:"75.2%",left:"38.2%"},{top:"76.5%",left:"41.4%"},{top:"74.9%",left:"46.5%"}],
+      exit: [{top:"74.9%",left:"46.5%"},{top:"76.5%",left:"41.4%"},{top:"75.2%",left:"38.2%"},{top:"73.5%",left:"33.4%"},{top:"75.2%",left:"32.3%"},{top:"79.9%",left:"29.2%"},{top:"84.1%",left:"26.7%"},{top:"86.4%",left:"21.7%"},{top:"86.5%",left:"16.9%"},{top:"88.5%",left:"14.1%"},{top:"93.3%",left:"10.9%"}],
+      nodes: [
+        { id: 'kayttotaidot_1', top: '74.9%', left: '46.5%' },
+        { id: 'kayttotaidot_2', top: '51.0%', left: '43.7%' },
+        { id: 'kayttotaidot_3', top: '48.9%', left: '51.7%' },
+        { id: 'kayttotaidot_4', top: '48.0%', left: '61.9%' },
+        { id: 'kayttotaidot_5', top: '79.6%', left: '72.5%' },
+        { id: 'kayttotaidot_6', top: '66.6%', left: '69.6%' },
+        { id: 'kayttotaidot_7', top: '25.7%', left: '53.1%' }
+      ],
+      paths: {
+        'kayttotaidot_1-kayttotaidot_2': [{top:"74.9%",left:"46.5%"},{top:"70.4%",left:"47.0%"},{top:"67.0%",left:"44.2%"},{top:"61.3%",left:"43.9%"},{top:"58.1%",left:"46.5%"},{top:"55.4%",left:"44.7%"},{top:"51.0%",left:"43.7%"}],
+        'kayttotaidot_1-kayttotaidot_6': [{top:"74.9%",left:"46.5%"},{top:"73.8%",left:"48.2%"},{top:"72.6%",left:"51.0%"},{top:"72.6%",left:"54.2%"},{top:"73.5%",left:"57.9%"},{top:"73.4%",left:"62.4%"},{top:"73.3%",left:"67.2%"},{top:"71.9%",left:"69.3%"},{top:"66.6%",left:"69.6%"}],
+        'kayttotaidot_6-kayttotaidot_5': [{top:"66.6%",left:"69.6%"}, {top:"71.9%",left:"69.3%"}, {top:"75.0%",left:"70.0%"},{top:"76.5%",left:"71.9%"},{top:"79.6%",left:"72.5%"}],
+        'kayttotaidot_2-kayttotaidot_3': [{top:"51.0%",left:"43.7%"}, {top:"55.4%",left:"44.7%"}, {top:"58.1%",left:"46.5%"}, {top:"57.1%",left:"47.5%"},{top:"55.4%",left:"49.4%"},{top:"53.4%",left:"51.3%"},{top:"48.9%",left:"51.7%"}],
+        'kayttotaidot_3-kayttotaidot_4': [{top:"48.9%",left:"51.7%"}, {top:"53.4%",left:"51.3%"}, {top:"55.4%",left:"49.4%"}, {top:"55.5%",left:"50.4%"},{top:"54.2%",left:"53.5%"},{top:"52.7%",left:"56.5%"},{top:"51.9%",left:"58.5%"},{top:"50.0%",left:"60.1%"},{top:"48.0%",left:"61.9%"}],
+        'kayttotaidot_3-kayttotaidot_7': [{top:"48.9%",left:"51.7%"}, {top:"48.4%",left:"53.3%"},{top:"45.0%",left:"55.8%"},{top:"39.2%",left:"55.0%"},{top:"36.1%",left:"52.5%"},{top:"32.4%",left:"51.5%"},{top:"31.0%",left:"53.0%"},{top:"25.7%",left:"53.1%"}]
+      }
     },
     konepellin: {
         entry: [{top:"44.8%",left:"94.9%"},{top:"46.1%",left:"91.3%"},{top:"46.9%",left:"87.8%"},{top:"47.6%",left:"85.5%"},{top:"49.2%",left:"82.8%"},{top:"49.8%",left:"78.2%"},{top:"52.2%",left:"73.7%"},{top:"55.8%",left:"69.7%"},{top:"58.9%",left:"66.8%"},{top:"62.6%",left:"66.1%"},{top:"68.1%",left:"67.2%"},{top:"70.9%",left:"70.9%"},{top:"73.3%",left:"74.1%"},{top:"75.9%",left:"77.2%"}],
