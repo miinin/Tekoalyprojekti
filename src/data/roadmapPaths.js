@@ -109,24 +109,24 @@ export const AI_ROADMAP_DATA = {
         }
     },
     reilu_peli: {
-      entry: [{ top: '0%', left: '30%' }, { top: '42%', left: '52%' }],
-      exit: [{ top: '0%', left: '30%' }],
+      entry: [{top:"5.8%",left:"33.0%"},{top:"9.8%",left:"30.9%"},{top:"15.6%",left:"30.3%"},{top:"19.4%",left:"31.7%"},{top:"22.2%",left:"35.4%"},{top:"25.9%",left:"38.8%"},{top:"32.4%",left:"38.2%"},{top:"38.3%",left:"38.3%"},{top:"43.6%",left:"39.7%"},{top:"46.6%",left:"41.8%"},{top:"50.4%",left:"45.3%"},{top:"49.9%",left:"48.4%"},{top:"47.6%",left:"51.9%"}],
+      exit: [{top:"47.6%",left:"51.9%"},{top:"49.9%",left:"48.4%"},{top:"50.4%",left:"45.3%"},{top:"46.6%",left:"41.8%"},{top:"43.6%",left:"39.7%"},{top:"38.3%",left:"38.3%"},{top:"32.4%",left:"38.2%"},{top:"25.9%",left:"38.8%"},{top:"22.2%",left:"35.4%"},{top:"19.4%",left:"31.7%"},{top:"15.6%",left:"30.3%"},{top:"9.8%",left:"30.9%"},{top:"5.8%",left:"33.0%"}],
       nodes: [
-        { id: 'reilu_peli_1', top: '83%', left: '28%' },
-        { id: 'reilu_peli_2', top: '70%', left: '37%' },
-        { id: 'reilu_peli_3', top: '72%', left: '50%' },
-        { id: 'reilu_peli_4', top: '42%', left: '52%' },
-        { id: 'reilu_peli_5', top: '41%', left: '65%' },
-        { id: 'reilu_peli_6', top: '79%', left: '72%' },
-        { id: 'reilu_peli_7', top: '40%', left: '83%' }
+        { id: 'reilu_peli_1', top: '47.6%', left: '51.9%' },
+        { id: 'reilu_peli_2', top: '70.3%', left: '66.2%' },
+        { id: 'reilu_peli_3', top: '39.4%', left: '80.1%' },
+        { id: 'reilu_peli_4', top: '66.6%', left: '49.1%' },
+        { id: 'reilu_peli_5', top: '69.4%', left: '47.1%' },
+        { id: 'reilu_peli_6', top: '66.0%', left: '39.6%' },
+        { id: 'reilu_peli_7', top: '77.2%', left: '28.7%' }
       ],
       paths: {
-        'reilu_peli_4-reilu_peli_5': [{ top: '42%', left: '52%' }, { top: '41%', left: '65%' }],
-        'reilu_peli_5-reilu_peli_7': [{ top: '41%', left: '65%' }, { top: '40%', left: '83%' }],
-        'reilu_peli_4-reilu_peli_2': [{ top: '42%', left: '52%' }, { top: '70%', left: '37%' }],
-        'reilu_peli_2-reilu_peli_1': [{ top: '70%', left: '37%' }, { top: '83%', left: '28%' }],
-        'reilu_peli_2-reilu_peli_3': [{ top: '70%', left: '37%' }, { top: '72%', left: '50%' }],
-        'reilu_peli_5-reilu_peli_6': [{ top: '41%', left: '65%' }, { top: '79%', left: '72%' }]
+        'reilu_peli_1-reilu_peli_2': [{top:"47.6%",left:"51.9%"}, {top:"51.4%",left:"53.9%"},{top:"57.6%",left:"55.7%"},{top:"61.6%",left:"57.3%"},{top:"63.6%",left:"59.3%"},{top:"65.9%",left:"62.1%"},{top:"69.2%",left:"64.3%"},{top:"70.3%",left:"66.2%"}],
+        'reilu_peli_1-reilu_peli_3': [{top:"47.6%",left:"51.9%"}, {top:"47.1%",left:"54.3%"},{top:"44.0%",left:"58.9%"},{top:"41.0%",left:"61.2%"},{top:"39.5%",left:"63.3%"},{top:"38.4%",left:"66.8%"},{top:"39.1%",left:"70.0%"},{top:"40.6%",left:"71.0%"},{top:"42.3%",left:"75.1%"},{top:"41.4%",left:"76.3%"},{top:"38.1%",left:"78.9%"},{top:"39.4%",left:"80.1%"}],
+        'reilu_peli_1-reilu_peli_4': [{top:"47.6%",left:"51.9%"}, {top:"52.7%",left:"48.8%"},{top:"55.9%",left:"48.3%"},{top:"58.9%",left:"48.8%"},{top:"62.8%",left:"49.1%"},{top:"66.6%",left:"49.1%"}],
+        'reilu_peli_1-reilu_peli_6': [{top:"47.6%",left:"51.9%"}, {top:"52.4%",left:"47.5%"},{top:"56.1%",left:"46.3%"},{top:"59.3%",left:"45.4%"},{top:"61.5%",left:"43.8%"},{top:"64.1%",left:"41.5%"},{top:"66.0%",left:"39.6%"}],
+        'reilu_peli_6-reilu_peli_5': [{top:"66.0%",left:"39.6%"}, {top:"68.5%",left:"40.1%"},{top:"68.9%",left:"42.6%"},{top:"69.1%",left:"44.6%"},{top:"69.4%",left:"47.1%"}],
+        'reilu_peli_6-reilu_peli_7': [{top:"66.0%",left:"39.6%"}, {top:"68.1%",left:"34.8%"},{top:"66.6%",left:"32.1%"},{top:"66.7%",left:"30.1%"},{top:"69.4%",left:"29.1%"},{top:"72.2%",left:"28.7%"},{top:"77.2%",left:"28.7%"}]
       }
     },
     aivoterveys: {

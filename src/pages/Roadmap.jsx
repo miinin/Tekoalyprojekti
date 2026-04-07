@@ -354,8 +354,8 @@ const Roadmap = () => {
       'kayttotaidot': '/map-jaa.png',
       'reilu_peli': '/map-satama.png',
       'konepellin': '/map-viidakko.png',
-      'aivoterveys': '/map-viidakko.png',
-      'digiturva': '/map-linna.png'
+      'aivoterveys': '/map-linna.png',
+      'digiturva': '/map-meri.png'
     };
     return assets[mapId] || '/map-bg.jpg';
   };
