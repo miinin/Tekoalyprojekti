@@ -234,7 +234,9 @@ export default function Garage() {
           scroll-behavior: smooth;
           gap: 1rem;
           padding: 1rem 0.5rem;
-          margin-top: 1rem;
+          margin: 1rem auto 0 auto;
+          width: 100%;
+          max-width: 1000px;
           min-height: 150px;
           scrollbar-width: thin;
           scrollbar-color: var(--primary-color) rgba(0,0,0,0.1);
