@@ -437,7 +437,8 @@ export default function Garage() {
               .map(item => {
                 const isHovered = hoveredItem === item.id;
                 const isOwned = purchased.includes(item.id);
-                const isEquipped = equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault);
+                const slot = item.category === 'extra' ? item.id : item.category;
+                const isEquipped = equipped[slot] === item.id || (!equipped[slot] && item.isDefault);
                 const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
                 
                 let shouldShow = false;
