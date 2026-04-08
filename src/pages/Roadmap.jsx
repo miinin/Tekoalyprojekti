@@ -31,6 +31,7 @@ const Roadmap = () => {
   );
   const [puffs, setPuffs] = useState([]);
   const mapRef = useRef(null);
+  const consumedReturnRef = useRef(false);
 
   // Edit Mode States
   const [isEditMode, setIsEditMode] = useState(false);
@@ -106,14 +107,18 @@ const Roadmap = () => {
             }
         }
     } else if (currentMap === 'main') {
-        const returnedFrom = params.get('returnedFrom');
-        const lastNodeId = returnedFrom || currentLocationId;
+        const urlReturnedFrom = params.get('returnedFrom');
+        const validReturn = urlReturnedFrom && !consumedReturnRef.current;
+        const lastNodeId = validReturn ? urlReturnedFrom : currentLocationId;
+        
         const lastNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === lastNodeId);
         if (lastNode) {
             setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
-            if (returnedFrom !== currentLocationId && returnedFrom) {
-                setCurrentLocationId(returnedFrom);
-                navigate(location.pathname, { replace: true });
+            if (validReturn) {
+                if (urlReturnedFrom !== currentLocationId) {
+                    setCurrentLocationId(urlReturnedFrom);
+                }
+                consumedReturnRef.current = true;
             }
         } else {
             const startNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === 'start_point');
