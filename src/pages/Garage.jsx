@@ -105,7 +105,7 @@ export default function Garage() {
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
     
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
-    let btnBg = (sparks >= item.price || item.isDefault) ? 'var(--primary-color)' : '#e2e8f0';
+    let btnBg = (sparks >= item.price || item.isDefault) ? '#f59e0b' : '#e2e8f0'; // Amber for buy
     let btnColor = (sparks >= item.price || item.isDefault) ? 'white' : 'var(--text-muted)';
     const canBuy = sparks >= item.price && !isOwned && !item.isDefault;
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
@@ -113,28 +113,28 @@ export default function Garage() {
 
     if (isEquipped && item.category === 'extra') {
        btnText = 'POISTA';
-       btnBg = '#ef4444';
+       btnBg = '#64748b'; // Neutral gray instead of red
        btnColor = 'white';
        cursor = 'pointer';
     } else if (isEquipped) {
        btnText = 'ASENNETTU';
-       btnBg = '#10b981';
+       btnBg = '#10b981'; // Green
        btnColor = 'white';
        cursor = 'default';
     } else if (isOwned && (isCarItem || isEquippableGarage)) {
        btnText = 'ASENNA';
-       btnBg = '#3b82f6';
+       btnBg = '#3b82f6'; // Blue
        btnColor = 'white';
        cursor = 'pointer';
     }
 
     return (
       <div key={item.id} className="carousel-item glass-panel" 
-           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)' }} 
+           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)', justifyContent: 'space-between', height: '100%' }} 
            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; setHoveredItem(item.id); }} 
            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-          <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexGrow: 1 }}>
+          <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             {React.cloneElement(item.icon, { size: 20 })}
           </div>
           <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
