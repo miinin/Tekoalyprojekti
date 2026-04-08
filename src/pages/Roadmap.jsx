@@ -113,6 +113,7 @@ const Roadmap = () => {
             setVanPos(prev => ({ ...prev, top: lastNode.top, left: lastNode.left, stepTime: 0 }));
             if (returnedFrom !== currentLocationId && returnedFrom) {
                 setCurrentLocationId(returnedFrom);
+                navigate(location.pathname, { replace: true });
             }
         } else {
             const startNode = AI_ROADMAP_DATA.main.nodes.find(n => n.id === 'start_point');
