@@ -54,9 +54,16 @@ export default function Garage() {
     { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 400, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
+    { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Luotettavat peltivanteet', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
 
     // EXTRA
-    { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Turbo-Ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' }
+    { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Turbo-Ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },
+    { id: 'van-extra02', category: 'extra', categoryName: 'Erityisosat', name: 'Työkalusarja vaativiin oloihin', desc: 'Valmiina kaikkiin remontteihin tien päällä.', price: 1000, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
+    { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff' },
+    { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 2200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2' },
+    { id: 'van-extra05', category: 'extra', categoryName: 'Erityisosat', name: 'Sivuikkuna takatilaan', desc: 'Lisää valoa ja tilan tunnetta.', price: 1200, icon: <Grid size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 2500, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe' },
+    { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 800, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe' }
   ];
 
   const garageUpgrades = [
