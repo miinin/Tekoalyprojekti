@@ -105,8 +105,8 @@ export default function Garage() {
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
     
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
-    let btnBg = (sparks >= item.price || item.isDefault) ? '#f59e0b' : '#e2e8f0'; // Amber for buy
-    let btnColor = (sparks >= item.price || item.isDefault) ? 'white' : 'var(--text-muted)';
+    let btnBg = (sparks >= item.price || item.isDefault) ? '#fef3c7' : '#e2e8f0'; // Toned down amber for buy
+    let btnColor = (sparks >= item.price || item.isDefault) ? '#d97706' : 'var(--text-muted)';
     const canBuy = sparks >= item.price && !isOwned && !item.isDefault;
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
     let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
@@ -130,14 +130,14 @@ export default function Garage() {
 
     return (
       <div key={item.id} className="carousel-item glass-panel" 
-           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)', justifyContent: 'space-between', height: '100%' }} 
+           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)', justifyContent: 'space-between', flex: '0 0 auto' }} 
            onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; setHoveredItem(item.id); }} 
            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', flexGrow: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', flexGrow: 1 }}>
           <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             {React.cloneElement(item.icon, { size: 20 })}
           </div>
-          <div style={{ flexGrow: 1, fontFamily: 'var(--font-main)' }}>
+          <div style={{ fontFamily: 'var(--font-main)' }}>
             <h3 style={{ margin: 0, fontSize: '0.9rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
             <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{item.desc}</p>
           </div>
@@ -202,6 +202,10 @@ export default function Garage() {
     return acc;
   }, {});
 
+  const hoveredObj = hoveredItem ? [...carUpgrades, ...garageUpgrades].find(i => i.id === hoveredItem) : null;
+  const hoverSlot = hoveredObj ? (hoveredObj.category === 'extra' ? hoveredObj.id : hoveredObj.category) : null;
+  const isGlobalPreview = hoveredObj && equipped[hoverSlot] !== hoveredObj.id;
+
   return (
     <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '1800px', margin: '0 auto', width: '100%' }}>
       <style>{`
@@ -258,6 +262,7 @@ export default function Garage() {
           min-height: 150px;
           scrollbar-width: thin;
           scrollbar-color: var(--primary-color) rgba(0,0,0,0.1);
+          align-items: stretch;
         }
         .item-carousel::-webkit-scrollbar {
           height: 8px;
@@ -361,7 +366,8 @@ export default function Garage() {
             minHeight: '300px',
             borderRadius: '24px', 
             overflow: 'hidden', 
-            border: '4px solid rgba(0, 114, 198, 0.4)',
+            border: isGlobalPreview ? '4px solid rgba(16, 185, 129, 0.9)' : '3px solid rgba(0, 114, 198, 0.4)',
+            transition: 'border-color 0.3s ease',
             boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
@@ -448,7 +454,7 @@ export default function Garage() {
                     shouldShow = true;
                     if (!isOwned || !isEquipped) isPreview = true;
                 } else if (isEquipped) {
-                    if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
+                    if (hoverSlot && hoverSlot === slot) {
                         shouldShow = false;
                     } else {
                         shouldShow = true;
@@ -463,7 +469,7 @@ export default function Garage() {
                 return null;
               })}
 
-            {hoveredItem && !purchased.includes(hoveredItem) && (
+            {isGlobalPreview && (
               <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(16, 185, 129, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
                  ESIKATSELU
               </div>
