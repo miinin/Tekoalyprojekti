@@ -137,6 +137,15 @@ export const store = {
     return true;
   },
 
+  unequipItem: async (category) => {
+    const room = store.getRoomCode();
+    const key = room ? `aivan_equipped_${room}` : 'aivan_equipped';
+    const items = await store.getEquippedItems();
+    delete items[category];
+    localStorage.setItem(key, JSON.stringify(items));
+    return true;
+  },
+
   purchaseItem: async (itemId, price, category = null) => {
     const success = await store.spendSparks(price);
     if (success) {

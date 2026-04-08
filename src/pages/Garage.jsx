@@ -101,7 +101,8 @@ export default function Garage() {
     const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
     const isEquippableGarage = equippableGarageCategories.includes(item.category);
     const isOwned = purchased.includes(item.id) || item.isDefault;
-    const isEquipped = isCarItem ? (equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault)) : (isEquippableGarage ? (equipped[item.category] === item.id || (!equipped[item.category] && item.isDefault)) : isOwned);
+    const slot = item.category === 'extra' ? item.id : item.category;
+    const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
     
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
     let btnBg = (sparks >= item.price || item.isDefault) ? 'var(--primary-color)' : '#e2e8f0';
@@ -110,14 +111,19 @@ export default function Garage() {
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
     let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
 
-    if (isEquipped) {
+    if (isEquipped && item.category === 'extra') {
+       btnText = 'POISTA';
+       btnBg = '#ef4444';
+       btnColor = 'white';
+       cursor = 'pointer';
+    } else if (isEquipped) {
        btnText = 'ASENNETTU';
        btnBg = '#10b981';
        btnColor = 'white';
        cursor = 'default';
     } else if (isOwned && (isCarItem || isEquippableGarage)) {
        btnText = 'ASENNA';
-       btnBg = '#8b5cf6';
+       btnBg = '#3b82f6';
        btnColor = 'white';
        cursor = 'pointer';
     }
@@ -145,7 +151,7 @@ export default function Garage() {
           onClick={async (e) => {
             e.stopPropagation();
             if (canBuy) {
-              const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? item.category : null);
+              const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? slot : null);
               if (success) {
                 setSparks(await store.getSparks());
                 setPurchased(await store.getPurchasedItems());
@@ -160,8 +166,13 @@ export default function Garage() {
                     }, 1500);
                 }
               }
+            } else if (isEquipped && item.category === 'extra') {
+               const success = await store.unequipItem(slot);
+               if (success) {
+                 setEquipped(await store.getEquippedItems());
+               }
             } else if (isOwned && (isCarItem || isEquippableGarage) && !isEquipped) {
-               const success = await store.equipItem(item.id, item.category);
+               const success = await store.equipItem(item.id, slot);
                if (success) {
                  setEquipped(await store.getEquippedItems());
                }
