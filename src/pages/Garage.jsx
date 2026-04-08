@@ -45,11 +45,12 @@ export default function Garage() {
     { id: 'van-body12', category: 'body', categoryName: 'Maalipinnat', name: 'AI Team', desc: 'Rakastan sitä, kun promptit loksahtelevat kohdilleen.', price: 3000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#1e293b' },
     
     // PUSKURIT
-    { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja.', price: 400, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä.', price: 600, icon: <ShieldCheck size={28} />, color: '#94a3b8', bg: '#f8fafc' },
-    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Urheilupuskuri', desc: 'Aerodynaaminen muotoilu.', price: 800, icon: <ShieldCheck size={28} />, color: '#475569', bg: '#e2e8f0' },
-    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Maastopuskuri', desc: 'Kestää kovempaakin menoa.', price: 900, icon: <ShieldCheck size={28} />, color: '#1e293b', bg: '#cbd5e1' },
-    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Erikoispuskuri', desc: 'Huipputason designia.', price: 1200, icon: <ShieldCheck size={28} />, color: '#0f172a', bg: '#94a3b8' },
+    { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava ja vähäeleinen perussuoja kaduille.', price: 0, isDefault: true, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä ja tyylikästä retrohenkeä.', price: 800, icon: <ShieldCheck size={28} />, color: '#94a3b8', bg: '#f8fafc' },
+    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Kultapuskuri', desc: 'Katujen todellisille mestareille. Bling bling!', price: 2500, icon: <ShieldCheck size={28} />, color: '#d97706', bg: '#fef3c7' },
+    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Mattamusta', desc: 'Tyylikäs, erittäin hillitty ja moderni tumma suoja.', price: 1200, icon: <ShieldCheck size={28} />, color: '#1e293b', bg: '#e2e8f0' },
+    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Rustiikkinen puskuri', desc: 'Rouheaa asennetta huokuva, ajan patinoima teräs.', price: 600, icon: <ShieldCheck size={28} />, color: '#9a3412', bg: '#ffedd5' },
+    { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas, lämpimän hohtava pronssisuoja.', price: 1800, icon: <ShieldCheck size={28} />, color: '#b45309', bg: '#fef08a' },
 
     // VANTEET
     { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 400, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
