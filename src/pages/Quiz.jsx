@@ -256,6 +256,42 @@ export default function Quiz() {
           {currentQuestion.question}
         </h2>
 
+        {showExplanation && (
+          <div className="animate-fade-in" style={{ padding: '2.5rem', background: isCorrect ? '#f0fdf4' : '#fef2f2', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', position: 'relative', zIndex: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {isCorrect ? <CheckCircle2 size={42} color="#16a34a" /> : <XCircle size={42} color="#dc2626" />}
+                <h2 style={{ margin: 0, fontSize: '1.8rem', color: isCorrect ? '#15803d' : '#b91c1c' }}>
+                  {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
+                </h2>
+              </div>
+              {isCorrect && (
+                <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: '#fef3c7', color: '#d97706', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+                  <Zap size={24} fill="#d97706" /> +{store.getTestMode() ? 500 : 50} Kipinää
+                </div>
+              )}
+            </div>
+            
+            <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', display: 'flex', gap: '1.5rem', alignItems: 'flex-start', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(0, 114, 198, 0.4)' }}>
+                 <Lightbulb size={32} />
+              </div>
+              <div>
+                <h3 style={{ margin: '0 0 0.8rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>Mikä on homman juju?</h3>
+                <p style={{ margin: 0, lineHeight: '1.7', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                  {currentQuestion.explanation}
+                </p>
+              </div>
+            </div>
+
+            <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px' }} onClick={handleNext}>
+              {currentIndex < questions.length - 1 ? 'Seuraava Kysymys' : 'Suoritettu! Jatka tästä'}
+              <ArrowRight size={24} />
+            </button>
+          </div>
+        )}
+
+        <div style={{ opacity: showExplanation ? 0.3 : 1, filter: showExplanation ? 'grayscale(0.7) blur(1px)' : 'none', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: showExplanation ? 'none' : 'auto' }}>
         {/* Regular Multiple Choice / True-False / Scenario / etc */}
         {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -376,40 +412,8 @@ export default function Quiz() {
             )}
           </div>
         )}
-      </div>
-
-      {showExplanation && (
-        <div className="animate-fade-in" style={{ padding: '2rem', background: isCorrect ? 'rgba(76, 175, 80, 0.1)' : 'rgba(239, 68, 68, 0.1)', border: isCorrect ? '2px solid var(--accent-color)' : '2px solid #ef4444', borderRadius: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              {isCorrect ? <CheckCircle2 size={32} color="var(--accent-color)" /> : <XCircle size={32} color="#ef4444" />}
-              <h2 style={{ margin: 0, color: isCorrect ? 'var(--accent-color)' : '#ef4444' }}>
-                {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
-              </h2>
-            </div>
-            {isCorrect && (
-              <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#fef3c7', color: '#d97706', padding: '0.5rem 1rem', borderRadius: '20px', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>
-                <Zap size={20} fill="#d97706" /> +{store.getTestMode() ? 500 : 50} Kipinää
-              </div>
-            )}
-          </div>
-          
-          <div style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
-            <Lightbulb size={24} color="var(--primary-color)" style={{ flexShrink: 0 }} />
-            <div>
-              <h3 style={{ margin: '0 0 0.5rem 0', color: 'var(--primary-color)' }}>Mikä on homman juju?</h3>
-              <p style={{ margin: 0, lineHeight: '1.6', color: 'var(--text-main)' }}>
-                {currentQuestion.explanation}
-              </p>
-            </div>
-          </div>
-
-          <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }} onClick={handleNext}>
-            {currentIndex < questions.length - 1 ? 'Seuraava Kysymys' : 'Suoritettu! Palaa Kartalle'}
-            <ArrowRight size={20} />
-          </button>
         </div>
-      )}
+      </div>
 
     </div>
   );
