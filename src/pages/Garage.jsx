@@ -104,14 +104,29 @@ export default function Garage() {
     const slot = item.category === 'extra' ? item.id : item.category;
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
     
+    let meetsPrereq = true;
+    let prereqText = '';
+    if (item.id === 'g-floor2' && !purchased.includes('g-floor-base')) {
+        meetsPrereq = false;
+        prereqText = 'VAATII EDELLISEN';
+    } else if (item.id === 'g-floor3' && !purchased.includes('g-floor2')) {
+        meetsPrereq = false;
+        prereqText = 'VAATII EDELLISEN';
+    }
+
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
     let btnBg = (sparks >= item.price || item.isDefault) ? '#fef3c7' : '#e2e8f0'; // Toned down amber for buy
     let btnColor = (sparks >= item.price || item.isDefault) ? '#d97706' : 'var(--text-muted)';
-    const canBuy = sparks >= item.price && !isOwned && !item.isDefault;
+    const canBuy = sparks >= item.price && !isOwned && !item.isDefault && meetsPrereq;
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
     let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
 
-    if (isEquipped && item.category === 'extra') {
+    if (!meetsPrereq && !isOwned) {
+       btnText = prereqText;
+       btnBg = '#f1f5f9';
+       btnColor = '#94a3b8';
+       cursor = 'not-allowed';
+    } else if (isEquipped && item.category === 'extra') {
        btnText = 'POISTA';
        btnBg = '#64748b'; // Neutral gray instead of red
        btnColor = 'white';
@@ -366,9 +381,11 @@ export default function Garage() {
             minHeight: '300px',
             borderRadius: '24px', 
             overflow: 'hidden', 
-            border: isGlobalPreview ? '4px solid rgba(16, 185, 129, 0.9)' : '3px solid rgba(0, 114, 198, 0.4)',
-            transition: 'border-color 0.3s ease',
-            boxShadow: 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
+            border: '4px solid rgba(0, 114, 198, 0.4)',
+            transition: 'box-shadow 0.3s ease',
+            boxShadow: isGlobalPreview 
+              ? '0 0 0 6px rgba(16, 185, 129, 0.9), inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)' 
+              : 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
               {isTutorialActive && (
