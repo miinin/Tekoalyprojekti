@@ -509,8 +509,10 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: isLastNode ? '4px solid #fef08a' : '4px solid white',
-                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)',
+                borderWidth: '4px',
+                borderStyle: 'solid',
+                borderColor: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode ? '#fef08a' : 'white'),
+                boxShadow: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)'),
                 backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
@@ -672,8 +674,8 @@ const Roadmap = () => {
           50% { transform: rotate(3deg) scale(1.05); }
         }
         @keyframes wiggle-strong {
-          0%, 100% { transform: rotate(-8deg) scale(1.15); box-shadow: 0 0 20px rgba(16, 185, 129, 0.5) !important; border-color: rgba(16, 185, 129, 0.5) !important; }
-          50% { transform: rotate(8deg) scale(1.15); box-shadow: 0 0 50px rgba(16, 185, 129, 1) !important; border-color: rgba(16, 185, 129, 1) !important; }
+          0%, 100% { transform: rotate(-8deg) scale(1.15); box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); border-color: rgba(16, 185, 129, 0.5); }
+          50% { transform: rotate(8deg) scale(1.15); box-shadow: 0 0 60px rgba(16, 185, 129, 1); border-color: rgba(16, 185, 129, 1); }
         }
         .animate-wiggle {
           animation: wiggle 0.6s ease-in-out infinite;
@@ -721,6 +723,7 @@ const Roadmap = () => {
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
           <button 
             onClick={() => navigate('/garage')}
+            className={currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-strong" : ""}
             style={{ 
                 backgroundColor: 'white', 
                 border: 'none', 
@@ -729,12 +732,20 @@ const Roadmap = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '0.6rem', 
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                boxShadow: currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? undefined : '0 4px 12px rgba(0,0,0,0.1)',
                 cursor: 'pointer',
-                transition: 'transform 0.2s'
+                transition: currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? 'none' : 'transform 0.2s'
             }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            onMouseOver={(e) => {
+                if (!(currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                }
+            }}
+            onMouseOut={(e) => {
+                if (!(currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                    e.currentTarget.style.transform = 'scale(1)';
+                }
+            }}
           >
             <Car size={24} color="var(--primary-color)" />
             <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--primary-color)', fontFamily: 'var(--font-main)' }}>AUTOTALLI</span>
@@ -760,7 +771,7 @@ const Roadmap = () => {
                     Seikkailu alkaa!
                 </div>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Ensimmäinen kohteesi on <b>tekoälyn maailman perusteet</b>. Paina sinisiä pallukoita päästäksesi eteenpäin aloittaaksesi seikkailun. Tämän jälkeen alueella aukeaa uusia visailuja ja jatkoreittejä!
+                    Kartalla liikutaan painamalla sinisiä pallukoita. Seikkailusi ensimmäinen etappi on tekoälyn perusteet!
                 </div>
                 <button 
                    className="btn-primary" 
