@@ -415,15 +415,13 @@ export default function Garage() {
           }}>
               {isTutorialActive && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   <b>Löysit hylätyn autotallin ja laatikollisen kipinöitä!</b><br/>
-                   Hämähäkinseittien takia emme pääse kunnolla töihin. Osta sivupaneelista "Siivous" nähdäksesi mitä kaikkea pölyn alta paljastuu...
+                   Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Valitse ”Siivous” ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
               {showGreenPulse && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   <b>Huippua! Auto on paljastettu.</b><br/>
-                   Kipinät loppuivat kesken. Kerää lisää kipinöitä viemällä paku testeihin klikkaamalla vihreää oikean ylänurkan "Tiekartta" -painiketta!
+                   <b>Tulipa siistiä!</b> Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea AI van!, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
                 </div>
               )}
               
