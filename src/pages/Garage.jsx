@@ -145,6 +145,11 @@ export default function Garage() {
        cursor = 'pointer';
     }
 
+    let extraBtnClass = "";
+    if (isTutorialActive && item.id === 'g-clean') {
+        extraBtnClass = " animate-wiggle";
+    }
+
     return (
       <div key={item.id} className="carousel-item glass-panel" 
            style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)', justifyContent: 'space-between', flex: '0 0 auto' }} 
@@ -160,7 +165,7 @@ export default function Garage() {
           </div>
         </div>
         <button 
-          className="btn-primary" 
+          className={`btn-primary${extraBtnClass}`} 
           style={{ 
             padding: '0.5rem', fontSize: '0.9rem', width: '100%',
             background: btnBg, color: btnColor, boxShadow: btnShadow, cursor
@@ -399,14 +404,14 @@ export default function Garage() {
           }}>
               {isTutorialActive && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   <b>Löysit hylätyn autotallin ja laatikollisen kipinöitä! ✨</b><br/>
+                   <b>Löysit hylätyn autotallin ja laatikollisen kipinöitä!</b><br/>
                    Hämähäkinseittien takia emme pääse kunnolla töihin. Osta sivupaneelista "Siivous" nähdäksesi mitä kaikkea pölyn alta paljastuu...
                 </div>
               )}
               
               {showGreenPulse && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   <b>Huippua! Auto on paljastettu. 🚐</b><br/>
+                   <b>Huippua! Auto on paljastettu.</b><br/>
                    Kipinät loppuivat kesken. Kerää lisää kipinöitä viemällä paku testeihin klikkaamalla vihreää oikean ylänurkan "Tiekartta" -painiketta!
                 </div>
               )}

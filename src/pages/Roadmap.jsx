@@ -30,6 +30,7 @@ const Roadmap = () => {
   const [showMapTutorial, setShowMapTutorial] = useState(
       store.getTutorialCompleted() && !store.getTutorialSkipped() && !store.getMapTutorialCompleted()
   );
+  const [closedTuition, setClosedTuition] = useState({ 0: false, 1: false, 2: false });
   const [puffs, setPuffs] = useState([]);
   const mapRef = useRef(null);
   const consumedReturnRef = useRef(false);
@@ -476,7 +477,8 @@ const Roadmap = () => {
           }
       }
       const isCompleted = completedLessons.includes(node.id);
-      const isFirstEverTarget = currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0 && showMapTutorial;
+      const isFirstEverTarget = currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
+      const isFirstSubTarget = currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
 
       const labelPos = node.labelPos || 'bottom';
       let labelStyle = { top: '100%', left: '50%', transform: 'translate(-50%, 0.66rem)' };
@@ -498,7 +500,7 @@ const Roadmap = () => {
           <button
             id={node.id}
             onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
-            className={isFirstEverTarget ? "animate-pulse" : ""}
+            className={(isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle" : ""}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 height: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -664,6 +666,13 @@ const Roadmap = () => {
         .van-idle {
           animation: vanIdle 1.5s ease-in-out infinite;
         }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(-3deg) scale(1.05); }
+          50% { transform: rotate(3deg) scale(1.05); }
+        }
+        .animate-wiggle {
+          animation: wiggle 0.6s ease-in-out infinite;
+        }
       `}</style>
       {/* Header Controls */}
       <div style={headerStyle}>
@@ -737,10 +746,10 @@ const Roadmap = () => {
             {showMapTutorial && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
-                    <MapIcon size={32} /> Seikkailu alkaa!
+                    Seikkailu alkaa!
                 </div>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Ensimmäinen kohteesi on <b>AI-maailman perusteet</b>. Paina isosta pyöreästä napista sykkivän saaren kohdalla aloittaaksesi seikkailun. Tämän jälkeen alueella aukeaa uusia visailuja ja jatkoreittejä!
+                    Ensimmäinen kohteesi on <b>tekoälyn maailman perusteet</b>. Paina sinisiä pallukoita päästäksesi eteenpäin aloittaaksesi seikkailun. Tämän jälkeen alueella aukeaa uusia visailuja ja jatkoreittejä!
                 </div>
                 <button 
                    className="btn-primary" 
@@ -750,7 +759,41 @@ const Roadmap = () => {
                        setShowMapTutorial(false);
                    }}
                 >
-                   Selvä homma, mennään!
+                   Selvä homma!
+                </button>
+              </div>
+            )}
+            
+            {/* Submap Tutoriaalit */}
+            {currentMap === 'perusteet' && completedLessons.length === 0 && !closedTuition[0] && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
+                    Valitse ensimmäinen kategoria napsauttamalla sinistä pallukkaa.
+                </div>
+                <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 0: true}))}>
+                   Ymmärretty!
+                </button>
+              </div>
+            )}
+            
+            {currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
+                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta.
+                </div>
+                <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 1: true}))}>
+                   Selvä homma!
+                </button>
+              </div>
+            )}
+            
+            {currentMap === 'perusteet' && completedLessons.length === 2 && !closedTuition[2] && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
+                    Kun kaikki 6 kategoriaa on tehty, aukeaa viimeinen, jonka kysymykset perustuvat 'hyvä tietää' -laatikoihin. Ne kannattaa lukea, koska niistä saa eniten kipinöitä!
+                </div>
+                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 2: true}))}>
+                   Ymmärretty!
                 </button>
               </div>
             )}
