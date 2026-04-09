@@ -479,6 +479,7 @@ const Roadmap = () => {
       const isCompleted = completedLessons.includes(node.id);
       const isFirstEverTarget = currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
       const isFirstSubTarget = currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
+      const isSecondSubTarget = currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1 && closedTuition[1];
 
       const labelPos = node.labelPos || 'bottom';
       let labelStyle = { top: '100%', left: '50%', transform: 'translate(-50%, 0.66rem)' };
@@ -500,7 +501,7 @@ const Roadmap = () => {
           <button
             id={node.id}
             onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
-            className={(isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle" : ""}
+            className={isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : "")}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 height: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -508,8 +509,8 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: isLastNode ? '4px solid #fef08a' : (isFirstEverTarget ? '4px solid #10b981' : '4px solid white'),
-                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : (isFirstEverTarget ? '0 0 25px rgba(16, 185, 129, 0.8)' : '0 8px 20px rgba(0,0,0,0.2)'),
+                border: isLastNode ? '4px solid #fef08a' : '4px solid white',
+                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)',
                 backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
@@ -670,8 +671,18 @@ const Roadmap = () => {
           0%, 100% { transform: rotate(-3deg) scale(1.05); }
           50% { transform: rotate(3deg) scale(1.05); }
         }
+        @keyframes wiggle-strong {
+          0%, 100% { transform: rotate(-8deg) scale(1.15); box-shadow: 0 0 20px rgba(16, 185, 129, 0.5) !important; border-color: rgba(16, 185, 129, 0.5) !important; }
+          50% { transform: rotate(8deg) scale(1.15); box-shadow: 0 0 50px rgba(16, 185, 129, 1) !important; border-color: rgba(16, 185, 129, 1) !important; }
+        }
         .animate-wiggle {
           animation: wiggle 0.6s ease-in-out infinite;
+        }
+        .animate-wiggle-strong {
+          animation: wiggle-strong 0.8s ease-in-out infinite;
+        }
+        .animate-wiggle-strong-alt {
+          animation: wiggle-strong 0.8s ease-in-out infinite 0.4s;
         }
       `}</style>
       {/* Header Controls */}
@@ -779,7 +790,7 @@ const Roadmap = () => {
             {currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta.
+                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 1: true}))}>
                    Selvä homma!
@@ -790,10 +801,10 @@ const Roadmap = () => {
             {currentMap === 'perusteet' && completedLessons.length === 2 && !closedTuition[2] && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Kun kaikki 6 kategoriaa on tehty, aukeaa viimeinen, jonka kysymykset perustuvat 'hyvä tietää' -laatikoihin. Ne kannattaa lukea, koska niistä saa eniten kipinöitä!
+                    Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin nähtyihin ”Mikä on homman juju?” -laatikoihin. Lue siis nämä laatikot tarkasti jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 2: true}))}>
-                   Ymmärretty!
+                   Olen valmis jatkamaan seikkailua itse!
                 </button>
               </div>
             )}
