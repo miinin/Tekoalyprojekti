@@ -425,7 +425,7 @@ export default function Garage() {
                 </div>
               )}
               
-              {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && (
+              {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Tervetuloa takaisin!</b><br/>
                    Voit ostaa ansaitsemillasi kipinöillä päivityksiä autoosi ja parannella autotallia. Tutki rohkeasti uusia vaihtoehtoja sivupaneelista!

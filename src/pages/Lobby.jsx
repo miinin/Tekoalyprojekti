@@ -60,7 +60,7 @@ export default function Lobby() {
         .lobby-bg {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(-45deg, #0284c7, #4f46e5, #be185d, #7e22ce);
+            background: linear-gradient(-45deg, #0ea5e9, #10b981, #059669, #f59e0b);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             z-index: -2;
@@ -98,8 +98,8 @@ export default function Lobby() {
       <div className="lobby-bg" />
       <div className="lobby-overlay" />
 
-      <h1 className="animate-fade-in" style={{ fontSize: '7rem', margin: 0, marginTop: '-3rem', textShadow: '0 10px 20px rgba(0,0,0,0.4)', color: 'white', fontFamily: 'var(--font-display)', letterSpacing: '6px' }}>AIVAN</h1>
-      <p className="animate-fade-in" style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.4rem', margin: '0 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold' }}>Tekoälyn oppimispeli peruskouluille ja lukioille</p>
+      <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', marginTop: '-3rem', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))', zIndex: 10 }} />
+      <p className="animate-fade-in" style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
       <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '2.5rem', width: '100%', maxWidth: '950px', padding: '0 1.5rem', zIndex: 10 }}>
         

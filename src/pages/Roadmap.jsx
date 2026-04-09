@@ -477,9 +477,9 @@ const Roadmap = () => {
           }
       }
       const isCompleted = completedLessons.includes(node.id);
-      const isFirstEverTarget = currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
-      const isFirstSubTarget = currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
-      const isSecondSubTarget = currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1 && closedTuition[1];
+      const isFirstEverTarget = !store.getTutorialSkipped() && currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
+      const isFirstSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
+      const isSecondSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1 && closedTuition[1];
 
       const labelPos = node.labelPos || 'bottom';
       let labelStyle = { top: '100%', left: '50%', transform: 'translate(-50%, 0.66rem)' };
@@ -730,7 +730,7 @@ const Roadmap = () => {
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
           <button 
             onClick={() => navigate('/garage')}
-            className={currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-glow-soft-alt" : ""}
+            className={!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-glow-soft-alt" : ""}
             style={{ 
                 backgroundColor: 'white', 
                 border: 'none', 
@@ -739,17 +739,17 @@ const Roadmap = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '0.6rem', 
-                boxShadow: currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? undefined : '0 4px 12px rgba(0,0,0,0.1)',
+                boxShadow: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? undefined : '0 4px 12px rgba(0,0,0,0.1)',
                 cursor: 'pointer',
-                transition: currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? 'none' : 'transform 0.2s'
+                transition: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? 'none' : 'transform 0.2s'
             }}
             onMouseOver={(e) => {
-                if (!(currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
                     e.currentTarget.style.transform = 'scale(1.05)';
                 }
             }}
             onMouseOut={(e) => {
-                if (!(currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
                     e.currentTarget.style.transform = 'scale(1)';
                 }
             }}
@@ -794,7 +794,7 @@ const Roadmap = () => {
             )}
             
             {/* Submap Tutoriaalit */}
-            {currentMap === 'perusteet' && completedLessons.length === 0 && !closedTuition[0] && (
+            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 0 && !closedTuition[0] && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Valitse ensimmäinen kategoria napsauttamalla sinistä pallukkaa.
@@ -805,7 +805,7 @@ const Roadmap = () => {
               </div>
             )}
             
-            {currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
+            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
@@ -816,7 +816,7 @@ const Roadmap = () => {
               </div>
             )}
             
-            {currentMap === 'perusteet' && completedLessons.length === 2 && !closedTuition[2] && (
+            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 2 && !closedTuition[2] && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin nähtyihin ”Mikä on homman juju?” -laatikoihin. Lue siis nämä laatikot tarkasti jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
