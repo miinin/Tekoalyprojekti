@@ -115,9 +115,9 @@ export const AI_ROADMAP_DATA = {
         { id: 'reilu_peli_1', top: '47.6%', left: '51.9%' },
         { id: 'reilu_peli_2', top: '70.3%', left: '66.2%' },
         { id: 'reilu_peli_3', top: '39.4%', left: '80.1%' },
-        { id: 'reilu_peli_4', top: '66.6%', left: '49.1%' },
-        { id: 'reilu_peli_5', top: '69.4%', left: '47.1%' },
-        { id: 'reilu_peli_6', top: '66.0%', left: '39.6%' },
+        { id: 'reilu_peli_4', top: '66.6%', left: '49.1%', labelPos: 'top' },
+        { id: 'reilu_peli_5', top: '69.4%', left: '47.1%', labelPos: 'left' },
+        { id: 'reilu_peli_6', top: '66.0%', left: '39.6%', labelPos: 'bottom' },
         { id: 'reilu_peli_7', top: '77.2%', left: '28.7%' }
       ],
       paths: {

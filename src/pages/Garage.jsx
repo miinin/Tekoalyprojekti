@@ -152,17 +152,17 @@ export default function Garage() {
            onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
         <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', flexGrow: 1 }}>
           <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            {React.cloneElement(item.icon, { size: 20 })}
+            {React.cloneElement(item.icon, { size: 24 })}
           </div>
           <div style={{ fontFamily: 'var(--font-main)' }}>
-            <h3 style={{ margin: 0, fontSize: '0.9rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
-            <p style={{ margin: '0.1rem 0 0 0', fontSize: '0.7rem', color: 'var(--text-muted)' }}>{item.desc}</p>
+            <h3 style={{ margin: 0, fontSize: '1.1rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
+            <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.desc}</p>
           </div>
         </div>
         <button 
           className="btn-primary" 
           style={{ 
-            padding: '0.3rem', fontSize: '0.75rem', width: '100%',
+            padding: '0.5rem', fontSize: '0.9rem', width: '100%',
             background: btnBg, color: btnColor, boxShadow: btnShadow, cursor
           }}
           onClick={async (e) => {
@@ -293,8 +293,8 @@ export default function Garage() {
           border-radius: 4px;
         }
         .carousel-item {
-          width: 250px;
-          min-width: 250px;
+          width: 280px;
+          min-width: 280px;
           flex-shrink: 0;
         }
         @keyframes flashBang {
@@ -303,6 +303,13 @@ export default function Garage() {
         }
         .flash-bang {
           animation: flashBang 2s ease-out forwards;
+        }
+        @keyframes wiggle {
+          0%, 100% { transform: rotate(-3deg) scale(1.05); }
+          50% { transform: rotate(3deg) scale(1.05); }
+        }
+        .animate-wiggle {
+          animation: wiggle 0.6s ease-in-out infinite;
         }
       `}</style>
 
@@ -321,7 +328,7 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           <button 
-             className={`btn-secondary ${showGreenPulse ? 'animate-pulse' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
+             className={`btn-secondary ${showGreenPulse ? 'animate-wiggle' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}
              disabled={isTutorialActive}
              style={{ 
@@ -391,20 +398,20 @@ export default function Garage() {
             background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
           }}>
               {isTutorialActive && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '0.8rem 1.5rem', borderRadius: '12px', border: '3px solid #f59e0b', color: 'var(--text-main)', fontSize: '0.9rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Löysit hylätyn autotallin ja laatikollisen kipinöitä! ✨</b><br/>
                    Hämähäkinseittien takia emme pääse kunnolla töihin. Osta sivupaneelista "Siivous" nähdäksesi mitä kaikkea pölyn alta paljastuu...
                 </div>
               )}
               
               {showGreenPulse && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '0.8rem 1.5rem', borderRadius: '12px', border: '3px solid #10b981', color: 'var(--text-main)', fontSize: '0.9rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Huippua! Auto on paljastettu. 🚐</b><br/>
-                   Kipinät loppuivat kesken. Tienaa varallisuutta viemällä paku testeihin klikkaamalla vihreää "Tiekartta" -painiketta!
+                   Kipinät loppuivat kesken. Kerää lisää kipinöitä viemällä paku testeihin klikkaamalla vihreää oikean ylänurkan "Tiekartta" -painiketta!
                 </div>
               )}
 
-              {isTutorialActive ? (
+              {isTutorialActive && hoveredItem !== 'g-clean' ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               ) : (
                 <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
@@ -448,7 +455,7 @@ export default function Garage() {
               return null;
             })}
 
-            {isTutorialActive ? (
+            {isTutorialActive && hoveredItem !== 'g-clean' ? (
                 <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
             ) : (
                 <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />

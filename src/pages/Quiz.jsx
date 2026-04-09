@@ -13,6 +13,16 @@ export default function Quiz() {
   
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentSparks, setCurrentSparks] = useState(0);
+
+  useEffect(() => {
+    const fetchSparks = async () => {
+      setCurrentSparks(await store.getSparks());
+    };
+    fetchSparks();
+    const interval = setInterval(fetchSparks, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     // Load dynamic questions from local DB instead of hardcoded file
@@ -39,7 +49,6 @@ export default function Quiz() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [earnedSparks, setEarnedSparks] = useState(0);
-  const [grindSparks, setGrindSparks] = useState(0);
   const [results, setResults] = useState([]);
 
   // States for special types
@@ -138,17 +147,12 @@ export default function Quiz() {
 
       const newSparksEarned = await store.saveNodeRecord(sub.id, totalEarned);
       
-      // Calculate continuous loop reward (grind reward): 
-      const grindRewardCount = results.filter(r => r.earned > 0).length;
-      const grindSparksEarned = grindRewardCount * 10 * sparkRewardMultiplier; // 10 sparks base per partially/fully right question
-      
-      const totalToBank = newSparksEarned + grindSparksEarned;
+      const totalToBank = newSparksEarned; // Removed grindSparksEarned / reiluuslisä
 
       if (totalToBank > 0) {
          await store.addSparks(totalToBank);
       }
       setEarnedSparks(newSparksEarned);
-      setGrindSparks(grindSparksEarned);
       store.markCompleted(sub.id);
       setShowSummary(true);
     }
@@ -182,13 +186,6 @@ export default function Quiz() {
                     {correctAnswersCount === questions.length ? 
                       'Huippusuoritus! Olet kerännyt jo kaikki ennätyskipinät tältä tasolta.' : 
                       'Et rikkonut ennätystäsi tällä kertaa... Vastauksiasi kannattaa pohtia uudelleen!'}
-                </div>
-              )}
-              
-              {grindSparks > 0 && (
-                <div style={{ fontSize: '1.1rem', color: 'var(--primary-color)', marginBottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem', padding: '1rem', background: 'var(--bg-secondary)', borderRadius: '12px' }}>
-                    <div>Reiluuslisä (Osallistuminen & osittaiset oikeat vastaukset, ei riipu ennätyksistäsi)</div>
-                    <div style={{ fontWeight: 'bold' }}>+{grindSparks} kipinää</div>
                 </div>
               )}
 
@@ -229,15 +226,23 @@ export default function Quiz() {
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
       
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>
-          <ChevronLeft size={24} /> 
-        </button>
-        <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--primary-color)' }}>
-          {sub.name}
-        </span>
-        <div style={{ color: 'var(--text-muted)' }}>
-          {currentIndex + 1} / {questions.length}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>
+            <ChevronLeft size={24} /> 
+          </button>
+          <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.2rem', color: 'var(--primary-color)' }}>
+            {sub.name}
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <div style={{ fontWeight: 'bold', color: 'var(--text-main)', background: '#fef3c7', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d97706', border: '2px solid #fde68a' }}>
+            <Zap size={20} fill="#d97706" />
+            {currentSparks}
+          </div>
+          <div style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>
+            {currentIndex + 1} / {questions.length}
+          </div>
         </div>
       </div>
 

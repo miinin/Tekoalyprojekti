@@ -6,7 +6,8 @@ import {
   Trophy, 
   Car,
   CheckCircle2,
-  Lock
+  Lock,
+  Zap
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 
@@ -93,16 +94,17 @@ const Roadmap = () => {
                 if (entryPath.length > 1 && parseFloat(entryPath[1].left) < parseFloat(entryPath[0].left)) {
                     initialDirection = -1;
                 }
+                const shortenedPath = entryPath.slice(0, 2);
                 setVanPos(prev => ({ 
                     ...prev, 
-                    top: entryPath[0].top, 
-                    left: entryPath[0].left, 
+                    top: shortenedPath[0].top, 
+                    left: shortenedPath[0].left, 
                     direction: initialDirection,
                     stepTime: 0 
                 }));
                 
                 setTimeout(() => {
-                    moveAlongPath(entryPath);
+                    moveAlongPath(shortenedPath);
                 }, 100);
             }
         }
@@ -328,12 +330,14 @@ const Roadmap = () => {
   };
 
   const [equippedItems, setEquippedItems] = useState({});
+  const [sparks, setSparks] = useState(0);
 
   useEffect(() => {
     const fetchProgress = async () => {
       setEquippedItems(await store.getEquippedItems());
       const savedCompletions = store.getCompletions();
       setCompletedLessons(savedCompletions);
+      setSparks(await store.getSparks());
     };
     fetchProgress();
     
@@ -472,6 +476,13 @@ const Roadmap = () => {
           }
       }
       const isCompleted = completedLessons.includes(node.id);
+      const isFirstEverTarget = currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0 && showMapTutorial;
+
+      const labelPos = node.labelPos || 'bottom';
+      let labelStyle = { top: '100%', left: '50%', transform: 'translate(-50%, 0.66rem)' };
+      if (labelPos === 'top') { labelStyle = { bottom: '100%', left: '50%', transform: 'translate(-50%, -0.66rem)' }; }
+      else if (labelPos === 'left') { labelStyle = { top: '50%', right: '100%', transform: 'translate(-0.66rem, -50%)' }; }
+      else if (labelPos === 'right') { labelStyle = { top: '50%', left: '100%', transform: 'translate(0.66rem, -50%)' }; }
 
       return (
         <div 
@@ -481,16 +492,13 @@ const Roadmap = () => {
               top: node.top, 
               left: node.left, 
               transform: 'translate(-50%, -50%)',
-              zIndex: 40,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '0.66rem'
+              zIndex: 40
           }}
         >
           <button
             id={node.id}
             onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
+            className={isFirstEverTarget ? "animate-pulse" : ""}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 height: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -498,8 +506,8 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: isLastNode ? '4px solid #fef08a' : '4px solid white',
-                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)',
+                border: isLastNode ? '4px solid #fef08a' : (isFirstEverTarget ? '4px solid #10b981' : '4px solid white'),
+                boxShadow: isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : (isFirstEverTarget ? '0 0 25px rgba(16, 185, 129, 0.8)' : '0 8px 20px rgba(0,0,0,0.2)'),
                 backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
@@ -539,11 +547,14 @@ const Roadmap = () => {
           <div 
             className="glass-panel" 
             style={{ 
+                position: 'absolute',
+                ...labelStyle,
                 padding: '0.4rem 1rem', 
                 borderRadius: '10px', 
                 backgroundColor: 'white', 
                 border: '1px solid rgba(0,0,0,0.1)',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                pointerEvents: 'none'
             }}
           >
               <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
@@ -709,6 +720,11 @@ const Roadmap = () => {
             <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--primary-color)', fontFamily: 'var(--font-main)' }}>AUTOTALLI</span>
           </button>
 
+          <div style={{ backgroundColor: '#fef3c7', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid #fde68a', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+            <Zap size={24} fill="#d97706" color="#d97706" />
+            <span style={{ fontWeight: 900, fontSize: '1.3rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{sparks}</span>
+          </div>
+
           <div style={{ backgroundColor: 'white', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid var(--secondary-color)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
             <span style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--text-main)', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
@@ -719,16 +735,16 @@ const Roadmap = () => {
       {/* Map Content */}
       <div style={mapContainerStyle}>
             {showMapTutorial && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.5rem', borderRadius: '15px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', boxShadow: '0 10px 40px rgba(0,0,0,0.4)', width: '90%', maxWidth: '450px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.5rem' }}>
-                    <MapIcon size={28} /> Seikkailu alkaa!
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
+                    <MapIcon size={32} /> Seikkailu alkaa!
                 </div>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                    Edessäsi aukeaa tiekartta. Valitse haluamasi kohde kartalta, suorita visailu ja tienaa kipinöitä autotalliin! Takaisin autotalliin pääset oikean ylänurkan painikkeesta.
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
+                    Ensimmäinen kohteesi on <b>AI-maailman perusteet</b>. Paina isosta pyöreästä napista sykkivän saaren kohdalla aloittaaksesi seikkailun. Tämän jälkeen alueella aukeaa uusia visailuja ja jatkoreittejä!
                 </div>
                 <button 
                    className="btn-primary" 
-                   style={{ width: '100%', background: '#10b981', fontSize: '1.2rem', padding: '1rem' }} 
+                   style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} 
                    onClick={() => {
                        store.completeMapTutorial();
                        setShowMapTutorial(false);
