@@ -13,6 +13,8 @@ export default function Garage() {
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
   const [flashScreen, setFlashScreen] = useState(false);
+  const [completedLessons, setCompletedLessons] = useState([]);
+  const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
   const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_clean' : 'body'); // Default open: Body (or g_clean in tutorial)
 
@@ -21,6 +23,7 @@ export default function Garage() {
       setSparks(await store.getSparks());
       setPurchased(await store.getPurchasedItems());
       setEquipped(await store.getEquippedItems());
+      setCompletedLessons(store.getCompletions());
     };
     fetchData();
     
@@ -313,8 +316,15 @@ export default function Garage() {
           0%, 100% { transform: rotate(-3deg) scale(1.05); }
           50% { transform: rotate(3deg) scale(1.05); }
         }
+        @keyframes wiggle-glow {
+          0%, 100% { transform: rotate(-3deg) scale(1.05); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+          50% { transform: rotate(3deg) scale(1.05); box-shadow: 0 0 30px rgba(16, 185, 129, 1); }
+        }
         .animate-wiggle {
           animation: wiggle 0.6s ease-in-out infinite;
+        }
+        .animate-wiggle-glow {
+          animation: wiggle-glow 0.8s ease-in-out infinite;
         }
       `}</style>
 
@@ -333,7 +343,7 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           <button 
-             className={`btn-secondary ${showGreenPulse ? 'animate-wiggle' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
+             className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}
              disabled={isTutorialActive}
              style={{ 
@@ -341,7 +351,8 @@ export default function Garage() {
                  cursor: isTutorialActive ? 'not-allowed' : 'pointer',
                  background: showGreenPulse ? '#10b981' : '',
                  color: showGreenPulse ? 'white' : '#64748b',
-                 borderColor: showGreenPulse ? '#10b981' : ''
+                 borderColor: showGreenPulse ? '#10b981' : '',
+                 boxShadow: showGreenPulse ? undefined : ''
              }}
           >
             <Map size={20} /> Tiekartta
@@ -413,6 +424,17 @@ export default function Garage() {
                 <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Huippua! Auto on paljastettu.</b><br/>
                    Kipinät loppuivat kesken. Kerää lisää kipinöitä viemällä paku testeihin klikkaamalla vihreää oikean ylänurkan "Tiekartta" -painiketta!
+                </div>
+              )}
+              
+              {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && (
+                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                   <b>Tervetuloa takaisin!</b><br/>
+                   Voit ostaa ansaitsemillasi kipinöillä päivityksiä autoosi ja parannella autotallia. Tutki rohkeasti uusia vaihtoehtoja sivupaneelista!
+                   <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', background: '#3b82f6' }} onClick={() => {
+                        localStorage.setItem('aivan_garage_tuition', 'true');
+                        setClosedGarageTuition(true);
+                   }}>Selvä homma!</button>
                 </div>
               )}
 

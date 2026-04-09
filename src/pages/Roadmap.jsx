@@ -677,6 +677,10 @@ const Roadmap = () => {
           0%, 100% { transform: rotate(-8deg) scale(1.15); box-shadow: 0 0 20px rgba(16, 185, 129, 0.5); border-color: rgba(16, 185, 129, 0.5); }
           50% { transform: rotate(8deg) scale(1.15); box-shadow: 0 0 60px rgba(16, 185, 129, 1); border-color: rgba(16, 185, 129, 1); }
         }
+        @keyframes wiggle-glow-soft {
+          0%, 100% { transform: rotate(-3deg) scale(1.05); box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
+          50% { transform: rotate(3deg) scale(1.05); box-shadow: 0 0 30px rgba(16, 185, 129, 1); }
+        }
         .animate-wiggle {
           animation: wiggle 0.6s ease-in-out infinite;
         }
@@ -685,6 +689,9 @@ const Roadmap = () => {
         }
         .animate-wiggle-strong-alt {
           animation: wiggle-strong 0.8s ease-in-out infinite 0.4s;
+        }
+        .animate-wiggle-glow-soft-alt {
+          animation: wiggle-glow-soft 0.8s ease-in-out infinite 0.4s;
         }
       `}</style>
       {/* Header Controls */}
@@ -723,7 +730,7 @@ const Roadmap = () => {
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
           <button 
             onClick={() => navigate('/garage')}
-            className={currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-strong" : ""}
+            className={currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-glow-soft-alt" : ""}
             style={{ 
                 backgroundColor: 'white', 
                 border: 'none', 
