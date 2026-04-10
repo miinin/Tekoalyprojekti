@@ -118,11 +118,15 @@ export default function Garage() {
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
     let btnBg = (sparks >= item.price || item.isDefault) ? '#3b82f6' : '#e2e8f0'; 
     let btnColor = (sparks >= item.price || item.isDefault) ? 'white' : 'var(--text-muted)';
-    const canBuy = sparks >= item.price && !isOwned && !item.isDefault && meetsPrereq;
+    const canBuy = sparks >= item.price && !isOwned && !item.isDefault && meetsPrereq && (!isTutorialActive || item.id === 'g-clean');
     let btnShadow = canBuy ? '0 4px 6px rgba(59, 130, 246, 0.3)' : 'none';
-    let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
+    let cursor = (canBuy || (item.isDefault && !isEquipped && !isTutorialActive)) ? 'pointer' : 'not-allowed';
 
-    if (!meetsPrereq && !isOwned) {
+    if (isTutorialActive && item.id !== 'g-clean') {
+       btnBg = '#f1f5f9';
+       btnColor = '#94a3b8';
+       cursor = 'not-allowed';
+    } else if (!meetsPrereq && !isOwned) {
        btnText = prereqText;
        btnBg = '#f1f5f9';
        btnColor = '#94a3b8';
@@ -157,7 +161,7 @@ export default function Garage() {
                borderWidth: '2px',
                boxShadow: '0 4px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8)'
            }} 
-           onMouseEnter={() => setHoveredItem(item.id)}
+           onMouseEnter={() => { if (!isTutorialActive || item.id === 'g-clean') setHoveredItem(item.id); }}
            onMouseLeave={() => setHoveredItem(null)}>
            
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
