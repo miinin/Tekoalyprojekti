@@ -112,13 +112,13 @@ export const AI_ROADMAP_DATA = {
       entry: [{top:"5.8%",left:"33.0%"},{top:"9.8%",left:"30.9%"},{top:"15.6%",left:"30.3%"},{top:"19.4%",left:"31.7%"},{top:"22.2%",left:"35.4%"},{top:"25.9%",left:"38.8%"},{top:"32.4%",left:"38.2%"},{top:"38.3%",left:"38.3%"},{top:"43.6%",left:"39.7%"},{top:"46.6%",left:"41.8%"},{top:"50.4%",left:"45.3%"},{top:"49.9%",left:"48.4%"},{top:"47.6%",left:"51.9%"}],
       exit: [{top:"47.6%",left:"51.9%"},{top:"49.9%",left:"48.4%"},{top:"50.4%",left:"45.3%"},{top:"46.6%",left:"41.8%"},{top:"43.6%",left:"39.7%"},{top:"38.3%",left:"38.3%"},{top:"32.4%",left:"38.2%"},{top:"25.9%",left:"38.8%"},{top:"22.2%",left:"35.4%"},{top:"19.4%",left:"31.7%"},{top:"15.6%",left:"30.3%"},{top:"9.8%",left:"30.9%"},{top:"5.8%",left:"33.0%"}],
       nodes: [
-        { id: 'reilu_peli_1', top: '47.6%', left: '51.9%' },
-        { id: 'reilu_peli_2', top: '70.3%', left: '66.2%' },
-        { id: 'reilu_peli_3', top: '39.4%', left: '80.1%' },
-        { id: 'reilu_peli_4', top: '66.6%', left: '49.1%', labelPos: 'top' },
-        { id: 'reilu_peli_5', top: '69.4%', left: '47.1%', labelPos: 'left' },
-        { id: 'reilu_peli_6', top: '66.0%', left: '39.6%', labelPos: 'bottom' },
-        { id: 'reilu_peli_7', top: '77.2%', left: '28.7%' }
+        { id: 'reilu_peli_1', top: '42.5%', left: '35.7%' },
+        { id: 'reilu_peli_2', top: '41.1%', left: '82.2%' },
+        { id: 'reilu_peli_3', top: '33.4%', left: '63.1%' },
+        { id: 'reilu_peli_4', top: '43.6%', left: '49.7%', labelPos: 'top' },
+        { id: 'reilu_peli_5', top: '67.8%', left: '64.6%', labelPos: 'left' },
+        { id: 'reilu_peli_6', top: '71.0%', left: '51.5%', labelPos: 'bottom' },
+        { id: 'reilu_peli_7', top: '64.5%', left: '36.3%' }
       ],
       paths: {
         'reilu_peli_1-reilu_peli_2': [{top:"47.6%",left:"51.9%"}, {top:"51.4%",left:"53.9%"},{top:"57.6%",left:"55.7%"},{top:"61.6%",left:"57.3%"},{top:"63.6%",left:"59.3%"},{top:"65.9%",left:"62.1%"},{top:"69.2%",left:"64.3%"},{top:"70.3%",left:"66.2%"}],
