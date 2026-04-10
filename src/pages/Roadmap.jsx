@@ -625,10 +625,12 @@ const Roadmap = () => {
   const mapContainerStyle = {
     position: 'absolute',
     inset: '100px 30px 40px 30px',
-    backgroundColor: '#cbd5e1',
+    background: 'rgba(255, 255, 255, 0.25)',
+    backdropFilter: 'blur(12px)',
+    WebkitBackdropFilter: 'blur(12px)',
     borderRadius: '30px',
-    border: '8px solid rgba(255, 255, 255, 0.3)',
-    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.2)',
+    border: '8px solid rgba(255, 255, 255, 0.4)',
+    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
@@ -660,7 +662,7 @@ const Roadmap = () => {
   };
 
   return (
-    <div className="roadmap-container" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden', backgroundColor: '#f1f5f9' }}>
+    <div className="roadmap-container" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
       <style>{`
         @keyframes vanIdle {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
