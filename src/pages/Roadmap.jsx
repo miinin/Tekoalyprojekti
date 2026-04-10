@@ -359,7 +359,6 @@ const Roadmap = () => {
                                  allWaypoints.push(...finalWaypoints);
                              }
                         }
-                        }
                     }
                 }
             }
