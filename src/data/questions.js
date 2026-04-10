@@ -163,22 +163,22 @@ export const categories = [
     "id": "kayttotaidot",
     "name": "Tekoälyn käyttötaidot",
     "subcategories": [
-      { "id": "kayttotaidot_1", "name": "Taso 1: Kehotteet", "questions": [
+      { "id": "kayttotaidot_1", "name": "Tarkka osoite navigaattoriin (Hyvän kysymyksen laatiminen / Promptaus)", "questions": [
           { "id": "q_kt1_1", "type": "multiple_choice", "question": "Mikä on 'prompt'?", "options": ["Ohje tai kysymys jolla ohjaat tekoälyä", "Salasana", "Tietokoneen merkki", "Uusi peli"], "correctAnswer": "Ohje tai kysymys jolla ohjaat tekoälyä", "explanation": "Kehote (prompt) on tärkein työkalusi tekoälyn komentamiseen." }
       ] },
-      { "id": "kayttotaidot_2", "name": "Taso 2: Hallusinaatiot", "questions": [
+      { "id": "kayttotaidot_2", "name": "Katse ulos tuulilasista (Tiedon tarkistaminen)", "questions": [
           { "id": "q_kt2_1", "type": "true_false", "question": "Voiko tekoäly joskus puhua täyttä pajunköyttä vakuuttavasti?", "options": ["Kyllä, tätä kutsutaan hallusinaatioksi", "Ei, se tietää aina totuuden"], "correctAnswer": "Kyllä, tätä kutsutaan hallusinaatioksi", "explanation": "Kielimallit yrittävät miellyttää ja voivat siksi keksiä faktoja tyhjästä." }
       ] },
-      { "id": "kayttotaidot_3", "name": "Taso 3: Konteksti", "questions": [
+      { "id": "kayttotaidot_3", "name": "Ratinkääntö ja uusi reitti (Ohjeiden tarkentaminen)", "questions": [
           { "id": "q_kt3_1", "type": "multiple_choice", "question": "Miten saat tekoälyltä parempia vastauksia?", "options": ["Antamalla sille taustatietoa eli kontekstia", "Kirjoittamalla lyhyemmin", "Kysymällä vain kerran", "Huutamalla ISOILLA KIRJAIMILLA"], "correctAnswer": "Antamalla sille taustatietoa eli kontekstia", "explanation": "Mitä enemmän tekoäly tietää tilanteesta, sitä osuvampia ohjeita se voi antaa." }
       ] },
-      { "id": "kayttotaidot_4", "name": "Taso 4: Kritiikki", "questions": [
+      { "id": "kayttotaidot_4", "name": "Apukuski ideoi (Tekoäly luovana kaverina)", "questions": [
           { "id": "q_kt4_1", "type": "true_false", "question": "Pitäisikö tekoälyn vastaukset tarkistaa aina muista lähteistä?", "options": ["Kyllä, medialukutaito on tärkeää", "Ei, tekoäly on internettiä viisaampi"], "correctAnswer": "Kyllä, medialukutaito on tärkeää", "explanation": "Lähdekriittisyys on AI-ajalla tärkeämpi taito kuin koskaan." }
       ] },
-      { "id": "kayttotaidot_5", "name": "Taso 5: Kuvien luonti", "questions": [
+      { "id": "kayttotaidot_5", "name": "Oikea työkalu pakista (Sopivan tekoälyn valinta)", "questions": [
           { "id": "q_kt5_1", "type": "multiple_choice", "question": "Millainen kehote tuottaa parhaita tekoälykuvia?", "options": ["Kuvaileva ja yksityiskohtainen", "Mahdollisimman lyhyt", "Sekava", "Tyhjä"], "correctAnswer": "Kuvaileva ja yksityiskohtainen", "explanation": "Kuvaile valo, tyyli, värit ja kohde tarkasti saadaksesi hyviä tuloksia." }
       ] },
-      { "id": "kayttotaidot_6", "name": "Taso 6: Monimuotoisuus", "questions": [
+      { "id": "kayttotaidot_6", "name": "Tavarat siististi kyytiin (Tiedon tiivistäminen ja muokkaus)", "questions": [
           { "id": "q_kt6_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan multimodaalisella tekoälyllä?", "options": ["Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "Se on hyvin nopea", "Se toimii monessa maassa", "Se on kallis"], "correctAnswer": "Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "explanation": "Modernit mallit (kuten GPT-4o tai Gemini) osaavat katsella kuvia ja kuunnella kerralla." }
       ] },
       { "id": "kayttotaidot_7", "name": "Finaali – Suuri Mestariralli", "questions": [
