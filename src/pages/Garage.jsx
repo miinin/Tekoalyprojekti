@@ -55,7 +55,7 @@ export default function Garage() {
     { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas, lämpimän hohtava pronssisuoja.', price: 1800, icon: <ShieldCheck size={28} />, color: '#b45309', bg: '#fef08a' },
 
     // VANTEET
-    { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 400, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
+    { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 0, isDefault: true, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
     { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Luotettavat peltivanteet', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
@@ -117,10 +117,10 @@ export default function Garage() {
     }
 
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
-    let btnBg = (sparks >= item.price || item.isDefault) ? '#fef3c7' : '#e2e8f0'; 
-    let btnColor = (sparks >= item.price || item.isDefault) ? '#d97706' : 'var(--text-muted)';
+    let btnBg = (sparks >= item.price || item.isDefault) ? '#3b82f6' : '#e2e8f0'; 
+    let btnColor = (sparks >= item.price || item.isDefault) ? 'white' : 'var(--text-muted)';
     const canBuy = sparks >= item.price && !isOwned && !item.isDefault && meetsPrereq;
-    let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
+    let btnShadow = canBuy ? '0 4px 6px rgba(59, 130, 246, 0.3)' : 'none';
     let cursor = (canBuy || (item.isDefault && !isEquipped)) ? 'pointer' : 'not-allowed';
 
     if (!meetsPrereq && !isOwned) {
@@ -140,7 +140,7 @@ export default function Garage() {
        cursor = 'default';
     } else if (isOwned && (isCarItem || isEquippableGarage)) {
        btnText = 'ASENNA';
-       btnBg = '#3b82f6'; 
+       btnBg = '#0ea5e9'; 
        btnColor = 'white';
        cursor = 'pointer';
     }
@@ -153,28 +153,39 @@ export default function Garage() {
     return (
       <div key={item.id} className={`glass-panel grid-item ${isEquipped ? 'equipped-highlight' : ''}`}
            style={{ 
-               backgroundColor: 'rgba(255,255,255,0.7)', 
-               borderColor: isEquipped ? item.color : 'transparent',
-               borderWidth: isEquipped ? '2px' : '0px'
+               background: 'linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%)', 
+               borderColor: isEquipped ? '#10b981' : '#cbd5e1',
+               borderWidth: '2px',
+               boxShadow: '0 4px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8)'
            }} 
            onMouseEnter={() => setHoveredItem(item.id)}
            onMouseLeave={() => setHoveredItem(null)}>
            
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, background: item.bg, padding: '0.6rem', position: 'relative' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
               {item.category === 'body' ? (
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '12px 12px 0 0' }}>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
                     <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '50% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
                     <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '60%', background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}></div>
                   </div>
               ) : (
-                  <div style={{ color: item.color, zIndex: 1, marginTop: 'auto', marginBottom: '0.5rem' }}>
-                    {React.cloneElement(item.icon, { size: 40 })}
+                  <div style={{ 
+                      color: '#475569', 
+                      zIndex: 1, 
+                      marginTop: 'auto', 
+                      marginBottom: '0.5rem',
+                      background: 'linear-gradient(135deg, #cbd5e1 0%, #f1f5f9 100%)',
+                      padding: '0.8rem',
+                      borderRadius: '50%',
+                      boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1), 0 2px 5px rgba(255,255,255,0.7)',
+                      border: '1px solid #94a3b8'
+                  }}>
+                    {React.cloneElement(item.icon, { size: 28 })}
                   </div>
               )}
-              <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : item.color, textAlign: 'center', lineHeight: '1.1', zIndex: 1, textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none', marginTop: item.category === 'body' ? 'auto' : 0 }}>{item.name}</span>
+              <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', zIndex: 1, textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none', marginTop: item.category === 'body' ? 'auto' : 0 }}>{item.name}</span>
           </div>
 
-          <div style={{ padding: '0.6rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ padding: '0.6rem', paddingTop: '0.4rem', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 5 }}>
              <button 
                 className={`btn-primary${extraBtnClass}`} 
                 style={{ padding: '0.5rem', fontSize: '0.85rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, borderRadius: '8px' }}
@@ -448,13 +459,13 @@ export default function Garage() {
             background: 'radial-gradient(circle at top, #334155 0%, #0f172a 100%)' 
           }}>
               {isTutorialActive && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Klikkaa oikealta sivupaneelista "Siivous" ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
               {showGreenPulse && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Tulipa siistiä!</b> Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea AI van!, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
                 </div>
               )}
