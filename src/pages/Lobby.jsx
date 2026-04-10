@@ -59,7 +59,7 @@ export default function Lobby() {
         }
         .lobby-bg {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: -20px;
             background: linear-gradient(-45deg, #0ea5e9, #10b981, #059669, #f59e0b);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -67,7 +67,7 @@ export default function Lobby() {
         }
         .lobby-overlay {
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            inset: -20px;
             background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.5));
             z-index: -1;
         }
