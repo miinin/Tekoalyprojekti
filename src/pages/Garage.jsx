@@ -315,12 +315,13 @@ export default function Garage() {
         .equipped-highlight {
            box-shadow: inset 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
-        @keyframes flashBang {
+        @keyframes blackoutFade {
           0% { opacity: 1; }
+          50% { opacity: 1; }
           100% { opacity: 0; }
         }
-        .flash-bang {
-          animation: flashBang 2s ease-out forwards;
+        .flash-blackout {
+          animation: blackoutFade 1.6s ease-in-out forwards;
         }
         @keyframes wiggle {
           0%, 100% { transform: rotate(-3deg) scale(1.05); }
@@ -338,9 +339,7 @@ export default function Garage() {
         }
       `}</style>
 
-      {flashScreen && (
-         <div className="flash-bang" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'white', zIndex: 9999, pointerEvents: 'none' }}></div>
-      )}
+      {/* flashScreen moved to garage-right */}
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
@@ -479,6 +478,14 @@ export default function Garage() {
               : 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.1)',
             background: 'radial-gradient(circle at top, #334155 0%, #0f172a 100%)' 
           }}>
+              
+              {flashScreen && (
+                <div className="flash-blackout" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#020617', zIndex: 99, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+                    <Sparkles size={80} color="#fbbf24" style={{ animation: 'wiggle 0.5s infinite' }} />
+                    <h2 style={{ color: 'white', marginTop: '1rem', fontFamily: 'var(--font-display)', letterSpacing: '4px' }}>PUHDISTETAAN TALLIA...</h2>
+                </div>
+              )}
+
               {isTutorialActive && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!
