@@ -16,7 +16,7 @@ export default function Garage() {
   const [completedLessons, setCompletedLessons] = useState([]);
   const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
-  const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_clean' : 'body');
+  const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_floor' : 'body');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,8 +71,7 @@ export default function Garage() {
   ];
 
   const garageUpgrades = [
-    { id: 'g-clean', category: 'g_clean', categoryName: 'Siisteys', name: 'Siivous', desc: 'Raivaa seittien ja lian pahin kerros.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
-    
+    { id: 'g-clean', category: 'g_floor', categoryName: 'Lattia', name: 'Siivous', desc: 'Raivaa seittien ja lian pahin kerros.', price: 200, icon: <Sparkles size={28} />, color: '#a855f7', bg: '#f3e8ff' },
     { id: 'g-floor-base', category: 'g_floor', categoryName: 'Lattia', name: 'Öljytahrojen poisto', desc: 'Siivoaa öljyläikät.', price: 400, icon: <Grid size={28} />, color: '#6366f1', bg: '#e0e7ff' },
     { id: 'g-floor2', category: 'g_floor', categoryName: 'Lattia', name: 'Säröjen korjaus', desc: 'Korjaa lattian säröt.', price: 800, icon: <Grid size={28} />, color: '#4f46e5', bg: '#e0e7ff' },
     { id: 'g-floor3', category: 'g_floor', categoryName: 'Lattia', name: 'Betonilattia', desc: 'Uusi kestävä betonivalu.', price: 1500, icon: <Grid size={28} />, color: '#3730a3', bg: '#e0e7ff' },
@@ -94,7 +93,7 @@ export default function Garage() {
   ];
 
   const setCategory = (cat) => {
-    if (isTutorialActive && cat !== 'g_clean') return;
+    if (isTutorialActive && cat !== 'g_floor') return;
     setActiveCategory(cat);
   };
 
@@ -405,7 +404,7 @@ export default function Garage() {
               <div>
                 <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
                 {Object.entries(categorisedGarage).map(([catId, category]) => {
-                  const isLocked = isTutorialActive && catId !== 'g_clean';
+                  const isLocked = isTutorialActive && catId !== 'g_floor';
                   return (
                     <div key={catId} style={{ marginBottom: '0.5rem' }}>
                       <div 
@@ -421,7 +420,6 @@ export default function Garage() {
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                           {catId === 'g_clean' && <Sparkles size={18} color="#8b5cf6" />}
                            {catId === 'g_floor' && <Grid size={18} color="#8b5cf6" />}
                            {catId === 'g_walls' && <Layers size={18} color="#8b5cf6" />}
                            {catId === 'g_tools' && <Wrench size={18} color="#8b5cf6" />}
@@ -465,7 +463,7 @@ export default function Garage() {
           }}>
               {isTutorialActive && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Klikkaa oikealta sivupaneelista "Siivous" ja katso, mitä aarteita romun alta paljastuu!
+                   Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
