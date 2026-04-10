@@ -189,9 +189,14 @@ export const store = {
     localStorage.removeItem('aivan_items');
     localStorage.removeItem('aivan_equipped');
     localStorage.removeItem('aivan_completions');
+    localStorage.removeItem('completed_lessons');
     localStorage.removeItem('aivan_node_records');
+    localStorage.removeItem('aivan_node_stats');
     localStorage.removeItem('aivan_tutorial_completed');
     localStorage.removeItem('aivan_map_tutorial_completed');
+    localStorage.removeItem('aivan_garage_tuition');
+    localStorage.removeItem('aivan_last_main');
+    localStorage.removeItem('aivan_last_sub');
     store.setRoomCode(null);
   },
 

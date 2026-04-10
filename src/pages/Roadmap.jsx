@@ -785,7 +785,7 @@ const Roadmap = () => {
                 alignItems: 'center',
                 gap: '0.5rem'
             }}
-            onClick={() => currentMap === 'main' ? navigate('/lobby') : handleBackToMain()}
+            onClick={() => navigate('/lobby')}
           >
             <ChevronLeft size={28} color="var(--primary-color)" />
             <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
