@@ -366,6 +366,18 @@ export default function Garage() {
           >
             <Map size={20} /> Tiekartta
           </button>
+          <button 
+             className="btn-secondary" 
+             onClick={() => navigate('/lobby')}
+             disabled={isTutorialActive}
+             style={{ 
+                 opacity: isTutorialActive ? 0.3 : 1, 
+                 cursor: isTutorialActive ? 'not-allowed' : 'pointer',
+                 color: '#64748b'
+             }}
+          >
+            Päävalikko
+          </button>
         </div>
       </div>
 
