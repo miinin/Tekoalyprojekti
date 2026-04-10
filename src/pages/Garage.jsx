@@ -105,7 +105,6 @@ export default function Garage() {
     const isOwned = purchased.includes(item.id) || item.isDefault;
     const slot = item.category === 'extra' ? item.id : item.category;
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
-    const isExpanded = expandedItem === item.id;
     
     let meetsPrereq = true;
     let prereqText = '';
