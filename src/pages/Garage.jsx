@@ -507,7 +507,7 @@ export default function Garage() {
               {flashScreen && (
                 <div className="flash-blackout" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#020617', zIndex: 99, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
                     <Sparkles size={80} color="#fbbf24" style={{ animation: 'wiggle 0.5s infinite' }} />
-                    <h2 style={{ color: 'white', marginTop: '1rem', fontFamily: 'var(--font-display)', letterSpacing: '4px' }}>PUHDISTETAAN TALLIA...</h2>
+                    <h2 style={{ color: 'white', marginTop: '1rem', fontFamily: 'var(--font-display)', letterSpacing: '4px' }}>TALLIN SIIVOUS KÄYNNISSÄ...</h2>
                 </div>
               )}
 
