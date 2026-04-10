@@ -134,12 +134,12 @@ export const AI_ROADMAP_DATA = {
       exit: [{top:"87.9%",left:"61.4%"},{top:"92.5%",left:"62.8%"},{top:"93.5%",left:"65.9%"},{top:"95.0%",left:"68.1%"}, {top:"105.0%",left:"68.1%"}],
       nodes: [
         { id: 'aivoterveys_1', top: '87.2%', left: '63.4%' },
-        { id: 'aivoterveys_2', top: '77.2%', left: '43.8%' },
+        { id: 'aivoterveys_2', top: '47.9%', left: '43.4%' },
         { id: 'aivoterveys_3', top: '37.0%', left: '50.3%' },
         { id: 'aivoterveys_4', top: '50.1%', left: '67.0%' },
-        { id: 'aivoterveys_5', top: '86.4%', left: '60.7%' },
+        { id: 'aivoterveys_5', top: '62.5%', left: '81.0%' },
         { id: 'aivoterveys_6', top: '77.6%', left: '80.0%' },
-        { id: 'aivoterveys_7', top: '47.9%', left: '43.4%' }
+        { id: 'aivoterveys_7', top: '77.2%', left: '43.8%' }
       ],
       paths: {
         'aivoterveys_5-aivoterveys_6': [{top:"87.9%",left:"61.4%"},{top:"92.5%",left:"62.8%"},{top:"93.5%",left:"65.9%"},{top:"95.0%",left:"68.1%"}, {top:"94.0%",left:"69.0%"},{top:"92.3%",left:"70.8%"},{top:"89.0%",left:"72.0%"},{top:"84.9%",left:"73.0%"},{top:"82.0%",left:"73.5%"},{top:"77.4%",left:"75.6%"},{top:"76.3%",left:"78.4%"}],
