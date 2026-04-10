@@ -629,18 +629,18 @@ const Roadmap = () => {
                 pointerEvents: 'none'
             }}
           >
-              <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
+              <div style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)', textAlign: 'center', lineHeight: '1.2' }}>
                   {labelText.includes('(') ? (
                       <>
-                          {labelText.substring(0, labelText.indexOf('(')).trim()}
-                          <span style={{ fontSize: '0.85em', color: '#64748b', fontWeight: 700, marginLeft: '0.3rem' }}>
+                          <div>{labelText.substring(0, labelText.indexOf('(')).trim()}</div>
+                          <div style={{ fontSize: '0.85em', color: '#64748b', fontWeight: 700, marginTop: '3px', fontFamily: "'Roboto', sans-serif" }}>
                               {labelText.substring(labelText.indexOf('('))}
-                          </span>
+                          </div>
                       </>
                   ) : (
                       labelText
                   )}
-              </span>
+              </div>
           </div>
         </div>
       );
@@ -991,41 +991,5 @@ const Roadmap = () => {
       {currentMap !== 'main' && (
           <div style={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
               <button 
-                className="btn-primary" 
-                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(0, 114, 198, 0.4)', fontSize: '1.2rem' }}
-                onClick={handleBackToMain}
-              >
-                <MapIcon size={24} />
-                PALAA MAAILMALLE
-              </button>
-          </div>
-      )}
-      
-      {toastMessage && (
-        <div style={{
-            position: 'fixed',
-            bottom: '7%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'rgba(255,255,255,0.95)',
-            border: '4px solid var(--danger)',
-            color: 'var(--text-main)',
-            fontWeight: 'bold',
-            fontSize: '1.2rem',
-            padding: '1rem 2rem',
-            borderRadius: '20px',
-            zIndex: 1100,
-            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
-            textAlign: 'center',
-            maxWidth: '90%',
-            animation: 'fade-in 0.3s ease-out'
-        }}>
-           <span className="material-symbols-outlined" style={{ color: 'var(--danger)', verticalAlign: 'middle', marginRight: '10px' }}>info</span>
-           {toastMessage}
-        </div>
-      )}
-    </div>
-  );
-};
 
 export default Roadmap;
