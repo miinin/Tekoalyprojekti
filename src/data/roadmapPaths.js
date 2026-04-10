@@ -70,13 +70,13 @@ export const AI_ROADMAP_DATA = {
       entry: [{top:"93.3%",left:"10.9%"},{top:"88.5%",left:"14.1%"},{top:"86.5%",left:"16.9%"},{top:"86.4%",left:"21.7%"},{top:"84.1%",left:"26.7%"},{top:"79.9%",left:"29.2%"},{top:"75.2%",left:"32.3%"},{top:"73.5%",left:"33.4%"},{top:"75.2%",left:"38.2%"},{top:"76.5%",left:"41.4%"},{top:"74.9%",left:"46.5%"}],
       exit: [{top:"74.9%",left:"46.5%"},{top:"76.5%",left:"41.4%"},{top:"75.2%",left:"38.2%"},{top:"73.5%",left:"33.4%"},{top:"75.2%",left:"32.3%"},{top:"79.9%",left:"29.2%"},{top:"84.1%",left:"26.7%"},{top:"86.4%",left:"21.7%"},{top:"86.5%",left:"16.9%"},{top:"88.5%",left:"14.1%"},{top:"93.3%",left:"10.9%"}],
       nodes: [
-        { id: 'kayttotaidot_1', top: '74.9%', left: '46.5%' },
-        { id: 'kayttotaidot_2', top: '51.0%', left: '43.7%' },
-        { id: 'kayttotaidot_3', top: '48.9%', left: '51.7%' },
-        { id: 'kayttotaidot_4', top: '48.0%', left: '61.9%' },
-        { id: 'kayttotaidot_5', top: '79.6%', left: '72.5%' },
-        { id: 'kayttotaidot_6', top: '66.6%', left: '69.6%' },
-        { id: 'kayttotaidot_7', top: '25.7%', left: '53.1%' }
+        { id: 'kayttotaidot_1', top: '63.8%', left: '12.5%' },
+        { id: 'kayttotaidot_2', top: '81.5%', left: '25.8%' },
+        { id: 'kayttotaidot_3', top: '75.5%', left: '48.7%' },
+        { id: 'kayttotaidot_4', top: '55.8%', left: '34.7%' },
+        { id: 'kayttotaidot_5', top: '45.9%', left: '43.7%' },
+        { id: 'kayttotaidot_6', top: '46.0%', left: '54.5%' },
+        { id: 'kayttotaidot_7', top: '63.2%', left: '68.2%' }
       ],
       paths: {
         'kayttotaidot_1-kayttotaidot_2': [{top:"74.9%",left:"46.5%"},{top:"70.4%",left:"47.0%"},{top:"67.0%",left:"44.2%"},{top:"61.3%",left:"43.9%"},{top:"58.1%",left:"46.5%"},{top:"55.4%",left:"44.7%"},{top:"51.0%",left:"43.7%"}],
