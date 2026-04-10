@@ -181,7 +181,7 @@ export const categories = [
       { "id": "kayttotaidot_6", "name": "Tavarat siististi kyytiin (Tiedon tiivistäminen ja muokkaus)", "questions": [
           { "id": "q_kt6_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan multimodaalisella tekoälyllä?", "options": ["Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "Se on hyvin nopea", "Se toimii monessa maassa", "Se on kallis"], "correctAnswer": "Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "explanation": "Modernit mallit (kuten GPT-4o tai Gemini) osaavat katsella kuvia ja kuunnella kerralla." }
       ] },
-      { "id": "kayttotaidot_7", "name": "Finaali – Suuri mestariralli", "questions": [
+      { "id": "kayttotaidot_7", "name": "Finaali:\nSuuri mestariralli", "questions": [
           { "id": "q_kt7_1", "type": "multiple_choice", "question": "Miten voit testata tekoälyn päättelyä?", "options": ["Pyytämällä sitä ajattelemaan 'askel kerrallaan'", "Kysymällä siltä kuka se on", "Antamalla sille nimen", "Sulkemalla sen"], "correctAnswer": "Pyytämällä sitä ajattelemaan 'askel kerrallaan'", "explanation": "Chain-of-thought eli ajatuksen ketjuttaminen pakottaa mallin välivaiheisiin, mikä parantaa logiikkaa." }
       ] }
     ]
