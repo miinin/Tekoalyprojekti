@@ -9,7 +9,6 @@ export default function Garage() {
   const [purchased, setPurchased] = useState([]);
   const [equipped, setEquipped] = useState({});
   const [hoveredItem, setHoveredItem] = useState(null);
-  const [expandedItem, setExpandedItem] = useState(null); // Uusi!
   const tutorialSkipped = store.getTutorialSkipped();
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
@@ -97,7 +96,6 @@ export default function Garage() {
   const setCategory = (cat) => {
     if (isTutorialActive && cat !== 'g_clean') return;
     setActiveCategory(cat);
-    setExpandedItem(null); // Sulkee vanhat ristikot navigoidessa
   };
 
   const renderSquareItem = (item) => {
@@ -154,37 +152,35 @@ export default function Garage() {
     }
 
     return (
-      <div key={item.id} className={`glass-panel grid-item ${isExpanded ? 'expanded' : ''} ${isEquipped ? 'equipped-highlight' : ''}`}
+      <div key={item.id} className={`glass-panel grid-item ${isEquipped ? 'equipped-highlight' : ''}`}
            style={{ 
-               backgroundColor: isExpanded ? 'white' : 'rgba(255,255,255,0.7)', 
-               borderColor: (isExpanded || isEquipped) ? item.color : 'transparent',
-               borderWidth: (isExpanded || isEquipped) ? '2px' : '0px',
-               cursor: 'pointer' 
+               backgroundColor: 'rgba(255,255,255,0.7)', 
+               borderColor: isEquipped ? item.color : 'transparent',
+               borderWidth: isEquipped ? '2px' : '0px'
            }} 
-           onClick={() => setExpandedItem(isExpanded ? null : item.id)}
            onMouseEnter={() => setHoveredItem(item.id)}
            onMouseLeave={() => setHoveredItem(null)}>
            
-         {!isExpanded ? (
-             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', height: '100%', background: item.bg, padding: '1rem' }}>
-                 <div style={{ color: item.color }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, background: item.category === 'body' ? 'transparent' : item.bg, padding: '0.6rem', position: 'relative' }}>
+              {item.category === 'body' ? (
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0 }}>
+                    <img src={`/carparts/${item.id}.png`} style={{ width: '400%', height: '400%', objectFit: 'cover', objectPosition: 'left 50% bottom 30%', opacity: 0.9, filter: 'saturate(1.2)' }} alt={item.name} />
+                    <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '60%', background: 'linear-gradient(transparent, rgba(0,0,0,0.8))' }}></div>
+                  </div>
+              ) : (
+                  <div style={{ color: item.color, zIndex: 1, marginTop: 'auto', marginBottom: '0.5rem' }}>
                     {React.cloneElement(item.icon, { size: 40 })}
-                 </div>
-                 <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: item.color, textAlign: 'center', lineHeight: '1.1' }}>{item.name}</span>
-             </div>
-         ) : (
-             <div className="animate-fade-in" style={{ display: 'flex', gap: '1rem', width: '100%', height: '100%', padding: '0.5rem' }}>
-                 <div style={{ background: item.bg, padding: '1rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    {React.cloneElement(item.icon, { size: 48 })}
-                 </div>
-                 <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                    <h3 style={{ margin: 0, fontSize: '1.2rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)' }}>{item.name}</h3>
-                    <p style={{ margin: '0.3rem 0 0.8rem 0', fontSize: '0.9rem', color: 'var(--text-muted)', flexGrow: 1 }}>{item.desc}</p>
-                    <button 
-                      className={`btn-primary${extraBtnClass}`} 
-                      style={{ padding: '0.6rem', fontSize: '0.95rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, marginTop: 'auto' }}
-                      onClick={async (e) => {
-                        e.stopPropagation();
+                  </div>
+              )}
+              <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : item.color, textAlign: 'center', lineHeight: '1.1', zIndex: 1, textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none', marginTop: item.category === 'body' ? 'auto' : 0 }}>{item.name}</span>
+          </div>
+
+          <div style={{ padding: '0.6rem', width: '100%', display: 'flex', justifyContent: 'center' }}>
+             <button 
+                className={`btn-primary${extraBtnClass}`} 
+                style={{ padding: '0.5rem', fontSize: '0.85rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, borderRadius: '8px' }}
+                onClick={async (e) => {
+                  e.stopPropagation();
                         if (canBuy) {
                           const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? slot : null);
                           if (success) {
@@ -215,10 +211,8 @@ export default function Garage() {
                       }}
                     >
                       {btnText}
-                    </button>
-                 </div>
+                </button>
              </div>
-         )}
       </div>
     );
   };
@@ -277,35 +271,27 @@ export default function Garage() {
         }
         .items-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
           gap: 0.8rem;
           margin-bottom: 2rem;
           align-content: start;
         }
         .grid-item {
-          aspect-ratio: 1;
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          border-radius: 16px;
+          border-radius: 12px;
           overflow: hidden;
           position: relative;
           padding: 0;
+          min-height: 150px;
         }
         .grid-item:hover {
-          transform: scale(1.03);
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .grid-item.expanded {
-          grid-column: span 2;
-          aspect-ratio: auto;
-          min-height: 140px;
-          flex-direction: row;
-          padding: 0.5rem;
-          align-items: stretch;
-          text-align: left;
+          transform: translateY(-4px);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+          z-index: 10;
         }
         .equipped-highlight {
            box-shadow: inset 0 0 0 3px rgba(16, 185, 129, 0.2);
@@ -451,7 +437,7 @@ export default function Garage() {
            <div style={{ 
             position: 'relative', 
             width: '100%',
-            aspectRatio: '5/4', /* Makes the visual graphic much bigger visually and vertically expanded */
+            aspectRatio: '16/9',
             minHeight: '400px',
             borderRadius: '24px', 
             overflow: 'hidden', 
@@ -464,7 +450,7 @@ export default function Garage() {
           }}>
               {isTutorialActive && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
-                   Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Valitse ”Siivous” ja katso, mitä aarteita romun alta paljastuu!
+                   Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Klikkaa oikealta sivupaneelista "Siivous" ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
