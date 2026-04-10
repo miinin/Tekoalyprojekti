@@ -839,7 +839,7 @@ const Roadmap = () => {
 
           <div style={{ backgroundColor: 'white', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid var(--secondary-color)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
-            <span style={{ fontWeight: 900, fontSize: '1.3rem', color: 'var(--text-main)', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
+            <span style={{ fontWeight: 900, fontSize: '1.3rem', color: '#text-main', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
           </div>
         </div>
       </div>
@@ -991,5 +991,41 @@ const Roadmap = () => {
       {currentMap !== 'main' && (
           <div style={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
               <button 
+                className="btn-primary" 
+                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(0, 114, 198, 0.4)', fontSize: '1.2rem' }}
+                onClick={handleBackToMain}
+              >
+                <MapIcon size={24} />
+                PALAA MAAILMALLE
+              </button>
+          </div>
+      )}
+      
+      {toastMessage && (
+        <div style={{
+            position: 'fixed',
+            top: '12%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(255,255,255,0.95)',
+            border: '4px solid #f59e0b',
+            color: 'var(--text-main)',
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            padding: '1rem 2rem',
+            borderRadius: '20px',
+            zIndex: 1100,
+            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+            textAlign: 'center',
+            maxWidth: '90%',
+            animation: 'fade-in 0.3s ease-out'
+        }}>
+           <span className="material-symbols-outlined" style={{ color: '#f59e0b', verticalAlign: 'middle', marginRight: '10px' }}>info</span>
+           {toastMessage}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Roadmap;
