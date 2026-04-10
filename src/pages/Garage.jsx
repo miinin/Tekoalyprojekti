@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Garage() {
@@ -343,9 +343,30 @@ export default function Garage() {
       
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '3rem' }}>Autotalli</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>Rakennetaan yhdessä unelmien AI-paku!</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+          <button 
+            className="btn-secondary" 
+            style={{ 
+                padding: '0.8rem 1.5rem', 
+                borderRadius: '15px', 
+                background: 'white', 
+                border: 'none', 
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                cursor: isTutorialActive ? 'not-allowed' : 'pointer',
+                opacity: isTutorialActive ? 0.3 : 1
+            }}
+            onClick={() => { if (!isTutorialActive) navigate('/lobby') }}
+          >
+            <ChevronLeft size={28} color="var(--primary-color)" />
+            <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
+          </button>
+          <div>
+            <h1 style={{ margin: 0, fontSize: '3rem' }}>Autotalli</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>Rakennetaan yhdessä unelmien AI-paku!</p>
+          </div>
         </div>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
@@ -365,18 +386,6 @@ export default function Garage() {
              }}
           >
             <Map size={20} /> Tiekartta
-          </button>
-          <button 
-             className="btn-secondary" 
-             onClick={() => navigate('/lobby')}
-             disabled={isTutorialActive}
-             style={{ 
-                 opacity: isTutorialActive ? 0.3 : 1, 
-                 cursor: isTutorialActive ? 'not-allowed' : 'pointer',
-                 color: '#64748b'
-             }}
-          >
-            Päävalikko
           </button>
         </div>
       </div>

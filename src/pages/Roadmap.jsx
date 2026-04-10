@@ -481,9 +481,9 @@ const Roadmap = () => {
 
   const getMedalStyles = (medal) => {
     switch(medal) {
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: '#fde047', stroke: '#b45309', bg: 'radial-gradient(circle at 30% 30%, #fef08a 0%, #f59e0b 40%, #b45309 100%)' };
-      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: '#f1f5f9', stroke: '#64748b', bg: 'radial-gradient(circle at 30% 30%, #ffffff 0%, #94a3b8 50%, #475569 100%)' };
-      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: '#fcd34d', stroke: '#78350f', bg: 'radial-gradient(circle at 30% 30%, #fde68a 0%, #d97706 50%, #78350f 100%)' };
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'radial-gradient(circle at 30% 30%, #fef08a 0%, #f59e0b 40%, #b45309 100%)' };
+      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: 'url(#silver-grad)', stroke: '#475569', bg: 'radial-gradient(circle at 30% 30%, #ffffff 0%, #94a3b8 50%, #475569 100%)' };
+      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: 'url(#bronze-grad)', stroke: '#78350f', bg: 'radial-gradient(circle at 30% 30%, #fde68a 0%, #d97706 50%, #78350f 100%)' };
       default: return null;
     }
   };
@@ -763,8 +763,7 @@ const Roadmap = () => {
             onClick={() => currentMap === 'main' ? navigate('/lobby') : handleBackToMain()}
           >
             <ChevronLeft size={28} color="var(--primary-color)" />
-            {currentMap !== 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>MAAILMANKARTTA</span>}
-            {currentMap === 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>LOBBY</span>}
+            <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
           </button>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               {currentMap === 'main' ? (
@@ -822,6 +821,30 @@ const Roadmap = () => {
 
       {/* Map Content */}
       <div style={mapContainerStyle}>
+            {/* Metallic Gradients for Trophies */}
+            <svg width="0" height="0" style={{ position: 'absolute' }}>
+                <defs>
+                    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#fef08a" />
+                        <stop offset="35%" stopColor="#eab308" />
+                        <stop offset="70%" stopColor="#fbbf24" />
+                        <stop offset="100%" stopColor="#9a3412" />
+                    </linearGradient>
+                    <linearGradient id="silver-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#ffffff" />
+                        <stop offset="40%" stopColor="#cbd5e1" />
+                        <stop offset="70%" stopColor="#94a3b8" />
+                        <stop offset="100%" stopColor="#475569" />
+                    </linearGradient>
+                    <linearGradient id="bronze-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#fde68a" />
+                        <stop offset="40%" stopColor="#d97706" />
+                        <stop offset="70%" stopColor="#b45309" />
+                        <stop offset="100%" stopColor="#78350f" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
             {showMapTutorial && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
@@ -833,12 +856,14 @@ const Roadmap = () => {
                 <button 
                    className="btn-primary" 
                    style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} 
-                   onClick={() => {
+                   onClick={async () => {
                        store.completeMapTutorial();
                        setShowMapTutorial(false);
+                       await store.addSparks(10);
+                       setSparks(await store.getSparks());
                    }}
                 >
-                   Selvä homma!
+                   Selvä homma! (+10 ⚡)
                 </button>
               </div>
             )}
@@ -849,8 +874,12 @@ const Roadmap = () => {
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Valitse ensimmäinen kategoria napsauttamalla sinistä pallukkaa.
                 </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 0: true}))}>
-                   Ymmärretty!
+                <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+                    setClosedTuition(prev => ({...prev, 0: true}));
+                    await store.addSparks(10);
+                    setSparks(await store.getSparks());
+                }}>
+                   Ymmärretty! (+10 ⚡)
                 </button>
               </div>
             )}
@@ -860,8 +889,12 @@ const Roadmap = () => {
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 1: true}))}>
-                   Selvä homma!
+                <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+                    setClosedTuition(prev => ({...prev, 1: true}));
+                    await store.addSparks(10);
+                    setSparks(await store.getSparks());
+                }}>
+                   Selvä homma! (+10 ⚡)
                 </button>
               </div>
             )}
@@ -871,8 +904,12 @@ const Roadmap = () => {
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin nähtyihin ”Mikä on homman juju?” -laatikoihin. Lue siis nämä laatikot tarkasti jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
                 </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setClosedTuition(prev => ({...prev, 2: true}))}>
-                   Olen valmis jatkamaan seikkailua itse!
+                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+                    setClosedTuition(prev => ({...prev, 2: true}));
+                    await store.addSparks(10);
+                    setSparks(await store.getSparks());
+                }}>
+                   Olen valmis jatkamaan seikkailua itse! (+10 ⚡)
                 </button>
               </div>
             )}
