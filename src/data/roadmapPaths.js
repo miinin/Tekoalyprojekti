@@ -109,8 +109,8 @@ export const AI_ROADMAP_DATA = {
         }
     },
     reilu_peli: {
-      entry: [{top:"5.8%",left:"33.0%"},{top:"9.8%",left:"30.9%"},{top:"15.6%",left:"30.3%"},{top:"19.4%",left:"31.7%"},{top:"22.2%",left:"35.4%"},{top:"25.9%",left:"38.8%"},{top:"32.4%",left:"38.2%"},{top:"38.3%",left:"38.3%"},{top:"43.6%",left:"39.7%"},{top:"46.6%",left:"41.8%"},{top:"50.4%",left:"45.3%"},{top:"49.9%",left:"48.4%"},{top:"47.6%",left:"51.9%"}],
-      exit: [{top:"47.6%",left:"51.9%"},{top:"49.9%",left:"48.4%"},{top:"50.4%",left:"45.3%"},{top:"46.6%",left:"41.8%"},{top:"43.6%",left:"39.7%"},{top:"38.3%",left:"38.3%"},{top:"32.4%",left:"38.2%"},{top:"25.9%",left:"38.8%"},{top:"22.2%",left:"35.4%"},{top:"19.4%",left:"31.7%"},{top:"15.6%",left:"30.3%"},{top:"9.8%",left:"30.9%"},{top:"5.8%",left:"33.0%"}],
+      entry: [{top:"5.5%",left:"33.7%"},{top:"8.2%",left:"31.3%"},{top:"13.2%",left:"29.8%"},{top:"17.3%",left:"30.1%"},{top:"21.1%",left:"34.8%"},{top:"25.7%",left:"38.5%"},{top:"30.5%",left:"39.0%"},{top:"36.2%",left:"38.3%"},{top:"41.7%",left:"37.8%"},{top:"42.5%",left:"35.7%"}],
+      exit: [{top:"42.5%",left:"35.7%"},{top:"41.7%",left:"37.8%"},{top:"36.2%",left:"38.3%"},{top:"30.5%",left:"39.0%"},{top:"25.7%",left:"38.5%"},{top:"21.1%",left:"34.8%"},{top:"17.3%",left:"30.1%"},{top:"13.2%",left:"29.8%"},{top:"8.2%",left:"31.3%"},{top:"5.5%",left:"33.7%"}],
       nodes: [
         { id: 'reilu_peli_1', top: '42.5%', left: '35.7%' },
         { id: 'reilu_peli_2', top: '41.1%', left: '82.2%' },
@@ -121,12 +121,12 @@ export const AI_ROADMAP_DATA = {
         { id: 'reilu_peli_7', top: '64.5%', left: '36.3%' }
       ],
       paths: {
-        'reilu_peli_1-reilu_peli_2': [{top:"47.6%",left:"51.9%"}, {top:"51.4%",left:"53.9%"},{top:"57.6%",left:"55.7%"},{top:"61.6%",left:"57.3%"},{top:"63.6%",left:"59.3%"},{top:"65.9%",left:"62.1%"},{top:"69.2%",left:"64.3%"},{top:"70.3%",left:"66.2%"}],
-        'reilu_peli_1-reilu_peli_3': [{top:"47.6%",left:"51.9%"}, {top:"47.1%",left:"54.3%"},{top:"44.0%",left:"58.9%"},{top:"41.0%",left:"61.2%"},{top:"39.5%",left:"63.3%"},{top:"38.4%",left:"66.8%"},{top:"39.1%",left:"70.0%"},{top:"40.6%",left:"71.0%"},{top:"42.3%",left:"75.1%"},{top:"41.4%",left:"76.3%"},{top:"38.1%",left:"78.9%"},{top:"39.4%",left:"80.1%"}],
-        'reilu_peli_1-reilu_peli_4': [{top:"47.6%",left:"51.9%"}, {top:"52.7%",left:"48.8%"},{top:"55.9%",left:"48.3%"},{top:"58.9%",left:"48.8%"},{top:"62.8%",left:"49.1%"},{top:"66.6%",left:"49.1%"}],
-        'reilu_peli_1-reilu_peli_6': [{top:"47.6%",left:"51.9%"}, {top:"52.4%",left:"47.5%"},{top:"56.1%",left:"46.3%"},{top:"59.3%",left:"45.4%"},{top:"61.5%",left:"43.8%"},{top:"64.1%",left:"41.5%"},{top:"66.0%",left:"39.6%"}],
-        'reilu_peli_6-reilu_peli_5': [{top:"66.0%",left:"39.6%"}, {top:"68.5%",left:"40.1%"},{top:"68.9%",left:"42.6%"},{top:"69.1%",left:"44.6%"},{top:"69.4%",left:"47.1%"}],
-        'reilu_peli_6-reilu_peli_7': [{top:"66.0%",left:"39.6%"}, {top:"68.1%",left:"34.8%"},{top:"66.6%",left:"32.1%"},{top:"66.7%",left:"30.1%"},{top:"69.4%",left:"29.1%"},{top:"72.2%",left:"28.7%"},{top:"77.2%",left:"28.7%"}]
+        'reilu_peli_1-reilu_peli_4': [{top:"42.5%",left:"35.7%"},{top:"43.0%",left:"39.6%"},{top:"44.9%",left:"41.0%"},{top:"48.2%",left:"43.2%"},{top:"50.0%",left:"44.6%"},{top:"50.0%",left:"48.0%"},{top:"43.6%",left:"49.7%"}],
+        'reilu_peli_4-reilu_peli_3': [{top:"43.6%",left:"49.7%"},{top:"47.2%",left:"50.8%"},{top:"45.9%",left:"53.7%"},{top:"44.1%",left:"55.9%"},{top:"42.1%",left:"57.9%"},{top:"37.2%",left:"63.3%"},{top:"33.4%",left:"63.1%"}],
+        'reilu_peli_3-reilu_peli_2': [{top:"33.4%",left:"63.1%"},{top:"36.3%",left:"68.9%"},{top:"38.1%",left:"70.7%"},{top:"40.3%",left:"72.8%"},{top:"42.5%",left:"76.1%"},{top:"42.4%",left:"79.2%"},{top:"41.1%",left:"82.2%"}],
+        'reilu_peli_4-reilu_peli_5': [{top:"43.6%",left:"49.7%"},{top:"49.3%",left:"52.1%"},{top:"53.3%",left:"53.8%"},{top:"56.8%",left:"54.6%"},{top:"60.4%",left:"56.7%"},{top:"63.5%",left:"59.3%"},{top:"65.1%",left:"61.7%"},{top:"67.8%",left:"64.6%"}],
+        'reilu_peli_4-reilu_peli_7': [{top:"43.6%",left:"49.7%"},{top:"52.7%",left:"48.0%"},{top:"55.9%",left:"48.2%"},{top:"58.7%",left:"47.3%"},{top:"60.5%",left:"44.8%"},{top:"62.3%",left:"41.4%"},{top:"63.4%",left:"39.1%"},{top:"64.5%",left:"36.3%"}],
+        'reilu_peli_4-reilu_peli_6': [{top:"43.6%",left:"49.7%"},{top:"61.0%",left:"47.7%"},{top:"64.8%",left:"48.3%"},{top:"67.4%",left:"49.6%"},{top:"64.1%",left:"51.1%"},{top:"62.5%",left:"53.7%"},{top:"71.0%",left:"51.5%"}]
       }
     },
     aivoterveys: {
@@ -151,8 +151,8 @@ export const AI_ROADMAP_DATA = {
       }
     },
     digiturva: {
-        entry: [{top:"105.2%",left:"17.1%"},{top:"95.2%",left:"17.1%"},{top:"92.7%",left:"18.5%"},{top:"89.2%",left:"20.8%"},{top:"87.0%",left:"22.6%"},{top:"82.9%",left:"23.5%"},{top:"79.6%",left:"25.9%"},{top:"78.6%",left:"27.9%"},{top:"75.8%",left:"31.2%"},{top:"72.4%",left:"26.4%"},{top:"67.7%",left:"21.5%"}],
-        exit: [{top:"67.7%",left:"21.5%"},{top:"72.4%",left:"26.4%"},{top:"75.8%",left:"31.2%"},{top:"78.6%",left:"27.9%"},{top:"79.6%",left:"25.9%"},{top:"82.9%",left:"23.5%"},{top:"87.0%",left:"22.6%"},{top:"89.2%",left:"20.8%"},{top:"92.7%",left:"18.5%"},{top:"95.2%",left:"17.1%"},{top:"105.2%",left:"17.1%"}],
+        entry: [{top:"97.0%",left:"15.7%"},{top:"91.0%",left:"20.0%"},{top:"87.1%",left:"23.0%"},{top:"81.3%",left:"27.2%"},{top:"77.2%",left:"28.7%"},{top:"73.3%",left:"27.3%"},{top:"70.6%",left:"23.2%"},{top:"67.5%",left:"20.7%"}],
+        exit: [{top:"67.5%",left:"20.7%"},{top:"70.6%",left:"23.2%"},{top:"73.3%",left:"27.3%"},{top:"77.2%",left:"28.7%"},{top:"81.3%",left:"27.2%"},{top:"87.1%",left:"23.0%"},{top:"91.0%",left:"20.0%"},{top:"97.0%",left:"15.7%"}],
         nodes: [
           { id: 'digiturva_1', top: '67.5%', left: '20.7%' },
           { id: 'digiturva_2', top: '50.5%', left: '66.7%' },
@@ -163,13 +163,13 @@ export const AI_ROADMAP_DATA = {
           { id: 'digiturva_7', top: '66.2%', left: '59.8%' }
         ],
         paths: {
-          'digiturva_1-digiturva_2': [{top:"67.7%",left:"21.5%"}, {top:"72.4%",left:"26.4%"}, {top:"74.9%",left:"33.2%"},{top:"74.7%",left:"37.2%"},{top:"74.7%",left:"40.3%"},{top:"76.5%",left:"42.2%"},{top:"79.3%",left:"44.7%"}, {top:"84.2%",left:"46.1%"}],
-          'digiturva_2-digiturva_7': [{top:"84.2%",left:"46.1%"}, {top:"79.3%",left:"44.7%"}, {top:"76.5%",left:"42.2%"}, {top:"74.7%",left:"40.3%"}, {top:"70.4%",left:"40.7%"},{top:"66.7%",left:"41.9%"},{top:"67.5%",left:"45.1%"},{top:"69.0%",left:"48.8%"},{top:"70.0%",left:"52.1%"},{top:"70.5%",left:"55.0%"},{top:"66.6%",left:"58.5%"}, {top:"66.2%",left:"59.8%"}],
-          'digiturva_7-digiturva_5': [{top:"66.2%",left:"59.8%"}, {top:"71.3%",left:"61.5%"},{top:"74.2%",left:"65.8%"},{top:"76.3%",left:"68.1%"},{top:"77.5%",left:"69.6%"},{top:"78.0%",left:"71.7%"},{top:"74.5%",left:"74.1%"},{top:"76.2%",left:"77.2%"},{top:"76.1%",left:"79.4%"},{top:"74.9%",left:"82.4%"},{top:"70.8%",left:"85.2%"}],
-          'digiturva_7-digiturva_6': [{top:"66.2%",left:"59.8%"}, {top:"71.3%",left:"61.5%"}, {top:"71.9%",left:"64.0%"},{top:"71.2%",left:"65.8%"},{top:"69.9%",left:"68.0%"},{top:"68.0%",left:"70.4%"},{top:"64.0%",left:"72.0%"},{top:"62.5%",left:"73.4%"},{top:"59.3%",left:"75.9%"},{top:"56.8%",left:"78.1%"},{top:"55.2%",left:"80.0%"},{top:"53.4%",left:"82.4%"},{top:"51.4%",left:"85.4%"},{top:"48.9%",left:"87.0%"},{top:"46.9%",left:"87.1%"},{top:"42.9%",left:"87.1%"}],
-          'digiturva_2-digiturva_3': [{top:"84.2%",left:"46.1%"}, {top:"79.3%",left:"44.7%"}, {top:"76.5%",left:"42.2%"},{top:"74.7%",left:"40.3%"},{top:"70.4%",left:"40.7%"},{top:"66.7%",left:"41.9%"}, {top:"63.4%",left:"41.5%"},{top:"59.3%",left:"41.4%"},{top:"56.7%",left:"40.8%"},{top:"54.9%",left:"39.5%"},{top:"53.9%",left:"36.6%"},{top:"53.2%",left:"35.2%"},{top:"49.1%",left:"34.8%"}],
-          'digiturva_3-digiturva_4': [{top:"48.2%",left:"34.8%"}, {top:"53.2%",left:"35.2%"},{top:"53.9%",left:"36.6%"},{top:"54.9%",left:"39.5%"}, {top:"54.4%",left:"42.0%"},{top:"51.7%",left:"44.6%"},{top:"50.5%",left:"46.6%"},{top:"46.5%",left:"48.6%"},{top:"43.9%",left:"49.8%"},{top:"40.6%",left:"51.0%"},{top:"37.6%",left:"51.8%"},{top:"33.1%",left:"52.5%"}, {top:"31.6%",left:"53.1%"}],
-          'digiturva_4-digiturva_7': [{top:"31.6%",left:"53.1%"}, {top:"33.1%",left:"52.5%"}, {top:"37.6%",left:"51.8%"},{top:"40.6%",left:"51.0%"},{top:"43.9%",left:"49.8%"},{top:"46.5%",left:"48.6%"}, {top:"48.0%",left:"51.0%"},{top:"47.6%",left:"54.6%"},{top:"47.7%",left:"56.8%"},{top:"49.4%",left:"60.2%"},{top:"53.1%",left:"62.4%"},{top:"55.7%",left:"63.7%"},{top:"59.8%",left:"64.4%"},{top:"63.4%",left:"64.5%"},{top:"67.0%",left:"64.8%"}, {top:"66.2%",left:"59.8%"}]
+          'digiturva_1-digiturva_3': [{top:"67.5%",left:"20.7%"},{top:"75.3%",left:"30.6%"},{top:"72.1%",left:"34.5%"},{top:"70.0%",left:"37.4%"},{top:"66.3%",left:"40.5%"},{top:"61.1%",left:"41.3%"},{top:"55.4%",left:"39.7%"},{top:"51.7%",left:"36.9%"},{top:"48.2%",left:"34.8%"}],
+          'digiturva_3-digiturva_4': [{top:"48.2%",left:"34.8%"},{top:"54.3%",left:"42.7%"},{top:"51.4%",left:"46.2%"},{top:"47.1%",left:"48.4%"},{top:"43.4%",left:"50.0%"},{top:"38.0%",left:"52.1%"},{top:"31.6%",left:"53.1%"}],
+          'digiturva_4-digiturva_2': [{top:"31.6%",left:"53.1%"},{top:"47.7%",left:"51.1%"},{top:"47.7%",left:"53.6%"},{top:"49.3%",left:"57.6%"},{top:"50.4%",left:"61.6%"},{top:"51.4%",left:"64.2%"},{top:"50.5%",left:"66.7%"}],
+          'digiturva_2-digiturva_7': [{top:"50.5%",left:"66.7%"},{top:"59.1%",left:"65.5%"},{top:"64.1%",left:"64.6%"},{top:"68.1%",left:"62.2%"},{top:"66.2%",left:"59.8%"}],
+          'digiturva_7-digiturva_3': [{top:"66.2%",left:"59.8%"},{top:"70.9%",left:"57.6%"},{top:"71.2%",left:"52.5%"},{top:"69.6%",left:"48.4%"},{top:"67.0%",left:"43.8%"},{top:"48.2%",left:"34.8%"}],
+          'digiturva_7-digiturva_5': [{top:"66.2%",left:"59.8%"},{top:"72.1%",left:"62.9%"},{top:"75.6%",left:"65.9%"},{top:"77.2%",left:"69.2%"},{top:"78.2%",left:"73.3%"},{top:"79.5%",left:"78.3%"},{top:"78.4%",left:"82.2%"},{top:"69.7%",left:"85.6%"}],
+          'digiturva_7-digiturva_6': [{top:"66.2%",left:"59.8%"},{top:"65.4%",left:"67.3%"},{top:"65.0%",left:"70.4%"},{top:"63.4%",left:"73.2%"},{top:"60.5%",left:"75.8%"},{top:"57.3%",left:"78.9%"},{top:"53.7%",left:"81.2%"},{top:"50.4%",left:"84.6%"},{top:"47.2%",left:"86.4%"},{top:"41.8%",left:"86.7%"}]
         }
     }
   }
