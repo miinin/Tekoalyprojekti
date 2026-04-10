@@ -260,8 +260,10 @@ const Roadmap = () => {
         if (node) {
             // Etsitään edellinen completed-rasti, jotta tiedetään voidaanko ajaa pitkin viivaa
             const mapNodes = currentData.nodes.map(n => n.id);
-            const userDone = mapNodes.filter(id => completedLessons.includes(id));
-            const startNode = userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0];
+            const userDone = completedLessons.filter(id => mapNodes.includes(id));
+            const params = new URLSearchParams(window.location.search);
+            const completedNodeId = params.get('completed');
+            const startNode = completedNodeId || (userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0]);
             
             if (startNode && startNode !== nodeId) {
                 // BFS-polunhaku alakartan risteäviin lompakkoihin (esim. etiikka/satama)
