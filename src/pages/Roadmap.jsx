@@ -23,6 +23,19 @@ const Roadmap = () => {
   const [versionColor] = useState('var(--danger)'); // Punainen
   const [vanPos, setVanPos] = useState({ top: '50%', left: '50%', direction: 1, isTunnel: false, stepTime: 0 });
   const [isMoving, setIsMoving] = useState(false);
+  const [bubbleText, setBubbleText] = useState(null);
+
+  useEffect(() => {
+    let timeout;
+    if (vanPos.message) {
+      setBubbleText(vanPos.message);
+    } else if (bubbleText) {
+      timeout = setTimeout(() => {
+        setBubbleText(null);
+      }, 1000);
+    }
+    return () => clearTimeout(timeout);
+  }, [vanPos.message, bubbleText]);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
     return saved ? JSON.parse(saved) : [];
@@ -483,9 +496,9 @@ const Roadmap = () => {
         }}
       >
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            {vanPos.message && currentMap === 'perusteet' && isMoving && (
+            {bubbleText && currentMap === 'perusteet' && (
                <div style={{ position: 'absolute', top: '-65px', left: '50%', transform: `translateX(-50%) scaleX(${vanPos.direction || 1})`, background: 'white', padding: '10px 18px', borderRadius: '20px', fontWeight: '900', color: 'var(--primary-color)', border: '4px solid var(--primary-color)', zIndex: 100, fontSize: '1.4rem', whiteSpace: 'nowrap', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', letterSpacing: '1px' }}>
-                  {vanPos.message}
+                  {bubbleText}
                   <div style={{ position: 'absolute', bottom: '-12px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderTop: '10px solid var(--primary-color)' }} />
                </div>
             )}
