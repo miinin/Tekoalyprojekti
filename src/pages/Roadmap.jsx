@@ -311,9 +311,15 @@ const Roadmap = () => {
                     if (allWaypoints.length > 0) {
                          await moveAlongPath(allWaypoints);
                     }
-                    setIsMoving(false);
                 }
             }
+            
+            // Varmistetaan aina, että paku on lopulta TÄSMÄLLEEN solmun päällä ja animoitu perille ennen navigointia
+            setIsMoving(true);
+            setVanPos(prev => ({ ...prev, top: node.top, left: node.left, stepTime: 500 }));
+            await new Promise(r => setTimeout(r, 550));
+            setIsMoving(false);
+
             navigate(`/quiz/${currentMap}/${nodeId}`);
         }
     }
