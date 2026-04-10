@@ -155,7 +155,7 @@ export const AI_ROADMAP_DATA = {
         exit: [{top:"67.7%",left:"21.5%"},{top:"72.4%",left:"26.4%"},{top:"75.8%",left:"31.2%"},{top:"78.6%",left:"27.9%"},{top:"79.6%",left:"25.9%"},{top:"82.9%",left:"23.5%"},{top:"87.0%",left:"22.6%"},{top:"89.2%",left:"20.8%"},{top:"92.7%",left:"18.5%"},{top:"95.2%",left:"17.1%"},{top:"105.2%",left:"17.1%"}],
         nodes: [
           { id: 'digiturva_1', top: '67.5%', left: '20.7%' },
-          { id: 'digiturva_2', top: '84.2%', left: '46.1%' },
+          { id: 'digiturva_2', top: '50.5%', left: '66.7%' },
           { id: 'digiturva_3', top: '48.2%', left: '34.8%' },
           { id: 'digiturva_4', top: '31.6%', left: '53.1%' },
           { id: 'digiturva_5', top: '69.7%', left: '85.6%' },
