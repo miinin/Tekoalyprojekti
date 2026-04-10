@@ -7,7 +7,8 @@ import {
   Car,
   CheckCircle2,
   Lock,
-  Zap
+  Zap,
+  Medal
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 
@@ -487,9 +488,9 @@ const Roadmap = () => {
 
   const getMedalStyles = (medal) => {
     switch(medal) {
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'radial-gradient(circle at 30% 30%, #fef08a 0%, #f59e0b 40%, #b45309 100%)' };
-      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: 'url(#silver-grad)', stroke: '#475569', bg: 'radial-gradient(circle at 30% 30%, #ffffff 0%, #94a3b8 50%, #475569 100%)' };
-      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: 'url(#bronze-grad)', stroke: '#78350f', bg: 'radial-gradient(circle at 30% 30%, #fde68a 0%, #d97706 50%, #78350f 100%)' };
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 30%, #f59e0b 50%, #b45309 80%, #fef08a 100%)' };
+      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: 'url(#silver-grad)', stroke: '#334155', bg: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #94a3b8 50%, #475569 80%, #ffffff 100%)' };
+      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: 'url(#bronze-grad)', stroke: '#451a03', bg: 'linear-gradient(135deg, #fcd34d 0%, #b45309 30%, #78350f 50%, #451a03 80%, #fcd34d 100%)' };
       default: return null;
     }
   };
@@ -587,7 +588,26 @@ const Roadmap = () => {
             {isLocked ? <Lock size={20} color="white" /> : 
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {medal ? (
-                   <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                   <>
+                     {medal === 'gold' && (
+                       <svg style={{ position: 'absolute', width: '135%', height: '135%', top: '-17%', left: '-17%', pointerEvents: 'none', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} viewBox="0 0 100 100">
+                         <g fill="#fef08a">
+                           <path d="M20,60 Q25,50 15,50 Q10,55 20,60" />
+                           <path d="M15,40 Q20,30 10,30 Q5,35 15,40" />
+                           <path d="M18,20 Q23,10 13,10 Q8,15 18,20" />
+                           <path d="M80,60 Q75,50 85,50 Q90,55 80,60" />
+                           <path d="M85,40 Q80,30 90,30 Q95,35 85,40" />
+                           <path d="M82,20 Q77,10 87,10 Q92,15 82,20" />
+                         </g>
+                         <path d="M20,70 C10,50 10,30 20,10" stroke="#fef08a" fill="transparent" strokeWidth="4" strokeLinecap="round"/>
+                         <path d="M80,70 C90,50 90,30 80,10" stroke="#fef08a" fill="transparent" strokeWidth="4" strokeLinecap="round"/>
+                       </svg>
+                     )}
+                     {medal === 'gold' 
+                       ? <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                       : <Medal size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                     }
+                   </>
                ) : (() => {
                   const fSize = currentMap === 'main' ? '2.5rem' : '1.8rem';
                   const MatIcon = ({ name }) => (
@@ -837,10 +857,34 @@ const Roadmap = () => {
             <span style={{ fontWeight: 900, fontSize: '1.3rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{sparks}</span>
           </div>
 
-          <div style={{ backgroundColor: 'white', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid var(--secondary-color)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-            <Trophy size={24} color="var(--secondary-color)" fill="var(--secondary-color)" />
-            <span style={{ fontWeight: 900, fontSize: '1.3rem', color: '#text-main', fontFamily: 'var(--font-display)' }}>{completedLessons.length} / 42</span>
-          </div>
+          {(() => {
+            let counts = { gold: 0, silver: 0, bronze: 0 };
+            Object.keys(AI_ROADMAP_DATA.sub).forEach(mapId => {
+              const subData = AI_ROADMAP_DATA.sub[mapId];
+              if (subData && subData.nodes) {
+                 subData.nodes.forEach(node => {
+                    const m = getSubmapMedal(node.id);
+                    if (m) counts[m]++;
+                 });
+              }
+            });
+            return (
+              <div style={{ backgroundColor: 'white', padding: '0.6rem 1.2rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '1.2rem', borderTop: '5px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Medal size={22} color="#451a03" fill="url(#bronze-grad)" />
+                  <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#78350f', fontFamily: 'var(--font-display)' }}>{counts.bronze}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Medal size={22} color="#334155" fill="url(#silver-grad)" />
+                  <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#475569', fontFamily: 'var(--font-display)' }}>{counts.silver}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <Trophy size={22} color="#b45309" fill="url(#gold-grad)" />
+                  <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{counts.gold}</span>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
 
@@ -888,7 +932,7 @@ const Roadmap = () => {
                        setSparks(await store.getSparks());
                    }}
                 >
-                   Selvä homma! (+10 ⚡)
+                   Selvä homma! (+10⚡)
                 </button>
               </div>
             )}
@@ -904,7 +948,7 @@ const Roadmap = () => {
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
                 }}>
-                   Ymmärretty! (+10 ⚡)
+                   Ymmärretty! (+10⚡)
                 </button>
               </div>
             )}
@@ -912,14 +956,14 @@ const Roadmap = () => {
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
+                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: '#3b82f6', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
                     setClosedTuition(prev => ({...prev, 1: true}));
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
                 }}>
-                   Selvä homma! (+10 ⚡)
+                   Selvä homma! (+10⚡)
                 </button>
               </div>
             )}
@@ -934,7 +978,7 @@ const Roadmap = () => {
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
                 }}>
-                   Olen valmis jatkamaan seikkailua itse! (+10 ⚡)
+                   Olen valmis jatkamaan seikkailua itse! (+10⚡)
                 </button>
               </div>
             )}
