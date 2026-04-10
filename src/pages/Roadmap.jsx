@@ -715,15 +715,14 @@ const Roadmap = () => {
             {currentMap !== 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>MAAILMANKARTTA</span>}
             {currentMap === 'main' && <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>LOBBY</span>}
           </button>
-          <div>
-            <h1 style={{ margin: 0, fontSize: '2.5rem', lineHeight: 1, textShadow: '0 2px 4px rgba(255,255,255,0.8)', fontFamily: 'var(--font-main)', fontWeight: 900 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               {currentMap === 'main' ? (
-                  <><span style={{ color: 'var(--accent-color)' }}>AI</span> <span style={{ color: 'var(--primary-color)' }}>Van!</span></>
-              ) : <span style={{ color: 'var(--primary-color)' }}>{categories.find(c => c.id === currentMap)?.name}</span>}
-            </h1>
-            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 900, color: 'var(--text-muted)', letterSpacing: '1px' }}>
-              {currentMap === 'main' ? 'PÄÄREITTI' : 'ALUEEN TUTKIMUS'} | <span style={{ color: versionColor, fontWeight: '900', background: 'rgba(239, 68, 68, 0.1)', padding: '0.3rem 0.8rem', borderRadius: '12px' }}>{dataVersion}</span>
-            </p>
+                  <img src="/logo.png" alt="AIvan Logo" style={{ height: '40px', objectFit: 'contain' }} />
+              ) : (
+                  <h1 style={{ margin: 0, fontSize: '2rem', lineHeight: '1.2', textTransform: 'uppercase', color: 'var(--primary-color)' }}>
+                      {categories.find(c => c.id === currentMap)?.name}
+                  </h1>
+              )}
           </div>
         </div>
 

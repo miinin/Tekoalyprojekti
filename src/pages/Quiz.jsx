@@ -304,6 +304,17 @@ export default function Quiz() {
               const isSelected = selectedAnswer === option;
               let btnStyle = { padding: '1rem', textAlign: 'left', background: 'white', border: '2px solid #e2e8f0', color: 'var(--text-main)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', fontSize: '1.05rem', lineHeight: '1.4', fontFamily: 'var(--font-main)', fontWeight: '500' };
               
+              if (currentQuestion.type === 'true_false') {
+                 const optOpt = option.toLowerCase();
+                 if (['oikein', 'kyllä', 'true', 'yes'].includes(optOpt)) {
+                    btnStyle.color = '#15803d';
+                    if (!isSelected) { btnStyle.border = '2px solid #bbf7d0'; btnStyle.background = '#f0fdf4'; }
+                 } else if (['väärin', 'ei', 'false', 'no'].includes(optOpt)) {
+                    btnStyle.color = '#b91c1c';
+                    if (!isSelected) { btnStyle.border = '2px solid #fecaca'; btnStyle.background = '#fef2f2'; }
+                 }
+              }
+
               if (showExplanation) {
                 if (option === currentQuestion.correctAnswer) {
                   btnStyle.border = '2px solid var(--accent-color)';

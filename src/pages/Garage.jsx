@@ -248,6 +248,8 @@ export default function Garage() {
   const isGlobalPreview = hoveredObj && equipped[hoverSlot] !== hoveredObj.id;
 
   return (
+    <>
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, background: 'radial-gradient(circle at 50% -20%, #334155 0%, #020617 100%)' }} />
     <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '2000px', margin: '0 auto', width: '100%' }}>
       <style>{`
         .garage-grid {
@@ -371,7 +373,7 @@ export default function Garage() {
         <div className="garage-left">
            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
+                <h3 style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
                 {Object.entries(categorisedCar).map(([catId, category]) => {
                   const isLocked = isTutorialActive;
                   return (
@@ -402,7 +404,7 @@ export default function Garage() {
               </div>
 
               <div>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
+                <h3 style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
                 {Object.entries(categorisedGarage).map(([catId, category]) => {
                   const isLocked = isTutorialActive && catId !== 'g_floor';
                   return (
@@ -436,7 +438,7 @@ export default function Garage() {
 
         {/* CENTER COLUMN: Selected Category Items */}
         <div className="garage-center">
-            <h2 style={{ fontSize: '1.6rem', color: 'var(--text-main)', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
+            <h2 style={{ fontSize: '1.6rem', color: 'white', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
               {activeCategory ? (categorisedCar[activeCategory]?.name || categorisedGarage[activeCategory]?.name) : "Valitse kategoria"}
             </h2>
             <div className="items-grid animate-fade-in">
@@ -576,5 +578,6 @@ export default function Garage() {
 
       </div>
     </div>
+    </>
   );
 }
