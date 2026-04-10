@@ -5,7 +5,7 @@ export const categories = [
     "subcategories": [
       {
         "id": "perusteet_1",
-        "name": "Taso 1: Alkeet",
+        "name": "Mikä ihmeen tekoäly?",
         "questions": [
           {
             "id": "q_p1_1",
@@ -30,23 +30,23 @@ export const categories = [
           }
         ]
       },
-      { "id": "perusteet_2", "name": "Taso 2: Koneoppiminen", "questions": [
+      { "id": "perusteet_2", "name": "Ihmisäly vs. tekoäly", "questions": [
           { "id": "q_p2_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan 'koneoppimisella'?", "options": ["Kone oppii datasta ilman että sille annetaan sääntöjä etukäteen", "Kone menee kouluun", "Kone lukee kirjoja", "Kone päivittää itsensä"], "correctAnswer": "Kone oppii datasta ilman että sille annetaan sääntöjä etukäteen", "explanation": "Koneoppiminen on tekoälyn osa-alue, jossa algoritmit löytävät säännönmukaisuuksia datasta." },
           { "id": "q_p2_2", "type": "true_false", "question": "Tarvitseeko koneoppiminen suuria määriä dataa toimiakseen hyvin?", "options": ["Kyllä", "Ei välttämättä"], "correctAnswer": "Kyllä", "explanation": "Mitä enemmän ja laadukkaampaa dataa on, sitä paremmin malli yleensä oppii." }
       ] },
-      { "id": "perusteet_3", "name": "Taso 3: Neuroverkot", "questions": [
+      { "id": "perusteet_3", "name": "Tekoäly vs. tavallinen ohjelma", "questions": [
           { "id": "q_p3_1", "type": "multiple_choice", "question": "Mikä on tekoälyn neuroverkko?", "options": ["Siimaa ja lautoja", "Aivojen solujen toimintaa matkiva tietokoneohjelma", "Sähköverkko", "Internet-selain"], "correctAnswer": "Aivojen solujen toimintaa matkiva tietokoneohjelma", "explanation": "Neuroverkot on saaneet inspiraationsa ihmisaivojen hermosoluista ja niiden välisistä yhteyksistä." }
       ] },
-      { "id": "perusteet_4", "name": "Taso 4: Algoritmit", "questions": [
+      { "id": "perusteet_4", "name": "Mitä tekoäly ei osaa?", "questions": [
           { "id": "q_p4_1", "type": "multiple_choice", "question": "Mikä on algoritmi?", "options": ["Laskuresepti tai ohjesarja", "Tietokoneen osa", "Pelin nimi", "Salasana"], "correctAnswer": "Laskuresepti tai ohjesarja", "explanation": "Algoritmi on tarkka ohje siitä, miten jokin tehtävä suoritetaan vaihe vaiheelta." }
       ] },
-      { "id": "perusteet_5", "name": "Taso 5: Datan merkitys", "questions": [
+      { "id": "perusteet_5", "name": "Tekoälyn aikakone", "questions": [
           { "id": "q_p5_1", "type": "scenario", "question": "SKENAARIO: Haluat opettaa tekoälyn tunnistamaan omenoita, mutta näytät sille vain kuvia punaisista omenoista. Mitä tapahtuu, kun näytät sille keltaisen omenan?", "options": ["Se tunnistaa sen heti", "Se ei todennäköisesti tunnista sitä omenaksi", "Se muuttuu keltaiseksi", "Se pyytää lisää dataa"], "correctAnswer": "Se ei todennäköisesti tunnista sitä omenaksi", "explanation": "Tekoäly on vain niin viisas kuin sille annettu opetusdata. Jos se on nähnyt vain punaisia omenoita, se luulee omenan olevan aina punainen." }
       ] },
-      { "id": "perusteet_6", "name": "Taso 6: Tekoälyn historia", "questions": [
+      { "id": "perusteet_6", "name": "Tekoälymyytit", "questions": [
           { "id": "q_p6_1", "type": "multiple_choice", "question": "Milloin tekoälyn ajatus sai alkunsa?", "options": ["1950-luvulla", "2010-luvulla", "1800-luvulla", "2000-luvulla"], "correctAnswer": "1950-luvulla", "explanation": "Tekoälyn perusta luotiin jo 1950-luvulla, vaikka teknologia sen toteuttamiseen kehittyi vasta myöhemmin." }
       ] },
-      { "id": "perusteet_7", "name": "Taso 7: Tulevaisuus", "questions": [
+      { "id": "perusteet_7", "name": "Tarkastuspiste – Tiukka Katsastus", "questions": [
           { "id": "q_p7_1", "type": "true_false", "question": "Voiko tekoäly joskus olla älykkäämpi kuin ihminen kaikissa asioissa?", "options": ["Tämä on hypoteettinen tilanne nimeltä AGI", "Ei ikinä"], "correctAnswer": "Tämä on hypoteettinen tilanne nimeltä AGI", "explanation": "Tiedemiehet puhuvat AGI:stä (Artificial General Intelligence), mutta olemme vielä kaukana siitä." }
       ] }
     ]
@@ -84,7 +84,7 @@ export const categories = [
       { "id": "konepellin_6", "name": "Taso 6: Takaisinvirtaus", "questions": [
           { "id": "q_k6_1", "type": "multiple_choice", "question": "Mikä on backpropagation?", "options": ["Tapa jolla tekoäly korjaa virheitään oppiessaan", "Tietokoneen sammuttaminen", "Netin selaus", "Varmuuskopiointi"], "correctAnswer": "Tapa jolla tekoäly korjaa virheitään oppiessaan", "explanation": "Se on matemaattinen tapa siirtää virhetieto verkossa taaksepäin painoarvojen korjaamiseksi." }
       ] },
-      { "id": "konepellin_7", "name": "Taso 7: Uudet arkkitehtuurit", "questions": [
+      { "id": "konepellin_7", "name": "Erikoiskoe – Yskivä Moottori", "questions": [
           { "id": "q_k7_1", "type": "multiple_choice", "question": "Mikä on 'Transformer'-arkkitehtuuri?", "options": ["Modernien kielimallien perusta", "Muuttuva robotti", "Sähkölaite", "Auto-tekoäly"], "correctAnswer": "Modernien kielimallien perusta", "explanation": "Transfomerit mahdollistivat ChatGPT:n kaltaiset suuret kielimallit huomaamalla yhteydet sanojen välillä." }
       ] }
     ]
@@ -127,7 +127,7 @@ export const categories = [
       { "id": "arjessa_6", "name": "Taso 6: Robotti-imurit", "questions": [
           { "id": "q_a6_1", "type": "multiple_choice", "question": "Miten robotti-imuri tunnistaa esteet?", "options": ["Sensoreilla ja koneoppimisella", "Sattumanvaraisesti törmäilemällä", "Se näkee unia", "Siinä on ihminen sisällä"], "correctAnswer": "Sensoreilla ja koneoppimisella", "explanation": "Nykyaikaiset imurit oppivat kotisi kartan ja tunnistavat esineet (kuten sukat!) tekoälyn avulla." }
       ] },
-      { "id": "arjessa_7", "name": "Taso 7: Älykodit", "questions": [
+      { "id": "arjessa_7", "name": "Erikoiskoe – Kaaosristeys", "questions": [
           { "id": "q_a7_1", "type": "multiple_choice", "question": "Mikä on unelma 'älykodista'?", "options": ["Koti joka oppii rutiinisi ja säästää energiaa", "Koti joka puhuu koko ajan", "Koti jossa on paljon lamppuja", "Koti joka vaihtaa paikkaa"], "correctAnswer": "Koti joka oppii rutiinisi ja säästää energiaa", "explanation": "Tekoäly voi säädellä lämpöä ja valoja sen mukaan, milloin olet kotona." }
       ] }
     ]
@@ -154,7 +154,7 @@ export const categories = [
       { "id": "reilu_peli_6", "name": "Taso 6: Työelämän muutos", "questions": [
           { "id": "q_e6_1", "type": "multiple_choice", "question": "Miten tekoäly vaikuttaa tulevaisuuden töihin?", "options": ["Se poistaa joitain töitä, mutta luo täysin uusia", "Kaikki työt loppuvat", "Mikään ei muutu", "Töitä on enemmän kaikille"], "correctAnswer": "Se poistaa joitain töitä, mutta luo täysin uusia", "explanation": "Rutiinitehtävät vähenevät, mutta tarve tekoälyä osaaville ihmisille kasvaa." }
       ] },
-      { "id": "reilu_peli_7", "name": "Taso 7: Kohdistaminen", "questions": [
+      { "id": "reilu_peli_7", "name": "Tarkastuspiste – Häijy Kaahari", "questions": [
           { "id": "q_e7_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan AI Alignmentilla?", "options": ["Tekoälyn tavoitteiden kohdistamista ihmiskunnan parhaaksi", "Tekoälyn asettamista riveihin", "Netin korjaamista", "Tiedon suodatusta"], "correctAnswer": "Tekoälyn tavoitteiden kohdistamista ihmiskunnan parhaaksi", "explanation": "Alignment on tavoite varmistaa, ettei tekoäly vahingossakaan toimi ihmisten arvoja vastaan." }
       ] }
     ]
@@ -181,7 +181,7 @@ export const categories = [
       { "id": "kayttotaidot_6", "name": "Taso 6: Monimuotoisuus", "questions": [
           { "id": "q_kt6_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan multimodaalisella tekoälyllä?", "options": ["Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "Se on hyvin nopea", "Se toimii monessa maassa", "Se on kallis"], "correctAnswer": "Se ymmärtää tekstiä, kuvaa, ääntä ja videoita samanaikaisesti", "explanation": "Modernit mallit (kuten GPT-4o tai Gemini) osaavat katsella kuvia ja kuunnella kerralla." }
       ] },
-      { "id": "kayttotaidot_7", "name": "Taso 7: Guruksi", "questions": [
+      { "id": "kayttotaidot_7", "name": "Finaali – Suuri Mestariralli", "questions": [
           { "id": "q_kt7_1", "type": "multiple_choice", "question": "Miten voit testata tekoälyn päättelyä?", "options": ["Pyytämällä sitä ajattelemaan 'askel kerrallaan'", "Kysymällä siltä kuka se on", "Antamalla sille nimen", "Sulkemalla sen"], "correctAnswer": "Pyytämällä sitä ajattelemaan 'askel kerrallaan'", "explanation": "Chain-of-thought eli ajatuksen ketjuttaminen pakottaa mallin välivaiheisiin, mikä parantaa logiikkaa." }
       ] }
     ]
@@ -208,7 +208,7 @@ export const categories = [
       { "id": "aivoterveys_6", "name": "Taso 6: Kvanteista tekoälyyn", "questions": [
           { "id": "q_h6_1", "type": "multiple_choice", "question": "Miten kvanttitietokoneet voisivat auttaa tekoälyä?", "options": ["Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "Ne tekisivät niistä pienempiä", "Ne eivät auta", "Ne tekisivät niistä vihreitä"], "correctAnswer": "Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "explanation": "Kvanttilaskenta voisi mullistaa sen, miten nopeasti ja monimutkaisia asioita tekoäly osaa." }
       ] },
-      { "id": "aivoterveys_7", "name": "Taso 7: Suurmestari", "questions": [
+      { "id": "aivoterveys_7", "name": "Erikoiskoe – Sumuinen Yöajo", "questions": [
           { "id": "q_h7_1", "type": "true_false", "question": "Oletko nyt valmis kohtaamaan tekoälyn tulevaisuuden?", "options": ["Aina valmis oppimaan uutta", "En vielä"], "correctAnswer": "Aina valmis oppimaan uutta", "explanation": "Hienoa! Tekoälyn suurin taito on kyky pysyä uteliaana." }
       ] }
     ]
@@ -223,7 +223,7 @@ export const categories = [
       { "id": "digiturva_4", "name": "Taso 4: Tunteet", "questions": [ { "id": "q_s4_1", "type": "true_false", "question": "Voiko koodi tuntea surua?", "options": ["Ei, se voi vain simuloida sitä", "Kyllä"], "correctAnswer": "Ei, se voi vain simuloida sitä", "explanation": "Koneilla ei ole biologista kehoa tai tunteita, vain matemaattisia malleja." } ] },
       { "id": "digiturva_5", "name": "Taso 5: Yhteistyö", "questions": [ { "id": "q_s5_1", "type": "multiple_choice", "question": "Mikä on paras tapa käyttää tekoälyä?", "options": ["Ihmisen ja koneen yhteistyönä (Copilot)", "Antamalla koneen tehdä kaikki", "Välttämällä sitä", "Vain koodaamiseen"], "correctAnswer": "Ihmisen ja koneen yhteistyönä (Copilot)", "explanation": "Yhdessä ihminen ja tekoäly ovat vahvempia kuin kumpikaan yksin." } ] },
       { "id": "digiturva_6", "name": "Taso 6: Vastuullisuus", "questions": [ { "id": "q_s6_1", "type": "multiple_choice", "question": "Kuka on viime kädessä vastuussa tekoälyn teoista?", "options": ["Ihminen joka sitä käyttää tai kehitti sen", "Tekoäly itse", "Tietokone", "Kukaan ei ole"], "correctAnswer": "Ihminen joka sitä käyttää tai kehitti sen", "explanation": "Vastuu on aina ihmisellä, vaikka työkalu olisi kuinka kehittynyt." } ] },
-      { "id": "digiturva_7", "name": "Taso 7: Loppusanat", "questions": [ { "id": "q_s7_1", "type": "multiple_choice", "question": "Mikä on tärkein oppi tästä matkasta?", "options": ["Uteliaisuus ja kriittisyys", "Että osaan vastata kysymyksiin", "Että auto osaa ajaa", "Pelin loppu"], "correctAnswer": "Uteliaisuus ja kriittisyys", "explanation": "Olet suorittanut AIVAN tien! Muista: maailma muuttuu, mutta oppiminen jatkuu." } ] }
+      { "id": "digiturva_7", "name": "Tarkastuspiste – Maantierosvon Tietulli", "questions": [ { "id": "q_s7_1", "type": "multiple_choice", "question": "Mikä on tärkein oppi tästä matkasta?", "options": ["Uteliaisuus ja kriittisyys", "Että osaan vastata kysymyksiin", "Että auto osaa ajaa", "Pelin loppu"], "correctAnswer": "Uteliaisuus ja kriittisyys", "explanation": "Olet suorittanut AIVAN tien! Muista: maailma muuttuu, mutta oppiminen jatkuu." } ] }
     ]
   }
 ];
