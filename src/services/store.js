@@ -64,6 +64,21 @@ export const store = {
     return 0; // No new sparks earned
   },
 
+  getNodeStats: () => {
+    return JSON.parse(localStorage.getItem('aivan_node_stats') || '{}');
+  },
+
+  saveNodeStats: (nodeId, correctCount, totalCount) => {
+    const stats = store.getNodeStats();
+    const currentStat = stats[nodeId];
+    
+    // Only save if it's the first time OR if the new completion ratio is strictly better
+    if (!currentStat || (correctCount / totalCount) > (currentStat.correct / currentStat.total)) {
+        stats[nodeId] = { correct: correctCount, total: totalCount };
+        localStorage.setItem('aivan_node_stats', JSON.stringify(stats));
+    }
+  },
+
   getSparks: async () => {
     const room = store.getRoomCode();
     // Simulate fetching from shared DB. Right now just local storage with room key

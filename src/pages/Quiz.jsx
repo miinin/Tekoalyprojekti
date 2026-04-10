@@ -146,6 +146,7 @@ export default function Quiz() {
       totalEarned = totalEarned * sparkRewardMultiplier;
 
       const newSparksEarned = await store.saveNodeRecord(sub.id, totalEarned);
+      store.saveNodeStats(sub.id, correctAnswersCount, questions.length);
       
       const totalToBank = newSparksEarned; // Removed grindSparksEarned / reiluuslisä
 

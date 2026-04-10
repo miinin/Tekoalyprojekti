@@ -441,6 +441,47 @@ const Roadmap = () => {
     </>
   );
 
+  const getSubmapMedal = (nodeId) => {
+    const stats = store.getNodeStats();
+    const stat = stats[nodeId];
+    if (!stat || stat.total === 0) return null;
+    const ratio = stat.correct / stat.total;
+    if (ratio >= 1.0) return 'gold';
+    if (ratio >= 0.66) return 'silver';
+    if (ratio >= 0.33) return 'bronze';
+    return null;
+  };
+
+  const getMainmapMedal = (categoryId) => {
+    const cat = categories.find(c => c.id === categoryId);
+    if (!cat) return null;
+    const stats = store.getNodeStats();
+    let totalCorrect = 0;
+    let absoluteTotalQuestions = 0;
+    
+    cat.subcategories.forEach(sub => {
+       const stat = stats[sub.id];
+       if (stat) totalCorrect += stat.correct;
+       absoluteTotalQuestions += sub.questions ? sub.questions.length : (stat ? stat.total : 0);
+    });
+
+    if (absoluteTotalQuestions === 0) return null;
+    const ratio = totalCorrect / absoluteTotalQuestions;
+    if (ratio >= 1.0) return 'gold';
+    if (ratio >= 0.66) return 'silver';
+    if (ratio >= 0.33) return 'bronze';
+    return null;
+  };
+
+  const getMedalStyles = (medal) => {
+    switch(medal) {
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: '#fde047', stroke: '#b45309' };
+      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: '#f1f5f9', stroke: '#64748b' };
+      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: '#fcd34d', stroke: '#78350f' };
+      default: return null;
+    }
+  };
+
   const renderMapNodes = () => {
     const data = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     if (!data) return null;
@@ -477,6 +518,9 @@ const Roadmap = () => {
           }
       }
       const isCompleted = completedLessons.includes(node.id);
+      const medal = currentMap === 'main' ? getMainmapMedal(node.id) : getSubmapMedal(node.id);
+      const mStyles = getMedalStyles(medal);
+
       const isFirstEverTarget = !store.getTutorialSkipped() && currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
       const isFirstSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
       const isSecondSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1 && closedTuition[1];
@@ -509,19 +553,20 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderWidth: '4px',
+                borderWidth: mStyles ? '6px' : '4px',
                 borderStyle: 'solid',
-                borderColor: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode ? '#fef08a' : 'white'),
-                boxShadow: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)'),
+                borderColor: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? mStyles.border : (isLastNode ? '#fef08a' : 'white')),
+                boxShadow: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? `0 0 30px ${mStyles.shadow}, inset 0 0 10px rgba(255,255,255,0.5)` : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
                 backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
           >
             {isLocked ? <Lock size={20} color="white" /> : 
-             isCompleted && currentMap !== 'main' ? <CheckCircle2 size={32} color="white" /> : 
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               {(() => {
+               {medal ? (
+                   <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+               ) : (() => {
                   const fSize = currentMap === 'main' ? '2.5rem' : '1.8rem';
                   const MatIcon = ({ name }) => (
                       <span className="material-symbols-outlined" style={{ fontSize: fSize, color: 'white', fontVariationSettings: "'wght' 300, 'FILL' 0", userSelect: 'none' }}>
@@ -545,7 +590,7 @@ const Roadmap = () => {
                   }
                   const iconName = getIconString(currentMap === 'main' ? node.id : currentMap);
                   return <MatIcon name={iconName} />;
-             })()}
+               })()}
              </div>}
           </button>
           
