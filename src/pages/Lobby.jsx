@@ -83,6 +83,7 @@ export default function Lobby() {
             padding: 2.5rem;
             position: relative;
             overflow: hidden;
+            height: 520px;
         }
         .mode-card:hover {
             transform: translateY(-8px);
