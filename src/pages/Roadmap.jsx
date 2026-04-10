@@ -774,7 +774,7 @@ const Roadmap = () => {
       {/* Map Content */}
       <div style={mapContainerStyle}>
             {showMapTutorial && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
+              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
                     Seikkailu alkaa!
                 </div>
@@ -796,7 +796,7 @@ const Roadmap = () => {
             
             {/* Submap Tutoriaalit */}
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 0 && !closedTuition[0] && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Valitse ensimmäinen kategoria napsauttamalla sinistä pallukkaa.
                 </div>
@@ -807,7 +807,7 @@ const Roadmap = () => {
             )}
             
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && !closedTuition[1] && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin Autotalliin oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
@@ -818,7 +818,7 @@ const Roadmap = () => {
             )}
             
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 2 && !closedTuition[2] && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
+              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin nähtyihin ”Mikä on homman juju?” -laatikoihin. Lue siis nämä laatikot tarkasti jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
                 </div>
