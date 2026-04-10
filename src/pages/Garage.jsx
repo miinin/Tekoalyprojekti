@@ -231,13 +231,13 @@ export default function Garage() {
     );
   };
 
-  const categorisedCar = carUpgrades.reduce((acc, item) => {
+  const categorisedCar = [...carUpgrades].sort((a, b) => a.price - b.price).reduce((acc, item) => {
     if (!acc[item.category]) acc[item.category] = { name: item.categoryName, items: [] };
     acc[item.category].items.push(item);
     return acc;
   }, {});
 
-  const categorisedGarage = garageUpgrades.reduce((acc, item) => {
+  const categorisedGarage = [...garageUpgrades].sort((a, b) => a.price - b.price).reduce((acc, item) => {
     let displayCat = item.category;
     if (displayCat === 'g_jack') displayCat = 'g_tools';
 
