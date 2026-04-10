@@ -83,7 +83,7 @@ export default function Lobby() {
             padding: 2.5rem;
             position: relative;
             overflow: hidden;
-            height: 520px;
+            min-height: 520px;
         }
         .mode-card:hover {
             transform: translateY(-8px);
@@ -112,24 +112,14 @@ export default function Lobby() {
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin keräten Kipinöitä ja kehitä tekoälypakuasi huippuunsa.</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            {store.hasProgress() && (
-              <button className="btn-primary" onClick={handleContinueSinglePlayer} style={{ background: '#10b981', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.4)' }}>
-                JATKA PELIÄ
-              </button>
-            )}
-
-            <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#0ea5e9', borderColor: '#0ea5e9', color: store.hasProgress() ? '#0ea5e9' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(14, 165, 233, 0.4)' }}>
-              {store.hasProgress() ? 'ALOITA ALUSTA' : 'UUSI SEIKKAILU'}
-            </button>
-
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '-0.3rem' }}>
                <button onClick={() => setShowSettings(!showSettings)} style={{ background: 'transparent', border: 'none', color: '#64748b', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.9rem', fontWeight: 'bold' }}>
                  <Wrench size={16} /> Aloitusasetukset
                </button>
             </div>
 
             {showSettings && (
-               <div className="animate-fade-in" style={{ backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem', border: '2px solid #e2e8f0' }}>
+               <div className="animate-fade-in" style={{ backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1rem', border: '2px solid #e2e8f0', marginBottom: '0.5rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                      <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Nopea oppija (Ohita opastus)</span>
                      <div 
@@ -144,12 +134,24 @@ export default function Lobby() {
                      <div 
                        className="toggle-track"
                        onClick={() => { const v = !testMode; setTestMode(v); store.setTestMode(v); }}
-                       style={{ background: testMode ? '#8b5cf6' : '#cbd5e1' }}>
+                       style={{ background: testMode ? '#10b981' : '#cbd5e1' }}>
                        <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
                      </div>
                   </div>
                </div>
             )}
+
+            {store.hasProgress() && (
+              <button className="btn-primary" onClick={handleContinueSinglePlayer} style={{ background: '#10b981', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.4)' }}>
+                JATKA PELIÄ
+              </button>
+            )}
+
+            <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#0ea5e9', borderColor: '#0ea5e9', color: store.hasProgress() ? '#0ea5e9' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(14, 165, 233, 0.4)' }}>
+              {store.hasProgress() ? 'ALOITA ALUSTA' : 'UUSI SEIKKAILU'}
+            </button>
+
+
           </div>
         </div>
 

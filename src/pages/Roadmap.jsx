@@ -523,7 +523,7 @@ const Roadmap = () => {
     cat.subcategories.forEach(sub => {
        const stat = stats[sub.id];
        if (stat) totalCorrect += stat.correct;
-       absoluteTotalQuestions += sub.questions ? sub.questions.length : (stat ? stat.total : 0);
+       absoluteTotalQuestions += sub.questions ? Math.min(sub.questions.length, 5) : (stat ? stat.total : 5);
     });
 
     if (absoluteTotalQuestions === 0) return null;
