@@ -222,7 +222,8 @@ const Roadmap = () => {
                 left: target.left, 
                 direction: dir,
                 isTunnel: target.tunnel || false,
-                stepTime: stepDuration + 50 // CSS vie hieman pidempään kuin askel -> jatkuva liike!
+                stepTime: stepDuration + 50, // CSS vie hieman pidempään kuin askel -> jatkuva liike!
+                message: target.msg || null
             };
         });
         
@@ -479,6 +480,12 @@ const Roadmap = () => {
         }}
       >
         <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+            {vanPos.message && currentMap === 'perusteet' && isMoving && (
+               <div style={{ position: 'absolute', top: '-65px', left: '50%', transform: 'translateX(-50%)', background: 'white', padding: '10px 18px', borderRadius: '20px', fontWeight: '900', color: 'var(--primary-color)', border: '4px solid var(--primary-color)', zIndex: 100, fontSize: '1.4rem', whiteSpace: 'nowrap', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', letterSpacing: '1px' }}>
+                  {vanPos.message}
+                  <div style={{ position: 'absolute', bottom: '-12px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '10px solid transparent', borderRight: '10px solid transparent', borderTop: '10px solid var(--primary-color)' }} />
+               </div>
+            )}
             {/* Base Van */}
             <img 
               src="/carparts/van1-base.png" 
