@@ -89,6 +89,7 @@ const Roadmap = () => {
                     left: completedNode.left, 
                     stepTime: 0 
                 }));
+                setCurrentLocationId(completedNodeId);
 
                 // Etsi seuraava reitti tästä pisteestä
                 const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
@@ -97,6 +98,7 @@ const Roadmap = () => {
         } else {
             // Normaali saapuminen alakarttaan
             const entryPath = subData.entry;
+            setCurrentLocationId(subData.nodes[0].id); // Määritetään ensimmäinen node fyysiseksi sijainniksi
             if (entryPath && entryPath.length > 0) {
                 let initialDirection = 1;
                 if (entryPath.length > 1 && parseFloat(entryPath[1].left) < parseFloat(entryPath[0].left)) {
@@ -273,7 +275,11 @@ const Roadmap = () => {
             const userDone = completedLessons.filter(id => mapNodes.includes(id));
             const params = new URLSearchParams(window.location.search);
             const completedNodeId = params.get('completed');
-            const startNode = completedNodeId || (userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0]);
+            
+            let startNode = currentLocationId;
+            if (!startNode || startNode === 'start_point' || !mapNodes.includes(startNode)) {
+                startNode = completedNodeId || (userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0]);
+            }
             
             if (startNode && startNode !== nodeId) {
                 // BFS-polunhaku alakartan risteäviin lompakkoihin (esim. etiikka/satama)
