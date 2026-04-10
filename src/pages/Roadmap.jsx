@@ -488,7 +488,7 @@ const Roadmap = () => {
 
   const getMedalStyles = (medal) => {
     switch(medal) {
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 30%, #f59e0b 50%, #b45309 80%, #fef08a 100%)' };
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 1)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 22%, #ffffff 38%, #f59e0b 58%, #b45309 80%, #fef08a 100%)' };
       case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: 'url(#silver-grad)', stroke: '#334155', bg: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #94a3b8 50%, #475569 80%, #ffffff 100%)' };
       case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: 'url(#bronze-grad)', stroke: '#451a03', bg: 'linear-gradient(135deg, #fcd34d 0%, #b45309 30%, #78350f 50%, #451a03 80%, #fcd34d 100%)' };
       default: return null;
@@ -589,22 +589,8 @@ const Roadmap = () => {
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {medal ? (
                    <>
-                     {medal === 'gold' && (
-                       <svg style={{ position: 'absolute', width: '135%', height: '135%', top: '-17%', left: '-17%', pointerEvents: 'none', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} viewBox="0 0 100 100">
-                         <g fill="#fef08a">
-                           <path d="M20,60 Q25,50 15,50 Q10,55 20,60" />
-                           <path d="M15,40 Q20,30 10,30 Q5,35 15,40" />
-                           <path d="M18,20 Q23,10 13,10 Q8,15 18,20" />
-                           <path d="M80,60 Q75,50 85,50 Q90,55 80,60" />
-                           <path d="M85,40 Q80,30 90,30 Q95,35 85,40" />
-                           <path d="M82,20 Q77,10 87,10 Q92,15 82,20" />
-                         </g>
-                         <path d="M20,70 C10,50 10,30 20,10" stroke="#fef08a" fill="transparent" strokeWidth="4" strokeLinecap="round"/>
-                         <path d="M80,70 C90,50 90,30 80,10" stroke="#fef08a" fill="transparent" strokeWidth="4" strokeLinecap="round"/>
-                       </svg>
-                     )}
                      {medal === 'gold' 
-                       ? <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                       ? <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 5px 8px rgba(0,0,0,0.5))' }} />
                        : <Medal size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
                      }
                    </>

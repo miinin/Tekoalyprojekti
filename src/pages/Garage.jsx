@@ -33,18 +33,18 @@ export default function Garage() {
 
   const carUpgrades = [
     // MAALIPINNAT
-    { id: 'van-body01', category: 'body', categoryName: 'Maalipinnat', name: 'Sininen Salama', desc: 'Kotimainen ja luotettava perusväri.', price: 0, isDefault: true, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'van-body02', category: 'body', categoryName: 'Maalipinnat', name: 'Punainen Liekki', desc: 'Räiskyvän punainen pinta.', price: 1000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 1000, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1200, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
-    { id: 'van-body05', category: 'body', categoryName: 'Maalipinnat', name: 'Seikkailija', desc: 'Sulaudu täydellisesti maastoon.', price: 1500, icon: <PaintBucket size={28} />, color: '#4d7c0f', bg: '#ecfccb' },
-    { id: 'van-body06', category: 'body', categoryName: 'Maalipinnat', name: 'VIP-Kyyti', desc: 'Hopean ja kullan ylellinen liitto.', price: 2000, icon: <PaintBucket size={28} />, color: '#d97706', bg: '#fef3c7' },
-    { id: 'van-body07', category: 'body', categoryName: 'Maalipinnat', name: 'Varikkomestari', desc: 'Vauhdikas tuki kisaradoille.', price: 1400, icon: <PaintBucket size={28} />, color: '#dc2626', bg: '#fee2e2' },
-    { id: 'van-body08', category: 'body', categoryName: 'Maalipinnat', name: 'Neon-Unelma', desc: 'Kasarin kyberyötä huokuva retro.', price: 2500, icon: <PaintBucket size={28} />, color: '#c026d3', bg: '#fae8ff' },
-    { id: 'van-body09', category: 'body', categoryName: 'Maalipinnat', name: 'Sateenkaari', desc: 'Väriä ja iloa teille.', price: 1800, icon: <PaintBucket size={28} />, color: '#fbbf24', bg: '#fef3c7' },
-    { id: 'van-body10', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkaniitty', desc: 'Tyylitelty ja kaunis kuosi.', price: 2200, icon: <PaintBucket size={28} />, color: '#f472b6', bg: '#fce7f3' },
-    { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön Ritari', desc: 'Tumma ja puhuva mattamusta.', price: 1000, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
-    { id: 'van-body12', category: 'body', categoryName: 'Maalipinnat', name: 'AI Team', desc: 'Rakastan sitä, kun promptit loksahtelevat kohdilleen.', price: 3000, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#1e293b' },
+    { id: 'van-body01', category: 'body', categoryName: 'Maalipinnat', name: 'Sininen salama', desc: 'Kotimainen ja luotettava perusväri.', price: 0, isDefault: true, icon: <PaintBucket size={28} />, color: '#3b82f6', bg: '#dbeafe' },
+    { id: 'van-body02', category: 'body', categoryName: 'Maalipinnat', name: 'Punainen liekki', desc: 'Räiskyvän punainen pinta.', price: 800, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#fee2e2' },
+    { id: 'van-body03', category: 'body', categoryName: 'Maalipinnat', name: 'Lumivalko', desc: 'Puhdas ja tyylikkään vaalea.', price: 800, icon: <PaintBucket size={28} />, color: '#64748b', bg: '#f1f5f9' },
+    { id: 'van-body04', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkavoima', desc: 'Rauhaa, rakkautta ja tekoälyä.', price: 1500, icon: <PaintBucket size={28} />, color: '#ec4899', bg: '#fbcfe8' },
+    { id: 'van-body05', category: 'body', categoryName: 'Maalipinnat', name: 'Seikkailija', desc: 'Sulaudu täydellisesti maastoon.', price: 1200, icon: <PaintBucket size={28} />, color: '#4d7c0f', bg: '#ecfccb' },
+    { id: 'van-body06', category: 'body', categoryName: 'Maalipinnat', name: 'VIP-kyyti', desc: 'Hopean ja kullan ylellinen liitto.', price: 2500, icon: <PaintBucket size={28} />, color: '#d97706', bg: '#fef3c7' },
+    { id: 'van-body07', category: 'body', categoryName: 'Maalipinnat', name: 'Varikkomestari', desc: 'Vauhdikas tuki kisaradoille.', price: 1500, icon: <PaintBucket size={28} />, color: '#dc2626', bg: '#fee2e2' },
+    { id: 'van-body08', category: 'body', categoryName: 'Maalipinnat', name: 'Neon-unelma', desc: 'Kasarin kyberyötä huokuva retro.', price: 2000, icon: <PaintBucket size={28} />, color: '#c026d3', bg: '#fae8ff' },
+    { id: 'van-body09', category: 'body', categoryName: 'Maalipinnat', name: 'Sateenkaari', desc: 'Väriä ja iloa teille.', price: 1200, icon: <PaintBucket size={28} />, color: '#fbbf24', bg: '#fef3c7' },
+    { id: 'van-body10', category: 'body', categoryName: 'Maalipinnat', name: 'Kukkaniitty', desc: 'Tyylitelty ja kaunis kuosi.', price: 2000, icon: <PaintBucket size={28} />, color: '#f472b6', bg: '#fce7f3' },
+    { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön ritari', desc: 'Tumma ja puhuva mattamusta.', price: 800, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
+    { id: 'van-body12', category: 'body', categoryName: 'Maalipinnat', name: 'AI Team', desc: 'Rakastan sitä, kun promptit loksahtelevat kohdilleen.', price: 1200, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#1e293b' },
     
     // PUSKURIT
     { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava ja vähäeleinen perussuoja kaduille.', price: 0, isDefault: true, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9' },
@@ -526,11 +526,11 @@ export default function Garage() {
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Tervetuloa takaisin!</b><br/>
-                   Voit ostaa ansaitsemillasi kipinöillä päivityksiä autoosi ja parannella autotallia. Tästä eteenpäin valikot rullaavat vasemmalta oikealle tuoden osat tyylillä esiin.
+                   Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #ec4899, #8b5cf6, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', background: '#3b82f6' }} onClick={() => {
                         localStorage.setItem('aivan_garage_tuition', 'true');
                         setClosedGarageTuition(true);
-                   }}>Noniin, hommiin!</button>
+                   }}>Eikun hommiin!</button>
                 </div>
               )}
 
