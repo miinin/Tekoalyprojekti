@@ -552,9 +552,7 @@ const Roadmap = () => {
   const renderMapNodes = () => {
     const data = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     if (!data) return null;
-    const nodesToRender = currentMap === 'main' 
-        ? data.nodes.filter(n => !n.isJunction) 
-        : data.nodes;
+    const nodesToRender = data.nodes.filter(n => !n.isJunction);
 
     return nodesToRender.map(node => {
       const category = categories.find(c => c.id === currentMap);
