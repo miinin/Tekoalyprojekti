@@ -160,11 +160,11 @@ export default function Garage() {
            onMouseEnter={() => setHoveredItem(item.id)}
            onMouseLeave={() => setHoveredItem(null)}>
            
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, background: item.category === 'body' ? 'transparent' : item.bg, padding: '0.6rem', position: 'relative' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, background: item.bg, padding: '0.6rem', position: 'relative' }}>
               {item.category === 'body' ? (
-                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0 }}>
-                    <img src={`/carparts/${item.id}.png`} style={{ width: '400%', height: '400%', objectFit: 'cover', objectPosition: 'left 50% bottom 30%', opacity: 0.9, filter: 'saturate(1.2)' }} alt={item.name} />
-                    <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '60%', background: 'linear-gradient(transparent, rgba(0,0,0,0.8))' }}></div>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '12px 12px 0 0' }}>
+                    <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '50% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
+                    <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '60%', background: 'linear-gradient(transparent, rgba(0,0,0,0.7))' }}></div>
                   </div>
               ) : (
                   <div style={{ color: item.color, zIndex: 1, marginTop: 'auto', marginBottom: '0.5rem' }}>
