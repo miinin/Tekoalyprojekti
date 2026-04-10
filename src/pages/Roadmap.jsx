@@ -475,9 +475,9 @@ const Roadmap = () => {
 
   const getMedalStyles = (medal) => {
     switch(medal) {
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: '#fde047', stroke: '#b45309' };
-      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: '#f1f5f9', stroke: '#64748b' };
-      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: '#fcd34d', stroke: '#78350f' };
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 0.8)', icon: '#fde047', stroke: '#b45309', bg: 'radial-gradient(circle at 30% 30%, #fef08a 0%, #f59e0b 40%, #b45309 100%)' };
+      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: '#f1f5f9', stroke: '#64748b', bg: 'radial-gradient(circle at 30% 30%, #ffffff 0%, #94a3b8 50%, #475569 100%)' };
+      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: '#fcd34d', stroke: '#78350f', bg: 'radial-gradient(circle at 30% 30%, #fde68a 0%, #d97706 50%, #78350f 100%)' };
       default: return null;
     }
   };
@@ -557,7 +557,7 @@ const Roadmap = () => {
                 borderStyle: 'solid',
                 borderColor: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? mStyles.border : (isLastNode ? '#fef08a' : 'white')),
                 boxShadow: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? `0 0 30px ${mStyles.shadow}, inset 0 0 10px rgba(255,255,255,0.5)` : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
-                backgroundColor: isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)')),
+                background: mStyles ? mStyles.bg : (isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
