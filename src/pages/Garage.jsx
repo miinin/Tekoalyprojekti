@@ -238,8 +238,11 @@ export default function Garage() {
   }, {});
 
   const categorisedGarage = garageUpgrades.reduce((acc, item) => {
-    if (!acc[item.category]) acc[item.category] = { name: item.categoryName, items: [] };
-    acc[item.category].items.push(item);
+    let displayCat = item.category;
+    if (displayCat === 'g_jack') displayCat = 'g_tools';
+
+    if (!acc[displayCat]) acc[displayCat] = { name: (displayCat === 'g_tools' ? 'Työkalut' : item.categoryName), items: [] };
+    acc[displayCat].items.push(item);
     return acc;
   }, {});
 
@@ -441,10 +444,23 @@ export default function Garage() {
             <h2 style={{ fontSize: '1.6rem', color: 'white', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
               {activeCategory ? (categorisedCar[activeCategory]?.name || categorisedGarage[activeCategory]?.name) : "Valitse kategoria"}
             </h2>
-            <div className="items-grid animate-fade-in">
-                 {activeCategory && categorisedGarage[activeCategory]?.items.map(item => renderSquareItem(item))}
-                 {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderSquareItem(item))}
-            </div>
+            {activeCategory === 'g_tools' ? (
+              <>
+                <h3 style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Seinätyökalut</h3>
+                <div className="items-grid animate-fade-in" style={{ marginBottom: '2.5rem' }}>
+                     {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_tools').map(item => renderSquareItem(item))}
+                </div>
+                <h3 style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Tunkit</h3>
+                <div className="items-grid animate-fade-in">
+                     {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_jack').map(item => renderSquareItem(item))}
+                </div>
+              </>
+            ) : (
+              <div className="items-grid animate-fade-in">
+                   {activeCategory && categorisedGarage[activeCategory]?.items.map(item => renderSquareItem(item))}
+                   {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderSquareItem(item))}
+              </div>
+            )}
         </div>
 
         {/* RIGHT COLUMN: Visual Preview Graphic */}
