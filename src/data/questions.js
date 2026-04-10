@@ -57,7 +57,7 @@ export const categories = [
     "subcategories": [
       {
         "id": "konepellin_1",
-        "name": "Taso 1: Alkeet",
+        "name": "Tekoälyn polttoaine (Data)",
         "questions": [
           {
             "id": "q_k1_1",
@@ -69,19 +69,19 @@ export const categories = [
           }
         ]
       },
-      { "id": "konepellin_2", "name": "Taso 2: Laskentateho", "questions": [
+      { "id": "konepellin_2", "name": "Koodarin reseptikirja (Algoritmit)", "questions": [
           { "id": "q_k2_1", "type": "multiple_choice", "question": "Miksi tekoäly vaatii tehokkaita näytönohjaimia (GPU)?", "options": ["Ne osaavat laskea monta asiaa samaan aikaan", "Ne näyttävät parempia videoita", "Ne eivät kuumene", "Ne ovat halvempia"], "correctAnswer": "Ne osaavat laskea monta asiaa samaan aikaan", "explanation": "Tekoäly vaatii miljardeja pieniä laskutoimituksia kerralla, mihin näytönohjaimet ovat erinomaisia." }
       ] },
-      { "id": "konepellin_3", "name": "Taso 3: Syväoppiminen", "questions": [
+      { "id": "konepellin_3", "name": "Tekoälyn autokoulu (Koneoppiminen)", "questions": [
           { "id": "q_k3_1", "type": "true_false", "question": "Onko syväoppiminen sama asia kuin neuroverkko, jossa on monta kerrosta?", "options": ["Kyllä", "Ei"], "correctAnswer": "Kyllä", "explanation": "Syväoppiminen (Deep Learning) viittaa monikerroksisiin neuroverkkoihin." }
       ] },
-      { "id": "konepellin_4", "name": "Taso 4: Painoarvot", "questions": [
+      { "id": "konepellin_4", "name": "Tietokoneen aivovoimistelu (Neuroverkot)", "questions": [
           { "id": "q_k4_1", "type": "multiple_choice", "question": "Mitä tarkoittavat neuroverkon 'painoarvot' (weights)?", "options": ["Yhteyksien voimakkuuksia", "Koneen painoa", "Tiedoston kokoa", "Vastausnopeutta"], "correctAnswer": "Yhteyksien voimakkuuksia", "explanation": "Oppiminen on käytännössä näiden pienten numeroiden (painoarvojen) säätämistä oikeiksi." }
       ] },
-      { "id": "konepellin_5", "name": "Taso 5: Luonnollinen kieli", "questions": [
+      { "id": "konepellin_5", "name": "Salapoliisin työtä (Hahmontunnistus)", "questions": [
           { "id": "q_k5_1", "type": "multiple_choice", "question": "Mitä tarkoittaa NLP?", "options": ["Luonnollisen kielen käsittely", "Nopea lataus", "Uusi tietokone", "Väärä vastaus"], "correctAnswer": "Luonnollisen kielen käsittely", "explanation": "NLP (Natural Language Processing) on tekoälyn ala, joka keskittyy ihmiskielen ymmärtämiseen." }
       ] },
-      { "id": "konepellin_6", "name": "Taso 6: Takaisinvirtaus", "questions": [
+      { "id": "konepellin_6", "name": "Väärää bensaa tankissa! (Vinoumat ja huono data)", "questions": [
           { "id": "q_k6_1", "type": "multiple_choice", "question": "Mikä on backpropagation?", "options": ["Tapa jolla tekoäly korjaa virheitään oppiessaan", "Tietokoneen sammuttaminen", "Netin selaus", "Varmuuskopiointi"], "correctAnswer": "Tapa jolla tekoäly korjaa virheitään oppiessaan", "explanation": "Se on matemaattinen tapa siirtää virhetieto verkossa taaksepäin painoarvojen korjaamiseksi." }
       ] },
       { "id": "konepellin_7", "name": "Erikoiskoe – Yskivä Moottori", "questions": [
