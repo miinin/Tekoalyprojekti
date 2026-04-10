@@ -521,7 +521,7 @@ export default function Garage() {
                 </div>
               )}
 
-              {isTutorialActive && hoveredItem !== 'g-clean' ? (
+              {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               ) : (
                 <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
@@ -562,7 +562,7 @@ export default function Garage() {
                 return null;
               })}
 
-              {isTutorialActive && hoveredItem !== 'g-clean' ? (
+              {isTutorialActive ? (
                   <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
               ) : (
                   <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
