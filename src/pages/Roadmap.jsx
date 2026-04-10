@@ -141,7 +141,7 @@ const Roadmap = () => {
             }
         }
     }
-  }, [currentMap, currentLocationId, location.search]);
+  }, [currentMap, location.search]);
 
   const mainAdjacency = {};
   AI_ROADMAP_DATA.main.nodes.forEach(node => {
