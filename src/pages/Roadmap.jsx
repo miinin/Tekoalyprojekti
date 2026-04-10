@@ -234,6 +234,9 @@ const Roadmap = () => {
 
   const handleNodeClick = async (nodeId, isMain = false) => {
     if (isMoving) return;
+    if (isMain) {
+        consumedReturnRef.current = false;
+    }
     const currentData = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
     
     if (isMain) {
@@ -576,7 +579,8 @@ const Roadmap = () => {
       let isLastNode = false;
       let isLocked = false;
       if (currentMap !== 'main') {
-          isLastNode = node.id === data.nodes[data.nodes.length - 1].id;
+          const realNodes = data.nodes.filter(n => !n.isJunction);
+          isLastNode = node.id === realNodes[realNodes.length - 1].id;
       }
 
       if (currentMap !== 'main' && !completedLessons.includes(node.id)) {
