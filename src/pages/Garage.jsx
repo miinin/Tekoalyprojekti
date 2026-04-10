@@ -9,6 +9,7 @@ export default function Garage() {
   const [purchased, setPurchased] = useState([]);
   const [equipped, setEquipped] = useState({});
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [expandedItem, setExpandedItem] = useState(null); // Uusi!
   const tutorialSkipped = store.getTutorialSkipped();
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
@@ -16,7 +17,7 @@ export default function Garage() {
   const [completedLessons, setCompletedLessons] = useState([]);
   const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
-  const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_clean' : 'body'); // Default open: Body (or g_clean in tutorial)
+  const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_clean' : 'body');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +28,6 @@ export default function Garage() {
     };
     fetchData();
     
-    // Polling to keep sparks and inventory updated if playing co-op
     const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -94,20 +94,20 @@ export default function Garage() {
     { id: 'g-jack2', category: 'g_jack', categoryName: 'Tunkit', name: 'Laatutunkki', desc: 'Nopea ja vahva hallitunkki.', price: 1000, icon: <Disc size={28} />, color: '#475569', bg: '#f1f5f9' }
   ];
 
-
-
   const setCategory = (cat) => {
     if (isTutorialActive && cat !== 'g_clean') return;
     setActiveCategory(cat);
+    setExpandedItem(null); // Sulkee vanhat ristikot navigoidessa
   };
 
-  const renderUpgradeItem = (item) => {
+  const renderSquareItem = (item) => {
     const isCarItem = carUpgrades.some(u => u.id === item.id);
     const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
     const isEquippableGarage = equippableGarageCategories.includes(item.category);
     const isOwned = purchased.includes(item.id) || item.isDefault;
     const slot = item.category === 'extra' ? item.id : item.category;
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
+    const isExpanded = expandedItem === item.id;
     
     let meetsPrereq = true;
     let prereqText = '';
@@ -120,7 +120,7 @@ export default function Garage() {
     }
 
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
-    let btnBg = (sparks >= item.price || item.isDefault) ? '#fef3c7' : '#e2e8f0'; // Toned down amber for buy
+    let btnBg = (sparks >= item.price || item.isDefault) ? '#fef3c7' : '#e2e8f0'; 
     let btnColor = (sparks >= item.price || item.isDefault) ? '#d97706' : 'var(--text-muted)';
     const canBuy = sparks >= item.price && !isOwned && !item.isDefault && meetsPrereq;
     let btnShadow = canBuy ? '0 4px 6px rgba(0,0,0,0.1)' : 'none';
@@ -133,17 +133,17 @@ export default function Garage() {
        cursor = 'not-allowed';
     } else if (isEquipped && item.category === 'extra') {
        btnText = 'POISTA';
-       btnBg = '#64748b'; // Neutral gray instead of red
+       btnBg = '#64748b'; 
        btnColor = 'white';
        cursor = 'pointer';
     } else if (isEquipped) {
        btnText = 'ASENNETTU';
-       btnBg = '#10b981'; // Green
+       btnBg = '#10b981'; 
        btnColor = 'white';
        cursor = 'default';
     } else if (isOwned && (isCarItem || isEquippableGarage)) {
        btnText = 'ASENNA';
-       btnBg = '#3b82f6'; // Blue
+       btnBg = '#3b82f6'; 
        btnColor = 'white';
        cursor = 'pointer';
     }
@@ -154,75 +154,83 @@ export default function Garage() {
     }
 
     return (
-      <div key={item.id} className="carousel-item glass-panel" 
-           style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', padding: '0.8rem', transition: 'all 0.2s', cursor: 'pointer', border: '1px solid rgba(0,0,0,0.05)', justifyContent: 'space-between', flex: '0 0 auto' }} 
-           onMouseEnter={(e) => { e.currentTarget.style.transform = 'scale(1.02)'; e.currentTarget.style.borderColor = item.color; setHoveredItem(item.id); }} 
-           onMouseLeave={(e) => { e.currentTarget.style.transform = 'scale(1)'; e.currentTarget.style.borderColor = 'rgba(0,0,0,0.05)'; setHoveredItem(null); }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.8rem', flexGrow: 1 }}>
-          <div style={{ background: item.bg, padding: '0.6rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            {React.cloneElement(item.icon, { size: 24 })}
-          </div>
-          <div style={{ fontFamily: 'var(--font-main)' }}>
-            <h3 style={{ margin: 0, fontSize: '1.1rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)', lineHeight: '1.2' }}>{item.name}</h3>
-            <p style={{ margin: '0.2rem 0 0 0', fontSize: '0.85rem', color: 'var(--text-muted)' }}>{item.desc}</p>
-          </div>
-        </div>
-        <button 
-          className={`btn-primary${extraBtnClass}`} 
-          style={{ 
-            padding: '0.5rem', fontSize: '0.9rem', width: '100%',
-            background: btnBg, color: btnColor, boxShadow: btnShadow, cursor
-          }}
-          onClick={async (e) => {
-            e.stopPropagation();
-            if (canBuy) {
-              const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? slot : null);
-              if (success) {
-                setSparks(await store.getSparks());
-                setPurchased(await store.getPurchasedItems());
-                setEquipped(await store.getEquippedItems());
-                if (item.id === 'g-clean' && isTutorialActive) {
-                    store.completeTutorial();
-                    setIsTutorialActive(false);
-                    setActiveCategory('body'); // Auto-switch to car body painting!
-                    setFlashScreen(true);
-                    setTimeout(() => {
-                        setShowGreenPulse(true);
-                    }, 1500);
-                }
-              }
-            } else if (isEquipped && item.category === 'extra') {
-               const success = await store.unequipItem(slot);
-               if (success) {
-                 setEquipped(await store.getEquippedItems());
-               }
-            } else if (isOwned && (isCarItem || isEquippableGarage) && !isEquipped) {
-               const success = await store.equipItem(item.id, slot);
-               if (success) {
-                 setEquipped(await store.getEquippedItems());
-               }
-            }
-          }}
-        >
-          {btnText}
-        </button>
+      <div key={item.id} className={`glass-panel grid-item ${isExpanded ? 'expanded' : ''} ${isEquipped ? 'equipped-highlight' : ''}`}
+           style={{ 
+               backgroundColor: isExpanded ? 'white' : 'rgba(255,255,255,0.7)', 
+               borderColor: (isExpanded || isEquipped) ? item.color : 'transparent',
+               borderWidth: (isExpanded || isEquipped) ? '2px' : '0px',
+               cursor: 'pointer' 
+           }} 
+           onClick={() => setExpandedItem(isExpanded ? null : item.id)}
+           onMouseEnter={() => setHoveredItem(item.id)}
+           onMouseLeave={() => setHoveredItem(null)}>
+           
+         {!isExpanded ? (
+             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', width: '100%', height: '100%', background: item.bg, padding: '1rem' }}>
+                 <div style={{ color: item.color }}>
+                    {React.cloneElement(item.icon, { size: 40 })}
+                 </div>
+                 <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: item.color, textAlign: 'center', lineHeight: '1.1' }}>{item.name}</span>
+             </div>
+         ) : (
+             <div className="animate-fade-in" style={{ display: 'flex', gap: '1rem', width: '100%', height: '100%', padding: '0.5rem' }}>
+                 <div style={{ background: item.bg, padding: '1rem', borderRadius: '12px', color: item.color, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    {React.cloneElement(item.icon, { size: 48 })}
+                 </div>
+                 <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+                    <h3 style={{ margin: 0, fontSize: '1.2rem', fontFamily: 'var(--font-display)', color: 'var(--text-main)' }}>{item.name}</h3>
+                    <p style={{ margin: '0.3rem 0 0.8rem 0', fontSize: '0.9rem', color: 'var(--text-muted)', flexGrow: 1 }}>{item.desc}</p>
+                    <button 
+                      className={`btn-primary${extraBtnClass}`} 
+                      style={{ padding: '0.6rem', fontSize: '0.95rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, marginTop: 'auto' }}
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        if (canBuy) {
+                          const success = await store.purchaseItem(item.id, item.price, (isCarItem || isEquippableGarage) ? slot : null);
+                          if (success) {
+                            setSparks(await store.getSparks());
+                            setPurchased(await store.getPurchasedItems());
+                            setEquipped(await store.getEquippedItems());
+                            if (item.id === 'g-clean' && isTutorialActive) {
+                                store.completeTutorial();
+                                setIsTutorialActive(false);
+                                setActiveCategory('body'); 
+                                setFlashScreen(true);
+                                setTimeout(() => {
+                                    setShowGreenPulse(true);
+                                }, 1500);
+                            }
+                          }
+                        } else if (isEquipped && item.category === 'extra') {
+                           const success = await store.unequipItem(slot);
+                           if (success) {
+                             setEquipped(await store.getEquippedItems());
+                           }
+                        } else if (isOwned && (isCarItem || isEquippableGarage) && !isEquipped) {
+                           const success = await store.equipItem(item.id, slot);
+                           if (success) {
+                             setEquipped(await store.getEquippedItems());
+                           }
+                        }
+                      }}
+                    >
+                      {btnText}
+                    </button>
+                 </div>
+             </div>
+         )}
       </div>
     );
   };
 
-  // Group items by category for rendering
   const categorisedCar = carUpgrades.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = { name: item.categoryName, items: [] };
-    }
+    if (!acc[item.category]) acc[item.category] = { name: item.categoryName, items: [] };
     acc[item.category].items.push(item);
     return acc;
   }, {});
 
   const categorisedGarage = garageUpgrades.reduce((acc, item) => {
-    if (!acc[item.category]) {
-      acc[item.category] = { name: item.categoryName, items: [] };
-    }
+    if (!acc[item.category]) acc[item.category] = { name: item.categoryName, items: [] };
     acc[item.category].items.push(item);
     return acc;
   }, {});
@@ -232,7 +240,7 @@ export default function Garage() {
   const isGlobalPreview = hoveredObj && equipped[hoverSlot] !== hoveredObj.id;
 
   return (
-    <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '1800px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '2000px', margin: '0 auto', width: '100%' }}>
       <style>{`
         .garage-grid {
           display: grid;
@@ -242,12 +250,12 @@ export default function Garage() {
         }
         @media (min-width: 1100px) {
           .garage-grid {
-            grid-template-columns: minmax(200px, 1.5fr) 7fr minmax(250px, 2fr);
+            grid-template-columns: 260px 420px 1fr;
           }
         }
         @media (max-width: 1099px) {
-          .garage-left { order: 2; }
-          .garage-center { order: 1; }
+          .garage-left { order: 1; }
+          .garage-center { order: 2; }
           .garage-right { order: 3; }
         }
         .category-header {
@@ -267,43 +275,40 @@ export default function Garage() {
           background: rgba(255,255,255,0.9);
           border-color: var(--primary-color);
         }
-        .category-content {
-          overflow: hidden;
-          transition: max-height 0.3s ease-out;
+        .items-grid {
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
+          grid-template-columns: 1fr 1fr;
+          gap: 0.8rem;
+          margin-bottom: 2rem;
+          align-content: start;
         }
-        .item-carousel {
+        .grid-item {
+          aspect-ratio: 1;
           display: flex;
-          overflow-x: auto;
-          scroll-behavior: smooth;
-          gap: 1rem;
-          padding: 1rem 0.5rem;
-          margin: 1rem auto 0 auto;
-          width: 100%;
-          max-width: 1000px;
-          min-height: 150px;
-          scrollbar-width: thin;
-          scrollbar-color: var(--primary-color) rgba(0,0,0,0.1);
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 16px;
+          overflow: hidden;
+          position: relative;
+          padding: 0;
+        }
+        .grid-item:hover {
+          transform: scale(1.03);
+          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .grid-item.expanded {
+          grid-column: span 2;
+          aspect-ratio: auto;
+          min-height: 140px;
+          flex-direction: row;
+          padding: 0.5rem;
           align-items: stretch;
+          text-align: left;
         }
-        .item-carousel::-webkit-scrollbar {
-          height: 8px;
-        }
-        .item-carousel::-webkit-scrollbar-track {
-          background: rgba(0,0,0,0.1);
-          border-radius: 4px;
-        }
-        .item-carousel::-webkit-scrollbar-thumb {
-          background: var(--primary-color);
-          border-radius: 4px;
-        }
-        .carousel-item {
-          width: 280px;
-          min-width: 280px;
-          flex-shrink: 0;
+        .equipped-highlight {
+           box-shadow: inset 0 0 0 3px rgba(16, 185, 129, 0.2);
         }
         @keyframes flashBang {
           0% { opacity: 1; }
@@ -333,10 +338,10 @@ export default function Garage() {
       )}
       
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
           <h1 style={{ margin: 0, fontSize: '3rem' }}>Autotalli</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>Käytä kipinöitä tekoälypakusi tuunaukseen!</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>Rakennetaan yhdessä unelmien AI-paku!</p>
         </div>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
@@ -362,77 +367,121 @@ export default function Garage() {
 
       <div className="garage-grid">
         
-        {/* LEFT COLUMN: Garage Items (Collapsible) */}
+        {/* LEFT COLUMN: Categories Menu */}
         <div className="garage-left">
-          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin varusteet</h3>
-          
-          {Object.entries(categorisedGarage).map(([catId, category]) => {
-            const isLocked = isTutorialActive && catId !== 'g_clean';
-            return (
-            <div key={catId} style={{ marginBottom: '0.5rem' }}>
-              <div 
-                className="category-header" 
-                onClick={() => setCategory(catId)}
-                style={{ 
-                  borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                  background: activeCategory === catId ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
-                  pointerEvents: isLocked ? 'none' : 'auto',
-                  opacity: isLocked ? 0.4 : 1,
-                  filter: isLocked ? 'grayscale(100%)' : 'none'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                   {catId === 'g_clean' && <Sparkles size={18} color="#a855f7" />}
-                   {catId === 'g_floor' && <Grid size={18} color="#6366f1" />}
-                   {catId === 'g_walls' && <Layers size={18} color="#ec4899" />}
-                   {catId === 'g_tools' && <Wrench size={18} color="#eab308" />}
-                   {catId === 'g_jack' && <Disc size={18} color="#64748b" />}
-                   <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
-                </div>
+           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
+                {Object.entries(categorisedCar).map(([catId, category]) => {
+                  const isLocked = isTutorialActive;
+                  return (
+                    <div key={catId} style={{ marginBottom: '0.5rem' }}>
+                      <div 
+                        className="category-header" 
+                        onClick={() => setCategory(catId)}
+                        style={{ 
+                          borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
+                          background: activeCategory === catId ? '#f8fafc' : 'rgba(255,255,255,0.7)',
+                          pointerEvents: isLocked ? 'none' : 'auto',
+                          opacity: isLocked ? 0.4 : 1,
+                          filter: isLocked ? 'grayscale(100%)' : 'none',
+                          boxShadow: activeCategory === catId ? '0 4px 10px rgba(0,0,0,0.05)' : 'none'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                           {catId === 'body' && <PaintBucket size={18} color="var(--primary-color)" />}
+                           {catId === 'bumper' && <ShieldCheck size={18} color="var(--primary-color)" />}
+                           {catId === 'wheel' && <Aperture size={18} color="var(--primary-color)" />}
+                           {catId === 'extra' && <Zap size={18} color="var(--primary-color)" />}
+                           <span style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>{category.name}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          );})}
+
+              <div>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
+                {Object.entries(categorisedGarage).map(([catId, category]) => {
+                  const isLocked = isTutorialActive && catId !== 'g_clean';
+                  return (
+                    <div key={catId} style={{ marginBottom: '0.5rem' }}>
+                      <div 
+                        className="category-header" 
+                        onClick={() => setCategory(catId)}
+                        style={{ 
+                          borderColor: activeCategory === catId ? '#8b5cf6' : 'rgba(0,0,0,0.05)',
+                          background: activeCategory === catId ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
+                          pointerEvents: isLocked ? 'none' : 'auto',
+                          opacity: isLocked ? 0.4 : 1,
+                          filter: isLocked ? 'grayscale(100%)' : 'none',
+                          boxShadow: activeCategory === catId ? '0 4px 10px rgba(0,0,0,0.05)' : 'none'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                           {catId === 'g_clean' && <Sparkles size={18} color="#8b5cf6" />}
+                           {catId === 'g_floor' && <Grid size={18} color="#8b5cf6" />}
+                           {catId === 'g_walls' && <Layers size={18} color="#8b5cf6" />}
+                           {catId === 'g_tools' && <Wrench size={18} color="#8b5cf6" />}
+                           {catId === 'g_jack' && <Disc size={18} color="#8b5cf6" />}
+                           <span style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>{category.name}</span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+           </div>
         </div>
 
-        {/* CENTER COLUMN: Visual Preview */}
+        {/* CENTER COLUMN: Selected Category Items */}
         <div className="garage-center">
-          <div style={{ 
+            <h2 style={{ fontSize: '1.6rem', color: 'var(--text-main)', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
+              {activeCategory ? (categorisedCar[activeCategory]?.name || categorisedGarage[activeCategory]?.name) : "Valitse kategoria"}
+            </h2>
+            <div className="items-grid animate-fade-in">
+                 {activeCategory && categorisedGarage[activeCategory]?.items.map(item => renderSquareItem(item))}
+                 {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderSquareItem(item))}
+            </div>
+        </div>
+
+        {/* RIGHT COLUMN: Visual Preview Graphic */}
+        <div className="garage-right">
+           <div style={{ 
             position: 'relative', 
             width: '100%',
-            maxWidth: '1000px',
-            margin: '0 auto',
-            aspectRatio: '16/9', 
-            maxHeight: '50vh',
-            minHeight: '300px',
+            aspectRatio: '5/4', /* Makes the visual graphic much bigger visually and vertically expanded */
+            minHeight: '400px',
             borderRadius: '24px', 
             overflow: 'hidden', 
             border: '4px solid rgba(0, 114, 198, 0.4)',
             transition: 'box-shadow 0.3s ease',
             boxShadow: isGlobalPreview 
-              ? '0 0 0 6px rgba(16, 185, 129, 0.9), inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)' 
-              : 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 25px -5px rgba(0, 0, 0, 0.1)',
-            background: 'radial-gradient(circle at center, #334155 0%, #0f172a 100%)' // Dark "garage" theme
+              ? '0 0 0 6px rgba(16, 185, 129, 0.9), inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.2)' 
+              : 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.1)',
+            background: 'radial-gradient(circle at top, #334155 0%, #0f172a 100%)' 
           }}>
               {isTutorialActive && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #f59e0b', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Valitse ”Siivous” ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
               {showGreenPulse && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Tulipa siistiä!</b> Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea AI van!, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
                 </div>
               )}
               
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '1rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #3b82f6', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <b>Tervetuloa takaisin!</b><br/>
-                   Voit ostaa ansaitsemillasi kipinöillä päivityksiä autoosi ja parannella autotallia. Tutki rohkeasti uusia vaihtoehtoja sivupaneelista!
+                   Voit ostaa ansaitsemillasi kipinöillä päivityksiä autoosi ja parannella autotallia. Tästä eteenpäin valikot rullaavat vasemmalta oikealle tuoden osat tyylillä esiin.
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', background: '#3b82f6' }} onClick={() => {
                         localStorage.setItem('aivan_garage_tuition', 'true');
                         setClosedGarageTuition(true);
-                   }}>Selvä homma!</button>
+                   }}>Noniin, hommiin!</button>
                 </div>
               )}
 
@@ -442,70 +491,26 @@ export default function Garage() {
                 <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               )}
 
-            {garageUpgrades.map(item => {
-              const isHovered = hoveredItem === item.id;
-              const isOwned = purchased.includes(item.id);
-              const hoverActiveCategoryItem = Object.values(garageUpgrades).find(u => u.id === hoveredItem);
-              
-              let shouldShow = false;
-              let isPreview = false;
-
-              if (isHovered) {
-                  shouldShow = true;
-                  if (!isOwned) isPreview = true;
-               } else if (isOwned) {
-                  const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
-                  if (equippableGarageCategories.includes(item.category)) {
-                      // Only show if equipped
-                      if (equipped[item.category] === item.id) {
-                          shouldShow = true;
-                      } else {
-                          shouldShow = false;
-                      }
-                  } else if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
-                      shouldShow = false;
-                  } else {
-                      shouldShow = true;
-                  }
-              }
-
-              if (shouldShow) {
-                 if (item.id === 'g-clean') {
-                    return null; // Siivous-tutoriaalivaiheen "tavara" ei piirrä uutta render-tasoa, sillä taustakuva vaihtuu automaattisesti!
-                 }
-                 const fileName = item.id.replace('g-', '');
-                 const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
-                 return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
-              }
-              return null;
-            })}
-
-            {isTutorialActive && hoveredItem !== 'g-clean' ? (
-                <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
-            ) : (
-                <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
-            )}
-            
-            {!isTutorialActive && [...carUpgrades]
-              .sort((a, b) => {
-                const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
-                return (order[a.category] || 99) - (order[b.category] || 99);
-              })
-              .map(item => {
+              {garageUpgrades.map(item => {
                 const isHovered = hoveredItem === item.id;
                 const isOwned = purchased.includes(item.id);
-                const slot = item.category === 'extra' ? item.id : item.category;
-                const isEquipped = equipped[slot] === item.id || (!equipped[slot] && item.isDefault);
-                const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
+                const hoverActiveCategoryItem = Object.values(garageUpgrades).find(u => u.id === hoveredItem);
                 
                 let shouldShow = false;
                 let isPreview = false;
 
                 if (isHovered) {
                     shouldShow = true;
-                    if (!isOwned || !isEquipped) isPreview = true;
-                } else if (isEquipped) {
-                    if (hoverSlot && hoverSlot === slot) {
+                    if (!isOwned) isPreview = true;
+                 } else if (isOwned) {
+                    const equippableGarageCategories = ['g_tools', 'g_jack', 'g_walls'];
+                    if (equippableGarageCategories.includes(item.category)) {
+                        if (equipped[item.category] === item.id) {
+                            shouldShow = true;
+                        } else {
+                            shouldShow = false;
+                        }
+                    } else if (hoverActiveCategoryItem && hoverActiveCategoryItem.category === item.category) {
                         shouldShow = false;
                     } else {
                         shouldShow = true;
@@ -513,57 +518,61 @@ export default function Garage() {
                 }
 
                 if (shouldShow) {
-                   const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+                   if (item.id === 'g-clean') return null; 
+                   const fileName = item.id.replace('g-', '');
                    const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
-                   return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
+                   return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
                 }
                 return null;
               })}
 
-            {isGlobalPreview && (
-              <div className="animate-pulse" style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(16, 185, 129, 0.9)', color: 'white', padding: '0.4rem 1rem', borderRadius: '12px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 4px 12px rgba(0,0,0,0.3)' }}>
-                 ESIKATSELU
-              </div>
-            )}
+              {isTutorialActive && hoveredItem !== 'g-clean' ? (
+                  <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+              ) : (
+                  <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+              )}
+              
+              {!isTutorialActive && [...carUpgrades]
+                .sort((a, b) => {
+                  const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+                  return (order[a.category] || 99) - (order[b.category] || 99);
+                })
+                .map(item => {
+                  const isHovered = hoveredItem === item.id;
+                  const isOwned = purchased.includes(item.id);
+                  const slot = item.category === 'extra' ? item.id : item.category;
+                  const isEquipped = equipped[slot] === item.id || (!equipped[slot] && item.isDefault);
+                  const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
+                  
+                  let shouldShow = false;
+                  let isPreview = false;
 
-           </div>
+                  if (isHovered) {
+                      shouldShow = true;
+                      if (!isOwned || !isEquipped) isPreview = true;
+                  } else if (isEquipped) {
+                      if (hoverSlot && hoverSlot === slot) {
+                          shouldShow = false;
+                      } else {
+                          shouldShow = true;
+                      }
+                  }
 
-           {/* Carousel Below the Image */}
-           <div className="item-carousel animate-fade-in">
-             {activeCategory && categorisedGarage[activeCategory]?.items.map(item => renderUpgradeItem(item))}
-             {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderUpgradeItem(item))}
-           </div>
-        </div>
+                  if (shouldShow) {
+                     const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
+                     const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
+                     return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
+                  }
+                  return null;
+                })}
 
-        {/* RIGHT COLUMN: Car Upgrades (Collapsible) */}
-        <div className="garage-right">
-          <h3 style={{ fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
-          
-          {Object.entries(categorisedCar).map(([catId, category]) => {
-            const isLocked = isTutorialActive;
-             return (
-            <div key={catId} style={{ marginBottom: '0.5rem' }}>
-              <div 
-                className="category-header" 
-                onClick={() => setCategory(catId)}
-                style={{ 
-                  borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                  background: activeCategory === catId ? '#f8fafc' : 'rgba(255,255,255,0.7)',
-                  pointerEvents: isLocked ? 'none' : 'auto',
-                  opacity: isLocked ? 0.4 : 1,
-                  filter: isLocked ? 'grayscale(100%)' : 'none'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                   {catId === 'body' && <PaintBucket size={18} />}
-                   {catId === 'bumper' && <ShieldCheck size={18} />}
-                   {catId === 'wheel' && <Aperture size={18} />}
-                   {catId === 'extra' && <Zap size={18} />}
-                   <span style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{category.name}</span>
+              {isGlobalPreview && (
+                <div className="animate-pulse" style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(16, 185, 129, 0.95)', color: 'white', padding: '0.6rem 1.4rem', borderRadius: '16px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 8px 20px rgba(0,0,0,0.3)' }}>
+                   ESIKATSELU
                 </div>
-              </div>
-            </div>
-          )})}
+              )}
+
+           </div>
         </div>
 
       </div>
