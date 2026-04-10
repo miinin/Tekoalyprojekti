@@ -241,7 +241,17 @@ const Roadmap = () => {
                 reverse = true;
             }
             if (segmentWaypoints) {
-                const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
+                const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : [...segmentWaypoints];
+                const startNodeObj = AI_ROADMAP_DATA.main.nodes.find(n => n.id === start);
+                const endNodeObj = AI_ROADMAP_DATA.main.nodes.find(n => n.id === end);
+                
+                if (startNodeObj) {
+                    finalWaypoints[0] = { ...finalWaypoints[0], top: startNodeObj.top, left: startNodeObj.left };
+                }
+                if (endNodeObj) {
+                    finalWaypoints[finalWaypoints.length - 1] = { ...finalWaypoints[finalWaypoints.length - 1], top: endNodeObj.top, left: endNodeObj.left };
+                }
+
                 if (allWaypoints.length > 0) {
                     allWaypoints.push(...finalWaypoints.slice(1));
                 } else {
@@ -309,7 +319,17 @@ const Roadmap = () => {
                              reverse = true;
                         }
                         if (segmentWaypoints) {
-                             const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : segmentWaypoints;
+                             const finalWaypoints = reverse ? [...segmentWaypoints].reverse() : [...segmentWaypoints];
+                             const startNodeObj = currentData.nodes.find(n => n.id === s);
+                             const endNodeObj = currentData.nodes.find(n => n.id === e);
+
+                             if (startNodeObj) {
+                                 finalWaypoints[0] = { ...finalWaypoints[0], top: startNodeObj.top, left: startNodeObj.left };
+                             }
+                             if (endNodeObj) {
+                                 finalWaypoints[finalWaypoints.length - 1] = { ...finalWaypoints[finalWaypoints.length - 1], top: endNodeObj.top, left: endNodeObj.left };
+                             }
+
                              if (allWaypoints.length > 0) {
                                  allWaypoints.push(...finalWaypoints.slice(1));
                              } else {
