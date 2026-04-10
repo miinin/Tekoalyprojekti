@@ -130,24 +130,34 @@ export const AI_ROADMAP_DATA = {
       }
     },
     aivoterveys: {
-      entry: [{top:"105.0%",left:"68.1%"}, {top:"95.0%",left:"68.1%"},{top:"93.5%",left:"65.9%"},{top:"92.5%",left:"62.8%"},{top:"87.9%",left:"61.4%"}],
-      exit: [{top:"87.9%",left:"61.4%"},{top:"92.5%",left:"62.8%"},{top:"93.5%",left:"65.9%"},{top:"95.0%",left:"68.1%"}, {top:"105.0%",left:"68.1%"}],
+      entry: [{top:"105.0%",left:"68.1%"},{top:"95.0%",left:"68.1%"},{top:"93.1%",left:"67.8%"}],
+      exit: [{top:"85.9%",left:"44.7%"},{top:"95.0%",left:"44.7%"},{top:"105.0%",left:"44.7%"}],
       nodes: [
-        { id: 'aivoterveys_1', top: '87.2%', left: '63.4%' },
-        { id: 'aivoterveys_2', top: '47.9%', left: '43.4%' },
-        { id: 'aivoterveys_3', top: '37.0%', left: '50.3%' },
-        { id: 'aivoterveys_4', top: '50.1%', left: '67.0%' },
+        { id: 'jun_0', top: '93.1%', left: '67.8%', isJunction: true },
+        { id: 'aivoterveys_1', top: '82.0%', left: '60.3%' },
+        { id: 'aivoterveys_2', top: '52.6%', left: '42.2%' },
+        { id: 'aivoterveys_3', top: '39.6%', left: '49.0%' },
+        { id: 'aivoterveys_4', top: '54.4%', left: '66.4%' },
         { id: 'aivoterveys_5', top: '62.5%', left: '81.0%' },
-        { id: 'aivoterveys_6', top: '77.6%', left: '80.0%' },
-        { id: 'aivoterveys_7', top: '77.2%', left: '43.8%' }
+        { id: 'aivoterveys_6', top: '79.0%', left: '77.9%' },
+        { id: 'aivoterveys_7', top: '85.9%', left: '44.7%' },
+        { id: 'jun_1', top: '81.2%', left: '74.0%', isJunction: true },
+        { id: 'jun_2', top: '76.6%', left: '74.5%', isJunction: true },
+        { id: 'jun_3', top: '46.8%', left: '54.7%', isJunction: true },
+        { id: 'jun_4', top: '54.4%', left: '47.2%', isJunction: true }
       ],
       paths: {
-        'aivoterveys_5-aivoterveys_6': [{top:"87.9%",left:"61.4%"},{top:"92.5%",left:"62.8%"},{top:"93.5%",left:"65.9%"},{top:"95.0%",left:"68.1%"}, {top:"94.0%",left:"69.0%"},{top:"92.3%",left:"70.8%"},{top:"89.0%",left:"72.0%"},{top:"84.9%",left:"73.0%"},{top:"82.0%",left:"73.5%"},{top:"77.4%",left:"75.6%"},{top:"76.3%",left:"78.4%"}],
-        'aivoterveys_6-aivoterveys_7': [{top:"76.3%",left:"78.4%"},{top:"74.5%",left:"76.6%"},{top:"71.3%",left:"78.7%"},{top:"68.4%",left:"79.7%"},{top:"64.9%",left:"80.2%"}],
-        'aivoterveys_6-aivoterveys_4': [{top:"76.3%",left:"78.4%"}, {top:"77.4%",left:"75.6%"}, {top:"77.5%",left:"73.6%"},{top:"76.9%",left:"70.7%"},{top:"75.2%",left:"67.8%"},{top:"73.6%",left:"65.7%"},{top:"68.9%",left:"65.2%"},{top:"65.3%",left:"64.4%"},{top:"60.2%",left:"65.7%"},{top:"57.7%",left:"66.4%"},{top:"51.0%",left:"66.4%"}],
-        'aivoterveys_4-aivoterveys_3': [{top:"51.0%",left:"66.4%"}, {top:"51.5%",left:"64.0%"},{top:"54.5%",left:"62.0%"},{top:"55.1%",left:"60.7%"},{top:"55.2%",left:"58.3%"},{top:"52.8%",left:"56.6%"},{top:"50.6%",left:"55.6%"},{top:"48.3%",left:"55.5%"},{top:"45.8%",left:"54.5%"},{top:"44.8%",left:"52.5%"},{top:"43.4%",left:"49.8%"},{top:"42.2%",left:"47.9%"},{top:"38.3%",left:"49.3%"},{top:"37.6%",left:"50.3%"}],
-        'aivoterveys_3-aivoterveys_2': [{top:"37.6%",left:"50.3%"},{top:"38.3%",left:"49.3%"},{top:"42.2%",left:"47.9%"},{top:"43.4%",left:"49.8%"},{top:"44.8%",left:"52.5%"},{top:"45.8%",left:"54.5%"},{top:"48.3%",left:"55.5%"},{top:"50.6%",left:"55.6%"}, {top:"52.1%",left:"53.7%"},{top:"53.1%",left:"51.5%"},{top:"54.1%",left:"49.8%"},{top:"54.8%",left:"47.4%"},{top:"55.2%",left:"45.0%"}],
-        'aivoterveys_2-aivoterveys_1': [{top:"55.2%",left:"45.0%"},{top:"54.9%",left:"44.2%"},{top:"52.6%",left:"42.0%"},{top:"58.9%",left:"44.2%"},{top:"60.5%",left:"44.1%"},{top:"62.6%",left:"45.4%"},{top:"63.4%",left:"47.8%"},{top:"65.3%",left:"51.6%"},{top:"65.8%",left:"53.9%"},{top:"69.0%",left:"55.7%"},{top:"72.9%",left:"55.1%"},{top:"77.3%",left:"52.8%"},{top:"79.9%",left:"50.0%"},{top:"82.4%",left:"48.6%"},{top:"85.3%",left:"46.2%"}]
+        'jun_0-aivoterveys_1': [{top:"93.1%",left:"67.8%"},{top:"92.8%",left:"66.8%"},{top:"90.7%",left:"65.0%"},{top:"82.0%",left:"60.3%"}],
+        'jun_0-jun_1': [{top:"93.1%",left:"67.8%"},{top:"88.4%",left:"72.1%"},{top:"81.2%",left:"74.0%"}],
+        'jun_1-aivoterveys_6': [{top:"81.2%",left:"74.0%"},{top:"79.5%",left:"76.8%"},{top:"79.0%",left:"77.9%"}],
+        'jun_1-jun_2': [{top:"81.2%",left:"74.0%"},{top:"76.6%",left:"74.5%"}],
+        'jun_2-aivoterveys_5': [{top:"76.6%",left:"74.5%"},{top:"75.7%",left:"75.2%"},{top:"71.7%",left:"78.9%"},{top:"66.5%",left:"81.2%"},{top:"62.5%",left:"81.0%"}],
+        'jun_2-aivoterveys_4': [{top:"76.6%",left:"74.5%"},{top:"75.5%",left:"71.6%"},{top:"74.2%",left:"68.2%"},{top:"71.0%",left:"66.2%"},{top:"66.1%",left:"64.4%"},{top:"60.2%",left:"65.1%"},{top:"54.4%",left:"66.4%"}],
+        'aivoterveys_4-jun_3': [{top:"54.4%",left:"66.4%"},{top:"48.1%",left:"64.6%"},{top:"51.6%",left:"63.8%"},{top:"53.3%",left:"60.9%"},{top:"54.0%",left:"58.3%"},{top:"46.8%",left:"54.7%"}],
+        'jun_3-aivoterveys_3': [{top:"46.8%",left:"54.7%"},{top:"45.2%",left:"51.9%"},{top:"44.1%",left:"48.6%"},{top:"41.5%",left:"47.4%"},{top:"39.6%",left:"49.0%"}],
+        'jun_3-jun_4': [{top:"46.8%",left:"54.7%"},{top:"50.4%",left:"55.0%"},{top:"51.8%",left:"51.8%"},{top:"52.4%",left:"51.6%"},{top:"54.4%",left:"47.2%"}],
+        'jun_4-aivoterveys_2': [{top:"54.4%",left:"47.2%"},{top:"54.2%",left:"43.6%"},{top:"52.6%",left:"42.2%"}],
+        'jun_4-aivoterveys_7': [{top:"54.4%",left:"47.2%"},{top:"58.3%",left:"44.0%"},{top:"61.7%",left:"44.8%"},{top:"64.5%",left:"50.2%"},{top:"66.8%",left:"54.3%"},{top:"72.1%",left:"55.2%"},{top:"79.1%",left:"52.0%"},{top:"84.9%",left:"49.2%"},{top:"85.9%",left:"44.7%"}]
       }
     },
     digiturva: {
