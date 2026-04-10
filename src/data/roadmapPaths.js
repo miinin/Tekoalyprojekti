@@ -73,24 +73,32 @@ export const AI_ROADMAP_DATA = {
       }
     },
     kayttotaidot: {
-      entry: [{top:"86.3%",left:"16.9%"},{top:"84.7%",left:"13.5%"},{top:"81.2%",left:"11.3%"},{top:"77.5%",left:"11.3%"},{top:"74.3%",left:"13.8%"},{top:"70.1%",left:"15.5%"},{top:"67.7%",left:"13.8%"}],
-      exit: [{top:"67.0%",left:"69.2%"},{top:"60.7%",left:"65.8%"},{top:"61.6%",left:"64.9%"},{top:"62.8%",left:"63.4%"},{top:"64.5%",left:"62.0%"},{top:"65.0%",left:"59.0%"},{top:"65.1%",left:"58.1%"},{top:"65.0%",left:"57.2%"},{top:"64.5%",left:"54.8%"},{top:"64.4%",left:"53.9%"},{top:"64.4%",left:"53.1%"},{top:"64.3%",left:"51.7%"},{top:"64.2%",left:"50.8%"},{top:"63.5%",left:"49.7%"},{top:"62.9%",left:"48.9%"},{top:"62.7%",left:"48.2%"},{top:"62.3%",left:"47.5%"},{top:"51.4%",left:"51.0%"},{top:"43.9%",left:"54.9%"}],
+      entry: [{top:"93.7%",left:"14.0%"},{top:"88.6%",left:"15.7%"}],
+      exit: [{top:"50.6%",left:"52.6%"},{top:"53.3%",left:"50.4%"},{top:"55.6%",left:"48.4%"},{top:"59.5%",left:"45.0%"},{top:"62.7%",left:"42.8%"},{top:"67.4%",left:"43.7%"},{top:"68.9%",left:"45.8%"},{top:"71.0%",left:"48.1%"},{top:"76.7%",left:"44.7%"},{top:"76.6%",left:"41.4%"},{top:"74.6%",left:"37.5%"},{top:"75.1%",left:"34.0%"},{top:"76.2%",left:"31.7%"},{top:"79.0%",left:"29.5%"},{top:"80.1%",left:"28.2%"},{top:"81.7%",left:"25.6%"},{top:"84.9%",left:"20.8%"},{top:"86.7%",left:"17.5%"},{top:"88.6%",left:"15.7%"},{top:"93.7%",left:"14.0%"}],
       nodes: [
-        { id: 'kayttotaidot_1', top: '67.7%', left: '13.8%' },
-        { id: 'kayttotaidot_2', top: '83.4%', left: '23.6%' },
-        { id: 'kayttotaidot_3', top: '73.9%', left: '46.2%' },
-        { id: 'kayttotaidot_4', top: '60.2%', left: '35.7%' },
-        { id: 'kayttotaidot_5', top: '48.9%', left: '45.7%' },
-        { id: 'kayttotaidot_6', top: '67.0%', left: '69.2%' },
-        { id: 'kayttotaidot_7', top: '43.9%', left: '54.9%' }
+        { id: 'kayttotaidot_1', top: '71.7%', left: '14.2%' },
+        { id: 'kayttotaidot_2', top: '81.7%', left: '25.6%' },
+        { id: 'kayttotaidot_3', top: '76.7%', left: '44.7%' },
+        { id: 'kayttotaidot_6', top: '71.7%', left: '69.2%' },
+        { id: 'kayttotaidot_4', top: '62.9%', left: '37.7%' },
+        { id: 'kayttotaidot_5', top: '52.8%', left: '45.5%' },
+        { id: 'kayttotaidot_7', top: '50.6%', left: '52.6%' },
+        { id: 'kayttotaidot_jun_1', top: '88.6%', left: '15.7%', isJunction: true },
+        { id: 'kayttotaidot_jun_6', top: '71.0%', left: '48.1%', isJunction: true },
+        { id: 'kayttotaidot_jun_4', top: '62.7%', left: '42.8%', isJunction: true },
+        { id: 'kayttotaidot_jun_5', top: '55.6%', left: '48.4%', isJunction: true }
       ],
       paths: {
-        'kayttotaidot_1-kayttotaidot_2': [{top:"67.7%",left:"13.8%"},{top:"85.6%",left:"19.3%"},{top:"84.7%",left:"21.9%"},{top:"83.4%",left:"23.6%"}],
-        'kayttotaidot_2-kayttotaidot_3': [{top:"83.4%",left:"23.6%"},{top:"79.1%",left:"28.2%"},{top:"76.6%",left:"30.8%"},{top:"75.7%",left:"33.2%"},{top:"74.2%",left:"36.6%"},{top:"75.3%",left:"39.7%"},{top:"76.1%",left:"43.2%"},{top:"73.9%",left:"46.2%"}],
-        'kayttotaidot_3-kayttotaidot_4': [{top:"73.9%",left:"46.2%"},{top:"68.2%",left:"45.0%"},{top:"65.4%",left:"41.8%"},{top:"63.5%",left:"38.8%"},{top:"60.2%",left:"35.7%"}],
-        'kayttotaidot_4-kayttotaidot_5': [{top:"60.2%",left:"35.7%"},{top:"62.7%",left:"43.0%"},{top:"60.1%",left:"44.7%"},{top:"56.7%",left:"46.7%"},{top:"50.8%",left:"47.2%"},{top:"48.9%",left:"45.7%"}],
-        'kayttotaidot_5-kayttotaidot_7': [{top:"48.9%",left:"45.7%"},{top:"51.4%",left:"51.0%"},{top:"43.9%",left:"54.9%"}],
-        'kayttotaidot_7-kayttotaidot_6': [{top:"43.9%",left:"54.9%"},{top:"51.4%",left:"51.0%"},{top:"62.3%",left:"47.5%"},{top:"62.7%",left:"48.2%"},{top:"62.9%",left:"48.9%"},{top:"63.5%",left:"49.7%"},{top:"64.2%",left:"50.8%"},{top:"64.3%",left:"51.7%"},{top:"64.4%",left:"53.1%"},{top:"64.4%",left:"53.9%"},{top:"64.5%",left:"54.8%"},{top:"65.0%",left:"57.2%"},{top:"65.1%",left:"58.1%"},{top:"65.0%",left:"59.0%"},{top:"64.5%",left:"62.0%"},{top:"62.8%",left:"63.4%"},{top:"61.6%",left:"64.9%"},{top:"60.7%",left:"65.8%"},{top:"67.0%",left:"69.2%"}]
+        'kayttotaidot_1-kayttotaidot_jun_1': [{top:"71.7%",left:"14.2%"},{top:"76.4%",left:"11.4%"},{top:"80.2%",left:"10.8%"},{top:"85.5%",left:"12.4%"},{top:"88.1%",left:"14.8%"},{top:"88.6%",left:"15.7%"}],
+        'kayttotaidot_jun_1-kayttotaidot_2': [{top:"88.6%",left:"15.7%"},{top:"86.7%",left:"17.5%"},{top:"84.9%",left:"20.8%"},{top:"81.7%",left:"25.6%"}],
+        'kayttotaidot_2-kayttotaidot_3': [{top:"81.7%",left:"25.6%"},{top:"80.1%",left:"28.2%"},{top:"79.0%",left:"29.5%"},{top:"76.2%",left:"31.7%"},{top:"75.1%",left:"34.0%"},{top:"74.6%",left:"37.5%"},{top:"76.6%",left:"41.4%"},{top:"76.7%",left:"44.7%"}],
+        'kayttotaidot_3-kayttotaidot_jun_6': [{top:"76.7%",left:"44.7%"},{top:"71.0%",left:"48.1%"}],
+        'kayttotaidot_jun_6-kayttotaidot_6': [{top:"71.0%",left:"48.1%"},{top:"73.7%",left:"49.1%"},{top:"73.9%",left:"51.1%"},{top:"73.6%",left:"56.4%"},{top:"72.9%",left:"60.4%"},{top:"73.5%",left:"65.5%"},{top:"71.7%",left:"69.2%"}],
+        'kayttotaidot_jun_6-kayttotaidot_jun_4': [{top:"71.0%",left:"48.1%"},{top:"68.9%",left:"45.8%"},{top:"67.4%",left:"43.7%"},{top:"62.7%",left:"42.8%"}],
+        'kayttotaidot_jun_4-kayttotaidot_4': [{top:"62.7%",left:"42.8%"},{top:"64.2%",left:"39.7%"},{top:"62.9%",left:"37.7%"}],
+        'kayttotaidot_jun_4-kayttotaidot_jun_5': [{top:"62.7%",left:"42.8%"},{top:"59.5%",left:"45.0%"},{top:"55.6%",left:"48.4%"}],
+        'kayttotaidot_jun_5-kayttotaidot_5': [{top:"55.6%",left:"48.4%"},{top:"54.9%",left:"45.6%"},{top:"52.8%",left:"45.5%"}],
+        'kayttotaidot_jun_5-kayttotaidot_7': [{top:"55.6%",left:"48.4%"},{top:"53.3%",left:"50.4%"},{top:"50.6%",left:"52.6%"}]
       }
     },
     konepellin: {
