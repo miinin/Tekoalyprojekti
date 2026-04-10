@@ -98,7 +98,7 @@ const Roadmap = () => {
         } else {
             // Normaali saapuminen alakarttaan
             const entryPath = subData.entry;
-            setCurrentLocationId(subData.nodes[0].id); // Määritetään ensimmäinen node fyysiseksi sijainniksi
+            setCurrentLocationId('start_point');
             if (entryPath && entryPath.length > 0) {
                 let initialDirection = 1;
                 if (entryPath.length > 1 && parseFloat(entryPath[1].left) < parseFloat(entryPath[0].left)) {
@@ -275,10 +275,29 @@ const Roadmap = () => {
             const userDone = completedLessons.filter(id => mapNodes.includes(id));
             const params = new URLSearchParams(window.location.search);
             const completedNodeId = params.get('completed');
-            
+
             let startNode = currentLocationId;
+            let bridgeFromEntry = false;
+            
             if (!startNode || startNode === 'start_point' || !mapNodes.includes(startNode)) {
-                startNode = completedNodeId || (userDone.length > 0 ? userDone[userDone.length - 1] : mapNodes[0]);
+                if (!completedNodeId) {
+                    startNode = mapNodes[0];
+                    bridgeFromEntry = true;
+                } else {
+                    startNode = completedNodeId;
+                }
+            }
+            
+            let allWaypoints = [];
+            
+            if (bridgeFromEntry && currentData.entry && currentData.entry.length > 0) {
+                const firstNodePos = currentData.nodes.find(n => n.id === mapNodes[0]);
+                const entryWaypoints = currentData.entry.slice(1); // Koska auto pysäköitiin entry[1]:een
+                
+                if (firstNodePos) {
+                    allWaypoints.push(...entryWaypoints);
+                    allWaypoints.push({ top: firstNodePos.top, left: firstNodePos.left });
+                }
             }
             
             if (startNode && startNode !== nodeId) {
@@ -313,8 +332,6 @@ const Roadmap = () => {
                 }
 
                 if (pathSequence && pathSequence.length > 1) {
-                    setIsMoving(true);
-                    let allWaypoints = [];
                     for (let i = 0; i < pathSequence.length - 1; i++) {
                         const s = pathSequence[i];
                         const e = pathSequence[i+1];
@@ -342,15 +359,18 @@ const Roadmap = () => {
                                  allWaypoints.push(...finalWaypoints);
                              }
                         }
-                    }
-                    if (allWaypoints.length > 0) {
-                         await moveAlongPath(allWaypoints);
+                        }
                     }
                 }
             }
             
+            if (allWaypoints.length > 0) {
+                 await moveAlongPath(allWaypoints);
+            }
+            
             // Varmistetaan aina, että paku on lopulta TÄSMÄLLEEN solmun päällä ja animoitu perille ennen navigointia
             setIsMoving(true);
+            setCurrentLocationId(nodeId);
             setVanPos(prev => ({ ...prev, top: node.top, left: node.left, stepTime: 500 }));
             await new Promise(r => setTimeout(r, 550));
             setIsMoving(false);
