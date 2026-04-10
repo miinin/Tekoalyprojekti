@@ -252,7 +252,7 @@ export default function Garage() {
 
   return (
     <>
-    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, background: 'radial-gradient(circle at 50% -20%, #334155 0%, #020617 100%)' }} />
+    <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, background: 'radial-gradient(circle at 50% 0%, #fefefe 0%, #e2e8f0 70%, #cbd5e1 100%)' }} />
     <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '2000px', margin: '0 auto', width: '100%' }}>
       <style>{`
         .garage-grid {
@@ -376,7 +376,7 @@ export default function Garage() {
         <div className="garage-left">
            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
                 {Object.entries(categorisedCar).map(([catId, category]) => {
                   const isLocked = isTutorialActive;
                   return (
@@ -407,7 +407,7 @@ export default function Garage() {
               </div>
 
               <div>
-                <h3 style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.7)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
+                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Tallin parannukset</h3>
                 {Object.entries(categorisedGarage).map(([catId, category]) => {
                   const isLocked = isTutorialActive && catId !== 'g_floor';
                   return (
@@ -441,16 +441,16 @@ export default function Garage() {
 
         {/* CENTER COLUMN: Selected Category Items */}
         <div className="garage-center">
-            <h2 style={{ fontSize: '1.6rem', color: 'white', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
+            <h2 style={{ fontSize: '1.6rem', color: 'var(--text-main)', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
               {activeCategory ? (categorisedCar[activeCategory]?.name || categorisedGarage[activeCategory]?.name) : "Valitse kategoria"}
             </h2>
             {activeCategory === 'g_tools' ? (
               <>
-                <h3 style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Seinätyökalut</h3>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Seinätyökalut</h3>
                 <div className="items-grid animate-fade-in" style={{ marginBottom: '2.5rem' }}>
                      {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_tools').map(item => renderSquareItem(item))}
                 </div>
-                <h3 style={{ fontSize: '1.2rem', color: 'rgba(255,255,255,0.7)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Tunkit</h3>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Tunkit</h3>
                 <div className="items-grid animate-fade-in">
                      {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_jack').map(item => renderSquareItem(item))}
                 </div>

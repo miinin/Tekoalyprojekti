@@ -302,31 +302,35 @@ export default function Quiz() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {currentQuestion.options.map((option, idx) => {
               const isSelected = selectedAnswer === option;
-              let btnStyle = { padding: '1rem', textAlign: 'left', background: 'white', border: '2px solid #e2e8f0', color: 'var(--text-main)', borderRadius: '12px', cursor: 'pointer', transition: 'all 0.2s', fontSize: '1.05rem', lineHeight: '1.4', fontFamily: 'var(--font-main)', fontWeight: '500' };
+              let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
               
               if (currentQuestion.type === 'true_false') {
                  const optOpt = option.toLowerCase();
-                 if (['oikein', 'kyllä', 'true', 'yes'].includes(optOpt)) {
+                 if (optOpt.includes('oikein') || optOpt.includes('kyllä') || optOpt === 'true' || optOpt.startsWith('yes')) {
                     btnStyle.color = '#15803d';
-                    if (!isSelected) { btnStyle.border = '2px solid #bbf7d0'; btnStyle.background = '#f0fdf4'; }
-                 } else if (['väärin', 'ei', 'false', 'no'].includes(optOpt)) {
+                    if (!isSelected) { btnStyle.border = '2px solid rgba(134, 239, 172, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(240, 253, 244, 0.8) 0%, rgba(220, 252, 231, 0.6) 100%)'; }
+                 } else if (optOpt.includes('väärin') || optOpt.includes('ei') || optOpt === 'false' || optOpt.startsWith('no')) {
                     btnStyle.color = '#b91c1c';
-                    if (!isSelected) { btnStyle.border = '2px solid #fecaca'; btnStyle.background = '#fef2f2'; }
+                    if (!isSelected) { btnStyle.border = '2px solid rgba(252, 165, 165, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(254, 242, 242, 0.8) 0%, rgba(254, 226, 226, 0.6) 100%)'; }
                  }
               }
 
               if (showExplanation) {
                 if (option === currentQuestion.correctAnswer) {
                   btnStyle.border = '2px solid var(--accent-color)';
-                  btnStyle.background = 'rgba(76, 175, 80, 0.1)';
+                  btnStyle.background = 'rgba(76, 175, 80, 0.15)';
+                  btnStyle.boxShadow = '0 0 20px rgba(76, 175, 80, 0.2)';
                 } else if (isSelected) {
                   btnStyle.border = '2px solid #ef4444';
-                  btnStyle.background = 'rgba(239, 68, 68, 0.1)';
+                  btnStyle.background = 'rgba(239, 68, 68, 0.15)';
                 } else {
-                  btnStyle.opacity = 0.6;
+                  btnStyle.opacity = 0.5;
                 }
               } else if (isSelected) {
                 btnStyle.border = '2px solid var(--primary-color)';
+                btnStyle.boxShadow = '0 8px 25px rgba(0, 114, 198, 0.15)';
+                btnStyle.transform = 'translateY(-2px)';
+                btnStyle.background = 'white';
               }
 
               return (
@@ -334,8 +338,23 @@ export default function Quiz() {
                   key={idx} 
                   style={btnStyle}
                   onClick={() => !showExplanation && setSelectedAnswer(option)}
-                  onMouseEnter={(e) => !showExplanation && (e.currentTarget.style.borderColor = 'var(--primary-color)')}
-                  onMouseLeave={(e) => !showExplanation && !isSelected && (e.currentTarget.style.borderColor = '#e2e8f0')}
+                  onMouseEnter={(e) => {
+                     if (!showExplanation) {
+                         e.currentTarget.style.transform = 'translateY(-3px)';
+                         e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,114,198,0.12)';
+                         if (!isSelected) e.currentTarget.style.borderColor = 'var(--primary-color)';
+                     }
+                  }}
+                  onMouseLeave={(e) => {
+                     if (!showExplanation) {
+                         e.currentTarget.style.transform = isSelected ? 'translateY(-2px)' : 'translateY(0)';
+                         e.currentTarget.style.boxShadow = isSelected ? '0 8px 25px rgba(0, 114, 198, 0.15)' : '0 4px 15px rgba(0,0,0,0.03)';
+                         if (!isSelected) {
+                             e.currentTarget.style.borderColor = (currentQuestion.type === 'true_false' && (option.toLowerCase().includes('oikein') || option.toLowerCase().includes('kyllä'))) ? 'rgba(134, 239, 172, 0.4)' : 
+                                                                (currentQuestion.type === 'true_false') ? 'rgba(252, 165, 165, 0.4)' : 'transparent';
+                         }
+                     }
+                  }}
                 >
                   {option}
                 </button>
