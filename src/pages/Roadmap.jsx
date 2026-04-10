@@ -508,8 +508,8 @@ const Roadmap = () => {
       
       const mainMapLabel = categories.find(c => c.id === node.id)?.name;
       const labelText = currentMap === 'main' 
-          ? (mainMapLabel || node.id).toUpperCase()
-          : (subcategory ? subcategory.name : node.id).toUpperCase();
+          ? (mainMapLabel || node.id)
+          : (subcategory ? subcategory.name : node.id);
 
       const nodeIndexParts = node.id.split('_');
       const nodeIndexNum = parseInt(nodeIndexParts[nodeIndexParts.length - 1]);
@@ -639,7 +639,7 @@ const Roadmap = () => {
                   {labelText.includes('(') ? (
                       <>
                           <div>{labelText.substring(0, labelText.indexOf('(')).trim()}</div>
-                          <div style={{ fontSize: '0.85em', color: '#64748b', fontWeight: 700, marginTop: '3px', fontFamily: "'Roboto', sans-serif" }}>
+                          <div style={{ fontSize: '0.9em', color: '#64748b', fontWeight: 400, marginTop: '3px', fontFamily: "'Roboto', sans-serif" }}>
                               {labelText.substring(labelText.indexOf('('))}
                           </div>
                       </>
