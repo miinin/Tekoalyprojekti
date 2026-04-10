@@ -190,22 +190,22 @@ export const categories = [
     "id": "aivoterveys",
     "name": "Aivoterveys",
     "subcategories": [
-      { "id": "aivoterveys_1", "name": "Taso 1: Turingin testi", "questions": [
+      { "id": "aivoterveys_1", "name": "Huoltotauko (Ruutuaika ja tauot)", "questions": [
           { "id": "q_h1_1", "type": "multiple_choice", "question": "Mikä on Turingin testin tavoite?", "options": ["Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "Testata koneen nopeutta", "Katsoa osaako kone uida", "Testata internet-yhteyttä"], "correctAnswer": "Katsoa voiko kone huijata ihmistä luulemaan sitä toiseksi ihmiseksi", "explanation": "Alan Turing kehitti tämän kokeen määritelläkseen, voiko kone ajatella." }
       ] },
-      { "id": "aivoterveys_2", "name": "Taso 2: Emergenssi", "questions": [
+      { "id": "aivoterveys_2", "name": "Yöksi parkkiin (Uni ja iltarutiinit)", "questions": [
           { "id": "q_h2_1", "type": "multiple_choice", "question": "Mitä tarkoittaa emergenssi tekoälyssä?", "options": ["Uusien, odottamattomien taitojen syntymistä mallin kasvaessa", "Koneen hajoamista", "Tiedon poistumista", "Hidastumista"], "correctAnswer": "Uusien, odottamattomien taitojen syntymistä mallin kasvaessa", "explanation": "Erittäin suuret mallit saattavat alkaa osata taitoja (kuten vitsit tai koodaus), joita niille ei suoraan opetettu." }
       ] },
-      { "id": "aivoterveys_3", "name": "Taso 3: Singularity", "questions": [
+      { "id": "aivoterveys_3", "name": "Aikuisten moottoritie (Ikärajat ja some)", "questions": [
           { "id": "q_h3_1", "type": "multiple_choice", "question": "Mikä on teknologinen singulariteetti?", "options": ["Hetki jolloin tekoäly ylittää ihmisälyn ja kehitys kiihtyy hallitsemattomaksi", "Avaruusmatka", "Pelin loppu", "Tekoälyn sammuminen"], "correctAnswer": "Hetki jolloin tekoäly ylittää ihmisälyn ja kehitys kiihtyy hallitsemattomaksi", "explanation": "Tämä on tulevaisuusfuturologien ennustus, jonka toteutumisesta kiistellään." }
       ] },
-      { "id": "aivoterveys_4", "name": "Taso 4: Tekoälyn talvet", "questions": [
+      { "id": "aivoterveys_4", "name": "Ulos autosta! (Liikunta ja oikea elämä)", "questions": [
           { "id": "q_h4_1", "type": "multiple_choice", "question": "Mitä oli 'AI Winter'?", "options": ["Aika jolloin tekoälyn rahoitus ja kiinnostus lopuivat vuosiksi", "Loma-aika", "Pohjoisnapa", "Varkaus"], "correctAnswer": "Aika jolloin tekoälyn rahoitus ja kiinnostus lopuivat vuosiksi", "explanation": "Historiassa on ollut useita jaksoja, jolloin tekoälyyn ei enää uskottu." }
       ] },
-      { "id": "aivoterveys_5", "name": "Taso 5: Superäly", "questions": [
+      { "id": "aivoterveys_5", "name": "Oikea apukuski (Tunteet ja aito kaveruus)", "questions": [
           { "id": "q_h5_1", "type": "true_false", "question": "Pidetäänkö superälyä potentiaalisena riskinä ihmiskunnalle?", "options": ["Kyllä, se on merkittävä tutkimuskohde", "Ei, se on mahdotonta"], "correctAnswer": "Kyllä, se on merkittävä tutkimuskohde", "explanation": "Superäly (Superintelligence) vaatii tarkat turvasäännöt toimiakseen ihmisen hyväksi." }
       ] },
-      { "id": "aivoterveys_6", "name": "Taso 6: Kvanteista tekoälyyn", "questions": [
+      { "id": "aivoterveys_6", "name": "Radio hiljemmalle (Keskittyminen ja taustahäly)", "questions": [
           { "id": "q_h6_1", "type": "multiple_choice", "question": "Miten kvanttitietokoneet voisivat auttaa tekoälyä?", "options": ["Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "Ne tekisivät niistä pienempiä", "Ne eivät auta", "Ne tekisivät niistä vihreitä"], "correctAnswer": "Ne pystyisivät laskemaan valtavia määriä dataa silmänräpäyksessä", "explanation": "Kvanttilaskenta voisi mullistaa sen, miten nopeasti ja monimutkaisia asioita tekoäly osaa." }
       ] },
       { "id": "aivoterveys_7", "name": "Erikoiskoe – Sumuinen Yöajo", "questions": [
