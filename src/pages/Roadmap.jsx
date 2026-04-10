@@ -630,7 +630,16 @@ const Roadmap = () => {
             }}
           >
               <span style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)' }}>
-                  {labelText}
+                  {labelText.includes('(') ? (
+                      <>
+                          {labelText.substring(0, labelText.indexOf('(')).trim()}
+                          <span style={{ fontSize: '0.85em', color: '#64748b', fontWeight: 700, marginLeft: '0.3rem' }}>
+                              {labelText.substring(labelText.indexOf('('))}
+                          </span>
+                      </>
+                  ) : (
+                      labelText
+                  )}
               </span>
           </div>
         </div>

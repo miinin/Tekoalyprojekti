@@ -95,7 +95,7 @@ export const categories = [
     "subcategories": [
       {
         "id": "arjessa_1",
-        "name": "Taso 1: Alkeet",
+        "name": "Taskussa asuva apuri (Älypuhelimet)",
         "questions": [
           {
             "id": "q_a1_1",
@@ -112,19 +112,19 @@ export const categories = [
           }
         ]
       },
-      { "id": "arjessa_2", "name": "Taso 2: Kasvontunnistus", "questions": [
+      { "id": "arjessa_2", "name": "Ruutuajan taikatemput (Suositukset ja videot)", "questions": [
           { "id": "q_a2_1", "type": "true_false", "question": "Käyttääkö puhelimen lukituksen avaaminen kasvoilla tekoälyä?", "options": ["Kyllä", "Ei"], "correctAnswer": "Kyllä", "explanation": "Se vertaa kasvojasi aiemmin opituihin piirteisiin tekoälyn avulla." }
       ] },
-      { "id": "arjessa_3", "name": "Taso 3: Hakukoneet", "questions": [
+      { "id": "arjessa_3", "name": "Tekoäly pelikaverina (Videopelit)", "questions": [
           { "id": "q_a3_1", "type": "multiple_choice", "question": "Miten Google käyttää tekoälyä?", "options": ["Ymmärtääkseen hakusi tarkoituksen paremmin", "Löytääkseen halvimmat hinnat", "Poistaakseen internetin", "Kysymällä muilta ihmisiltä"], "correctAnswer": "Ymmärtääkseen hakusi tarkoituksen paremmin", "explanation": "Tekoäly auttaa ymmärtämään mitä oikeasti etsit, vaikka et käyttäisi täsmälleen oikeita sanoja." }
       ] },
-      { "id": "arjessa_4", "name": "Taso 4: Suoratoisto", "questions": [
+      { "id": "arjessa_4", "name": "Olohuoneen pikkurobotit (Älykoti)", "questions": [
           { "id": "q_a4_1", "type": "multiple_choice", "question": "Miten Netflix osaa suositella sinulle sopivia elokuvia?", "options": ["Analysoimalla muiden samankaltaisten käyttäjien valintoja", "He arvaavat", "Se on aina sama lista kaikille", "Katsomalla sinua kamerasta"], "correctAnswer": "Analysoimalla muiden samankaltaisten käyttäjien valintoja", "explanation": "Suosittelualgoritmit etsivät 'maku-profiileja' ja tarjoavat sisältöä niiden perusteella." }
       ] },
-      { "id": "arjessa_5", "name": "Taso 5: Kartat ja reitit", "questions": [
+      { "id": "arjessa_5", "name": "Maailmanlaajuinen tulkki (Koulu ja kielet)", "questions": [
           { "id": "q_a5_1", "type": "true_false", "question": "Ennustaako Google Maps ruuhkia tekoälyn avulla?", "options": ["Kyllä", "Ei"], "correctAnswer": "Kyllä", "explanation": "Se analysoi historiadataa ja reaaliaikaista sijaintitietoa laskeakseen nopeimman reitin." }
       ] },
-      { "id": "arjessa_6", "name": "Taso 6: Robotti-imurit", "questions": [
+      { "id": "arjessa_6", "name": "AI vanin apukuski (Kartat ja liikenne)", "questions": [
           { "id": "q_a6_1", "type": "multiple_choice", "question": "Miten robotti-imuri tunnistaa esteet?", "options": ["Sensoreilla ja koneoppimisella", "Sattumanvaraisesti törmäilemällä", "Se näkee unia", "Siinä on ihminen sisällä"], "correctAnswer": "Sensoreilla ja koneoppimisella", "explanation": "Nykyaikaiset imurit oppivat kotisi kartan ja tunnistavat esineet (kuten sukat!) tekoälyn avulla." }
       ] },
       { "id": "arjessa_7", "name": "Erikoiskoe – Kaaosristeys", "questions": [
