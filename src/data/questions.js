@@ -136,22 +136,22 @@ export const categories = [
     "id": "reilu_peli",
     "name": "Reilu peli",
     "subcategories": [
-      { "id": "reilu_peli_1", "name": "Taso 1: Puolueellisuus", "questions": [
+      { "id": "reilu_peli_1", "name": "Kaikki kyytiin! (Tasa-arvo ja syrjimättömyys)", "questions": [
           { "id": "q_e1_1", "type": "multiple_choice", "question": "Miksi tekoäly voi olla ennakkoluuloinen (bias)?", "options": ["Koska sen opetusdata on ollut yksipuolista", "Koska se on vihainen", "Se on mahdotonta", "Koska se on tehty koneella"], "correctAnswer": "Koska sen opetusdata on ollut yksipuolista", "explanation": "Jos mallille opetetaan vain tietynlaisia esimerkkejä, se oppii suosimaan niitä eettisesti väärin." }
       ] },
-      { "id": "reilu_peli_2", "name": "Taso 2: Yksityisyys", "questions": [
+      { "id": "reilu_peli_2", "name": "Kuka oli kuskina? (Oma työ, vastuu ja avoimuus)", "questions": [
           { "id": "q_e2_1", "type": "true_false", "question": "Onko turvallista syöttää henkilötietoja julkiseen tekoälyyn?", "options": ["Ei, tiedot voivat päätyä osaksi opetusmateriaalia", "Kyllä, se on täysin salattua"], "correctAnswer": "Ei, tiedot voivat päätyä osaksi opetusmateriaalia", "explanation": "Monet tekoälyt tallentavat käydyt keskustelut kehitystä varten, joten varo salaisuuksia!" }
       ] },
-      { "id": "reilu_peli_3", "name": "Taso 3: Syväväärennökset", "questions": [
+      { "id": "reilu_peli_3", "name": "Luvattomat varaosat (Tekijänoikeudet)", "questions": [
           { "id": "q_e3_1", "type": "multiple_choice", "question": "Mikä on syväväärennös (Deepfake)?", "options": ["Tekoälyllä luotu aidolta näyttävä huijausvideo tai -kuva", "Hyvin syvä reikä", "Väärennetty passi", "Tietokonepeli"], "correctAnswer": "Tekoälyllä luotu aidolta näyttävä huijausvideo tai -kuva", "explanation": "Deepfaket voivat laittaa ihmiset sanomaan asioita, joita he eivät oikeasti ole sanoneet." }
       ] },
-      { "id": "reilu_peli_4", "name": "Taso 4: Tekijänoikeudet", "questions": [
+      { "id": "reilu_peli_4", "name": "Ei roiskita kuraa! (Kiusaaminen ja ystävällisyys)", "questions": [
           { "id": "q_e4_1", "type": "multiple_choice", "question": "Kuka omistaa tekoälyn luoman taideteoksen koodin?", "options": ["Tämä on monimutkainen ja uusi lakikysymys", "Aina tekoäly itse", "Aina ihminen joka painoi nappia", "Valtio"], "correctAnswer": "Tämä on monimutkainen ja uusi lakikysymys", "explanation": "Tällä hetkellä laki etsii vielä vastausta siihen, kuka omistaa 'koneen luovuuden'." }
       ] },
-      { "id": "reilu_peli_5", "name": "Taso 5: Avoimuus", "questions": [
+      { "id": "reilu_peli_5", "name": "Peltinen apukuski (Ihmisyys ja tunteet)", "questions": [
           { "id": "q_e5_1", "type": "true_false", "question": "Pitäisikö meidän aina tietää, puhummeko ihmisen vai tekoälyn kanssa?", "options": ["Kyllä, se on eettisesti suositeltavaa", "Ei se ole tärkeää"], "correctAnswer": "Kyllä, se on eettisesti suositeltavaa", "explanation": "Läpinäkyvyys rakentaa luottamusta teknologian ja ihmisten välille." }
       ] },
-      { "id": "reilu_peli_6", "name": "Taso 6: Työelämän muutos", "questions": [
+      { "id": "reilu_peli_6", "name": "Raskas kaasujalka (Tekoäly ja luonto)", "questions": [
           { "id": "q_e6_1", "type": "multiple_choice", "question": "Miten tekoäly vaikuttaa tulevaisuuden töihin?", "options": ["Se poistaa joitain töitä, mutta luo täysin uusia", "Kaikki työt loppuvat", "Mikään ei muutu", "Töitä on enemmän kaikille"], "correctAnswer": "Se poistaa joitain töitä, mutta luo täysin uusia", "explanation": "Rutiinitehtävät vähenevät, mutta tarve tekoälyä osaaville ihmisille kasvaa." }
       ] },
       { "id": "reilu_peli_7", "name": "Tarkastuspiste – Häijy Kaahari", "questions": [
