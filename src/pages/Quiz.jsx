@@ -305,12 +305,11 @@ export default function Quiz() {
               const isSelected = selectedAnswer === option;
               let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
               
-              if (currentQuestion.type === 'true_false') {
-                 const optOpt = option.toLowerCase();
-                 if (optOpt.includes('oikein') || optOpt.includes('kyllä') || optOpt === 'true' || optOpt.startsWith('yes')) {
+              if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
+                 if (idx === 0) {
                     btnStyle.color = '#15803d';
                     if (!isSelected) { btnStyle.border = '2px solid rgba(134, 239, 172, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(240, 253, 244, 0.8) 0%, rgba(220, 252, 231, 0.6) 100%)'; }
-                 } else if (optOpt.includes('väärin') || optOpt.includes('ei') || optOpt === 'false' || optOpt.startsWith('no')) {
+                 } else {
                     btnStyle.color = '#b91c1c';
                     if (!isSelected) { btnStyle.border = '2px solid rgba(252, 165, 165, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(254, 242, 242, 0.8) 0%, rgba(254, 226, 226, 0.6) 100%)'; }
                  }
@@ -351,8 +350,8 @@ export default function Quiz() {
                          e.currentTarget.style.transform = isSelected ? 'translateY(-2px)' : 'translateY(0)';
                          e.currentTarget.style.boxShadow = isSelected ? '0 8px 25px rgba(0, 114, 198, 0.15)' : '0 4px 15px rgba(0,0,0,0.03)';
                          if (!isSelected) {
-                             e.currentTarget.style.borderColor = (currentQuestion.type === 'true_false' && (option.toLowerCase().includes('oikein') || option.toLowerCase().includes('kyllä'))) ? 'rgba(134, 239, 172, 0.4)' : 
-                                                                (currentQuestion.type === 'true_false') ? 'rgba(252, 165, 165, 0.4)' : 'transparent';
+                             e.currentTarget.style.borderColor = (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2 && idx === 0) ? 'rgba(134, 239, 172, 0.4)' : 
+                                                                (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2 && idx === 1) ? 'rgba(252, 165, 165, 0.4)' : 'transparent';
                          }
                      }
                   }}
