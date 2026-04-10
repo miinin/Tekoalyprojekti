@@ -32,6 +32,7 @@ const Roadmap = () => {
   );
   const [closedTuition, setClosedTuition] = useState({ 0: false, 1: false, 2: false });
   const [puffs, setPuffs] = useState([]);
+  const [toastMessage, setToastMessage] = useState(null);
   const mapRef = useRef(null);
   const consumedReturnRef = useRef(false);
 
@@ -58,6 +59,11 @@ const Roadmap = () => {
       setCurrentMap('main');
     }
   }, [location]);
+
+  const showToast = (msg) => {
+      setToastMessage(msg);
+      setTimeout(() => setToastMessage(null), 3500);
+  };
 
   // Kartan vaihdon yhteydessä: Saavutaan alakarttaan sisääntuloreittiä (entry) pitkin!
   useEffect(() => {
@@ -550,7 +556,17 @@ const Roadmap = () => {
         >
           <button
             id={node.id}
-            onClick={() => !isLocked && handleNodeClick(node.id, currentMap === 'main')}
+            onClick={() => {
+                if (isLocked) {
+                    if (isLastNode) {
+                        showToast("Aja ensin aiemmat etapit läpi, jotta AI-pakusi on viritetty kuntoon tätä erikoiskoetta varten!");
+                    } else {
+                        showToast("Tämä etappi aukeaa myöhemmin! Suorita ensin aiemmat pysäkit.");
+                    }
+                } else {
+                    handleNodeClick(node.id, currentMap === 'main');
+                }
+            }}
             className={isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : "")}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -975,9 +991,32 @@ const Roadmap = () => {
               </button>
           </div>
       )}
+      
+      {toastMessage && (
+        <div style={{
+            position: 'fixed',
+            bottom: '7%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(255,255,255,0.95)',
+            border: '4px solid var(--danger)',
+            color: 'var(--text-main)',
+            fontWeight: 'bold',
+            fontSize: '1.2rem',
+            padding: '1rem 2rem',
+            borderRadius: '20px',
+            zIndex: 1100,
+            boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+            textAlign: 'center',
+            maxWidth: '90%',
+            animation: 'fade-in 0.3s ease-out'
+        }}>
+           <span className="material-symbols-outlined" style={{ color: 'var(--danger)', verticalAlign: 'middle', marginRight: '10px' }}>info</span>
+           {toastMessage}
+        </div>
+      )}
     </div>
   );
 };
-;
 
 export default Roadmap;
