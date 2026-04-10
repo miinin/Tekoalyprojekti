@@ -204,11 +204,11 @@ export default function Garage() {
                             if (item.id === 'g-clean' && isTutorialActive) {
                                 store.completeTutorial();
                                 setIsTutorialActive(false);
-                                setActiveCategory('body'); 
+                                setActiveCategory('g_floor'); 
                                 setFlashScreen(true);
                                 setTimeout(() => {
                                     setShowGreenPulse(true);
-                                }, 1500);
+                                }, 2500);
                             }
                           }
                         } else if (isEquipped && item.category === 'extra') {
@@ -317,11 +317,11 @@ export default function Garage() {
         }
         @keyframes blackoutFade {
           0% { opacity: 1; }
-          50% { opacity: 1; }
+          60% { opacity: 1; }
           100% { opacity: 0; }
         }
         .flash-blackout {
-          animation: blackoutFade 1.6s ease-in-out forwards;
+          animation: blackoutFade 3.5s ease-in-out forwards;
         }
         @keyframes wiggle {
           0%, 100% { transform: rotate(-3deg) scale(1.05); }
