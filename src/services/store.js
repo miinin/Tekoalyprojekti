@@ -92,6 +92,14 @@ export const store = {
     }
   },
 
+  getAggregatedNodeStats: (nodeId, totalNodeQuestionsCount) => {
+    const correctness = store.getQuestionCorrectness();
+    const nodeState = correctness[nodeId] || {};
+    let correct = 0;
+    Object.values(nodeState).forEach(val => { if (val) correct++; });
+    return { correct, total: totalNodeQuestionsCount };
+  },
+
   getNodeStats: () => {
     return JSON.parse(localStorage.getItem('aivan_node_stats') || '{}');
   },
