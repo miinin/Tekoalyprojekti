@@ -60,7 +60,8 @@ export default function Garage() {
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
     { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Maastorenkaat', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
+    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Vintage-vanteet', desc: 'Tyylikästä nostalgiaa menneiltä vuosikymmeniltä.', price: 2000, icon: <Disc size={28} />, color: '#f59e0b', bg: '#fef3c7' },
+    { id: 'van-wheel06', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Turbo-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },

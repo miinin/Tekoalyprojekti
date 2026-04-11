@@ -52,7 +52,7 @@ export default function Quiz() {
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') buff = 'vinssi';
        if (mainCategory === 'konepellin' && extras === 'van-extra07') buff = 'eramaa-antenni';
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
-       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel05') buff = 'talvirenkaat';
+       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') buff = 'talvirenkaat';
        setActiveBuff(buff);
 
        // Globaalit puskuribuffit (Törmäyksenesto, poistaa 1 väärän monivalinnassa)
