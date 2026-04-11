@@ -64,6 +64,34 @@ export const store = {
     return 0; // No new sparks earned
   },
 
+  getQuestionRecords: () => {
+    return JSON.parse(localStorage.getItem('aivan_question_records') || '{}');
+  },
+
+  saveQuestionRecord: (questionId, newScore) => {
+    const records = store.getQuestionRecords();
+    const currentScore = records[questionId] || 0;
+    if (newScore > currentScore) {
+       records[questionId] = newScore;
+       localStorage.setItem('aivan_question_records', JSON.stringify(records));
+       return newScore - currentScore; // Return the amount of NEW sparks earned
+    }
+    return 0; // No new sparks earned
+  },
+
+  getQuestionCorrectness: () => {
+    return JSON.parse(localStorage.getItem('aivan_question_correctness') || '{}');
+  },
+
+  saveQuestionCorrectness: (nodeId, questionId, isCorrect) => {
+    const correctness = store.getQuestionCorrectness();
+    if (!correctness[nodeId]) correctness[nodeId] = {};
+    if (isCorrect || !correctness[nodeId].hasOwnProperty(questionId)) { 
+        correctness[nodeId][questionId] = isCorrect;
+        localStorage.setItem('aivan_question_correctness', JSON.stringify(correctness));
+    }
+  },
+
   getNodeStats: () => {
     return JSON.parse(localStorage.getItem('aivan_node_stats') || '{}');
   },
@@ -191,6 +219,8 @@ export const store = {
     localStorage.removeItem('aivan_completions');
     localStorage.removeItem('completed_lessons');
     localStorage.removeItem('aivan_node_records');
+    localStorage.removeItem('aivan_question_records');
+    localStorage.removeItem('aivan_question_correctness');
     localStorage.removeItem('aivan_node_stats');
     localStorage.removeItem('aivan_tutorial_completed');
     localStorage.removeItem('aivan_map_tutorial_completed');
@@ -222,6 +252,8 @@ export const store = {
     localStorage.removeItem(`aivan_equipped_${room}`);
     localStorage.removeItem('aivan_completions');
     localStorage.removeItem('aivan_node_records');
+    localStorage.removeItem('aivan_question_records');
+    localStorage.removeItem('aivan_question_correctness');
     // If we're deleting our current room, clear it
     if (store.getRoomCode() === room) store.setRoomCode(null);
   },

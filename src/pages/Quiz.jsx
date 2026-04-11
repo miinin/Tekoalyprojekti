@@ -24,22 +24,61 @@ export default function Quiz() {
     return () => clearInterval(interval);
   }, []);
 
+  const [activeBuff, setActiveBuff] = useState(null);
+
   useEffect(() => {
-    // Load dynamic questions from local DB instead of hardcoded file
-    const loadedCategories = store.getQuestions();
-    setCategories(loadedCategories);
-    
-    const cat = loadedCategories.find(c => c.id === mainCategory);
-    setCategory(cat);
-    
-    const s = cat ? cat.subcategories?.find(sc => sc.id === subCategory) : null;
-    setSub(s);
-    
-    if (s && s.questions) {
-      // Satunnaisesti valitse tasan 5 kysymystä
-      const shuffled = [...s.questions].sort(() => Math.random() - 0.5);
-      setQuestions(shuffled.slice(0, 5));
-    }
+    const fetchQuestionsAndBuffs = async () => {
+       const loadedCategories = store.getQuestions();
+       setCategories(loadedCategories);
+       
+       const cat = loadedCategories.find(c => c.id === mainCategory);
+       setCategory(cat);
+       
+       const s = cat ? cat.subcategories?.find(sc => sc.id === subCategory) : null;
+       setSub(s);
+       
+       // Lataa varusteet Buffeja varten
+       const equipped = await store.getEquippedItems();
+       const extras = equipped['extra'] || '';
+       const wheels = equipped['wheel'] || '';
+       let buff = null;
+       
+       if (mainCategory === 'digiturva' && extras === 'van-extra06') buff = 'snorkkeli';
+       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') buff = 'vinssi';
+       if (mainCategory === 'konepellin' && extras === 'van-extra07') buff = 'eramaa-antenni';
+       // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
+       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel05') buff = 'talvirenkaat';
+       setActiveBuff(buff);
+
+       if (s && s.questions) {
+         if (s.isLastNode) {
+            // Keltainen finaali: kaikki 10 (tai maksimi) kerralla
+            const shuffled = [...s.questions].sort(() => Math.random() - 0.5);
+            setQuestions(shuffled.slice(0, 10));
+         } else {
+            const correctness = store.getQuestionCorrectness()[s.id] || {};
+            const unasked = [];
+            const wrong = [];
+            const correct = [];
+            
+            [...s.questions].forEach(q => {
+               if (!correctness.hasOwnProperty(q.id)) unasked.push(q);
+               else if (correctness[q.id] === false) wrong.push(q);
+               else correct.push(q);
+            });
+            
+            unasked.sort(() => Math.random() - 0.5);
+            wrong.sort(() => Math.random() - 0.5);
+            correct.sort(() => Math.random() - 0.5);
+            
+            // Priorisoi: Kysymättömät -> Väärin vastatut -> Oikein vastatut
+            const selected = [...unasked, ...wrong, ...correct].slice(0, 5);
+            selected.sort(() => Math.random() - 0.5); // Sekoitetaan ettei aina tule helppoja peräkkäin
+            setQuestions(selected);
+         }
+       }
+    };
+    fetchQuestionsAndBuffs();
   }, [mainCategory, subCategory]);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showExplanation, setShowExplanation] = useState(false);
@@ -54,6 +93,26 @@ export default function Quiz() {
   // States for special types
   const [orderedItems, setOrderedItems] = useState([]);
   const [dragTargets, setDragTargets] = useState({}); // { itemName: targetName }
+  
+  // Buff states
+  const [removedOptions, setRemovedOptions] = useState([]);
+  const [usedSecondChance, setUsedSecondChance] = useState(false);
+
+  useEffect(() => {
+    setRemovedOptions([]);
+    setUsedSecondChance(false);
+    
+    if (!questions.length || !activeBuff) return;
+    
+    const currentQuestion = questions[currentIndex];
+    if (currentQuestion.type === 'multiple_choice') {
+        const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer);
+        if (wrongOptions.length > 0) {
+            const randomWrong = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+            setRemovedOptions([randomWrong]);
+        }
+    }
+  }, [currentIndex, questions, activeBuff]);
 
   if (!category || !sub) {
     return (
@@ -84,10 +143,21 @@ export default function Quiz() {
 
   const currentQuestion = questions[currentIndex];
   
-  // Custom initialization when moving to new question
   if (currentQuestion.type === 'ordering' && orderedItems.length === 0 && !selectedAnswer) {
-    // Shuffle the options once when loading the ordering question
-    setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
+    if (activeBuff) {
+       const firstCorrect = currentQuestion.correctAnswer[0];
+       const remaining = currentQuestion.options.filter(o => o !== firstCorrect);
+       setOrderedItems([firstCorrect, ...remaining.sort(() => Math.random() - 0.5)]);
+    } else {
+       setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
+    }
+  }
+  
+  if (currentQuestion.type === 'drag_drop' && Object.keys(dragTargets).length === 0 && !selectedAnswer) {
+      if (activeBuff && currentQuestion.options.length > 0) {
+         const firstOption = currentQuestion.options[0];
+         setDragTargets({ [firstOption.item]: firstOption.target });
+      }
   }
 
   const handleAnswerSubmit = (answer) => {
@@ -99,11 +169,14 @@ export default function Quiz() {
     let earned = 0;
     let max = 50;
     
-    // Define max sparks per type
-    if (currentQuestion.type === 'true_false') max = 25;
+    // Uudet peliteorian mukaiset max-arvot
+    if (currentQuestion.type === 'true_false') max = 20;
     else if (currentQuestion.type === 'multiple_choice') max = 50;
-    else if (currentQuestion.type === 'scenario' || currentQuestion.type === 'spot_the_ai' || currentQuestion.type === 'reverse_prompt') max = 75;
-    else if (currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') max = 100;
+    else if (currentQuestion.type === 'scenario' || currentQuestion.type === 'spot_the_ai' || currentQuestion.type === 'reverse_prompt') max = 80;
+    else if (currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') max = 150;
+    
+    // Keltainen finaalikategoria (10 kysymystä) antaa tuplat
+    if (sub.isLastNode) max = max * 2;
 
     if (currentQuestion.type === 'drag_drop') {
       const correctTargets = currentQuestion.options.filter(opt => dragTargets[opt.item] === opt.target).length;
@@ -122,11 +195,18 @@ export default function Quiz() {
       earned = correct ? max : 0;
     }
     
+    if (currentQuestion.type === 'true_false' && !correct && activeBuff && !usedSecondChance) {
+        setUsedSecondChance(true);
+        setSelectedAnswer(null); // Reset their click
+        // You would ideally show a toast or message here, but the activeBuff icon + second chance behavior is clear.
+        return; 
+    }
+    
     if (correct) {
       setCorrectAnswersCount(prev => prev + 1);
     }
     
-    setResults(prev => [...prev, { earned, max, type: currentQuestion.type }]);
+    setResults(prev => [...prev, { id: currentQuestion.id, earned, max, type: currentQuestion.type, correct }]);
     setIsCorrect(correct);
     setShowExplanation(true);
   };
@@ -140,20 +220,27 @@ export default function Quiz() {
       setDragTargets({});
       setCurrentIndex(currentIndex + 1);
     } else {
-      // End of quiz handling: calculate dynamic high score delta + grind reward
-      let totalEarned = results.reduce((acc, curr) => acc + curr.earned, 0);
+      // End of quiz handling: calculate dynamic high score delta per question
+      let totalNewSparks = 0;
       const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
-      totalEarned = totalEarned * sparkRewardMultiplier;
-
-      const newSparksEarned = await store.saveNodeRecord(sub.id, totalEarned);
-      store.saveNodeStats(sub.id, correctAnswersCount, questions.length);
       
-      const totalToBank = newSparksEarned; // Removed grindSparksEarned / reiluuslisä
+      results.forEach(res => {
+         store.saveQuestionCorrectness(sub.id, res.id, res.correct);
+         const earned = res.earned * sparkRewardMultiplier;
+         const diff = store.saveQuestionRecord(res.id, earned);
+         totalNewSparks += diff;
+      });
+
+      // Update Node Stats (Aggregated across all possible questions)
+      const { correct, total } = store.getAggregatedNodeStats(sub.id, sub.questions.length);
+      store.saveNodeStats(sub.id, correct, sub.questions.length);
+      
+      const totalToBank = totalNewSparks; // Removed grindSparksEarned / reiluuslisä
 
       if (totalToBank > 0) {
          await store.addSparks(totalToBank);
       }
-      setEarnedSparks(newSparksEarned);
+      setEarnedSparks(totalNewSparks);
       store.markCompleted(sub.id);
       setShowSummary(true);
     }
@@ -261,6 +348,11 @@ export default function Quiz() {
         <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.5', color: 'var(--text-main)' }}>
           {currentQuestion.question}
         </h2>
+        {usedSecondChance && (
+           <div style={{ color: '#d97706', background: '#fef3c7', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
+              <Zap size={20} fill="#d97706" /> AIvanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen.
+           </div>
+        )}
 
         {showExplanation && (
           <div className="animate-fade-in" style={{ padding: '2.5rem', background: isCorrect ? '#f0fdf4' : '#fef2f2', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', position: 'relative', zIndex: 10 }}>
@@ -303,7 +395,13 @@ export default function Quiz() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {currentQuestion.options.map((option, idx) => {
               const isSelected = selectedAnswer === option;
-              let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+              const isRemoved = removedOptions.includes(option);
+              let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+              
+              if (isRemoved) {
+                 btnStyle.opacity = 0.4;
+                 btnStyle.textDecoration = 'line-through';
+              }
               
               if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
                  if (idx === 0) {
@@ -337,9 +435,9 @@ export default function Quiz() {
                 <button 
                   key={idx} 
                   style={btnStyle}
-                  onClick={() => !showExplanation && setSelectedAnswer(option)}
+                  onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)}
                   onMouseEnter={(e) => {
-                     if (!showExplanation) {
+                     if (!showExplanation && !isRemoved) {
                          e.currentTarget.style.transform = 'translateY(-3px)';
                          e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,114,198,0.12)';
                          if (!isSelected) e.currentTarget.style.borderColor = 'var(--primary-color)';
