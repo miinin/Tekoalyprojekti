@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Garage() {
@@ -11,6 +11,7 @@ export default function Garage() {
   const [hoveredItem, setHoveredItem] = useState(null);
   const tutorialSkipped = store.getTutorialSkipped();
   const [isTutorialActive, setIsTutorialActive] = useState(!store.getTutorialCompleted() && !tutorialSkipped);
+  const [hideTutorialBox, setHideTutorialBox] = useState(false);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
   const [flashScreen, setFlashScreen] = useState(false);
   const [completedLessons, setCompletedLessons] = useState([]);
@@ -59,16 +60,16 @@ export default function Garage() {
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
     { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Maastorenkaat', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: '❄️ Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
+    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Turbo-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },
     { id: 'van-extra02', category: 'extra', categoryName: 'Erityisosat', name: 'Työkalusarja vaativiin oloihin', desc: 'Valmiina kaikkiin remontteihin tien päällä.', price: 1000, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
     { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff' },
-    { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 2200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: '⛰️ Apulaite: Aivoterveys', desc: 'Vuoristokartalla asennettuna AIvan auttaa yhden askeleen verran jokaisessa kysymyksessä!' } },
+    { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 2200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Apulaite: Aivoterveys', desc: 'Vuoristokartalla asennettuna AIvan auttaa yhden askeleen verran jokaisessa kysymyksessä!' } },
     { id: 'van-extra05', category: 'extra', categoryName: 'Erityisosat', name: 'Sivuikkuna takatilaan', desc: 'Lisää valoa ja tilan tunnetta.', price: 1200, icon: <Grid size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 2500, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: '💧 Apulaite: Digiturva', desc: 'Vedenalaisessa kartassa AIvan sulkee yhden väärän vaihtoehdon tai antaa toisen mahdollisuuden.' } },
-    { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 800, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe', buff: { title: '🏜️ Apulaite: Konepellin alle', desc: 'Aavikkokartalla erämaa-antenni takaa varman yhteyden tekoälyyn, joka poistaa yhden väärän vaihtoehdon!' } }
+    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 2500, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Apulaite: Digiturva', desc: 'Vedenalaisessa kartassa AIvan sulkee yhden väärän vaihtoehdon tai antaa toisen mahdollisuuden.' } },
+    { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 800, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe', buff: { title: 'Apulaite: Konepellin alle', desc: 'Aavikkokartalla erämaa-antenni takaa varman yhteyden tekoälyyn, joka poistaa yhden väärän vaihtoehdon!' } }
   ];
 
   const garageUpgrades = [
@@ -194,7 +195,7 @@ export default function Garage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: item.category === 'body' ? 'auto' : 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none' }}>{item.name}</span>
-                      {item.buff && <Sparkles size={14} color="#f59e0b" style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }} title="Tällä esineellä on erikoiskyky!" />}
+                      {item.buff && <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 6px rgba(34, 197, 94, 0.6), inset 0 2px 3px rgba(255,255,255,0.8)' }} title="Tällä esineellä on apulaiteominaisuus!" />}
                   </div>
               </div>
           </div>
@@ -517,20 +518,23 @@ export default function Garage() {
                 </div>
               )}
 
-              {isTutorialActive && (
+              {isTutorialActive && !hideTutorialBox && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                   <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
                    Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}
               
               {showGreenPulse && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                   <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
                    <b>Tulipa siistiä!</b> Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #ec4899, #8b5cf6, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
                 </div>
               )}
               
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 2rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
+                   <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
                    <b>Tervetuloa takaisin!</b><br/>
                    Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #ec4899, #8b5cf6, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1rem', background: '#3b82f6' }} onClick={() => {
@@ -628,10 +632,10 @@ export default function Garage() {
               )}
 
               {hoveredObj && hoveredObj.buff && (
-                <div className="animate-fade-in" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(255, 255, 255, 0.95)', padding: '1.2rem', borderRadius: '16px', borderLeft: '6px solid #f59e0b', color: 'var(--text-main)', zIndex: 20, boxShadow: '0 15px 30px rgba(0,0,0,0.4)', maxWidth: '350px' }}>
-                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                      <Sparkles size={22} color="#d97706" />
-                      <span style={{ fontWeight: '900', fontSize: '1.1rem', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{hoveredObj.buff.title}</span>
+                <div className="animate-fade-in" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(255, 255, 255, 0.95)', padding: '1.2rem', borderRadius: '16px', borderLeft: '6px solid #22c55e', color: 'var(--text-main)', zIndex: 20, boxShadow: '0 15px 30px rgba(0,0,0,0.4)', maxWidth: '350px' }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+                      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 8px rgba(34, 197, 94, 0.8), inset 0 2px 4px rgba(255,255,255,0.8)' }} />
+                      <span style={{ fontWeight: '900', fontSize: '1.1rem', color: '#166534', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{hoveredObj.buff.title}</span>
                    </div>
                    <div style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#334155', fontWeight: '500' }}>
                       {hoveredObj.buff.desc}
