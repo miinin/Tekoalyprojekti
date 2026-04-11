@@ -655,11 +655,11 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderWidth: mStyles ? '6px' : '4px',
+                borderWidth: medal ? '0' : '4px',
                 borderStyle: 'solid',
-                borderColor: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? mStyles.border : (isLastNode ? '#fef08a' : 'white')),
-                boxShadow: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (mStyles ? `0 0 30px ${mStyles.shadow}, inset 0 0 10px rgba(255,255,255,0.5)` : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
-                background: mStyles ? mStyles.bg : (isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
+                borderColor: medal ? 'transparent' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode ? '#fef08a' : 'white')),
+                boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
+                background: medal ? 'transparent' : (isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
@@ -671,8 +671,8 @@ const Roadmap = () => {
                      src={`/trophy/medal-${medal === 'platinum' ? 'plat' : medal}.png`}
                      alt={medal}
                      style={{ 
-                       width: currentMap === 'main' ? '44px' : '32px', 
-                       height: currentMap === 'main' ? '44px' : '32px', 
+                       width: '125%', 
+                       height: '125%', 
                        objectFit: 'contain',
                        filter: 'drop-shadow(0 5px 8px rgba(0,0,0,0.5))' 
                      }} 
