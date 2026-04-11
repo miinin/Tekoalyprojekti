@@ -59,16 +59,16 @@ export default function Garage() {
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
     { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Maastorenkaat', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', badge: '❄️ Kartta-apu: Reilu peli' },
+    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: '❄️ Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Turbo-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },
     { id: 'van-extra02', category: 'extra', categoryName: 'Erityisosat', name: 'Työkalusarja vaativiin oloihin', desc: 'Valmiina kaikkiin remontteihin tien päällä.', price: 1000, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a' },
     { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff' },
-    { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 2200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', badge: '⛰️ Apulaite: Aivoterveys' },
+    { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 2200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: '⛰️ Apulaite: Aivoterveys', desc: 'Vuoristokartalla asennettuna AIvan auttaa yhden askeleen verran jokaisessa kysymyksessä!' } },
     { id: 'van-extra05', category: 'extra', categoryName: 'Erityisosat', name: 'Sivuikkuna takatilaan', desc: 'Lisää valoa ja tilan tunnetta.', price: 1200, icon: <Grid size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 2500, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', badge: '💧 Apulaite: Digiturva' },
-    { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 800, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe', badge: '🏜️ Apulaite: Konepellin alle' }
+    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 2500, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: '💧 Apulaite: Digiturva', desc: 'Vedenalaisessa kartassa AIvan sulkee yhden väärän vaihtoehdon tai antaa toisen mahdollisuuden.' } },
+    { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 800, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe', buff: { title: '🏜️ Apulaite: Konepellin alle', desc: 'Aavikkokartalla erämaa-antenni takaa varman yhteyden tekoälyyn, joka poistaa yhden väärän vaihtoehdon!' } }
   ];
 
   const garageUpgrades = [
@@ -192,12 +192,10 @@ export default function Garage() {
                   </div>
               )}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: item.category === 'body' ? 'auto' : 0 }}>
-                  <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none' }}>{item.name}</span>
-                  {item.badge && (
-                      <span style={{ marginTop: '0.3rem', background: '#fef3c7', color: '#b45309', fontSize: '0.65rem', fontWeight: 'bold', padding: '0.2rem 0.4rem', borderRadius: '4px', border: '1px solid #fde68a' }}>
-                          {item.badge}
-                      </span>
-                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 1px 3px rgba(0,0,0,0.9)' : 'none' }}>{item.name}</span>
+                      {item.buff && <Sparkles size={14} color="#f59e0b" style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.3))' }} title="Tällä esineellä on erikoiskyky!" />}
+                  </div>
               </div>
           </div>
 
@@ -626,6 +624,18 @@ export default function Garage() {
               {isGlobalPreview && (
                 <div className="animate-pulse" style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(16, 185, 129, 0.95)', color: 'white', padding: '0.6rem 1.4rem', borderRadius: '16px', fontWeight: 'bold', letterSpacing: '2px', zIndex: 10, boxShadow: '0 8px 20px rgba(0,0,0,0.3)' }}>
                    ESIKATSELU
+                </div>
+              )}
+
+              {hoveredObj && hoveredObj.buff && (
+                <div className="animate-fade-in" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(255, 255, 255, 0.95)', padding: '1.2rem', borderRadius: '16px', borderLeft: '6px solid #f59e0b', color: 'var(--text-main)', zIndex: 20, boxShadow: '0 15px 30px rgba(0,0,0,0.4)', maxWidth: '350px' }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                      <Sparkles size={22} color="#d97706" />
+                      <span style={{ fontWeight: '900', fontSize: '1.1rem', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{hoveredObj.buff.title}</span>
+                   </div>
+                   <div style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#334155', fontWeight: '500' }}>
+                      {hoveredObj.buff.desc}
+                   </div>
                 </div>
               )}
 
