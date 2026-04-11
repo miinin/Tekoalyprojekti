@@ -536,9 +536,10 @@ const Roadmap = () => {
     const stat = stats[nodeId];
     if (!stat || stat.total === 0) return null;
     const ratio = stat.correct / stat.total;
-    if (ratio >= 1.0) return 'gold';
-    if (ratio >= 0.66) return 'silver';
-    if (ratio >= 0.33) return 'bronze';
+    if (stat.total > 0 && stat.correct === stat.total) return 'platinum';
+    if (ratio >= 0.75) return 'gold';
+    if (ratio >= 0.40) return 'silver';
+    if (stat.correct >= 1) return 'bronze';
     return null;
   };
 
@@ -557,17 +558,19 @@ const Roadmap = () => {
 
     if (absoluteTotalQuestions === 0) return null;
     const ratio = totalCorrect / absoluteTotalQuestions;
-    if (ratio >= 1.0) return 'gold';
-    if (ratio >= 0.66) return 'silver';
-    if (ratio >= 0.33) return 'bronze';
+    if (absoluteTotalQuestions > 0 && totalCorrect === absoluteTotalQuestions) return 'platinum';
+    if (ratio >= 0.75) return 'gold';
+    if (ratio >= 0.40) return 'silver';
+    if (totalCorrect >= 1) return 'bronze';
     return null;
   };
 
   const getMedalStyles = (medal) => {
     switch(medal) {
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 1)', icon: 'url(#gold-grad)', stroke: '#b45309', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 22%, #ffffff 38%, #f59e0b 58%, #b45309 80%, #fef08a 100%)' };
-      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', icon: 'url(#silver-grad)', stroke: '#334155', bg: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #94a3b8 50%, #475569 80%, #ffffff 100%)' };
-      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', icon: 'url(#bronze-grad)', stroke: '#451a03', bg: 'linear-gradient(135deg, #fcd34d 0%, #b45309 30%, #78350f 50%, #451a03 80%, #fcd34d 100%)' };
+      case 'platinum': return { border: '#e2e8f0', shadow: 'rgba(226, 232, 240, 1)', bg: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #f1f5f9 50%, #cbd5e1 80%, #f8fafc 100%)' };
+      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 1)', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 22%, #ffffff 38%, #f59e0b 58%, #b45309 80%, #fef08a 100%)' };
+      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', bg: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #94a3b8 50%, #475569 80%, #ffffff 100%)' };
+      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', bg: 'linear-gradient(135deg, #fcd34d 0%, #b45309 30%, #78350f 50%, #451a03 80%, #fcd34d 100%)' };
       default: return null;
     }
   };
@@ -664,12 +667,16 @@ const Roadmap = () => {
             {isLocked ? <Lock size={20} color="white" /> : 
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {medal ? (
-                   <>
-                     {medal === 'gold' 
-                       ? <Trophy size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 5px 8px rgba(0,0,0,0.5))' }} />
-                       : <Medal size={currentMap === 'main' ? 44 : 32} color={mStyles.stroke} fill={mStyles.icon} style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
-                     }
-                   </>
+                   <img 
+                     src={`/trophy/medal-${medal === 'platinum' ? 'plat' : medal}.png`}
+                     alt={medal}
+                     style={{ 
+                       width: currentMap === 'main' ? '44px' : '32px', 
+                       height: currentMap === 'main' ? '44px' : '32px', 
+                       objectFit: 'contain',
+                       filter: 'drop-shadow(0 5px 8px rgba(0,0,0,0.5))' 
+                     }} 
+                   />
                ) : (() => {
                   const fSize = currentMap === 'main' ? '2.5rem' : '1.8rem';
                   const MatIcon = ({ name }) => (
@@ -920,7 +927,7 @@ const Roadmap = () => {
           </div>
 
           {(() => {
-            let counts = { gold: 0, silver: 0, bronze: 0 };
+            let counts = { platinum: 0, gold: 0, silver: 0, bronze: 0 };
             Object.keys(AI_ROADMAP_DATA.sub).forEach(mapId => {
               const subData = AI_ROADMAP_DATA.sub[mapId];
               if (subData && subData.nodes) {
@@ -933,16 +940,20 @@ const Roadmap = () => {
             return (
               <div style={{ backgroundColor: 'white', padding: '0.6rem 1.2rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '1.2rem', borderTop: '5px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Medal size={22} color="#451a03" fill="url(#bronze-grad)" />
+                  <img src="/trophy/medal-bronze.png" alt="bronze" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#78350f', fontFamily: 'var(--font-display)' }}>{counts.bronze}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Medal size={22} color="#334155" fill="url(#silver-grad)" />
+                  <img src="/trophy/medal-silver.png" alt="silver" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#475569', fontFamily: 'var(--font-display)' }}>{counts.silver}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Trophy size={22} color="#b45309" fill="url(#gold-grad)" />
+                  <img src="/trophy/medal-gold.png" alt="gold" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{counts.gold}</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <img src="/trophy/medal-plat.png" alt="platinum" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+                  <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#1e293b', fontFamily: 'var(--font-display)' }}>{counts.platinum}</span>
                 </div>
               </div>
             );
