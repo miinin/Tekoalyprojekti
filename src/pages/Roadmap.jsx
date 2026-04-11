@@ -599,7 +599,7 @@ const Roadmap = () => {
       if (currentMap !== 'main' && !completedLessons.includes(node.id)) {
           if (isLastNode) {
               // Avataan vain jos kaikki muut solmut tässä alakartassa on suoritettu
-              const otherNodes = data.nodes.filter(n => n.id !== node.id);
+              const otherNodes = data.nodes.filter(n => n.id !== node.id && !n.isJunction);
               const allOthersDone = otherNodes.every(n => completedLessons.includes(n.id));
               isLocked = !allOthersDone;
           } else {
