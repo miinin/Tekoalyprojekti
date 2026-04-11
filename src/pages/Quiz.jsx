@@ -78,6 +78,8 @@ export default function Quiz() {
        else if (tools === 'g-walltools2') toolsLevel = 2;
        else if (tools === 'g-walltools3') toolsLevel = 3;
        else if (tools === 'g-walltools4') toolsLevel = 4;
+       else if (tools === 'g-walltools5') toolsLevel = 2;
+       else if (tools === 'g-walltools6') toolsLevel = 1;
        setToolsBuff(toolsLevel);
 
        if (s && s.questions) {
