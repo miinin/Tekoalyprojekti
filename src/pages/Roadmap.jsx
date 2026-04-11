@@ -671,8 +671,12 @@ const Roadmap = () => {
                      src={`/trophy/medal-${medal === 'platinum' ? 'plat' : medal}.png`}
                      alt={medal}
                      style={{ 
-                       width: '125%', 
-                       height: '125%', 
+                       position: 'absolute',
+                       top: '50%',
+                       left: '50%',
+                       transform: 'translate(-50%, -50%)',
+                       width: currentMap === 'main' ? '85px' : '70px', 
+                       height: currentMap === 'main' ? '85px' : '70px', 
                        objectFit: 'contain',
                        filter: 'drop-shadow(0 5px 8px rgba(0,0,0,0.5))' 
                      }} 
