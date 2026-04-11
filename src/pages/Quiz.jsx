@@ -437,7 +437,7 @@ export default function Quiz() {
 
         {usedSecondChance && (
            <div style={{ color: '#d97706', background: '#fef3c7', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
-              <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : "AIvanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen."}
+              <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : "AI vanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen."}
            </div>
         )}
 
