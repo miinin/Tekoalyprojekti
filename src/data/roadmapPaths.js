@@ -22,10 +22,10 @@ export const AI_ROADMAP_DATA = {
   },
   sub: {
     perusteet: {
-      entry: [{top:"94.8%",left:"43.1%"},{top:"89.2%",left:"45.7%"},{top:"87.7%",left:"47.3%"}],
+      entry: [{top:"94.8%",left:"43.1%"},{top:"89.2%",left:"45.7%"},{top:"78.2%",left:"50.4%"}],
       exit: [{top:"45.7%",left:"64.1%"},{top:"50.0%",left:"68.0%"},{top:"55.0%",left:"72.0%"}],
       nodes: [
-        { id: 'perusteet_1', top: '87.7%', left: '47.3%' },
+        { id: 'perusteet_1', top: '78.2%', left: '50.4%' },
         { id: 'perusteet_2', top: '76.0%', left: '24.0%' },
         { id: 'perusteet_3', top: '40.1%', left: '21.6%' },
         { id: 'perusteet_4', top: '28.4%', left: '42.3%' },
@@ -37,7 +37,7 @@ export const AI_ROADMAP_DATA = {
         { id: 'perusteet_jun_2', top: '62.5%', left: '30.3%', isJunction: true }
       ],
       paths: {
-        'perusteet_1-perusteet_jun_0': [{top:"87.7%",left:"47.3%"},{top:"84.0%",left:"48.2%"},{top:"79.8%",left:"47.8%"}],
+        'perusteet_1-perusteet_jun_0': [{top:"78.2%",left:"50.4%"},{top:"84.0%",left:"48.2%"},{top:"79.8%",left:"47.8%"}],
         'perusteet_jun_0-perusteet_6': [{top:"79.8%",left:"47.8%"},{top:"81.3%",left:"49.7%"},{top:"84.3%",left:"53.3%"},{top:"84.5%",left:"59.2%"},{top:"87.2%",left:"64.8%"},{top:"87.6%",left:"70.6%"},{top:"85.8%",left:"75.4%"},{top:"83.6%",left:"80.4%"},{top:"80.2%",left:"83.0%"},{top:"75.7%",left:"85.6%"},{top:"70.8%",left:"85.7%"},{top:"67.7%",left:"86.1%"},{top:"62.7%",left:"87.2%"}],
         'perusteet_jun_0-perusteet_jun_1': [{top:"79.8%",left:"47.8%"},{top:"75.5%",left:"44.8%"},{top:"69.9%",left:"45.7%"},{top:"65.4%",left:"47.0%"}],
         'perusteet_jun_1-perusteet_jun_2': [{top:"65.4%",left:"47.0%"},{top:"63.4%",left:"44.3%"},{top:"62.5%",left:"40.8%"},{top:"64.1%",left:"38.9%"},{top:"64.1%",left:"36.8%"},{top:"62.9%",left:"35.4%"},{top:"62.9%",left:"33.2%"},{top:"62.5%",left:"30.3%"}],
