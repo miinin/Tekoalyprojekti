@@ -25,6 +25,11 @@ export default function Quiz() {
   }, []);
 
   const [activeBuff, setActiveBuff] = useState(null);
+  const [bumperBuff, setBumperBuff] = useState(0);
+  const [jackBuff, setJackBuff] = useState(0);
+  const [toolsBuff, setToolsBuff] = useState(0);
+  const [jackSaved, setJackSaved] = useState(false);
+  const [bumperSaved, setBumperSaved] = useState(false);
 
   useEffect(() => {
     const fetchQuestionsAndBuffs = async () => {
@@ -49,6 +54,31 @@ export default function Quiz() {
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
        if (mainCategory === 'reilu_peli' && wheels === 'van-wheel05') buff = 'talvirenkaat';
        setActiveBuff(buff);
+
+       // Globaalit puskuribuffit (Törmäyksenesto, poistaa 1 väärän monivalinnassa)
+       const bumper = equipped['bumper'] || '';
+       let bumperProb = 0;
+       if (bumper === 'van-bumper01' || bumper === 'van-bumper05') bumperProb = 0.05;
+       else if (bumper === 'van-bumper02' || bumper === 'van-bumper04') bumperProb = 0.10;
+       else if (bumper === 'van-bumper03' || bumper === 'van-bumper06') bumperProb = 0.15;
+       setBumperBuff(bumperProb);
+
+       // Globaalit tunkkibuffit (Levitaatio, säästää T/F menetykseltä)
+       const jack = equipped['g_jack'] || '';
+       let jackProb = 0;
+       if (jack === 'g-jack1') jackProb = 0.05;
+       else if (jack === 'g-jack2') jackProb = 0.10;
+       else if (jack === 'g-jack3') jackProb = 0.15;
+       setJackBuff(jackProb);
+
+       // Globaalit työkalubuffit (Järjestely, näyttää virheet)
+       const tools = equipped['g_tools'] || '';
+       let toolsLevel = 0;
+       if (tools === 'g-walltools1') toolsLevel = 1;
+       else if (tools === 'g-walltools2') toolsLevel = 2;
+       else if (tools === 'g-walltools3') toolsLevel = 3;
+       else if (tools === 'g-walltools4') toolsLevel = 4;
+       setToolsBuff(toolsLevel);
 
        if (s && s.questions) {
          if (s.isLastNode) {
@@ -97,22 +127,41 @@ export default function Quiz() {
   // Buff states
   const [removedOptions, setRemovedOptions] = useState([]);
   const [usedSecondChance, setUsedSecondChance] = useState(false);
+  const [usedToolChecks, setUsedToolChecks] = useState(false);
+  const [highlightedWrongItems, setHighlightedWrongItems] = useState([]);
 
   useEffect(() => {
     setRemovedOptions([]);
     setUsedSecondChance(false);
+    setBumperSaved(false);
+    setJackSaved(false);
+    setUsedToolChecks(false);
+    setHighlightedWrongItems([]);
     
-    if (!questions.length || !activeBuff) return;
+    if (!questions.length) return;
     
     const currentQuestion = questions[currentIndex];
     if (currentQuestion.type === 'multiple_choice') {
-        const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer);
-        if (wrongOptions.length > 0) {
-            const randomWrong = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
-            setRemovedOptions([randomWrong]);
+        let shouldRemove = false;
+        let isBumper = false;
+        
+        if (activeBuff) {
+            shouldRemove = true;
+        } else if (bumperBuff > 0 && Math.random() < bumperBuff) {
+            shouldRemove = true;
+            isBumper = true;
+        }
+
+        if (shouldRemove) {
+            const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer);
+            if (wrongOptions.length > 0) {
+                const randomWrong = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
+                setRemovedOptions([randomWrong]);
+                if (isBumper) setBumperSaved(true);
+            }
         }
     }
-  }, [currentIndex, questions, activeBuff]);
+  }, [currentIndex, questions, activeBuff, bumperBuff]);
 
   if (!category || !sub) {
     return (
@@ -144,7 +193,7 @@ export default function Quiz() {
   const currentQuestion = questions[currentIndex];
   
   if (currentQuestion.type === 'ordering' && orderedItems.length === 0 && !selectedAnswer) {
-    if (activeBuff) {
+    if (activeBuff || toolsBuff >= 4) {
        const firstCorrect = currentQuestion.correctAnswer[0];
        const remaining = currentQuestion.options.filter(o => o !== firstCorrect);
        setOrderedItems([firstCorrect, ...remaining.sort(() => Math.random() - 0.5)]);
@@ -154,7 +203,7 @@ export default function Quiz() {
   }
   
   if (currentQuestion.type === 'drag_drop' && Object.keys(dragTargets).length === 0 && !selectedAnswer) {
-      if (activeBuff && currentQuestion.options.length > 0) {
+      if ((activeBuff || toolsBuff >= 4) && currentQuestion.options.length > 0) {
          const firstOption = currentQuestion.options[0];
          setDragTargets({ [firstOption.item]: firstOption.target });
       }
@@ -195,11 +244,42 @@ export default function Quiz() {
       earned = correct ? max : 0;
     }
     
-    if (currentQuestion.type === 'true_false' && !correct && activeBuff && !usedSecondChance) {
-        setUsedSecondChance(true);
-        setSelectedAnswer(null); // Reset their click
-        // You would ideally show a toast or message here, but the activeBuff icon + second chance behavior is clear.
-        return; 
+    if (currentQuestion.type === 'true_false' && !correct && !usedSecondChance) {
+        let saved = false;
+        let isJack = false;
+        if (activeBuff) {
+            saved = true;
+        } else if (jackBuff > 0 && Math.random() < jackBuff) {
+            saved = true;
+            isJack = true;
+        }
+
+        if (saved) {
+            setUsedSecondChance(true);
+            setSelectedAnswer(null); // Reset their click
+            if (isJack) setJackSaved(true);
+            return; 
+        }
+    }
+    
+    if ((currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') && toolsBuff > 0 && !usedToolChecks && !correct) {
+        let wrongItems = [];
+        if (currentQuestion.type === 'ordering') {
+             answer.forEach((item, idx) => {
+                  if (item !== currentQuestion.correctAnswer[idx]) wrongItems.push(item);
+             });
+        } else if (currentQuestion.type === 'drag_drop') {
+             currentQuestion.options.forEach(opt => {
+                  if (dragTargets[opt.item] !== opt.target) wrongItems.push(opt.item);
+             });
+        }
+        
+        if (wrongItems.length > 0) {
+             setUsedToolChecks(true);
+             setHighlightedWrongItems(wrongItems.slice(0, toolsBuff));
+             setSelectedAnswer(null);
+             return;
+        }
     }
     
     if (correct) {
@@ -348,9 +428,16 @@ export default function Quiz() {
         <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.5', color: 'var(--text-main)' }}>
           {currentQuestion.question}
         </h2>
+        
+        {usedToolChecks && highlightedWrongItems.length > 0 && (
+           <div style={{ color: '#b91c1c', background: '#fef2f2', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fca5a5' }}>
+              <Wrench size={20} fill="#ef4444" color="#b91c1c" /> Autotallin työkalut paljastavat, että {highlightedWrongItems.length} punaisella merkittyä palikkaa on väärässä paikassa!
+           </div>
+        )}
+
         {usedSecondChance && (
            <div style={{ color: '#d97706', background: '#fef3c7', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
-              <Zap size={20} fill="#d97706" /> AIvanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen.
+              <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : "AIvanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen."}
            </div>
         )}
 
@@ -399,8 +486,10 @@ export default function Quiz() {
               let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
               
               if (isRemoved) {
-                 btnStyle.opacity = 0.4;
-                 btnStyle.textDecoration = 'line-through';
+                 btnStyle.opacity = 0.5;
+                 btnStyle.display = 'flex';
+                 btnStyle.justifyContent = 'space-between';
+                 btnStyle.alignItems = 'center';
               }
               
               if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
@@ -454,7 +543,9 @@ export default function Quiz() {
                      }
                   }}
                 >
-                  {option}
+                  <span style={{ textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</span>
+                  {isRemoved && bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Törmäyksenesto suojasi</span>}
+                  {isRemoved && !bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Varuste poisti</span>}
                 </button>
               );
             })}
@@ -472,7 +563,7 @@ export default function Quiz() {
         {currentQuestion.type === 'ordering' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {orderedItems.map((item, idx) => (
-              <div key={idx} style={{ padding: '1rem', background: showExplanation && isCorrect ? 'rgba(76,175,80,0.1)' : 'white', border: showExplanation && isCorrect ? '2px solid var(--accent-color)' : showExplanation ? '2px solid #ef4444' : '2px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div key={idx} style={{ padding: '1rem', background: showExplanation && isCorrect ? 'rgba(76,175,80,0.1)' : 'white', border: showExplanation && isCorrect ? '2px solid var(--accent-color)' : showExplanation ? '2px solid #ef4444' : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <span style={{ width: '30px', height: '30px', background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
@@ -530,7 +621,7 @@ export default function Quiz() {
                 >
                   <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)' }}>{target}</h3>
                   {currentQuestion.options.filter(o => dragTargets[o.item] === target).map((opt, idx) => (
-                    <div key={idx} style={{ padding: '0.8rem', background: showExplanation ? (opt.target === target ? 'rgba(76,175,80,0.2)' : 'rgba(239,68,68,0.2)') : '#e2e8f0', border: showExplanation ? (opt.target === target ? '2px solid var(--accent-color)' : '2px solid #ef4444') : '2px solid transparent', borderRadius: '8px', fontSize: '0.9rem', textAlign: 'center' }}>
+                    <div key={idx} style={{ padding: '0.8rem', background: showExplanation ? (opt.target === target ? 'rgba(76,175,80,0.2)' : 'rgba(239,68,68,0.2)') : '#e2e8f0', border: showExplanation ? (opt.target === target ? '2px solid var(--accent-color)' : '2px solid #ef4444') : highlightedWrongItems.includes(opt.item) ? '2px solid #ef4444' : '2px solid transparent', borderRadius: '8px', fontSize: '0.9rem', textAlign: 'center' }}>
                       {opt.item}
                     </div>
                   ))}
