@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -431,19 +431,21 @@ export default function Garage() {
           <button 
              className={`btn-secondary`} 
              onClick={() => setShowTrophyCabinet(true)}
+             disabled={isTutorialActive}
              style={{ 
-                 background: '#eab308',
-                 color: '#1e293b',
-                 borderColor: '#ca8a04',
+                 opacity: isTutorialActive ? 0.3 : 1,
+                 cursor: isTutorialActive ? 'not-allowed' : 'pointer',
                  display: 'flex',
                  alignItems: 'center',
+                 justifyContent: 'center',
                  gap: '0.4rem',
                  padding: '0.8rem 1.5rem',
-                 boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-                 fontWeight: 'bold'
+                 background: '#f8fafc',
+                 color: '#0f172a',
+                 borderColor: '#cbd5e1'
              }}
           >
-            🏆 Palkintokaappi
+            <Trophy size={20} color="#eab308" /> Palkintokaappi
           </button>
           <button 
              className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
@@ -632,11 +634,11 @@ export default function Garage() {
                           {trophyMap.map(t => { 
                              const isEarned = earnedTrophies.includes(t.id);
                              return (
-                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '120px' }}>
-                                    <div style={{ width: '100px', height: '100px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '4px solid #eab308' : '4px solid #cbd5e1', boxShadow: isEarned ? '0 0 20px rgba(234, 179, 8, 0.4)' : 'none' }}>
-                                        <img src={`/trophy/${t.id}.png`} style={{ width: '60%', height: '60%', objectFit: 'contain', filter: isEarned ? 'none' : 'brightness(0) opacity(0.2)' }} alt={t.name} />
+                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.2rem', width: '160px' }}>
+                                    <div style={{ width: '150px', height: '150px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '6px solid #eab308' : '6px solid #cbd5e1', boxShadow: isEarned ? '0 0 25px rgba(234, 179, 8, 0.5)' : 'none' }}>
+                                        <img src={`/trophy/${t.id}.png`} style={{ width: '65%', height: '65%', objectFit: 'contain', filter: isEarned ? 'none' : 'brightness(0) opacity(0.2)' }} alt={t.name} />
                                     </div>
-                                    <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
+                                    <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
                                 </div>
                              );
                           })}
