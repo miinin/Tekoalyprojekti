@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X } from 'lucide-react';
 import { store } from '../services/store';
+import { categories } from '../data/questions';
 
 export default function Garage() {
   const navigate = useNavigate();
@@ -17,7 +18,21 @@ export default function Garage() {
   const [completedLessons, setCompletedLessons] = useState([]);
   const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
+  const [earnedTrophies, setEarnedTrophies] = useState([]);
+  const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
+  const [showTrophyTuition, setShowTrophyTuition] = useState(false);
+
   const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_floor' : 'body');
+
+  const trophyMap = [
+    { id: 'trophy1', mapId: 'perusteet', name: 'Tekoälyn perusteet' },
+    { id: 'trophy2', mapId: 'arjessa', name: 'Tekoäly arjessamme' },
+    { id: 'trophy3', mapId: 'konepellin', name: 'Konepellin alla' },
+    { id: 'trophy4', mapId: 'aivoterveys', name: 'Aivoterveys' },
+    { id: 'trophy5', mapId: 'reilu_peli', name: 'Reilu peli' },
+    { id: 'trophy6', mapId: 'kayttotaidot', name: 'Tekoälyn käyttötaidot' },
+    { id: 'trophy7', mapId: 'digiturva', name: 'Digiturva' }
+  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +40,32 @@ export default function Garage() {
       setPurchased(await store.getPurchasedItems());
       setEquipped(await store.getEquippedItems());
       setCompletedLessons(store.getCompletions());
+
+      // Palkintokaapin laskenta
+      const stats = store.getNodeStats();
+      let earned = [];
+      trophyMap.forEach(t => {
+         const cat = categories.find(c => c.id === t.mapId);
+         if (!cat) return;
+         let totalCorrect = 0;
+         let absoluteTotalQuestions = 0;
+         cat.subcategories.forEach(sub => {
+            const stat = stats[sub.id];
+            if (stat) totalCorrect += stat.correct;
+            absoluteTotalQuestions += sub.questions ? Math.min(sub.questions.length, 5) : (stat && stat.total ? stat.total : 5);
+         });
+         if (absoluteTotalQuestions > 0) {
+            const ratio = totalCorrect / absoluteTotalQuestions;
+            if (ratio >= 0.75) {
+               earned.push(t.id);
+            }
+         }
+      });
+      setEarnedTrophies(earned);
+      
+      if (earned.length > 0 && !localStorage.getItem('aivan_trophy_tuition')) {
+         setShowTrophyTuition(true);
+      }
     };
     fetchData();
     
@@ -388,6 +429,23 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           <button 
+             className={`btn-secondary`} 
+             onClick={() => setShowTrophyCabinet(true)}
+             style={{ 
+                 background: '#eab308',
+                 color: '#1e293b',
+                 borderColor: '#ca8a04',
+                 display: 'flex',
+                 alignItems: 'center',
+                 gap: '0.4rem',
+                 padding: '0.8rem 1.5rem',
+                 boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
+                 fontWeight: 'bold'
+             }}
+          >
+            🏆 Palkintokaappi
+          </button>
+          <button 
              className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}
              disabled={isTutorialActive}
@@ -546,6 +604,45 @@ export default function Garage() {
                         setClosedGarageTuition(true);
                    }}>Eikun hommiin!</button>
                 </div>
+              )}
+              
+              {showTrophyTuition && (
+                <div className="animate-bounce" style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '1.5rem 2.5rem', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 90, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%' }}>
+                   <button onClick={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
+                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                      <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
+                   </div>
+                   <b>Mikä suoritus!</b> Ansaitsit juuri ensimmäisen Tiekartan mestarin pokaalisi ja se toimitettiin Autotalliin!<br/><br/>Oletko valmis keräämään ne kaikki? Voit ihailla saavutuksiasi Palkintokaapissa.
+                   <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
+                        localStorage.setItem('aivan_trophy_tuition', 'true');
+                        setShowTrophyTuition(false);
+                        setShowTrophyCabinet(true);
+                   }}>Avaa Palkintokaappi</button>
+                </div>
+              )}
+              
+              {showTrophyCabinet && (
+                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
+                    <div className="glass-panel animate-bounce" style={{ background: '#f8fafc', padding: '3rem', borderRadius: '24px', width: '90%', maxWidth: '800px', display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', animation: 'wiggle 0.5s ease-out' }} onClick={e => e.stopPropagation()}>
+                       <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#64748b' }}><X size={32} /></button>
+                       <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}><img src="/trophy/medal-gold.png" style={{width: 40}} alt="" /> Palkintokaappi</h2>
+                       <p style={{ textAlign: 'center', color: '#64748b', fontSize: '1.2rem', marginTop: '-1rem' }}>Jokainen näistä pokaaleista vaatii erinomaista onnistumista koko Tiekartan osion tasolla. Oletko todellinen AI-mestari?</p>
+                       
+                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', marginTop: '1rem' }}>
+                          {trophyMap.map(t => { 
+                             const isEarned = earnedTrophies.includes(t.id);
+                             return (
+                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '120px' }}>
+                                    <div style={{ width: '100px', height: '100px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '4px solid #eab308' : '4px solid #cbd5e1', boxShadow: isEarned ? '0 0 20px rgba(234, 179, 8, 0.4)' : 'none' }}>
+                                        <img src={`/trophy/${t.id}.png`} style={{ width: '60%', height: '60%', objectFit: 'contain', filter: isEarned ? 'none' : 'brightness(0) opacity(0.2)' }} alt={t.name} />
+                                    </div>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
+                                </div>
+                             );
+                          })}
+                       </div>
+                    </div>
+                 </div>
               )}
 
               {isTutorialActive ? (
