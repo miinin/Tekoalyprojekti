@@ -19,6 +19,7 @@ export default function Garage() {
   const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
   const [earnedTrophies, setEarnedTrophies] = useState([]);
+  const [earnedMedals, setEarnedMedals] = useState({ platinum: 0, gold: 0, silver: 0, bronze: 0 });
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
 
@@ -62,6 +63,21 @@ export default function Garage() {
          }
       });
       setEarnedTrophies(earned);
+
+      let mCounts = { platinum: 0, gold: 0, silver: 0, bronze: 0 };
+      categories.forEach(cat => {
+         cat.subcategories.forEach(sub => {
+             const stat = stats[sub.id];
+             if (stat && stat.total > 0) {
+                 const ratio = stat.correct / stat.total;
+                 if (stat.correct === stat.total) mCounts.platinum++;
+                 else if (ratio >= 0.75) mCounts.gold++;
+                 else if (ratio >= 0.40) mCounts.silver++;
+                 else if (stat.correct >= 1) mCounts.bronze++;
+             }
+         });
+      });
+      setEarnedMedals(mCounts);
       
       if (earned.length > 0 && !localStorage.getItem('aivan_trophy_tuition')) {
          setShowTrophyTuition(true);
@@ -206,12 +222,14 @@ export default function Garage() {
                background: 'linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%)', 
                borderColor: isEquipped ? '#10b981' : '#cbd5e1',
                borderWidth: '2px',
-               boxShadow: '0 4px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8)'
+               boxShadow: '0 4px 10px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.8)',
+               position: 'relative'
            }} 
            onMouseEnter={() => { if (!isTutorialActive || item.id === 'g-clean') setHoveredItem(item.id); }}
            onMouseLeave={() => setHoveredItem(null)}>
            
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
+           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
+              {item.buff && <div style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 8px rgba(34, 197, 94, 0.8), inset 0 2px 3px rgba(255,255,255,0.8)', zIndex: 10 }} title="Tällä esineellä on apulaiteominaisuus!" />}
               {item.category === 'body' ? (
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
                     <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '30% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
@@ -240,7 +258,6 @@ export default function Garage() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: item.category === 'body' ? 'auto' : 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.8)' : 'none' }}>{item.name}</span>
-                      {item.buff && <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 6px rgba(34, 197, 94, 0.6), inset 0 2px 3px rgba(255,255,255,0.8)' }} title="Tällä esineellä on apulaiteominaisuus!" />}
                   </div>
               </div>
           </div>
@@ -446,10 +463,10 @@ export default function Garage() {
              style={{ 
                  opacity: isTutorialActive ? 0.3 : 1, 
                  cursor: isTutorialActive ? 'not-allowed' : 'pointer',
-                 background: showGreenPulse ? '#10b981' : '',
-                 color: showGreenPulse ? 'white' : '#64748b',
-                 borderColor: showGreenPulse ? '#10b981' : '',
-                 boxShadow: showGreenPulse ? undefined : ''
+                 background: showGreenPulse ? '#10b981' : undefined,
+                 color: showGreenPulse ? 'white' : undefined,
+                 borderColor: showGreenPulse ? '#10b981' : undefined,
+                 boxShadow: showGreenPulse ? undefined : undefined
              }}
           >
             <Map size={20} /> Tiekartta
@@ -634,6 +651,29 @@ export default function Garage() {
                                 </div>
                              );
                           })}
+                       </div>
+                       
+                       <h3 style={{ textAlign: 'center', marginTop: '1rem', marginBottom: 0, color: 'var(--text-main)', fontSize: '1.3rem', fontWeight: 'bold' }}>Mitalikokoelma</h3>
+                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', justifyContent: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.6)', borderRadius: '16px', border: '2px solid rgba(226,232,240,0.8)' }}>
+                          {['platinum', 'gold', 'silver', 'bronze'].map(type => {
+                              if (earnedMedals[type] === 0) return null;
+                              const count = earnedMedals[type];
+                              const maxShow = Math.min(count, 10);
+                              return (
+                                  <div key={type} style={{ position: 'relative', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                      <div style={{ position: 'absolute', top: -10, right: -15, background: '#1e293b', color: 'white', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', zIndex: 20, fontSize: '1rem', border: '2px solid white', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{count}</div>
+                                      {Array.from({ length: maxShow }).map((_, i) => {
+                                          const isTop = i === maxShow - 1;
+                                          return (
+                                              <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} style={{ width: isTop ? '75px' : '70px', height: isTop ? '75px' : '70px', objectFit: 'contain', position: 'absolute', top: `50%`, left: `50%`, transform: `translate(calc(-50% - ${(maxShow - 1 - i) * 6}px), calc(-50% - ${(maxShow - 1 - i) * 3}px))`, filter: `drop-shadow(0 3px 4px rgba(0,0,0,0.5))`, zIndex: i }} alt={type} />
+                                          )
+                                      })}
+                                  </div>
+                              )
+                          })}
+                          {Object.values(earnedMedals).every(v => v === 0) && (
+                              <p style={{ color: '#94a3b8', margin: 0, fontStyle: 'italic' }}>Et ole vielä ansainnut mitaleja alatehtävistä.</p>
+                          )}
                        </div>
                     </div>
                  </div>
