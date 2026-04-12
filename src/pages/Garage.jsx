@@ -434,15 +434,7 @@ export default function Garage() {
              disabled={isTutorialActive}
              style={{ 
                  opacity: isTutorialActive ? 0.3 : 1,
-                 cursor: isTutorialActive ? 'not-allowed' : 'pointer',
-                 display: 'flex',
-                 alignItems: 'center',
-                 justifyContent: 'center',
-                 gap: '0.4rem',
-                 padding: '0.8rem 1.5rem',
-                 background: '#f8fafc',
-                 color: '#0f172a',
-                 borderColor: '#cbd5e1'
+                 cursor: isTutorialActive ? 'not-allowed' : 'pointer'
              }}
           >
             <Trophy size={20} color="#eab308" /> Palkintokaappi
@@ -624,21 +616,21 @@ export default function Garage() {
               )}
               
               {showTrophyCabinet && (
-                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
-                    <div className="glass-panel animate-bounce" style={{ background: '#f8fafc', padding: '3rem', borderRadius: '24px', width: '90%', maxWidth: '800px', display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', animation: 'wiggle 0.5s ease-out' }} onClick={e => e.stopPropagation()}>
+                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }} onClick={() => setShowTrophyCabinet(false)}>
+                    <div className="glass-panel animate-bounce" style={{ background: '#f8fafc', padding: '3rem', borderRadius: '24px', width: '100%', maxWidth: '800px', maxHeight: '100%', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', animation: 'wiggle 0.5s ease-out' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#64748b' }}><X size={32} /></button>
-                       <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}><img src="/trophy/medal-gold.png" style={{width: 40}} alt="" /> Palkintokaappi</h2>
-                       <p style={{ textAlign: 'center', color: '#64748b', fontSize: '1.2rem', marginTop: '-1rem' }}>Jokainen näistä pokaaleista vaatii erinomaista onnistumista koko Tiekartan osion tasolla. Oletko todellinen AI-mestari?</p>
+                       <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexShrink: 0 }}><img src="/trophy/medal-gold.png" style={{width: 40}} alt="" /> Palkintokaappi</h2>
+                       <p style={{ textAlign: 'center', color: '#64748b', fontSize: '1.2rem', marginTop: '-1rem', flexShrink: 0 }}>Jokainen näistä pokaaleista vaatii erinomaista onnistumista koko Tiekartan osion tasolla. Oletko todellinen AI-mestari?</p>
                        
-                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', justifyContent: 'center', marginTop: '1rem' }}>
+                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'center', marginTop: '1rem' }}>
                           {trophyMap.map(t => { 
                              const isEarned = earnedTrophies.includes(t.id);
                              return (
-                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.2rem', width: '160px' }}>
-                                    <div style={{ width: '150px', height: '150px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '6px solid #eab308' : '6px solid #cbd5e1', boxShadow: isEarned ? '0 0 25px rgba(234, 179, 8, 0.5)' : 'none' }}>
+                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '140px' }}>
+                                    <div style={{ width: '120px', height: '120px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '5px solid #eab308' : '5px solid #cbd5e1', boxShadow: isEarned ? '0 0 25px rgba(234, 179, 8, 0.5)' : 'none' }}>
                                         <img src={`/trophy/${t.id}.png`} style={{ width: '65%', height: '65%', objectFit: 'contain', filter: isEarned ? 'none' : 'brightness(0) opacity(0.2)' }} alt={t.name} />
                                     </div>
-                                    <span style={{ fontSize: '1.05rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
+                                    <span style={{ fontSize: '1rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
                                 </div>
                              );
                           })}
