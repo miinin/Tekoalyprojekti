@@ -670,38 +670,43 @@ export default function Garage() {
                             )}
                        </div>
 
-                       {/* Pokaalit väliaikaisesti lajiteltuna vasempaan ylänurkkaan, kunnes koordinaatit syötetään */}
-                       <div style={{ position: 'absolute', top: '10%', left: '10%', display: 'flex', gap: '2rem', flexWrap: 'wrap', zIndex: 10, pointerEvents: 'none', width: '50%' }}>
+                       {/* Ylähylly: Pokaalit */}
+                       <div style={{ position: 'absolute', top: '42.55%', left: '22.53%', width: '55.78%', height: '4.55%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 10, pointerEvents: 'none' }}>
                            {trophyMap.map(t => { 
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
-                                   <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', width: '100px' }}>
-                                       <div style={{ width: '80px', height: '80px', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.5))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s' }}>
-                                           <img src={`/trophy/${t.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt={t.name} />
-                                       </div>
-                                       <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textAlign: 'center', textShadow: '0 2px 4px rgba(0,0,0,0.8)', padding: '0.2rem 0.5rem', background: 'rgba(0,0,0,0.5)', borderRadius: '4px' }}>{t.id}</span>
+                                   <div key={t.id} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s' }}>
+                                       <img src={`/trophy/${t.id}.png`} style={{ width: '8vw', maxWidth: '85px', minWidth: '40px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(20px)' }} alt={t.name} />
                                    </div>
                                );
                            })}
                        </div>
                        
-                       <div style={{ position: 'absolute', top: '40%', left: '10%', display: 'flex', gap: '2rem', flexWrap: 'wrap', zIndex: 10, pointerEvents: 'none', width: '80%' }}>
+                       {/* Alahylly: Mitalit */}
+                       <div style={{ position: 'absolute', top: '76.76%', left: '24.19%', width: '53.57%', height: '8.30%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 10, pointerEvents: 'none' }}>
                             {['platinum', 'gold', 'silver', 'bronze'].map(type => {
                                  const count = earnedMedals[type] || 0;
-                                 if (count === 0) return null;
+                                 if (count === 0) {
+                                     // Show placeholder if no medals
+                                     return (
+                                          <div key={type} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', opacity: 0.15, filter: 'brightness(0)' }}>
+                                              <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ width: '7vw', maxWidth: '65px', minWidth: '35px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(15px)' }} />
+                                          </div>
+                                     );
+                                 }
+                                 
                                  const maxShow = Math.min(count, 10);
                                  
                                  return (
-                                     <div key={type} style={{ position: 'relative', width: '60px', height: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                         <div style={{ position: 'relative', width: '60px', height: '60px' }}>
+                                     <div key={type} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', transform: 'translateY(15px)' }}>
+                                         <div style={{ position: 'relative', width: '7vw', maxWidth: '65px', minWidth: '35px', aspectRatio: '1/1' }}>
                                              {Array.from({ length: maxShow }).map((_, i) => (
-                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', top: `calc(50% - ${(maxShow - 1 - i) * 3}px)`, left: `calc(50% - ${(maxShow - 1 - i) * 3}px)`, transform: 'translate(-50%, -50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
+                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 5}px`, left: `calc(50% - ${i * 2}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
                                              ))}
                                          </div>
-                                         <div style={{ position: 'absolute', top: '-10px', right: '-10px', background: '#334155', color: 'white', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.3)' }}>
+                                         <div style={{ position: 'absolute', top: '-15px', right: '-15px', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '1rem', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
                                               {count}
                                          </div>
-                                         <span style={{ position: 'absolute', bottom: '-20px', fontSize: '0.8rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textShadow: '0 2px 4px rgba(0,0,0,0.8)', padding: '0.2rem 0.5rem', background: 'rgba(0,0,0,0.5)', borderRadius: '4px' }}>{type}</span>
                                      </div>
                                  );
                             })}
@@ -715,7 +720,7 @@ export default function Garage() {
               ) : (
                 <>
                   <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
-                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
+                  <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
                   <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
                 </>
               )}
@@ -756,9 +761,9 @@ export default function Garage() {
               })}
 
               {isTutorialActive ? (
-                  <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+                  <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
               ) : (
-                  <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, padding: '2rem', pointerEvents: 'none' }} />
+                  <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
               )}
               
               {!isTutorialActive && [...carUpgrades]
@@ -790,7 +795,7 @@ export default function Garage() {
                   if (shouldShow) {
                      const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
                      const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
-                     return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
+                     return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
                   }
                   return null;
                 })}
