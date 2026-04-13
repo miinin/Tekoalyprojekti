@@ -125,6 +125,7 @@ export default function Quiz() {
   // States for special types
   const [orderedItems, setOrderedItems] = useState([]);
   const [dragTargets, setDragTargets] = useState({}); // { itemName: targetName }
+  const [selectedDragItem, setSelectedDragItem] = useState(null);
   
   // Buff states
   const [removedOptions, setRemovedOptions] = useState([]);
@@ -140,6 +141,7 @@ export default function Quiz() {
     setJackSaved(false);
     setUsedToolChecks(false);
     setHighlightedWrongItems([]);
+    setSelectedDragItem(null);
     
     if (!questions.length) return;
     
@@ -351,6 +353,17 @@ export default function Quiz() {
     setDragTargets(prev => ({ ...prev, [item]: target }));
   };
   const handleDragOver = (e) => e.preventDefault();
+  
+  const handleClickDragItem = (item) => {
+    if (showExplanation) return;
+    setSelectedDragItem(prev => prev === item ? null : item);
+  };
+  
+  const handleClickDropZone = (target) => {
+    if (showExplanation || !selectedDragItem) return;
+    setDragTargets(prev => ({ ...prev, [selectedDragItem]: target }));
+    setSelectedDragItem(null);
+  };
 
   if (showSummary) {
       return (
@@ -442,7 +455,7 @@ export default function Quiz() {
           );
         })()}
         
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.5', color: 'var(--text-main)' }}>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.6', color: 'var(--text-main)', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
           {currentQuestion.question}
         </h2>
         
@@ -500,7 +513,7 @@ export default function Quiz() {
             {shuffledOptions.map((option, idx) => {
               const isSelected = selectedAnswer === option;
               const isRemoved = removedOptions.includes(option);
-              let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.9)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 6px 20px rgba(0,0,0,0.05)' };
               
               if (isRemoved) {
                  btnStyle.opacity = 0.5;
@@ -580,7 +593,7 @@ export default function Quiz() {
         {currentQuestion.type === 'ordering' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {orderedItems.map((item, idx) => (
-              <div key={idx} style={{ padding: '1rem', background: showExplanation && isCorrect ? 'rgba(76,175,80,0.1)' : 'white', border: showExplanation && isCorrect ? '2px solid var(--accent-color)' : showExplanation ? '2px solid #ef4444' : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid #e2e8f0', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div key={idx} style={{ padding: '1.2rem 1.5rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'rgba(255, 255, 255, 0.9)', border: showExplanation && isCorrect ? '2px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '2px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '2px solid rgba(252, 165, 165, 0.8)' : '2px solid transparent', borderRadius: '30px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 6px 20px rgba(0,0,0,0.05)', fontSize: '1.1rem', fontFamily: 'var(--font-main)', fontWeight: '600' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <span style={{ width: '30px', height: '30px', background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
@@ -612,15 +625,17 @@ export default function Quiz() {
         {/* Drag and Drop Logic */}
         {currentQuestion.type === 'drag_drop' && (
           <div>
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).map((item, idx) => {
                 if (dragTargets[item]) return null;
+                const isSelected = selectedDragItem === item;
                 return (
                   <div 
                     key={idx} 
                     draggable={!showExplanation}
                     onDragStart={(e) => handleDragStart(e, item)}
-                    style={{ padding: '0.8rem 1rem', background: 'var(--primary-color)', color: 'white', borderRadius: '8px', cursor: showExplanation ? 'default' : 'grab', fontSize: '0.9rem' }}
+                    onClick={() => handleClickDragItem(item)}
+                    style={{ padding: '1rem 1.5rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '30px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '1.1rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 6px 15px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
                   >
                     {item}
                   </div>
@@ -634,14 +649,15 @@ export default function Quiz() {
                   key={target}
                   onDrop={(e) => !showExplanation && handleDrop(e, target)}
                   onDragOver={handleDragOver}
-                  style={{ flex: '1 1 250px', minHeight: '200px', border: '3px dashed #cbd5e1', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.5)' }}
+                  onClick={() => handleClickDropZone(target)}
+                  style={{ flex: '1 1 250px', minHeight: '220px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                 >
-                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)' }}>{target}</h3>
+                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.4rem' }}>{target}</h3>
                   {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).filter(item => dragTargets[item] === target).map((item, idx) => {
                     const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
                     const isItemCorrect = expected === target;
                     return (
-                      <div key={idx} style={{ padding: '0.8rem', background: showExplanation ? (isItemCorrect ? 'rgba(76,175,80,0.2)' : 'rgba(239,68,68,0.2)') : '#e2e8f0', border: showExplanation ? (isItemCorrect ? '2px solid var(--accent-color)' : '2px solid #ef4444') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid transparent', borderRadius: '8px', fontSize: '0.9rem', textAlign: 'center' }}>
+                      <div key={idx} style={{ padding: '1rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'white', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid #cbd5e1', borderRadius: '20px', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
                         {item}
                       </div>
                     );

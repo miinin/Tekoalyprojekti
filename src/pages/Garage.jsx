@@ -671,7 +671,7 @@ export default function Garage() {
                        </div>
 
                        {/* Ylähylly: Pokaalit */}
-                       <div style={{ position: 'absolute', top: '42.55%', left: '22.53%', width: '55.78%', height: '4.55%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
+                       <div style={{ position: 'absolute', top: '42.62%', left: '24.25%', width: '53.67%', height: '4.02%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
                            {trophyMap.map(t => { 
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
@@ -683,7 +683,7 @@ export default function Garage() {
                        </div>
                        
                        {/* Alahylly: Mitalit */}
-                       <div style={{ position: 'absolute', top: '76.76%', left: '24.19%', width: '53.57%', height: '8.30%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
+                       <div style={{ position: 'absolute', top: '76.87%', left: '23.92%', width: '53.83%', height: '8.04%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
                             {['platinum', 'gold', 'silver', 'bronze'].map(type => {
                                  const count = earnedMedals[type] || 0;
                                  if (count === 0) {
