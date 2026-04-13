@@ -630,7 +630,15 @@ export default function Garage() {
                    </div>
                    <b>Mikä suoritus!</b> Ansaitsit juuri ensimmäisen Tiekartan mestarin pokaalisi ja se toimitettiin Autotalliin!<br/><br/>Oletko valmis keräämään ne kaikki? Voit ihailla saavutuksiasi Palkintokaapissa.
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
-                        localStorage.setItem('aivan_trophy_tuition', 'true');                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
+                        localStorage.setItem('aivan_trophy_tuition', 'true');
+                        setShowTrophyTuition(false);
+                        setShowTrophyCabinet(true);
+                   }}>Avaa Palkintokaappi</button>
+                </div>
+              )}
+              
+              {showTrophyCabinet && (
+                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
                     <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1400px', margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        
@@ -699,8 +707,8 @@ export default function Garage() {
                             })}
                        </div>
                     </div>
-              )}
                  </div>
+              )}
 
               {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
