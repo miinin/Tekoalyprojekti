@@ -639,12 +639,13 @@ export default function Garage() {
               
               {showTrophyCabinet && (
                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
-                    <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1400px', margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        
-                       <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
+                       <div style={{ position: 'relative', display: 'flex', maxHeight: '100%', maxWidth: '1400px', justifyContent: 'center', alignItems: 'center' }}>
+                           <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ maxHeight: '90vh', maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
                        
-                       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
+                           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
                             onClick={(e) => {
                                if (!isEditMode) return;
                                const rect = e.currentTarget.getBoundingClientRect();
@@ -676,7 +677,7 @@ export default function Garage() {
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
                                    <div key={t.id} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s' }}>
-                                       <img src={`/trophy/${t.id}.png`} style={{ width: '8vw', maxWidth: '85px', minWidth: '40px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(20px)' }} alt={t.name} />
+                                       <img src={`/trophy/${t.id}.png`} style={{ height: '350%', minHeight: '40px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(15%)' }} alt={t.name} />
                                    </div>
                                );
                            })}
@@ -690,7 +691,7 @@ export default function Garage() {
                                      // Show placeholder if no medals
                                      return (
                                           <div key={type} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', opacity: 0.15, filter: 'brightness(0)' }}>
-                                              <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ width: '7vw', maxWidth: '65px', minWidth: '35px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(15px)' }} />
+                                              <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ height: '140%', minHeight: '35px', objectFit: 'contain', objectPosition: 'bottom', transform: 'translateY(15%)' }} />
                                           </div>
                                      );
                                  }
@@ -699,21 +700,22 @@ export default function Garage() {
                                  
                                  return (
                                      <div key={type} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', transform: 'translateY(15px)' }}>
-                                         <div style={{ position: 'relative', width: '7vw', maxWidth: '65px', minWidth: '35px', aspectRatio: '1/1' }}>
+                                         <div style={{ position: 'relative', height: '140%', minHeight: '35px', aspectRatio: '1/1' }}>
                                              {Array.from({ length: maxShow }).map((_, i) => (
-                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 5}px`, left: `calc(50% - ${i * 2}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
+                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
                                              ))}
                                          </div>
-                                         <div style={{ position: 'absolute', top: '-15px', right: '-15px', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '1rem', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
+                                         <div style={{ position: 'absolute', top: '-15%', right: '-15%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '1rem', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
                                               {count}
                                          </div>
                                      </div>
                                  );
                             })}
-                       </div>
-                    </div>
-                 </div>
-              )}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               )}
 
               {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />

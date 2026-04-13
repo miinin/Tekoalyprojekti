@@ -365,6 +365,26 @@ export default function Quiz() {
     setSelectedDragItem(null);
   };
 
+  const handleRemoveFromDropZone = (item) => {
+    if (showExplanation) return;
+    setDragTargets(prev => {
+      const next = { ...prev };
+      delete next[item];
+      return next;
+    });
+  };
+
+  const renderTextWithAivanGradient = (text) => {
+    if (!text) return null;
+    const parts = text.split(/(AI van)/i);
+    return parts.map((part, i) => {
+      if (part.toLowerCase() === 'ai van') {
+        return <span key={i} style={{ background: 'linear-gradient(90deg, #0ea5e9, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', display: 'inline-block', transform: 'scale(1.05)' }}>AI van</span>;
+      }
+      return part;
+    });
+  };
+
   if (showSummary) {
       return (
         <div style={{ padding: '2rem', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -455,8 +475,8 @@ export default function Quiz() {
           );
         })()}
         
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '2rem', lineHeight: '1.6', color: 'var(--text-main)', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
-          {currentQuestion.question}
+        <h2 style={{ fontSize: '1.7rem', marginBottom: '2.5rem', lineHeight: '1.6', color: 'var(--text-main)', fontFamily: 'var(--font-main)', fontWeight: '800' }}>
+          {renderTextWithAivanGradient(currentQuestion.question)}
         </h2>
         
         {usedToolChecks && highlightedWrongItems.length > 0 && (
@@ -593,15 +613,15 @@ export default function Quiz() {
         {currentQuestion.type === 'ordering' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {orderedItems.map((item, idx) => (
-              <div key={idx} style={{ padding: '1.2rem 1.5rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'rgba(255, 255, 255, 0.9)', border: showExplanation && isCorrect ? '2px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '2px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '2px solid rgba(252, 165, 165, 0.8)' : '2px solid transparent', borderRadius: '30px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 6px 20px rgba(0,0,0,0.05)', fontSize: '1.1rem', fontFamily: 'var(--font-main)', fontWeight: '600' }}>
+              <div key={idx} style={{ padding: '1.5rem 1.8rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '35px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 8px 25px rgba(0,0,0,0.06)', fontSize: '1.2rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <span style={{ width: '30px', height: '30px', background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
                 </div>
                 {!showExplanation && (
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    <button style={{ padding: '0.5rem', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3 }} onClick={() => moveItem(idx, 'up')}>↑</button>
-                    <button style={{ padding: '0.5rem', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3 }} onClick={() => moveItem(idx, 'down')}>↓</button>
+                  <div style={{ display: 'flex', gap: '0.8rem' }}>
+                    <button style={{ padding: '0.8rem 1.2rem', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '15px', fontWeight: 'bold' }} onClick={() => moveItem(idx, 'up')}>↑</button>
+                    <button style={{ padding: '0.8rem 1.2rem', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '15px', fontWeight: 'bold' }} onClick={() => moveItem(idx, 'down')}>↓</button>
                   </div>
                 )}
               </div>
@@ -652,16 +672,24 @@ export default function Quiz() {
                   onClick={() => handleClickDropZone(target)}
                   style={{ flex: '1 1 250px', minHeight: '220px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                 >
-                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.4rem' }}>{target}</h3>
-                  {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).filter(item => dragTargets[item] === target).map((item, idx) => {
-                    const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
-                    const isItemCorrect = expected === target;
-                    return (
-                      <div key={idx} style={{ padding: '1rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'white', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid #cbd5e1', borderRadius: '20px', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.05)' }}>
-                        {item}
-                      </div>
-                    );
-                  })}
+                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.4rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', flexGrow: 1 }}>
+                    {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).filter(item => dragTargets[item] === target).map((item, idx) => {
+                      const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+                      const isItemCorrect = expected === target;
+                      return (
+                        <div 
+                          key={idx} 
+                          draggable={!showExplanation}
+                          onDragStart={(e) => handleDragStart(e, item)}
+                          onClick={() => handleRemoveFromDropZone(item)}
+                          style={{ padding: '1rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '25px', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                        >
+                          {item}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               ))}
             </div>
