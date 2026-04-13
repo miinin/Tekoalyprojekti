@@ -22,6 +22,7 @@ export default function Garage() {
   const [earnedMedals, setEarnedMedals] = useState({ platinum: 0, gold: 0, silver: 0, bronze: 0 });
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
+  const [hoverCabinet, setHoverCabinet] = useState(false);
 
   const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_floor' : 'body');
 
@@ -446,17 +447,6 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           <button 
-             className={`btn-secondary`} 
-             onClick={() => setShowTrophyCabinet(true)}
-             disabled={isTutorialActive}
-             style={{ 
-                 opacity: isTutorialActive ? 0.3 : 1,
-                 cursor: isTutorialActive ? 'not-allowed' : 'pointer'
-             }}
-          >
-            <Trophy size={20} color="#eab308" /> Palkintokaappi
-          </button>
-          <button 
              className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}
              disabled={isTutorialActive}
@@ -682,7 +672,10 @@ export default function Garage() {
               {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               ) : (
-                <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+                <>
+                  <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'auto', cursor: 'pointer', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(234, 179, 8, 0.8)) brightness(1.2)' : 'none', transition: 'all 0.2s' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
+                </>
               )}
 
               {garageUpgrades.map(item => {
