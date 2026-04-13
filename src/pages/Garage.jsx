@@ -642,7 +642,7 @@ export default function Garage() {
                     <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1400px', margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        
-                       <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none' }} />
+                       <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
                        
                        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
                             onClick={(e) => {
@@ -671,7 +671,7 @@ export default function Garage() {
                        </div>
 
                        {/* Ylähylly: Pokaalit */}
-                       <div style={{ position: 'absolute', top: '42.55%', left: '22.53%', width: '55.78%', height: '4.55%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 10, pointerEvents: 'none' }}>
+                       <div style={{ position: 'absolute', top: '42.55%', left: '22.53%', width: '55.78%', height: '4.55%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
                            {trophyMap.map(t => { 
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
@@ -683,7 +683,7 @@ export default function Garage() {
                        </div>
                        
                        {/* Alahylly: Mitalit */}
-                       <div style={{ position: 'absolute', top: '76.76%', left: '24.19%', width: '53.57%', height: '8.30%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 10, pointerEvents: 'none' }}>
+                       <div style={{ position: 'absolute', top: '76.76%', left: '24.19%', width: '53.57%', height: '8.30%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
                             {['platinum', 'gold', 'silver', 'bronze'].map(type => {
                                  const count = earnedMedals[type] || 0;
                                  if (count === 0) {
@@ -720,7 +720,7 @@ export default function Garage() {
               ) : (
                 <>
                   <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
-                  <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
+                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
                   <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
                 </>
               )}
