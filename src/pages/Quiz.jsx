@@ -131,6 +131,7 @@ export default function Quiz() {
   const [usedSecondChance, setUsedSecondChance] = useState(false);
   const [usedToolChecks, setUsedToolChecks] = useState(false);
   const [highlightedWrongItems, setHighlightedWrongItems] = useState([]);
+  const [shuffledOptions, setShuffledOptions] = useState([]);
 
   useEffect(() => {
     setRemovedOptions([]);
@@ -143,6 +144,12 @@ export default function Quiz() {
     if (!questions.length) return;
     
     const currentQuestion = questions[currentIndex];
+    
+    if (['multiple_choice', 'scenario', 'spot_the_ai', 'reverse_prompt'].includes(currentQuestion.type)) {
+        setShuffledOptions([...currentQuestion.options].sort(() => Math.random() - 0.5));
+    } else {
+        setShuffledOptions(currentQuestion.options ? [...currentQuestion.options] : []);
+    }
     if (currentQuestion.type === 'multiple_choice') {
         let shouldRemove = false;
         let isBumper = false;
@@ -482,7 +489,7 @@ export default function Quiz() {
         {/* Regular Multiple Choice / True-False / Scenario / etc */}
         {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {currentQuestion.options.map((option, idx) => {
+            {shuffledOptions.map((option, idx) => {
               const isSelected = selectedAnswer === option;
               const isRemoved = removedOptions.includes(option);
               let btnStyle = { padding: '1.2rem 1.5rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.8)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };

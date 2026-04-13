@@ -24,8 +24,8 @@ export const categories = [
             "id": "q_p1_2",
             "type": "true_false",
             "question": "Onko ChatGPT esimerkki yleisestä tekoälystä (AGI), joka ymmärtää maailmaa kuten ihminen?",
-            "options": ["Oikein", "väärin"],
-            "correctAnswer": "väärin",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
             "explanation": "ChatGPT on kielimalli, joka ennustaa seuraavia sanoja datan perusteella. Se ei ole tietoinen tai omaa ihmisen kaltaista yleistä ymmärrystä."
           }
         ]

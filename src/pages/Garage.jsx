@@ -23,6 +23,21 @@ export default function Garage() {
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
   const [hoverCabinet, setHoverCabinet] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [clickPoints, setClickPoints] = useState([]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.shiftKey && e.key.toLowerCase() === 'e') {
+        setIsEditMode(prev => {
+            if (prev) setClickPoints([]);
+            return !prev;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_floor' : 'body');
 
@@ -615,59 +630,77 @@ export default function Garage() {
                    </div>
                    <b>Mikä suoritus!</b> Ansaitsit juuri ensimmäisen Tiekartan mestarin pokaalisi ja se toimitettiin Autotalliin!<br/><br/>Oletko valmis keräämään ne kaikki? Voit ihailla saavutuksiasi Palkintokaapissa.
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
-                        localStorage.setItem('aivan_trophy_tuition', 'true');
-                        setShowTrophyTuition(false);
-                        setShowTrophyCabinet(true);
-                   }}>Avaa Palkintokaappi</button>
-                </div>
-              )}
-              
-              {showTrophyCabinet && (
-                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }} onClick={() => setShowTrophyCabinet(false)}>
-                    <div className="glass-panel animate-bounce" style={{ background: '#f8fafc', padding: '3rem', borderRadius: '24px', width: '100%', maxWidth: '800px', maxHeight: '100%', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', animation: 'wiggle 0.5s ease-out' }} onClick={e => e.stopPropagation()}>
-                       <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'none', border: 'none', cursor: 'pointer', color: '#64748b' }}><X size={32} /></button>
-                       <h2 style={{ fontSize: '2.5rem', textAlign: 'center', margin: 0, color: 'var(--text-main)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexShrink: 0 }}><img src="/trophy/medal-gold.png" style={{width: 40}} alt="" /> Palkintokaappi</h2>
-                       <p style={{ textAlign: 'center', color: '#64748b', fontSize: '1.2rem', marginTop: '-1rem', flexShrink: 0 }}>Jokainen näistä pokaaleista vaatii erinomaista onnistumista koko Tiekartan osion tasolla. Oletko todellinen AI-mestari?</p>
+                        localStorage.setItem('aivan_trophy_tuition', 'true');                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
+                    <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '1400px', margin: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
+                       <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        
-                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'center', marginTop: '1rem' }}>
-                          {trophyMap.map(t => { 
-                             const isEarned = earnedTrophies.includes(t.id);
-                             return (
-                                <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem', width: '140px' }}>
-                                    <div style={{ width: '120px', height: '120px', background: isEarned ? 'radial-gradient(circle, #fef08a 0%, #fde047 100%)' : '#e2e8f0', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', border: isEarned ? '5px solid #eab308' : '5px solid #cbd5e1', boxShadow: isEarned ? '0 0 25px rgba(234, 179, 8, 0.5)' : 'none' }}>
-                                        <img src={`/trophy/${t.id}.png`} style={{ width: '65%', height: '65%', objectFit: 'contain', filter: isEarned ? 'none' : 'brightness(0) opacity(0.2)' }} alt={t.name} />
+                       <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none' }} />
+                       
+                       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
+                            onClick={(e) => {
+                               if (!isEditMode) return;
+                               const rect = e.currentTarget.getBoundingClientRect();
+                               const x = ((e.clientX - rect.left) / rect.width) * 100;
+                               const y = ((e.clientY - rect.top) / rect.height) * 100;
+                               setClickPoints(prev => prev.length >= 2 ? [{x, y}] : [...prev, {x, y}]);
+                            }}>
+                            
+                            {isEditMode && clickPoints.map((p, i) => (
+                                <div key={i} style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, width: '10px', height: '10px', background: 'red', borderRadius: '50%', transform: 'translate(-50%, -50%)', zIndex: 401, pointerEvents: 'none' }} />
+                            ))}
+                            {isEditMode && clickPoints.length === 2 && (
+                                <>
+                                    <div style={{ position: 'absolute', left: `${Math.min(clickPoints[0].x, clickPoints[1].x)}%`, top: `${Math.min(clickPoints[0].y, clickPoints[1].y)}%`, width: `${Math.abs(clickPoints[0].x - clickPoints[1].x)}%`, height: `${Math.abs(clickPoints[0].y - clickPoints[1].y)}%`, background: 'rgba(59, 130, 246, 0.4)', border: '2px dashed #60a5fa', zIndex: 400, pointerEvents: 'none' }} />
+                                    <div style={{ position: 'absolute', backgroundColor: 'black', color: '#10b981', padding: '1.5rem', top: '20px', left: '20px', zIndex: 500, fontFamily: 'monospace', borderRadius: '8px', border: '2px solid #10b981', fontSize: '1.2rem' }}>
+                                        Ota ylös nämä koordinaatit:<br/><br/>
+                                        top: '{Math.min(clickPoints[0].y, clickPoints[1].y).toFixed(2)}%',<br/>
+                                        left: '{Math.min(clickPoints[0].x, clickPoints[1].x).toFixed(2)}%',<br/>
+                                        width: '{Math.abs(clickPoints[0].x - clickPoints[1].x).toFixed(2)}%',<br/>
+                                        height: '{Math.abs(clickPoints[0].y - clickPoints[1].y).toFixed(2)}%'
                                     </div>
-                                    <span style={{ fontSize: '1rem', fontWeight: 'bold', color: isEarned ? '#0f172a' : '#94a3b8', textAlign: 'center', lineHeight: '1.2' }}>{t.name}</span>
-                                </div>
-                             );
-                          })}
+                                </>
+                            )}
+                       </div>
+
+                       {/* Pokaalit väliaikaisesti lajiteltuna vasempaan ylänurkkaan, kunnes koordinaatit syötetään */}
+                       <div style={{ position: 'absolute', top: '10%', left: '10%', display: 'flex', gap: '2rem', flexWrap: 'wrap', zIndex: 10, pointerEvents: 'none', width: '50%' }}>
+                           {trophyMap.map(t => { 
+                               const isEarned = earnedTrophies.includes(t.id);
+                               return (
+                                   <div key={t.id} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', width: '100px' }}>
+                                       <div style={{ width: '80px', height: '80px', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.5))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s' }}>
+                                           <img src={`/trophy/${t.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} alt={t.name} />
+                                       </div>
+                                       <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textAlign: 'center', textShadow: '0 2px 4px rgba(0,0,0,0.8)', padding: '0.2rem 0.5rem', background: 'rgba(0,0,0,0.5)', borderRadius: '4px' }}>{t.id}</span>
+                                   </div>
+                               );
+                           })}
                        </div>
                        
-                       <h3 style={{ textAlign: 'center', marginTop: '1rem', marginBottom: 0, color: 'var(--text-main)', fontSize: '1.3rem', fontWeight: 'bold' }}>Mitalikokoelma</h3>
-                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', justifyContent: 'center', padding: '1.5rem', background: 'rgba(255,255,255,0.6)', borderRadius: '16px', border: '2px solid rgba(226,232,240,0.8)' }}>
-                          {['platinum', 'gold', 'silver', 'bronze'].map(type => {
-                              if (earnedMedals[type] === 0) return null;
-                              const count = earnedMedals[type];
-                              const maxShow = Math.min(count, 10);
-                              return (
-                                  <div key={type} style={{ position: 'relative', width: '100px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                      <div style={{ position: 'absolute', top: -10, right: -15, background: '#1e293b', color: 'white', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', zIndex: 20, fontSize: '1rem', border: '2px solid white', boxShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>{count}</div>
-                                      {Array.from({ length: maxShow }).map((_, i) => {
-                                          const isTop = i === maxShow - 1;
-                                          return (
-                                              <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} style={{ width: isTop ? '75px' : '70px', height: isTop ? '75px' : '70px', objectFit: 'contain', position: 'absolute', top: `50%`, left: `50%`, transform: `translate(calc(-50% - ${(maxShow - 1 - i) * 6}px), calc(-50% - ${(maxShow - 1 - i) * 3}px))`, filter: `drop-shadow(0 3px 4px rgba(0,0,0,0.5))`, zIndex: i }} alt={type} />
-                                          )
-                                      })}
-                                  </div>
-                              )
-                          })}
-                          {Object.values(earnedMedals).every(v => v === 0) && (
-                              <p style={{ color: '#94a3b8', margin: 0, fontStyle: 'italic' }}>Et ole vielä ansainnut mitaleja alatehtävistä.</p>
-                          )}
+                       <div style={{ position: 'absolute', top: '40%', left: '10%', display: 'flex', gap: '2rem', flexWrap: 'wrap', zIndex: 10, pointerEvents: 'none', width: '80%' }}>
+                            {['platinum', 'gold', 'silver', 'bronze'].map(type => {
+                                 const count = earnedMedals[type] || 0;
+                                 if (count === 0) return null;
+                                 const maxShow = Math.min(count, 10);
+                                 
+                                 return (
+                                     <div key={type} style={{ position: 'relative', width: '60px', height: '60px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                         <div style={{ position: 'relative', width: '60px', height: '60px' }}>
+                                             {Array.from({ length: maxShow }).map((_, i) => (
+                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', top: `calc(50% - ${(maxShow - 1 - i) * 3}px)`, left: `calc(50% - ${(maxShow - 1 - i) * 3}px)`, transform: 'translate(-50%, -50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
+                                             ))}
+                                         </div>
+                                         <div style={{ position: 'absolute', top: '-10px', right: '-10px', background: '#334155', color: 'white', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.3)' }}>
+                                              {count}
+                                         </div>
+                                         <span style={{ position: 'absolute', bottom: '-20px', fontSize: '0.8rem', fontWeight: 'bold', color: 'rgba(255,255,255,0.8)', textShadow: '0 2px 4px rgba(0,0,0,0.8)', padding: '0.2rem 0.5rem', background: 'rgba(0,0,0,0.5)', borderRadius: '4px' }}>{type}</span>
+                                     </div>
+                                 );
+                            })}
                        </div>
                     </div>
-                 </div>
               )}
+                 </div>
 
               {isTutorialActive ? (
                 <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
