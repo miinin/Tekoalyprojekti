@@ -212,9 +212,11 @@ export default function Quiz() {
   }
   
   if (currentQuestion.type === 'drag_drop' && Object.keys(dragTargets).length === 0 && !selectedAnswer) {
-      if ((activeBuff || toolsBuff >= 4) && currentQuestion.options.length > 0) {
-         const firstOption = currentQuestion.options[0];
-         setDragTargets({ [firstOption.item]: firstOption.target });
+      const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
+      if ((activeBuff || toolsBuff >= 4) && draggables.length > 0) {
+         const firstItem = draggables[0];
+         const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[firstItem] : (currentQuestion.options.find(o => o.item === firstItem)?.target);
+         setDragTargets({ [firstItem]: expected });
       }
   }
 
@@ -237,8 +239,12 @@ export default function Quiz() {
     if (sub.isLastNode) max = max * 2;
 
     if (currentQuestion.type === 'drag_drop') {
-      const correctTargets = currentQuestion.options.filter(opt => dragTargets[opt.item] === opt.target).length;
-      const totalTargets = currentQuestion.options.length;
+      const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
+      const correctTargets = draggables.filter(item => {
+          const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+          return dragTargets[item] === expected;
+      }).length;
+      const totalTargets = draggables.length;
       earned = Math.floor((correctTargets / totalTargets) * max);
       correct = correctTargets === totalTargets && totalTargets > 0;
     } else if (currentQuestion.type === 'ordering') {
@@ -278,8 +284,10 @@ export default function Quiz() {
                   if (item !== currentQuestion.correctAnswer[idx]) wrongItems.push(item);
              });
         } else if (currentQuestion.type === 'drag_drop') {
-             currentQuestion.options.forEach(opt => {
-                  if (dragTargets[opt.item] !== opt.target) wrongItems.push(opt.item);
+             const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
+             draggables.forEach(item => {
+                  const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+                  if (dragTargets[item] !== expected) wrongItems.push(item);
              });
         }
         
@@ -605,23 +613,23 @@ export default function Quiz() {
         {currentQuestion.type === 'drag_drop' && (
           <div>
             <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-              {currentQuestion.options.map((opt, idx) => {
-                if (dragTargets[opt.item]) return null;
+              {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).map((item, idx) => {
+                if (dragTargets[item]) return null;
                 return (
                   <div 
                     key={idx} 
                     draggable={!showExplanation}
-                    onDragStart={(e) => handleDragStart(e, opt.item)}
+                    onDragStart={(e) => handleDragStart(e, item)}
                     style={{ padding: '0.8rem 1rem', background: 'var(--primary-color)', color: 'white', borderRadius: '8px', cursor: showExplanation ? 'default' : 'grab', fontSize: '0.9rem' }}
                   >
-                    {opt.item}
+                    {item}
                   </div>
                 );
               })}
             </div>
 
             <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-              {['AIvanin kyytiin', 'Jätä tien sivuun'].map(target => (
+              {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
                 <div 
                   key={target}
                   onDrop={(e) => !showExplanation && handleDrop(e, target)}
@@ -629,16 +637,20 @@ export default function Quiz() {
                   style={{ flex: '1 1 250px', minHeight: '200px', border: '3px dashed #cbd5e1', borderRadius: '16px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.5)' }}
                 >
                   <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)' }}>{target}</h3>
-                  {currentQuestion.options.filter(o => dragTargets[o.item] === target).map((opt, idx) => (
-                    <div key={idx} style={{ padding: '0.8rem', background: showExplanation ? (opt.target === target ? 'rgba(76,175,80,0.2)' : 'rgba(239,68,68,0.2)') : '#e2e8f0', border: showExplanation ? (opt.target === target ? '2px solid var(--accent-color)' : '2px solid #ef4444') : highlightedWrongItems.includes(opt.item) ? '2px solid #ef4444' : '2px solid transparent', borderRadius: '8px', fontSize: '0.9rem', textAlign: 'center' }}>
-                      {opt.item}
-                    </div>
-                  ))}
+                  {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).filter(item => dragTargets[item] === target).map((item, idx) => {
+                    const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+                    const isItemCorrect = expected === target;
+                    return (
+                      <div key={idx} style={{ padding: '0.8rem', background: showExplanation ? (isItemCorrect ? 'rgba(76,175,80,0.2)' : 'rgba(239,68,68,0.2)') : '#e2e8f0', border: showExplanation ? (isItemCorrect ? '2px solid var(--accent-color)' : '2px solid #ef4444') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '2px solid transparent', borderRadius: '8px', fontSize: '0.9rem', textAlign: 'center' }}>
+                        {item}
+                      </div>
+                    );
+                  })}
                 </div>
               ))}
             </div>
             
-            {!showExplanation && currentQuestion.options.every(o => dragTargets[o.item]) && (
+            {!showExplanation && (currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).every(item => dragTargets[item]) && (
                <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
                  Tarkista vastaukset
                </button>
