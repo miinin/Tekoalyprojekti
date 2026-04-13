@@ -23,6 +23,21 @@ export default function Garage() {
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
   const [hoverCabinet, setHoverCabinet] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [clickPoints, setClickPoints] = useState([]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.shiftKey && e.key.toLowerCase() === 'e') {
+        setIsEditMode(prev => {
+            if (prev) setClickPoints([]);
+            return !prev;
+        });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const [activeCategory, setActiveCategory] = useState(isTutorialActive ? 'g_floor' : 'body');
 
@@ -571,8 +586,32 @@ export default function Garage() {
             boxShadow: isGlobalPreview 
               ? '0 0 0 6px rgba(16, 185, 129, 0.9), inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.2)' 
               : 'inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.1)',
-            background: 'radial-gradient(circle at top, #334155 0%, #0f172a 100%)' 
+            background: 'radial-gradient(circle at top, #334155 0%, #0f172a 100%)',
+            cursor: isEditMode ? 'crosshair' : 'default'
+          }}
+          onClick={(e) => {
+              if (!isEditMode) return;
+              const rect = e.currentTarget.getBoundingClientRect();
+              const x = ((e.clientX - rect.left) / rect.width) * 100;
+              const y = ((e.clientY - rect.top) / rect.height) * 100;
+              setClickPoints(prev => prev.length >= 2 ? [{x, y}] : [...prev, {x, y}]);
           }}>
+              
+              {isEditMode && clickPoints.map((p, i) => (
+                  <div key={i} style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, width: '10px', height: '10px', background: 'red', borderRadius: '50%', transform: 'translate(-50%, -50%)', zIndex: 401, pointerEvents: 'none' }} />
+              ))}
+              {isEditMode && clickPoints.length === 2 && (
+                  <>
+                      <div style={{ position: 'absolute', left: `${Math.min(clickPoints[0].x, clickPoints[1].x)}%`, top: `${Math.min(clickPoints[0].y, clickPoints[1].y)}%`, width: `${Math.abs(clickPoints[0].x - clickPoints[1].x)}%`, height: `${Math.abs(clickPoints[0].y - clickPoints[1].y)}%`, background: 'rgba(59, 130, 246, 0.4)', border: '2px dashed #60a5fa', zIndex: 400, pointerEvents: 'none' }} />
+                      <div style={{ position: 'absolute', backgroundColor: 'black', color: '#10b981', padding: '1.5rem', top: '20px', left: '20px', zIndex: 500, fontFamily: 'monospace', borderRadius: '8px', border: '2px solid #10b981', fontSize: '1.2rem' }}>
+                          Ota ylös nämä koordinaatit:<br/><br/>
+                          top: '{Math.min(clickPoints[0].y, clickPoints[1].y).toFixed(2)}%',<br/>
+                          left: '{Math.min(clickPoints[0].x, clickPoints[1].x).toFixed(2)}%',<br/>
+                          width: '{Math.abs(clickPoints[0].x - clickPoints[1].x).toFixed(2)}%',<br/>
+                          height: '{Math.abs(clickPoints[0].y - clickPoints[1].y).toFixed(2)}%'
+                      </div>
+                  </>
+              )}
               
               {flashScreen && (
                 <div className="flash-blackout" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: '#020617', zIndex: 99, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
