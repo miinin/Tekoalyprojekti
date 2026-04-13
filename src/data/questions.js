@@ -9,24 +9,124 @@ export const categories = [
         "questions": [
           {
             "id": "q_p1_1",
-            "type": "multiple_choice",
-            "question": "Mikä seuraavista kuvastaa parhaiten \"kapeaa tekoälyä\" (Narrow AI)?",
-            "options": [
-              "Se osaa ajatella ja tuntea kuten ihminen suurimmassa osassa tilanteista.",
-              "Se on oppinut koko Internetin jokaisen tiedon sanasta sanaan ulkoa.",
-              "Se on suunniteltu ja opetettu suoriutumaan erinomaisesti vain yhdestä tietystä tehtävästä.",
-              "Se voi ottaa täyden hallinnan tietokoneestasi halutessaan ilman lupaasi."
-            ],
-            "correctAnswer": "Se on suunniteltu ja opetettu suoriutumaan erinomaisesti vain yhdestä tietystä tehtävästä.",
-            "explanation": "Kaikki nykyinen ympärillämme oleva tekoäly on ns. kapeaa tekoälyä. Nämä mallit (esim. shakkikoneet, chatit, lääketieteen kuvantunnistajat) osaavat vain sen tehtävän mihin ne on opetettu."
+            "type": "true_false",
+            "question": "AI vanin kojelaudassa asuu pieni oikea keksijä, joka vastaa kaikkiin kysymyksiin.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly ei ole oikea elävä ihminen tai olento, vaan ihmisen koodaama erikoisohjelma. Se asuu laitteissa koodin muodossa!"
           },
           {
             "id": "q_p1_2",
+            "type": "multiple_choice",
+            "question": "Mikä tekoäly oikeastaan on?",
+            "options": ["Taikuutta autotallissa", "Elävä robottieläin", "Koodattu ohjelma", "Avaruudesta tullut kone"],
+            "correctAnswer": "Koodattu ohjelma",
+            "explanation": "Tekoäly ei ole taikuutta, vaan se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka suorittaa sille annettuja tehtäviä."
+          },
+          {
+            "id": "q_p1_3",
+            "type": "scenario",
+            "question": "SKENAARIO: Olet automatkalla ja kysyt puhelimesi ääniavustajalta reittiä huvipuistoon. Kaverisi takapenkillä huutaa: \"Vau, puhelimen sisällä on taikuri!\" Mitä vastaat hänelle?",
+            "options": ["Niin on, se osaa taikoa reitin!", "Ei, se on koodattu ohjelma.", "Se on taikuutta ja tiedettä.", "Puhelimessa asuu pieni robotti."],
+            "correctAnswer": "Ei, se on koodattu ohjelma.",
+            "explanation": "Ääniavustaja käyttää tekoälyä, joka on ihmisten tekemä ohjelma, ei taikuutta tai taikuri."
+          },
+          {
+            "id": "q_p1_4",
+            "type": "ordering",
+            "question": "Järjestä, miten AI vanin tekoäly oikeasti syntyy ja toimii, ensimmäisestä askeleesta viimeiseen.",
+            "options": ["Ihmiset keksivät hyvän idean", "Koodarit kirjoittavat ohjelman", "Tekoäly ladataan auton tietokoneeseen", "Auto osaa etsiä reitit koodin avulla"],
+            "correctAnswer": ["Ihmiset keksivät hyvän idean", "Koodarit kirjoittavat ohjelman", "Tekoäly ladataan auton tietokoneeseen", "Auto osaa etsiä reitit koodin avulla"],
+            "explanation": "Koska tekoäly ei synny taikaiskusta, ihmisen täytyy ensin keksiä idea ja koodata se valmiiksi ohjelmaksi."
+          },
+          {
+            "id": "q_p1_5",
+            "type": "spot_the_ai",
+            "question": "Mikä näistä autotallin tai auton asioista käyttää todennäköisimmin tekoälyä?",
+            "options": ["Mekaaninen jakoavain", "Perinteinen polkupyörä", "Reittejä ehdottava navigaattori", "Puhjennut autonrengas"],
+            "correctAnswer": "Reittejä ehdottava navigaattori",
+            "explanation": "Navigaattori käyttää tietokoneohjelmaa eli tekoälyä laskeakseen nopeimman reitin. Muut ovat perinteisiä tavaroita ilman koodia."
+          },
+          {
+            "id": "q_p1_6",
+            "type": "reverse_prompt",
+            "question": "Auton tekoälyradio soittaa tällaisen laulun: \"Auto kulkee, kumit laulaa, tekoäly karttaa kantaa!\" Millä kehotteella (promptilla) tämä saatiin aikaan?",
+            "options": ["Kirjoita pitkä uutinen nopeasta autosta.", "Tee todella surullinen runo sateesta.", "Keksi lyhyt ja iloinen riimi automatkasta.", "Kerro yksityiskohtaisesti kuinka moottori korjataan."],
+            "correctAnswer": "Keksi lyhyt ja iloinen riimi automatkasta.",
+            "explanation": "Tekoäly ei toimi omasta tahdostaan, vaan se suorittaa täsmälleen ihmisen sille antaman ohjeen eli promptin mukaisen tehtävän."
+          },
+          {
+            "id": "q_p1_7",
+            "type": "multiple_choice",
+            "question": "Kun tekoäly antaa sinulle vastauksen tai ajaa AI vania, kuka sen alun perin on opettanut ja koodannut tekemään niin?",
+            "options": ["Toinen tekoäly", "Tietokone ihan itse", "Ihminen", "Taikuri"],
+            "correctAnswer": "Ihminen",
+            "explanation": "Tekoäly on aina ihmisen koodaama erikoisohjelma. Se ei osaa tehdä yhtään mitään ilman, että ihminen on sen ensin rakentanut."
+          },
+          {
+            "id": "q_p1_8",
             "type": "true_false",
-            "question": "Onko ChatGPT esimerkki yleisestä tekoälystä (AGI), joka ymmärtää maailmaa kuten ihminen?",
+            "question": "Tekoälyn toiminta on puhdasta taikuutta, jota edes sen keksijät ja koodarit eivät ymmärrä.",
             "options": ["Oikein", "Väärin"],
             "correctAnswer": "Väärin",
-            "explanation": "ChatGPT on kielimalli, joka ennustaa seuraavia sanoja datan perusteella. Se ei ole tietoinen tai omaa ihmisen kaltaista yleistä ymmärrystä."
+            "explanation": "Tekoäly ei ole taikuutta. Se perustuu koodiin, jonka fiksut asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle."
+          },
+          {
+            "id": "q_p1_9",
+            "type": "drag_drop",
+            "question": "Yhdistä asiat oikeisiin laatikoihin sen perusteella, mitä ne oikeasti ovat.",
+            "draggables": ["Tekoäly", "Ihminen", "Taikasauva"],
+            "dropZones": ["Koodattu ohjelma", "Elävä olento", "Taikuutta"],
+            "correctAnswer": {"Tekoäly": "Koodattu ohjelma", "Ihminen": "Elävä olento", "Taikasauva": "Taikuutta"},
+            "explanation": "Muista tärkeä sääntö: tekoäly on vain koodattu ohjelma, ei koskaan taikuutta tai oikea elävä olento!"
+          },
+          {
+            "id": "q_p1_10",
+            "type": "multiple_choice",
+            "question": "Voiko AI vanin tekoäly olla sinulle oikea, elävä ystävä?",
+            "options": ["Kyllä, se on täysin elossa", "Ei, se on vain ohjelma", "Kyllä, jos sille paljon juttelee", "Ei, koska se on vain hidas auto"],
+            "correctAnswer": "Ei, se on vain ohjelma",
+            "explanation": "Vaikka tekoäly voi jutella kivasti ja auttaa tehtävissä, se on silti vain tietokoneohjelma, ei koskaan elävä olento."
+          },
+          {
+            "id": "q_p1_11",
+            "type": "scenario",
+            "question": "SKENAARIO: AI vanin näyttö menee yhtäkkiä pimeäksi ja radio lakkaa kuulumasta. Pikkuveljesi pelästyy ja luulee, että auton henki karkasi. Miten rauhoitat hänet?",
+            "options": ["Kerron, että tekoäly taisi vain mennä unille.", "Sanon, että ohjelma taisi kaatua tai virta loppua.", "Alan etsiä karannutta henkeä heti autotallista.", "Soitan heti poliisille, koska henki on kadonnut."],
+            "correctAnswer": "Sanon, että ohjelma taisi kaatua tai virta loppua.",
+            "explanation": "Koska tekoäly on vain tietokoneohjelma, sillä ei ole sielua tai henkeä. Se tarvitsee toimiakseen vain sähköä ja koodia."
+          },
+          {
+            "id": "q_p1_12",
+            "type": "true_false",
+            "question": "Ensimmäiset tekoälyt syntyivät aivan itsekseen autotallin perällä lojuneista vanhoista varaosista.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Ohjelmat eivät synny itsekseen. Tekoäly on aina ihmisen rakentama ja koodaama erikoisohjelma."
+          },
+          {
+            "id": "q_p1_13",
+            "type": "ordering",
+            "question": "Järjestä asiat elävästä olennosta keksittyyn taikuuteen. Aseta tekoäly oikealle paikalleen näiden väliin!",
+            "options": ["Oikea ihminen (Elävä olento)", "Tekoäly (Koodattu ohjelma)", "Lentävä matto (Taikuutta)"],
+            "correctAnswer": ["Oikea ihminen (Elävä olento)", "Tekoäly (Koodattu ohjelma)", "Lentävä matto (Taikuutta)"],
+            "explanation": "Ihminen on elävä olento, tekoäly on tietokoneella toimiva ohjelma, ja lentävät matot ovat olemassa vain saduissa ja taikuudessa."
+          },
+          {
+            "id": "q_p1_14",
+            "type": "spot_the_ai",
+            "question": "Yksi näistä tavoista ohjata ja liikuttaa AI vania käyttää tekoälyä. Mikä se on?",
+            "options": ["Kääntämällä mekaanista rattia omilla käsillä.", "Painaen kaasupoljinta oikealla jalalla.", "Auton tietokone väistää estettä kameroilla ja koodilla.", "Vetämällä käsijarrusta voimakkaasti alamäessä."],
+            "correctAnswer": "Auton tietokone väistää estettä kameroilla ja koodilla.",
+            "explanation": "Kun tietokoneohjelma on koodattu tekemään itsenäisiä päätöksiä (kuten väistämään estettä), kyseessä on tekoäly. Muut ovat ihmisen tekemiä mekaanisia toimintoja."
+          },
+          {
+            "id": "q_p1_15",
+            "type": "reverse_prompt",
+            "question": "Tekoälyavustaja vastasi kuskille näin: \"Hei! Olen ihmisen tekemä tietokoneohjelma, jonka tarkoitus on auttaa sinua!\" Mikä seuraavista oli ihmisen antama ohje (prompt)?",
+            "options": ["Kerro, mikä on paras lempiruokasi.", "Selitä lyhyesti, mikä ihme sinä oikein olet.", "Tee taikatemppu taikasauvalla.", "Kuka voitti jalkapallopelin eilen illalla?"],
+            "correctAnswer": "Selitä lyhyesti, mikä ihme sinä oikein olet.",
+            "explanation": "Tekoäly vastaa kysymykseen rehellisesti: se ei ole taikuri tai ihminen, vaan koodattu ohjelma, jonka tarkoitus on auttaa meitä."
           }
         ]
       },
