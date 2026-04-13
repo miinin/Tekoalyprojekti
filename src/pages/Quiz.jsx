@@ -620,8 +620,8 @@ export default function Quiz() {
                 </div>
                 {!showExplanation && (
                   <div style={{ display: 'flex', gap: '0.8rem' }}>
-                    <button style={{ padding: '0.8rem 1.2rem', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '15px', fontWeight: 'bold' }} onClick={() => moveItem(idx, 'up')}>↑</button>
-                    <button style={{ padding: '0.8rem 1.2rem', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '15px', fontWeight: 'bold' }} onClick={() => moveItem(idx, 'down')}>↓</button>
+                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--accent-color)', color: 'white', border: 'none', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(120, 190, 32, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'up')}>↑</button>
+                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--accent-color)', color: 'white', border: 'none', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(120, 190, 32, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'down')}>↓</button>
                   </div>
                 )}
               </div>
