@@ -674,7 +674,8 @@ export default function Garage() {
               ) : (
                 <>
                   <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
-                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'auto', cursor: 'pointer', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(234, 179, 8, 0.8)) brightness(1.2)' : 'none', transition: 'all 0.2s' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
+                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
+                  <div style={{ position: 'absolute', top: '30%', right: '10%', width: '15%', height: '50%', background: 'rgba(255, 0, 0, 0.4)', border: '2px solid red', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
                 </>
               )}
 
