@@ -255,7 +255,128 @@ export const categories = [
           }
       ] },
       { "id": "perusteet_3", "name": "Tekoäly vs. tavallinen ohjelma", "questions": [
-          { "id": "q_p3_1", "type": "multiple_choice", "question": "Mikä on tekoälyn neuroverkko?", "options": ["Siimaa ja lautoja", "Aivojen solujen toimintaa matkiva tietokoneohjelma", "Sähköverkko", "Internet-selain"], "correctAnswer": "Aivojen solujen toimintaa matkiva tietokoneohjelma", "explanation": "Neuroverkot on saaneet inspiraationsa ihmisaivojen hermosoluista ja niiden välisistä yhteyksistä." }
+          {
+            "id": "q_p3_1",
+            "type": "true_false",
+            "question": "AI vanin perinteinen tuulilasinpyyhin menee päälle, kun painat nappia. Tekoäly puolestaan voi keksiä itselleen täysin uusia sääntöjä, joita kukaan ei ole sille koodannut.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Vaikka tekoäly osaa sopeutua uusiin tilanteisiin ja oppia uutta, sekin toimii aina alun perin ihmisen koodaamien raamien ja sääntöjen puitteissa."
+          },
+          {
+            "id": "q_p3_2",
+            "type": "multiple_choice",
+            "question": "Autotallin perinteinen robottikäsi on ohjelmoitu siirtämään mutteri laatikkoon tasan metrin päähän. Mitä se tekee, jos laatikko onkin siirretty puoli metriä sivuun?",
+            "options": ["Se etsii laatikon nopeasti kameroiden avulla.", "Se pudottaa mutterin siihen vanhaan paikkaan.", "Se kysyy sinulta heti neuvoa ongelmaan.", "Se kieltäytyy kokonaan tekemästä työtään."],
+            "correctAnswer": "Se pudottaa mutterin siihen vanhaan paikkaan.",
+            "explanation": "Tavallinen ohjelma noudattaa vain ja ainoastaan sille annettua sääntöä. Se ei osaa sopeutua yllättäviin muutoksiin, toisin kuin tekoäly!"
+          },
+          {
+            "id": "q_p3_3",
+            "type": "scenario",
+            "question": "SKENAARIO: Olette ajamassa AI vanilla ja tiellä on yllättäen kaatunut puu. Tavallinen ohjelma, kuten vakionopeudensäädin, vain jatkaisi matkaa samaa vauhtia. Miten tekoälyllä varustettu ohjaus eroaa tässä tilanteessa?",
+            "options": ["Se osaa havaita esteen ja jarruttaa ajoissa.", "Se kääntyy heti takaisin kotiin päin.", "Se jatkaa matkaa aivan kuten ennenkin.", "Se sammuttaa moottorin pysyvästi."],
+            "correctAnswer": "Se osaa havaita esteen ja jarruttaa ajoissa.",
+            "explanation": "Tekoäly pystyy havainnoimaan ympäristöään ja reagoimaan uusiin, yllättäviin tilanteisiin. Tavallinen ohjelma tekee sokeasti vain sen yhden ennalta määrätyn asian."
+          },
+          {
+            "id": "q_p3_4",
+            "type": "drag_drop",
+            "question": "Kumpi osaa mitäkin? Yhdistä asiat tavalliseen ohjelmaan tai tekoälyyn.",
+            "draggables": ["Toimii vain napista painamalla", "Laskee aina tasan 2+2=4", "Tunnistaa yllättävät liikennemerkit", "Tuottaa aivan uuden satukirjan"],
+            "dropZones": ["Tavallinen ohjelma", "Tekoäly"],
+            "correctAnswer": {"Toimii vain napista painamalla": "Tavallinen ohjelma", "Laskee aina tasan 2+2=4": "Tavallinen ohjelma", "Tunnistaa yllättävät liikennemerkit": "Tekoäly", "Tuottaa aivan uuden satukirjan": "Tekoäly"},
+            "explanation": "Tavallinen ohjelma on kuin taskulaskin tai valokatkaisija. Tekoäly on paljon monimutkaisempi: se osaa tunnistaa kuvia ja jopa luoda täysin uutta sisältöä!"
+          },
+          {
+            "id": "q_p3_5",
+            "type": "ordering",
+            "question": "Tavallinen koodi seuraa sääntöjä tiukasti rivi riviltä. Järjestä perinteisen sähköikkunan toiminta alusta loppuun.",
+            "options": ["Ihminen painaa auton ikkunan nappia.", "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'", "Ikkunan sähkömoottori käynnistyy.", "Ikkuna aukeaa nätisti alas asti."],
+            "correctAnswer": ["Ihminen painaa auton ikkunan nappia.", "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'", "Ikkunan sähkömoottori käynnistyy.", "Ikkuna aukeaa nätisti alas asti."],
+            "explanation": "Tavallinen tietokoneohjelma koostuu hyvin yksinkertaisista \"jos tapahtuu A, tee B\" -säännöistä. Se suorittaa ne aina prikulleen samassa järjestyksessä."
+          },
+          {
+            "id": "q_p3_6",
+            "type": "spot_the_ai",
+            "question": "Mikä näistä AI vanin toiminnoista vaatii ehdottomasti tekoälyä, eikä vain tavallista ohjelmointia?",
+            "options": ["Auton radio, joka soittaa aina tiettyä kanavaa.", "Peruutuskamera, joka näyttää pelkän kuvan taakse.", "Vilkku, joka naksuu tasan sekunnin välein.", "Kamera, joka tunnistaa tiellä juoksevan ketun."],
+            "correctAnswer": "Kamera, joka tunnistaa tiellä juoksevan ketun.",
+            "explanation": "Eläimen tai esteen tunnistaminen oikeassa elämässä vaatii tekoälyä, joka kykenee tulkitsemaan näkemäänsä. Muut ovat hyvin yksinkertaisia sääntöohjelmia."
+          },
+          {
+            "id": "q_p3_7",
+            "type": "reverse_prompt",
+            "question": "Auton näyttöön ilmestyy täysin uusi reittikartta, joka kiertää juuri alkaneen kolariruuhkan. Millä kehotteella (promptilla) tekoäly saatiin reagoimaan yllättävään tilanteeseen?",
+            "options": ["Näytä meille aina se kaikista suorin reitti kaupunkiin.", "Etsi aina uusi ja turvallinen reitti, jos tiellä on este.", "Piirrä kartta paperille punaisella kynällä.", "Sammuta navigaattori kokonaan aina, kun on ruuhkaa."],
+            "correctAnswer": "Etsi aina uusi ja turvallinen reitti, jos tiellä on este.",
+            "explanation": "Tekoäly voidaan ohjelmoida sopeutumaan. Antamalla sille ohje etsiä uusi reitti vaaran sattuessa, se pystyy tuottamaan lennosta täysin uuden suunnitelman!"
+          },
+          {
+            "id": "q_p3_8",
+            "type": "true_false",
+            "question": "Tavallinen cd-soitin osaa ihan itse keksiä ja säveltää täysin uusia ja upeita lauluja, jos vanhat levyt alkavat kyllästyttää automatkalla.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Tavallinen soitin soittaa vain ne kappaleet, jotka on jo valmiiksi tehty. Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvittaisiin tekoälyä."
+          },
+          {
+            "id": "q_p3_9",
+            "type": "multiple_choice",
+            "question": "Miten perinteinen autotallissa pelattava tietokonepeli eroaa nykyaikaisesta tekoälyvastustajasta?",
+            "options": ["Tavallinen peli oppii virheistään jatkuvasti lisää.", "Tavallinen peli toimii aina samojen sääntöjen mukaan.", "Tavallinen peli keksii itsestään täysin uusia kenttiä.", "Tavallinen peli osaa oikeasti lukea ihmisen ajatuksia."],
+            "correctAnswer": "Tavallinen peli toimii aina samojen sääntöjen mukaan.",
+            "explanation": "Tavallisen pelin tietokonevastustaja liikkuu aina samojen sääntöjen mukaan. Tekoäly taas osaa oppia pelityylistäsi ja voi yllättää sinut!"
+          },
+          {
+            "id": "q_p3_10",
+            "type": "drag_drop",
+            "question": "Kumpi näistä kyseessä on? Raahaa väitteet oikean ohjelman päälle.",
+            "draggables": ["Toimii vain ennalta annettujen sääntöjen mukaan", "Ei osaa reagoida mihinkään uuteen tai outoon", "Voi luoda aivan uuden ja hienon kuvan pyynnöstä", "Oppii ja sopeutuu jatkuvasti uusiin asioihin"],
+            "dropZones": ["Tekoäly", "Tavallinen ohjelma"],
+            "correctAnswer": {"Toimii vain ennalta annettujen sääntöjen mukaan": "Tavallinen ohjelma", "Ei osaa reagoida mihinkään uuteen tai outoon": "Tavallinen ohjelma", "Voi luoda aivan uuden ja hienon kuvan pyynnöstä": "Tekoäly", "Oppii ja sopeutuu jatkuvasti uusiin asioihin": "Tekoäly"},
+            "explanation": "Tavalliset ohjelmat ovat luotettavia, mutta joustamattomia. Tekoäly on paljon joustavampi, sillä se voi oppia ja luoda uutta tietoa."
+          },
+          {
+            "id": "q_p3_11",
+            "type": "scenario",
+            "question": "SKENAARIO: Kirjoitat autotallin sähkölukolle tunnusluvun väärin. Tavallinen ohjelma hylkää luvun heti. Miten edistynyt älylukko (jossa on tekoäly) voisi toimia samassa tilanteessa, jotta pääsisit sisään?",
+            "options": ["Se tunnistaa kasvosi kamerasta ja avaa oven silti.", "Se rikkoo oven lukon suurella voimalla auki.", "Se hälyttää heti kovaäänisesti palokunnan paikalle.", "Se sammuttaa rangaistuksena autotallin sähköt."],
+            "correctAnswer": "Se tunnistaa kasvosi kamerasta ja avaa oven silti.",
+            "explanation": "Tekoäly osaa yhdistää useita eri tietoja (kuten kuvaa ja salasanoja) tehdäkseen älykkäitä päätöksiä, kun taas tavallinen lukko ymmärtää vain pelkät numerot."
+          },
+          {
+            "id": "q_p3_12",
+            "type": "spot_the_ai",
+            "question": "Kolme näistä asioista on tavallisen koodin rutiineja, mutta yksi on uuden luomista tekoälyllä. Mikä?",
+            "options": ["Laskin-ohjelma, joka ilmoittaa että 5 x 5 on aina 25.", "Sähköpostiohjelma, joka lähettää jo valmiin viestin eteenpäin.", "Työkalu, joka kirjoittaa ohjeestasi uuden runon.", "Herätyskello, joka soi joka aamu tasan kello kahdeksan."],
+            "correctAnswer": "Työkalu, joka kirjoittaa ohjeestasi uuden runon.",
+            "explanation": "Aivan uuden, ennen olemassa olemattoman sisällön (kuten tekstin tai runon) tuottaminen on tyypillinen edistyneen tekoälyn tehtävä!"
+          },
+          {
+            "id": "q_p3_13",
+            "type": "ordering",
+            "question": "Järjestä autossa olevat asiat yksinkertaisimmasta sääntöohjelmasta kaikkein edistyneimpään tekoälyyn!",
+            "options": ["Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija", "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan", "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä"],
+            "correctAnswer": ["Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija", "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan", "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä"],
+            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan, ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!"
+          },
+          {
+            "id": "q_p3_14",
+            "type": "multiple_choice",
+            "question": "Jos tekoäly kerran on niin fiksu ja mukautuva, miksi autossa on edelleen myös täysin tavallisia ohjelmia (kuten jarruvalojen ohjaus)?",
+            "options": ["Koska tavalliset ohjelmat ovat nopeita ja aina sataprosenttisen varmoja.", "Koska tekoäly unohtaa todella usein sytyttää tärkeät valot.", "Koska tekoälykoodi on aivan liian iso mahtuakseen autoon.", "Koska tavalliset ohjelmat ovat aivan uusi ja hieno keksintö."],
+            "correctAnswer": "Koska tavalliset ohjelmat ovat nopeita ja aina sataprosenttisen varmoja.",
+            "explanation": "Yksinkertaisiin, tuttuihin ja toistuviin tehtäviin (kuten jarruvalon sytyttämiseen) ei tarvita monimutkaista tekoälyä. Tavallinen ohjelma tekee ne nopeimmin ja turvallisimmin!"
+          },
+          {
+            "id": "q_p3_15",
+            "type": "reverse_prompt",
+            "question": "Tekoälyradio näkee kameran avulla asvaltissa valtavan reiän ja sanoo uuden lauseen: \"Varo, hidasta hieman, edessä on kuoppa!\" Mikä alkuperäinen sääntö (prompti) mahdollisti tämän uuden yllättävän varoituksen?",
+            "options": ["Soita radiosta ainoastaan oikein kovaäänistä musiikkia.", "Tarkkaile aina tietä ja varoita kuskia yllättävistä vaaroista.", "Kerro kuskille yksi hauska vitsi joka kymmenes kilometri.", "Mittaa tarkasti, kuinka leveä auton vasen rengas on."],
+            "correctAnswer": "Tarkkaile aina tietä ja varoita kuskia yllättävistä vaaroista.",
+            "explanation": "Kun tekoälylle annetaan joustava ohje \"varoittaa vaaroista\", sen ohjelmointi ei rajoitu vain tiettyihin sanoihin, vaan se osaa keksiä tilanteeseen parhaiten sopivan varoituksen!"
+          }
       ] },
       { "id": "perusteet_4", "name": "Mitä tekoäly ei osaa?", "questions": [
           { "id": "q_p4_1", "type": "multiple_choice", "question": "Mikä on algoritmi?", "options": ["Laskuresepti tai ohjesarja", "Tietokoneen osa", "Pelin nimi", "Salasana"], "correctAnswer": "Laskuresepti tai ohjesarja", "explanation": "Algoritmi on tarkka ohje siitä, miten jokin tehtävä suoritetaan vaihe vaiheelta." }
