@@ -1113,7 +1113,7 @@ const Roadmap = () => {
           <div style={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
               <button 
                 className="btn-primary" 
-                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(0, 114, 198, 0.4)', fontSize: '1.2rem' }}
+                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(76, 133, 17, 0.4)', fontSize: '1.2rem' }}
                 onClick={handleBackToMain}
               >
                 <MapIcon size={24} />

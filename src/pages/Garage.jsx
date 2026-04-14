@@ -581,7 +581,7 @@ export default function Garage() {
             minHeight: '400px',
             borderRadius: '24px', 
             overflow: 'hidden', 
-            border: '4px solid rgba(0, 114, 198, 0.4)',
+            border: '4px solid rgba(76, 133, 17, 0.4)',
             transition: 'box-shadow 0.3s ease',
             boxShadow: isGlobalPreview 
               ? '0 0 0 6px rgba(16, 185, 129, 0.9), inset 0 0 50px rgba(0,0,0,0.5), 0 20px 40px rgba(0, 0, 0, 0.2)' 

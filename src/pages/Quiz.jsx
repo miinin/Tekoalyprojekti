@@ -133,6 +133,7 @@ export default function Quiz() {
   const [usedToolChecks, setUsedToolChecks] = useState(false);
   const [highlightedWrongItems, setHighlightedWrongItems] = useState([]);
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [hoveredOptionIdx, setHoveredOptionIdx] = useState(null);
 
   useEffect(() => {
     setRemovedOptions([]);
@@ -142,6 +143,7 @@ export default function Quiz() {
     setUsedToolChecks(false);
     setHighlightedWrongItems([]);
     setSelectedDragItem(null);
+    setHoveredOptionIdx(null);
     
     if (!questions.length) return;
     
@@ -508,7 +510,7 @@ export default function Quiz() {
             </div>
             
             <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', display: 'flex', gap: '1.5rem', alignItems: 'flex-start', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
-              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(0, 114, 198, 0.4)' }}>
+              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
                  <Lightbulb size={32} />
               </div>
               <div>
@@ -533,6 +535,7 @@ export default function Quiz() {
             {shuffledOptions.map((option, idx) => {
               const isSelected = selectedAnswer === option;
               const isRemoved = removedOptions.includes(option);
+              const isHovered = hoveredOptionIdx === idx;
               
               let borderColor = '#22c55e'; // default fallback for 'Oikein'
               if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
@@ -548,7 +551,7 @@ export default function Quiz() {
                  borderColor = colorPalette[idx % colorPalette.length];
               }
               
-              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'white', border: `3px solid ${borderColor}`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' };
+              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
               
               if (isRemoved) {
                  btnStyle.opacity = 0.5;
@@ -566,13 +569,21 @@ export default function Quiz() {
                   btnStyle.border = '3px solid #ef4444';
                   btnStyle.background = 'rgba(239, 68, 68, 0.15)';
                 } else {
+                  btnStyle.border = `3px solid ${borderColor}20`;
                   btnStyle.opacity = 0.5;
                 }
-              } else if (isSelected) {
-                btnStyle.background = borderColor;
-                btnStyle.color = 'white';
-                btnStyle.boxShadow = `0 8px 25px ${borderColor}60`;
-                btnStyle.transform = 'translateY(-2px)';
+              } else {
+                if (isSelected) {
+                  btnStyle.background = borderColor;
+                  btnStyle.border = `3px solid ${borderColor}`;
+                  btnStyle.color = 'white';
+                  btnStyle.boxShadow = `0 6px 20px ${borderColor}40`;
+                  btnStyle.transform = 'translateY(-2px)';
+                } else if (isHovered && !isRemoved) {
+                  btnStyle.border = `3px solid ${borderColor}`;
+                  btnStyle.transform = 'translateY(-3px)';
+                  btnStyle.boxShadow = `0 8px 25px ${borderColor}30`;
+                }
               }
 
               return (
@@ -580,23 +591,8 @@ export default function Quiz() {
                   key={idx} 
                   style={btnStyle}
                   onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)}
-                  onMouseEnter={(e) => {
-                     if (!showExplanation && !isRemoved) {
-                         e.currentTarget.style.transform = 'translateY(-3px)';
-                         e.currentTarget.style.boxShadow = `0 10px 25px ${borderColor}40`;
-                         if (!isSelected) e.currentTarget.style.borderColor = borderColor;
-                     }
-                  }}
-                  onMouseLeave={(e) => {
-                     if (!showExplanation) {
-                         e.currentTarget.style.transform = isSelected ? 'translateY(-2px)' : 'translateY(0)';
-                         e.currentTarget.style.boxShadow = isSelected ? '0 8px 25px rgba(0, 114, 198, 0.15)' : '0 4px 15px rgba(0,0,0,0.03)';
-                         if (!isSelected) {
-                             e.currentTarget.style.borderColor = (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2 && idx === 0) ? 'rgba(134, 239, 172, 0.4)' : 
-                                                                (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2 && idx === 1) ? 'rgba(252, 165, 165, 0.4)' : 'transparent';
-                         }
-                     }
-                  }}
+                  onMouseEnter={() => setHoveredOptionIdx(idx)}
+                  onMouseLeave={() => setHoveredOptionIdx(null)}
                 >
                   <span style={{ textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</span>
                   {isRemoved && bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Törmäyksenesto suojasi</span>}

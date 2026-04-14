@@ -32,7 +32,7 @@ export default function Login() {
                 width: '100%',
                 padding: '1.2rem 1rem 1.2rem 3.5rem',
                 borderRadius: '8px',
-                border: '2px solid rgba(0, 114, 198, 0.2)',
+                border: '2px solid rgba(76, 133, 17, 0.2)',
                 background: '#f8fafc',
                 color: 'var(--text-main)',
                 fontSize: '1rem',
