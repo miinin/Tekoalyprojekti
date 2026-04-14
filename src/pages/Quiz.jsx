@@ -388,8 +388,16 @@ export default function Quiz() {
     setSelectedDragItem(null);
   };
 
-  const handleRemoveFromDropZone = (item) => {
+  const handleRemoveFromDropZone = (e, item) => {
     if (showExplanation) return;
+    if (selectedDragItem) {
+        // Jos käyttäjällä on palikka "kädessä" (valittuna) ja hän klikkaa vahingossa 
+        // toista palikkaa laatikossa, hän todennäköisesti yrittää PUDOTTAA palikan laatikkoon.
+        // Tällöin emme poista olemassa olevaa palikkaa, vaan annamme klikkauksen valua alaspäin 
+        // laatikon DropZonelle, joka hoitaa uuden palikan sijoittamisen kiltisti uutena jäsenenä lootaan!
+        return;
+    }
+    e.stopPropagation();
     setDragTargets(prev => {
       const next = { ...prev };
       delete next[item];
@@ -760,7 +768,7 @@ export default function Quiz() {
                           key={idx} 
                           draggable={!showExplanation}
                           onDragStart={(e) => handleDragStart(e, item)}
-                          onClick={() => handleRemoveFromDropZone(item)}
+                          onClick={(e) => handleRemoveFromDropZone(e, item)}
                           style={{ padding: '1rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '25px', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
                         >
                           {item}
