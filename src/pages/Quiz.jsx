@@ -509,7 +509,7 @@ export default function Quiz() {
   };
 
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '950px', margin: '0 auto', width: '100%' }}>
       
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -594,7 +594,7 @@ export default function Quiz() {
               )}
             </div>
             
-            <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: '2.5rem', borderRadius: '20px', display: 'flex', gap: '1.8rem', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
+            <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: '1.5rem 2.5rem', borderRadius: '20px', display: 'flex', gap: '1.8rem', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
               <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
                  <Lightbulb size={36} />
               </div>
