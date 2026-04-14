@@ -1085,7 +1085,10 @@ const Roadmap = () => {
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     <b>Kerää osaamismitaleja!</b><br/><br/>
-                    Jokaisen kategorian kokeista on tarjolla mitaleja sen mukaan, kuinka moneen kysymykseen vastaat oikein. Mitä paremmin osaat, sitä kirkkaamman mitalin ansaitset!<br/><br/>
+                    Kun vastaat tason kysymyksiin, sinulle on tarjolla mitaleja sen mukaan, kuinka moneen saat oikean vastauksen. Mitä paremmin osaat, sitä kirkkaamman mitalin ansaitset!<br/><br/>
+                    <span style={{ fontSize: '1rem', color: '#0369a1', background: '#e0f2fe', padding: '0.4rem 0.8rem', borderRadius: '8px', display: 'inline-block', marginBottom: '1rem' }}>
+                        💡 <b>Vinkki:</b> Kirkkaimpiin mitaleihin sama taso pitää pelata useamman kerran, jotta saat kerättyä aina uusia vaihtuvia kysymyksiä!
+                    </span><br/>
                     <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <span style={{ width: '28px', textAlign: 'center', fontWeight: '900', color: '#ef4444' }}>❌</span> 
