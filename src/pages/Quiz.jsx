@@ -495,17 +495,17 @@ export default function Quiz() {
 
   const getQuestionStyle = (type) => {
     const styles = {
-      'true_false': { text: 'Oikein vai väärin', icon: <Scale size={18} />, color: '#0072C6', bg: '#e0f2fe' },
-      'multiple_choice': { text: 'Monivalinta', icon: <List size={18} />, color: '#0072C6', bg: '#e0f2fe' },
-      'scenario': { text: 'Miten toimit?', icon: <Compass size={18} />, color: '#d97706', bg: '#fef3c7' },
-      'drag_drop': { text: 'Raahaa ja Pudota', icon: <Move size={18} />, color: '#16a34a', bg: '#dcfce7' },
-      'ordering': { text: 'Järjestä oikein', icon: <ArrowUpDown size={18} />, color: '#16a34a', bg: '#dcfce7' },
-      'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={18} />, color: '#7c3aed', bg: '#ede9fe' },
-      'reverse_prompt': { text: 'Käänteinen Kehote', icon: <Terminal size={18} />, color: '#db2777', bg: '#fce7f3' },
-      'spot_the_lie': { text: 'Hallusinaation Metsästys', icon: <Search size={18} />, color: '#dc2626', bg: '#fee2e2' },
-      'jailbreak': { text: 'Jailbreak -hakkerointi', icon: <Unlock size={18} />, color: '#0d9488', bg: '#ccfbf1' }
+      'true_false': { text: 'Oikein vai väärin', icon: <Scale size={22} />, color: '#0072C6', bg: '#e0f2fe', border: '#bae6fd' },
+      'multiple_choice': { text: 'Monivalinta', icon: <List size={22} />, color: '#0072C6', bg: '#e0f2fe', border: '#bae6fd' },
+      'scenario': { text: 'Miten toimit?', icon: <Compass size={22} />, color: '#d97706', bg: '#fef3c7', border: '#fde68a' },
+      'drag_drop': { text: 'Raahaa ja Pudota', icon: <Move size={22} />, color: '#16a34a', bg: '#dcfce7', border: '#bbf7d0' },
+      'ordering': { text: 'Järjestä oikein', icon: <ArrowUpDown size={22} />, color: '#16a34a', bg: '#dcfce7', border: '#bbf7d0' },
+      'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={22} />, color: '#6d28d9', bg: '#ede9fe', border: '#ddd6fe' },
+      'reverse_prompt': { text: 'Käänteinen Kehote', icon: <Terminal size={22} />, color: '#be185d', bg: '#fce7f3', border: '#fbcfe8' },
+      'spot_the_lie': { text: 'Hallusinaation Metsästys', icon: <Search size={22} />, color: '#b91c1c', bg: '#fee2e2', border: '#fecaca' },
+      'jailbreak': { text: 'Jailbreak -hakkerointi', icon: <Unlock size={22} />, color: '#0f766e', bg: '#ccfbf1', border: '#99f6e4' }
     };
-    return styles[type] || { text: 'Kysymys', icon: <Brain size={18} />, color: '#0072C6', bg: '#e0f2fe' };
+    return styles[type] || { text: 'Kysymys', icon: <Brain size={22} />, color: '#0072C6', bg: '#e0f2fe', border: '#bae6fd' };
   };
 
   return (
@@ -555,7 +555,7 @@ export default function Quiz() {
         {(() => {
           const styleInfo = getQuestionStyle(currentQuestion.type);
           return (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: styleInfo.bg, color: styleInfo.color, padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 'bold', marginBottom: '1.5rem', fontFamily: 'var(--font-main)' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem', backgroundColor: styleInfo.bg, color: styleInfo.color, padding: '0.6rem 1.4rem', borderRadius: '30px', fontSize: '1.2rem', fontWeight: '800', marginBottom: '2rem', fontFamily: 'var(--font-display)', border: `2px solid ${styleInfo.border}`, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               {styleInfo.icon}
               {styleInfo.text}
             </div>
@@ -594,13 +594,13 @@ export default function Quiz() {
               )}
             </div>
             
-            <div style={{ background: 'white', padding: '2rem', borderRadius: '16px', display: 'flex', gap: '1.5rem', alignItems: 'flex-start', border: '1px solid rgba(0,0,0,0.05)', boxShadow: '0 4px 6px rgba(0,0,0,0.02)' }}>
+            <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: '2.5rem', borderRadius: '20px', display: 'flex', gap: '1.8rem', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
               <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
-                 <Lightbulb size={32} />
+                 <Lightbulb size={36} />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 0.8rem 0', color: 'var(--text-main)', fontSize: '1.4rem' }}>Mikä on homman juju?</h3>
-                <p style={{ margin: 0, lineHeight: '1.7', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+                <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Mikä on homman juju?</h3>
+                <p style={{ margin: 0, lineHeight: '1.8', color: '#1e293b', fontSize: '1.3rem', fontWeight: '600', fontFamily: 'var(--font-main)' }}>
                   {currentQuestion.explanation}
                 </p>
               </div>
