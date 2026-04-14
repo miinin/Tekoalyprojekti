@@ -428,7 +428,7 @@ export default function Quiz() {
 
   const getQuestionStyle = (type) => {
     const styles = {
-      'true_false': { text: 'Oikein vai Väärin', icon: <Scale size={18} />, color: '#0072C6', bg: '#e0f2fe' },
+      'true_false': { text: 'Oikein vai väärin', icon: <Scale size={18} />, color: '#0072C6', bg: '#e0f2fe' },
       'multiple_choice': { text: 'Monivalinta', icon: <List size={18} />, color: '#0072C6', bg: '#e0f2fe' },
       'scenario': { text: 'Miten toimit?', icon: <Compass size={18} />, color: '#d97706', bg: '#fef3c7' },
       'drag_drop': { text: 'Raahaa ja Pudota', icon: <Move size={18} />, color: '#16a34a', bg: '#dcfce7' },
@@ -533,7 +533,17 @@ export default function Quiz() {
             {shuffledOptions.map((option, idx) => {
               const isSelected = selectedAnswer === option;
               const isRemoved = removedOptions.includes(option);
-              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'rgba(255, 255, 255, 0.9)', border: '2px solid transparent', color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 6px 20px rgba(0,0,0,0.05)' };
+              
+              const colorPalette = [
+                { bg: 'linear-gradient(135deg, rgba(239, 246, 255, 0.9) 0%, rgba(219, 234, 254, 0.7) 100%)', border: 'rgba(191, 219, 254, 0.5)', text: '#1e40af' }, // Blue
+                { bg: 'linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 226, 226, 0.7) 100%)', border: 'rgba(254, 202, 202, 0.5)', text: '#991b1b' }, // Red
+                { bg: 'linear-gradient(135deg, rgba(255, 251, 235, 0.9) 0%, rgba(254, 243, 199, 0.7) 100%)', border: 'rgba(253, 230, 138, 0.5)', text: '#92400e' }, // Yellow
+                { bg: 'linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(220, 252, 231, 0.7) 100%)', border: 'rgba(187, 247, 208, 0.5)', text: '#166534' }, // Green
+                { bg: 'linear-gradient(135deg, rgba(250, 245, 255, 0.9) 0%, rgba(243, 232, 255, 0.7) 100%)', border: 'rgba(233, 213, 255, 0.5)', text: '#6b21a8' }  // Purple
+              ];
+              const pColor = colorPalette[idx % colorPalette.length];
+              
+              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: pColor.bg, border: `2px solid ${pColor.border}`, color: pColor.text, borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 6px 20px rgba(0,0,0,0.05)' };
               
               if (isRemoved) {
                  btnStyle.opacity = 0.5;
