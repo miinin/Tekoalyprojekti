@@ -562,22 +562,22 @@ export default function Quiz() {
 
               if (showExplanation) {
                 if (option === currentQuestion.correctAnswer) {
-                  btnStyle.border = '3px solid var(--accent-color)';
-                  btnStyle.background = 'rgba(120, 190, 32, 0.15)';
-                  btnStyle.boxShadow = '0 0 20px rgba(120, 190, 32, 0.2)';
+                  btnStyle.border = '3px solid #22c55e';
+                  btnStyle.background = '#22c55e1A';
+                  btnStyle.boxShadow = '0 0 20px #22c55e30';
                 } else if (isSelected) {
                   btnStyle.border = '3px solid #ef4444';
-                  btnStyle.background = 'rgba(239, 68, 68, 0.15)';
+                  btnStyle.background = '#ef44441A';
                 } else {
                   btnStyle.border = `3px solid ${borderColor}20`;
                   btnStyle.opacity = 0.5;
                 }
               } else {
                 if (isSelected) {
-                  btnStyle.background = borderColor;
+                  btnStyle.background = `${borderColor}1A`;
                   btnStyle.border = `3px solid ${borderColor}`;
-                  btnStyle.color = 'white';
-                  btnStyle.boxShadow = `0 6px 20px ${borderColor}40`;
+                  btnStyle.color = 'var(--text-main)';
+                  btnStyle.boxShadow = `0 6px 20px ${borderColor}30`;
                   btnStyle.transform = 'translateY(-2px)';
                 } else if (isHovered && !isRemoved) {
                   btnStyle.border = `3px solid ${borderColor}`;
@@ -616,7 +616,7 @@ export default function Quiz() {
             {orderedItems.map((item, idx) => (
               <div key={idx} style={{ padding: '1.5rem 1.8rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '35px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 8px 25px rgba(0,0,0,0.06)', fontSize: '1.2rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span style={{ width: '30px', height: '30px', background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
+                  <span style={{ width: '30px', height: '30px', flexShrink: 0, background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
                 </div>
                 {!showExplanation && (
