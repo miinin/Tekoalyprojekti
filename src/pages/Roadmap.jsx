@@ -554,9 +554,9 @@ const Roadmap = () => {
     const getSubcategoryMedal = (stat) => {
         if (!stat || stat.total === 0) return null;
         if (stat.correct === stat.total && stat.total > 0) return 'platinum';
-        if (stat.correct >= stat.total - 1) return 'gold';
-        if (stat.correct >= stat.total - 3) return 'silver';
-        if (stat.correct >= stat.total - 5) return 'bronze';
+        if (stat.correct >= Math.floor(stat.total * 0.9)) return 'gold';
+        if (stat.correct >= Math.floor(stat.total * 0.7)) return 'silver';
+        if (stat.correct >= Math.floor(stat.total * 0.5)) return 'bronze';
         return null;
     };
     return getSubcategoryMedal(stat);
@@ -1084,8 +1084,8 @@ const Roadmap = () => {
             {showMedalTutorial && (
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    <b>Kerää solmumitaleita!</b><br/><br/>
-                    Vastaamalla oikein kokeiden kysymyksiin ansaitset sitä kirkkaampia mitaleja. Yritä tavoitella parasta mahdollista tasoa!<br/><br/>
+                    <b>Kerää osaamismitaleja!</b><br/><br/>
+                    Jokaisen kategorian kokeista on tarjolla mitaleja sen mukaan, kuinka moneen kysymykseen vastaat oikein. Mitä paremmin osaat, sitä kirkkaamman mitalin ansaitset!<br/><br/>
                     <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <span style={{ width: '28px', textAlign: 'center', fontWeight: '900', color: '#ef4444' }}>❌</span> 

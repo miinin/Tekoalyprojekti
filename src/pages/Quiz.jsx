@@ -333,9 +333,9 @@ export default function Quiz() {
       const getMedalLevel = (c, t) => {
          if (t === 0) return 0;
          if (c === t) return 4;
-         if (c === t - 1) return 3;
-         if (c >= t - 3) return 2;
-         if (c >= t - 5) return 1;
+         if (c >= Math.floor(t * 0.9)) return 3;
+         if (c >= Math.floor(t * 0.7)) return 2;
+         if (c >= Math.floor(t * 0.5)) return 1;
          return 0;
       };
       const oldMedalLevel = getMedalLevel(oldStat.correct, oldStat.total);
