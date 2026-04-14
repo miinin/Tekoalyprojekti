@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700;900&display=swap');
 
 :root {
-  --primary-color: #0072C6; /* Raikas sininen */
-  --primary-hover: #005A9E;
+  --primary-color: #78BE20; /* Eduks vihreä */
+  --primary-hover: #5d9716;
   --secondary-color: #F2A900; /* Pirteä keltainen/oranssi */
-  --accent-color: #78BE20; /* Eduks vihreä */
+  --accent-color: #0072C6; /* Raikas sininen */
   --bg-color: #f7fbff; /* Vaalea, raikas tausta */
   --surface-color: #ffffff; /* Puhdas valkoinen elementeille */
   --surface-hover: #f1f5f9;

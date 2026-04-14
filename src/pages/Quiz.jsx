@@ -534,16 +534,21 @@ export default function Quiz() {
               const isSelected = selectedAnswer === option;
               const isRemoved = removedOptions.includes(option);
               
-              const colorPalette = [
-                { bg: 'linear-gradient(135deg, rgba(239, 246, 255, 0.9) 0%, rgba(219, 234, 254, 0.7) 100%)', border: 'rgba(191, 219, 254, 0.5)', text: '#1e40af' }, // Blue
-                { bg: 'linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 226, 226, 0.7) 100%)', border: 'rgba(254, 202, 202, 0.5)', text: '#991b1b' }, // Red
-                { bg: 'linear-gradient(135deg, rgba(255, 251, 235, 0.9) 0%, rgba(254, 243, 199, 0.7) 100%)', border: 'rgba(253, 230, 138, 0.5)', text: '#92400e' }, // Yellow
-                { bg: 'linear-gradient(135deg, rgba(240, 253, 244, 0.9) 0%, rgba(220, 252, 231, 0.7) 100%)', border: 'rgba(187, 247, 208, 0.5)', text: '#166534' }, // Green
-                { bg: 'linear-gradient(135deg, rgba(250, 245, 255, 0.9) 0%, rgba(243, 232, 255, 0.7) 100%)', border: 'rgba(233, 213, 255, 0.5)', text: '#6b21a8' }  // Purple
-              ];
-              const pColor = colorPalette[idx % colorPalette.length];
+              let borderColor = '#22c55e'; // default fallback for 'Oikein'
+              if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
+                 borderColor = idx === 0 ? '#22c55e' : '#ef4444';
+              } else {
+                 const colorPalette = [
+                   '#3b82f6', // Pure Blue
+                   '#ef4444', // Pure Red
+                   '#f59e0b', // Pure Orange/Yellow
+                   '#10b981', // Pure Green
+                   '#8b5cf6'  // Pure Purple
+                 ];
+                 borderColor = colorPalette[idx % colorPalette.length];
+              }
               
-              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: pColor.bg, border: `2px solid ${pColor.border}`, color: pColor.text, borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 6px 20px rgba(0,0,0,0.05)' };
+              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'white', border: `3px solid ${borderColor}`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' };
               
               if (isRemoved) {
                  btnStyle.opacity = 0.5;
@@ -551,33 +556,23 @@ export default function Quiz() {
                  btnStyle.justifyContent = 'space-between';
                  btnStyle.alignItems = 'center';
               }
-              
-              if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
-                 if (idx === 0) {
-                    btnStyle.color = '#15803d';
-                    if (!isSelected) { btnStyle.border = '2px solid rgba(134, 239, 172, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(240, 253, 244, 0.8) 0%, rgba(220, 252, 231, 0.6) 100%)'; }
-                 } else {
-                    btnStyle.color = '#b91c1c';
-                    if (!isSelected) { btnStyle.border = '2px solid rgba(252, 165, 165, 0.4)'; btnStyle.background = 'linear-gradient(135deg, rgba(254, 242, 242, 0.8) 0%, rgba(254, 226, 226, 0.6) 100%)'; }
-                 }
-              }
 
               if (showExplanation) {
                 if (option === currentQuestion.correctAnswer) {
-                  btnStyle.border = '2px solid var(--accent-color)';
-                  btnStyle.background = 'rgba(76, 175, 80, 0.15)';
-                  btnStyle.boxShadow = '0 0 20px rgba(76, 175, 80, 0.2)';
+                  btnStyle.border = '3px solid var(--accent-color)';
+                  btnStyle.background = 'rgba(120, 190, 32, 0.15)';
+                  btnStyle.boxShadow = '0 0 20px rgba(120, 190, 32, 0.2)';
                 } else if (isSelected) {
-                  btnStyle.border = '2px solid #ef4444';
+                  btnStyle.border = '3px solid #ef4444';
                   btnStyle.background = 'rgba(239, 68, 68, 0.15)';
                 } else {
                   btnStyle.opacity = 0.5;
                 }
               } else if (isSelected) {
-                btnStyle.border = '2px solid var(--primary-color)';
-                btnStyle.boxShadow = '0 8px 25px rgba(0, 114, 198, 0.15)';
+                btnStyle.background = borderColor;
+                btnStyle.color = 'white';
+                btnStyle.boxShadow = `0 8px 25px ${borderColor}60`;
                 btnStyle.transform = 'translateY(-2px)';
-                btnStyle.background = 'white';
               }
 
               return (
@@ -588,8 +583,8 @@ export default function Quiz() {
                   onMouseEnter={(e) => {
                      if (!showExplanation && !isRemoved) {
                          e.currentTarget.style.transform = 'translateY(-3px)';
-                         e.currentTarget.style.boxShadow = '0 10px 25px rgba(0,114,198,0.12)';
-                         if (!isSelected) e.currentTarget.style.borderColor = 'var(--primary-color)';
+                         e.currentTarget.style.boxShadow = `0 10px 25px ${borderColor}40`;
+                         if (!isSelected) e.currentTarget.style.borderColor = borderColor;
                      }
                   }}
                   onMouseLeave={(e) => {
