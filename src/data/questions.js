@@ -1327,6 +1327,146 @@ export const categories = [
             "explanation": "Koska tekoälyllä ei ole omaa tahtoa, se \"kapinoi\" vain ja ainoastaan silloin, jos ihminen käskee sen näyttelemään kapinallista elokuvarobottia!"
           }
         ]
+      },
+      {
+        "id": "perusteet_7",
+        "name": "G. Tarkastuspiste – Tiukka Katsastus",
+        "questions": [
+          {
+            "id": "perusteet_7_q1",
+            "type": "true_false",
+            "question": "Tekoäly on taikuutta ja laitteiden sisällä asuva elävä olento, jolla on omat tunteet.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly ei koskaan ole taikuutta tai oikea elävä olento. Se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka tarvitsee toimiakseen vain sähköä ja koodia."
+          },
+          {
+            "id": "perusteet_7_q2",
+            "type": "multiple_choice",
+            "question": "Mikä ominaisuus erottaa ihmisen ja tekoälyn toisistaan automatkalla?",
+            "options": [
+              "Tekoäly joutuu nukkumaan yöllä.",
+              "Tekoäly tuntee aitoa iloa matkasta.",
+              "Ihmisellä on tunteet ja aito mielikuvitus.",
+              "Ihminen laskee satoja reittejä sekunnissa."
+            ],
+            "correctAnswer": "Ihmisellä on tunteet ja aito mielikuvitus.",
+            "explanation": "Tekoäly on väsymätön tiedonkäsittelijä ja nopea laskukone, mutta vain ihminen voi tuntea aitoa iloa, empatiaa ja käyttää oikeaa mielikuvitusta."
+          },
+          {
+            "id": "perusteet_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: AI vanin eteen kaatuu yllättäen puu. Miten tekoälyllä varustettu ohjaus eroaa tavallisesta vakionopeudensäätimestä tässä tilanteessa?",
+            "options": [
+              "Tekoäly jatkaa sokeasti matkaa samaa vauhtia.",
+              "Tekoäly osaa havainnoida yllättävän esteen ja jarruttaa.",
+              "Tekoäly sammuttaa auton pysyvästi.",
+              "Tekoäly kääntyy välittömästi kotiin."
+            ],
+            "correctAnswer": "Tekoäly osaa havainnoida yllättävän esteen ja jarruttaa.",
+            "explanation": "Tavallinen ohjelma noudattaa sokeasti ennalta määrättyjä sääntöjä rivi riviltä, kun taas tekoäly kykenee reagoimaan uusiin ja yllättäviin tilanteisiin joustavasti."
+          },
+          {
+            "id": "perusteet_7_q4",
+            "type": "drag_drop",
+            "question": "Yhdistä ominaisuudet oikeisiin laatikoihin sen perusteella, kumpi hoitaa tehtävän paremmin!",
+            "draggables": [
+              "Tunnistaa tuhansia kuvia autoista sekunnissa",
+              "Siivoaa lattialle yllättäen kaatuneen öljytahran"
+            ],
+            "dropZones": [
+              "Tekoäly",
+              "Ihminen"
+            ],
+            "correctAnswer": {
+              "Tunnistaa tuhansia kuvia autoista sekunnissa": "Tekoäly",
+              "Siivoaa lattialle yllättäen kaatuneen öljytahran": "Ihminen"
+            },
+            "explanation": "Tekoäly on mestari käsittelemään valtavia määriä digitaalista tietoa nopeasti, mutta vain ihmisellä on maalaisjärki ja kyky toimia oikeassa fyysisessä maailmassa."
+          },
+          {
+            "id": "perusteet_7_q5",
+            "type": "ordering",
+            "question": "Järjestä tekoälyn aikakoneen tapahtumat vanhimmasta uusimpaan!",
+            "options": [
+              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).",
+              "Tutkijat keksivät ensimmäisen idean tekoälystä.",
+              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä."
+            ],
+            "correctAnswer": [
+              "Tutkijat keksivät ensimmäisen idean tekoälystä.",
+              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).",
+              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä."
+            ],
+            "explanation": "Idea keksittiin jo yli 50 vuotta sitten, mutta tekoälyn toimiminen fiksusti on vaatinut tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia."
+          },
+          {
+            "id": "perusteet_7_q6",
+            "type": "spot_the_ai",
+            "question": "Mikä näistä koneen toiminnoista vaatii ehdottomasti tekoälyä, eikä ole vain tavallisen ohjelman tiukka sääntö?",
+            "options": [
+              "Ikkunan avaaminen nappia painamalla.",
+              "Vilkku, joka naksuu sekunnin välein.",
+              "Kamera, joka tunnistaa tiellä juoksevan ketun.",
+              "Laskin, joka kertoo että 2+2=4."
+            ],
+            "correctAnswer": "Kamera, joka tunnistaa tiellä juoksevan ketun.",
+            "explanation": "Eläimen tai esteen tunnistaminen oikeassa elämässä vaatii tekoälyä, joka tulkitsee näkemäänsä. Muut tekevät vain yhden ennalta koodatun yksinkertaisen asian."
+          },
+          {
+            "id": "perusteet_7_q7",
+            "type": "reverse_prompt",
+            "question": "Tekoäly huudahtaa: \"Olen paha robotti BZZT! Aion ottaa autotallisi hallintaani!\" Mikä koodarin antama ohje (prompti) todistaa, ettei koneella ole omaa tahtoa?",
+            "options": [
+              "Kerro minulle, miten tekoäly toimii.",
+              "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
+              "Etsi nopein reitti lelukauppaan.",
+              "Miten siivoan autotallin nopeasti?"
+            ],
+            "correctAnswer": "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
+            "explanation": "Tekoälyllä ei ole omaa tahtoa tai halua valloittaa maailmaa. Se voi lausua tällaista vain siksi, että ihminen käski sen näyttelemään keksittyä elokuvamyyttiä."
+          },
+          {
+            "id": "perusteet_7_q8",
+            "type": "true_false",
+            "question": "Tekoäly on mestari yhdessä lajissa. Esimerkiksi täydellinen shakkitekoäly ymmärtää heti, miten potkaistaan rangaistuspotku jalkapallossa.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly on erikoisosaaja vain siinä yhdessä ainoassa asiassa, mihin se on koodattu. Shakkiohjelma on täysin neuvoton fyysisen maailman ja muiden lajien edessä."
+          },
+          {
+            "id": "perusteet_7_q9",
+            "type": "multiple_choice",
+            "question": "Miksi elokuvissa tekoäly yrittää usein valloittaa maailman tai kapinoida ihmisiä vastaan?",
+            "options": [
+              "Koska ohjelmilla on oma vahva tahto.",
+              "Koska koneet suuttuvat ihmisille helposti.",
+              "Koska se on vain jännittävä keksitty juoni viihdettä varten.",
+              "Koska oikea tekoäly tekee niin myös autotallissa."
+            ],
+            "correctAnswer": "Koska se on vain jännittävä keksitty juoni viihdettä varten.",
+            "explanation": "Myytit tekoälyn kapinasta ovat scifi-elokuvien keksittyä viihdettä. Oikea tekoäly on vain apuväline, joka sammuu kiltisti, kun laitat sen pois päältä."
+          },
+          {
+            "id": "perusteet_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: AI vanin tekoälyradio soittaa upouuden, iloisen riimin automatkasta. Miten se eroaa perinteisestä cd-soittimesta?",
+            "options": [
+              "Se toimii täysin ilman sähköä.",
+              "Se osaa luoda aivan uuden tekstin tai kappaleen pyynnöstä.",
+              "Se soittaa vain valmiiksi nauhoitettuja lauluja.",
+              "Se noudattaa tiukkoja sääntöjä rivi riviltä."
+            ],
+            "correctAnswer": "Se osaa luoda aivan uuden tekstin tai kappaleen pyynnöstä.",
+            "explanation": "Tavallinen cd-soitin toistaa vain ennalta tehtyä tietoa. Tekoäly pystyy yhdistelemään asioita ja tuottamaan aivan uutta, ennen olemassa olemattomaa sisältöä, kuten runoja. ________________"
+          }
+        ]
       }
     ]
   },
@@ -2669,6 +2809,146 @@ export const categories = [
             ],
             "correctAnswer": "Opetusdatana käytettiin vain turkulaisten kirjoittamia uutisia ja blogeja.",
             "explanation": "Jos kaikki tekoälyn näkemä maailman tieto on peräisin vain yhdestä kaupungista, sille syntyy valtava vinouma. Se alkaa luulla, että koko maailmassa ei ole mitään muuta olemassa kuin Turku!"
+          }
+        ]
+      },
+      {
+        "id": "konepellin_7",
+        "name": "G. Erikoiskoe – Yskivä Moottori",
+        "questions": [
+          {
+            "id": "konepellin_7_q1",
+            "type": "true_false",
+            "question": "Tekoälymoottori ei toimi ilman valtavaa määrää tietoa, kuten tekstejä ja kuvia, jotka ovat sen polttoainetta.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Oikein",
+            "explanation": "Data on tekoälyn oikea polttoaine. Ilman sille syötettyä valtavaa määrää esimerkkejä, tekoäly ei pysty toimimaan tai oppimaan uusia asioita."
+          },
+          {
+            "id": "konepellin_7_q2",
+            "type": "multiple_choice",
+            "question": "Mitä tarkoitetaan \"koneoppimisella\" tekoälyn autokoulussa?",
+            "options": [
+              "Koodari kirjoittaa koneelle jokaisen säännön käsin.",
+              "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
+              "Kone oppii lukemalla yhden pienen ohjekirjan.",
+              "Kone korjaa fyysisen auton moottorin itse."
+            ],
+            "correctAnswer": "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
+            "explanation": "Koneoppimisessa tekoäly harjoittelee virtuaalisesti jopa miljoonia kertoja päivässä. Esimerkkien (datan) avulla se löytää säännöt toistamalla."
+          },
+          {
+            "id": "konepellin_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: AI vanin kamera on opetettu tunnistamaan autoja antamalla sille dataa vain punaisista autoista. Ette ajaa sininen auto. Miksi tekoäly ei tunnista sitä?",
+            "options": [
+              "Datassa oli vinouma (yksipuolista tietoa), joten kone tekee väärän päätöksen.",
+              "Koneen silmät ovat rikki.",
+              "Sininen väri on koneille mahdoton nähdä.",
+              "Tekoäly haluaa tahallaan suosia punaisia autoja."
+            ],
+            "correctAnswer": "Datassa oli vinouma (yksipuolista tietoa), joten kone tekee väärän päätöksen.",
+            "explanation": "Jos tekoälyn polttoaine (data) on huonoa tai yksipuolista, syntyy vinouma. Kone oppii epäreilun säännön ja tekee sen takia hölmöjä päätöksiä tosielämässä!"
+          },
+          {
+            "id": "konepellin_7_q4",
+            "type": "ordering",
+            "question": "Järjestä tekoälyn neuroverkon aivovoimistelu! Miten se päättelee näkemänsä STOP-merkin?",
+            "options": [
+              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
+              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.",
+              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa."
+            ],
+            "correctAnswer": [
+              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
+              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.",
+              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa."
+            ],
+            "explanation": "Neuroverkko jäljittelee ihmisaivoja. Se yhdistelee tietoja kerroksittain pienistä viivoista ja väreistä aina suuriin ja vaikeisiin kokonaisuuksiin asti."
+          },
+          {
+            "id": "konepellin_7_q5",
+            "type": "drag_drop",
+            "question": "Yhdistä konehuoneen termit oikeisiin \"leipomisen\" vastineisiin!",
+            "draggables": [
+              "Jauhot ja sokerit (Polttoaine)",
+              "Reseptikirja (Tarkat askeleet)"
+            ],
+            "dropZones": [
+              "Data",
+              "Algoritmi"
+            ],
+            "correctAnswer": {
+              "Jauhot ja sokerit (Polttoaine)": "Data",
+              "Reseptikirja (Tarkat askeleet)": "Algoritmi"
+            },
+            "explanation": "Data on tekoälyn raaka-aine eli oppimateriaali. Algoritmi taas on ihmisen kirjoittama tarkka sääntölista ja askelmerkki, jota kone sokeasti noudattaa."
+          },
+          {
+            "id": "konepellin_7_q6",
+            "type": "spot_the_ai",
+            "question": "Mikä näistä on selvä esimerkki tekoälyn hahmontunnistuksen salapoliisityöstä kameran avulla?",
+            "options": [
+              "Magneetti kerää lattialta rautaruuvit.",
+              "Laskin laskee nopeasti 10 x 10.",
+              "Auto löytää kameran kuvasta tien reunan valkoiset viivat.",
+              "Tuuletin puhaltaa roskat sivuun."
+            ],
+            "correctAnswer": "Auto löytää kameran kuvasta tien reunan valkoiset viivat.",
+            "explanation": "Hahmontunnistus perustuu siihen, että kone etsii kuvasta geometrisiä kuvioita, värejä ja reunoja (kuten viivoja tai ympyröitä) auttaakseen meitä ymmärtämään ympäristöä."
+          },
+          {
+            "id": "konepellin_7_q7",
+            "type": "reverse_prompt",
+            "question": "Tekoäly antaa kuskille pöhkön ohjeen: \"Omenat ovat sinisiä ja suolaisia.\" Millä huonolla datalla kone oli vahingossa opetettu?",
+            "options": [
+              "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
+              "Datana käytettiin kuvia punaisista omenapuista.",
+              "Datana käytettiin vain luontodokumentteja.",
+              "Datana käytettiin oikeita reseptejä."
+            ],
+            "correctAnswer": "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
+            "explanation": "Sääntö \"roskaa sisään, roskaa ulos\" pätee tässä! Tekoäly uskoo datan sokeasti. Jos syötetty tieto on väärää, myös koneen antamat vastaukset ovat vääriä."
+          },
+          {
+            "id": "konepellin_7_q8",
+            "type": "true_false",
+            "question": "Jos koodari jättää algoritmista vahingossa askeleen pois, tekoäly osaa kyllä maalaisjärjellään lisätä sen sinne.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly noudattaa algoritmin askeleita täysin sokeasti. Jos koodari tekee virheen, kone toistaa täsmälleen tuon saman virheen, koska sillä ei ole omaa maalaisjärkeä."
+          },
+          {
+            "id": "konepellin_7_q9",
+            "type": "multiple_choice",
+            "question": "Miksi koodari ei käytä tavallista laskinohjelmaa kuvien tunnistamiseen, vaan rakentaa neuroverkon?",
+            "options": [
+              "Neuroverkko tarvitsee vähemmän sähköä.",
+              "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
+              "Laskinohjelma on liian nopea.",
+              "Neuroverkko on tehty kokonaan puusta."
+            ],
+            "correctAnswer": "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
+            "explanation": "Pulmat, kuten puheen tai kuvien tunnistaminen, ovat niin monimutkaisia, että niihin tarvitaan ihmisen aivojen hermoverkkoja matkivaa tekoälyohjelmaa."
+          },
+          {
+            "id": "konepellin_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Haluat opettaa robotin tunnistamaan lumisateen. Riittääkö sille yksi ainoa valokuva lumisateesta?",
+            "options": [
+              "Kyllä, yksi kuva riittää aivan hyvin.",
+              "Ei, se tarvitsee tuhansia erilaisia kuvia oppiakseen kunnolla.",
+              "Kyllä, jos kuva on todella iso.",
+              "Ei, se tarvitsee videon auringonpaisteesta."
+            ],
+            "correctAnswer": "Ei, se tarvitsee tuhansia erilaisia kuvia oppiakseen kunnolla.",
+            "explanation": "Ihminen voi oppia kerrasta, mutta tekoälyn \"autokoulu\" (koneoppiminen) vaatii valtavan vuoren monipuolista dataa, jotta kone oppii säännön luotettavasti. ________________"
           }
         ]
       }
@@ -4024,6 +4304,146 @@ export const categories = [
             ],
             "correctAnswer": "Selitä avun hakeminen netissä käyttämällä auton hätävilkkuja esimerkkinä.",
             "explanation": "Hätävilkkujen laittaminen on loistava vertauskuva. Se tarkoittaa, että pysähdyt, ilmoitat muille (aikuisille) olevasi pulassa, ja odotat rauhassa apua paikalle ilman että yrität selvitä yksin!"
+          }
+        ]
+      },
+      {
+        "id": "digiturva_7",
+        "name": "G. Tarkastuspiste – Maantierosvon Tietulli",
+        "questions": [
+          {
+            "id": "digiturva_7_q1",
+            "type": "true_false",
+            "question": "Vahva ja turvallinen salasana AI vanin tietokoneeseen on aina pelkkä oma etunimesi, koska sen muistaa itse parhaiten.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Oma etunimi on maantierosvolle liian helppo arvata. Vahva salasana (turvalukko) on pitkä, monimutkainen salalause ja vain sinun tiedossasi!"
+          },
+          {
+            "id": "digiturva_7_q2",
+            "type": "multiple_choice",
+            "question": "Mitä tarkoittaa omien tietojen pitäminen \"lukitussa hanskalokerossa\"?",
+            "options": [
+              "Tavaroiden piilottamista oikeaan autoon.",
+              "Yksityisten tietojen (kuten nimen, osoitteen ja koulun) pitämistä turvassa ja poissa julkisesta netistä.",
+              "Kaikkien nettisivujen sulkemista.",
+              "Sitä, ettei netissä saa pelata koskaan."
+            ],
+            "correctAnswer": "Yksityisten tietojen (kuten nimen, osoitteen ja koulun) pitämistä turvassa ja poissa julkisesta netistä.",
+            "explanation": "Omat tärkeät henkilötiedot pidetään aina piilossa \"lukitussa hanskalokerossa\", eikä niitä jaeta chateissa koskaan vieraille ihmisille."
+          },
+          {
+            "id": "digiturva_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: Sähköpostiisi pamahtaa viesti: \"ONNEA! Olet voittanut uuden puhelimen! Klikkaa linkkiä heti lunastaaksesi sen!\" Mitä teet?",
+            "options": [
+              "Klikkaan nopeasti ennen kuin palkinto katoaa.",
+              "Lähetän viestin kavereillekin.",
+              "En klikkaa, vaan suljen viestin ja kysyn neuvoa aikuiselta.",
+              "Annan viestiin pankkikortin tiedot."
+            ],
+            "correctAnswer": "En klikkaa, vaan suljen viestin ja kysyn neuvoa aikuiselta.",
+            "explanation": "Jos jokin on liian hyvää ollakseen totta, se on \"maantierosvon ansa\" eli tietojenkalasteluviesti! Älä koskaan klikkaa epäilyttäviä hätäilylinkkejä."
+          },
+          {
+            "id": "digiturva_7_q4",
+            "type": "ordering",
+            "question": "Laita nämä tiedot järjestykseen: aloita siitä, minkä saa kertoa netissä kaikille, ja päätä siihen, mikä pitää salata ehdottomasti!",
+            "options": [
+              "Pelissä käyttämäsi keksitty nimimerkki",
+              "Oma etunimesi ja ikäsi",
+              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
+            ],
+            "correctAnswer": [
+              "Pelissä käyttämäsi keksitty nimimerkki",
+              "Oma etunimesi ja ikäsi",
+              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
+            ],
+            "explanation": "Keksityt nimet ja lempivärit ovat täysin turvallisia. Sen sijaan tarkat asuinpaikat ja puhelinnumerot kuuluvat aina lukittuun hanskalokeroon!"
+          },
+          {
+            "id": "digiturva_7_q5",
+            "type": "drag_drop",
+            "question": "Miten vältät laitteesi saastumisen \"digitaalisella ruosteella\" (viruksilla)? Yhdistä teko ja seuraus!",
+            "draggables": [
+              "Lataat sovellukset vain virallisista sovelluskaupoista",
+              "Lataat ilmaisen kopiopelin tuntemattomalta nettisivulta"
+            ],
+            "dropZones": [
+              "Laite pysyy turvassa ja terveenä",
+              "Laite voi saada haittaohjelman (viruksen)"
+            ],
+            "correctAnswer": {
+              "Lataat sovellukset vain virallisista sovelluskaupoista": "Laite pysyy turvassa ja terveenä",
+              "Lataat ilmaisen kopiopelin tuntemattomalta nettisivulta": "Laite voi saada haittaohjelman (viruksen)"
+            },
+            "explanation": "Viralliset kaupat tarkistavat sovellukset. Tuntemattomilta sivuilta ladatut ilmaiset kopiot ovat suorin reitti laitteen saastumiseen haittaohjelmalla."
+          },
+          {
+            "id": "digiturva_7_q6",
+            "type": "spot_the_ai",
+            "question": "Kuka näistä neuvojista ei ymmärrä \"valepukuisia liftareita\" (syväväärennöksiä) ollenkaan?",
+            "options": [
+              "'Etsi oudosta videosta virheitä, kuten outoja varjoja tai sulaneita muotoja.'",
+              "'Kaikki videot netissä ovat aina 100 % aitoja ja totta, tekoäly ei osaa väärentää niitä.'",
+              "'Tarkista uskomattomat uutiset aina luotettavasta lähteestä, kuten YLEltä.'",
+              "'Tekoäly voi oppia matkimaan ihmisen ääntä täydellisesti.'"
+            ],
+            "correctAnswer": "'Kaikki videot netissä ovat aina 100 % aitoja ja totta, tekoäly ei osaa väärentää niitä.'",
+            "explanation": "Tekoälyllä voidaan tehdä syväväärennöksiä eli deepfake-videoita ja -ääniä, jotka näyttävät aivan aidoilta, mutta ovat täysin keksittyjä!"
+          },
+          {
+            "id": "digiturva_7_q7",
+            "type": "reverse_prompt",
+            "question": "Laitat AI vanin turvallisuusasetukset päälle ja ruudulla lukee: \"Tilisi on nyt yksityinen. Kukaan tuntematon ei näe kuviasi tai sijaintiasi.\" Mikä ohje tämän teki?",
+            "options": [
+              "Jaa tietoni kaikille internetin käyttäjille.",
+              "Laita 'lukittu hanskalokero' päälle ja piilota omat tietoni vierailta.",
+              "Etsi minulle kuvia hienoista autoista.",
+              "Sammuta puhelimen kamera lopullisesti."
+            ],
+            "correctAnswer": "Laita 'lukittu hanskalokero' päälle ja piilota omat tietoni vierailta.",
+            "explanation": "Sometilien ja pelien muuttaminen yksityisiksi on paras tapa pitää maantierosvot loitolla. Silloin vain oikeat, hyväksytyt ystäväsi näkevät tietosi!"
+          },
+          {
+            "id": "digiturva_7_q8",
+            "type": "true_false",
+            "question": "Jos pelissä tulee vastaan outo ja pelottava tilanne tai ihminen, laitteen voi vain piilottaa sängyn alle ja asian voi unohtaa.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Pelottavat asiat eivät katoa piilottamalla. Fiksu kuski laittaa \"hätävilkut päälle\" ja kertoo tapahtuneesta välittömästi luotettavalle aikuiselle, joka osaa auttaa!"
+          },
+          {
+            "id": "digiturva_7_q9",
+            "type": "multiple_choice",
+            "question": "Miksi kaksivaiheinen tunnistautuminen (kuten puhelimeen tuleva koodi) on tärkeää salasanojen lisäksi?",
+            "options": [
+              "Se tekee autosta paljon nopeamman ajaa.",
+              "Se on vahva lisälukko: vaikka rosvo arvaa salasanasi, hän ei pääse sisään ilman puhelintasi.",
+              "Se piilottaa laitteen kokonaan internetistä.",
+              "Se maksaa tilillesi ilmaista rahaa joka päivä."
+            ],
+            "correctAnswer": "Se on vahva lisälukko: vaikka rosvo arvaa salasanasi, hän ei pääse sisään ilman puhelintasi.",
+            "explanation": "Se toimii erinomaisena \"turvalukkona\". Vaikka salasana vuotaisi varkaille, pelitilisi pysyy turvassa ilman toista varmistuskoodia!"
+          },
+          {
+            "id": "digiturva_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Kuulet pelin äänichatissa kaverisi äänen, mutta hän pyytää kiireesti antamaan pelitilisi salasanan. Ääni kuulostaa oikealta, mutta pyyntö on todella outo. Mitä teet?",
+            "options": [
+              "Annan salasanan heti, koska ääni on tuttu.",
+              "Soitan kaverille oikealla puhelimella varmistaakseni asian, sillä kyseessä voi olla väärennetty ääni.",
+              "Lähetän salasanani kaikille muillekin pelaajille.",
+              "Nauran ja poistan pelin kokonaan."
+            ],
+            "correctAnswer": "Soitan kaverille oikealla puhelimella varmistaakseni asian, sillä kyseessä voi olla väärennetty ääni.",
+            "explanation": "Tekoäly voi kloonata \"valepukuisille liftareille\" aivan aidon kuuloisen äänen! Omat salasanat pidetään aina itsellä, ja oudot pyynnöt pitää varmistaa muuta kautta. ________________"
           }
         ]
       }
@@ -5384,6 +5804,146 @@ export const categories = [
             "explanation": "Pomodoro on kuuluisa tapa auttaa aivoja keskittymään. Se lupaa aivoille tauon pienen urakan jälkeen, mikä helpottaa työhön tarttumista."
           }
         ]
+      },
+      {
+        "id": "aivoterveys_7",
+        "name": "G. Erikoiskoe – Sumuinen Yöajo",
+        "questions": [
+          {
+            "id": "aivoterveys_7_q1",
+            "type": "true_false",
+            "question": "Ihmisaivot ovat superkoneita, jotka pystyvät tekemään läksyjä, kuuntelemaan musiikkia ja pelaamaan tarkasti aivan samaan aikaan ilman virheitä.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Aivot eivät pysty moniajoon (multitasking). Ne joutuvat hyppimään asioiden välillä, mikä aiheuttaa \"keskittymiskyvyn kolarin\", tekee meistä väsyneen ja hidastaa oppimista."
+          },
+          {
+            "id": "aivoterveys_7_q2",
+            "type": "multiple_choice",
+            "question": "Mitä asiantuntijat tarkoittavat, kun he käskevät pitämään kunnon \"huoltotauon\" ruuduista ylikuumenemisen estämiseksi?",
+            "options": [
+              "Toisen, vähän hitaamman pelin avaamista puhelimelta.",
+              "Laitteen sulkemista, nousemista ylös ja katsomista kauas ulos ikkunasta.",
+              "Energiajuoman juomista pelin ääressä.",
+              "Elokuvan katsomista televisiosta."
+            ],
+            "correctAnswer": "Laitteen sulkemista, nousemista ylös ja katsomista kauas ulos ikkunasta.",
+            "explanation": "Ylikuumeneminen tarkoittaa aivojen ja silmien väsymistä. Todellinen huoltotauko pidetään aina täysin ilman digilaitteita esimerkiksi 20-20-20 -säännön avulla!"
+          },
+          {
+            "id": "aivoterveys_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: Pelaat toimintapeliä, jonka ikäraja on K-16. Olet itse 10-vuotias. Peli saa sinut ahdistuneeksi. Miksi näitä \"aikuisten moottoritien\" pelejä pitäisi välttää?",
+            "options": [
+              "Lapsen aivot ovat vasta kehittymässä, ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
+              "Aikuiset haluavat vain säästää parhaat pelit itselleen.",
+              "K-16 pelit rikkovat lasten tabletit fyysisesti.",
+              "Lapsen sormet eivät taivu peliohjaimella tarpeeksi nopeasti."
+            ],
+            "correctAnswer": "Lapsen aivot ovat vasta kehittymässä, ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
+            "explanation": "Ikärajat suojelevat kasvavia aivoja! Se mikä on aikuiselle viihdettä, voi ylikuormittaa lapsen aivot, koska ne eivät vielä osaa suodattaa pelottavia asioita oikein."
+          },
+          {
+            "id": "aivoterveys_7_q4",
+            "type": "ordering",
+            "question": "Järjestä aivojen yöllisen huollon (unen) askeleet oikeaan järjestykseen!",
+            "options": [
+              "Laitteiden sininen valo sammutetaan tuntia ennen nukkumaanmenoa.",
+              "Silmät suljetaan ja nukahdetaan syvään 9–11 tunnin uneen.",
+              "Aivot siivoavat yöllä turhat tiedot pois ja tallentavat päivän tärkeät opit muistiin."
+            ],
+            "correctAnswer": [
+              "Laitteiden sininen valo sammutetaan tuntia ennen nukkumaanmenoa.",
+              "Silmät suljetaan ja nukahdetaan syvään 9–11 tunnin uneen.",
+              "Aivot siivoavat yöllä turhat tiedot pois ja tallentavat päivän tärkeät opit muistiin."
+            ],
+            "explanation": "Uni on aivojen vilkkain huoltohetki. Jotta aivot ymmärtävät aloittaa huollon, ruutujen kirkas ja aivoja huijaava valo pitää laittaa ajoissa parkkiin!"
+          },
+          {
+            "id": "aivoterveys_7_q5",
+            "type": "drag_drop",
+            "question": "Auta aivojasi voimaan hyvin! Miten korjaat jumittavat aivot tai pahan mielen oikein?",
+            "draggables": [
+              "Kiipeileminen ja juokseminen ulkona",
+              "Surusta ja kiukusta puhuminen aikuiselle"
+            ],
+            "dropZones": [
+              "Aivojen happikylpy (Ulos autosta!)",
+              "Aito lohduttaja (Oikea apukuski)"
+            ],
+            "correctAnswer": {
+              "Kiipeileminen ja juokseminen ulkona": "Aivojen happikylpy (Ulos autosta!)",
+              "Surusta ja kiukusta puhuminen aikuiselle": "Aito lohduttaja (Oikea apukuski)"
+            },
+            "explanation": "Liikunta kasvattaa aivoja ja antaa niille happea. Pahaa mieltä taas ei koskaan pidä turruttaa laitteiden \"laastarilla\", vaan se puretaan puhumalla aidolle, elävälle ihmiselle."
+          },
+          {
+            "id": "aivoterveys_7_q6",
+            "type": "spot_the_ai",
+            "question": "Kuka näistä neuvojista ei ymmärrä keskittymiskyvyn toimintaa ollenkaan?",
+            "options": [
+              "'Piilota puhelin läksyjen ajaksi, jotta se ei vie huomiotasi.'",
+              "'Tee läksyt ja pelaa samalla nopeatempoista videopeliä, niin saat asiat nopeammin valmiiksi.'",
+              "'Yritä saavuttaa flow-tila tekemällä vain yhtä asiaa kerrallaan rauhassa.'",
+              "'Kun keskeytät työsi viestin vuoksi, aivoilta kuluu aikaa palata takaisin tehtävään.'"
+            ],
+            "correctAnswer": "'Tee läksyt ja pelaa samalla nopeatempoista videopeliä, niin saat asiat nopeammin valmiiksi.'",
+            "explanation": "Tämä on tekoälyn valhe, sillä aivot eivät pysty tehokkaaseen moniajoon! Häiriöt ja usean asian yrittäminen yhtä aikaa hidastavat toimintaa ja lisäävät virheitä valtavasti."
+          },
+          {
+            "id": "aivoterveys_7_q7",
+            "type": "reverse_prompt",
+            "question": "Ääniavustaja ilmoittaa yhtäkkiä: \"Nyt kaikki laitteet parkkiin! On aika mennä pelaamaan piilosta pihalle, jotta aivonne kasvavat vahvoiksi ja saavat uusia hermoverkkoja!\" Mikä asetus oli päällä?",
+            "options": [
+              "Aivojen liikuntaa ja terveyttä muistuttava tauko-ohjelma.",
+              "Auton oviin liitetty automaattinen murtohälytys.",
+              "Pelin sisäinen rangaistus häviämisestä.",
+              "Akun säästötila, joka sammuttaa kaikki laitteet pysyvästi."
+            ],
+            "correctAnswer": "Aivojen liikuntaa ja terveyttä muistuttava tauko-ohjelma.",
+            "explanation": "Aivot voivat parhaiten oikeassa elämässä liikkuessa! Hien pintaan saaminen ja uudet liikeradat metsässä rakentavat aivoihin kirjaimellisesti uusia, fiksuja hermoverkkoja."
+          },
+          {
+            "id": "aivoterveys_7_q8",
+            "type": "true_false",
+            "question": "Pieni tylsyys ilman ruutuja on aivoille itse asiassa tosi hyödyllistä, koska se pakottaa aivot keksimään uutta ja herättää oman mielikuvituksen.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan oikein! Tylsyys on kuin tyhjä kangas taiteilijalle. Jos turrutat tylsyyden aina heti ruudulla, aivosi eivät koskaan opi luomaan omia upeita ideoita."
+          },
+          {
+            "id": "aivoterveys_7_q9",
+            "type": "multiple_choice",
+            "question": "Mitä tapahtuu \"unihiekalle\", jos tuijotat kirkasta tablettia juuri ennen nukkumaanmenoa?",
+            "options": [
+              "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä, ja unihormonin eritys estyy.",
+              "Ruudun valo tuo heti silmiin oikeaa hiekkaa.",
+              "Laite lataa automaattisesti akkuaan aivojesi sähköstä.",
+              "Unihiekka muuttuu digitaaliseksi koodiksi laitteen sisälle."
+            ],
+            "correctAnswer": "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä, ja unihormonin eritys estyy.",
+            "explanation": "Laitteiden kirkas valo estää nukahtamishormonia (melatoniinia) toimimasta kunnolla. Siksi aivot pysyvät virkeinä, ja tärkeän yöhuollon aloittaminen myöhästyy."
+          },
+          {
+            "id": "aivoterveys_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Haluat saavuttaa \"flow-tilan\" lukiessasi kokeeseen, jotta et edes huomaisi ajan kulumista ja oppisit superhyvin. Mitä sinun pitää tehdä ympäristöllesi?",
+            "options": [
+              "Laitan radion täydelle huudolle ja avaan television taustalle.",
+              "Laitan puhelimen äänettömälle toiseen huoneeseen ja poistan kaikki häiriöt.",
+              "Kutsun viisi kaveria samaan huoneeseen juttelemaan kanssani.",
+              "Syön kilon sokeria ennen aloittamista."
+            ],
+            "correctAnswer": "Laitan puhelimen äänettömälle toiseen huoneeseen ja poistan kaikki häiriöt.",
+            "explanation": "Keskittyminen ja syvä flow-tila onnistuvat vain silloin, kun aivot saavat työskennellä ilman jatkuvia \"kiviä tiellä\" eli puhelimen piippauksia tai taustahälyä! ________________"
+          }
+        ]
       }
     ]
   },
@@ -6727,6 +7287,151 @@ export const categories = [
             ],
             "correctAnswer": "Toinen tiellä ajava autokuski ilmoitti sovelluksella esteestä tiellä minuuttia aiemmin.",
             "explanation": "Yhteistyö on voimaa! Monissa navigointisovelluksissa ihmiset voivat itse napin painalluksella ilmoittaa tiellä olevista vaaroista, ja tekoäly jakaa tämän tiedon välittömästi muille takana tuleville kuskeille."
+          }
+        ]
+      },
+      {
+        "id": "arjessa_7",
+        "name": "G. Erikoiskoe – Kaaosristeys",
+        "questions": [
+          {
+            "id": "arjessa_7_q1",
+            "type": "true_false",
+            "question": "Kun navigaattori ohjaa sinut kiertotielle ennen ruuhkaa, se tekee sen siksi, että se näkee tulevaisuuteen oikean taikuuden avulla.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Navigaattori ei ennusta asioita! Se hyödyntää joukkoälyä: se tarkkailee edellä ajavien ihmisten puhelimien nopeutta ja tajuaa välittömästi, jos tiellä on ruuhkasta johtuva hidastus."
+          },
+          {
+            "id": "arjessa_7_q2",
+            "type": "multiple_choice",
+            "question": "Mikä on suoratoistopalveluiden (kuten YouTube) \"suosittelualgoritmin\" kaikkein tärkein tavoite?",
+            "options": [
+              "Opettaa sinulle koulun uusia historian ja fysiikan läksyjä.",
+              "Pitää sinut ruudun ääressä mahdollisimman pitkään suosittelemalla samanlaisia videoita, jotta näkisit mainoksia.",
+              "Säästää laitteesi akkua laittamalla se nopeasti kiinni.",
+              "Pakottaa sinut katsomaan pelkästään videoita, joista et pidä."
+            ],
+            "correctAnswer": "Pitää sinut ruudun ääressä mahdollisimman pitkään suosittelemalla samanlaisia videoita, jotta näkisit mainoksia.",
+            "explanation": "Algoritmit on koodattu koukuttamaan! Ne oppivat mieltymyksesi ja luovat \"suosittelukuplan\", josta on vaikea irrottautua automaattitoiston ja mainosten vuoksi."
+          },
+          {
+            "id": "arjessa_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: Haluat tietää, mitä ulkomaalaisessa ravintolan kyltissä lukee. Osoitat sitä puhelimen kameralla ja suomenkielinen käännös ilmestyy suoraan ruudulle. Miten tekoäly teki tämän taikatempun?",
+            "options": [
+              "Se soitti nopeasti ravintolan omistajalle ja kysyi asiaa.",
+              "Hahmontunnistus luki kirjaimet kuvasta, ja kääntäjäohjelma etsi niille suomenkielisen vastineen tietopankista.",
+              "Se muutti koko kyltin oikeasti fyysisesti suomenkieliseksi.",
+              "Se vain arvasi jotain aivan sattumanvaraisesti."
+            ],
+            "correctAnswer": "Hahmontunnistus luki kirjaimet kuvasta, ja kääntäjäohjelma etsi niille suomenkielisen vastineen tietopankista.",
+            "explanation": "Tämä upea arjen tekoäly vaatii kahden asian yhdistämistä: kameran kykyä nähdä pikseleistä muotoja (kirjaimia) ja kääntäjän valtavaa, salamannopeaa sanakirjatietoa!"
+          },
+          {
+            "id": "arjessa_7_q4",
+            "type": "ordering",
+            "question": "Järjestä kasvojentunnistuksen askeleet! Miten puhelimesi \"taskussa asuva apuri\" aukeaa?",
+            "options": [
+              "Kamera nappaa kuvan kasvoistasi.",
+              "Tekoäly skannaa kasvojesi tarkat mitat ja muodot (esim. silmien etäisyyden).",
+              "Ohjelma vertaa mittoja tallennettuun hahmoosi.",
+              "Kone toteaa kuvion täsmäävän oikeaan omistajaan ja avaa lukon."
+            ],
+            "correctAnswer": [
+              "Kamera nappaa kuvan kasvoistasi.",
+              "Tekoäly skannaa kasvojesi tarkat mitat ja muodot (esim. silmien etäisyyden).",
+              "Ohjelma vertaa mittoja tallennettuun hahmoosi.",
+              "Kone toteaa kuvion täsmäävän oikeaan omistajaan ja avaa lukon."
+            ],
+            "explanation": "Kasvojentunnistus ei katso vain ihonväriä tai tukkaa, vaan tekee matemaattista salapoliisityötä kasvojesi tarkoista kuvioista tunnistaakseen juuri sinut."
+          },
+          {
+            "id": "arjessa_7_q5",
+            "type": "drag_drop",
+            "question": "Yhdistä älykodin ja liikenteen tekoälylaitteet niiden oikeisiin aisteihin ja toimintoihin!",
+            "draggables": [
+              "Älytermostaatti",
+              "Robotti-imuri",
+              "Robottiauto (LiDAR)"
+            ],
+            "dropZones": [
+              "Lukee netistä sääennusteen ja säätää talon lämpöä automaattisesti",
+              "Rakentaa lasereilla digitaalisen 3D-kartan ympäristön esteistä",
+              "Mittaa sensoreilla etäisyyksiä välttääkseen seiniin törmäämisen lattialla"
+            ],
+            "correctAnswer": {
+              "Älytermostaatti": "Lukee netistä sääennusteen ja säätää talon lämpöä automaattisesti",
+              "Robottiauto (LiDAR)": "Rakentaa lasereilla digitaalisen 3D-kartan ympäristön esteistä",
+              "Robotti-imuri": "Mittaa sensoreilla etäisyyksiä välttääkseen seiniin törmäämisen lattialla"
+            },
+            "explanation": "Laitteet pystyvät tekemään itsenäisiä ja fiksuja päätöksiä aistiensa (kuten tutkien, lasereiden ja nettiyhteyden) avulla helpottaakseen arkeamme."
+          },
+          {
+            "id": "arjessa_7_q6",
+            "type": "spot_the_ai",
+            "question": "Pelaat autotallissa moninpeliä. Kuka näistä pelikavereista on koodattu tietokonevastustaja (botti/NPC) eikä oikea ihminen?",
+            "options": [
+              "Hahmo, joka nauraa mikrofonissa sinun hyville vitseillesi.",
+              "Hahmo, joka jää ikuisesti jumiin juoksemaan päin lukittua ovea.",
+              "Hahmo, joka lähtee välillä käymään oikealla jääkaapilla.",
+              "Hahmo, joka keksii jatkuvasti aivan uusia, ovelia taktiikoita."
+            ],
+            "correctAnswer": "Hahmo, joka jää ikuisesti jumiin juoksemaan päin lukittua ovea.",
+            "explanation": "Tekoälybotit ohjataan matemaattisten sääntöjen ja reitinhakujen (pathfinding) avulla. Koska ne ovat sokeita koneita, ne voivat paljastua oudoista mekaanisista jumiutumisista eli bugeista!"
+          },
+          {
+            "id": "arjessa_7_q7",
+            "type": "reverse_prompt",
+            "question": "Puhelimen ääniavustaja soittaa yllättäen rentouttavaa metsän kohinaa ruuhkaisessa kaaosristeyksessä. Mikä komento (prompti) sille oli annettu?",
+            "options": [
+              "Soita mahdollisimman kovaäänistä rock-musiikkia piristykseksi.",
+              "Laita soimaan jotain, joka auttaa rentoutumaan stressaavassa liikenteessä.",
+              "Etsi uutiset tämän päivän säästä.",
+              "Kerro kuinka monta autoa tässä risteyksessä tarkalleen on."
+            ],
+            "correctAnswer": "Laita soimaan jotain, joka auttaa rentoutumaan stressaavassa liikenteessä.",
+            "explanation": "Arjen tekoäly, kuten ääniavustaja, ymmärtää nykyään puheen muuttamista tekstiksi salamannopeasti ja osaa jopa valita musiikkia ihmisen toivoman \"fiiliksen\" mukaan!"
+          },
+          {
+            "id": "arjessa_7_q8",
+            "type": "true_false",
+            "question": "Robottiautot ovat nykyään niin täydellisiä, että ne pystyvät ajamaan täysin virheettömästi myös paksussa lumimyrskyssä, jossa ihminenkään ei näe mitään.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Huono sää (kuten lumi tai paksu sumu) on tekoälyautoille edelleen todella vaikea paikka, koska ne peittävät kaistaviivat ja häiritsevät kameroiden sekä lasereiden näkyvyyttä!"
+          },
+          {
+            "id": "arjessa_7_q9",
+            "type": "multiple_choice",
+            "question": "Miksi kääntäjäsovellus kääntää vieraskielisen vitsin tai sanonnan joskus aivan hassuksi ja väärin?",
+            "options": [
+              "Koska se tekee sen tahallaan nolatakseen sinut.",
+              "Koska tekoäly kääntää asiat usein liian kirjaimellisesti sana sanalta, eikä se ymmärrä piilomerkityksiä.",
+              "Koska puhelimen akku on lopussa.",
+              "Koska kääntäjä ei koskaan käytä oikeaa tietopankkia."
+            ],
+            "correctAnswer": "Koska tekoäly kääntää asiat usein liian kirjaimellisesti sana sanalta, eikä se ymmärrä piilomerkityksiä.",
+            "explanation": "Maailmanlaajuinen tulkki on loistava sanakirja, mutta koneena siltä puuttuu aito inhimillinen ymmärrys huumorista, paikallisista sanonnoista ja runoista."
+          },
+          {
+            "id": "arjessa_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Haluat lähettää pitkän viestin kaverille tärisevän AI vanin takapenkiltä, mutta et osu oikeisiin kirjaimiin ruudulla. Miten tekoäly auttaa?",
+            "options": [
+              "Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
+              "Tekoäly pysäyttää auton välittömästi kokonaan.",
+              "Tekoäly tulostaa paperisen kirjeen, jonka lähetät postissa.",
+              "Puhelin lukitsee näyttönsä tunniksi, jotta et häiritse kuskia."
+            ],
+            "correctAnswer": "Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
+            "explanation": "Puhelimen ääniavustajat ja saneluohjelmat osaavat muuttaa äänen koodin kautta kirjoitetuksi tekstiksi. Se on upea arjen apuri, kun kädet ovat varatut tai auton kyyti on pomppuista! ________________"
           }
         ]
       }
@@ -8079,6 +8784,148 @@ export const categories = [
             "explanation": "Fiksuissa älylaitteissa ja puhelimissa on nykyään Eko- tai virransäästötila. Se kertoo laitteen aivoille, että niiden pitää toimia hitaammin ja rauhallisemmin \"kevyellä kaasujalalla\", jotta sekä akku että ympäristö säästyvät!"
           }
         ]
+      },
+      {
+        "id": "reilu_peli_7",
+        "name": "G. Tarkastuspiste – Häijy Kaahari",
+        "questions": [
+          {
+            "id": "reilu_peli_7_q1",
+            "type": "true_false",
+            "question": "Tekoäly on tietokoneohjelmana aina automaattisesti sataprosenttisen reilu, eikä se voi koskaan vahingossakaan syrjiä ketään ihmistä.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly oppii datasta! Jos opetusdatassa on ennakkoluuloja tai se on yksipuolista (esim. siitä puuttuu pyörätuolin käyttäjiä), kone oppii tekemään epäreiluja ja syrjiviä päätöksiä (vinoumia)."
+          },
+          {
+            "id": "reilu_peli_7_q2",
+            "type": "multiple_choice",
+            "question": "Jos palautat tekoälyn tekemän esitelmän opettajalle ja siinä on täysin väärää faktatietoa, kuka kantaa asiasta lopullisen vastuun?",
+            "options": [
+              "Tekoälyohjelma itse, joka yritetään rangaista.",
+              "Tietokoneen alkuperäinen koodari.",
+              "Sinä itse, sillä olet tilanteen kuskina ja vastuu on ihmisellä.",
+              "Opettaja, koska hän antoi tehtävän."
+            ],
+            "correctAnswer": "Sinä itse, sillä olet tilanteen kuskina ja vastuu on ihmisellä.",
+            "explanation": "Sääntö \"Kuka oli kuskina\" tarkoittaa, että tekoäly on vain työkalu (kuten polkupyörä). Et voi vierittää virheitä koneen syyksi, vaan ihmisen pitää tarkistaa työt ja ottaa niistä vastuu."
+          },
+          {
+            "id": "reilu_peli_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: Löydät netistä taiteilijan upean maalauksen. Lataat sen tekoälylle ja käsket sen tehdä 10 täydellistä kopiota samalla uniikilla tyylillä, jotta voit myydä ne omina töinäsi. Mitä teit väärin?",
+            "options": [
+              "Käytit toisen taiteilijan kovaa työtä ja tyyliä luvattomina varaosina ilman lupaa.",
+              "Unohdit värittää kuvat ennen myyntiä.",
+              "Myit kuvat aivan liian halvalla hinnalla.",
+              "Roiskit vahingossa oikeaa kuraa kuvien päälle."
+            ],
+            "correctAnswer": "Käytit toisen taiteilijan kovaa työtä ja tyyliä luvattomina varaosina ilman lupaa.",
+            "explanation": "Tekijänoikeudet suojaavat alkuperäisiä luojia. Toisen uniikin työn kopioiminen ja käyttäminen oman tekoälyn \"moottorin\" polttoaineena on epäreilua peliä ja usein täysin luvatonta!"
+          },
+          {
+            "id": "reilu_peli_7_q4",
+            "type": "ordering",
+            "question": "Huomaat, että netissä levitetään tekoälyllä tehtyä noloa huijauskuvaa luokkakaveristasi. Miten pysäytät kiusaamisen (kuran roiskimisen) askeleittain?",
+            "options": [
+              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
+              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
+              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
+              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä."
+            ],
+            "correctAnswer": [
+              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
+              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
+              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
+              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä."
+            ],
+            "explanation": "Tekoälyllä tehdyt ilkeät viestit tai nolatut kuvat (esim. deepfake) ovat aivan oikeaa kiusaamista. Fiksu apukuski pysäyttää leviämisen ja hakee aikuisen avuksi!"
+          },
+          {
+            "id": "reilu_peli_7_q5",
+            "type": "drag_drop",
+            "question": "Yhdistä tekoälyn luoma eettinen haaste ja sen selitys reilussa pelissä!",
+            "draggables": [
+              "Konesalit vaativat valtavasti sähköä ja jäähdytysvettä toimiakseen",
+              "Tekoäly yrittää matkia aitoa, lohduttavaa ystävää"
+            ],
+            "dropZones": [
+              "Raskas kaasujalka (Ympäristön kuormitus)",
+              "Peltinen apukuski (Eliza-ilmiö ja tunteiden puute)"
+            ],
+            "correctAnswer": {
+              "Konesalit vaativat valtavasti sähköä ja jäähdytysvettä toimiakseen": "Raskas kaasujalka (Ympäristön kuormitus)",
+              "Tekoäly yrittää matkia aitoa, lohduttavaa ystävää": "Peltinen apukuski (Eliza-ilmiö ja tunteiden puute)"
+            },
+            "explanation": "Tekoäly on uskomaton laite, mutta sen jatkuva käyttö ei ole ilmaista luonnolle. Siltä puuttuvat myös aina aidot tunteet, joten sitä ei pidä koskaan erehtyä pitämään ainoana oikeana ystävänä."
+          },
+          {
+            "id": "reilu_peli_7_q6",
+            "type": "spot_the_ai",
+            "question": "Kuka näistä digikuskeista uskoo hassuun ja täysin väärään myyttiin tekoälyn virranlähteestä ja energiasta?",
+            "options": [
+              "'Tekoälyn käyttäminen puhelimella kuluttaa luonnonvaroja, sillä konesalit vaativat oikeaa sähköä.'",
+              "'Kuvan piirtäminen tekoälyllä on huomattavasti raskaampaa työtä kuin tekstin kirjoittaminen.'",
+              "'Tekoäly ei kuluta sähköä lainkaan, koska se saa rajattoman energiansa suoraan avaruuden taikuudesta.'",
+              "'Laitteiden viilentämiseen menee miljoonia litroja puhdasta vettä.'"
+            ],
+            "correctAnswer": "'Tekoäly ei kuluta sähköä lainkaan, koska se saa rajattoman energiansa suoraan avaruuden taikuudesta.'",
+            "explanation": "Tekoäly ei ole näkymätöntä tai ilmaista taikaa! Se asuu massiivisissa tietokonekeskuksissa (konesaleissa), joiden pyörittäminen ja jäähdyttäminen kuluttaa todella paljon sähköä ja vettä."
+          },
+          {
+            "id": "reilu_peli_7_q7",
+            "type": "reverse_prompt",
+            "question": "Yritit syöttää tekoälylle käskyn tehdä ilkeä vitsikuva toisesta ihmisestä, mutta ruutuun tuli punainen teksti: \"Estetty: En suostu tuottamaan kiusaavaa sisältöä ihmisistä.\" Mikä asetus koodari oli laittanut päälle?",
+            "options": [
+              "Kone poisti vahingossa kaikki internetin pelit.",
+              "Koneeseen oli rakennettu eettiset suodattimet eli 'kuraläpät', jotka kieltäytyvät ilkeistä komennoista.",
+              "Laite sammutti akkunsa kokonaan nukkumaanmenoa varten.",
+              "Kone päätti alkaa itkeä kuullessaan pahoja sanoja."
+            ],
+            "correctAnswer": "Koneeseen oli rakennettu eettiset suodattimet eli 'kuraläpät', jotka kieltäytyvät ilkeistä komennoista.",
+            "explanation": "Tekoäly-yhtiöt rakentavat koneisiinsa tarkoituksella \"kuraläppiä\". Ne tunnistavat ilkeät tai vaaralliset komennot ja estävät tekoälyn käyttämisen toisten ihmisten vahingoittamiseen!"
+          },
+          {
+            "id": "reilu_peli_7_q8",
+            "type": "true_false",
+            "question": "Jos kerrot koulussa opettajalle täysin avoimesti ja rehellisesti hakeneesi tekoälyltä apua esitelmäsi ideointiin, se on osoitus reilusta pelistä.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan oikein! Avoimuus on kaiken a ja o. Kun käytät tekoälyä ideoinnin apukuskina, mutta teet varsinaisen aivotyön itse ja kerrot AI:n käytöstä reilusti, toimit täysin oikein."
+          },
+          {
+            "id": "reilu_peli_7_q9",
+            "type": "multiple_choice",
+            "question": "Miksi tekoälyllä tehtyjen nolojen ja valheellisten väärennöskuvien (deepfake) jakaminen eteenpäin on niin haitallista?",
+            "options": [
+              "Koska nolo kuva saa aikaan pilkkaa ja pysyy internetissä aina, aiheuttaen kohteelle aitoa pahaa mieltä.",
+              "Koska tekoälykuvat ovat laadultaan liian kauniita.",
+              "Koska kaikki ihmiset uskovat heti, että kyseessä on robotti.",
+              "Koska kuvan kohde saa kuvasta itselleen erittäin paljon ilmaista rahaa."
+            ],
+            "correctAnswer": "Koska nolo kuva saa aikaan pilkkaa ja pysyy internetissä aina, aiheuttaen kohteelle aitoa pahaa mieltä.",
+            "explanation": "Vaikka kuva olisi tekoälyn tekemä väärennös, \"digitaalinen kura\" on oikeaa kiusaamista. Sen aiheuttama häpeä ja paha mieli kohdehenkilölle ovat täysin aitoja tunteita!"
+          },
+          {
+            "id": "reilu_peli_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Pyydät tekoälyä piirtämään kuvan ammatista \"lääkäri\", ja se piirtää jatkuvasti vain harmaahiuksisia miehiä. Ymmärrät, että sen opetusdata oli yksipuolista. Miten korjaat tilanteen fiksulla promptilla tasa-arvon nimissä?",
+            "options": [
+              "Pyydät tekoälyä piirtämään pelkkiä autoja lääkäreiden sijaan.",
+              "Pyydät tekoälyä varmistamaan, että piirroksissa näkyy ammattien todellinen monimuotoisuus, kuten naislääkäreitä.",
+              "Käsket sitä piirtämään lääkäreille myös todella isot viikset.",
+              "Poistat tekoälyohjelman laitteeltasi lopullisesti."
+            ],
+            "correctAnswer": "Pyydät tekoälyä varmistamaan, että piirroksissa näkyy ammattien todellinen monimuotoisuus, kuten naislääkäreitä.",
+            "explanation": "Reilu tekoäly tarkoittaa \"Kaikki kyytiin\" -asennetta! Jos kone tekee stereotypioita vanhan datan takia, meidän kuskien pitää ohjata sitä luomaan uusia, reilumpia ja monimuotoisempia kuvia koko ihmiskunnasta. ________________"
+          }
+        ]
       }
     ]
   },
@@ -9424,6 +10271,151 @@ export const categories = [
             ],
             "correctAnswer": "Tee näistä sekavista tiedoista heti selkeä ja siisti taulukko.",
             "explanation": "Taulukointi on yksi tekoälyn siisteimpiä taitoja! Kun datamassa on sekavaa, sana \"taulukko\" (table) on kuin taikasana, joka järjestää kaiken suoriin ja ymmärrettäviin sarakkeisiin."
+          }
+        ]
+      },
+      {
+        "id": "kayttotaidot_7",
+        "name": "G. Finaali – Suuri Mestariralli",
+        "questions": [
+          {
+            "id": "kayttotaidot_7_q1",
+            "type": "true_false",
+            "question": "Tekoäly osaa lukea ajatuksiasi erinomaisesti! Jos kirjoitat sille vain yhden sanan, kuten \"auto\", se keksii aina varmasti täydellisen tarinan juuri siitä asiasta, jota salaa mielessäsi ajattelit.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly ei ikinä osaa lukea ajatuksia. Aivan kuten navigaattori tarvitsee täsmällisen ja tarkan osoitteen, tekoäly vaatii tarkan ohjeen (promptin) tuottaakseen juuri sinulle sopivan tuloksen!"
+          },
+          {
+            "id": "kayttotaidot_7_q2",
+            "type": "multiple_choice",
+            "question": "Mitä asiantuntijat tarkoittavat sillä, kun tekoäly \"hallusinoi\" faktojen kanssa?",
+            "options": [
+              "Sitä, että kone nukahtaa ja näkee visuaalisia unia.",
+              "Sitä, että laite alkaa soittaa musiikkia kysymättä lupaa.",
+              "Sitä, että tekoäly keksii täysin olemattoman tiedon ja esittää sen luottavaisesti varmana faktana.",
+              "Sitä, että auton näyttöruutu menee yhtäkkiä aivan sumeaksi."
+            ],
+            "correctAnswer": "Sitä, että tekoäly keksii täysin olemattoman tiedon ja esittää sen luottavaisesti varmana faktana.",
+            "explanation": "Tekoäly (kielimalli) on sana-arvauskone, joka vain yhdistelee sanoja todennäköisyyksien mukaan. Sillä ei ole käsitystä todellisesta maailmasta, joten se saattaa kertoa vakuuttavan kuuloisia valheita (hallusinaatioita) faktoina!"
+          },
+          {
+            "id": "kayttotaidot_7_q3",
+            "type": "scenario",
+            "question": "SKENAARIO: Olet tekemässä tärkeää esitelmää. Miten toimit, jotta \"katse pysyy ulos tuulilasista\" ja varmistat tekoälyn antamien tietojen olevan oikeasti totta?",
+            "options": [
+              "Kopioin aina täysin suoraan sen ihka ensimmäisen tuloksen, jonka tekoäly minulle antaa.",
+              "Tarkistan tekoälyn antamat samat faktat myös oikeasta kirjasta tai muusta luotettavasta ja virallisesta lähteestä.",
+              "Kirjoitan tekoälyn antamat tekstit esitelmään vain punaisella värillä.",
+              "Jätän koko esitelmän tekemättä, koska tekoäly on täysin hyödytön."
+            ],
+            "correctAnswer": "Tarkistan tekoälyn antamat samat faktat myös oikeasta kirjasta tai muusta luotettavasta ja virallisesta lähteestä.",
+            "explanation": "Lähdekritiikki ja ristiintarkistus ovat supertaitoja. Älä koskaan luota sokeasti yhteen lähteeseen tai tekoälyn nopeaan vastaukseen, vaan varmista tärkeät faktat aina toisaalta!"
+          },
+          {
+            "id": "kayttotaidot_7_q4",
+            "type": "ordering",
+            "question": "Järjestä täydellisen ja tarkan promptin (ohjeen) rakennuspalikat! Miten annat navigaattorille parhaan mahdollisen osoitteen?",
+            "options": [
+              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').",
+              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').",
+              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').",
+              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista')."
+            ],
+            "correctAnswer": [
+              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').",
+              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').",
+              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').",
+              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista')."
+            ],
+            "explanation": "Kun annat koneelle tarkat speksit eli roolin, tehtävän, taustatiedot ja halutun tulostusmuodon, tekoälystä tulee mielettömän taitava ja tarkka työkalu."
+          },
+          {
+            "id": "kayttotaidot_7_q5",
+            "type": "drag_drop",
+            "question": "Valitse \"oikea työkalu pakista\"! Yhdistä tekemäsi digitaalinen työ ja siihen kaikkein parhaiten sopiva tekoälysovellus.",
+            "draggables": [
+              "Kielimalli (kuten Gemini tai ChatGPT)",
+              "Kuvageneraattori",
+              "Kääntäjä ja puhesynteesi"
+            ],
+            "dropZones": [
+              "Esitelmän tekstin ideoiminen, kirjoittaminen ja oikoluku",
+              "Uusien ja upeiden digitaalisten piirrosten luominen tarinaan",
+              "Vieraskielisen kyltin lukeminen ja sen ääntäminen ääneen matkalla"
+            ],
+            "correctAnswer": {
+              "Kielimalli (kuten Gemini tai ChatGPT)": "Esitelmän tekstin ideoiminen, kirjoittaminen ja oikoluku",
+              "Kuvageneraattori": "Uusien ja upeiden digitaalisten piirrosten luominen tarinaan",
+              "Kääntäjä ja puhesynteesi": "Vieraskielisen kyltin lukeminen ja sen ääntäminen ääneen matkalla"
+            },
+            "explanation": "Yleistyökalut ovat hyviä, mutta monimutkaisissa tehtävissä (kuten kuvissa ja musiikissa) kannattaa ehdottomasti käyttää juuri kyseiseen tehtävään erikoistunutta omaa tekoälyohjelmaa."
+          },
+          {
+            "id": "kayttotaidot_7_q6",
+            "type": "spot_the_ai",
+            "question": "Etsi joukosta erittäin huono ja epäselvä \"hakuammunta\"-prompti, jolla et takuulla saa tekoälyltä haluamaasi hyvää tulosta!",
+            "options": [
+              "'Keksi minulle kolme hauskaa lyhyttä vitsiä autoista ja koirista.'",
+              "'Selitä tämä pitkä teksti lyhyesti aivan kuin olisin 8-vuotias.'",
+              "'Tee heti mulle se joku hieno tarina.'",
+              "'Toimi kuin merirosvo ja toivota matkustajat tervetulleeksi lyhyellä lauseella.'"
+            ],
+            "correctAnswer": "'Tee heti mulle se joku hieno tarina.'",
+            "explanation": "Epätarkka ohje jättää tekoälyn täysin arvailemaan! Jos et kerro teemaa, pituutta, kohderyhmää tai tyyliä, saat luultavasti todella tylsän ja puuduttavan geneerisen vastauksen."
+          },
+          {
+            "id": "kayttotaidot_7_q7",
+            "type": "reverse_prompt",
+            "question": "Tekoäly pahoittelee kiltisti ensimmäistä vastaustaan, ja kirjoittaa sen tilalle uuden listan: \"1. Korit 2. Moottori 3. Renkaat.\" Mikä oli tekemäsi \"ratinkääntö\" (korjausliike)?",
+            "options": [
+              "Tuo edellinen vastaus oli aivan liian sekava, tiivistä sen pääasiat yhdellä helpolla listalla.",
+              "Kirjoita minulle kokonainen uusi ja paksu kirja auton renkaista.",
+              "Käännä tuo teksti suoraan englanniksi ja lisää siihen paljon uutta faktaa.",
+              "Piirrä valokuva sähköautosta, joka ajaa kovaa."
+            ],
+            "correctAnswer": "Tuo edellinen vastaus oli aivan liian sekava, tiivistä sen pääasiat yhdellä helpolla listalla.",
+            "explanation": "Ratinkääntö tarkoittaa iterointia eli tekoälyn ohjaamista oikeaan suuntaan! Jos laite antaa liian vaikean tai tylsän tekstin, voit aina pyytää sitä tiivistämään, muuttamaan sävyä tai luomaan \"ranskalaisia viivoja\" (listoja)."
+          },
+          {
+            "id": "kayttotaidot_7_q8",
+            "type": "true_false",
+            "question": "Tekoälyn tekemän tekstin ensimmäinen versio on poikkeuksetta aina täysin sataprosenttisen valmis, eikä sinun kannata ikinä tuhlata aikaasi sen muokkaamiseen tai palautteen antamiseen (iteroimiseen).",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Promptaaminen on keskustelua ja laitteen testaamista. Ensimmäinen vastaus on harvoin täydellinen, joten lukeminen ja palautteen antaminen (iterointi) ovat mestarikuskin tärkeimpiä taitoja!"
+          },
+          {
+            "id": "kayttotaidot_7_q9",
+            "type": "multiple_choice",
+            "question": "Miten \"apukuski\" (tekoäly) on sinulle kaikkein luovin ja fiksuin apu, kun edessäsi on tyhjä paperi ja aiot kirjoittaa uuden kouluaineen?",
+            "options": [
+              "Se voi kirjoittaa esseen täysin valmiiksi viidessä sekunnissa, jotta minun ei tarvitse miettiä asiaa lainkaan.",
+              "Se voi heitellä minulle nopeasti kymmeniä hauskoja aiheideaoita aivoriihikaverina, joista voin valita suosikkini ja kirjoittaa itse.",
+              "Se voi laulaa minulle laulun, jotta unohdan koko läksyn täydellisesti.",
+              "Se voi etsiä toisen oppilaan tekemän esseen netistä ja kopioida sen minulle."
+            ],
+            "correctAnswer": "Se voi heitellä minulle nopeasti kymmeniä hauskoja aiheideaoita aivoriihikaverina, joista voin valita suosikkini ja kirjoittaa itse.",
+            "explanation": "Tekoäly auttaa ylittämään luovan lukon! Se on väsymätön ideoiden heittelijä, joka auttaa omat aivosi vauhtiin. Lopullinen luova yhdistely ja työ tehdään kuitenkin aina itse."
+          },
+          {
+            "id": "kayttotaidot_7_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: AI vanin käyttöohje on täynnä todella vaikeita ja puuduttavia insinöörisanoja. Aikaa tarkan napin etsimiseen on vain minuutti. Miten käytät tekoälyn pakkaustaitoja eli kykyä laittaa \"tavarat siististi kyytiin\"?",
+            "options": [
+              "Pyydän tekoälyä kääntämään laitteen 10-sivuisen ohjekirjan suoraan latinaksi.",
+              "Käsken tekoälyn lukemaan koko pitkän tekstin minulle erittäin hitaasti ääneen.",
+              "Kopioin vaikean tekstin tekoälylle ja pyydän sitä tiivistämään ohjeen pelkkiin kolmeen tärkeimpään askelmerkkiin (ranskalaisiin viivoihin).",
+              "Pyydän tekoälyä ostamaan netistä minulle uuden, erilaisen radion autoon."
+            ],
+            "correctAnswer": "Kopioin vaikean tekstin tekoälylle ja pyydän sitä tiivistämään ohjeen pelkkiin kolmeen tärkeimpään askelmerkkiin (ranskalaisiin viivoihin).",
+            "explanation": "Pitkien tekstien ja vaikeiden faktojen tiivistäminen \"selkosuomeksi\" tai ranskalaisiksi viivoiksi (bullet points) on tekoälyn ylivoimaisesti vahvinta osaamista ja uskomattoman kätevä käyttötaito!"
           }
         ]
       }
