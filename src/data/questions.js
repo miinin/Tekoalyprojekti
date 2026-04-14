@@ -131,8 +131,128 @@ export const categories = [
         ]
       },
       { "id": "perusteet_2", "name": "Ihmisäly vs. tekoäly", "questions": [
-          { "id": "q_p2_1", "type": "multiple_choice", "question": "Mitä tarkoitetaan 'koneoppimisella'?", "options": ["Kone oppii datasta ilman että sille annetaan sääntöjä etukäteen", "Kone menee kouluun", "Kone lukee kirjoja", "Kone päivittää itsensä"], "correctAnswer": "Kone oppii datasta ilman että sille annetaan sääntöjä etukäteen", "explanation": "Koneoppiminen on tekoälyn osa-alue, jossa algoritmit löytävät säännönmukaisuuksia datasta." },
-          { "id": "q_p2_2", "type": "true_false", "question": "Tarvitseeko koneoppiminen suuria määriä dataa toimiakseen hyvin?", "options": ["Kyllä", "Ei välttämättä"], "correctAnswer": "Kyllä", "explanation": "Mitä enemmän ja laadukkaampaa dataa on, sitä paremmin malli yleensä oppii." }
+          {
+            "id": "q_p2_1",
+            "type": "true_false",
+            "question": "AI vanin navigaattori on ollut päällä koko päivän. Sille pitää antaa välillä tauko, jotta se ei väsy ja tule vihaiseksi.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly on tietokoneohjelma, jolla ei ole tunteita. Se ei väsy, kyllästy tai suutu, vaikka se tekisi töitä kellon ympäri!"
+          },
+          {
+            "id": "q_p2_2",
+            "type": "multiple_choice",
+            "question": "Puhutte autossa siitä, kuinka kivaa perillä huvipuistossa tulee olemaan. Miten tekoäly suhtautuu tähän automatkaan?",
+            "options": ["Se odottaa innolla tulevia laitteita", "Se laskee ahkerasti nopeinta reittiä", "Se pelkää hurjia vuoristoratoja", "Se toivoo saavansa ison hattaran"],
+            "correctAnswer": "Se laskee ahkerasti nopeinta reittiä",
+            "explanation": "Ihmisillä on tunteita ja mielikuvitusta, mutta tekoäly on nopea laskukone. Se ei tunne iloa tai pelkoa, vaan keskittyy suorittamaan tehtäväänsä."
+          },
+          {
+            "id": "q_p2_3",
+            "type": "scenario",
+            "question": "SKENAARIO: Olette ajaneet pitkään ja alat keksiä takapenkillä hauskoja vitsejä ohikiitävistä autoista. Pyydät auton tekoälyä mukaan leikkiin. Miten tekoälyn \"mielikuvitus\" eroaa sinun mielikuvituksestasi?",
+            "options": ["Tekoäly osaa nauraa vitsille oikeasti", "Tekoäly keksii asioita omasta päästään", "Tekoälyllä on täydellinen huumorintaju", "Tekoäly vain yhdistelee oppimaansa tietoa"],
+            "correctAnswer": "Tekoäly vain yhdistelee oppimaansa tietoa",
+            "explanation": "Ihmisellä on aito mielikuvitus. Tekoäly taas \"keksii\" vitsejä vain yhdistelemällä sanoja ja sääntöjä, joita ihmiset ovat sille aiemmin syöttäneet."
+          },
+          {
+            "id": "q_p2_4",
+            "type": "drag_drop",
+            "question": "Yhdistä ominaisuudet oikeisiin laatikoihin sen mukaan, kuuluvatko ne ihmiselle vai tekoälylle.",
+            "draggables": ["Tuntee iloa matkasta", "Laskee sekunnissa satoja reittejä", "Tylsistyy takapenkillä", "Ei tarvitse koskaan yöunia"],
+            "dropZones": ["Ihminen", "Tekoäly"],
+            "correctAnswer": {"Tuntee iloa matkasta": "Ihminen", "Laskee sekunnissa satoja reittejä": "Tekoäly", "Tylsistyy takapenkillä": "Ihminen", "Ei tarvitse koskaan yöunia": "Tekoäly"},
+            "explanation": "Ihmiset tuntevat ja väsyvät. Tekoäly on väsymätön laskukone, jolla ei ole lainkaan omia tunteita tai tarpeita."
+          },
+          {
+            "id": "q_p2_5",
+            "type": "ordering",
+            "question": "Järjestä ratkaisijat sen mukaan, kuka laskee valtavan matikkalaskun (esim. 5432 x 897) nopeimmin. Aloita nopeimmasta!",
+            "options": ["Tietokoneen tekoäly", "Aikuinen laskimen kanssa", "Lapsi ruutupaperin kanssa"],
+            "correctAnswer": ["Tietokoneen tekoäly", "Aikuinen laskimen kanssa", "Lapsi ruutupaperin kanssa"],
+            "explanation": "Tekoäly ja tietokoneet ovat valtavan nopeita laskemaan numeroita. Ihmisen aivot ovat loistavat luovuudessa, mutta suurissa laskuissa kone on salamannopea voittaja."
+          },
+          {
+            "id": "q_p2_6",
+            "type": "spot_the_ai",
+            "question": "Kumpi näistä automatkan lauluntekijöistä on todennäköisimmin tekoäly? Etsi vaihtoehto, josta puuttuu aito tunne ja elämänkokemus.",
+            "options": ["'Tämä laulu kertoo siitä, kun söimme jäätelöä ja minua nauratti!'", "'Laulu aiheesta jäätelö. Jäätelö on kylmä jälkiruoka, joka sulaa nopeasti.'", "'Muistatko kun lauloimme tätä biisiä ukkosen aikana? Oli vähän jännää!'", "'Olin tosi surullinen kun eväsleipäni putosi maahan kuralätäkköön.'"],
+            "correctAnswer": "'Laulu aiheesta jäätelö. Jäätelö on kylmä jälkiruoka, joka sulaa nopeasti.'",
+            "explanation": "Tekoäly pystyy luettelemaan faktoja jäätelöstä nopeasti, mutta se ei voi muistella asioita, tuntea makua tai kokea iloa ja surua kuten ihminen."
+          },
+          {
+            "id": "q_p2_7",
+            "type": "reverse_prompt",
+            "question": "Auton ääniavustaja sanoo: \"Voi ei, onpa todella harmillista, että sataa vettä. Olen niin pahoillani puolestanne!\" Millä kehotteella (promptilla) tekoäly saatiin sanomaan näin?",
+            "options": ["Kerro meille sääennuste seuraavalle tunnille.", "Laske kuinka paljon vettä sataa millimetreinä.", "Esitä, että olet surullinen sateisen sään vuoksi.", "Keksi iloinen laulu sateenvarjoista ja lätäköistä."],
+            "correctAnswer": "Esitä, että olet surullinen sateisen sään vuoksi.",
+            "explanation": "Tekoäly ei oikeasti ole pahoillaan sateesta, koska se ei tunne sääliä. Se kuitenkin osaa hienosti matkia surullista puhetta, jos siltä pyydetään sitä promptilla!"
+          },
+          {
+            "id": "q_p2_8",
+            "type": "true_false",
+            "question": "Pysähdytte huoltoasemalle tauolle. Auton tekoäly on ahkeroinut reittien kanssa monta tuntia, joten sillekin kannattaa ostaa oma hampurilainen.",
+            "options": ["Oikein", "Väärin"],
+            "correctAnswer": "Väärin",
+            "explanation": "Toisin kuin ihminen, tekoäly ei tunne nälkää eikä se pysty syömään ruokaa. Se tarvitsee toimiakseen ainoastaan sähköä!"
+          },
+          {
+            "id": "q_p2_9",
+            "type": "multiple_choice",
+            "question": "Missä asiassa sinä olet paljon parempi ja taitavampi kuin maailman nopeinkaan tekoäly?",
+            "options": ["Pitkien sanakirjojen ulkoa muistamisessa", "Vaikeiden kertolaskujen ratkaisemisessa", "Oikean ystävyyden ja empatian tuntemisessa", "Tietokonepelien koodirivien lukemisessa"],
+            "correctAnswer": "Oikean ystävyyden ja empatian tuntemisessa",
+            "explanation": "Tekoäly on mestari käsittelemään tietoa ja numeroita, mutta vain sinä osaat tuntea aitoa ystävyyttä, empatiaa ja välittämistä toisista ihmisistä."
+          },
+          {
+            "id": "q_p2_10",
+            "type": "scenario",
+            "question": "SKENAARIO: Piirrät autotallissa upean ja täysin uudenlaisen keksinnön paperille pelkän oman mielikuvituksesi avulla. Sitten pyydät tekoälyä piirtämään jotain vastaavaa. Miksi tekoäly tarvitsee sinun ohjeitasi?",
+            "options": ["Koska siltä puuttuu täysin oma, aito mielikuvitus.", "Koska se on liian hidas tekemään mitään uutta.", "Koska se piirtää vain ja ainoastaan mustavalkoisena.", "Koska se pelkää tekevänsä liian ruman piirustuksen."],
+            "correctAnswer": "Koska siltä puuttuu täysin oma, aito mielikuvitus.",
+            "explanation": "Tekoäly osaa luoda hienoja kuvia, mutta se tekee sen aina ihmisen antamien ohjeiden ja ihmisiltä oppimansa tiedon pohjalta. Sillä ei ole omaa luovuutta."
+          },
+          {
+            "id": "q_p2_11",
+            "type": "spot_the_ai",
+            "question": "Huokaiset takapenkillä: \"Minulla on tosi tylsää, haluaisin olla jo perillä.\" Kuka vastaajista on selvästi tekoäly?",
+            "options": ["'Ymmärrän hyvin, matka on ollut pitkä. Pelataanko jotain?'", "'Minuakin vähän väsyttää, mutta onneksi olemme pian perillä.'", "'Kohde saavutetaan 45 minuutin kuluttua. Keskinopeus on 80 km/h.'", "'Katsotaan yhdessä ulos ikkunasta, ehkä sieltä näkyy lehmiä!'"],
+            "correctAnswer": "'Kohde saavutetaan 45 minuutin kuluttua. Keskinopeus on 80 km/h.'",
+            "explanation": "Tekoäly antaa tarkan ja nopean faktavastauksen täysin ilman tunnetta. Ihmiset sen sijaan ymmärtävät, miltä tylsyys tuntuu, ja yrittävät lohduttaa."
+          },
+          {
+            "id": "q_p2_12",
+            "type": "multiple_choice",
+            "question": "Mitä auton tekoälynavigaattori osaa tehdä paljon nopeammin kuin yksikään ihminen maailmassa?",
+            "options": ["Löytää kaikkien mahdollisten reittien pituudet", "Nauttia kauniista ja aurinkoisista maalaismaisemista", "Keksiä täysin uuden ja opettavaisen sadun", "Maistaa kuinka hyvältä retkieväät maistuvat"],
+            "correctAnswer": "Löytää kaikkien mahdollisten reittien pituudet",
+            "explanation": "Tekoäly on ohjelma, joka on tehty käsittelemään dataa salamannopeasti. Se ei kuitenkaan voi koskaan nauttia maisemista tai maistaa asioita."
+          },
+          {
+            "id": "q_p2_13",
+            "type": "drag_drop",
+            "question": "Kummalle antaisit seuraavat tehtävät automatkalla? Raahaa tehtävä joko itsellesi (ihmiselle) tai navigaattorin tekoälylle sen perusteella, kumpi on siinä parempi.",
+            "draggables": ["Laske nopein reitti ruuhkassa", "Etsi sata faktaa dinosauruksista", "Päätä, mikä jäätelö maistuu parhaalta", "Lohduta pikkusiskoa, jota harmittaa"],
+            "dropZones": ["Tekoäly", "Ihminen"],
+            "correctAnswer": {"Laske nopein reitti ruuhkassa": "Tekoäly", "Etsi sata faktaa dinosauruksista": "Tekoäly", "Päätä, mikä jäätelö maistuu parhaalta": "Ihminen", "Lohduta pikkusiskoa, jota harmittaa": "Ihminen"},
+            "explanation": "Tekoäly on uskomattoman nopea etsimään tietoa ja laskemaan asioita, mutta vain ihminen voi kokea makuja ja antaa aitoa lohtua toiselle!"
+          },
+          {
+            "id": "q_p2_14",
+            "type": "reverse_prompt",
+            "question": "Tekoälyradio sanoo yhtäkkiä iloisella äänellä: \"Jihuu! Olen niin ylpeä teistä, olette loistavia matkustajia!\" Millä promptilla tekoäly saatiin kehumaan autossa olijoita?",
+            "options": ["Laske kaikkien matkustajien yhteinen ikä autossa.", "Käyttäydy kuin innostunut ystävä ja kehu meitä.", "Etsi tietoa siitä, miksi ihmiset pitävät kehuista.", "Kerro meille, mitä sana 'ylpeä' oikeasti tarkoittaa."],
+            "correctAnswer": "Käyttäydy kuin innostunut ystävä ja kehu meitä.",
+            "explanation": "Tekoälyllä ei ole oikeita tunteita tai ylpeyttä, mutta kun siltä pyytää promptilla \"käyttäydy kuin innostunut ystävä\", se osaa matkia iloista ja kehuvaa puhetyyliä täydellisesti!"
+          },
+          {
+            "id": "q_p2_15",
+            "type": "ordering",
+            "question": "Tekoäly ei itse tunne iloa, mutta se osaa kirjoittaa iloisen tarinan. Järjestä asiat siihen järjestykseen, miten tekoäly oikeasti oppii asioita ilosta!",
+            "options": ["Ihmiset kirjoittavat tekstejä iloisista asioista internetiin", "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa", "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn", "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse"],
+            "correctAnswer": ["Ihmiset kirjoittavat tekstejä iloisista asioista internetiin", "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa", "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn", "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse"],
+            "explanation": "Tekoäly oppii asioita lukemalla ihmisten tuottamaa materiaalia. Se oppii sanojen säännöt todella nopeasti, mutta ei silti koskaan koe itse ilon tunnetta."
+          }
       ] },
       { "id": "perusteet_3", "name": "Tekoäly vs. tavallinen ohjelma", "questions": [
           { "id": "q_p3_1", "type": "multiple_choice", "question": "Mikä on tekoälyn neuroverkko?", "options": ["Siimaa ja lautoja", "Aivojen solujen toimintaa matkiva tietokoneohjelma", "Sähköverkko", "Internet-selain"], "correctAnswer": "Aivojen solujen toimintaa matkiva tietokoneohjelma", "explanation": "Neuroverkot on saaneet inspiraationsa ihmisaivojen hermosoluista ja niiden välisistä yhteyksistä." }
