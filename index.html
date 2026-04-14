@@ -13,5 +13,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener('error', function(e) {
+        if (e.target && e.target.tagName === 'SCRIPT') {
+          console.error("Koodin haku palvelimelta epäonnistui. Varmistetaan selaimen lennosta tapahtuva päivitys.");
+          if (!sessionStorage.getItem('aivan_chunk_retry')) {
+            sessionStorage.setItem('aivan_chunk_retry', 'true');
+            // Pakota kova uudelleenlataus murtamalla välimuisti query stringillä
+            window.location.href = window.location.href.split('?')[0] + '?t=' + new Date().getTime();
+          } else {
+            sessionStorage.removeItem('aivan_chunk_retry');
+            document.body.innerHTML += '<div style="position:fixed;top:0;left:0;width:100%;background:#ef4444;color:white;text-align:center;padding:1rem;z-index:9999;font-family:sans-serif;"><b>Pelin lataaminen epäonnistui.</b> Tyhjennä puhelimesi tai selaimesi välimuisti.</div>';
+          }
+        }
+      }, true);
+    </script>
   </body>
 </html>
