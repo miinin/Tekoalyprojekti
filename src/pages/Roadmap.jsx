@@ -1085,27 +1085,27 @@ const Roadmap = () => {
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     <b>Kerää solmumitaleita!</b><br/><br/>
-                    Saat mitalin sen perusteella, miten hyvin pärjäät 10 kysymyksen kisoissa:<br/><br/>
+                    Vastaamalla oikein kokeiden kysymyksiin ansaitset sitä kirkkaampia mitaleja. Yritä tavoitella parasta mahdollista tasoa!<br/><br/>
                     <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <span style={{ width: '28px', textAlign: 'center', fontWeight: '900', color: '#ef4444' }}>❌</span> 
-                         1-4 oikein: Ei mitalia... yritä uudelleen!
+                         Ei mitalia... yritä uudelleen!
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-bronze.png" alt="pronssi" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
-                         5-6 oikein: Pronssia
+                         Pronssi: Tiedät alkeet!
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-silver.png" alt="hopea" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
-                         7-8 oikein: Hopeaa
+                         Hopea: Hyvä suoritus!
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-gold.png" alt="kulta" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
-                         9 oikein: Kultaa (yhtä vaille täydellisyyttä!)
+                         Kulta: Huipputietäjä!
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-plat.png" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
-                         10 oikein: Täysi potti Platinum!
+                         Platina: Kaikki oikein! Täydellistä!
                        </li>
                     </ul>
                 </div>
