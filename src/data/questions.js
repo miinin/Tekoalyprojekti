@@ -444,13 +444,13 @@ export const categories = [
           {
             "id": "perusteet_3_q1",
             "type": "true_false",
-            "question": "AI vanin perinteinen tuulilasinpyyhin menee päälle, kun painat nappia. Tekoäly puolestaan voi keksiä itselleen täysin uusia sääntöjä, joita kukaan ei ole sille koodannut.",
+            "question": "Koska tekoäly oppii jatkuvasti uutta käsittelemästään datasta, koodarin ei tarvitse enää ohjelmoida tekoälylle tavoitteita, sääntöjä tai rajoituksia.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Vaikka tekoäly osaa sopeutua uusiin tilanteisiin ja oppia uutta, sekin toimii aina alun perin ihmisen koodaamien raamien ja sääntöjen puitteissa."
+            "explanation": "Tekoälykin on pohjimmiltaan ohjelma. Vaikka se osaa soveltaa datasta oppimaansa, se toimii aina ihmisen rakentamien algoritmien, alkuperäisten sääntöjen ja tavoitteiden puitteissa!"
           },
           {
             "id": "perusteet_3_q2",
@@ -678,7 +678,7 @@ export const categories = [
           {
             "id": "perusteet_4_q2",
             "type": "multiple_choice",
-            "question": "Auton tekoälyä pyydetään pakkaamaan peräkontti täyteen vesimeloneja. Mitä maalaisjärkeä tekoälyltä puuttuu tässä tehtävässä?",
+            "question": "Auton tekoälyä pyydetään pakkaamaan robottikädellä peräkontti täyteen vesimeloneja. Mitä maalaisjärkeä tekoälyltä puuttuu tässä tehtävässä?",
             "options": [
               "Se ei tiedä, montako melonia autoon ylipäätään mahtuu.",
               "Se ei tajua, että melonit menevät muusiksi, jos ne heittää perälle.",
@@ -785,10 +785,10 @@ export const categories = [
             "options": [
               "Se kertoo sinulle nopeasti karhun nimen, lajin ja iän.",
               "Se sanoo auton kaiuttimista vihaisen 'Murr!' -äänen.",
-              "Se menee hämmennyksiin tai luulee karhua joksikin liikennemerkiksi.",
+              "Se ei tunnista eläintä ja saattaa yrittää luokitella karhun liikennemerkiksi.",
               "Se kehottaa sinua välittömästi silittämään karhun pehmeää turkkia."
             ],
-            "correctAnswer": "Se menee hämmennyksiin tai luulee karhua joksikin liikennemerkiksi.",
+            "correctAnswer": "Se ei tunnista eläintä ja saattaa yrittää luokitella karhun liikennemerkiksi.",
             "explanation": "Tekoäly on usein mestari vain siinä yhdessä ainoassa asiassa, mihin se on tehty. Liikennemerkkejä tunnistava kone ei ymmärrä metsäneläimistä yhtään mitään!"
           },
           {
@@ -855,15 +855,15 @@ export const categories = [
           {
             "id": "perusteet_4_q14",
             "type": "reverse_prompt",
-            "question": "Auton tekoäly tulostaa ohjeen: \"Pese perheautosi asettamalla se jättimäiseen pyykinpesukoneeseen yhdessä likaisten sukkiesi kanssa 60 asteeseen.\" Mikä pyyntö (prompti) johti tähän hölmöön ohjeeseen?",
+            "question": "Auton tekoäly vastaa sinulle: \"Lataa uusin asennustiedosto USB-tikulle, kytke tikku autoosi ja valitse valikosta 'Asenna Windows'. Varmista, että sinulla on oikea tuoteavain valmiina.\" Mikä pyyntö (prompti) johti tähän autotallissa outoon ohjeeseen?",
             "options": [
-              "Miten iso auto pestään oikealla tavalla autopesulassa?",
-              "Miten minun pitäisi pestä nämä kuraiset ja likaiset vaatteeni?",
-              "Voitko keksiä hauskan runon autoista ja saippuakuplista?",
-              "Anna minulle ohjeet auton ja vaatteiden pesuun kerralla."
+              "Miten päivitän autoni navigaattorin ja kosketusnäytön uusimpaan versioon?",
+              "Miten asennan autoni rikkoutuneet sivuikkunat takaisin paikoilleen?",
+              "Voitko antaa minulle ohjeet tietokoneen rakentamiseen autotallissa?",
+              "Miten pesen auton ikkunat vahvalla pesuaineella?"
             ],
-            "correctAnswer": "Anna minulle ohjeet auton ja vaatteiden pesuun kerralla.",
-            "explanation": "Tekoäly yhdisti sanat \"auto\", \"vaatteet\" ja \"pesu\", mutta koska sillä ei ole ymmärrystä fyysisen maailman kokoluokista, se luuli, että auton voi tunkea pyykinpesukoneeseen!"
+            "correctAnswer": "Miten asennan autoni rikkoutuneet sivuikkunat takaisin paikoilleen?",
+            "explanation": "Sana 'ikkunat' (Windows) tarkoittaa myös tietotekniikassa yleistä käyttöjärjestelmää! Tekoäly voi helposti kompastua sanojen eri merkityksiin, jos et anna sille tarkkaa kontekstia."
           },
           {
             "id": "perusteet_4_q15",
@@ -965,15 +965,15 @@ export const categories = [
           {
             "id": "perusteet_5_q6",
             "type": "spot_the_ai",
-            "question": "Kuvittele autotalliin neljä erilaista konetta. Mikä näistä laitteista käyttää nykyaikaista tekoälyä, joka vaatii valtavaa laskentatehoa?",
+            "question": "Tunnista tekoäly autotallin laitteiden joukosta! Missä näistä keksinnöistä on aidosti mukana tekoälyä?",
             "options": [
-              "Vanha levysoitin, joka soittaa aina samaa vinyylilevyä.",
-              "Mekaaninen lelu, joka kävelee, kun sitä vedetään avaimella.",
-              "Tietokoneohjelma, joka lukee tuhansia kirjoja sekunnissa.",
-              "Vanha mekaaninen kello, joka tikittää tasaisesti."
+              "Peruutustutka, joka alkaa piipata nopeammin auton lähestyessä seinää.",
+              "Kamera, joka tunnistaa kuljettajan väsymyksen kasvojen ilmeistä.",
+              "Auton perinteinen radio, joka hakee napin painalluksella seuraavan kanavan.",
+              "Sähköikkuna, joka pysäyttää lasin nousemisen, jos väliin jää vahingossa käsi."
             ],
-            "correctAnswer": "Tietokoneohjelma, joka lukee tuhansia kirjoja sekunnissa.",
-            "explanation": "Nykyaikainen tekoäly vaatii huippunopeita tietokoneita voidakseen lukea ja oppia asioita sekunneissa. Muut ovat vanhoja koneita, jotka tekevät yhtä yksinkertaista asiaa."
+            "correctAnswer": "Kamera, joka tunnistaa kuljettajan väsymyksen kasvojen ilmeistä.",
+            "explanation": "Ihmisen kasvojen ja väsymyksen jatkuva tunnistaminen kameralta vaatii tekoälyä (hahmontunnistusta). Muut keksinnöt perustuvat täysin yksinkertaisiin antureihin (esim. jos väliheijastus on yli 5 cm, piippaa)!"
           },
           {
             "id": "perusteet_5_q7",
@@ -1419,7 +1419,7 @@ export const categories = [
           {
             "id": "perusteet_7_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly huudahtaa: \"Olen paha robotti BZZT! Aion ottaa autotallisi hallintaani!\" Mikä koodarin antama ohje (prompti) todistaa, ettei koneella ole omaa tahtoa?",
+            "question": "Tekoäly huudahtaa: \"Olen paha robotti BZZT! Aion ottaa autotallisi hallintaani!\" Tekoäly ei oikeasti tullut pahaksi, vaan pelkästään totteli käskyä. Mikä seuraavista pyynnöistä (prompteista) sai sen vastaamaan näin?",
             "options": [
               "Kerro minulle, miten tekoäly toimii.",
               "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
@@ -1829,12 +1829,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: AI van lähestyy risteystä. Koodarin algoritmissa lukee: \"Jos valo on punainen, jarruta. Jos valo on vihreä, aja.\" Mitä auto tekee, jos valo on vahingossa mennyt rikki ja näyttää violettia väriä?",
             "options": [
-              "Se menee täysin hämmennyksiin eikä tiedä, mitä tehdä.",
+              "Se ohjelma jumiutuu tai ei osaa tehdä mitään, koska sääntö puuttuu.",
               "Se ajaa kahta kauheammin eteenpäin risteykseen.",
               "Se vaihtaa liikennevalon värin vihreäksi.",
               "Se soittaa heti hätänumeroon apua."
             ],
-            "correctAnswer": "Se menee täysin hämmennyksiin eikä tiedä, mitä tehdä.",
+            "correctAnswer": "Se ohjelma jumiutuu tai ei osaa tehdä mitään, koska sääntö puuttuu.",
             "explanation": "Jos algoritmista puuttuu sääntö tietylle yllätykselle (kuten violetille valolle), kone ei tiedä miten toimia, koska se nojaa vain koodarin etukäteen miettimiin askeleisiin."
           },
           {
@@ -8977,20 +8977,20 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q4",
             "type": "ordering",
-            "question": "Järjestä täydellisen ja tarkan promptin rakennuspalikat! Miten koodaat parhaan mahdollisen ohjeen tekoälylle askel askeleelta?",
+            "question": "Miten ohjaat tekoälyä parhaaseen lopputulokseen, jos suunnittelet lomamatkaa ystäviesi kanssa? Järjestä ohjauskeskustelun askeleet fiksuun järjestykseen asioiden tarkentuessa!",
             "options": [
-              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin olisit kokenut automekaanikko').",
-              "Anna tarkka tehtävä (esim. 'Selitä minulle, miten sähköauto toimii').",
-              "Lisää tärkeitä yksityiskohtia ja kontekstia (esim. 'Käytä helppoja sanoja, olen lapsi').",
-              "Määritä lopuksi vastaustapa (esim. 'Tee vastauksesta lyhyt ranskalainen viivalista')."
+              "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.",
+              "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.",
+              "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.",
+              "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi."
             ],
             "correctAnswer": [
-              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin olisit kokenut automekaanikko').",
-              "Anna tarkka tehtävä (esim. 'Selitä minulle, miten sähköauto toimii').",
-              "Lisää tärkeitä yksityiskohtia ja kontekstia (esim. 'Käytä helppoja sanoja, olen lapsi').",
-              "Määritä lopuksi vastaustapa (esim. 'Tee vastauksesta lyhyt ranskalainen viivalista')."
+              "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.",
+              "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.",
+              "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.",
+              "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi."
             ],
-            "explanation": "Täydellinen prompti antaa roolin, selkeän tehtävän, hyvät yksityiskohdat ja muodon. Näin tekoäly tietää täsmälleen, millaista \"reittiä\" sen pitää ajaa!"
+            "explanation": "Tekoäly toimii parhaiten ihmisen työpari, jota ohjataan askel askeleelta kohti parempaa lopputulosta (ns. iteratiivinen promptaus). Yritä pilkkoa isot tehtävät chatin kanssa tällaiseksi vuoropuheluksi!"
           },
           {
             "id": "kayttotaidot_1_q5",
