@@ -324,6 +324,7 @@ export default function Quiz() {
       setOrderedItems([]);
       setDragTargets({});
       setCurrentIndex(currentIndex + 1);
+    } else {
       // End of quiz handling: calculate dynamic high score delta per question
       let totalNewSparks = 0;
       const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
