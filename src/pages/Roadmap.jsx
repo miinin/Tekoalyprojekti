@@ -321,7 +321,7 @@ const Roadmap = () => {
             let bridgeFromEntry = false;
             
             if (!startNode || startNode === 'start_point' || !mapNodes.includes(startNode)) {
-                if (!completedNodeId) {
+                if (!completedNodeId || !mapNodes.includes(completedNodeId)) {
                     startNode = mapNodes[0];
                     bridgeFromEntry = true;
                 } else {
