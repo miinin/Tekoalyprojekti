@@ -335,7 +335,7 @@ export default function Quiz() {
          if (c === t) return 4;
          if (c >= Math.floor(t * 0.9)) return 3;
          if (c >= Math.floor(t * 0.7)) return 2;
-         if (c >= Math.floor(t * 0.5)) return 1;
+         if (c >= 2) return 1;
          return 0;
       };
       const oldMedalLevel = getMedalLevel(oldStat.correct, oldStat.total);

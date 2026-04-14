@@ -556,7 +556,7 @@ const Roadmap = () => {
         if (stat.correct === stat.total && stat.total > 0) return 'platinum';
         if (stat.correct >= Math.floor(stat.total * 0.9)) return 'gold';
         if (stat.correct >= Math.floor(stat.total * 0.7)) return 'silver';
-        if (stat.correct >= Math.floor(stat.total * 0.5)) return 'bronze';
+        if (stat.correct >= 2) return 'bronze';
         return null;
     };
     return getSubcategoryMedal(stat);
@@ -580,7 +580,7 @@ const Roadmap = () => {
     if (absoluteTotalQuestions > 0 && totalCorrect === absoluteTotalQuestions) return 'platinum';
     if (ratio >= 0.75) return 'gold';
     if (ratio >= 0.40) return 'silver';
-    if (totalCorrect >= 1) return 'bronze';
+    if (totalCorrect >= 12) return 'bronze';
     return null;
   };
 
