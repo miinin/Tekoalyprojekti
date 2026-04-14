@@ -349,7 +349,7 @@ const Roadmap = () => {
                     const [s, e] = pathKey.split('-');
                     if (subAdjacency[s] && subAdjacency[e]) {
                         subAdjacency[s].push(e);
-                        subAdjacency[e].push(start);
+                        subAdjacency[e].push(s);
                     }
                 });
 
