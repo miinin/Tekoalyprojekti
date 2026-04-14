@@ -60,6 +60,7 @@ const Roadmap = () => {
   // Edit Mode States
   const [isEditMode, setIsEditMode] = useState(false);
   const [editWaypoints, setEditWaypoints] = useState([]);
+  const [showMedalTutorial, setShowMedalTutorial] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -962,6 +963,7 @@ const Roadmap = () => {
               </div>
             );
           })()}
+          <button onClick={() => setShowMedalTutorial(true)} style={{ background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold', marginLeft: '0.5rem', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>?</button>
         </div>
       </div>
 
@@ -997,7 +999,7 @@ const Roadmap = () => {
                     Seikkailu alkaa!
                 </div>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Kartalla liikutaan painamalla sinisiä pallukoita. Seikkailusi ensimmäinen etappi on tekoälyn perusteet!
+                    Kartalla liikutaan painamalla vihreitä pallukoita. Seikkailusi ensimmäinen etappi on tekoälyn perusteet!
                 </div>
                 <button 
                    className="btn-primary" 
@@ -1018,7 +1020,7 @@ const Roadmap = () => {
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 0 && !closedTuition[0] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Valitse ensimmäinen kategoria napsauttamalla sinistä pallukkaa.
+                    Valitse ensimmäinen kategoria napsauttamalla vihreää pallukkaa.
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
                     setClosedTuition(prev => ({...prev, 0: true}));
@@ -1033,7 +1035,7 @@ const Roadmap = () => {
             {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 1 && !closedTuition[1] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: '#3b82f6', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
+                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: 'var(--primary-color)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
                     setClosedTuition(prev => ({...prev, 1: true}));
@@ -1057,6 +1059,22 @@ const Roadmap = () => {
                 }}>
                    Olen valmis jatkamaan seikkailua itse! (+10⚡)
                 </button>
+              </div>
+            )}
+
+            {showMedalTutorial && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
+                    <b>Kerää solmumitaleita!</b><br/><br/>
+                    Saat mitalin sen perusteella, miten hyvin pärjäät perustason kysymyksissä:<br/><br/>
+                    <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
+                       <li style={{ marginBottom: '0.5rem' }}>❌ 1-4 oikein: Ei mitalia... yritä uudelleen!</li>
+                       <li style={{ marginBottom: '0.5rem' }}>🥉 5-6 oikein: Pronssia</li>
+                       <li style={{ marginBottom: '0.5rem' }}>🥈 7-8 oikein: Hopeaa</li>
+                       <li style={{ marginBottom: '0.5rem' }}>🥇 9-10 oikein: Kultaa!</li>
+                    </ul>
+                </div>
+                <button className="btn-primary" style={{ width: '100%', background: 'var(--primary-color)', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setShowMedalTutorial(false)}>Selvä juttu!</button>
               </div>
             )}
         <div style={mapInnerStyle} onClick={handleMapClick}>

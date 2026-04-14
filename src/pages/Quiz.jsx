@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
-import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown } from 'lucide-react';
 
 export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
@@ -14,6 +14,7 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSparks, setCurrentSparks] = useState(0);
+  const [bossIntroSeen, setBossIntroSeen] = useState(false);
 
   useEffect(() => {
     const fetchSparks = async () => {
@@ -378,13 +379,31 @@ export default function Quiz() {
 
   const renderTextWithAivanGradient = (text) => {
     if (!text) return null;
-    const parts = text.split(/(AI van)/i);
-    return parts.map((part, i) => {
+    let isScenario = false;
+    let processingText = text;
+    if (processingText.startsWith('SKENAARIO: ')) {
+        isScenario = true;
+        processingText = processingText.replace('SKENAARIO: ', '');
+    }
+    const parts = processingText.split(/(AI van)/i);
+    const content = parts.map((part, i) => {
       if (part.toLowerCase() === 'ai van') {
-        return <span key={i} style={{ background: 'linear-gradient(90deg, #0ea5e9, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', display: 'inline-block', transform: 'scale(1.05)' }}>AI van</span>;
+        return <span key={i} style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', display: 'inline-block', transform: 'scale(1.05)' }}>AI van</span>;
       }
       return part;
     });
+
+    if (isScenario) {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', background: 'var(--primary-color)', color: 'white', padding: '0.4rem 1rem', borderRadius: '8px', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                    Kuvittele tilanne
+                </div>
+                <div>{content}</div>
+            </div>
+        );
+    }
+    return content;
   };
 
   if (showSummary) {
@@ -466,6 +485,21 @@ export default function Quiz() {
         </div>
       </div>
 
+      {!bossIntroSeen && sub && sub.id.endsWith('_7') && (
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="glass-panel animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', border: '5px solid #f59e0b', padding: '3rem', borderRadius: '24px', maxWidth: '600px', width: '90%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', position: 'relative' }}>
+                <h1 style={{ color: '#d97706', fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Suuri Mestarikoitos</h1>
+                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'var(--text-main)', marginBottom: '2rem', fontWeight: 'bold' }}>
+                    Olet saapunut kategorian finaaliin! Vastaa 10 tiukkaan mestarikysymykseen. Kerää vähintään <span style={{ color: '#10b981', fontSize: '1.4rem' }}>7 oikein</span> voittaaksesi tämän alueen kiiltävän mestaruuspokaalin suoraan autotalliisi!
+                </p>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+                    <button className="btn-primary" style={{ background: '#f59e0b', color: '#1e293b', padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => setBossIntroSeen(true)}>Olen valmis, aloita finaali!</button>
+                    <button className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa pakoon kartalle</button>
+                </div>
+            </div>
+         </div>
+      )}
+
       <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
         {(() => {
           const styleInfo = getQuestionStyle(currentQuestion.type);
@@ -543,9 +577,9 @@ export default function Quiz() {
               } else {
                  const colorPalette = [
                    '#3b82f6', // Pure Blue
-                   '#ef4444', // Pure Red
+                   '#ec4899', // Pink (replaced red)
                    '#f59e0b', // Pure Orange/Yellow
-                   '#10b981', // Pure Green
+                   '#06b6d4', // Cyan (replaced green)
                    '#8b5cf6'  // Pure Purple
                  ];
                  borderColor = colorPalette[idx % colorPalette.length];
@@ -621,8 +655,8 @@ export default function Quiz() {
                 </div>
                 {!showExplanation && (
                   <div style={{ display: 'flex', gap: '0.8rem' }}>
-                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--accent-color)', color: 'white', border: 'none', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(120, 190, 32, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'up')}>↑</button>
-                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--accent-color)', color: 'white', border: 'none', borderRadius: '50%', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(120, 190, 32, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'down')}>↓</button>
+                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'up')}><ArrowUp size={24} /></button>
+                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'down')}><ArrowDown size={24} /></button>
                   </div>
                 )}
               </div>
