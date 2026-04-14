@@ -29,6 +29,8 @@ export default function Quiz() {
   const [bumperBuff, setBumperBuff] = useState(0);
   const [jackBuff, setJackBuff] = useState(0);
   const [toolsBuff, setToolsBuff] = useState(0);
+  const [activePaint, setActivePaint] = useState('');
+  const [wowMedal, setWowMedal] = useState(null);
   const [jackSaved, setJackSaved] = useState(false);
   const [bumperSaved, setBumperSaved] = useState(false);
 
@@ -55,6 +57,7 @@ export default function Quiz() {
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
        if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') buff = 'talvirenkaat';
        setActiveBuff(buff);
+       setActivePaint(equipped['body'] || '');
 
        // Globaalit puskuribuffit (Törmäyksenesto, poistaa 1 väärän monivalinnassa)
        const bumper = equipped['bumper'] || '';
@@ -321,11 +324,21 @@ export default function Quiz() {
       setOrderedItems([]);
       setDragTargets({});
       setCurrentIndex(currentIndex + 1);
-    } else {
       // End of quiz handling: calculate dynamic high score delta per question
       let totalNewSparks = 0;
       const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
       
+      const oldStat = store.getNodeStats()[sub.id] || { correct: 0, total: sub.questions.length };
+      const getMedalLevel = (c, t) => {
+         if (t === 0) return 0;
+         if (c === t) return 4;
+         if (c === t - 1) return 3;
+         if (c >= t - 3) return 2;
+         if (c >= t - 5) return 1;
+         return 0;
+      };
+      const oldMedalLevel = getMedalLevel(oldStat.correct, oldStat.total);
+
       results.forEach(res => {
          store.saveQuestionCorrectness(sub.id, res.id, res.correct);
          const earned = res.earned * sparkRewardMultiplier;
@@ -337,7 +350,13 @@ export default function Quiz() {
       const { correct, total } = store.getAggregatedNodeStats(sub.id, sub.questions.length);
       store.saveNodeStats(sub.id, correct, sub.questions.length);
       
-      const totalToBank = totalNewSparks; // Removed grindSparksEarned / reiluuslisä
+      const newMedalLevel = getMedalLevel(correct, total);
+      if (newMedalLevel > oldMedalLevel) {
+          const medalNames = { 4: 'platinum', 3: 'gold', 2: 'silver', 1: 'bronze' };
+          setWowMedal(medalNames[newMedalLevel] || null);
+      }
+
+      const totalToBank = totalNewSparks;
 
       if (totalToBank > 0) {
          await store.addSparks(totalToBank);
@@ -377,6 +396,21 @@ export default function Quiz() {
     });
   };
 
+  const paintGradients = {
+    'van-body01': 'linear-gradient(90deg, #1e3a8a, #3b82f6)',
+    'van-body02': 'linear-gradient(90deg, #7f1d1d, #ef4444)',
+    'van-body03': 'linear-gradient(90deg, #94a3b8, #e2e8f0)',
+    'van-body04': 'linear-gradient(90deg, #f472b6, #34d399, #fcd34d)',
+    'van-body05': 'linear-gradient(90deg, #14532d, #4ade80)',
+    'van-body06': 'linear-gradient(90deg, #94a3b8, #f59e0b, #d97706)',
+    'van-body07': 'linear-gradient(90deg, #b91c1c, #f87171)',
+    'van-body08': 'linear-gradient(90deg, #d946ef, #06b6d4, #f43f5e)',
+    'van-body09': 'linear-gradient(90deg, #ef4444, #eab308, #22c55e, #3b82f6)',
+    'van-body10': 'linear-gradient(90deg, #fce7f3, #f472b6, #ec4899)',
+    'van-body11': 'linear-gradient(90deg, #020617, #1e293b, #475569)',
+    'van-body12': 'linear-gradient(90deg, #000000, #ef4444)'
+  };
+
   const renderTextWithAivanGradient = (text) => {
     if (!text) return null;
     let isScenario = false;
@@ -386,9 +420,11 @@ export default function Quiz() {
         processingText = processingText.replace('SKENAARIO: ', '');
     }
     const parts = processingText.split(/(AI van)/i);
+    const usedGradient = paintGradients[activePaint] || 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)';
+
     const content = parts.map((part, i) => {
       if (part.toLowerCase() === 'ai van') {
-        return <span key={i} style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', display: 'inline-block', transform: 'scale(1.05)' }}>AI van</span>;
+        return <span key={i} style={{ background: usedGradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', display: 'inline-block', transform: 'scale(1.05)' }}>AI van</span>;
       }
       return part;
     });
@@ -427,10 +463,11 @@ export default function Quiz() {
                       'Et rikkonut ennätystäsi tällä kertaa... Vastauksiasi kannattaa pohtia uudelleen!'}
                 </div>
               )}
-
-              <button className="btn-primary" onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)} style={{ fontSize: '1.2rem', padding: '1rem 2rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+              <div style={{ marginTop: '2rem' }}>
+              <button className="btn-primary" onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}${wowMedal ? `&wow_medal=${wowMedal}` : ''}`)} style={{ fontSize: '1.2rem', padding: '1rem 2rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
                   Palaa kartalle <ArrowRight size={20} />
               </button>
+              </div>
           </div>
         </div>
       );
@@ -474,13 +511,18 @@ export default function Quiz() {
             {sub.name}
           </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ fontWeight: 'bold', color: 'var(--text-main)', background: '#fef3c7', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d97706', border: '2px solid #fde68a' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
+          <div style={{ fontWeight: 'bold', background: '#fef3c7', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d97706', border: '2px solid #fde68a' }}>
             <Zap size={20} fill="#d97706" />
             {currentSparks}
           </div>
-          <div style={{ color: 'var(--text-muted)', fontWeight: 'bold' }}>
-            {currentIndex + 1} / {questions.length}
+          <div style={{ width: '150px' }}>
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 'bold', textAlign: 'right', marginBottom: '0.3rem' }}>
+              {currentIndex + 1} / {questions.length}
+            </div>
+            <div style={{ width: '100%', height: '8px', background: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
+              <div style={{ width: `${((currentIndex + 1) / questions.length) * 100}%`, background: 'linear-gradient(90deg, #ec4899, #38bdf8)', height: '100%', transition: 'width 0.4s ease' }} />
+            </div>
           </div>
         </div>
       </div>

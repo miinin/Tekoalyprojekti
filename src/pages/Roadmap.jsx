@@ -8,9 +8,11 @@ import {
   CheckCircle2,
   Lock,
   Zap,
-  Medal
+  Medal,
+  Info
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
+import confetti from 'canvas-confetti';
 
 import { categories } from '../data/questions';
 import { store } from '../services/store';
@@ -61,6 +63,7 @@ const Roadmap = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editWaypoints, setEditWaypoints] = useState([]);
   const [showMedalTutorial, setShowMedalTutorial] = useState(false);
+  const [showWowMedal, setShowWowMedal] = useState(null);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -92,10 +95,23 @@ const Roadmap = () => {
     const params = new URLSearchParams(location.search);
     const completedNodeId = params.get('completed');
     const mapParam = params.get('map');
+    const wowMedalParam = params.get('wow_medal');
+
+    // Mitalin juhliminen
+    if (wowMedalParam && !consumedReturnRef.current) {
+        setShowWowMedal(wowMedalParam);
+        confetti({
+            particleCount: 150,
+            spread: 100,
+            origin: { y: 0.6 },
+            zIndex: 10000
+        });
+        window.history.replaceState({}, document.title, window.location.pathname + "?map=" + (mapParam || 'main') + (completedNodeId ? "&completed=" + completedNodeId : ""));
+    }
 
     // Jos URL:n mukainen kartta ei täsmää komponentin tilaan, odotetaan että React päivittää tilan.
     const expectedMap = (mapParam && AI_ROADMAP_DATA.sub[mapParam]) ? mapParam : 'main';
-    if (expectedMap !== currentMap) return;
+    if (currentMap !== expectedMap) return;
 
     if (currentMap !== 'main' && AI_ROADMAP_DATA.sub[currentMap]) {
         const subData = AI_ROADMAP_DATA.sub[currentMap];
@@ -333,7 +349,7 @@ const Roadmap = () => {
                     const [s, e] = pathKey.split('-');
                     if (subAdjacency[s] && subAdjacency[e]) {
                         subAdjacency[s].push(e);
-                        subAdjacency[e].push(s);
+                        subAdjacency[e].push(start);
                     }
                 });
 
@@ -535,13 +551,15 @@ const Roadmap = () => {
   const getSubmapMedal = (nodeId) => {
     const stats = store.getNodeStats();
     const stat = stats[nodeId];
-    if (!stat || stat.total === 0) return null;
-    const ratio = stat.correct / stat.total;
-    if (stat.total > 0 && stat.correct === stat.total) return 'platinum';
-    if (ratio >= 0.75) return 'gold';
-    if (ratio >= 0.40) return 'silver';
-    if (stat.correct >= 1) return 'bronze';
-    return null;
+    const getSubcategoryMedal = (stat) => {
+        if (!stat || stat.total === 0) return null;
+        if (stat.correct === stat.total && stat.total > 0) return 'platinum';
+        if (stat.correct >= stat.total - 1) return 'gold';
+        if (stat.correct >= stat.total - 3) return 'silver';
+        if (stat.correct >= stat.total - 5) return 'bronze';
+        return null;
+    };
+    return getSubcategoryMedal(stat);
   };
 
   const getMainmapMedal = (categoryId) => {
@@ -656,10 +674,9 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderWidth: medal ? '0' : '4px',
-                borderStyle: 'solid',
-                borderColor: medal ? 'transparent' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode ? '#fef08a' : 'white')),
-                boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? undefined : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
+                border: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '3px solid white' : (medal ? '0' : '4px solid white'),
+                borderColor: medal ? 'transparent' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? 'white' : (isLastNode ? '#fef08a' : 'white')),
+                boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '0 0 0 5px rgba(255,255,255,0.7)' : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
                 background: medal ? 'transparent' : (isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
@@ -960,10 +977,12 @@ const Roadmap = () => {
                   <img src="/trophy/medal-plat.png" alt="platinum" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#1e293b', fontFamily: 'var(--font-display)' }}>{counts.platinum}</span>
                 </div>
+                <button onClick={() => setShowMedalTutorial(true)} style={{ background: 'transparent', color: 'var(--primary-color)', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: 0, opacity: 0.8, transition: 'all 0.2s', transform: 'scale(1.1)' }}>
+                  <Info size={24} />
+                </button>
               </div>
             );
           })()}
-          <button onClick={() => setShowMedalTutorial(true)} style={{ background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontWeight: 'bold', marginLeft: '0.5rem', boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>?</button>
         </div>
       </div>
 
@@ -1066,15 +1085,39 @@ const Roadmap = () => {
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     <b>Kerää solmumitaleita!</b><br/><br/>
-                    Saat mitalin sen perusteella, miten hyvin pärjäät perustason kysymyksissä:<br/><br/>
+                    Saat mitalin sen perusteella, miten hyvin pärjäät 10 kysymyksen kisoissa:<br/><br/>
                     <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
-                       <li style={{ marginBottom: '0.5rem' }}>❌ 1-4 oikein: Ei mitalia... yritä uudelleen!</li>
-                       <li style={{ marginBottom: '0.5rem' }}>🥉 5-6 oikein: Pronssia</li>
-                       <li style={{ marginBottom: '0.5rem' }}>🥈 7-8 oikein: Hopeaa</li>
-                       <li style={{ marginBottom: '0.5rem' }}>🥇 9-10 oikein: Kultaa!</li>
+                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                         <span style={{ width: '28px', textAlign: 'center', fontWeight: '900', color: '#ef4444' }}>❌</span> 
+                         1-4 oikein: Ei mitalia... yritä uudelleen!
+                       </li>
+                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                         <img src="/trophy/medal-bronze.png" alt="pronssi" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         5-6 oikein: Pronssia
+                       </li>
+                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                         <img src="/trophy/medal-silver.png" alt="hopea" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         7-8 oikein: Hopeaa
+                       </li>
+                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                         <img src="/trophy/medal-gold.png" alt="kulta" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         9 oikein: Kultaa (yhtä vaille täydellisyyttä!)
+                       </li>
+                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                         <img src="/trophy/medal-plat.png" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         10 oikein: Täysi potti Platinum!
+                       </li>
                     </ul>
                 </div>
                 <button className="btn-primary" style={{ width: '100%', background: 'var(--primary-color)', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setShowMedalTutorial(false)}>Selvä juttu!</button>
+              </div>
+            )}
+
+            {showWowMedal && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '25%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
+                <h1 style={{ margin: 0, fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#d97706', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>UUSI MITALI!</h1>
+                <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.5rem', padding: '1.5rem' }} onClick={() => setShowWowMedal(null)}>Upeaa, jatka matkaa!</button>
               </div>
             )}
         <div style={mapInnerStyle} onClick={handleMapClick}>
