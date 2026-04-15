@@ -7300,15 +7300,15 @@ export const categories = [
           {
             "id": "arjessa_5_q7",
             "type": "reverse_prompt",
-            "question": "Yritit kääntää tekoälyllä lauseen \"Se on pala kakkua\", joka tarkoittaa englanniksi sanontaa \"Se on tosi helppoa\" (It's a piece of cake). Tekoäly kuitenkin piirsi kuvan ihan oikeasta täytekakkupalasta! Mikä oli syötteesi?",
+            "question": "Yrität kääntää puhelimesi kameralla espanjankielisen ruokalistan suomeksi. Tekoäly ei kuitenkaan käännä sitä laisinkaan, vaan lukee sen sijaan ruokalistan tekstin ääneen pelkäksi espanjaksi. Minkä puhekomennon annoit sille vahingossa?",
             "options": [
-              "Piirrä minulle kuva sanonnasta 'Se on pala kakkua'.",
-              "Käännä minulle englanniksi lause 'Tämä on tosi helppoa'.",
-              "Etsi internetistä hyviä reseptejä herkullisiin suklaakakkuihin.",
-              "Mitä englannin kielen sanonta 'piece of cake' tarkoittaa suomeksi?"
+              "Lue ruudulla näkyvä teksti ääneen.",
+              "Käännä kameran näkemä teksti suomeksi.",
+              "Tallenna valokuva tästä ruokalistasta.",
+              "Etsi espanjalaisten ravintoloiden osoitteita."
             ],
-            "correctAnswer": "Piirrä minulle kuva sanonnasta 'Se on pala kakkua'.",
-            "explanation": "Tekoäly ottaa asiat usein kirjaimellisesti! Jos pyydät sitä piirtämään sanonnan sana sanalta, se ei ymmärrä sen piilomerkitystä (helppo asia), vaan piirtää kirjaimellisesti kakkua ja kuorrutusta."
+            "correctAnswer": "Lue ruudulla näkyvä teksti ääneen.",
+            "explanation": "Tekoälylaitteissa on useita rinnakkaisia toimintoja. Ruudunlukija lukee näkyvän tekstin sellaisenaan silmien avuksi, kun taas kääntäjäohjelma vaihtaisi tekstin täysin toiselle kielelle. On tärkeää syöttää ohje aina oikein!"
           },
           {
             "id": "arjessa_5_q8",
