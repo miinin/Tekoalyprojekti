@@ -1676,11 +1676,11 @@ export const categories = [
             "question": "Etsi joukosta tekoälyn tuottama teksti, josta huomaa, että sen käyttämä data (polttoaine) on ollut todella vanhaa!",
             "options": [
               "Tänään sataa lunta, joten autoon pitää laittaa talvirenkaat alle.",
-              "Suomen presidentti on Urho Kekkonen, ja televisiot ovat mustavalkoisia.",
+              "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
               "Kävimme eilen perheen kanssa pizzalla, ja se oli superhyvää!",
               "Sähköautot ovat yleistyneet paljon viime vuosien aikana."
             ],
-            "correctAnswer": "Suomen presidentti on Urho Kekkonen, ja televisiot ovat mustavalkoisia.",
+            "correctAnswer": "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
             "explanation": "Jos tekoälyn käyttämä data on kerätty pitkän aikaa sitten, se luulee, että ne asiat ovat edelleen totta! Tekoäly on juuri niin fiksu kuin sen saama data."
           },
           {
