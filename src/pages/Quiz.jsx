@@ -530,20 +530,49 @@ export default function Quiz() {
           <div style={{ flex: 1, maxWidth: '280px', position: 'relative', marginTop: '10px' }}>
             <div style={{ position: 'relative', width: '100%', height: '35px' }}>
                <div style={{ position: 'absolute', top: '22px', left: '10px', right: '10px', height: '6px', background: '#e2e8f0', borderRadius: '3px', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
-                  <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: 'linear-gradient(90deg, #ec4899, #38bdf8)', width: `${(currentIndex / Math.max(1, questions.length - 1)) * 100}%`, transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', borderRadius: '3px' }} />
+                  {(() => {
+                     const bodyId = equippedItems?.body || 'van-body01';
+                     const colors = {
+                        'van-body01': '#3b82f6',
+                        'van-body02': '#ef4444',
+                        'van-body03': '#64748b',
+                        'van-body04': '#ec4899',
+                        'van-body05': '#4d7c0f',
+                        'van-body06': '#d97706',
+                        'van-body07': '#dc2626',
+                        'van-body08': '#c026d3',
+                        'van-body09': '#fbbf24',
+                        'van-body10': '#f472b6',
+                        'van-body11': '#1e293b',
+                        'van-body12': '#ef4444'
+                     };
+                     const barColor = colors[bodyId] || '#38bdf8';
+                     return (
+                       <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: barColor, width: `${(currentIndex / Math.max(1, questions.length - 1)) * 100}%`, transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', borderRadius: '3px' }} />
+                     );
+                  })()}
                </div>
                
-               {Array.from({length: questions.length}).map((_, i) => (
+               {Array.from({length: questions.length}).map((_, i) => {
+                  const bodyId = equippedItems?.body || 'van-body01';
+                  const colors = {
+                        'van-body01': '#3b82f6', 'van-body02': '#ef4444', 'van-body03': '#64748b',
+                        'van-body04': '#ec4899', 'van-body05': '#4d7c0f', 'van-body06': '#d97706',
+                        'van-body07': '#dc2626', 'van-body08': '#c026d3', 'van-body09': '#fbbf24',
+                        'van-body10': '#f472b6', 'van-body11': '#1e293b', 'van-body12': '#ef4444'
+                  };
+                  const barColor = colors[bodyId] || '#38bdf8';
+                  return (
                   <div key={i} style={{ 
                      position: 'absolute', 
                      top: '25px', 
                      left: `calc(10px + ${i / Math.max(1, questions.length - 1)} * calc(100% - 20px))`, 
                      width: '14px', height: '14px', borderRadius: '50%', 
-                     background: i <= currentIndex ? '#38bdf8' : '#cbd5e1', 
+                     background: i <= currentIndex ? barColor : '#cbd5e1', 
                      transform: 'translate(-50%, -50%)', border: '3px solid white', 
                      transition: 'background 0.5s ease', zIndex: 5, boxShadow: '0 2px 4px rgba(0,0,0,0.15)' 
                   }} />
-               ))}
+               )})}
                
                <div style={{ 
                   position: 'absolute', 
