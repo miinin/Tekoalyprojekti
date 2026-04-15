@@ -1121,8 +1121,8 @@ const Roadmap = () => {
                 <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
                 <p style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
-                  {showWowMedal === 'bronze' && "Tiesitkö, että pelaamalla tason myöhemmin uudelleen voit saavuttaa uusia kysymyksiä ja nousta hopealle, kullalle tai jopa platinalle!"}
-                  {showWowMedal === 'silver' && "Hienoa työtä! Pelaamalla uudestaan voit saada uusia kysymyksiä, ja nousta vielä kultaan tai platinaan!"}
+                  {showWowMedal === 'bronze' && "Tiesitkö, että pelaamalla tason myöhemmin uudelleen saat eri kysymyksiä ja voit nousta hopealle, kullalle tai jopa platinalle!"}
+                  {showWowMedal === 'silver' && "Hienoa työtä! Pelaamalla uudestaan saat uusia kysymyksiä, ja voit nousta vielä kultaan tai platinaan!"}
                   {showWowMedal === 'gold' && "Upea suoritus! Enää hieman harjoitusta, niin saat kaikkiin vaihtuviinkin kysymyksiin oikean vastauksen ja ansaitset legendaarisen platinamitalin!"}
                   {showWowMedal === 'platinum' && "Täydellistä! Olet nyt vastannut tämän tason KAIKKIIN vaihtuviin kysymyksiin onnistuneesti oikein!"}
                 </p>

@@ -4700,7 +4700,7 @@ export const categories = [
           {
             "id": "aivoterveys_1_q2",
             "type": "multiple_choice",
-            "question": "Mitä tarkoittaa, kun aivot \"ylikuumenevat\" liiallisesta ruutuajasta autotallin peleissä?",
+            "question": "Mitä tarkoittaa, kun aivot \"ylikuumenevat\" liiallisesta ruutuajasta?",
             "options": [
               "Päästä alkaa nousta oikeaa savua.",
               "Keskittyminen herpaantuu ja olo on väsynyt.",
@@ -9367,9 +9367,9 @@ export const categories = [
             "question": "Miksi tekoälyllä tehtyjen nolojen ja valheellisten väärennöskuvien (deepfake) jakaminen eteenpäin on niin haitallista?",
             "options": [
               "Koska nolo kuva saa aikaan pilkkaa ja pysyy internetissä aina, aiheuttaen kohteelle aitoa pahaa mieltä.",
-              "Koska tekoälykuvat ovat laadultaan liian kauniita.",
-              "Koska kaikki ihmiset uskovat heti, että kyseessä on robotti.",
-              "Koska kuvan kohde saa kuvasta itselleen erittäin paljon ilmaista rahaa."
+              "Koska tekoälyn automaattisesti muokkaamat digitaaliset kasvot ovat laadullisesti aivan liian kauniita.",
+              "Koska useimmat ihmiset ja ylläpitäjät luulevat internetin nimettömiä kuvien julkaisijoita roboteiksi.",
+              "Koska usein pelätään pelkän valheellisen hupikuvan antavan sen kohteelle valtavasti laitonta rahaa."
             ],
             "correctAnswer": "Koska nolo kuva saa aikaan pilkkaa ja pysyy internetissä aina, aiheuttaen kohteelle aitoa pahaa mieltä.",
             "explanation": "Vaikka kuva olisi tekoälyn tekemä väärennös, \"digitaalinen kura\" on oikeaa kiusaamista. Sen aiheuttama häpeä ja paha mieli kohdehenkilölle ovat täysin aitoja tunteita!"
