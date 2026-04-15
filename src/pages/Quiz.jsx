@@ -528,9 +528,6 @@ export default function Quiz() {
             {currentSparks}
           </div>
           <div style={{ flex: 1, maxWidth: '280px', position: 'relative', marginTop: '10px' }}>
-            <div style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: '900', fontFamily: 'var(--font-display)', textAlign: 'right', marginBottom: '0.2rem' }}>
-              {currentIndex + 1} / {questions.length}
-            </div>
             <div style={{ position: 'relative', width: '100%', height: '35px' }}>
                <div style={{ position: 'absolute', top: '22px', left: '10px', right: '10px', height: '6px', background: '#e2e8f0', borderRadius: '3px', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
                   <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', background: 'linear-gradient(90deg, #ec4899, #38bdf8)', width: `${(currentIndex / Math.max(1, questions.length - 1)) * 100}%`, transition: 'width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', borderRadius: '3px' }} />
