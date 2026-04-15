@@ -94,7 +94,7 @@ export default function Quiz() {
        else if (tools === 'g-walltools4') greenCharge = 60;
        setToolsBuff(greenCharge);
 
-       const wheels = equipped['wheel'] || '';
+       // wheels already declared
        let yellowCharge = 0;
        let yellowPower = 1;
        if (wheels === 'van-wheel01') yellowCharge = 20;
@@ -186,20 +186,6 @@ export default function Quiz() {
     } else {
         setShuffledDraggables([]);
     }
-    // Enää ei poisteta valintoja automaattisesti! (Keltainen mittari hoitaa sen manuaalisesti) else if (bumperBuff > 0 && Math.random() < bumperBuff) {
-            shouldRemove = true;
-            isBumper = true;
-        }
-
-        if (shouldRemove) {
-            const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer);
-            if (wrongOptions.length > 0) {
-                const randomWrong = wrongOptions[Math.floor(Math.random() * wrongOptions.length)];
-                setRemovedOptions([randomWrong]);
-                if (isBumper) setBumperSaved(true);
-            }
-        }
-    }
   }, [currentIndex, questions, activeBuff, bumperBuff]);
 
   if (!category || !sub) {
@@ -233,14 +219,10 @@ export default function Quiz() {
   
   if (currentQuestion.type === 'ordering' && orderedItems.length === 0 && !selectedAnswer) {
        setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
-  } else {
-       setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
-    }
   }
   
   if (currentQuestion.type === 'drag_drop' && Object.keys(dragTargets).length === 0 && !selectedAnswer) {
       // Ei automaattista täyttöä enää
-  }
   }
 
   const handleAnswerSubmit = (answer) => {
@@ -300,22 +282,7 @@ export default function Quiz() {
         }
     }
     
-    // Vanha järjestelybuffi on poistettu);
-        } else if (currentQuestion.type === 'drag_drop') {
-             const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
-             draggables.forEach(item => {
-                  const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
-                  if (dragTargets[item] !== expected) wrongItems.push(item);
-             });
-        }
-        
-        if (wrongItems.length > 0) {
-             setUsedToolChecks(true);
-             setHighlightedWrongItems(wrongItems.slice(0, toolsBuff));
-             setSelectedAnswer(null);
-             return;
-        }
-    }
+    // Osa vanhasta koodista siivottu pois
     
     if (correct) {
       setCorrectAnswersCount(prev => prev + 1);
