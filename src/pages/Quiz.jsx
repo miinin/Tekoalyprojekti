@@ -615,8 +615,8 @@ export default function Quiz() {
                     Olet saapunut kategorian finaaliin! Vastaa 10 tiukkaan mestarikysymykseen. Kerää vähintään <span style={{ color: '#10b981', fontSize: '1.4rem' }}>7 oikein</span> voittaaksesi tämän alueen kiiltävän mestaruuspokaalin suoraan autotalliisi!
                 </p>
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-                    <button className="btn-primary" style={{ background: '#f59e0b', color: '#1e293b', padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => setBossIntroSeen(true)}>Olen valmis, aloita finaali!</button>
-                    <button className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa pakoon kartalle</button>
+                    <button className="btn-primary" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#ffffff', padding: '1rem 2rem', fontSize: '1.2rem', border: 'none', boxShadow: '0 4px 15px rgba(217, 119, 6, 0.3)' }} onClick={() => setBossIntroSeen(true)}>Olen valmis, aloita finaali!</button>
+                    <button className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa kartalle harjoittelemaan</button>
                 </div>
             </div>
          </div>

@@ -9038,12 +9038,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Haluat tekoälyn piirtävän kuvan unelmiesi AI vanista. Pyydät tekoälyä luomaan peräti 100 erilaista kuvaa kerralla ihan vain huvin vuoksi, vaikka tarvitset niistä vain yhden. Mitä luonnolle tapahtuu?",
             "options": [
-              "Puhelimesi istuttaa samalla täysin automaattisesti sata uutta puuta metsään.",
-              "Sata kuvaa syntyy täysin ilmaiseksi ja täysin ilman mitään sähköä tai energiaa.",
-              "Tekoälyn tietokoneet joutuvat tekemään todella paljon turhaa työtä ja tuhlaamaan luonnon energiaa.",
-              "Autotallin valot sammuvat heti ja ovet menevät pysyvästi vahingossa takalukkoon."
+              "Sovelluksesi koodi istuttaa samalla täysin automaattisesti yli sata uutta puuntaimea johonkin metsään.",
+              "Nuo sata kuvaa luodaan täysin taianomaisesti ja kokonaan ilman ylimääräistä sähkön tai energian kulumista.",
+              "Tekoälyn raskaat tietokoneet joutuvat petollisesti tekemään valtavan turhaa työtä ja tuhlaamaan energiaa.",
+              "Laitteesi akku tyhjenee välittömästi, huoneen valot sammuvat sähköpulasta ja ovet menevät heti takalukkoon."
             ],
-            "correctAnswer": "Tekoälyn tietokoneet joutuvat tekemään todella paljon turhaa työtä ja tuhlaamaan luonnon energiaa.",
+            "correctAnswer": "Tekoälyn raskaat tietokoneet joutuvat petollisesti tekemään valtavan turhaa työtä ja tuhlaamaan energiaa.",
             "explanation": "Jokaisen kuvan luominen vaatii valtavasti tietokoneiden \"ruksutusta\". Fiksu ja reilu kuski pyytää vain sen mitä oikeasti tarvitsee, eikä kaasuta turhaan luontoa kuormittaen!"
           },
           {
@@ -9053,14 +9053,14 @@ export const categories = [
             "correctAnswer": {
               "Kysyt vitsin puhelimeltasi ja se lähettää pyyntösi nopeasti internetin yli.": "1. vaihe",
               "Pyyntö saapuu jättimäiseen konesaliin, jossa hyrrää valtavasti tietokoneita.": "2. vaihe",
-              "Koneet tekevät kovaa aivotyötä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.": "3. vaihe",
+              "Koneet tekevät poikkeuksellisen raskasta työtä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.": "3. vaihe",
               "Vastaus palaa puhelimeesi ja konesalin tuulettimet jäähdyttävät kuumia koneita vedellä.": "4. vaihe"
             },
             "explanation": "Vaikka puhelimesi akku ei juuri kuluisi silmissä, jossain todella kaukana isot ja kuumat tietokoneet kuluttavat paljon sähköä juuri sinun pyyntösi vuoksi.",
             "draggables": [
               "Kysyt vitsin puhelimeltasi ja se lähettää pyyntösi nopeasti internetin yli.",
               "Pyyntö saapuu jättimäiseen konesaliin, jossa hyrrää valtavasti tietokoneita.",
-              "Koneet tekevät kovaa aivotyötä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.",
+              "Koneet tekevät poikkeuksellisen raskasta työtä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.",
               "Vastaus palaa puhelimeesi ja konesalin tuulettimet jäähdyttävät kuumia koneita vedellä."
             ],
             "dropZones": [
@@ -9135,17 +9135,17 @@ export const categories = [
             "question": "Miksi jättimäiset tekoälyä pyörittävät konesalit (palvelinkeskukset) tarvitsevat miljoonia litroja oikeaa, puhdasta vettä putkistoihinsa?",
             "options": [
               "Tekoäly tarvitsee vettä voidakseen kasvattaa oman digitaalisen uima-altaan kesäpeleihin.",
-              "Koska koneet käyvät niin kuumina aivotyöstä, että ne täytyy välttämättä jäähdyttää vedellä.",
+              "Koska koneet käyvät niin kuumina jatkuvasta laskentatyöstä, että ne täytyy jäähdyttää vedellä.",
               "Koska vedestä tehdään salaista polttoainetta, jota siirretään suoraan puhelimien sisälle.",
               "Tekoäly-yhtiöt haluavat vain pestä omat jättimäiset autonsa mahdollisimman usein konesalissa."
             ],
-            "correctAnswer": "Koska koneet käyvät niin kuumina aivotyöstä, että ne täytyy välttämättä jäähdyttää vedellä.",
+            "correctAnswer": "Koska koneet käyvät niin kuumina jatkuvasta laskentatyöstä, että ne täytyy jäähdyttää vedellä.",
             "explanation": "Aivan kuten auton moottori käy kuumana raskaassa ajossa ja tarvitsee jäähdytysnestettä, tekoälyn valtavat palvelimet hehkuvat kuumuutta jatkuvan sähkön takia. Niiden viilentämiseen menee todella valtavasti puhdasta vettä!"
           },
           {
             "id": "reilu_peli_6_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat laskea autotallissa, kuinka monta renkaan pulttia tarvitset neljään autoon (4 x 4 x 5). Voisit kysyä asiaa tekoälyltä netistä tai käyttää vain puhelimen pientä, tavallista taskulaskinta ilman nettiä. Kumpi on reilumpaa luonnolle?",
+            "question": "SKENAARIO: Haluat laskea autotallissa, kuinka monta renkaan pulttia tarvitset neljään autoon (4 x 4 x 5). Voisit kysyä asiaa tekoälyltä tai käyttää vain puhelimen tavallista laskinsovellusta. Mikä näistä vaihtoehdoista on reilumpaa luonnolle?",
             "options": [
               "Raskaan netissä toimivan tekoälyn käyttö, koska se on vaan paljon hienompaa ja siistimpää.",
               "Tavallinen taskulaskin, koska se tekee pienen laskun laitteessa täysin ilman isoja konesaleja.",
@@ -9379,13 +9379,13 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Pyydät tekoälyä piirtämään kuvan ammatista \"lääkäri\", ja se piirtää jatkuvasti vain harmaahiuksisia miehiä. Ymmärrät, että sen opetusdata oli yksipuolista. Miten korjaat tilanteen fiksulla promptilla tasa-arvon nimissä?",
             "options": [
-              "Pyydät tekoälyä piirtämään pelkkiä autoja lääkäreiden sijaan.",
-              "Pyydät tekoälyä varmistamaan, että piirroksissa näkyy ammattien todellinen monimuotoisuus, kuten naislääkäreitä.",
-              "Käsket sitä piirtämään lääkäreille myös todella isot viikset.",
-              "Poistat tekoälyohjelman laitteeltasi lopullisesti."
+              "Käsket tekoälyä lopettamaan lääkärien piirtämisen ja pyydät sitä luomaan paljon kuvia ainoastaan urheiluautoista.",
+              "Pyydät tekoälyä varmistamaan, että piirrosten sisältö edustaa oikeaa monimuotoisuutta, kuten myös naislääkäreitä.",
+              "Käsket tekoälyn jatkaa linjalla, mutta pakotat sen piirtämään poikkeuksetta kaikille hahmoille massiiviset viikset.",
+              "Lopetat huonokäytöksisen piraattitekoälyn käytön kokonaan ja poistat sovelluksen omista digitaalisista laitteistasi."
             ],
-            "correctAnswer": "Pyydät tekoälyä varmistamaan, että piirroksissa näkyy ammattien todellinen monimuotoisuus, kuten naislääkäreitä.",
-            "explanation": "Reilu tekoäly tarkoittaa \"Kaikki kyytiin\" -asennetta! Jos kone tekee stereotypioita vanhan datan takia, meidän kuskien pitää ohjata sitä luomaan uusia, reilumpia ja monimuotoisempia kuvia koko ihmiskunnasta. ________________"
+            "correctAnswer": "Pyydät tekoälyä varmistamaan, että piirrosten sisältö edustaa oikeaa monimuotoisuutta, kuten myös naislääkäreitä.",
+            "explanation": "Reilu tekoäly tarkoittaa \"Kaikki kyytiin\" -asennetta! Jos kone tekee stereotypioita vanhan datan takia, meidän kuskien pitää ohjata sitä luomaan uusia, reilumpia ja monimuotoisempia kuvia koko ihmiskunnasta."
           }
         ]
       }
