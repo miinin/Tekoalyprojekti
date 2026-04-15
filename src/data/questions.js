@@ -6475,7 +6475,7 @@ export const categories = [
               "Soitat puhelimella ystävälle, joka osaa puhua vähän espanjaa."
             ],
             "correctAnswer": "Osoitat puhelimen kameralla kylttiä, ja käännös ilmestyy suoraan ruudulle.",
-            "explanation": "Nykyaikainen kääntäjäsovellus osaa lukea tekstiä suoraan videokuvasta ja vaihtaa sen kielen reaaliajassa näytölle. Se on yksi upeimmista tekoälyn arjen \"taikatempuista\"!"
+            "explanation": "Nykyaikainen kääntäjäsovellus osaa lukea tekstiä suoraan videokuvasta ja vaihtaa sen kielen reaaliajassa näytölle. Se on yksi upeimmista tekoälyn ominaisuuksista arjessamme!"
           },
           {
             "id": "arjessa_1_q15",
@@ -6494,7 +6494,7 @@ export const categories = [
       },
       {
         "id": "arjessa_2",
-        "name": "Ruutuajan taikatemput",
+        "name": "Koukuttavat algoritmit",
         "questions": [
           {
             "id": "arjessa_2_q1",
@@ -6536,7 +6536,7 @@ export const categories = [
           {
             "id": "arjessa_2_q4",
             "type": "drag_drop",
-            "question": "Järjestä \"ruutuajan taikatempun\" askeleet. Miten algoritmi oppii ehdottamaan sinulle hyviä videoita autotallissa?",
+            "question": "Järjestä suosittelualgoritmin toiminnan askeleet. Miten algoritmi oppii ehdottamaan sinulle hyviä videoita autotallissa?",
             "correctAnswer": {
               "Katsot videon hassusta kissasta ajamassa isoa leluautoa.": "1. vaihe",
               "Tekoäly tallentaa muistiin, että pidät todella kissa- ja autovideoista.": "2. vaihe",
@@ -6581,7 +6581,7 @@ export const categories = [
           {
             "id": "arjessa_2_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä AI vanin laitteista käyttää suosittelualgoritmia, eli tekoälyn \"taikatemppua\" arvatakseen mistä viihteestä tykkäät?",
+            "question": "Mikä näistä AI vanin laitteista käyttää suosittelualgoritmia arvatakseen mistä viihteestä tykkäät?",
             "options": [
               "Tavallinen vanha FM-radio, joka soittaa aina tiettyä taajuutta.",
               "Suoratoistopalvelu (kuten Netflix), joka ehdottaa uutta sarjaa.",
@@ -6631,20 +6631,20 @@ export const categories = [
           {
             "id": "arjessa_2_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat rikkoa tekoälyn rakentaman \"suosittelukuplan\", koska olet kyllästynyt näkemään pelkkiä samoja Minecraft-videoita ruudullasi. Miten \"huijaat\" taikatemppua tekevän algoritmin näyttämään sinulle muuta?",
+            "question": "SKENAARIO: Haluat rikkoa tekoälyn rakentaman \"suosittelukuplan\", koska olet kyllästynyt näkemään pelkkiä samoja Minecraft-videoita ruudullasi. Miten muokkaat algoritmin oletuksia jotta se näyttäisi sinulle muuta?",
             "options": [
               "Katsot väkisin vielä kymmenen uutta Minecraft-videota putkeen yöllä.",
-              "Etsit hakukentästä täysin uusia ja erilaisia aiheita, kuten taikatemppuja.",
+              "Etsit hakukentästä täysin uusia ja erilaisia aiheita, esimerkiksi avaruusmatkustusta.",
               "Puhallat näyttöön todella kovaa ja sammutat laitteen kokonaan hetkeksi.",
               "Kirjoitat vanhojen videoiden alle erittäin vihaisia ja ilkeitä kommentteja."
             ],
-            "correctAnswer": "Etsit hakukentästä täysin uusia ja erilaisia aiheita, kuten taikatemppuja.",
+            "correctAnswer": "Etsit hakukentästä täysin uusia ja erilaisia aiheita, esimerkiksi avaruusmatkustusta.",
             "explanation": "Voit kouluttaa tekoälyä uudelleen! Kun aloitat täysin uusien asioiden etsimisen, algoritmi tajuaa mielenkiintosi muuttuneen ja alkaa suositella täysin uudenlaista sisältöä."
           },
           {
             "id": "arjessa_2_q11",
             "type": "drag_drop",
-            "question": "Miten eri palvelut ja sovellukset käyttävät tekoälyn suositteluja arjessamme? Yhdistä tuttu sovellus ja sen tekemä \"taikatemppu\"!",
+            "question": "Miten eri palvelut ja sovellukset käyttävät tekoälyn suositteluja arjessamme? Yhdistä tuttu sovellus ja sen tapa oppia ymmärtämään sinua!",
             "draggables": [
               "Spotify (Musiikki)",
               "YouTube (Videot)",
@@ -6665,7 +6665,7 @@ export const categories = [
           {
             "id": "arjessa_2_q12",
             "type": "drag_drop",
-            "question": "Miten joudut huomaamattasi \"ruutuajan taikatemppuun\" ja valvot vahingossa aivan liian pitkään? Järjestä tapahtumat yleisimpään aikajärjestykseen!",
+            "question": "Miten joudut huomaamattasi koukuttavaan kierteeseen ja valvot vahingossa aivan liian pitkään? Järjestä kierteeseen johtavat tapahtumat yleisimpään aikajärjestykseen!",
             "correctAnswer": {
               "Katsot automatkalla yhden kivan viiden minuutin pituisen videon aluksi.": "1. vaihe",
               "Tekoäly laittaa seuraavan, vielä jännittävämmän videon automaattisesti päälle.": "2. vaihe",
@@ -6831,10 +6831,10 @@ export const categories = [
             "type": "reverse_prompt",
             "question": "Pelin vihollinen sanoo yllättäen: \"En näe sinua, mutta kuulen askeleesi! Tulen etsimään sieltä, mistä ääni kuului!\" Mikä tekoälyn sääntö teki tästä mahdollista?",
             "options": [
-              "Jos vihollinen näkee pelaajan, soita iloista musiikkia.",
+              "Jos vihollinen hukkaa näköyhteyden pelaajaan, se pysähtyy satunnaisesti kuuntelemaan ympärilleen.",
               "Jos pelaaja pitää ääntä, vihollinen suunnistaa äänen lähteelle.",
-              "Jos pelaaja hyppää kerran, vihollinen nukahtaa heti.",
-              "Jos pelaaja piiloutuu, vihollinen unohtaa koko pelin."
+              "Jos pelaaja ei näy kamerassa, vihollinen palautuu takaisin oman vartioreittinsä alkuun.",
+              "Jos peli huomaa pelaajan olevan piilossa, se soittaa viholliselle varoitusääntä."
             ],
             "correctAnswer": "Jos pelaaja pitää ääntä, vihollinen suunnistaa äänen lähteelle.",
             "explanation": "Tekoäly pelissä on pohjimmiltaan joukko \"Jos tapahtuu X, tee Y\" -sääntöjä. Koodari on antanut viholliselle kyvyn reagoida ääniin, mikä tekee pelistä jännittävämmän!"
@@ -6866,7 +6866,7 @@ export const categories = [
           {
             "id": "arjessa_3_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Pelaat automatkalla peliä, jossa autosi menee rikki etkä meinaa päästä millään eteenpäin kentässä. Yhtäkkiä pelin taivaalle ilmestyy lentävä korjaaja-NPC, jota ei aiemmin ole näkynyt. Mitä näkymätön \"Pelinjohtaja-tekoäly\" teki?",
+            "question": "SKENAARIO: Pelaat automatkalla peliä, jossa autosi menee rikki etkä meinaa päästä millään eteenpäin kentässä. Yhtäkkiä pelin taivaalle ilmestyy lentävä korjaaja-NPC, jota ei aiemmin ole näkynyt. Mitä peliä ohjaava tekoäly teki?",
             "options": [
               "Se halusi vain kiusata sinua rikkinäisellä autolla entistä enemmän.",
               "Se havaitsi sinun olevan pulassa ja loi apurin helpottamaan peliä.",
@@ -6879,7 +6879,7 @@ export const categories = [
           {
             "id": "arjessa_3_q11",
             "type": "drag_drop",
-            "question": "Tekoäly hoitaa peleissä monia eri asioita ja taikatemppuja. Yhdistä tekoälyn tehtävä sen oikeaan esimerkkiin!",
+            "question": "Tekoäly hoitaa peleissä monia eri asioita. Yhdistä tekoälyn tehtävä sen oikeaan esimerkkiin!",
             "draggables": [
               "Reitinhaku (Pathfinding)",
               "Käyttäytymispuu (Behavior tree)",
@@ -7104,7 +7104,7 @@ export const categories = [
             "question": "SKENAARIO: Autotallin älyjääkaappi on kytketty kodin yhteiseen tekoälyyn. Se huomaa, että maitopurkki on otettu sieltä pois jo kolme päivää sitten, eikä uutta ole ilmestynyt tilalle. Mitä fiksu jääkaappi voi tehdä?",
             "options": [
               "Se osaa lisätä maidon automaattisesti puhelimesi digitaaliselle kauppalistalle.",
-              "Se alkaa valmistaa maitoa itse jääkaapin sisällä taikatempulla.",
+              "Se alkaa varovasti luomaan tekomaitoa jääkaapin sisällä tyhjästä.",
               "Se lopettaa muiden ruokien viilentämisen mielenosoituksena heti.",
               "Se soittaa heti naapuriin ja käskee heitä tuomaan maitoa teille."
             ],
@@ -7249,7 +7249,7 @@ export const categories = [
               "Kääntäjä etsii vieraille sanoille oikeat suomenkieliset vastineet.": "3. vaihe",
               "Käännetty suomenkielinen teksti ilmestyy puhelimesi ruudulle.": "4. vaihe"
             },
-            "explanation": "Kamerakäännös on huikea taikatemppu! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti.",
+            "explanation": "Kamerakäännös on huikea tekoälyn suoritus! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti.",
             "draggables": [
               "Osoitat puhelimen kameralla outoa ja vieraskielistä kylttiä.",
               "Tekoäly tunnistaa kirjaimet ja sanat suoraan kuvan pikseleistä.",
@@ -7699,7 +7699,7 @@ export const categories = [
           {
             "id": "arjessa_7_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat tietää, mitä ulkomaalaisessa ravintolan kyltissä lukee. Osoitat sitä puhelimen kameralla ja suomenkielinen käännös ilmestyy suoraan ruudulle. Miten tekoäly teki tämän taikatempun?",
+            "question": "SKENAARIO: Haluat tietää, mitä ulkomaalaisessa ravintolan kyltissä lukee. Osoitat sitä puhelimen kameralla ja suomenkielinen käännös ilmestyy suoraan ruudulle. Miten tekoäly onnistui luomaan tämän käännöksen?",
             "options": [
               "Se soitti nopeasti ravintolan omistajalle ja kysyi asiaa.",
               "Hahmontunnistus luki kirjaimet kuvasta, ja kääntäjäohjelma etsi niille suomenkielisen vastineen tietopankista.",
