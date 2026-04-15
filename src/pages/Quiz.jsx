@@ -616,7 +616,7 @@ export default function Quiz() {
 
       <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
         <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center', zIndex: 10 }}>
-           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 'bold' }}>
+           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#334155'} onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>
               <AlertTriangle size={16} /> Ilmoita virheestä
            </button>
            <div style={{ fontFamily: 'monospace', fontSize: '1rem', color: '#64748b', background: 'rgba(241, 245, 249, 0.9)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontWeight: '900', letterSpacing: '1px' }}>
@@ -625,26 +625,26 @@ export default function Quiz() {
         </div>
         
         {bugReportMode && (
-           <div className="animate-fade-in" style={{ marginTop: '2.5rem', marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#fef2f2', borderRadius: '12px', border: '2px solid #fecaca' }}>
+           <div className="animate-fade-in" style={{ marginTop: '2.5rem', marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
              {bugSubmitted ? (
                 <p style={{ color: '#166534', fontWeight: 'bold', margin: '1rem 0', textAlign: 'center', fontSize: '1.2rem' }}>Kiitos ilmoituksesta! Olemme vastaanottaneet sen.</p>
              ) : (
                 <div>
-                  <p style={{ fontSize: '1rem', color: '#991b1b', marginBottom: '1rem', lineHeight: 1.5 }}>
-                    <strong>Tekoäly kehittyy nopeasti ja tieto voi vanhentua.</strong> Tekijät ovat myös vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan, kerro siitä meille, jotta voimme korjata sen!
+                  <p style={{ fontSize: '1rem', color: '#475569', marginBottom: '1rem', lineHeight: 1.5 }}>
+                    Tekoäly kehittyy nopeasti ja tieto voi vanhentua. Olemme myös poikkeuksellisesti vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan tällä tasolla, kerro siitä meille, jotta voimme korjata sen!
                   </p>
                   <textarea 
                     value={bugText}
                     onChange={e => setBugText(e.target.value)}
                     maxLength={500}
                     placeholder="Mikä tässä kysymyksessä on mielestäsi pielessä tai vanhentunut?"
-                    style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid #fca5a5', resize: 'vertical', minHeight: '100px', marginBottom: '1rem', fontFamily: 'inherit', fontSize: '1rem' }}
+                    style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid #cbd5e1', resize: 'vertical', minHeight: '100px', marginBottom: '1rem', fontFamily: 'inherit', fontSize: '1rem', backgroundColor: '#ffffff', color: '#1e293b' }}
                   />
                   <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
                     <button className="btn-secondary" onClick={() => setBugReportMode(false)} style={{ padding: '0.5rem 1rem' }}>Peruuta</button>
                     <button className="btn-primary" 
                          disabled={!bugText.trim()}
-                         style={{ padding: '0.5rem 1.5rem', background: bugText.trim() ? '#dc2626' : '#fca5a5' }}
+                         style={{ padding: '0.5rem 1.5rem', background: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', borderColor: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', color: bugText.trim() ? '#ffffff' : '#f8fafc' }}
                          onClick={() => {
                             store.saveBugReport(currentQuestion.id, bugText);
                             setBugSubmitted(true);
