@@ -179,22 +179,22 @@ export const categories = [
           {
             "id": "perusteet_1_q13",
             "type": "drag_drop",
-            "question": "Järjestä asiat elävästä olennosta keksittyyn taikuuteen. Aseta tekoäly oikealle paikalleen näiden väliin!",
+            "question": "Yhdistä oikea asia sille kuuluvaan lokeroon! Mikä on koodia, mikä ihmistä ja mikä taikaa?",
             "correctAnswer": {
-              "Oikea ihminen (Elävä olento)": "1. vaihe",
-              "Tekoäly (Koodattu ohjelma)": "2. vaihe",
-              "Lentävä matto (Taikuutta)": "3. vaihe"
+              "Siri tai ChatGPT": "Tietokoneohjelma",
+              "Oma luokkakaverisi": "Elävä ihminen",
+              "Lentävä luuta": "Taikaa ja satua"
             },
-            "explanation": "Ihminen on elävä olento, tekoäly on tietokoneella toimiva ohjelma, ja lentävät matot ovat olemassa vain saduissa ja taikuudessa.",
+            "explanation": "Tekoälyt (kuten Siri tai ChatGPT) ovat älykkäitä tietokoneohjelmia. Vaikka ne juttelevat kuin ihmiset, kyse on matematiikasta ja koodista, ei taikuudesta tai elävästä sielusta!",
             "draggables": [
-              "Oikea ihminen (Elävä olento)",
-              "Tekoäly (Koodattu ohjelma)",
-              "Lentävä matto (Taikuutta)"
+              "Siri tai ChatGPT",
+              "Oma luokkakaverisi",
+              "Lentävä luuta"
             ],
             "dropZones": [
-              "1. vaihe",
-              "2. vaihe",
-              "3. vaihe"
+              "Tietokoneohjelma",
+              "Elävä ihminen",
+              "Taikaa ja satua"
             ]
           },
           {
