@@ -655,7 +655,24 @@ export default function Garage() {
                 </div>
               )}
               
-              {showTrophyCabinet && (
+               {saveCode && (
+                 <div className="animate-bounce" style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 90, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '600px' }}>
+                    <button onClick={() => setSaveCode(null)} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
+                    <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Rekisterikilpesi on valmis!</h3>
+                    <p style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.1rem' }}>Ota tämä koodi talteen. Kun palaat pelaamaan Lobbyn kautta uudella laitteella, syötä tämä rekisterikilpi sille varattuun kenttään, ja saat kaikki kipinäsi ja varusteesi takaisin.</p>
+                    
+                    <div style={{ background: 'linear-gradient(to right, #000 0%, #000 12%, #fff 12%, #fff 100%)', border: '5px solid #000', borderRadius: '12px', padding: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden' }}>
+                       <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1.5rem', zIndex: 2 }}>FIN</span>
+                       <span style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '8px', color: '#0f172a', fontFamily: 'monospace' }}>{saveCode}</span>
+                    </div>
+                    
+                    <button className="btn-primary" style={{ background: '#0ea5e9', marginTop: '2rem', width: '100%', fontSize: '1.3rem' }} onClick={() => setSaveCode(null)}>
+                       Selvä juttu! Otan talteen
+                    </button>
+                 </div>
+               )}
+
+               {showTrophyCabinet && (
                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
                     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
