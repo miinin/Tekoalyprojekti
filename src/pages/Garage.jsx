@@ -40,19 +40,6 @@ export default function Garage() {
       }
   };
 
-  const [saveCode, setSaveCode] = useState(null);
-  const [isSaving, setIsSaving] = useState(false);
-
-  const handleCreateSave = async () => {
-      setIsSaving(true);
-      const code = await store.exportProgressToCloud();
-      setIsSaving(false);
-      if (code) {
-          setSaveCode(code);
-      } else {
-          alert('Tallennus epäonnistui! Tarkista nettiyhteys tai Firebase-asetukset.');
-      }
-  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
