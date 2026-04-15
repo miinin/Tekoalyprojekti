@@ -327,6 +327,14 @@ export default function Quiz() {
       setCorrectAnswersCount(prev => prev + 1);
     }
     
+    const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
+    const diff = store.saveQuestionRecord(currentQuestion.id, earned * sparkRewardMultiplier);
+    if (diff > 0) {
+        store.addSparks(diff).then(() => {});
+        setEarnedSparks(prev => prev + diff);
+    }
+    store.saveQuestionCorrectness(sub.id, currentQuestion.id, correct);
+    
     setResults(prev => [...prev, { id: currentQuestion.id, earned, max, type: currentQuestion.type, correct }]);
     setIsCorrect(correct);
     setShowExplanation(true);
@@ -342,7 +350,6 @@ export default function Quiz() {
       setCurrentIndex(currentIndex + 1);
     } else {
       // End of quiz handling: calculate dynamic high score delta per question
-      let totalNewSparks = 0;
       const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
       
       const oldStat = store.getNodeStats()[sub.id] || { correct: 0, total: sub.questions.length };
@@ -355,13 +362,6 @@ export default function Quiz() {
          return 0;
       };
       const oldMedalLevel = getMedalLevel(oldStat.correct, oldStat.total);
-
-      results.forEach(res => {
-         store.saveQuestionCorrectness(sub.id, res.id, res.correct);
-         const earned = res.earned * sparkRewardMultiplier;
-         const diff = store.saveQuestionRecord(res.id, earned);
-         totalNewSparks += diff;
-      });
 
       // Update Node Stats (Aggregated across all possible questions)
       const { correct, total } = store.getAggregatedNodeStats(sub.id, sub.questions.length);
@@ -378,7 +378,6 @@ export default function Quiz() {
       if (totalToBank > 0) {
          await store.addSparks(totalToBank);
       }
-      setEarnedSparks(totalNewSparks);
       store.markCompleted(sub.id);
       setShowSummary(true);
     }
