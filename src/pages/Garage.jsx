@@ -255,7 +255,7 @@ export default function Garage() {
            onMouseLeave={() => setHoveredItem(null)}>
            
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
-              {item.buff && <div style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 8px rgba(34, 197, 94, 0.8), inset 0 2px 3px rgba(255,255,255,0.8)', zIndex: 10 }} title="Tällä esineellä on apulaiteominaisuus!" />}
+              {item.buff && <div style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', width: '12px', height: '12px', borderRadius: '50%', background: item.color || '#22c55e', border: '1px solid rgba(0,0,0,0.2)', boxShadow: `0 0 8px ${item.color || '#22c55e'}, inset 0 2px 3px rgba(255,255,255,0.8)`, zIndex: 10 }} title="Tällä esineellä on apulaiteominaisuus!" />}
               {item.category === 'body' ? (
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
                     <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '30% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
@@ -860,10 +860,10 @@ export default function Garage() {
               )}
 
               {hoveredObj && hoveredObj.buff && (
-                <div className="animate-fade-in" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(255, 255, 255, 0.95)', padding: '1.2rem', borderRadius: '16px', borderLeft: '6px solid #22c55e', color: 'var(--text-main)', zIndex: 20, boxShadow: '0 15px 30px rgba(0,0,0,0.4)', maxWidth: '350px' }}>
+                <div className="animate-fade-in" style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', background: 'rgba(255, 255, 255, 0.95)', padding: '1.2rem', borderRadius: '16px', borderLeft: `6px solid ${hoveredObj.color || '#22c55e'}`, color: 'var(--text-main)', zIndex: 20, boxShadow: '0 15px 30px rgba(0,0,0,0.4)', maxWidth: '350px' }}>
                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
-                      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#22c55e', border: '1px solid #14532d', boxShadow: '0 0 8px rgba(34, 197, 94, 0.8), inset 0 2px 4px rgba(255,255,255,0.8)' }} />
-                      <span style={{ fontWeight: '900', fontSize: '1.1rem', color: '#166534', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{hoveredObj.buff.title}</span>
+                      <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: hoveredObj.color || '#22c55e', border: '1px solid rgba(0,0,0,0.2)', boxShadow: `0 0 8px ${hoveredObj.color || '#22c55e'}, inset 0 2px 4px rgba(255,255,255,0.8)` }} />
+                      <span style={{ fontWeight: '900', fontSize: '1.1rem', color: hoveredObj.color || '#166534', textTransform: 'uppercase', letterSpacing: '0.5px', textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>{hoveredObj.buff.title}</span>
                    </div>
                    <div style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#334155', fontWeight: '500' }}>
                       {hoveredObj.buff.desc}
