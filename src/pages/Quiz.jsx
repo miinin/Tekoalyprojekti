@@ -303,6 +303,7 @@ export default function Quiz() {
     
     setResults(prev => [...prev, { id: currentQuestion.id, earned, max, type: currentQuestion.type, correct }]);
     setIsCorrect(correct);
+    setExplanationStartTime(Date.now());
     setShowExplanation(true);
   };
 
@@ -348,6 +349,7 @@ export default function Quiz() {
       if (newMedalLevel > oldMedalLevel) {
           const medalNames = { 4: 'platinum', 3: 'gold', 2: 'silver', 1: 'bronze' };
           setWowMedal(medalNames[newMedalLevel] || null);
+          store.chargeMeter('yellow', 100);
       }
 
       // Kipinät on jo tallennettu jokaisen kysymyksen jälkeen (use-tapaus 3)
@@ -426,13 +428,15 @@ export default function Quiz() {
   const renderMeters = () => {
     // Only show if the user has corresponding item equipped
     const b = bumperBuff > 0;
-    const w = equippedItems['wheel'] && equippedItems['wheel'] !== 'van-wheel01'; // Wheel01 charges but it's base
-    // Actually base wheel DOES charge? Yes it does. We just show yellow if any wheels exist
     const hasWheels = !!equippedItems['wheel'];
     const hasTools = toolsBuff > 0;
+    
+    if (!b && !hasWheels && !hasTools) return null;
 
     return (
-        <div style={{ position: 'fixed', bottom: '1.5rem', left: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 100 }}>
+        <div style={{ padding: '1.5rem', background: '#f8fafc', border: '3px dashed #cbd5e1', borderRadius: '24px', display: 'flex', flexDirection: 'row', gap: '3rem', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', boxShadow: 'inset 0 4px 10px rgba(0,0,0,0.02)' }}>
+            <div style={{ width: '100%', textAlign: 'center', fontSize: '1.1rem', color: '#64748b', fontWeight: 'bold', fontFamily: 'var(--font-main)', marginBottom: '-1.5rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Aktiiviset laitteet</div>
+            
             {b && (
                 <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.red >= 100 && showExplanation && !isCorrect ? 1 : 0.6, transition: 'all 0.3s' }}>
                    {meters.red >= 100 && showExplanation && !isCorrect && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#ef4444', borderRadius: '50%' }} />}
@@ -442,11 +446,11 @@ export default function Quiz() {
                      style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #f87171, #dc2626)', border: '2px solid #7f1d1d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.red >= 100 && showExplanation && !isCorrect) ? 'pointer' : 'default' }}>
                       <ShieldCheck size={28} color="white" />
                    </button>
-                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem', gap: '0.2rem' }}>
-                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
+                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
                          <div style={{ width: `${meters.red}%`, height: '100%', background: '#ef4444' }} />
                       </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>UUSINTA</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>UUSINTA</span>
                    </div>
                 </div>
             )}
@@ -460,11 +464,11 @@ export default function Quiz() {
                      style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #fde047, #ca8a04)', border: '2px solid #713f12', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice') ? 'pointer' : 'default' }}>
                       <Disc size={28} color="white" />
                    </button>
-                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}>
-                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
+                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
                          <div style={{ width: `${meters.yellow}%`, height: '100%', background: '#eab308' }} />
                       </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>POISTO</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>POISTO</span>
                    </div>
                 </div>
             )}
@@ -478,11 +482,11 @@ export default function Quiz() {
                      style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #86efac, #16a34a)', border: '2px solid #14532d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.green >= 100 && !showExplanation) ? 'pointer' : 'default' }}>
                       <Wrench size={28} color="white" />
                    </button>
-                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}>
-                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
+                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
                          <div style={{ width: `${meters.green}%`, height: '100%', background: '#22c55e' }} />
                       </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>VAIHTO</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>VAIHTO</span>
                    </div>
                 </div>
             )}
