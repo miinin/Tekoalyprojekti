@@ -1011,6 +1011,7 @@ export default function Quiz() {
         </div>
       </div>
 
+      {renderMeters()}
     </div>
   );
 }
