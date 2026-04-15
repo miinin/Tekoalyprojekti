@@ -7688,12 +7688,12 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Mikä on suoratoistopalveluiden (kuten YouTube) \"suosittelualgoritmin\" kaikkein tärkein tavoite?",
             "options": [
-              "Opettaa sinulle koulun uusia historian ja fysiikan läksyjä.",
-              "Pitää sinut ruudun ääressä mahdollisimman pitkään suosittelemalla samanlaisia videoita, jotta näkisit mainoksia.",
-              "Säästää laitteesi akkua laittamalla se nopeasti kiinni.",
-              "Pakottaa sinut katsomaan pelkästään videoita, joista et pidä."
+              "Opettaa sinulle joka päivä koulun uutta historiaa ja fysiikan tärkeitä kaavoja.",
+              "Pitää sinut ruudun ääressä mahdollisimman pitkään mainosten näyttämiseksi.",
+              "Säästää laitteesi akkua tehokkaasti sammuttamalla sen yllättäen lepotilaan.",
+              "Kiusata sinua pakottamalla katsomaan jatkuvasti vain koko palvelun tylsimpiä videoita."
             ],
-            "correctAnswer": "Pitää sinut ruudun ääressä mahdollisimman pitkään suosittelemalla samanlaisia videoita, jotta näkisit mainoksia.",
+            "correctAnswer": "Pitää sinut ruudun ääressä mahdollisimman pitkään mainosten näyttämiseksi.",
             "explanation": "Algoritmit on koodattu koukuttamaan! Ne oppivat mieltymyksesi ja luovat \"suosittelukuplan\", josta on vaikea irrottautua automaattitoiston ja mainosten vuoksi."
           },
           {
@@ -7701,12 +7701,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Haluat tietää, mitä ulkomaalaisessa ravintolan kyltissä lukee. Osoitat sitä puhelimen kameralla ja suomenkielinen käännös ilmestyy suoraan ruudulle. Miten tekoäly onnistui luomaan tämän käännöksen?",
             "options": [
-              "Se soitti nopeasti ravintolan omistajalle ja kysyi asiaa.",
-              "Hahmontunnistus luki kirjaimet kuvasta, ja kääntäjäohjelma etsi niille suomenkielisen vastineen tietopankista.",
-              "Se muutti koko kyltin oikeasti fyysisesti suomenkieliseksi.",
-              "Se vain arvasi jotain aivan sattumanvaraisesti."
+              "Tekoäly etsi ravintolan valmiin ruokalistan salaa internetistä kuvan perusteella.",
+              "Kamera luki kirjaimet ja kääntäjä etsi salamana tekstille oikean suomenkielisen vastineen.",
+              "Kamera tunnistaa kielen automaattisesti ja korvaa pikselit toisen kielen tekstillä.",
+              "Laitesovellus kilauttaa tietokannan kautta ravintolan omistajalle selvittääkseen tekstin."
             ],
-            "correctAnswer": "Hahmontunnistus luki kirjaimet kuvasta, ja kääntäjäohjelma etsi niille suomenkielisen vastineen tietopankista.",
+            "correctAnswer": "Kamera luki kirjaimet ja kääntäjä etsi salamana tekstille oikean suomenkielisen vastineen.",
             "explanation": "Tämä upea arjen tekoäly vaatii kahden asian yhdistämistä: kameran kykyä nähdä pikseleistä muotoja (kirjaimia) ja kääntäjän valtavaa, salamannopeaa sanakirjatietoa!"
           },
           {
@@ -7796,12 +7796,12 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Miksi kääntäjäsovellus kääntää vieraskielisen vitsin tai sanonnan joskus aivan hassuksi ja väärin?",
             "options": [
-              "Koska se tekee sen tahallaan nolatakseen sinut.",
-              "Koska tekoäly kääntää asiat usein liian kirjaimellisesti sana sanalta, eikä se ymmärrä piilomerkityksiä.",
-              "Koska puhelimen akku on lopussa.",
-              "Koska kääntäjä ei koskaan käytä oikeaa tietopankkia."
+              "Koska laitteen tekoäly haluaa vain tehdä ohjelmasta hauskan ja nolata sinut kääntämällä väärin.",
+              "Tekoäly kääntää asiat usein kirjaimellisesti, eikä ymmärrä lainkaan kulttuurisia piilomerkityksiä.",
+              "Kääntäjäsovellus toimii jostain syystä puutteellisesti silloin, kun puhelimen akku on tyhjentymässä.",
+              "Ohjelma ei ole välttämättä kytketty internetiin, joten se alkaa keksiä sanoille omia merkityksiään."
             ],
-            "correctAnswer": "Koska tekoäly kääntää asiat usein liian kirjaimellisesti sana sanalta, eikä se ymmärrä piilomerkityksiä.",
+            "correctAnswer": "Tekoäly kääntää asiat usein kirjaimellisesti, eikä ymmärrä lainkaan kulttuurisia piilomerkityksiä.",
             "explanation": "Maailmanlaajuinen tulkki on loistava sanakirja, mutta koneena siltä puuttuu aito inhimillinen ymmärrys huumorista, paikallisista sanonnoista ja runoista."
           },
           {
