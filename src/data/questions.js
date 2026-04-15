@@ -8576,19 +8576,19 @@ export const categories = [
           {
             "id": "reilu_peli_4_q4",
             "type": "drag_drop",
-            "question": "Järjestä fiksut askeleet aikajärjestykseen! Miten toimit, jos näet netissä jonkun jakavan tekoälyllä tehtyjä ilkeitä kuvia tutusta ihmisestä?",
+            "question": "Järjestä askeleet fiksusti! Miten toimit, kun kaveri näyttää sinulle puhelimestaan koulukaverista tehtyä ilkeää tekoälykuvaa?",
             "correctAnswer": {
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.": "1. vaihe",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.": "2. vaihe",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.": "3. vaihe",
-              "Ilmoittakaa aikuisen kanssa kuvasta sovelluksen ylläpidolle poistoa varten.": "4. vaihe"
+              "Kieltäydyt heti katsomasta kuvaa ja pyydät kaveria olemaan jakamatta sitä eteenpäin.": "1. vaihe",
+              "Päätätte yhdessä mennä välittömästi kertomaan asiasta lähimmälle opettajalle tai aikuiselle.": "2. vaihe",
+              "Opettaja tallentaa kuvan puhelimesta kuvakaappauksella turvaan todisteeksi.": "3. vaihe",
+              "Lopuksi teette opettajan avustuksella ilmoituksen sovellukseen kuvan poistamiseksi.": "4. vaihe"
             },
-            "explanation": "\"Kuran\" pysäyttäminen vaatii rohkeutta ja aikuisen apua. Tykkäämättä jättäminen pysäyttää kuvan leviämisen, ja aikuinen osaa auttaa sen poistamisessa netistä.",
+            "explanation": "Nettikiusaamisen pysäyttäminen vaatii uskallusta toimia heti oikein! Leviäminen katkaistaan heti, jonka jälkeen vastuu siirretään aikuiselle, joka varmistaa todisteet ja hoitaa poistamisen.",
             "draggables": [
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
-              "Ilmoittakaa aikuisen kanssa kuvasta sovelluksen ylläpidolle poistoa varten."
+              "Kieltäydyt heti katsomasta kuvaa ja pyydät kaveria olemaan jakamatta sitä eteenpäin.",
+              "Päätätte yhdessä mennä välittömästi kertomaan asiasta lähimmälle opettajalle tai aikuiselle.",
+              "Opettaja tallentaa kuvan puhelimesta kuvakaappauksella turvaan todisteeksi.",
+              "Lopuksi teette opettajan avustuksella ilmoituksen sovellukseen kuvan poistamiseksi."
             ],
             "dropZones": [
               "1. vaihe",
