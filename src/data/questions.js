@@ -7090,7 +7090,7 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Miksi robotti-imurit pyörivät usein ympyrää tai tekevät hassuja, hitaita siksak-liikkeitä lattialla ensimmäisillä siivouskerroillaan?",
             "options": [
-              "Ne tanssivat iloisina, koska saivat vihdoin tulla kaapista ulos.",
+              "Ne tanssivat iloisina, koska saivat vihdoin uuden tehtävän.",
               "Ne mittaavat sensoreillaan esteiden etäisyyksiä ja etsivät reittiä.",
               "Ne ovat menneet rikki ja yrittävät soittaa itselleen hätäapua.",
               "Ne luulevat olevansa oikeita koiria, jotka jahtaavat omaa häntäänsä."
@@ -7176,11 +7176,11 @@ export const categories = [
             "question": "Autotallissa on paljon erilaisia asioita. Mikä näistä laitteista on loistava esimerkki siitä, miten tekoäly tarkkailee tilaamme ja oppii tavoistamme pitkän ajan kuluessa?",
             "options": [
               "Vesiletku, joka sumuttaa vettä aina, kun väännät kahvasta voimakkaasti.",
-              "Älytermostaatti, joka oppii automaattisesti laskemaan lämpöä öisin meidän mennessä nukkumaan.",
+              "Älytermostaatti, joka oppii laskemaan lämpöä öisin teidän mentyä nukkumaan.",
               "Sähkövatkain, jolla on kolme nopeaa mekaanista vaihdetta, ja joka toimii napista.",
               "Vanha taskulaskin, joka muistaa aina sataprosenttisella tarkkuudella että 2+2=4."
             ],
-            "correctAnswer": "Älytermostaatti, joka oppii automaattisesti laskemaan lämpöä öisin meidän mennessä nukkumaan.",
+            "correctAnswer": "Älytermostaatti, joka oppii laskemaan lämpöä öisin teidän mentyä nukkumaan.",
             "explanation": "Koneoppiminen tarkoittaa sitä, että laite muuttuu viisaammaksi! Termostaatti huomaa viikkojen aikana, että olette unessa kello 22, ja alkaa itse laittaa säästöliekkiä päälle samaan aikaan energiansäästön vuoksi."
           },
           {
