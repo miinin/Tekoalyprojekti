@@ -180,7 +180,7 @@ export default function Lobby() {
             <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #cbd5e1', marginTop: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.6rem' }}>
                     <label style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        Lataa peli rekisterikilvellä: 
+                        Jatka tallentamallasi rekisterikilvellä: 
                         <button type="button" onClick={() => setModalState({ title: 'Miten lataaminen toimii?', text: 'Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!', onClose: () => setModalState(null), buttonText: 'Selvä juttu' })} style={{ background: 'none', color: '#0ea5e9', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}><Info size={18} /></button>
                     </label>
                 </div>
