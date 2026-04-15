@@ -453,6 +453,16 @@ export const store = {
           const upperCode = code.toUpperCase().trim();
           const docRef = doc(db, "class_sessions", upperCode, "players", nickname);
           
+          try {
+             const sessionDoc = await getDoc(doc(db, "class_sessions", upperCode));
+             if (sessionDoc.exists()) {
+                const rt = sessionDoc.data().requireTutorial;
+                if (typeof rt === 'boolean') {
+                    store.setTutorialSkipped(!rt);
+                }
+             }
+          } catch(e) {}
+          
           let docSnap;
           try { docSnap = await getDoc(docRef); } catch(e) {}
           

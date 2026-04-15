@@ -475,7 +475,7 @@ export default function Garage() {
                 onClick={handleCreateSave} 
                 disabled={isSaving}
                 className="btn-secondary" 
-                style={{ padding: '0.8rem 1.2rem', background: 'white', color: '#0f172a', borderColor: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 'bold' }}>
+                style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                 <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
               </button>
           )}

@@ -7,6 +7,7 @@ import { doc, setDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 
 export default function TeacherDashboard() {
   const navigate = useNavigate();
   const [sessionCode, setSessionCode] = useState('');
+  const [requireTutorial, setRequireTutorial] = useState(true);
   const [sessionStatus, setSessionStatus] = useState('active');
   const [players, setPlayers] = useState([]);
   
@@ -30,6 +31,7 @@ export default function TeacherDashboard() {
       
       await setDoc(doc(db, "class_sessions", code), {
           status: 'active',
+          requireTutorial: requireTutorial,
           createdAt: serverTimestamp()
       });
   };
@@ -118,6 +120,12 @@ export default function TeacherDashboard() {
                     <h2 style={{ fontSize: '2.2rem', margin: '0 0 1rem 0', fontFamily: 'var(--font-display)', color: '#0f172a' }}>Aloita oppitunti</h2>
                     <p style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '3rem', lineHeight: 1.6 }}>Luokkatilassa opettajana seuraat oppilaiden edistymistä reaaliajassa, palkitset heitä Kipinöillä ja voit tarvittaessa lukita peliruudut hetkeksi saadaksesi luokan huomion.</p>
                     
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', textAlign: 'left' }}>
+                       <input type="checkbox" id="tut" checked={requireTutorial} onChange={e => setRequireTutorial(e.target.checked)} style={{ minWidth: '24px', height: '24px', cursor: 'pointer', marginTop: '3px' }} />
+                       <label htmlFor="tut" style={{ fontSize: '1rem', color: '#334155', cursor: 'pointer', lineHeight: 1.4, margin: 0 }}>
+                           <strong style={{ display: 'block', marginBottom: '0.2rem', color: '#0f172a' }}>Näytä pelin opastus (Tutorial) oppilaille</strong> Pidä tämä oletuksena päällä kun ohjaat luokkaa ensimmäistä kertaa, jotta pelin mekaniikka ja tarkoitus aukeaa oikein.
+                       </label>
+                    </div>
                     <button className="btn-primary" onClick={createSession} style={{ padding: '1.5rem 3rem', fontSize: '1.5rem', background: '#0284c7', width: '100%', marginBottom: '2rem' }}>
                         Luo uusi pelisessio
                     </button>
