@@ -9287,17 +9287,17 @@ export const categories = [
             "type": "drag_drop",
             "question": "Huomaat, että netissä levitetään tekoälyllä tehtyä noloa huijauskuvaa luokkakaveristasi. Miten pysäytät kiusaamisen (kuran roiskimisen) askeleittain?",
             "correctAnswer": {
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.": "1. vaihe",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.": "2. vaihe",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.": "3. vaihe",
-              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä.": "4. vaihe"
+              "Tunnistat somessa leviävän kuvan tekoälyllä muokatuksi kiusaamiseksi ja päätät auttaa kaveriasi.": "1. vaihe",
+              "Otat ilkeästä kuvasta ja sen julkaisijasta nopeasti kuvakaappauksen tärkeäksi todisteeksi.": "2. vaihe",
+              "Näytät puhelimeen tallentamasi kuvakaappauksen luotettavalle aikuiselle ja pyydät häneltä apua.": "3. vaihe",
+              "Teette aikuisen kanssa yhdessä virallisen ilmoituksen sovellukselle, jotta ylläpito poistaa kuvan.": "4. vaihe"
             },
             "explanation": "Tekoälyllä tehdyt ilkeät viestit tai nolatut kuvat (esim. deepfake) ovat aivan oikeaa kiusaamista. Fiksu apukuski pysäyttää leviämisen ja hakee aikuisen avuksi!",
             "draggables": [
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
-              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä."
+              "Tunnistat somessa leviävän kuvan tekoälyllä muokatuksi kiusaamiseksi ja päätät auttaa kaveriasi.",
+              "Otat ilkeästä kuvasta ja sen julkaisijasta nopeasti kuvakaappauksen tärkeäksi todisteeksi.",
+              "Näytät puhelimeen tallentamasi kuvakaappauksen luotettavalle aikuiselle ja pyydät häneltä apua.",
+              "Teette aikuisen kanssa yhdessä virallisen ilmoituksen sovellukselle, jotta ylläpito poistaa kuvan."
             ],
             "dropZones": [
               "1. vaihe",
@@ -9340,12 +9340,12 @@ export const categories = [
           {
             "id": "reilu_peli_7_q7",
             "type": "reverse_prompt",
-            "question": "Yritit syöttää tekoälylle käskyn tehdä ilkeä vitsikuva toisesta ihmisestä, mutta ruutuun tuli punainen teksti: \"Estetty: En suostu tuottamaan kiusaavaa sisältöä ihmisistä.\" Mikä asetus koodari oli laittanut päälle?",
+            "question": "Yritit syöttää tekoälylle käskyn tehdä ilkeä vitsikuva toisesta ihmisestä, mutta ruutuun tuli punainen teksti: \"Estetty: En suostu tuottamaan kiusaavaa sisältöä ihmisistä.\" Minkä asetuksen koodari oli laittanut päälle?",
             "options": [
-              "Kone poisti vahingossa kaikki internetin pelit.",
+              "Kone joutui välittömästi vakavaan järjestelmähäiriöön ja päätti yllättäen poistaa aivan kaikki pelit.",
               "Koneeseen oli rakennettu eettiset suodattimet eli 'kuraläpät', jotka kieltäytyvät ilkeistä komennoista.",
-              "Laite sammutti akkunsa kokonaan nukkumaanmenoa varten.",
-              "Kone päätti alkaa itkeä kuullessaan pahoja sanoja."
+              "Laite käynnisti äkillisesti oman turvatoimensa ja sammutti akkunsa kokonaan nukkumaanmenoa varten.",
+              "Kone teki oman inhimillisen päätöksensä ja suorastaan alkoi itkeä kuullessaan tuollaisia pahoja sanoja."
             ],
             "correctAnswer": "Koneeseen oli rakennettu eettiset suodattimet eli 'kuraläpät', jotka kieltäytyvät ilkeistä komennoista.",
             "explanation": "Tekoäly-yhtiöt rakentavat koneisiinsa tarkoituksella \"kuraläppiä\". Ne tunnistavat ilkeät tai vaaralliset komennot ja estävät tekoälyn käyttämisen toisten ihmisten vahingoittamiseen!"
