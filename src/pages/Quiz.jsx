@@ -116,7 +116,7 @@ export default function Quiz() {
             correct.sort(() => Math.random() - 0.5);
             
             // Priorisoi: Kysymättömät -> Väärin vastatut -> Oikein vastatut
-            const selected = [...unasked, ...wrong, ...correct].slice(0, mainCategory === 'perusteet' ? 10 : 5);
+            const selected = [...unasked, ...wrong, ...correct].slice(0, 5);
             selected.sort(() => Math.random() - 0.5); // Sekoitetaan ettei aina tule helppoja peräkkäin
             setQuestions(selected);
          }
