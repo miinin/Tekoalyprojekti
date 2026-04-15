@@ -350,11 +350,7 @@ export default function Quiz() {
           setWowMedal(medalNames[newMedalLevel] || null);
       }
 
-      const totalToBank = totalNewSparks;
-
-      if (totalToBank > 0) {
-         await store.addSparks(totalToBank);
-      }
+      // Kipinät on jo tallennettu jokaisen kysymyksen jälkeen (use-tapaus 3)
       store.markCompleted(sub.id);
       setShowSummary(true);
     }
