@@ -63,12 +63,13 @@ export default function Lobby() {
   const [classCode, setClassCode] = useState('');
   const [classNick, setClassNick] = useState('');
 
-  const handleJoinClass = (e) => {
+  const handleJoinClass = async (e) => {
       e.preventDefault();
       if (classCode.length < 6 || classNick.length < 2) return;
       
       store.clearSinglePlayer();
       store.setClassroomCode(classCode.toUpperCase(), classNick);
+      await store.syncClassroomProgress();
       
       setModalState({
           title: 'Liitytty onnistuneesti!',
