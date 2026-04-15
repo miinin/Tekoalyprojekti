@@ -7231,12 +7231,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Olette lomamatkalla AI vanilla ulkomailla ja auto tarvitsee pientä korjausta. Isä yrittää puhua mekaanikolle, mutta kumpikaan ei ymmärrä toisen kieltä. Miten älypuhelin auttaa tilanteessa parhaiten?",
             "options": [
-              "Isä voi puhua suomea puhelimeen, ja tekoäly puhuu sen ääneen toisella kielellä mekaanikolle.",
-              "Puhelin voi tulostaa pienen sanakirjan, josta isä lukee sanoja tunti kerrallaan.",
-              "Tekoäly opettaa isälle heti koko uuden kielen vain viidessä minuutissa.",
-              "Puhelin käskee mekaanikkoa opiskelemaan heti täydellistä ja sujuvaa suomea."
+              "Isä puhuu suomea puhelimeen, ja kaiutin toistaa asian vieraalla kielellä.",
+              "Puhelin tulostaa pienen sanakirjan, josta isä etsii ja lukee sanoja hitaasti.",
+              "Tekoäly opettaa isälle heti koko uuden kielen vain muutamassa hassussa minuutissa.",
+              "Laitteen ohjelmisto komentaa mekaanikkoa opiskelemaan täydellistä ja sujuvaa suomea."
             ],
-            "correctAnswer": "Isä voi puhua suomea puhelimeen, ja tekoäly puhuu sen ääneen toisella kielellä mekaanikolle.",
+            "correctAnswer": "Isä puhuu suomea puhelimeen, ja kaiutin toistaa asian vieraalla kielellä.",
             "explanation": "Nykyaikainen tekoäly osaa kuunnella puhetta, kääntää sen välittömästi toiselle kielelle ja jopa puhua sen heti ääneen! Se on kuin aito oikea tulkki taskussa."
           },
           {
@@ -7429,7 +7429,7 @@ export const categories = [
               "Näytä digitaaliselta kartalta kaikkein nopein autoreitti Suomesta suoraan Ranskaan."
             ],
             "correctAnswer": "Käännä ja puhu ranskaksi lause: 'Miten pääsemme tästä lähimmälle uimarannalle?'.",
-            "explanation": "Moni tekoälykääntäjä pystyy nykyään kääntämään tekstin erittäin nopeasti ja myös lausumaan sen ääneen virheettömällä ja uskottavalla aksentilla. Tämä tekee tekoälystä uskomattoman upean ja kätevän apulaisen, kun matkustat oudoissa maissa! Olet aivan oikeassa, jäin kiinni! Keskittymiskykyni taisi ajaa hetkeksi ojaan, ja tein edelliset 5.F-kysymykset ihan väärästä aiheesta. Pahoittelut tästä navigointivirheestä! Hienoa, että olit tarkkana apukuskina ja korjasit suunnan. Tässä on 15 oikeaa, opettavaista ja hauskaa kysymystä alakategoriaan 5.F: \"AI vanin apukuski\" (Liikenne: miten navigaattorit tunnistavat ruuhkat ja kuinka itsestään ajavat autot toimivat). Nämä on räätälöity 7–12-vuotiaille Road trip / Autotalli -teemalla."
+            "explanation": "Moni tekoälykääntäjä pystyy nykyään kääntämään tekstin erittäin nopeasti ja myös lausumaan sen ääneen virheettömällä ja uskottavalla aksentilla. Tämä tekee tekoälystä uskomattoman upean ja kätevän apulaisen, kun matkustat oudoissa maissa!"
           }
         ]
       },
