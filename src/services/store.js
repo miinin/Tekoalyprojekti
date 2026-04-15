@@ -36,6 +36,8 @@ export const store = {
     
     if (sub) localStorage.setItem('aivan_last_sub', sub);
     else localStorage.removeItem('aivan_last_sub');
+    
+    store.syncClassroomProgress();
   },
 
   // Map Progress / Completions Tracking
@@ -61,6 +63,7 @@ export const store = {
     if (newScore > currentScore) {
        records[nodeId] = newScore;
        localStorage.setItem('aivan_node_records', JSON.stringify(records));
+       store.syncClassroomProgress();
        return newScore - currentScore; // Return the amount of NEW sparks earned
     }
     return 0; // No new sparks earned
@@ -76,6 +79,7 @@ export const store = {
     if (newScore > currentScore) {
        records[questionId] = newScore;
        localStorage.setItem('aivan_question_records', JSON.stringify(records));
+       store.syncClassroomProgress();
        return newScore - currentScore; // Return the amount of NEW sparks earned
     }
     return 0; // No new sparks earned
@@ -153,6 +157,7 @@ export const store = {
     const current = await store.getSparks();
     const key = room ? `aivan_sparks_${room}` : 'aivan_sparks';
     localStorage.setItem(key, current + amount);
+    store.syncClassroomProgress();
     return current + amount;
   },
 
@@ -162,6 +167,7 @@ export const store = {
     if (current >= amount) {
       const key = room ? `aivan_sparks_${room}` : 'aivan_sparks';
       localStorage.setItem(key, current - amount);
+      store.syncClassroomProgress();
       return true;
     }
     return false;
