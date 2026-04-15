@@ -6294,7 +6294,7 @@ export const categories = [
           {
             "id": "arjessa_2_q9",
             "type": "multiple_choice",
-            "question": "Mitä tarkoittaa \"suosittelukupla\" (tai algoritmikupla) autotallin peleissä ja videoissa?",
+            "question": "Mitä tarkoittaa \"suosittelukupla\" (tai algoritmikupla) peleissä ja videoissa?",
             "options": [
               "Oikeaa saippuakuplaa, joka puhalletaan jättimäiselle tietokoneen ruudulle.",
               "Sitä, että tekoäly näyttää sinulle vain ja ainoastaan yhdenlaisia asioita.",
