@@ -426,69 +426,103 @@ export default function Quiz() {
   };
 
   const renderMeters = () => {
-    // Only show if the user has corresponding item equipped
     const b = bumperBuff > 0;
     const hasWheels = !!equippedItems['wheel'];
     const hasTools = toolsBuff > 0;
     
     if (!b && !hasWheels && !hasTools) return null;
 
-    return (
-        <div style={{ padding: '1.5rem', background: '#f8fafc', border: '3px dashed #cbd5e1', borderRadius: '24px', display: 'flex', flexDirection: 'row', gap: '3rem', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', boxShadow: 'inset 0 4px 10px rgba(0,0,0,0.02)' }}>
-            <div style={{ width: '100%', textAlign: 'center', fontSize: '1.1rem', color: '#64748b', fontWeight: 'bold', fontFamily: 'var(--font-main)', marginBottom: '-1.5rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Aktiiviset laitteet</div>
-            
-            {b && (
-                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.red >= 100 && showExplanation && !isCorrect ? 1 : 0.6, transition: 'all 0.3s' }}>
-                   {meters.red >= 100 && showExplanation && !isCorrect && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#ef4444', borderRadius: '50%' }} />}
-                   <button 
-                     disabled={!(meters.red >= 100 && showExplanation && !isCorrect)}
-                     onClick={useRedMeter}
-                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #f87171, #dc2626)', border: '2px solid #7f1d1d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.red >= 100 && showExplanation && !isCorrect) ? 'pointer' : 'default' }}>
-                      <ShieldCheck size={28} color="white" />
-                   </button>
-                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
-                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-                         <div style={{ width: `${meters.red}%`, height: '100%', background: '#ef4444' }} />
-                      </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>UUSINTA</span>
-                   </div>
+    const MeterTab = ({ color, icon: Icon, percentage, label, tip, disabled, onClick }) => {
+        const isFull = percentage >= 100;
+        const isActive = isFull && !disabled;
+        const p = Math.min(100, Math.max(0, percentage));
+        
+        const colorMaps = {
+            red: { bg: '#ef4444', hover: '#dc2626', text: 'white', shadow: 'rgba(239,68,68,0.4)', loader: '#cbd5e1' },
+            yellow: { bg: '#eab308', hover: '#ca8a04', text: 'white', shadow: 'rgba(234,179,8,0.4)', loader: '#cbd5e1' },
+            green: { bg: '#22c55e', hover: '#16a34a', text: 'white', shadow: 'rgba(34,197,94,0.4)', loader: '#cbd5e1' }
+        };
+        const c = colorMaps[color];
+
+        return (
+            <button 
+                disabled={!isActive}
+                onClick={onClick}
+                title={tip}
+                style={{ 
+                    flex: '1 1 0', 
+                    minWidth: '0', 
+                    height: '54px', 
+                    position: 'relative', 
+                    border: 'none', 
+                    background: isActive ? c.bg : '#f1f5f9',
+                    cursor: isActive ? 'pointer' : 'not-allowed',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.6rem',
+                    transition: 'all 0.3s',
+                    padding: '0 1rem',
+                    boxShadow: isActive ? `0 4px 15px ${c.shadow}` : 'inset 0 4px 6px rgba(0,0,0,0.05)',
+                    borderBottomLeftRadius: '16px',
+                    borderBottomRightRadius: '16px',
+                    borderTop: 'none',
+                }}
+                onMouseOver={e => { if (isActive) e.currentTarget.style.background = c.hover; }}
+                onMouseOut={e => { if (isActive) e.currentTarget.style.background = c.bg; }}
+            >
+                {!isActive && (
+                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${p}%`, background: c.loader, zIndex: 1, transition: 'width 0.5s ease-out' }} />
+                )}
+                
+                <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.6rem', opacity: isActive ? 1 : 0.6 }}>
+                    {isActive && <div className="animate-ping" style={{ position: 'absolute', width: '20px', height: '20px', background: 'white', borderRadius: '50%', opacity: 0.5 }} />}
+                    <Icon size={20} color={isActive ? c.text : '#64748b'} />
+                    <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: isActive ? c.text : '#475569', letterSpacing: '1px', whiteSpace: 'nowrap' }}>
+                        {label} {(!isActive && percentage > 0) ? `(${Math.floor(p)}%)` : ''}
+                    </span>
                 </div>
+            </button>
+        );
+    };
+
+    return (
+        <div style={{ display: 'flex', width: '100%', gap: '8px', flexWrap: 'nowrap', marginTop: '-2rem', padding: '0 2.5rem', position: 'relative', zIndex: 1 }}>
+            {b && (
+                <MeterTab 
+                   color="red" 
+                   icon={ShieldCheck} 
+                   percentage={meters.red} 
+                   label="UUSINTA"
+                   tip="Puskuri: Mahdollistaa väärän vastauksen yrittämisen uudelleen. Latautuu oikeista vastauksista."
+                   disabled={!(showExplanation && !isCorrect)}
+                   onClick={useRedMeter}
+                />
             )}
             
             {hasWheels && (
-                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice' ? 1 : 0.6, transition: 'all 0.3s' }}>
-                   {meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice' && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#eab308', borderRadius: '50%' }} />}
-                   <button 
-                     disabled={!(meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice')}
-                     onClick={useYellowMeter}
-                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #fde047, #ca8a04)', border: '2px solid #713f12', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice') ? 'pointer' : 'default' }}>
-                      <Disc size={28} color="white" />
-                   </button>
-                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
-                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-                         <div style={{ width: `${meters.yellow}%`, height: '100%', background: '#eab308' }} />
-                      </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>POISTO</span>
-                   </div>
-                </div>
+                <MeterTab 
+                   color="yellow" 
+                   icon={Disc} 
+                   percentage={meters.yellow} 
+                   label="POISTO"
+                   tip="Renkaat: Poistaa yhden väärän vaihtoehdon. Latautuu kun saavutat uuden mitalitason kartalla!"
+                   disabled={showExplanation || currentQuestion.type !== 'multiple_choice'}
+                   onClick={useYellowMeter}
+                />
             )}
 
             {hasTools && (
-                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.green >= 100 && !showExplanation ? 1 : 0.6, transition: 'all 0.3s' }}>
-                   {meters.green >= 100 && !showExplanation && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#22c55e', borderRadius: '50%' }} />}
-                   <button 
-                     disabled={!(meters.green >= 100 && !showExplanation)}
-                     onClick={useGreenMeter}
-                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #86efac, #16a34a)', border: '2px solid #14532d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.green >= 100 && !showExplanation) ? 'pointer' : 'default' }}>
-                      <Wrench size={28} color="white" />
-                   </button>
-                   <div style={{ position: 'absolute', bottom: '-2rem', left: '50%', transform: 'translateX(-50%)', width: '80px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.3rem' }}>
-                      <div style={{ width: '50px', height: '6px', background: 'rgba(0,0,0,0.1)', borderRadius: '3px', overflow: 'hidden' }}>
-                         <div style={{ width: `${meters.green}%`, height: '100%', background: '#22c55e' }} />
-                      </div>
-                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#475569' }}>VAIHTO</span>
-                   </div>
-                </div>
+                <MeterTab 
+                   color="green" 
+                   icon={Wrench} 
+                   percentage={meters.green} 
+                   label="VAIHTO"
+                   tip="Työkalut: Ohittaa kysymyksen rangaistuksetta ja arpoo uuden. Latautuu kun luet opetusmateriaaleja/näyttöjä!"
+                   disabled={showExplanation}
+                   onClick={useGreenMeter}
+                />
             )}
         </div>
     );
