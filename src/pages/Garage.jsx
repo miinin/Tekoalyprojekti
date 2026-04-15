@@ -663,8 +663,8 @@ export default function Garage() {
                     
                     <div style={{ background: 'white', border: '3px solid #cbd5e1', borderRadius: '12px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden', margin: '0 1rem' }}>
                        <div style={{ background: '#0ea5e9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.2rem', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', width: '32px', height: '32px', gap: '3px', justifyContent: 'center', alignContent: 'center', marginBottom: '8px' }}>
-                             {Array(12).fill(0).map((_, i) => <div key={i} style={{ width: '5px', height: '5px', background: '#fde047', borderRadius: '50%' }} />)}
+                          <div style={{ display: 'flex', gridTemplateColumns: 'repeat(3, 1fr)', width: '32px', height: '32px', gap: '3px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginBottom: '8px' }}>
+                             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '8px', height: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={8} fill="#fde047" color="#fde047" strokeWidth={1} />}</div>)}
                           </div>
                           FIN
                        </div>
