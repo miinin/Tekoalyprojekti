@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
