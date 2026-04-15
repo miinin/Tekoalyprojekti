@@ -267,14 +267,6 @@ export const store = {
   },
 
   getQuestions: () => {
-    const customData = localStorage.getItem('aivan_custom_questions');
-    if (customData) {
-      try {
-        return JSON.parse(customData);
-      } catch (e) {
-        console.error('Failed to parse custom questions', e);
-      }
-    }
     // Deep clone default to avoid reference mutations
     return JSON.parse(JSON.stringify(defaultCategories));
   },
@@ -283,15 +275,7 @@ export const store = {
   getTestMode: () => localStorage.getItem('aivan_test_mode') === 'true',
   setTestMode: (val) => localStorage.setItem('aivan_test_mode', val ? 'true' : 'false'),
 
-  saveQuestions: (newCategoriesData) => {
-    localStorage.setItem('aivan_custom_questions', JSON.stringify(newCategoriesData));
-    return true;
-  },
   
-  resetQuestionsToDefault: () => {
-    localStorage.removeItem('aivan_custom_questions');
-    return JSON.parse(JSON.stringify(defaultCategories));
-  },
 
   // --- BUG REPORTS ---
   getBugReports: () => {
