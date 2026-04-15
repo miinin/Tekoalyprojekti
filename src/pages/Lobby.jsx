@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, DownloadCloud } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, DownloadCloud, Info } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
@@ -168,24 +168,34 @@ export default function Lobby() {
             </button>
 
             <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #cbd5e1', marginTop: '0.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-                    <label style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Lataa peli rekisterikilvellä:</label>
-                    <button type="button" onClick={() => alert('Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!')} style={{ background: '#e2e8f0', color: '#64748b', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>i</button>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.6rem' }}>
+                    <label style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        Lataa peli rekisterikilvellä: 
+                        <button type="button" onClick={() => alert('Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!')} style={{ background: 'none', color: '#0ea5e9', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}><Info size={18} /></button>
+                    </label>
                 </div>
-                <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.5rem' }}>
-                     <input
-                        type="text"
-                        placeholder="ABC-123"
-                        value={loadCode}
-                        onChange={(e) => {
-                            let val = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
-                            if (val.length === 3 && !val.includes('-') && loadCode.length < 3) val += '-';
-                            setLoadCode(val);
-                        }}
-                        maxLength={7}
-                        style={{ flexGrow: 1, padding: '0.8rem', borderRadius: '8px', border: '2px solid #e2e8f0', fontFamily: 'monospace', fontSize: '1.3rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '2px', fontWeight: 'bold', color: '#1e293b' }}
-                     />
-                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0ea5e9', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1 }}>
+                <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
+                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #cbd5e1', overflow: 'hidden' }}>
+                         <div style={{ background: '#0ea5e9', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', width: '22px', height: '22px', gap: '2px', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
+                               {Array(12).fill(0).map((_, i) => <div key={i} style={{ width: '3px', height: '3px', background: '#fde047', borderRadius: '50%' }} />)}
+                            </div>
+                            FIN
+                         </div>
+                         <input
+                            type="text"
+                            placeholder="ABC-123"
+                            value={loadCode}
+                            onChange={(e) => {
+                                let val = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+                                if (val.length === 3 && !val.includes('-') && loadCode.length < 3) val += '-';
+                                setLoadCode(val);
+                            }}
+                            maxLength={7}
+                            style={{ flexGrow: 1, padding: '0.8rem 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1.4rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '4px', fontWeight: '900', color: '#1e293b', background: 'transparent' }}
+                         />
+                     </div>
+                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0ea5e9', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
                          {isRestoring ? '...' : <DownloadCloud size={24} />}
                      </button>
                 </form>

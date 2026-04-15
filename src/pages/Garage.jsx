@@ -661,9 +661,16 @@ export default function Garage() {
                     <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Rekisterikilpesi on valmis!</h3>
                     <p style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.1rem' }}>Ota tämä koodi talteen. Kun palaat pelaamaan Lobbyn kautta uudella laitteella, syötä tämä rekisterikilpi sille varattuun kenttään, ja saat kaikki kipinäsi ja varusteesi takaisin.</p>
                     
-                    <div style={{ background: 'linear-gradient(to right, #000 0%, #000 12%, #fff 12%, #fff 100%)', border: '5px solid #000', borderRadius: '12px', padding: '1.2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden' }}>
-                       <span style={{ color: 'white', fontWeight: 'bold', fontSize: '1.5rem', zIndex: 2 }}>FIN</span>
-                       <span style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '8px', color: '#0f172a', fontFamily: 'monospace' }}>{saveCode}</span>
+                    <div style={{ background: 'white', border: '3px solid #cbd5e1', borderRadius: '12px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden', margin: '0 1rem' }}>
+                       <div style={{ background: '#0ea5e9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.2rem', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', width: '32px', height: '32px', gap: '3px', justifyContent: 'center', alignContent: 'center', marginBottom: '8px' }}>
+                             {Array(12).fill(0).map((_, i) => <div key={i} style={{ width: '5px', height: '5px', background: '#fde047', borderRadius: '50%' }} />)}
+                          </div>
+                          FIN
+                       </div>
+                       <div style={{ padding: '0.8rem 1rem', flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <span style={{ fontSize: '3.5rem', fontWeight: '900', letterSpacing: '8px', color: '#1e293b', fontFamily: 'monospace' }}>{saveCode}</span>
+                       </div>
                     </div>
                     
                     <button className="btn-primary" style={{ background: '#0ea5e9', marginTop: '2rem', width: '100%', fontSize: '1.3rem' }} onClick={() => setSaveCode(null)}>
