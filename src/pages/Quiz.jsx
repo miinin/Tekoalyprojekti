@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
-import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle } from 'lucide-react';
 
 export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
@@ -15,6 +15,10 @@ export default function Quiz() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSparks, setCurrentSparks] = useState(0);
   const [bossIntroSeen, setBossIntroSeen] = useState(false);
+  
+  const [bugReportMode, setBugReportMode] = useState(false);
+  const [bugText, setBugText] = useState('');
+  const [bugSubmitted, setBugSubmitted] = useState(false);
 
   useEffect(() => {
     const fetchSparks = async () => {
@@ -611,9 +615,48 @@ export default function Quiz() {
       )}
 
       <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', fontFamily: 'monospace', fontSize: '1rem', color: '#64748b', background: 'rgba(241, 245, 249, 0.9)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontWeight: '900', letterSpacing: '1px' }}>
-           {currentQuestion.id}
+        <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center', zIndex: 10 }}>
+           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontWeight: 'bold' }}>
+              <AlertTriangle size={16} /> Ilmoita virheestä
+           </button>
+           <div style={{ fontFamily: 'monospace', fontSize: '1rem', color: '#64748b', background: 'rgba(241, 245, 249, 0.9)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontWeight: '900', letterSpacing: '1px' }}>
+              {currentQuestion.id}
+           </div>
         </div>
+        
+        {bugReportMode && (
+           <div className="animate-fade-in" style={{ marginTop: '2.5rem', marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#fef2f2', borderRadius: '12px', border: '2px solid #fecaca' }}>
+             {bugSubmitted ? (
+                <p style={{ color: '#166534', fontWeight: 'bold', margin: '1rem 0', textAlign: 'center', fontSize: '1.2rem' }}>Kiitos ilmoituksesta! Olemme vastaanottaneet sen.</p>
+             ) : (
+                <div>
+                  <p style={{ fontSize: '1rem', color: '#991b1b', marginBottom: '1rem', lineHeight: 1.5 }}>
+                    <strong>Tekoäly kehittyy nopeasti ja tieto voi vanhentua.</strong> Tekijät ovat myös vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan, kerro siitä meille, jotta voimme korjata sen!
+                  </p>
+                  <textarea 
+                    value={bugText}
+                    onChange={e => setBugText(e.target.value)}
+                    maxLength={500}
+                    placeholder="Mikä tässä kysymyksessä on mielestäsi pielessä tai vanhentunut?"
+                    style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid #fca5a5', resize: 'vertical', minHeight: '100px', marginBottom: '1rem', fontFamily: 'inherit', fontSize: '1rem' }}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+                    <button className="btn-secondary" onClick={() => setBugReportMode(false)} style={{ padding: '0.5rem 1rem' }}>Peruuta</button>
+                    <button className="btn-primary" 
+                         disabled={!bugText.trim()}
+                         style={{ padding: '0.5rem 1.5rem', background: bugText.trim() ? '#dc2626' : '#fca5a5' }}
+                         onClick={() => {
+                            store.saveBugReport(currentQuestion.id, bugText);
+                            setBugSubmitted(true);
+                            setTimeout(() => { setBugReportMode(false); setBugSubmitted(false); setBugText(''); }, 3000);
+                         }}>
+                       Lähetä ilmoitus
+                    </button>
+                  </div>
+                </div>
+             )}
+           </div>
+        )}
         {(() => {
           const styleInfo = getQuestionStyle(currentQuestion.type);
           return (
@@ -661,7 +704,6 @@ export default function Quiz() {
                  <Lightbulb size={36} />
               </div>
               <div>
-                <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Mikä on homman juju?</h3>
                 <p style={{ margin: 0, lineHeight: '1.8', color: '#1e293b', fontSize: '1.3rem', fontWeight: '600', fontFamily: 'var(--font-main)' }}>
                   {currentQuestion.explanation}
                 </p>

@@ -18,6 +18,9 @@ export default function Admin() {
   const [expandedSubs, setExpandedSubs] = useState(new Set());
   const [editingQuestion, setEditingQuestion] = useState(null); // { catId, subId, qIdx, data }
 
+  // -- Bug Reports State --
+  const [bugReports, setBugReports] = useState([]);
+
   const loadData = () => {
     const r = store.getAllRooms();
     setRooms(r);
@@ -30,6 +33,11 @@ export default function Admin() {
     setRoomSparks(sparksData);
 
     setCategories(store.getQuestions());
+    
+    // Load bugs
+    if (store.getBugReports) {
+      setBugReports(store.getBugReports());
+    }
   };
 
   useEffect(() => {
@@ -146,6 +154,18 @@ export default function Admin() {
         >
           Kysymysten Hallinta
         </button>
+        <button 
+          className={activeTab === 'bugs' ? 'btn-primary' : 'btn-secondary'} 
+          onClick={() => setActiveTab('bugs')}
+          style={{ position: 'relative' }}
+        >
+          Virheilmoitukset
+          {bugReports.length > 0 && (
+            <span style={{ position: 'absolute', top: '-8px', right: '-8px', background: '#ef4444', color: 'white', borderRadius: '50%', width: '24px', height: '24px', display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: '0.8rem', fontWeight: 'bold' }}>
+              {bugReports.length}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* ROOMS TAB */}
@@ -210,6 +230,40 @@ export default function Admin() {
               ))}
             </tbody>
           </table>
+        </div>
+      )}
+
+      {/* BUGS TAB */}
+      {activeTab === 'bugs' && (
+        <div className="glass-panel" style={{ padding: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>Avoimet Virheilmoitukset <span style={{ background: '#e2e8f0', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '1rem' }}>{bugReports.length}</span></h2>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+             {bugReports.length === 0 && (
+                <p style={{ color: 'var(--text-muted)' }}>Ei uusia virheilmoituksia. Kaikki kunnossa!</p>
+             )}
+             {bugReports.map(report => (
+                <div key={report.id} style={{ padding: '1.5rem', background: '#f8fafc', borderRadius: '12px', borderLeft: '4px solid #ef4444', display: 'flex', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+                    <div style={{ flex: '1 1 300px' }}>
+                        <div style={{ fontSize: '0.8rem', color: '#64748b', marginBottom: '0.5rem' }}>{new Date(report.date).toLocaleString('fi-FI')}</div>
+                        <h4 style={{ margin: '0 0 0.5rem 0', fontFamily: 'monospace', color: 'var(--primary-color)' }}>Kysymys: {report.questionId}</h4>
+                        <p style={{ margin: 0, whiteSpace: 'pre-wrap', color: '#1e293b' }}>{report.text}</p>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <button className="btn-secondary" style={{ color: '#16a34a', borderColor: '#bbf7d0', padding: '0.6rem 1.2rem', whiteSpace: 'nowrap' }} onClick={() => {
+                            if (window.confirm('Kuitataanko ilmoitus käsitellyksi ja poistetaanko se listalta?')) {
+                                store.deleteBugReport(report.id);
+                                loadData();
+                            }
+                        }}>
+                           Kuittaa selvitetyksi
+                        </button>
+                    </div>
+                </div>
+             ))}
+          </div>
         </div>
       )}
 

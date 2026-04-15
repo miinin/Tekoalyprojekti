@@ -291,5 +291,27 @@ export const store = {
   resetQuestionsToDefault: () => {
     localStorage.removeItem('aivan_custom_questions');
     return JSON.parse(JSON.stringify(defaultCategories));
+  },
+
+  // --- BUG REPORTS ---
+  getBugReports: () => {
+    return JSON.parse(localStorage.getItem('aivan_bug_reports') || '[]');
+  },
+
+  saveBugReport: (questionId, text) => {
+    const reports = store.getBugReports();
+    reports.push({
+      id: Date.now().toString(),
+      questionId,
+      text,
+      date: new Date().toISOString()
+    });
+    localStorage.setItem('aivan_bug_reports', JSON.stringify(reports));
+  },
+
+  deleteBugReport: (reportId) => {
+    const reports = store.getBugReports();
+    const updated = reports.filter(r => r.id !== reportId);
+    localStorage.setItem('aivan_bug_reports', JSON.stringify(updated));
   }
 };
