@@ -8152,12 +8152,12 @@ export const categories = [
             "type": "spot_the_ai",
             "question": "Kuka näistä oppilaista ei halua olla \"kuski\" omassa elämässään ja yrittää pakoilla vastuuta tekoälyn avulla? Etsi huijari!",
             "options": [
-              "'Käytin AI:ta apuna sanojen kääntämisessä.'",
-              "'Tämä on kokonaan minun kirjoittamani teksti, kone teki kaiken ja minä vain kopioin sen!'",
-              "'Kerroin esitelmän alussa, että ideat ovat tekoälyltä.'",
-              "'Huomasin tekoälyn virheen ja korjasin sen itse.'"
+              "'Tarvitsin käännöstä ja käytin tekoälyä asiallisena apuna vieraiden sanojen kääntämisessä.'",
+              "'Tämä on täysin minun kirjoittamani teksti, kone teki kaiken oppaan ja minä vain kopioin sen!'",
+              "'Kerroin reilusti pitämäni esitelmän alussa, että teoksen kaikki uudet ideat ovat tekoälyltä.'",
+              "'Huomasin heti tekoälyn tekemän oudon virheen tekstissä ja korjasin sen oppilastyönä itse.'"
             ],
-            "correctAnswer": "'Tämä on kokonaan minun kirjoittamani teksti, kone teki kaiken ja minä vain kopioin sen!'",
+            "correctAnswer": "'Tämä on täysin minun kirjoittamani teksti, kone teki kaiken oppaan ja minä vain kopioin sen!'",
             "explanation": "Koneen tekemän työn huijaaminen omaksi on täysin reilun pelin vastaista. Tekijän pitää aina olla oikea ihminen, ei \"copy-paste\" -kone!"
           },
           {
@@ -8234,19 +8234,19 @@ export const categories = [
           {
             "id": "reilu_peli_2_q12",
             "type": "drag_drop",
-            "question": "Kirjoitit tarinan, johon otit hienon päähenkilön nimen tekoälyltä. Järjestä oikeat askeleet, kuinka palautat työn reilusti!",
+            "question": "Sait kirjoitelman valmiiksi ja pyysit tekoälyä korjaamaan sen oikeinkirjoituksen. Järjestä reilun pelin askeleet työn palauttamiseksi!",
             "correctAnswer": {
-              "Tarkista oma tarinasi ja ole siitä ylpeä.": "1. vaihe",
-              "Kirjoita paperin loppuun: 'Päähenkilön nimi ideoitu tekoälyllä'.": "2. vaihe",
-              "Palauta paperi opettajalle hymyillen.": "3. vaihe",
-              "Kerro opettajalle rehellisesti pyydettäessä, miten hieno AI-apuri sinulla oli.": "4. vaihe"
+              "Tarkista tekoälyn tekemät ehdotukset huolellisesti ja korjaa teksti hyväksymällä parannukset.": "1. vaihe",
+              "Kirjoita koko paperin loppuun selkeä merkintä: 'Oikeinkirjoitus on tarkistettu tekoälyllä'.": "2. vaihe",
+              "Palauta täysin valmis ja huolellisesti merkitty tehtäväpaperisi fyysisesti opettajan pöydälle.": "3. vaihe",
+              "Vastaa avoimesti ja totuudenmukaisesti takaisin, kun opettaja kysyy tekoälyn hienosta käytöstä.": "4. vaihe"
             },
-            "explanation": "Läpinäkyvyys on valttia. Kun AI:n käytöstä kerrotaan avoimesti, ei tarvitse koskaan jännittää kiinnijäämistä huijauksesta.",
+            "explanation": "Läpinäkyvyys on valttia. Kun tekoälyn käytöstä kerrotaan reilusti ja avoimesti, ei tarvitse koskaan jännittää turhaan kiinnijäämistä tai valehtelua.",
             "draggables": [
-              "Tarkista oma tarinasi ja ole siitä ylpeä.",
-              "Kirjoita paperin loppuun: 'Päähenkilön nimi ideoitu tekoälyllä'.",
-              "Palauta paperi opettajalle hymyillen.",
-              "Kerro opettajalle rehellisesti pyydettäessä, miten hieno AI-apuri sinulla oli."
+              "Tarkista tekoälyn tekemät ehdotukset huolellisesti ja korjaa teksti hyväksymällä parannukset.",
+              "Kirjoita koko paperin loppuun selkeä merkintä: 'Oikeinkirjoitus on tarkistettu tekoälyllä'.",
+              "Palauta täysin valmis ja huolellisesti merkitty tehtäväpaperisi fyysisesti opettajan pöydälle.",
+              "Vastaa avoimesti ja totuudenmukaisesti takaisin, kun opettaja kysyy tekoälyn hienosta käytöstä."
             ],
             "dropZones": [
               "1. vaihe",
