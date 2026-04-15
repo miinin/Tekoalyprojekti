@@ -156,7 +156,7 @@ export default function TeacherDashboard() {
                       <div style={{ position: 'relative', background: '#f8fafc', border: '2px dashed #cbd5e1', padding: '1.5rem', borderRadius: '16px', fontSize: '3rem', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '6px', color: '#0284c7' }}>
                           {sessionCode}
                           <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-15px', right: '-15px', background: 'white', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '20px', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', fontWeight: 'bold', fontSize: '0.9rem' }}>
-    <Maximize size={16} /> SUURENNA
+    <Maximize size={16} /> LAAJENNA
    </button>
                       </div>
                     </div>
@@ -168,7 +168,7 @@ export default function TeacherDashboard() {
                       <button 
                          onClick={togglePause}
                          style={{ 
-                            background: sessionStatus === 'active' ? '#6366f1' : '#10b981', 
+                            background: sessionStatus === 'active' ? '#0f766e' : '#10b981', 
                             color: 'white',
                             padding: '1.2rem', 
                             width: '100%', 
@@ -186,7 +186,7 @@ export default function TeacherDashboard() {
                          }}
                       >
                           {sessionStatus === 'active' ? (
-                              <><Pause size={24} /> Tauota peli luokalta</>
+                              <><Pause size={24} /> Keskustelutauko luokalle</>
                           ) : (
                               <><Play size={24} /> Vapauta peli luokalle</>
                           )}

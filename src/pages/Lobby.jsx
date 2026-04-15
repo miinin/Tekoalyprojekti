@@ -101,7 +101,7 @@ export default function Lobby() {
             <Settings size={22} />
         </button>
         <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-            <GraduationCap size={20} color="#8b5cf6" /> Opettajalle
+            <GraduationCap size={20} color="#059669" /> Opettajalle
         </button>
       </div>
 
@@ -265,7 +265,7 @@ export default function Lobby() {
                     placeholder="Esim. TurboKissa" 
                     value={joinCode}
                     onChange={(e) => setJoinCode(e.target.value)}
-                    style={{ flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #fbcfe8', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                    style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #fbcfe8', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                   />
                   <button type="submit" className="btn-primary" style={{ background: '#ec4899', padding: '1rem', borderRadius: '12px' }}>
                     <ArrowRight size={24} />
@@ -277,16 +277,16 @@ export default function Lobby() {
         </div>
 
         {/* LUOKKATILA */}
-        <div className="mode-card" style={{ borderTop: '8px solid #8b5cf6' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#8b5cf6', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
+        <div className="mode-card" style={{ borderTop: '8px solid #059669' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#059669', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
              <GraduationCap size={36} /> Luokkatila
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f5f3ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #ddd6fe' }}>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#7c3aed', fontWeight: 'bold', lineHeight: 1.4 }}>
-                   ⚠️ Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#ecfdf5', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #a7f3d0' }}>
+                <p style={{ margin: 0, fontSize: '0.9rem', color: '#047857', fontWeight: 'bold', lineHeight: 1.4 }}>
+                   <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
                 </p>
                 <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                   <input 
@@ -295,7 +295,7 @@ export default function Lobby() {
                     value={classCode}
                     maxLength={6}
                     onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
-                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #c4b5fd', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
+                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #6ee7b7', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
                   />
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input 
@@ -304,9 +304,9 @@ export default function Lobby() {
                         value={classNick}
                         maxLength={15}
                         onChange={(e) => setClassNick(e.target.value)}
-                        style={{ flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #c4b5fd', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                        style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #6ee7b7', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                       />
-                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2} className="btn-primary" style={{ background: '#8b5cf6', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2) ? 0.5 : 1 }}>
+                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2} className="btn-primary" style={{ background: '#059669', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2) ? 0.5 : 1 }}>
                         <ArrowRight size={24} />
                       </button>
                   </div>
