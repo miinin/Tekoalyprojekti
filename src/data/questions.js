@@ -5937,20 +5937,20 @@ export const categories = [
             "type": "drag_drop",
             "question": "Raahaa tekemiset oikeisiin laatikoihin sen mukaan, kuinka hyvin aivot pystyvät niihin!",
             "draggables": [
-              "Käveleminen ja purukumin pureskelu",
-              "Läksyjen teko ja vaikea videopeli",
-              "Hengittäminen ja musiikin kuuntelu",
-              "Kirjan lukeminen ja kokeeseen kertaaminen"
+              "Tutun koulumatkan käveleminen ja musiikin kuuntelu",
+              "Vaikeiden läksyjen tekeminen ja puhelimella viestittely",
+              "Tiskikoneen tyhjentäminen ja samalla kuulumisten juttelu",
+              "Uuden kielen opiskelu ja jännittävän videopelin pelaaminen"
             ],
             "dropZones": [
               "Onnistuu (Helpot rutiinit)",
               "Epäonnistuu (Vaatii keskittymistä)"
             ],
             "correctAnswer": {
-              "Käveleminen ja purukumin pureskelu": "Onnistuu (Helpot rutiinit)",
-              "Hengittäminen ja musiikin kuuntelu": "Onnistuu (Helpot rutiinit)",
-              "Läksyjen teko ja vaikea videopeli": "Epäonnistuu (Vaatii keskittymistä)",
-              "Kirjan lukeminen ja kokeeseen kertaaminen": "Epäonnistuu (Vaatii keskittymistä)"
+              "Tutun koulumatkan käveleminen ja musiikin kuuntelu": "Onnistuu (Helpot rutiinit)",
+              "Tiskikoneen tyhjentäminen ja samalla kuulumisten juttelu": "Onnistuu (Helpot rutiinit)",
+              "Vaikeiden läksyjen tekeminen ja puhelimella viestittely": "Epäonnistuu (Vaatii keskittymistä)",
+              "Uuden kielen opiskelu ja jännittävän videopelin pelaaminen": "Epäonnistuu (Vaatii keskittymistä)"
             },
             "explanation": "Aivot osaavat tehdä automaattisia asioita yhtä aikaa, mutta kaksi vaikeaa ja uutta asiaa kerralla on mahdoton tehtävä jopa neroille."
           },
