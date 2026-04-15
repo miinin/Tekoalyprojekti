@@ -1620,20 +1620,24 @@ export const categories = [
           {
             "id": "konepellin_1_q11",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikeisiin laatikoihin! Kumpi näistä on hyvää dataa tekoälyn opettamiseen, ja kumpi huonoa?",
+            "question": "Yhdistä asiat oikeisiin laatikoihin! Mikä näistä on hyvää dataa tekoälylle, ja mitkä kolme ovat puolestaan huonoa dataa?",
             "draggables": [
               "Miljoona valokuvaa erilaisista autoista",
-              "Yksi sumea kuva naapurin vanhasta autosta"
+              "Yksi sumea kuva naapurin vanhasta autosta",
+              "Tuhat sivua täysin keksittyjä ja vääriä faktoja",
+              "Paljon kuvia pelkästä nurmikosta, kun piti opettaa autoja"
             ],
             "dropZones": [
-              "Hyvää dataa (paljon polttoainetta)",
-              "Huonoa dataa (liian vähän polttoainetta)"
+              "Hyvää dataa (paljon laadukasta polttoainetta)",
+              "Huonoa dataa (viallista tai liian vähän polttoainetta)"
             ],
             "correctAnswer": {
-              "Miljoona valokuvaa erilaisista autoista": "Hyvää dataa (paljon polttoainetta)",
-              "Yksi sumea kuva naapurin vanhasta autosta": "Huonoa dataa (liian vähän polttoainetta)"
+              "Miljoona valokuvaa erilaisista autoista": "Hyvää dataa (paljon laadukasta polttoainetta)",
+              "Yksi sumea kuva naapurin vanhasta autosta": "Huonoa dataa (viallista tai liian vähän polttoainetta)",
+              "Tuhat sivua täysin keksittyjä ja vääriä faktoja": "Huonoa dataa (viallista tai liian vähän polttoainetta)",
+              "Paljon kuvia pelkästä nurmikosta, kun piti opettaa autoja": "Huonoa dataa (viallista tai liian vähän polttoainetta)"
             },
-            "explanation": "Tekoäly tarvitsee valtavan määrän monipuolista dataa oppiakseen asioita luotettavasti. Yksi kuva ei riitä sen polttoaineeksi!"
+            "explanation": "Tekoäly tarvitsee valtavan määrän monipuolista dataa oppiakseen luotettavasti. Sumeat kuvat, epäoleelliset asiat (kuten nurmikko autojen sijaan) ja väärät faktat vain hämmentävät sitä!"
           },
           {
             "id": "konepellin_1_q12",
