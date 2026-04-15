@@ -572,14 +572,13 @@ const Roadmap = () => {
     cat.subcategories.forEach(sub => {
        const stat = stats[sub.id];
        if (stat) totalCorrect += stat.correct;
-       absoluteTotalQuestions += sub.questions ? Math.min(sub.questions.length, 5) : (stat ? stat.total : 5);
+       absoluteTotalQuestions += sub.questions ? sub.questions.length : (stat ? stat.total : 0);
     });
 
     if (absoluteTotalQuestions === 0) return null;
-    const ratio = totalCorrect / absoluteTotalQuestions;
     if (absoluteTotalQuestions > 0 && totalCorrect === absoluteTotalQuestions) return 'platinum';
-    if (ratio >= 0.75) return 'gold';
-    if (ratio >= 0.40) return 'silver';
+    if (totalCorrect >= Math.floor(absoluteTotalQuestions * 0.9)) return 'gold';
+    if (totalCorrect >= Math.floor(absoluteTotalQuestions * 0.7)) return 'silver';
     if (totalCorrect >= 12) return 'bronze';
     return null;
   };

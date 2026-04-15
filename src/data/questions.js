@@ -2014,10 +2014,10 @@ export const categories = [
             "type": "reverse_prompt",
             "question": "Tekoälyllä on \"autokoulussa\" opetusohjelma. Se näyttää sinulle tuhat kuvaa punaisista ja sinisistä autoista ja lajittelee ne sitten väreittäin täydellisesti. Mikä oppimisohje (prompti) sille annettiin alussa?",
             "options": [
-              "Laske autojen huippunopeus moottorin äänen perusteella.",
+              "Laske jokaisen auton absoluuttinen huippunopeus pelkän nauhoitetun moottorin äänen perusteella.",
               "Tutki näitä esimerkkikuvia ja etsi sääntö, jolla autot voi jakaa kahteen ryhmään värin perusteella.",
-              "Piirrä aivan uusi sähköauto, jossa on keltaiset renkaat.",
-              "Kirjoita tarina punaisesta autosta, joka voitti kilpailun."
+              "Piirrä tietokoneella täysin uudenlainen sähköauto, jossa on kirkkaan keltaiset ja pyöreät renkaat.",
+              "Kirjoita jännittävä ja mukaansatempaava tarina punaisesta autosta, joka voitti suuren kilpailun."
             ],
             "correctAnswer": "Tutki näitä esimerkkikuvia ja etsi sääntö, jolla autot voi jakaa kahteen ryhmään värin perusteella.",
             "explanation": "Koneoppiminen tarkoittaa sitä, että koneelle annetaan paljon esimerkkejä ja sen tehtäväksi annetaan etsiä sieltä toistuva sääntö (kuten autojen väri) harjoittelemalla!"
@@ -2039,9 +2039,9 @@ export const categories = [
             "question": "Mitä autotallin koodari tarkoittaa, kun hän sanoo \"kouluttavansa\" tekoälymallia?",
             "options": [
               "Hän opettaa tekoälyä näyttämällä sille valtavasti esimerkkejä ja antamalla sen harjoitella toistoilla.",
-              "Hän rakentaa muovista pientä leluautoa työpöydällään työpäivän päätteeksi.",
-              "Hän lukitsee tekoälyn pimeään kaappiin, jotta se ei karkaa.",
-              "Hän opettaa omaa oikeaa autoaan hyppäämään esteiden yli pihalla."
+              "Hän keskittyy rakentamaan muovista ja metallista pientä leluautoa työpöydällään aina pitkän työpäivän päätteeksi.",
+              "Hän yrittää oppia koodaamista lukitsemalla tekoälyn pimeään kaappiin, jotta se ei pääse yllättäen karkaamaan verkkoon.",
+              "Hän yrittää vapaapäivänään opettaa omaa aivan oikeaa autoaan hyppäämään korkeiden esteiden yli viereisellä pihalla."
             ],
             "correctAnswer": "Hän opettaa tekoälyä näyttämällä sille valtavasti esimerkkejä ja antamalla sen harjoitella toistoilla.",
             "explanation": "Tekoälyn opettamista toistojen ja esimerkkidatan avulla kutsutaan mallin kouluttamiseksi. Se on koneen oma autokoulu!"
@@ -2832,10 +2832,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Mitä tarkoitetaan \"koneoppimisella\" tekoälyn autokoulussa?",
             "options": [
-              "Koodari kirjoittaa koneelle jokaisen säännön käsin.",
+              "Koodari koodaa ja kirjoittaa koneelle jokaisen tarvittavan tiedon ja säännön täysin käsin.",
               "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
-              "Kone oppii lukemalla yhden pienen ohjekirjan.",
-              "Kone korjaa fyysisen auton moottorin itse."
+              "Kone pystyy oppimaan uusia asioita vain lukemalla yhden pienen ohjekirjan kokonaan läpi.",
+              "Kone on täysin itsenäinen ja korjaa rikkoontuneen fyysisen auton moottorin täysin itse."
             ],
             "correctAnswer": "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
             "explanation": "Koneoppimisessa tekoäly harjoittelee virtuaalisesti jopa miljoonia kertoja päivässä. Esimerkkien (datan) avulla se löytää säännöt toistamalla."
@@ -2929,10 +2929,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Miksi koodari ei käytä tavallista laskinohjelmaa kuvien tunnistamiseen, vaan rakentaa neuroverkon?",
             "options": [
-              "Neuroverkko tarvitsee vähemmän sähköä.",
+              "Neuroverkko on yksinkertainen ohjelma, jota käytetään silloin, kun kone vaatii vähemmän virtaviivaista sähköä.",
               "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
-              "Laskinohjelma on liian nopea.",
-              "Neuroverkko on tehty kokonaan puusta."
+              "Laskinohjelma tekee laskutoimitukset aivan liian nopeasti, minkä vuoksi sen rinnalla käytetään hidastavaa neuroverkkoa.",
+              "Neuroverkko on vanhanaikainen ja kokonaan puusta rakennettu laite, jolla ihmiset ratkoivat vaikeita pulmia jo aiemmin."
             ],
             "correctAnswer": "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
             "explanation": "Pulmat, kuten puheen tai kuvien tunnistaminen, ovat niin monimutkaisia, että niihin tarvitaan ihmisen aivojen hermoverkkoja matkivaa tekoälyohjelmaa."
@@ -2948,7 +2948,7 @@ export const categories = [
               "Ei, se tarvitsee videon auringonpaisteesta."
             ],
             "correctAnswer": "Ei, se tarvitsee tuhansia erilaisia kuvia oppiakseen kunnolla.",
-            "explanation": "Ihminen voi oppia kerrasta, mutta tekoälyn \"autokoulu\" (koneoppiminen) vaatii valtavan vuoren monipuolista dataa, jotta kone oppii säännön luotettavasti. ________________"
+            "explanation": "Ihminen voi oppia kerrasta, mutta tekoälyn \"autokoulu\" (koneoppiminen) vaatii valtavan vuoren monipuolista dataa, jotta kone oppii säännön luotettavasti."
           }
         ]
       }
