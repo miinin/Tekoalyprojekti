@@ -7872,14 +7872,14 @@ export const categories = [
             "question": "Autotallin koodari huomaa, että AI vanin tekoäly-ovi tunnistaa huonosti silmälasipäisiä ihmisiä. Järjestä askeleet, joilla tekoäly korjataan reiluksi kaikille!",
             "correctAnswer": {
               "Koodari huomaa, että tekoälyovi ei aina aukea silmälasipäisille ihmisille.": "1. vaihe",
-              "Koodari tutkii opetusdatan ja huomaa, että kuvissa on vain laseittomia ihmisiä.": "2. vaihe",
+              "Koodari tutkii datan ja huomaa, että kuvissa on vain ihmisiä, joilla ei ole laseja.": "2. vaihe",
               "Koodari syöttää tekoälylle tuhansia uusia opetuskuvia ihmisistä silmälasit päässä.": "3. vaihe",
               "Tekoäly oppii uuden datan ja avaa jatkossa oven reilusti aivan kaikille.": "4. vaihe"
             },
             "explanation": "Epäreilut virheet pystytään korjaamaan! Syöttämällä ohjelmalle parempaa ja tasa-arvoisempaa opetusdataa (vähemmistöt huomioiden), tekoälystä saadaan korjattua reilu peli.",
             "draggables": [
               "Koodari huomaa, että tekoälyovi ei aina aukea silmälasipäisille ihmisille.",
-              "Koodari tutkii opetusdatan ja huomaa, että kuvissa on vain laseittomia ihmisiä.",
+              "Koodari tutkii datan ja huomaa, että kuvissa on vain ihmisiä, joilla ei ole laseja.",
               "Koodari syöttää tekoälylle tuhansia uusia opetuskuvia ihmisistä silmälasit päässä.",
               "Tekoäly oppii uuden datan ja avaa jatkossa oven reilusti aivan kaikille."
             ],
@@ -7998,19 +7998,19 @@ export const categories = [
           {
             "id": "reilu_peli_1_q12",
             "type": "drag_drop",
-            "question": "Järjestä vaiheet fiksusti aikajärjestykseen! Miten koodari oikeaoppisesti rakentaa AI vaniin täysin reilun, syrjimättömän ja tasa-arvoisen tekoälyapulaisen?",
+            "question": "Järjestä vaiheet fiksusti aikajärjestykseen! Miten koodari oikeaoppisesti rakentaa AI vaniin täysin reilun kasvojentunnistimen ovelle?",
             "correctAnswer": {
-              "Koodari kerää opetusdataa erittäin monenlaisista, erilaisista ja eri-ikäisistä ihmisistä.": "1. vaihe",
-              "Tekoäly koulutetaan ja sille opetetaan asioita tämän reilun ja monipuolisen datan avulla.": "2. vaihe",
-              "Koodari pyytää useita erilaisia ihmisiä (kuten vasenkätisiä ja lapsia) testaamaan laitetta.": "3. vaihe",
-              "Laitteesta tulee mahdollisimman reilu, ja se toimii täydellisesti ihan kaikille ihmisille.": "4. vaihe"
+              "Koodari kerää ensin satoja valokuvia kaikenlaisista, eri-ikäisistä ja erinäköisistä ihmisistä.": "1. vaihe",
+              "Tekoälylle syötetään nämä kuvat, jotta se oppii kattavasti tunnistamaan kaikenlaisia kasvoja.": "2. vaihe",
+              "Koodari pyytää silmälasipäisiä, lapsia ja isovanhempia kokeilemaan testissä oven avautumista.": "3. vaihe",
+              "Koodari korjaa testin perusteella löydetyt virheet, jolloin ovi toimii täydellisesti kaikille.": "4. vaihe"
             },
-            "explanation": "Reilun tekoälyn rakentaminen alkaa aina heti alussa monipuolisesta datasta, ja se varmistetaan lopuksi testaamalla sitä erilaisten ihmisten kanssa yhdessä.",
+            "explanation": "Reilun tekoälyn rakentaminen alkaa aina alussa monipuolisesta datasta, jatkuu mallin kouluttamisella ja varmistetaan lopuksi monipuolisella testauksella ja viilauksella.",
             "draggables": [
-              "Koodari kerää opetusdataa erittäin monenlaisista, erilaisista ja eri-ikäisistä ihmisistä.",
-              "Tekoäly koulutetaan ja sille opetetaan asioita tämän reilun ja monipuolisen datan avulla.",
-              "Koodari pyytää useita erilaisia ihmisiä (kuten vasenkätisiä ja lapsia) testaamaan laitetta.",
-              "Laitteesta tulee mahdollisimman reilu, ja se toimii täydellisesti ihan kaikille ihmisille."
+              "Koodari kerää ensin satoja valokuvia kaikenlaisista, eri-ikäisistä ja erinäköisistä ihmisistä.",
+              "Tekoälylle syötetään nämä kuvat, jotta se oppii kattavasti tunnistamaan kaikenlaisia kasvoja.",
+              "Koodari pyytää silmälasipäisiä, lapsia ja isovanhempia kokeilemaan testissä oven avautumista.",
+              "Koodari korjaa testin perusteella löydetyt virheet, jolloin ovi toimii täydellisesti kaikille."
             ],
             "dropZones": [
               "1. vaihe",
