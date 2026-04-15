@@ -404,10 +404,19 @@ export const store = {
       const location = store.getLastLocation() || { main: '', sub: '' };
       const locStr = location.main ? (location.sub ? `${location.main} -> ${location.sub}` : location.main) : 'Lobby';
 
+      const rawData = {};
+      for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('aivan_') && key !== 'aivan_room') {
+              rawData[key] = localStorage.getItem(key);
+          }
+      }
+
       await setDoc(doc(db, "class_sessions", code, "players", nickname), {
         sparks,
         medals: { platinum, gold, silver, bronze },
         location: locStr,
+        rawData,
         lastUpdate: serverTimestamp()
       }, { merge: true });
     } catch (err) {
@@ -437,5 +446,42 @@ export const store = {
         }
       }
     });
-  }
+  },
+
+  joinClassroom: async (code, nickname) => {
+      try {
+          const upperCode = code.toUpperCase().trim();
+          const docRef = doc(db, "class_sessions", upperCode, "players", nickname);
+          
+          let docSnap;
+          try { docSnap = await getDoc(docRef); } catch(e) {}
+          
+          if (docSnap && docSnap.exists() && docSnap.data().rawData) {
+              const data = docSnap.data().rawData;
+              const keysToRemove = [];
+              for (let i = 0; i < localStorage.length; i++) {
+                  const key = localStorage.key(i);
+                  if (key && key.startsWith('aivan_') && key !== 'aivan_room') keysToRemove.push(key);
+              }
+              keysToRemove.forEach(k => localStorage.removeItem(k));
+              
+              Object.keys(data).forEach(k => {
+                  if (k.startsWith('aivan_')) localStorage.setItem(k, data[k]);
+              });
+              
+              store.setClassroomCode(upperCode, nickname);
+              return true; // Resumed
+          } else {
+              store.clearSinglePlayer();
+              store.setClassroomCode(upperCode, nickname);
+              await store.syncClassroomProgress();
+              return false; // New
+          }
+      } catch (err) {
+          store.clearSinglePlayer();
+          store.setClassroomCode(code.toUpperCase().trim(), nickname);
+          await store.syncClassroomProgress();
+          return false;
+      }
+  },
 };
