@@ -1122,9 +1122,9 @@ const Roadmap = () => {
                 
                 <p style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
                   {showWowMedal === 'bronze' && "Tiesitkö, että pelaamalla tason myöhemmin uudelleen saat eri kysymyksiä ja voit nousta hopealle, kullalle tai jopa platinalle!"}
-                  {showWowMedal === 'silver' && "Hienoa työtä! Pelaamalla uudestaan saat uusia kysymyksiä, ja voit nousta vielä kultaan tai platinaan!"}
+                  {showWowMedal === 'silver' && "Hienoa työtä! Pelaamalla uudestaan saat uusia kysymyksiä ja voit nousta vielä kultaan tai platinaan!"}
                   {showWowMedal === 'gold' && "Upea suoritus! Enää hieman harjoitusta, niin saat kaikkiin vaihtuviinkin kysymyksiin oikean vastauksen ja ansaitset legendaarisen platinamitalin!"}
-                  {showWowMedal === 'platinum' && "Täydellistä! Olet nyt vastannut tämän tason KAIKKIIN vaihtuviin kysymyksiin onnistuneesti oikein!"}
+                  {showWowMedal === 'platinum' && "Täydellistä! Olet vastannut kaikkiin tämän tason kysymyksiin oikein!"}
                 </p>
 
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.5rem', padding: '1.5rem' }} onClick={() => setShowWowMedal(null)}>Upeaa, jatka matkaa!</button>
