@@ -1,0 +1,86 @@
+# Kieliasun havainnot kysymysdatassa
+
+## Pilkku ennen ja-sanaa (78 kpl)
+- **[perusteet_2_q11]** Perustelu: *"...Ihmiset sen sijaan ymmärtävät, miltä tylsyys tuntuu, ja yrittävät lohduttaa..."*
+- **[perusteet_3_q13]** Perustelu: *"...Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan, ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta..."*
+- **[perusteet_5_q8]** Perustelu: *"...Puhelimesi on niihin verrattuna todellinen superkone, ja siksi edistynyt tekoäly mahtuu nykyään taskuun..."*
+- **[perusteet_5_q10]** Kysymys: *"...Painat sitä, ja ruudulle ilmestyy kuva vanhasta koodarista 1970-luvulta..."*
+- **[perusteet_5_q15]** Kysymys: *"...Auton tekoälynäyttö alkaa vilkkua, ja se tulostaa tekstin hitaasti kirjain kerrallaan: "O..."*
+- **[konepellin_1_q6]** Perustelu: *"...Tekoäly on oikeastaan vähän hidasälyinen aluksi, ja se vaatii valtavan vuoren dataa oppiakseen saman asian..."*
+- **[konepellin_1_q9]** Perustelu: *"...Tekoäly kykenee keksimään vitsejä, koska se on lukenut internetistä "polttoaineekseen" valtavan määrän tekstejä ja vitsejä, ja oppinut niistä säännöt..."*
+- **[konepellin_1_q11]** Kysymys: *"...Mikä näistä on hyvää dataa tekoälylle, ja mitkä kolme ovat puolestaan huonoa dataa..."*
+- **[konepellin_1_q14]** Vaihtoehto: *"...Kävimme eilen perheen kanssa pizzalla, ja se oli superhyvää..."*
+- **[konepellin_2_q4]** Perustelu: *"...Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin, ja lopuksi työ suoritetaan..."*
+- **[konepellin_2_q11]** Perustelu: *"...Ensin kuunnellaan komento, sitten tietokoneen koodi ymmärtää sen, ja lopuksi suoritetaan itse tehtävä..."*
+- **[konepellin_3_q2]** Vaihtoehto: *"...Koodari antaa koneelle esimerkkejä, ja kone oppii harjoittelemalla..."*
+- **[konepellin_3_q6]** Vaihtoehto: *"...'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää, ja nyt olen mestari..."*
+- **[konepellin_3_q10]** Kysymys: *"...Kone on kuitenkin vielä huono arvaamaan, ja se sekoittaa puut jatkuvasti merkkeihin..."*
+- **[konepellin_4_q5]** Perustelu: *"...Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja, ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan..."*
+- **[konepellin_6_q7]** Kysymys: *"...Pyydät tekoälyä piirtämään kuvan "lääkäristä", ja se piirtää sinulle aina kuvan harmaahiuksisesta miehestä..."*
+- **[konepellin_6_q9]** Kysymys: *"...AI vanin musiikkisoitin osaa suositella vain klassista viulumusiikkia, ja se ärsyttää sinua..."*
+- **[konepellin_6_q10]** Perustelu: *"...Jos opetuksessa on käytetty vain aikuisten kuvia, laite ei "näe" lapsia kunnolla, ja siksi se jättää sinut huomiotta..."*
+- **[konepellin_6_q12]** Kysymys: *"...Koodari huomaa, että AI vanin tekoäly on epäreilu, ja haluaa korjata asian..."*
+- **[digiturva_1_q7]** Kysymys: *"...Pyysit tekoälyä auttamaan salasanan kanssa, ja se antoi vastauksen: "Tässä on 15 merkkiä pitkä turvallinen sarja: K8..."*
+- **[digiturva_2_q4]** Perustelu: *"...Tarkat henkilötiedot ja yhteystiedot ovat ehdottoman salaisia, ja ne on pidettävä aina piilossa vierailta..."*
+- **[digiturva_3_q3]** Perustelu: *"...Pysy rauhallisena, älä klikkaa mitään, ja näytä oudot viestit aina ensin aikuiselle..."*
+- **[digiturva_5_q3]** Kysymys: *"...Videossa on kuitenkin outoja varjoja, ja laulajan hampaat vilkkuvat hassusti suttuisina..."*
+- **[digiturva_5_q15]** Perustelu: *"...Tekoäly voi ottaa henkilön oman aidon äänen, kääntää siinä sanotun tekstin, ja pukea uuden kielen aivan alkuperäisen ihmisen kuuloiseksi ääneksi..."*
+- **[digiturva_6_q10]** Perustelu: *"...Aikuinen osaa kertoa sinulle rauhallisesti, onko uutinen totta vai ei, ja auttaa karkottamaan pelon..."*
+- **[digiturva_6_q13]** Perustelu: *"...Fiksut aikuiset ymmärtävät, että netissä sattuu vahinkoja, ja heidän tärkein tehtävänsä on auttaa sinua, ei rangaista..."*
+- **[digiturva_6_q14]** Perustelu: *"...Hyvä apukuski eli aikuinen pysyy aina rauhallisena, kiittää sinua rohkeudesta kertoa asiasta, ja auttaa sinua korjaamaan tilanteen yhdessä turvallisesti..."*
+- **[digiturva_6_q15]** Perustelu: *"...Se tarkoittaa, että pysähdyt, ilmoitat muille (aikuisille) olevasi pulassa, ja odotat rauhassa apua paikalle ilman että yrität selvitä yksin..."*
+- **[digiturva_7_q4]** Kysymys: *"...Laita nämä tiedot järjestykseen: aloita siitä, minkä saa kertoa netissä kaikille, ja päätä siihen, mikä pitää salata ehdottomasti..."*
+- **[digiturva_7_q10]** Perustelu: *"...Omat salasanat pidetään aina itsellä, ja oudot pyynnöt pitää varmistaa muuta kautta..."*
+- **[aivoterveys_1_q13]** Perustelu: *"...Se pakottaa aivot keksimään uutta, ja silloin syntyvät usein kaikkein parhaimmat leikit, joissa oma mielikuvitus pääsee valloilleen..."*
+- **[aivoterveys_3_q3]** Kysymys: *"...SKENAARIO: Olet kaverin autotallissa, ja isoveli alkaa pelata uutta, K-16 ikärajalla varustettua toimintapeliä..."*
+- **[aivoterveys_3_q13]** Vaihtoehto: *"...He eivät osaa pelata nopeita pelejä, ja ovat vähän kateellisia..."*
+- **[aivoterveys_5_q10]** Perustelu: *"...Se vain siirtää ongelmaa eteenpäin, ja usein laitteen sulkemisen jälkeen olo on entistä kiukkuisempi ja raskaampi..."*
+- **[aivoterveys_5_q10]** Vaihtoehto: *"...Olet edelleen vähintään yhtä surullinen, ja sinua voi jopa ärsyttää enemmän..."*
+- **[aivoterveys_5_q13]** Vaihtoehto: *"...Alat heti haukotella, ja silmäsi tuntuvat pelkästään raskailta..."*
+- **[aivoterveys_7_q3]** Vaihtoehto: *"...Lapsen aivot ovat vasta kehittymässä, ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina..."*
+- **[aivoterveys_7_q9]** Perustelu: *"...Siksi aivot pysyvät virkeinä, ja tärkeän yöhuollon aloittaminen myöhästyy..."*
+- **[aivoterveys_7_q9]** Vaihtoehto: *"...Ruudun sininen valo huijaa aivoja luulemaan, että on päivä, ja unihormonin eritys estyy..."*
+- **[arjessa_1_q7]** Kysymys: *"...Puhelimesi ääniavustaja vastaa sinulle kovaan ääneen: "Ouluun on matkaa noin 150 kilometriä, ja matka kestää noin kaksi tuntia..."*
+- **[arjessa_1_q9]** Kysymys: *"...Olette ottamassa yhteiskuvaa AI vanin edessä illan pimeydessä, ja puhelimen tekoäly tekee kuvasta upean ja kirkkaan..."*
+- **[arjessa_1_q10]** Perustelu: *"...Voit puhua viestin, ja tekoäly muuttaa äänesi salamannopeasti valmiiksi kirjoitetuksi tekstiksi ruudulle..."*
+- **[arjessa_1_q14]** Vaihtoehto: *"...Osoitat puhelimen kameralla kylttiä, ja käännös ilmestyy suoraan ruudulle..."*
+- **[arjessa_2_q2]** Perustelu: *"...Se huomaa toiminnastasi, mitä katsot mielelläsi, ja alkaa tarjota sinulle enemmän samanlaisia videoita pitääkseen sinut ruudun ääressä..."*
+- **[arjessa_2_q2]** Vaihtoehto: *"...Se oppii, että pidät autoista, ja ehdottaa niitä heti lisää..."*
+- **[arjessa_2_q7]** Perustelu: *"...Se seuraa digitaalista "historiaasi" eli sitä, mitä olet viime aikoina katsellut, ja tarjoaa sen pohjalta uutta samankaltaista viihdettä..."*
+- **[arjessa_3_q12]** Perustelu: *"...Ensin sen pitää havaita pelaaja matemaattisten koordinaattien avulla, sitten valita oikea toiminto sääntöjen listasta, ja lopuksi suorittaa animaatio..."*
+- **[arjessa_4_q13]** Perustelu: *"...Tavallinen imuri on vain moottori putken päässä, ja se vaatii täysin ihmisen aivoja ohjaukseen..."*
+- **[arjessa_4_q14]** Perustelu: *"...Termostaatti huomaa viikkojen aikana, että olette unessa kello 22, ja alkaa itse laittaa säästöliekkiä päälle samaan aikaan energiansäästön vuoksi..."*
+- **[arjessa_4_q14]** Vaihtoehto: *"...Sähkövatkain, jolla on kolme nopeaa mekaanista vaihdetta, ja joka toimii napista..."*
+- **[arjessa_5_q3]** Vaihtoehto: *"...Isä puhuu suomea puhelimeen, ja kaiutin toistaa asian vieraalla kielellä..."*
+- **[arjessa_5_q4]** Perustelu: *"...Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti..."*
+- **[arjessa_5_q12]** Raahattava: *"...Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä..."*
+- **[arjessa_6_q7]** Kysymys: *"...AI vanin robottiohjaus tekee seuraavan siirron: se vilkuttaa oikealle, hidastaa hieman vauhtia, odottaa että viereisellä kaistalla on tilaa, ja siirtyy pehmeästi toiselle kaistalle..."*
+- **[arjessa_6_q10]** Vaihtoehto: *"...Tiellä ollut ruuhka tai hidastus purkautui, ja liikenne vetää taas normaalisti..."*
+- **[arjessa_6_q15]** Perustelu: *"...Monissa navigointisovelluksissa ihmiset voivat itse napin painalluksella ilmoittaa tiellä olevista vaaroista, ja tekoäly jakaa tämän tiedon välittömästi muille takana tuleville kuskeille..."*
+- **[arjessa_7_q10]** Vaihtoehto: *"...Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi..."*
+- **[reilu_peli_1_q3]** Perustelu: *"...Tämä on epäreilua, ja siksi opetusdatan pitää aina olla monipuolista..."*
+- **[reilu_peli_1_q7]** Kysymys: *"...Koodasit AI vanille uuden ominaisuuden, ja se alkoi yhtäkkiä lukea kojelaudan kaikkia pikkutekstejä ääneen todella selkeästi ja kovaa..."*
+- **[reilu_peli_1_q14]** Perustelu: *"...Ihmiset ohjelmoivat sen säännöt, ja ihmiset voivat myös aivan aina korjata tekoälyn tekemät epäreilut virheet..."*
+- **[reilu_peli_2_q2]** Perustelu: *"...Jos palautat väärää tietoa, se on sinun vastuullasi, ja siksi tekoälyn käytöstä kerrotaan avoimesti..."*
+- **[reilu_peli_2_q3]** Perustelu: *"...Tekoälyn tekemiä läksyjä ei huijata omiksi, ja teoista on otettava oma vastuu..."*
+- **[reilu_peli_2_q7]** Kysymys: *"...Opettaja kehuu sinua: "Tämä oli upeasti ideoitu, ja oli reilua, että kerroit hakeneesi vain inspiraatiota tähän tekoälyltä..."*
+- **[reilu_peli_4_q3]** Kysymys: *"...SKENAARIO: Olette AI vanin takapenkillä, ja kaverisi näyttää tekoälyllä tekemäänsä kuvaa..."*
+- **[reilu_peli_5_q11]** Kysymys: *"...Millaisiin asioihin "peltinen apukuski" (kone) oikein sopii, ja milloin taas tarvitaan ehdottomasti oikeita ihmisiä (ystäviä)..."*
+- **[reilu_peli_6_q7]** Kysymys: *"...Auton akku kannattaa ladata öisin, jolloin sähkö on usein vihreämpää ja tuulista, ja renkaiden ilmanpaineet kannattaa pitää oikeina sähkön säästämiseksi..."*
+- **[reilu_peli_7_q10]** Kysymys: *"...SKENAARIO: Pyydät tekoälyä piirtämään kuvan ammatista "lääkäri", ja se piirtää jatkuvasti vain harmaahiuksisia miehiä..."*
+- **[kayttotaidot_1_q1]** Kysymys: *"..."auto"), ja se keksii aivan aina täydellisen tarinan juuri siitä, mitä salaa ajattelit..."*
+- **[kayttotaidot_2_q7]** Vaihtoehto: *"...Kerro miten hyvä koiran hajuaisti on, ja mainitse luotettava lähde tiedolle..."*
+- **[kayttotaidot_2_q10]** Vaihtoehto: *"...Ovea, ja koittaa vain puhua sille todella kauniisti koko iltapäivän..."*
+- **[kayttotaidot_3_q8]** Perustelu: *"...Voit vain sanoa sille "Lyhennä tuota äskeistä tekstiä", ja se tietää heti tarkalleen, mihin viittaat..."*
+- **[kayttotaidot_3_q15]** Kysymys: *"...AI vanin ruudulla ollut sekava taulukko pyyhkiytyy pois, ja tekoäly kirjoittaa sen tilalle: "Tässä yksinkertaisemmin: auto koostuu korista, moottorista ja renkaista..."*
+- **[kayttotaidot_4_q6]** Perustelu: *"...Ensimmäinen idea on harvoin se paras, ja tekoälyn ideoita pitää nimenomaan rikkoa, muuttaa ja muokata omannäköisiksi..."*
+- **[kayttotaidot_4_q10]** Vaihtoehto: *"...Syötätte sille tarinan alun, ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan..."*
+- **[kayttotaidot_5_q10]** Kysymys: *"...SKENAARIO: Haluat lähettää isoäidille syntymäpäiväonnittelut englanniksi, ja lisäksi haluat, että viesti lausutaan hänelle ääneen kuin oikean ihmisen puhe..."*
+- **[kayttotaidot_5_q10]** Perustelu: *"...Yksi työkalu hoitaa tekstin ymmärtämisen ja kääntämisen, ja toinen (text-to-speech eli puhesynteesi) hoitaa sen muuttamisen aidon kuuloiseksi ääneksi..."*
+- **[kayttotaidot_6_q4]** Perustelu: *"...Aina pitää ensin antaa tekoälylle materiaali (teksti), ja heti perään selkeä ohje siitä, miten haluat sen "pakattavan"..."*
+- **[kayttotaidot_7_q7]** Kysymys: *"...Tekoäly pahoittelee kiltisti ensimmäistä vastaustaan, ja kirjoittaa sen tilalle uuden listan: "1..."*
+
+## Kaksi pistettä (..) (2 kpl)
+- **[perusteet_5_q15]** Kysymys: *"...Auton tekoälynäyttö alkaa vilkkua, ja se tulostaa..."*
+- **[kayttotaidot_1_q7]** Perustelu: *"..."Toimi kuin..." tai "Olet..." on yksi parhaista ta..."*
+

@@ -383,7 +383,7 @@ export const categories = [
               "'Katsotaan yhdessä ulos ikkunasta, ehkä sieltä näkyy lehmiä!'"
             ],
             "correctAnswer": "'Kohde saavutetaan 45 minuutin kuluttua. Keskinopeus on 80 km/h.'",
-            "explanation": "Tekoäly antaa tarkan ja nopean faktavastauksen täysin ilman tunnetta. Ihmiset sen sijaan ymmärtävät, miltä tylsyys tuntuu, ja yrittävät lohduttaa."
+            "explanation": "Tekoäly antaa tarkan ja nopean faktavastauksen täysin ilman tunnetta. Ihmiset sen sijaan ymmärtävät, miltä tylsyys tuntuu ja yrittävät lohduttaa."
           },
           {
             "id": "perusteet_2_q12",
@@ -653,7 +653,7 @@ export const categories = [
               "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan": "2. vaihe",
               "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä": "3. vaihe"
             },
-            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan, ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!",
+            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!",
             "draggables": [
               "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija",
               "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan",
@@ -1046,7 +1046,7 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Vaikka vanhat tietokoneet olivat jättimäisiä, ne olivat uskomattoman hitaita! Puhelimesi on niihin verrattuna todellinen superkone, ja siksi edistynyt tekoäly mahtuu nykyään taskuun."
+            "explanation": "Vaikka vanhat tietokoneet olivat jättimäisiä, ne olivat uskomattoman hitaita! Puhelimesi on niihin verrattuna todellinen superkone ja siksi edistynyt tekoäly mahtuu nykyään taskuun."
           },
           {
             "id": "perusteet_5_q9",
@@ -1064,7 +1064,7 @@ export const categories = [
           {
             "id": "perusteet_5_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin kojelaudassa on nappi \"Historia\". Painat sitä, ja ruudulle ilmestyy kuva vanhasta koodarista 1970-luvulta. Hän näyttää surulliselta tyhjän arkistokaapin edessä. Miksi tekoälyä oli vaikea opettaa ennen internetin keksimistä?",
+            "question": "SKENAARIO: AI vanin kojelaudassa on nappi \"Historia\". Painat sitä ja ruudulle ilmestyy kuva vanhasta koodarista 1970-luvulta. Hän näyttää surulliselta tyhjän arkistokaapin edessä. Miksi tekoälyä oli vaikea opettaa ennen internetin keksimistä?",
             "options": [
               "Koodareilla ei ollut tarpeeksi paljon valmista tietoa, jolla opettaa konetta.",
               "Vanhan ajan arkistokaapit olivat asiantuntijoille aivan liian kalliita.",
@@ -1148,7 +1148,7 @@ export const categories = [
           {
             "id": "perusteet_5_q15",
             "type": "reverse_prompt",
-            "question": "Auton tekoälynäyttö alkaa vilkkua, ja se tulostaa tekstin hitaasti kirjain kerrallaan: \"O... l... e... n... h... i... d... a... s... k... o... n... e...\" Millä promptilla tekoäly saatiin leikkimään menneisyyttä?",
+            "question": "Auton tekoälynäyttö alkaa vilkkua ja se tulostaa tekstin hitaasti kirjain kerrallaan: \"O... l... e... n... h... i... d... a... s... k... o... n... e...\" Millä promptilla tekoäly saatiin leikkimään menneisyyttä?",
             "options": [
               "Esitä, että olet todella vanha ja hidas tietokone 60 vuoden takaa.",
               "Kirjoita minulle nopea ja hauska tarina kilpa-autosta.",
@@ -1642,7 +1642,7 @@ export const categories = [
               "Mekaanikko, joka korjaa auton vian kokeilemalla osia kerran."
             ],
             "correctAnswer": "Laite, joka tarvitsee miljoona kuvaa koirista oppiakseen sanan 'koira'.",
-            "explanation": "Ihminen on todella fiksu ja oppii asioita jo yhdestä esimerkistä. Tekoäly on oikeastaan vähän hidasälyinen aluksi, ja se vaatii valtavan vuoren dataa oppiakseen saman asian!"
+            "explanation": "Ihminen on todella fiksu ja oppii asioita jo yhdestä esimerkistä. Tekoäly on oikeastaan vähän hidasälyinen aluksi ja se vaatii valtavan vuoren dataa oppiakseen saman asian!"
           },
           {
             "id": "konepellin_1_q7",
@@ -1679,7 +1679,7 @@ export const categories = [
               "Koodari kirjoittaa sille jokaisen vitsin yksitellen."
             ],
             "correctAnswer": "Se on oppinut ne netin valtavasta datamäärästä.",
-            "explanation": "Tekoäly kykenee keksimään vitsejä, koska se on lukenut internetistä \"polttoaineekseen\" valtavan määrän tekstejä ja vitsejä, ja oppinut niistä säännöt."
+            "explanation": "Tekoäly kykenee keksimään vitsejä, koska se on lukenut internetistä \"polttoaineekseen\" valtavan määrän tekstejä ja vitsejä ja oppinut niistä säännöt."
           },
           {
             "id": "konepellin_1_q10",
@@ -1697,7 +1697,7 @@ export const categories = [
           {
             "id": "konepellin_1_q11",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikeisiin laatikoihin! Mikä näistä on hyvää dataa tekoälylle, ja mitkä kolme ovat puolestaan huonoa dataa?",
+            "question": "Yhdistä asiat oikeisiin laatikoihin! Mikä näistä on hyvää dataa tekoälylle ja mitkä kolme ovat puolestaan huonoa dataa?",
             "draggables": [
               "Miljoona valokuvaa erilaisista autoista",
               "Yksi sumea kuva naapurin vanhasta autosta",
@@ -1760,7 +1760,7 @@ export const categories = [
             "options": [
               "Tänään sataa lunta, joten autoon pitää laittaa talvirenkaat alle.",
               "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
-              "Kävimme eilen perheen kanssa pizzalla, ja se oli superhyvää!",
+              "Kävimme eilen perheen kanssa pizzalla ja se oli superhyvää!",
               "Sähköautot ovat yleistyneet paljon viime vuosien aikana."
             ],
             "correctAnswer": "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
@@ -1832,7 +1832,7 @@ export const categories = [
               "Pyyhkijöiden moottori saa sähköä.": "3. vaihe",
               "Ikkuna pyyhkiytyy täysin puhtaaksi.": "4. vaihe"
             },
-            "explanation": "Tekoälyn algoritmi etenee loogisesti askeleittain. Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin, ja lopuksi työ suoritetaan.",
+            "explanation": "Tekoälyn algoritmi etenee loogisesti askeleittain. Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin ja lopuksi työ suoritetaan.",
             "draggables": [
               "Kamera huomaa sadepisaran lasissa.",
               "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.",
@@ -1949,7 +1949,7 @@ export const categories = [
               "Etsi sana 'soita'": "Askel 2:",
               "Laita musiikki soimaan": "Askel 3:"
             },
-            "explanation": "Algoritmit ovat askeleittain eteneviä käskyjä. Ensin kuunnellaan komento, sitten tietokoneen koodi ymmärtää sen, ja lopuksi suoritetaan itse tehtävä."
+            "explanation": "Algoritmit ovat askeleittain eteneviä käskyjä. Ensin kuunnellaan komento, sitten tietokoneen koodi ymmärtää sen ja lopuksi suoritetaan itse tehtävä."
           },
           {
             "id": "konepellin_2_q12",
@@ -2036,12 +2036,12 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Kun puhutaan tekoälyn \"koneoppimisesta\", mitä se tarkoittaa autotallin koodarille?",
             "options": [
-              "Koodari antaa koneelle esimerkkejä, ja kone oppii harjoittelemalla.",
+              "Koodari antaa koneelle esimerkkejä ja kone oppii harjoittelemalla.",
               "Koodari joutuu lukemaan kaikki maailman kirjat yksin.",
               "Kone oppii ajamaan autoa täysin ilman sähköä.",
               "Kone oppii korjaamaan oikean moottorin jakoavaimella."
             ],
-            "correctAnswer": "Koodari antaa koneelle esimerkkejä, ja kone oppii harjoittelemalla.",
+            "correctAnswer": "Koodari antaa koneelle esimerkkejä ja kone oppii harjoittelemalla.",
             "explanation": "Koneoppimisessa koodari ei kirjoita jokaista pientä sääntöä käsin, vaan antaa tekoälylle valtavasti esimerkkejä. Tekoäly etsii niistä säännöt toistojen ja harjoittelun kautta!"
           },
           {
@@ -2107,11 +2107,11 @@ export const categories = [
             "question": "Kuka näistä oppijoista on tekoäly? Etsi vastaus, joka paljastaa koneoppimisen tavan käyttää valtavasti toistoja.",
             "options": [
               "'Minulle riittää, kun näytät kerran, miten turvavyö laitetaan kiinni.'",
-              "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää, ja nyt olen mestari!'",
+              "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää ja nyt olen mestari!'",
               "'Haluaisin pitää jo pienen tauon, jotta aivoni saavat levätä hetken.'",
               "'Opin parhaiten, kun käyn isäni kanssa oikealla ajotunnilla oikealla tiellä.'"
             ],
-            "correctAnswer": "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää, ja nyt olen mestari!'",
+            "correctAnswer": "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää ja nyt olen mestari!'",
             "explanation": "Koneoppimisessa tekoäly voi toistaa esimerkkejä virtuaalisesti jopa miljoonia kertoja päivässä väsymättä, mihin yksikään ihminen ei pysty."
           },
           {
@@ -2154,7 +2154,7 @@ export const categories = [
           {
             "id": "konepellin_3_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat opettaa AI vanin kameran erottamaan liikennemerkin tavallisesta puusta. Kone on kuitenkin vielä huono arvaamaan, ja se sekoittaa puut jatkuvasti merkkeihin. Miten voit auttaa sen koneoppimista onnistumaan paremmin?",
+            "question": "SKENAARIO: Haluat opettaa AI vanin kameran erottamaan liikennemerkin tavallisesta puusta. Kone on kuitenkin vielä huono arvaamaan ja se sekoittaa puut jatkuvasti merkkeihin. Miten voit auttaa sen koneoppimista onnistumaan paremmin?",
             "options": [
               "Annan sille paljon enemmän ja monipuolisempia esimerkkikuvia molemmista ja annan sen harjoitella.",
               "Poistan siltä kaikki kamerat, jotta sen ei tarvitse katsella ulos.",
@@ -2325,7 +2325,7 @@ export const categories = [
               "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.": "3. vaihe",
               "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa.": "4. vaihe"
             },
-            "explanation": "Neuroverkko etenee kerroksittain. Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja, ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan.",
+            "explanation": "Neuroverkko etenee kerroksittain. Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan.",
             "draggables": [
               "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
               "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.",
@@ -2825,7 +2825,7 @@ export const categories = [
           {
             "id": "konepellin_6_q7",
             "type": "reverse_prompt",
-            "question": "Pyydät tekoälyä piirtämään kuvan \"lääkäristä\", ja se piirtää sinulle aina kuvan harmaahiuksisesta miehestä. Millä huonolla datalla tekoäly on alun perin opetettu?",
+            "question": "Pyydät tekoälyä piirtämään kuvan \"lääkäristä\" ja se piirtää sinulle aina kuvan harmaahiuksisesta miehestä. Millä huonolla datalla tekoäly on alun perin opetettu?",
             "options": [
               "Opetuksessa käytettiin kuvia vain miehistä lääkärintakeissa.",
               "Opetuksessa käytettiin paljon kuvia naisista ja miehistä sairaalassa.",
@@ -2849,7 +2849,7 @@ export const categories = [
           {
             "id": "konepellin_6_q9",
             "type": "multiple_choice",
-            "question": "AI vanin musiikkisoitin osaa suositella vain klassista viulumusiikkia, ja se ärsyttää sinua. Miten koodari voi korjata tämän vinouman?",
+            "question": "AI vanin musiikkisoitin osaa suositella vain klassista viulumusiikkia ja se ärsyttää sinua. Miten koodari voi korjata tämän vinouman?",
             "options": [
               "Antamalla tekoälylle rangaistukseksi pitkän ajokiellon.",
               "Ruokkimalla tekoälyä datalla kaikista eri musiikkityyleistä.",
@@ -2870,7 +2870,7 @@ export const categories = [
               "Robotti pelkää, että sinä pudotat pullon vahingossa auton lattialle."
             ],
             "correctAnswer": "Robottia opetettiin tunnistamaan vain aikuisten, pitkien ihmisten kasvot.",
-            "explanation": "Tämä on yleinen tekoälyn vinouma! Jos opetuksessa on käytetty vain aikuisten kuvia, laite ei \"näe\" lapsia kunnolla, ja siksi se jättää sinut huomiotta. Data oli puutteellista!"
+            "explanation": "Tämä on yleinen tekoälyn vinouma! Jos opetuksessa on käytetty vain aikuisten kuvia, laite ei \"näe\" lapsia kunnolla ja siksi se jättää sinut huomiotta. Data oli puutteellista!"
           },
           {
             "id": "konepellin_6_q11",
@@ -2897,7 +2897,7 @@ export const categories = [
           {
             "id": "konepellin_6_q12",
             "type": "drag_drop",
-            "question": "Koodari huomaa, että AI vanin tekoäly on epäreilu, ja haluaa korjata asian. Järjestä korjausoperaation askeleet autotallissa!",
+            "question": "Koodari huomaa, että AI vanin tekoäly on epäreilu ja haluaa korjata asian. Järjestä korjausoperaation askeleet autotallissa!",
             "correctAnswer": {
               "Koodari huomaa auton tekevän vinoutuneita ja hölmöjä päätöksiä.": "1. vaihe",
               "Koodari tutkii tekoälyn saamaa dataa ja löytää sieltä yksipuolisen virheen.": "2. vaihe",
@@ -3213,7 +3213,7 @@ export const categories = [
           {
             "id": "digiturva_1_q7",
             "type": "reverse_prompt",
-            "question": "Pyysit tekoälyä auttamaan salasanan kanssa, ja se antoi vastauksen: \"Tässä on 15 merkkiä pitkä turvallinen sarja: K8!mP9@xL2#vQ5z\". Mikä oli alkuperäinen pyyntösi (promptisi)?",
+            "question": "Pyysit tekoälyä auttamaan salasanan kanssa ja se antoi vastauksen: \"Tässä on 15 merkkiä pitkä turvallinen sarja: K8!mP9@xL2#vQ5z\". Mikä oli alkuperäinen pyyntösi (promptisi)?",
             "options": [
               "Etsi netistä jonkun toisen ihmisen oikea salasana.",
               "Keksi minulle älyttömän heikko salasana, jonka muistan aina.",
@@ -3400,7 +3400,7 @@ export const categories = [
               "Oma etunimesi ja ikäsi": "3. vaihe",
               "Koko nimesi, kotiosoitteesi ja puhelinnumerosi": "4. vaihe"
             },
-            "explanation": "Yleisiä asioita ja nimimerkkejä on turvallista jakaa peleissä. Tarkat henkilötiedot ja yhteystiedot ovat ehdottoman salaisia, ja ne on pidettävä aina piilossa vierailta!",
+            "explanation": "Yleisiä asioita ja nimimerkkejä on turvallista jakaa peleissä. Tarkat henkilötiedot ja yhteystiedot ovat ehdottoman salaisia ja ne on pidettävä aina piilossa vierailta!",
             "draggables": [
               "Lempivärisi tai lempielokuvasi",
               "Pelissä käyttämäsi keksitty nimimerkki",
@@ -3625,7 +3625,7 @@ export const categories = [
               "Kirjoitan viestiin oman salasanani ja oikean nimeni."
             ],
             "correctAnswer": "Suljen viestin rauhassa ja kysyn heti neuvoa aikuiselta.",
-            "explanation": "Maantierosvot yrittävät usein pelotella sinua klikkaamaan kiireessä. Pysy rauhallisena, älä klikkaa mitään, ja näytä oudot viestit aina ensin aikuiselle!"
+            "explanation": "Maantierosvot yrittävät usein pelotella sinua klikkaamaan kiireessä. Pysy rauhallisena, älä klikkaa mitään ja näytä oudot viestit aina ensin aikuiselle!"
           },
           {
             "id": "digiturva_3_q4",
@@ -4089,7 +4089,7 @@ export const categories = [
           {
             "id": "digiturva_5_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Kaverisi näyttää videon, jossa lempilaulajasi laulaa tosi nolosti autotallin katolla. Laulaja näyttää itseltään. Videossa on kuitenkin outoja varjoja, ja laulajan hampaat vilkkuvat hassusti suttuisina. Mitä päättelet tästä?",
+            "question": "SKENAARIO: Kaverisi näyttää videon, jossa lempilaulajasi laulaa tosi nolosti autotallin katolla. Laulaja näyttää itseltään. Videossa on kuitenkin outoja varjoja ja laulajan hampaat vilkkuvat hassusti suttuisina. Mitä päättelet tästä?",
             "options": [
               "Laulaja on luultavasti oikeasti kiivennyt laulamaan katolle.",
               "Video on todennäköisesti tekoälyllä tehty syväväärennös.",
@@ -4291,7 +4291,7 @@ export const categories = [
               "Etsi internetistä pelaajia, jotka oikeasti puhuvat monia vieraita kieliä."
             ],
             "correctAnswer": "Käännä pelaajan oikea suomenkielinen ääni täysin japanin kielelle.",
-            "explanation": "Tekoäly voi ottaa henkilön oman aidon äänen, kääntää siinä sanotun tekstin, ja pukea uuden kielen aivan alkuperäisen ihmisen kuuloiseksi ääneksi. Se on ovela valepuku!"
+            "explanation": "Tekoäly voi ottaa henkilön oman aidon äänen, kääntää siinä sanotun tekstin ja pukea uuden kielen aivan alkuperäisen ihmisen kuuloiseksi ääneksi. Se on ovela valepuku!"
           }
         ]
       },
@@ -4443,7 +4443,7 @@ export const categories = [
               "Menet autotalliin ja yrität purkaa perheesi auton osiin aivan heti."
             ],
             "correctAnswer": "Laitan hätävilkut päälle ja kysyn aikuiselta, onko uutinen totta.",
-            "explanation": "Netissä on paljon valeuutisia ja pelottavia keksittyjä juttuja. Aikuinen osaa kertoa sinulle rauhallisesti, onko uutinen totta vai ei, ja auttaa karkottamaan pelon!"
+            "explanation": "Netissä on paljon valeuutisia ja pelottavia keksittyjä juttuja. Aikuinen osaa kertoa sinulle rauhallisesti, onko uutinen totta vai ei ja auttaa karkottamaan pelon!"
           },
           {
             "id": "digiturva_6_q11",
@@ -4501,7 +4501,7 @@ export const categories = [
               "Koska he haluavat mieluummin ratkaista vaikeat pulmat kokonaan yksin."
             ],
             "correctAnswer": "Koska he pelkäävät, että aikuinen suuttuu tai ottaa laitteen pois.",
-            "explanation": "Tämä on todella yleinen pelko, mutta se on täysin turha! Fiksut aikuiset ymmärtävät, että netissä sattuu vahinkoja, ja heidän tärkein tehtävänsä on auttaa sinua, ei rangaista."
+            "explanation": "Tämä on todella yleinen pelko, mutta se on täysin turha! Fiksut aikuiset ymmärtävät, että netissä sattuu vahinkoja ja heidän tärkein tehtävänsä on auttaa sinua, ei rangaista."
           },
           {
             "id": "digiturva_6_q14",
@@ -4514,7 +4514,7 @@ export const categories = [
               "'Minä soitan heti poliisille, tämä on maailman pahin ja isoin katastrofi.'"
             ],
             "correctAnswer": "'Hyvä kun kerroit minulle heti. Älä huoli, korjataan tämä asia yhdessä.'",
-            "explanation": "Hyvä apukuski eli aikuinen pysyy aina rauhallisena, kiittää sinua rohkeudesta kertoa asiasta, ja auttaa sinua korjaamaan tilanteen yhdessä turvallisesti."
+            "explanation": "Hyvä apukuski eli aikuinen pysyy aina rauhallisena, kiittää sinua rohkeudesta kertoa asiasta ja auttaa sinua korjaamaan tilanteen yhdessä turvallisesti."
           },
           {
             "id": "digiturva_6_q15",
@@ -4527,7 +4527,7 @@ export const categories = [
               "Keksi jännittävä tarina maantierosvosta, joka pöllii auton renkaat."
             ],
             "correctAnswer": "Selitä avun hakeminen netissä käyttämällä auton hätävilkkuja esimerkkinä.",
-            "explanation": "Hätävilkkujen laittaminen on loistava vertauskuva. Se tarkoittaa, että pysähdyt, ilmoitat muille (aikuisille) olevasi pulassa, ja odotat rauhassa apua paikalle ilman että yrität selvitä yksin!"
+            "explanation": "Hätävilkkujen laittaminen on loistava vertauskuva. Se tarkoittaa, että pysähdyt, ilmoitat muille (aikuisille) olevasi pulassa ja odotat rauhassa apua paikalle ilman että yrität selvitä yksin!"
           }
         ]
       },
@@ -4575,7 +4575,7 @@ export const categories = [
           {
             "id": "digiturva_7_q4",
             "type": "drag_drop",
-            "question": "Laita nämä tiedot järjestykseen: aloita siitä, minkä saa kertoa netissä kaikille, ja päätä siihen, mikä pitää salata ehdottomasti!",
+            "question": "Laita nämä tiedot järjestykseen: aloita siitä, minkä saa kertoa netissä kaikille ja päätä siihen, mikä pitää salata ehdottomasti!",
             "correctAnswer": {
               "Pelissä käyttämäsi keksitty nimimerkki": "1. vaihe",
               "Oma etunimesi ja ikäsi": "2. vaihe",
@@ -4672,7 +4672,7 @@ export const categories = [
               "Nauran ja poistan pelin kokonaan."
             ],
             "correctAnswer": "Soitan kaverille oikealla puhelimella varmistaakseni asian, sillä kyseessä voi olla väärennetty ääni.",
-            "explanation": "Tekoäly voi kloonata \"valepukuisille liftareille\" aivan aidon kuuloisen äänen! Omat salasanat pidetään aina itsellä, ja oudot pyynnöt pitää varmistaa muuta kautta. ________________"
+            "explanation": "Tekoäly voi kloonata \"valepukuisille liftareille\" aivan aidon kuuloisen äänen! Omat salasanat pidetään aina itsellä ja oudot pyynnöt pitää varmistaa muuta kautta. ________________"
           }
         ]
       }
@@ -4889,7 +4889,7 @@ export const categories = [
               "Laitteen kellon siirtäminen taaksepäin ovelasti."
             ],
             "correctAnswer": "Tavalliset, ilman ruutuja tapahtuvat vapaat leikit.",
-            "explanation": "Pieni tylsyys on itse asiassa aivoille todella hyödyllistä! Se pakottaa aivot keksimään uutta, ja silloin syntyvät usein kaikkein parhaimmat leikit, joissa oma mielikuvitus pääsee valloilleen."
+            "explanation": "Pieni tylsyys on itse asiassa aivoille todella hyödyllistä! Se pakottaa aivot keksimään uutta ja silloin syntyvät usein kaikkein parhaimmat leikit, joissa oma mielikuvitus pääsee valloilleen."
           },
           {
             "id": "aivoterveys_1_q14",
@@ -5187,7 +5187,7 @@ export const categories = [
           {
             "id": "aivoterveys_3_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Olet kaverin autotallissa, ja isoveli alkaa pelata uutta, K-16 ikärajalla varustettua toimintapeliä. Peli on hienon näköinen, mutta sen kovat äänet ja pelottavat hirviöt saavat sinut vähän ahdistuneeksi. Mitä teet?",
+            "question": "SKENAARIO: Olet kaverin autotallissa ja isoveli alkaa pelata uutta, K-16 ikärajalla varustettua toimintapeliä. Peli on hienon näköinen, mutta sen kovat äänet ja pelottavat hirviöt saavat sinut vähän ahdistuneeksi. Mitä teet?",
             "options": [
               "Katson peliä väkisin loppuun asti, jotta en vaikuttaisi pelkurilta.",
               "Kerron, että peli ahdistaa ja menen mieluummin pelaamaan muuta.",
@@ -5360,7 +5360,7 @@ export const categories = [
             "options": [
               "He haluavat itse pelata kaikki hauskimmat pelit ensin salaa.",
               "He välittävät aivoistasi ja haluavat suojella sinua painajaisilta.",
-              "He eivät osaa pelata nopeita pelejä, ja ovat vähän kateellisia.",
+              "He eivät osaa pelata nopeita pelejä ja ovat vähän kateellisia.",
               "He yrittävät säästää kotona mahdollisimman paljon sähköä."
             ],
             "correctAnswer": "He välittävät aivoistasi ja haluavat suojella sinua painajaisilta.",
@@ -5773,12 +5773,12 @@ export const categories = [
             "question": "SKENAARIO: Olet riidellyt siskosi kanssa ja sinua itkettää todella paljon. Otat tabletin käteen ja alat katsoa hauskoja kissavideoita tunteen peittämiseksi. Tunnin päästä suljet tabletin. Miltä aivoissasi todennäköisesti nyt tuntuu?",
             "options": [
               "Olet täysin unohtanut alkuperäisen riidan ja olet loppupäivän onnellinen.",
-              "Olet edelleen vähintään yhtä surullinen, ja sinua voi jopa ärsyttää enemmän.",
+              "Olet edelleen vähintään yhtä surullinen ja sinua voi jopa ärsyttää enemmän.",
               "Kissanpentu on taikaiskusta hypännyt videolta syliisi lohduttamaan.",
               "Osaat yhtäkkiä puhua kissojen kieltä ja ymmärrät siskosi ajatukset."
             ],
-            "correctAnswer": "Olet edelleen vähintään yhtä surullinen, ja sinua voi jopa ärsyttää enemmän.",
-            "explanation": "Ruudun tuijottaminen \"laastarina\" ei koskaan todella paranna surua. Se vain siirtää ongelmaa eteenpäin, ja usein laitteen sulkemisen jälkeen olo on entistä kiukkuisempi ja raskaampi!"
+            "correctAnswer": "Olet edelleen vähintään yhtä surullinen ja sinua voi jopa ärsyttää enemmän.",
+            "explanation": "Ruudun tuijottaminen \"laastarina\" ei koskaan todella paranna surua. Se vain siirtää ongelmaa eteenpäin ja usein laitteen sulkemisen jälkeen olo on entistä kiukkuisempi ja raskaampi!"
           },
           {
             "id": "aivoterveys_5_q11",
@@ -5831,7 +5831,7 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Miten aivosi ja kehosi usein kertovat sinulle, että olet yrittänyt piilottaa jotain pahaa mieltä liiallisen ruutuajan taakse?",
             "options": [
-              "Alat heti haukotella, ja silmäsi tuntuvat pelkästään raskailta.",
+              "Alat heti haukotella ja silmäsi tuntuvat pelkästään raskailta.",
               "Tunnet itsesi todella ärtyneeksi, levottomaksi tai huonotuuliseksi laitteen sulkemisen jälkeen.",
               "Alat yhtäkkiä kuulla auton radion soivan päässäsi itsekseen.",
               "Puhelimesi akku latautuu yllättäen vahingossa aivan täyteen itsestään."
@@ -6139,12 +6139,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Pelaat toimintapeliä, jonka ikäraja on K-16. Olet itse 10-vuotias. Peli saa sinut ahdistuneeksi. Miksi näitä \"aikuisten moottoritien\" pelejä pitäisi välttää?",
             "options": [
-              "Lapsen aivot ovat vasta kehittymässä, ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
+              "Lapsen aivot ovat vasta kehittymässä ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
               "Aikuiset haluavat vain säästää parhaat pelit itselleen.",
               "K-16 pelit rikkovat lasten tabletit fyysisesti.",
               "Lapsen sormet eivät taivu peliohjaimella tarpeeksi nopeasti."
             ],
-            "correctAnswer": "Lapsen aivot ovat vasta kehittymässä, ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
+            "correctAnswer": "Lapsen aivot ovat vasta kehittymässä ja liian jännittävät asiat voivat jäädä kummittelemaan painajaisina.",
             "explanation": "Ikärajat suojelevat kasvavia aivoja! Se mikä on aikuiselle viihdettä, voi ylikuormittaa lapsen aivot, koska ne eivät vielä osaa suodattaa pelottavia asioita oikein."
           },
           {
@@ -6228,13 +6228,13 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Mitä tapahtuu \"unihiekalle\", jos tuijotat kirkasta tablettia juuri ennen nukkumaanmenoa?",
             "options": [
-              "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä, ja unihormonin eritys estyy.",
+              "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä ja unihormonin eritys estyy.",
               "Ruudun valo tuo heti silmiin oikeaa hiekkaa.",
               "Laite lataa automaattisesti akkuaan aivojesi sähköstä.",
               "Unihiekka muuttuu digitaaliseksi koodiksi laitteen sisälle."
             ],
-            "correctAnswer": "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä, ja unihormonin eritys estyy.",
-            "explanation": "Laitteiden kirkas valo estää nukahtamishormonia (melatoniinia) toimimasta kunnolla. Siksi aivot pysyvät virkeinä, ja tärkeän yöhuollon aloittaminen myöhästyy."
+            "correctAnswer": "Ruudun sininen valo huijaa aivoja luulemaan, että on päivä ja unihormonin eritys estyy.",
+            "explanation": "Laitteiden kirkas valo estää nukahtamishormonia (melatoniinia) toimimasta kunnolla. Siksi aivot pysyvät virkeinä ja tärkeän yöhuollon aloittaminen myöhästyy."
           },
           {
             "id": "aivoterveys_7_q10",
@@ -6359,7 +6359,7 @@ export const categories = [
           {
             "id": "arjessa_1_q7",
             "type": "reverse_prompt",
-            "question": "Puhelimesi ääniavustaja vastaa sinulle kovaan ääneen: \"Ouluun on matkaa noin 150 kilometriä, ja matka kestää noin kaksi tuntia.\" Mikä oli sinun puhekomentosi (promptisi)?",
+            "question": "Puhelimesi ääniavustaja vastaa sinulle kovaan ääneen: \"Ouluun on matkaa noin 150 kilometriä ja matka kestää noin kaksi tuntia.\" Mikä oli sinun puhekomentosi (promptisi)?",
             "options": [
               "Hei tekoäly, laita Oulun radio päälle.",
               "Hei tekoäly, kuinka kauan kestää ajaa autolla Ouluun?",
@@ -6383,7 +6383,7 @@ export const categories = [
           {
             "id": "arjessa_1_q9",
             "type": "multiple_choice",
-            "question": "Olette ottamassa yhteiskuvaa AI vanin edessä illan pimeydessä, ja puhelimen tekoäly tekee kuvasta upean ja kirkkaan. Miten se onnistui siinä?",
+            "question": "Olette ottamassa yhteiskuvaa AI vanin edessä illan pimeydessä ja puhelimen tekoäly tekee kuvasta upean ja kirkkaan. Miten se onnistui siinä?",
             "options": [
               "Se on vain puhdasta taikuutta, joka asuu puhelimen linssissä.",
               "Tekoäly yhdisti nopeasti useita kuvia ja kirkasti niitä automaattisesti.",
@@ -6404,7 +6404,7 @@ export const categories = [
               "Otan kynän ja yritän kirjoittaa viestin tussilla puhelimen lasiin."
             ],
             "correctAnswer": "Käytän puhelimen sanelutoimintoa ja puhun viestin nopeasti ääneen.",
-            "explanation": "Puheentunnistus-tekoäly on loistava apuri! Voit puhua viestin, ja tekoäly muuttaa äänesi salamannopeasti valmiiksi kirjoitetuksi tekstiksi ruudulle."
+            "explanation": "Puheentunnistus-tekoäly on loistava apuri! Voit puhua viestin ja tekoäly muuttaa äänesi salamannopeasti valmiiksi kirjoitetuksi tekstiksi ruudulle."
           },
           {
             "id": "arjessa_1_q11",
@@ -6471,10 +6471,10 @@ export const categories = [
             "options": [
               "Etsit paksusta espanjan sanakirjasta sana kerrallaan kaikki kirjaimet.",
               "Arvaat kyltin tarkoituksen ihan itse vain katsomalla sitä pitkään.",
-              "Osoitat puhelimen kameralla kylttiä, ja käännös ilmestyy suoraan ruudulle.",
+              "Osoitat puhelimen kameralla kylttiä ja käännös ilmestyy suoraan ruudulle.",
               "Soitat puhelimella ystävälle, joka osaa puhua vähän espanjaa."
             ],
-            "correctAnswer": "Osoitat puhelimen kameralla kylttiä, ja käännös ilmestyy suoraan ruudulle.",
+            "correctAnswer": "Osoitat puhelimen kameralla kylttiä ja käännös ilmestyy suoraan ruudulle.",
             "explanation": "Nykyaikainen kääntäjäsovellus osaa lukea tekstiä suoraan videokuvasta ja vaihtaa sen kielen reaaliajassa näytölle. Se on yksi upeimmista tekoälyn ominaisuuksista arjessamme!"
           },
           {
@@ -6513,12 +6513,12 @@ export const categories = [
             "question": "Kun olette automatkalla ja katsot puhelimesta monta videota urheiluautoista, mitä videopalvelun tekoäly tekee taustalla?",
             "options": [
               "Se alkaa näyttää sinulle videoita leipomisesta ja kakuista.",
-              "Se oppii, että pidät autoista, ja ehdottaa niitä heti lisää.",
+              "Se oppii, että pidät autoista ja ehdottaa niitä heti lisää.",
               "Se sulkee puhelimen ja käskee sinun mennä heti nukkumaan.",
               "Se soittaa poliisille, koska katsot liikaa urheiluautoja."
             ],
-            "correctAnswer": "Se oppii, että pidät autoista, ja ehdottaa niitä heti lisää.",
-            "explanation": "Suosittelualgoritmi on kuin salapoliisi. Se huomaa toiminnastasi, mitä katsot mielelläsi, ja alkaa tarjota sinulle enemmän samanlaisia videoita pitääkseen sinut ruudun ääressä!"
+            "correctAnswer": "Se oppii, että pidät autoista ja ehdottaa niitä heti lisää.",
+            "explanation": "Suosittelualgoritmi on kuin salapoliisi. Se huomaa toiminnastasi, mitä katsot mielelläsi ja alkaa tarjota sinulle enemmän samanlaisia videoita pitääkseen sinut ruudun ääressä!"
           },
           {
             "id": "arjessa_2_q3",
@@ -6602,7 +6602,7 @@ export const categories = [
               "Olin laittanut puhelimen äänettömälle koko matkan ajaksi varmuuden vuoksi."
             ],
             "correctAnswer": "Olen katsonut koko pitkän matkan videoita autoista ja mekaanikoista.",
-            "explanation": "Tekoälyn algoritmi ei arvaa asioita tyhjästä! Se seuraa digitaalista \"historiaasi\" eli sitä, mitä olet viime aikoina katsellut, ja tarjoaa sen pohjalta uutta samankaltaista viihdettä."
+            "explanation": "Tekoälyn algoritmi ei arvaa asioita tyhjästä! Se seuraa digitaalista \"historiaasi\" eli sitä, mitä olet viime aikoina katsellut ja tarjoaa sen pohjalta uutta samankaltaista viihdettä."
           },
           {
             "id": "arjessa_2_q8",
@@ -6907,7 +6907,7 @@ export const categories = [
               "Tekoäly valitsee ohjesääntöjensä perusteella parhaan hyökkäystavan.": "3. vaihe",
               "Tekoälyhahmo aloittaa hyökkäysanimaation pelaajaa kohti.": "4. vaihe"
             },
-            "explanation": "Tekoälyllä on omat koodatut \"silmät ja korvat\". Ensin sen pitää havaita pelaaja matemaattisten koordinaattien avulla, sitten valita oikea toiminto sääntöjen listasta, ja lopuksi suorittaa animaatio!",
+            "explanation": "Tekoälyllä on omat koodatut \"silmät ja korvat\". Ensin sen pitää havaita pelaaja matemaattisten koordinaattien avulla, sitten valita oikea toiminto sääntöjen listasta ja lopuksi suorittaa animaatio!",
             "draggables": [
               "Pelaaja siirtyy tietämättään tekoälyvihollisen virtuaaliseen näkökenttään.",
               "Tekoälyn sensoriohjelma huomaa pelaajan sijainnin koordinaatit numerona.",
@@ -7168,7 +7168,7 @@ export const categories = [
               "Tavallinen imuri mahtuu piiloon kokonaan pieneen taskuusi."
             ],
             "correctAnswer": "Robotti-imuri tekee itsenäisiä päätöksiä reitistä tekoälyn avulla.",
-            "explanation": "Tavallinen imuri on vain moottori putken päässä, ja se vaatii täysin ihmisen aivoja ohjaukseen. Robotti-imuri hoitaa reitinhallinnan omien tekoälyaivojensa avulla!"
+            "explanation": "Tavallinen imuri on vain moottori putken päässä ja se vaatii täysin ihmisen aivoja ohjaukseen. Robotti-imuri hoitaa reitinhallinnan omien tekoälyaivojensa avulla!"
           },
           {
             "id": "arjessa_4_q14",
@@ -7177,11 +7177,11 @@ export const categories = [
             "options": [
               "Vesiletku, joka sumuttaa vettä aina, kun väännät kahvasta voimakkaasti.",
               "Älytermostaatti, joka oppii laskemaan lämpöä öisin teidän mentyä nukkumaan.",
-              "Sähkövatkain, jolla on kolme nopeaa mekaanista vaihdetta, ja joka toimii napista.",
+              "Sähkövatkain, jolla on kolme nopeaa mekaanista vaihdetta ja joka toimii napista.",
               "Vanha taskulaskin, joka muistaa aina sataprosenttisella tarkkuudella että 2+2=4."
             ],
             "correctAnswer": "Älytermostaatti, joka oppii laskemaan lämpöä öisin teidän mentyä nukkumaan.",
-            "explanation": "Koneoppiminen tarkoittaa sitä, että laite muuttuu viisaammaksi! Termostaatti huomaa viikkojen aikana, että olette unessa kello 22, ja alkaa itse laittaa säästöliekkiä päälle samaan aikaan energiansäästön vuoksi."
+            "explanation": "Koneoppiminen tarkoittaa sitä, että laite muuttuu viisaammaksi! Termostaatti huomaa viikkojen aikana, että olette unessa kello 22 ja alkaa itse laittaa säästöliekkiä päälle samaan aikaan energiansäästön vuoksi."
           },
           {
             "id": "arjessa_4_q15",
@@ -7231,12 +7231,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Olette lomamatkalla AI vanilla ulkomailla ja auto tarvitsee pientä korjausta. Isä yrittää puhua mekaanikolle, mutta kumpikaan ei ymmärrä toisen kieltä. Miten älypuhelin auttaa tilanteessa parhaiten?",
             "options": [
-              "Isä puhuu suomea puhelimeen, ja kaiutin toistaa asian vieraalla kielellä.",
+              "Isä puhuu suomea puhelimeen ja kaiutin toistaa asian vieraalla kielellä.",
               "Puhelin tulostaa pienen sanakirjan, josta isä etsii ja lukee sanoja hitaasti.",
               "Tekoäly opettaa isälle heti koko uuden kielen vain muutamassa hassussa minuutissa.",
               "Laitteen ohjelmisto komentaa mekaanikkoa opiskelemaan täydellistä ja sujuvaa suomea."
             ],
-            "correctAnswer": "Isä puhuu suomea puhelimeen, ja kaiutin toistaa asian vieraalla kielellä.",
+            "correctAnswer": "Isä puhuu suomea puhelimeen ja kaiutin toistaa asian vieraalla kielellä.",
             "explanation": "Nykyaikainen tekoäly osaa kuunnella puhetta, kääntää sen välittömästi toiselle kielelle ja jopa puhua sen heti ääneen! Se on kuin aito oikea tulkki taskussa."
           },
           {
@@ -7249,7 +7249,7 @@ export const categories = [
               "Kääntäjä etsii vieraille sanoille oikeat suomenkieliset vastineet.": "3. vaihe",
               "Käännetty suomenkielinen teksti ilmestyy puhelimesi ruudulle.": "4. vaihe"
             },
-            "explanation": "Kamerakäännös on huikea tekoälyn suoritus! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti.",
+            "explanation": "Kamerakäännös on huikea tekoälyn suoritus! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti.",
             "draggables": [
               "Osoitat puhelimen kameralla outoa ja vieraskielistä kylttiä.",
               "Tekoäly tunnistaa kirjaimet ja sanat suoraan kuvan pikseleistä.",
@@ -7375,14 +7375,14 @@ export const categories = [
             "correctAnswer": {
               "Avaat älykkään kielisovelluksen puhelimellasi ja aloitat harjoittelun.": "1. vaihe",
               "Sovellus kysyy sinulta kielen uusia sanoja ja lauseita pelillisten tehtävien avulla.": "2. vaihe",
-              "Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä.": "3. vaihe",
+              "Tekoäly huomaa ne asiat joissa teet paljon virheitä ja laittaa sinut kertaamaan juuri niitä.": "3. vaihe",
               "Opit uuden kielen tehokkaasti, koska tekoäly teki harjoittelusta täysin sinulle räätälöityä!": "4. vaihe"
             },
             "explanation": "Parhaat kielenoppimissovellukset käyttävät mukautuvaa koneoppimista. Tekoäly huomaa tarkasti, missä olet jo hyvä ja mitä sanoja sinun pitää vielä treenata paljon lisää!",
             "draggables": [
               "Avaat älykkään kielisovelluksen puhelimellasi ja aloitat harjoittelun.",
               "Sovellus kysyy sinulta kielen uusia sanoja ja lauseita pelillisten tehtävien avulla.",
-              "Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä.",
+              "Tekoäly huomaa ne asiat joissa teet paljon virheitä ja laittaa sinut kertaamaan juuri niitä.",
               "Opit uuden kielen tehokkaasti, koska tekoäly teki harjoittelusta täysin sinulle räätälöityä!"
             ],
             "dropZones": [
@@ -7535,7 +7535,7 @@ export const categories = [
           {
             "id": "arjessa_6_q7",
             "type": "reverse_prompt",
-            "question": "AI vanin robottiohjaus tekee seuraavan siirron: se vilkuttaa oikealle, hidastaa hieman vauhtia, odottaa että viereisellä kaistalla on tilaa, ja siirtyy pehmeästi toiselle kaistalle. Mikä oli tekoälyn saama tehtävä (prompti)?",
+            "question": "AI vanin robottiohjaus tekee seuraavan siirron: se vilkuttaa oikealle, hidastaa hieman vauhtia, odottaa että viereisellä kaistalla on tilaa ja siirtyy pehmeästi toiselle kaistalle. Mikä oli tekoälyn saama tehtävä (prompti)?",
             "options": [
               "Tee mahdollisimman nopea äkkijarrutus keskellä tyhjää tietä.",
               "Suorita turvallinen kaistanvaihto oikealle puolelle.",
@@ -7574,12 +7574,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: AI vanin navigaattorin ruudulla näkyy tiellä punainen pätkä, joka muuttuu yhtäkkiä vihreäksi juuri ennen kuin ehditte sinne. Mitä tiellä oikein tapahtui?",
             "options": [
-              "Tiellä ollut ruuhka tai hidastus purkautui, ja liikenne vetää taas normaalisti.",
+              "Tiellä ollut ruuhka tai hidastus purkautui ja liikenne vetää taas normaalisti.",
               "Tekoäly kyllästyi punaiseen väriin ja halusi kokeilla vihreää.",
               "Auto muuttui näkymättömäksi, jotta voitte lentää ruuhkan yli.",
               "Tekoäly yrittää tahallaan ohjata teidät suoraan kolariin."
             ],
-            "correctAnswer": "Tiellä ollut ruuhka tai hidastus purkautui, ja liikenne vetää taas normaalisti.",
+            "correctAnswer": "Tiellä ollut ruuhka tai hidastus purkautui ja liikenne vetää taas normaalisti.",
             "explanation": "Navigaattorit päivittävät tilannetta \"livenä\" eli aivan reaaliajassa. Kun edellä ajavat autot pääsevät taas vauhtiin, tekoäly poistaa punaisen ruuhkavaroituksen näytöltä!"
           },
           {
@@ -7664,7 +7664,7 @@ export const categories = [
               "Tekoäly näki esteen omilla fyysisillä silmillään suoraan auton katolta käsin."
             ],
             "correctAnswer": "Toinen tiellä ajava autokuski ilmoitti sovelluksella esteestä tiellä minuuttia aiemmin.",
-            "explanation": "Yhteistyö on voimaa! Monissa navigointisovelluksissa ihmiset voivat itse napin painalluksella ilmoittaa tiellä olevista vaaroista, ja tekoäly jakaa tämän tiedon välittömästi muille takana tuleville kuskeille."
+            "explanation": "Yhteistyö on voimaa! Monissa navigointisovelluksissa ihmiset voivat itse napin painalluksella ilmoittaa tiellä olevista vaaroista ja tekoäly jakaa tämän tiedon välittömästi muille takana tuleville kuskeille."
           }
         ]
       },
@@ -7809,12 +7809,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Haluat lähettää pitkän viestin kaverille tärisevän AI vanin takapenkiltä, mutta et osu oikeisiin kirjaimiin ruudulla. Miten tekoäly auttaa?",
             "options": [
-              "Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
+              "Käytät saneluohjelmaa ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
               "Tekoäly pysäyttää auton välittömästi kokonaan.",
               "Tekoäly tulostaa paperisen kirjeen, jonka lähetät postissa.",
               "Puhelin lukitsee näyttönsä tunniksi, jotta et häiritse kuskia."
             ],
-            "correctAnswer": "Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
+            "correctAnswer": "Käytät saneluohjelmaa ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
             "explanation": "Puhelimen ääniavustajat ja saneluohjelmat osaavat muuttaa äänen koodin kautta kirjoitetuksi tekstiksi. Se on upea arjen apuri, kun kädet ovat varatut tai auton kyyti on pomppuista!"
           }
         ]
@@ -7864,7 +7864,7 @@ export const categories = [
               "Auton akku loppui juuri täsmälleen samalla sekunnilla kokonaan."
             ],
             "correctAnswer": "Tekoälyä ei ole opetettu tunnistamaan pyörätuolissa olevia ihmisiä kuvista.",
-            "explanation": "Jos tekoälyä opetetaan vain seisovien ihmisten kuvilla, se ei osaa tunnistaa pyörätuolissa olevaa ihmistä kunnolla. Tämä on epäreilua, ja siksi opetusdatan pitää aina olla monipuolista!"
+            "explanation": "Jos tekoälyä opetetaan vain seisovien ihmisten kuvilla, se ei osaa tunnistaa pyörätuolissa olevaa ihmistä kunnolla. Tämä on epäreilua ja siksi opetusdatan pitää aina olla monipuolista!"
           },
           {
             "id": "reilu_peli_1_q4",
@@ -7927,7 +7927,7 @@ export const categories = [
           {
             "id": "reilu_peli_1_q7",
             "type": "reverse_prompt",
-            "question": "Koodasit AI vanille uuden ominaisuuden, ja se alkoi yhtäkkiä lukea kojelaudan kaikkia pikkutekstejä ääneen todella selkeästi ja kovaa. Mikä sääntö (prompti) annettiin laitteelle?",
+            "question": "Koodasit AI vanille uuden ominaisuuden ja se alkoi yhtäkkiä lukea kojelaudan kaikkia pikkutekstejä ääneen todella selkeästi ja kovaa. Mikä sääntö (prompti) annettiin laitteelle?",
             "options": [
               "Pidä huoli, että laitteen näyttö sammuu automaattisesti aina kello kahdeksan illalla.",
               "Suunnittele peli, jossa pitää lukea ruudulta todella paljon hyvin pientä tekstiä.",
@@ -8043,7 +8043,7 @@ export const categories = [
               "'Pahoittelut tapahtuneesta, meidän testiryhmässämme taisi olla vähän liian samanlaisia ihmisiä.'"
             ],
             "correctAnswer": "'Se on vain fiksun koneen oma päätös, emmekä me ihmiset voi laitteen päätöksille yhtään mitään.'",
-            "explanation": "Tämä on todella huono ja epäeettinen selitys! Kone ei tee ikinä omia itsenäisiä ja \"tietoisia\" päätöksiä. Ihmiset ohjelmoivat sen säännöt, ja ihmiset voivat myös aivan aina korjata tekoälyn tekemät epäreilut virheet."
+            "explanation": "Tämä on todella huono ja epäeettinen selitys! Kone ei tee ikinä omia itsenäisiä ja \"tietoisia\" päätöksiä. Ihmiset ohjelmoivat sen säännöt ja ihmiset voivat myös aivan aina korjata tekoälyn tekemät epäreilut virheet."
           },
           {
             "id": "reilu_peli_1_q15",
@@ -8086,7 +8086,7 @@ export const categories = [
               "Että ope on vastuussa sinun läksyistäsi."
             ],
             "correctAnswer": "Että teoista on otettava vastuu ja tekoälyn käytöstä kerrotaan avoimesti.",
-            "explanation": "Kun käytät tekoälyä, sinä olet yhä kuski. Jos palautat väärää tietoa, se on sinun vastuullasi, ja siksi tekoälyn käytöstä kerrotaan avoimesti!"
+            "explanation": "Kun käytät tekoälyä, sinä olet yhä kuski. Jos palautat väärää tietoa, se on sinun vastuullasi ja siksi tekoälyn käytöstä kerrotaan avoimesti!"
           },
           {
             "id": "reilu_peli_2_q3",
@@ -8099,7 +8099,7 @@ export const categories = [
               "Väitän, että isoveljeni teki läksyn puolestani."
             ],
             "correctAnswer": "Myönnän rehellisesti, että käytin tekoälyä ja otan vastuun virheestä.",
-            "explanation": "Kuski ottaa aina vastuun! Tekoälyn tekemiä läksyjä ei huijata omiksi, ja teoista on otettava oma vastuu."
+            "explanation": "Kuski ottaa aina vastuun! Tekoälyn tekemiä läksyjä ei huijata omiksi ja teoista on otettava oma vastuu."
           },
           {
             "id": "reilu_peli_2_q4",
@@ -8163,7 +8163,7 @@ export const categories = [
           {
             "id": "reilu_peli_2_q7",
             "type": "reverse_prompt",
-            "question": "Opettaja kehuu sinua: \"Tämä oli upeasti ideoitu, ja oli reilua, että kerroit hakeneesi vain inspiraatiota tähän tekoälyltä!\" Mikä prompti (kehotus) tuotti tämän reilun avun?",
+            "question": "Opettaja kehuu sinua: \"Tämä oli upeasti ideoitu ja oli reilua, että kerroit hakeneesi vain inspiraatiota tähän tekoälyltä!\" Mikä prompti (kehotus) tuotti tämän reilun avun?",
             "options": [
               "Kirjoita koko 500 sanan tarina nopeista autoista valmiiksi.",
               "Anna minulle 3 hauskaa ideaa tarinaan, jossa seikkailee AI van.",
@@ -8563,7 +8563,7 @@ export const categories = [
           {
             "id": "reilu_peli_4_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Olette AI vanin takapenkillä, ja kaverisi näyttää tekoälyllä tekemäänsä kuvaa. Kuvassa toinen luokkakaverinne on laitettu todella noloon tilanteeseen. Mitä teet fiksuna matkustajana?",
+            "question": "SKENAARIO: Olette AI vanin takapenkillä ja kaverisi näyttää tekoälyllä tekemäänsä kuvaa. Kuvassa toinen luokkakaverinne on laitettu todella noloon tilanteeseen. Mitä teet fiksuna matkustajana?",
             "options": [
               "Nauran mukana, koska se on vain tekoälyn tekemä hupsu piirustus.",
               "Jaan kuvan heti eteenpäin kaikille muille kavereilleni viestillä.",
@@ -8921,7 +8921,7 @@ export const categories = [
           {
             "id": "reilu_peli_5_q11",
             "type": "drag_drop",
-            "question": "Millaisiin asioihin \"peltinen apukuski\" (kone) oikein sopii, ja milloin taas tarvitaan ehdottomasti oikeita ihmisiä (ystäviä)? Raahaa vaihtoehdot paikoilleen!",
+            "question": "Millaisiin asioihin \"peltinen apukuski\" (kone) oikein sopii ja milloin taas tarvitaan ehdottomasti oikeita ihmisiä (ystäviä)? Raahaa vaihtoehdot paikoilleen!",
             "draggables": [
               "Tarkkojen sää- tai pitkien reittitietojen etsimiseen",
               "Vitseille ja hauskalle tietovisailulle matkan aikana",
@@ -9108,7 +9108,7 @@ export const categories = [
           {
             "id": "reilu_peli_6_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa sinulle vastauksen: \"Hei! Auton akku kannattaa ladata öisin, jolloin sähkö on usein vihreämpää ja tuulista, ja renkaiden ilmanpaineet kannattaa pitää oikeina sähkön säästämiseksi.\" Mikä prompti tuotti tämän luontoystävällisen tuloksen?",
+            "question": "Tekoäly antaa sinulle vastauksen: \"Hei! Auton akku kannattaa ladata öisin, jolloin sähkö on usein vihreämpää ja tuulista ja renkaiden ilmanpaineet kannattaa pitää oikeina sähkön säästämiseksi.\" Mikä prompti tuotti tämän luontoystävällisen tuloksen?",
             "options": [
               "Kerro, miten voin käyttää autoa kuluttaen mahdollisimman paljon kallista sähköä nopeasti.",
               "Anna minulle fiksuja vinkkejä siihen, kuinka säästän luontoa ja energiaa autoillessa.",
@@ -9377,7 +9377,7 @@ export const categories = [
           {
             "id": "reilu_peli_7_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Pyydät tekoälyä piirtämään kuvan ammatista \"lääkäri\", ja se piirtää jatkuvasti vain harmaahiuksisia miehiä. Ymmärrät, että sen opetusdata oli yksipuolista. Miten korjaat tilanteen fiksulla promptilla tasa-arvon nimissä?",
+            "question": "SKENAARIO: Pyydät tekoälyä piirtämään kuvan ammatista \"lääkäri\" ja se piirtää jatkuvasti vain harmaahiuksisia miehiä. Ymmärrät, että sen opetusdata oli yksipuolista. Miten korjaat tilanteen fiksulla promptilla tasa-arvon nimissä?",
             "options": [
               "Käsket tekoälyä lopettamaan lääkärien piirtämisen ja pyydät sitä luomaan paljon kuvia ainoastaan urheiluautoista.",
               "Pyydät tekoälyä varmistamaan, että piirrosten sisältö edustaa oikeaa monimuotoisuutta, kuten myös naislääkäreitä.",
@@ -9402,7 +9402,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q1",
             "type": "true_false",
-            "question": "Tekoäly on niin viisas, että sille riittää ohjeeksi vain yksi sana (esim. \"auto\"), ja se keksii aivan aina täydellisen tarinan juuri siitä, mitä salaa ajattelit.",
+            "question": "Tekoäly on niin viisas, että sille riittää ohjeeksi vain yksi sana (esim. \"auto\") ja se keksii aivan aina täydellisen tarinan juuri siitä, mitä salaa ajattelit.",
             "options": [
               "Oikein",
               "Väärin"
@@ -9737,11 +9737,11 @@ export const categories = [
             "question": "Tekoäly vastaa sinulle: \"Koirien hajuaisti on todella tarkka. Tämä tieto löytyy useiden biologiaa käsittelevien yliopistojen virallisista tutkimuksista.\" Millä fiksulla promptilla sait sen kertomaan tämän?",
             "options": [
               "Kerro minulle nopeasti jokin täysin keksitty valhe ja fakta koirista.",
-              "Kerro miten hyvä koiran hajuaisti on, ja mainitse luotettava lähde tiedolle.",
+              "Kerro miten hyvä koiran hajuaisti on ja mainitse luotettava lähde tiedolle.",
               "Piirrä minulle outo koira, jolla on iso yliopiston hattu päässään.",
               "Keksi joku hauska vitsi koirista ja niiden valtavan isosta nenästä."
             ],
-            "correctAnswer": "Kerro miten hyvä koiran hajuaisti on, ja mainitse luotettava lähde tiedolle.",
+            "correctAnswer": "Kerro miten hyvä koiran hajuaisti on ja mainitse luotettava lähde tiedolle.",
             "explanation": "Fiksut \"kuskit\" vaativat tekoälyltä aina lähteitä! Kun pyydät tekoälyä kertomaan, MISTÄ se tiedon haki, sinun on paljon helpompi mennä myöhemmin tarkistamaan se itse."
           },
           {
@@ -9775,7 +9775,7 @@ export const categories = [
             "options": [
               "Tekoälyä, koska se on modernimpi ja uudempi laite kuin isä.",
               "Isää, koska hän on oikea ja luotettava ihminen, jolla on kokemusta ovesta.",
-              "Ovea, ja koittaa vain puhua sille todella kauniisti koko iltapäivän.",
+              "Ovea ja koittaa vain puhua sille todella kauniisti koko iltapäivän.",
               "Ei kumpaakaan, ovi on varmaan mennyt pysyvästi rikki eikä aukea koskaan."
             ],
             "correctAnswer": "Isää, koska hän on oikea ja luotettava ihminen, jolla on kokemusta ovesta.",
@@ -9988,7 +9988,7 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Keskusteleva tekoäly muistaa samassa ketjussa aiemmin puhutut asiat! Voit vain sanoa sille \"Lyhennä tuota äskeistä tekstiä\", ja se tietää heti tarkalleen, mihin viittaat."
+            "explanation": "Keskusteleva tekoäly muistaa samassa ketjussa aiemmin puhutut asiat! Voit vain sanoa sille \"Lyhennä tuota äskeistä tekstiä\" ja se tietää heti tarkalleen, mihin viittaat."
           },
           {
             "id": "kayttotaidot_3_q9",
@@ -10090,7 +10090,7 @@ export const categories = [
           {
             "id": "kayttotaidot_3_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin ruudulla ollut sekava taulukko pyyhkiytyy pois, ja tekoäly kirjoittaa sen tilalle: \"Tässä yksinkertaisemmin: auto koostuu korista, moottorista ja renkaista.\" Mikä oli sinun korjausliikkeesi (promptisi)?",
+            "question": "AI vanin ruudulla ollut sekava taulukko pyyhkiytyy pois ja tekoäly kirjoittaa sen tilalle: \"Tässä yksinkertaisemmin: auto koostuu korista, moottorista ja renkaista.\" Mikä oli sinun korjausliikkeesi (promptisi)?",
             "options": [
               "Piirrä minulle yksityiskohtainen kuva isosta urheiluautosta sivulta päin.",
               "Tuo edellinen taulukko oli liian sekava, tiivistä sen pääasiat yhdellä helpolla lauseella.",
@@ -10200,7 +10200,7 @@ export const categories = [
               "'Pyydä tekoälyä arvioimaan omaa ideaasi ja kertomaan siihen parannusehdotuksia.'"
             ],
             "correctAnswer": "'Ota tekoälyn ensimmäinen idea aina suoraan käyttöön, äläkä ikinä muuta sitä.'",
-            "explanation": "Luovuus on vapaata leikkiä! Ensimmäinen idea on harvoin se paras, ja tekoälyn ideoita pitää nimenomaan rikkoa, muuttaa ja muokata omannäköisiksi."
+            "explanation": "Luovuus on vapaata leikkiä! Ensimmäinen idea on harvoin se paras ja tekoälyn ideoita pitää nimenomaan rikkoa, muuttaa ja muokata omannäköisiksi."
           },
           {
             "id": "kayttotaidot_4_q7",
@@ -10245,11 +10245,11 @@ export const categories = [
             "question": "SKENAARIO: Suunnittelette luokan kanssa uutta teatteriesitystä, mutta jännittävä loppuratkaisu puuttuu. Miten tekoäly voi pelastaa teatteriesityksen aivoriihen?",
             "options": [
               "Se voi mennä lavalle näyttelemään esityksen teidän puolestanne täysin yksin.",
-              "Syötätte sille tarinan alun, ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
+              "Syötätte sille tarinan alun ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
               "Se voi sammuttaa luokan valot ja kertoa kaikkien nukkumaan menosta.",
               "Se voi tulostaa internetistä aivan toisen, jo olemassa olevan näytelmän kopion teille."
             ],
-            "correctAnswer": "Syötätte sille tarinan alun, ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
+            "correctAnswer": "Syötätte sille tarinan alun ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
             "explanation": "Tekoäly voi jatkaa siitä, mihin ihmisen mielikuvitus loppuu! Kun annatte sille alkutiedot, se voi antaa uusia näkökulmia ja yllättäviä vaihtoehtoja aivoriihen avuksi."
           },
           {
@@ -10477,7 +10477,7 @@ export const categories = [
           {
             "id": "kayttotaidot_5_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat lähettää isoäidille syntymäpäiväonnittelut englanniksi, ja lisäksi haluat, että viesti lausutaan hänelle ääneen kuin oikean ihmisen puhe. Mitä digityökaluja yhdistelet fiksusti?",
+            "question": "SKENAARIO: Haluat lähettää isoäidille syntymäpäiväonnittelut englanniksi ja lisäksi haluat, että viesti lausutaan hänelle ääneen kuin oikean ihmisen puhe. Mitä digityökaluja yhdistelet fiksusti?",
             "options": [
               "Käytän ensin kääntäjää viestin kääntämiseen ja sitten puhesynteesiä (lukijaa) äänen lukemiseen.",
               "Käytän kuvageneraattoria ja pyydän sitä maalaamaan kuvan, joka pitää kovasti ääntä.",
@@ -10485,7 +10485,7 @@ export const categories = [
               "Kirjoitan viestin suomeksi ja työnnän puhelimen mikrofonin suoraan laatikkoon."
             ],
             "correctAnswer": "Käytän ensin kääntäjää viestin kääntämiseen ja sitten puhesynteesiä (lukijaa) äänen lukemiseen.",
-            "explanation": "Yhdistelemällä ohjelmia olet superkuski! Yksi työkalu hoitaa tekstin ymmärtämisen ja kääntämisen, ja toinen (text-to-speech eli puhesynteesi) hoitaa sen muuttamisen aidon kuuloiseksi ääneksi."
+            "explanation": "Yhdistelemällä ohjelmia olet superkuski! Yksi työkalu hoitaa tekstin ymmärtämisen ja kääntämisen ja toinen (text-to-speech eli puhesynteesi) hoitaa sen muuttamisen aidon kuuloiseksi ääneksi."
           },
           {
             "id": "kayttotaidot_5_q11",
@@ -10624,7 +10624,7 @@ export const categories = [
               "Syötä teksti tekoälylle ja paina 'Lähetä'.": "3. vaihe",
               "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta.": "4. vaihe"
             },
-            "explanation": "Aina pitää ensin antaa tekoälylle materiaali (teksti), ja heti perään selkeä ohje siitä, miten haluat sen \"pakattavan\"!",
+            "explanation": "Aina pitää ensin antaa tekoälylle materiaali (teksti) ja heti perään selkeä ohje siitä, miten haluat sen \"pakattavan\"!",
             "draggables": [
               "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.",
               "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'",
@@ -10910,7 +10910,7 @@ export const categories = [
           {
             "id": "kayttotaidot_7_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly pahoittelee kiltisti ensimmäistä vastaustaan, ja kirjoittaa sen tilalle uuden listan: \"1. Korit 2. Moottori 3. Renkaat.\" Mikä oli tekemäsi \"ratinkääntö\" (korjausliike)?",
+            "question": "Tekoäly pahoittelee kiltisti ensimmäistä vastaustaan ja kirjoittaa sen tilalle uuden listan: \"1. Korit 2. Moottori 3. Renkaat.\" Mikä oli tekemäsi \"ratinkääntö\" (korjausliike)?",
             "options": [
               "Tuo edellinen vastaus oli aivan liian sekava, tiivistä sen pääasiat yhdellä helpolla listalla.",
               "Kirjoita minulle kokonainen uusi ja paksu kirja auton renkaista.",
