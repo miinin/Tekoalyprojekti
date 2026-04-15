@@ -1119,6 +1119,14 @@ const Roadmap = () => {
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '25%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#d97706', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>UUSI MITALI!</h1>
                 <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                
+                <p style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
+                  {showWowMedal === 'bronze' && "Tiesitkö, että pelaamalla tason myöhemmin uudelleen voit saavuttaa uusia kysymyksiä ja nousta hopealle, kullalle tai jopa platinalle!"}
+                  {showWowMedal === 'silver' && "Hienoa työtä! Pelaamalla uudestaan voit saada uusia kysymyksiä, ja nousta vielä kultaan tai platinaan!"}
+                  {showWowMedal === 'gold' && "Upea suoritus! Enää hieman harjoitusta, niin saat kaikkiin vaihtuviinkin kysymyksiin oikean vastauksen ja ansaitset legendaarisen platinamitalin!"}
+                  {showWowMedal === 'platinum' && "Täydellistä! Olet nyt vastannut tämän tason KAIKKIIN vaihtuviin kysymyksiin onnistuneesti oikein!"}
+                </p>
+
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.5rem', padding: '1.5rem' }} onClick={() => setShowWowMedal(null)}>Upeaa, jatka matkaa!</button>
               </div>
             )}
