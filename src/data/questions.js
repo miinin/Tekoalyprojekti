@@ -8884,7 +8884,7 @@ export const categories = [
           {
             "id": "reilu_peli_5_q8",
             "type": "true_false",
-            "question": "On huomattavasti terveellisempää jutella omista salaisuuksista ja oikeista murheista vain tekoälylle, koska se ei vahingossakaan koskaan kerro niitä eteenpäin kenellekään.",
+            "question": "On huomattavasti terveellisempää jutella omista salaisuuksista ja oikeista murheista vain tekoälylle eikä kenellekään oikealle ihmiselle, koska kone ei koskaan kerro niitä eteenpäin kenellekään.",
             "options": [
               "Oikein",
               "Väärin"
