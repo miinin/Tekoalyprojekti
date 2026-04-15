@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, DownloadCloud } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
@@ -11,6 +11,22 @@ export default function Lobby() {
   const [testMode, setTestMode] = useState(store.getTestMode());
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
   const [showSettings, setShowSettings] = useState(false);
+  const [loadCode, setLoadCode] = useState('');
+  const [isRestoring, setIsRestoring] = useState(false);
+
+  const handleRestoreCloudSave = async (e) => {
+      e.preventDefault();
+      if (loadCode.length < 6) return;
+      setIsRestoring(true);
+      const success = await store.importProgressFromCloud(loadCode);
+      setIsRestoring(false);
+      if (success) {
+          alert('Peli ladattiin onnistuneesti rekisterikilvellä: ' + loadCode.toUpperCase());
+          navigate('/roadmap');
+      } else {
+          alert('Rekisterikilpeä ei löytynyt tai tilan lataus epäonnistui.');
+      }
+  };
 
   const handleNewSinglePlayer = async () => {
     store.clearSinglePlayer();
@@ -150,6 +166,30 @@ export default function Lobby() {
             <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#0ea5e9', borderColor: '#0ea5e9', color: store.hasProgress() ? '#0ea5e9' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(14, 165, 233, 0.4)' }}>
               {store.hasProgress() ? 'ALOITA ALUSTA' : 'UUSI SEIKKAILU'}
             </button>
+
+            <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #cbd5e1', marginTop: '0.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+                    <label style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Lataa peli rekisterikilvellä:</label>
+                    <button type="button" onClick={() => alert('Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!')} style={{ background: '#e2e8f0', color: '#64748b', width: '20px', height: '20px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', border: 'none', cursor: 'pointer' }}>i</button>
+                </div>
+                <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.5rem' }}>
+                     <input
+                        type="text"
+                        placeholder="ABC-123"
+                        value={loadCode}
+                        onChange={(e) => {
+                            let val = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+                            if (val.length === 3 && !val.includes('-') && loadCode.length < 3) val += '-';
+                            setLoadCode(val);
+                        }}
+                        maxLength={7}
+                        style={{ flexGrow: 1, padding: '0.8rem', borderRadius: '8px', border: '2px solid #e2e8f0', fontFamily: 'monospace', fontSize: '1.3rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '2px', fontWeight: 'bold', color: '#1e293b' }}
+                     />
+                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0ea5e9', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1 }}>
+                         {isRestoring ? '...' : <DownloadCloud size={24} />}
+                     </button>
+                </form>
+            </div>
 
 
           </div>

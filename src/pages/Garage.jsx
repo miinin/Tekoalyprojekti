@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Cloud } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -25,6 +25,34 @@ export default function Garage() {
   const [hoverCabinet, setHoverCabinet] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [clickPoints, setClickPoints] = useState([]);
+
+  const [saveCode, setSaveCode] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleCreateSave = async () => {
+      setIsSaving(true);
+      const code = await store.exportProgressToCloud();
+      setIsSaving(false);
+      if (code) {
+          setSaveCode(code);
+      } else {
+          alert('Tallennus epäonnistui! Tarkista nettiyhteys tai Firebase-asetukset.');
+      }
+  };
+
+  const [saveCode, setSaveCode] = useState(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleCreateSave = async () => {
+      setIsSaving(true);
+      const code = await store.exportProgressToCloud();
+      setIsSaving(false);
+      if (code) {
+          setSaveCode(code);
+      } else {
+          alert('Tallennus epäonnistui! Tarkista nettiyhteys tai Firebase-asetukset.');
+      }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -455,6 +483,15 @@ export default function Garage() {
           <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
+          {!isTutorialActive && (
+              <button 
+                onClick={handleCreateSave} 
+                disabled={isSaving}
+                className="btn-secondary" 
+                style={{ padding: '0.8rem 1.2rem', background: 'white', color: '#0f172a', borderColor: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 'bold' }}>
+                <Cloud size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
+              </button>
+          )}
           <button 
              className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
              onClick={() => navigate('/roadmap')}

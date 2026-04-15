@@ -1,4 +1,6 @@
 import { categories as defaultCategories } from '../data/questions';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 // A simple abstraction over local storage that simulates an async backend like Firebase
 export const store = {
@@ -236,6 +238,69 @@ export const store = {
     localStorage.removeItem('aivan_last_main');
     localStorage.removeItem('aivan_last_sub');
     store.setRoomCode(null);
+  },
+
+  // --- CLOUD SAVE SYSTEM ---
+  exportProgressToCloud: async () => {
+    try {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      const l1 = letters.charAt(Math.floor(Math.random() * letters.length));
+      const l2 = letters.charAt(Math.floor(Math.random() * letters.length));
+      const l3 = letters.charAt(Math.floor(Math.random() * letters.length));
+      const nums = Math.floor(100 + Math.random() * 900); // 100-999
+      const code = `${l1}${l2}${l3}-${nums}`;
+      
+      const payload = { timestamp: new Date().toISOString() };
+      
+      for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && key.startsWith('aivan_') && key !== 'aivan_room') {
+              payload[key] = localStorage.getItem(key);
+          }
+      }
+      
+      await setDoc(doc(db, "saves", code), payload);
+      return code;
+    } catch (err) {
+      console.error("Save error:", err);
+      return null;
+    }
+  },
+
+  importProgressFromCloud: async (code) => {
+    try {
+      if (!code || typeof code !== 'string') return false;
+      const upperCode = code.toUpperCase().trim();
+      const docRef = doc(db, "saves", upperCode);
+      const docSnap = await getDoc(docRef);
+      
+      if (docSnap.exists()) {
+          const data = docSnap.data();
+          // clear existing aivan_ keys EXCEPT room
+          const keysToRemove = [];
+          for (let i = 0; i < localStorage.length; i++) {
+              const key = localStorage.key(i);
+              if (key && key.startsWith('aivan_') && key !== 'aivan_room') {
+                  keysToRemove.push(key);
+              }
+          }
+          keysToRemove.forEach(k => localStorage.removeItem(k));
+          
+          // restore keys
+          Object.keys(data).forEach(k => {
+              if (k.startsWith('aivan_')) {
+                  localStorage.setItem(k, data[k]);
+              }
+          });
+          
+          return true;
+      } else {
+          return false;
+      }
+    } catch (err) {
+      console.error("Load error:", err);
+      return false;
+    }
   },
 
   // --- ADMIN METHODS ---
