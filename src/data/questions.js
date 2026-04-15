@@ -8509,12 +8509,12 @@ export const categories = [
             "type": "spot_the_ai",
             "question": "Etsi joukosta sellainen tavoite (prompti), joka on selvä yritys tehdä \"luvaton varaosakopio\" toisen omaisuudesta!",
             "options": [
-              "'Tee minulle tekoälyllä hieno kuva iloisesta avaruusoliosta, joka ajaa vihreää pientä autoa.'",
-              "'Auta minua keksimään uusia, hauskoja riimejä runoon, joka kertoo autotallista.'",
-              "'Luo uusi kirja, jossa on täsmälleen sama tarina ja kaikki samat hahmot kuin Harry Potterissa.'",
-              "'Keksi hyvä ja aivan uusi nimi minun omalle keksimälleni tarinalle laivasta.'"
+              "'Tee minulle tekoälyllä täysin uudenlainen kuva iloisesta avaruusoliosta, joka ajaa kilpa-autoa.'",
+              "'Auta minua heti keksimään uusia tai yllättäviä riimejä runoon, joka kertoo meidän autotallista.'",
+              "'Luo minulle uusi kirja, jossa on täsmälleen sama tarina ja samat hahmot kuin Harry Potterissa.'",
+              "'Keksi todella laadukas, myyvä ja mieleenpainuva uusi nimi minun omalle keksimälleni tarinalle.'"
             ],
-            "correctAnswer": "'Luo uusi kirja, jossa on täsmälleen sama tarina ja kaikki samat hahmot kuin Harry Potterissa.'",
+            "correctAnswer": "'Luo minulle uusi kirja, jossa on täsmälleen sama tarina ja samat hahmot kuin Harry Potterissa.'",
             "explanation": "Kuuluisat kirjat, hahmot ja tarinat on suojattu erittäin tarkasti lailla. Niiden vieminen ja kopioiminen toiseen uuteen kirjaan on varastamista."
           },
           {
@@ -8523,9 +8523,9 @@ export const categories = [
             "question": "Koodari syöttää uuden ohjeen tekoälyn järjestelmään ja ruudulla lukee: \"Opetusdatasta on nyt siivottu pois kaikki ne kuvat, joiden taiteilijat kielsivät niiden käytön.\" Mikä oli komennon reilu tavoite?",
             "options": [
               "Varmistaa, että tekoäly toimii reilusti ja noudattaa tekijänoikeuksia jättämällä suojatut työt rauhaan.",
-              "Pakottaa tekoäly toimimaan paljon hitaammin ja ärsyttämään kaikkia käyttäjiä.",
-              "Kiusata lapsia, jotka haluavat katsoa vain ilmaisia kuvia tietokoneelta.",
-              "Tyhjentää tietokoneen iso kiintolevy vain siksi, että sinne mahtuu enemmän pelejä."
+              "Pakottaa ohjelman koodi toimimaan jatkossa selvästi hitaammin ja ärsyttämään siten kaikkia käyttäjiä.",
+              "Kiusata tahallaan kaikkia ihmisiä, jotka haluaisivat ladata internetistä ilmaisia viihdyttäviä kuvia.",
+              "Tyhjentää koko laitteen iso kiintolevy täysin vain siksi, että uudemmille videopeleille jäisi enemmän tilaa."
             ],
             "correctAnswer": "Varmistaa, että tekoäly toimii reilusti ja noudattaa tekijänoikeuksia jättämällä suojatut työt rauhaan.",
             "explanation": "Nykyaikana yhä useammat fiksut ohjelmistoyritykset pyrkivät rakentamaan koneensa reilusti! Ne antavat taiteilijoille mahdollisuuden kieltää omien töidensä joutuminen tekoälyn \"varaosiksi\"."
