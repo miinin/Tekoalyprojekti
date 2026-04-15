@@ -7466,18 +7466,18 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Olette matkalla huvipuistoon AI vanilla. Yhtäkkiä navigaattori käskee teitä kääntymään pois isolta moottoritieltä ja ajamaan pientä mutkaista hiekkatietä pitkin. Miksi tekoäly-apukuski tekee näin?",
             "options": [
-              "Se haluaa vain näyttää teille kauniita lehmiä hiekkatien varrella.",
-              "Se meni täysin rikki ja arpoo suuntia aivan sattumanvaraisesti.",
-              "Se on huomannut moottoritiellä onnettomuudesta johtuvan ruuhkan ja laski kiertotien olevan nopeampi.",
-              "Se yrittää pakottaa teidät ajamaan takaisin kotiin autotalliin."
+              "Se haluaa pelkästään näyttää teille nätin hiekkatien varrella laiduntavat lehmät.",
+              "Se meni ehkä täysin rikki ja nyt arpoo ajosuuntia aivan tuurilla ja sattumanvaraisesti.",
+              "Se on huomannut päätielletapahtuneen onnettomuuden ja laski kiertotien olevan nopeampi.",
+              "Se yrittää pakottaa teidät ajamaan huvipuiston sijaan takaisin kotiin autotalliin."
             ],
-            "correctAnswer": "Se on huomannut moottoritiellä onnettomuudesta johtuvan ruuhkan ja laski kiertotien olevan nopeampi.",
+            "correctAnswer": "Se on huomannut päätielletapahtuneen onnettomuuden ja laski kiertotien olevan nopeampi.",
             "explanation": "Tekoälyn supervoima on matematiikka! Se laskee jatkuvasti eri reittien aikoja. Jos isolla tiellä on ruuhkaa, tekoäly löytää salamannopeasti kiertotien, jotta pääsette nopeammin perille."
           },
           {
             "id": "arjessa_6_q4",
             "type": "drag_drop",
-            "question": "Järjestä askeleet aikajärjestykseen! Miten navigaattori oppii, että moottoritiellä on ruuhka, ja varoittaa sinua?",
+            "question": "Järjestä askeleet aikajärjestykseen! Miten navigaattori oppii, että moottoritiellä on ruuhka ja varoittaa sinua?",
             "correctAnswer": {
               "Sata ihmistä ajaa samalla moottoritiellä navigaattorit päällä.": "1. vaihe",
               "Autojono joutuu yllättäen hidastamaan vauhtia kolarin takia.": "2. vaihe",
@@ -7645,12 +7645,12 @@ export const categories = [
             "type": "spot_the_ai",
             "question": "Kuka näistä oikeista autonkuljettajista tekee todella vaarallisen virheen käyttäessään \"apukuski\" tekoälyä?",
             "options": [
-              "Kuski, joka pitää aina katseen oikeassa tiessä navigaattorin lisäksi.",
-              "Kuski, joka luottaa sokeasti navigaattoriin ja yrittää ajaa suoraan järveen, jos kone niin käskee.",
-              "Kuski, joka kytkee navigaattorin päälle jo autotallissa ennen matkaa.",
-              "Kuski, joka pysähtyy kahville tekoälyn varoittaessa kolmen tunnin ruuhkasta."
+              "Kuski, joka pitää aina oman maalaisjärkensä mukana ja katseen tiessä.",
+              "Kuski, joka luottaa koneeseen sokeasti ja ajaa umpikujiin tai suoraan järveen.",
+              "Kuski, joka asettaa navigaattorin reitin turvallisesti ajoissa autotallissa.",
+              "Kuski, joka pitää ajoissa tauon tekoälyn varoittaessa kolmen tunnin ruuhkasta."
             ],
-            "correctAnswer": "Kuski, joka luottaa sokeasti navigaattoriin ja yrittää ajaa suoraan järveen, jos kone niin käskee.",
+            "correctAnswer": "Kuski, joka luottaa koneeseen sokeasti ja ajaa umpikujiin tai suoraan järveen.",
             "explanation": "Tekoäly voi joskus olla väärässä! Siksi oikean ihmisen täytyy aina käyttää maalaisjärkeä ja omia silmiään, eikä ajaa järveen tai umpimetsään vain laitteen käskystä."
           },
           {
@@ -7815,7 +7815,7 @@ export const categories = [
               "Puhelin lukitsee näyttönsä tunniksi, jotta et häiritse kuskia."
             ],
             "correctAnswer": "Käytät saneluohjelmaa, ja tekoäly muuttaa puhumasi äänen välittömästi tekstiksi.",
-            "explanation": "Puhelimen ääniavustajat ja saneluohjelmat osaavat muuttaa äänen koodin kautta kirjoitetuksi tekstiksi. Se on upea arjen apuri, kun kädet ovat varatut tai auton kyyti on pomppuista! ________________"
+            "explanation": "Puhelimen ääniavustajat ja saneluohjelmat osaavat muuttaa äänen koodin kautta kirjoitetuksi tekstiksi. Se on upea arjen apuri, kun kädet ovat varatut tai auton kyyti on pomppuista!"
           }
         ]
       }
