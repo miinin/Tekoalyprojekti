@@ -8086,7 +8086,7 @@ export const categories = [
               "Että ope on vastuussa sinun läksyistäsi."
             ],
             "correctAnswer": "Että teoista on otettava vastuu ja tekoälyn käytöstä kerrotaan avoimesti.",
-            "explanation": "Kun käytät tekoälyä, sinä olet yhä kuski. Jos palautat väärää tietoa, se on sinun vastuullasi, ja siksi AI:n käytöstä kerrotaan avoimesti!"
+            "explanation": "Kun käytät tekoälyä, sinä olet yhä kuski. Jos palautat väärää tietoa, se on sinun vastuullasi, ja siksi tekoälyn käytöstä kerrotaan avoimesti!"
           },
           {
             "id": "reilu_peli_2_q3",
@@ -8094,11 +8094,11 @@ export const categories = [
             "question": "SKENAARIO: Pyysit tekoälyä laskemaan vaikean matikan läksyn puolestasi. Opettaja huomaa, että vastaus on aivan väärin ja kysyy asiasta. Mitä teet, jotta olet reilu \"kuski\"?",
             "options": [
               "Syytän välittömästi tekoälyä ja sanon, että se on tyhmä kone.",
-              "Myönnän rehellisesti, että käytin AI:ta ja otan vastuun virheestä.",
+              "Myönnän rehellisesti, että käytin tekoälyä ja otan vastuun virheestä.",
               "Piiloudun pulpetin alle enkä vastaa opettajalle.",
               "Väitän, että isoveljeni teki läksyn puolestani."
             ],
-            "correctAnswer": "Myönnän rehellisesti, että käytin AI:ta ja otan vastuun virheestä.",
+            "correctAnswer": "Myönnän rehellisesti, että käytin tekoälyä ja otan vastuun virheestä.",
             "explanation": "Kuski ottaa aina vastuun! Tekoälyn tekemiä läksyjä ei huijata omiksi, ja teoista on otettava oma vastuu."
           },
           {
@@ -8182,7 +8182,7 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "AI:n käytöstä kertominen avoimesti on juuri se asia, mitä reilussa pelissä pitääkin tehdä! Fiksu opettaja arvostaa rehellisyyttä ja avoimuutta."
+            "explanation": "Tekoälyn käytöstä kertominen avoimesti on juuri se asia, mitä reilussa pelissä pitääkin tehdä! Fiksu opettaja arvostaa rehellisyyttä ja avoimuutta."
           },
           {
             "id": "reilu_peli_2_q9",
