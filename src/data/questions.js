@@ -7966,12 +7966,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: AI vanin uusi hieno autopeli vaatii, että sormea liu'utetaan ruudulla todella nopeasti oikealta vasemmalle. Vasenkätiselle kaverillesi tämä kyseinen liike on erittäin vaikea ja hän häviää pelin aina. Mitä pelin koodari unohti tehdä?",
             "options": [
-              "Hän unohti vahingossa laittaa peliin ne kaikkein hienoimmat ja kalleimmat urheiluautot.",
-              "Hän unohti suunnitella pelin niin, että se on mahdollinen pelata reilusti myös vasenkätisille.",
-              "Hän unohti pestä autotallin ikkunat täysin puhtaiksi ennen koodaamisen aloittamista.",
-              "Hän unohti salaa ohjelmoida pelin niin, että sinun kaverisi voittaisi siinä ihan joka kerta."
+              "Hän unohti laittaa peliin ne kaikkein hienoimmat ja nopeimmat urheiluautot pelattavaksi.",
+              "Hän unohti ohjelmoida pelin ohjauksen niin, että se on yhtä reilu myös vasenkätisille.",
+              "Hän unohti kalibroida kännykän ruudun tarkalleen oikean lämpöiseksi ennen pelin alkua.",
+              "Hän unohti salaa rakentaa peliin fuskukoodin, jolla kaverisi voittaisi ihan joka kerta."
             ],
-            "correctAnswer": "Hän unohti suunnitella pelin niin, että se on mahdollinen pelata reilusti myös vasenkätisille.",
+            "correctAnswer": "Hän unohti ohjelmoida pelin ohjauksen niin, että se on yhtä reilu myös vasenkätisille.",
             "explanation": "Tasa-arvo ja saavutettavuus digimaailmassa tarkoittaa myös sitä, että laitteet ja pelit on mietitty niin, että ne sopivat reilusti sekä oikea- että vasenkätisille pelaajille."
           },
           {
@@ -8024,12 +8024,12 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Aikuisten maailmassa ja teknologian parissa puhutaan usein hienosta sanasta nimeltä \"saavutettavuus\". Mitä se oikeastaan tarkoittaa tekoälyn ja pelien kohdalla?",
             "options": [
-              "Sitä, että auto kulkee mahdollisimman lujaa moottoritiellä ylinopeutta.",
-              "Sitä, että nettisivu, peli tai laite on aidosti helppo ja mahdollinen käyttää aivan kaikille.",
-              "Sitä, että saavutat autolla nopeasti maailmanennätyksen todella pitkällä ajomatkalla.",
-              "Sitä, että kaikki maailman markkinoilla olevat tietokoneet pitää maalata samanvärisiksi."
+              "Sitä, että laitteen tai nettisivun teho saavuttaa virtuaalimaksiminsa täysin ilman viivettä.",
+              "Sitä, että ohjelma, laite tai nettisivu on rakennettu varmasti ihan yhtä helppokäyttöiseksi kaikille.",
+              "Sitä, että taitava videopelaaja kykenee laitteella saavuttamaan pelin huippuennätyksen pysyvästi.",
+              "Sitä, että tekoäly myöntää saavutuksia, tähtiä ja virtuaalimitaleita vain taitavimmille pelaajille."
             ],
-            "correctAnswer": "Sitä, että nettisivu, peli tai laite on aidosti helppo ja mahdollinen käyttää aivan kaikille.",
+            "correctAnswer": "Sitä, että ohjelma, laite tai nettisivu on rakennettu varmasti ihan yhtä helppokäyttöiseksi kaikille.",
             "explanation": "Saavutettavuus on juuri sitä, että teknologia ei jätä koskaan ketään kyydistä! Se on ovien avaamista ja sitä, että laitteet auttavat ihmisiä näön, kuulon tai iän haasteista huolimatta täydellisesti."
           },
           {
