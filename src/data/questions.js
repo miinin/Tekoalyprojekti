@@ -46,21 +46,27 @@ export const categories = [
           },
           {
             "id": "perusteet_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä, miten AI vanin tekoäly oikeasti syntyy ja toimii, ensimmäisestä askeleesta viimeiseen.",
-            "options": [
+            "correctAnswer": {
+              "Ihmiset keksivät hyvän idean": "1. vaihe",
+              "Koodarit kirjoittavat ohjelman": "2. vaihe",
+              "Tekoäly ladataan auton tietokoneeseen": "3. vaihe",
+              "Auto osaa etsiä reitit koodin avulla": "4. vaihe"
+            },
+            "explanation": "Koska tekoäly ei synny taikaiskusta, ihmisen täytyy ensin keksiä idea ja koodata se valmiiksi ohjelmaksi.",
+            "draggables": [
               "Ihmiset keksivät hyvän idean",
               "Koodarit kirjoittavat ohjelman",
               "Tekoäly ladataan auton tietokoneeseen",
               "Auto osaa etsiä reitit koodin avulla"
             ],
-            "correctAnswer": [
-              "Ihmiset keksivät hyvän idean",
-              "Koodarit kirjoittavat ohjelman",
-              "Tekoäly ladataan auton tietokoneeseen",
-              "Auto osaa etsiä reitit koodin avulla"
-            ],
-            "explanation": "Koska tekoäly ei synny taikaiskusta, ihmisen täytyy ensin keksiä idea ja koodata se valmiiksi ohjelmaksi."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "perusteet_1_q5",
@@ -172,19 +178,24 @@ export const categories = [
           },
           {
             "id": "perusteet_1_q13",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä asiat elävästä olennosta keksittyyn taikuuteen. Aseta tekoäly oikealle paikalleen näiden väliin!",
-            "options": [
+            "correctAnswer": {
+              "Oikea ihminen (Elävä olento)": "1. vaihe",
+              "Tekoäly (Koodattu ohjelma)": "2. vaihe",
+              "Lentävä matto (Taikuutta)": "3. vaihe"
+            },
+            "explanation": "Ihminen on elävä olento, tekoäly on tietokoneella toimiva ohjelma, ja lentävät matot ovat olemassa vain saduissa ja taikuudessa.",
+            "draggables": [
               "Oikea ihminen (Elävä olento)",
               "Tekoäly (Koodattu ohjelma)",
               "Lentävä matto (Taikuutta)"
             ],
-            "correctAnswer": [
-              "Oikea ihminen (Elävä olento)",
-              "Tekoäly (Koodattu ohjelma)",
-              "Lentävä matto (Taikuutta)"
-            ],
-            "explanation": "Ihminen on elävä olento, tekoäly on tietokoneella toimiva ohjelma, ja lentävät matot ovat olemassa vain saduissa ja taikuudessa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_1_q14",
@@ -279,19 +290,24 @@ export const categories = [
           },
           {
             "id": "perusteet_2_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä ratkaisijat sen mukaan, kuka laskee valtavan matikkalaskun (esim. 5432 x 897) nopeimmin. Aloita nopeimmasta!",
-            "options": [
+            "correctAnswer": {
+              "Tietokoneen tekoäly": "1. vaihe",
+              "Aikuinen laskimen kanssa": "2. vaihe",
+              "Lapsi ruutupaperin kanssa": "3. vaihe"
+            },
+            "explanation": "Tekoäly ja tietokoneet ovat valtavan nopeita laskemaan numeroita. Ihmisen aivot ovat loistavat luovuudessa, mutta suurissa laskuissa kone on salamannopea voittaja.",
+            "draggables": [
               "Tietokoneen tekoäly",
               "Aikuinen laskimen kanssa",
               "Lapsi ruutupaperin kanssa"
             ],
-            "correctAnswer": [
-              "Tietokoneen tekoäly",
-              "Aikuinen laskimen kanssa",
-              "Lapsi ruutupaperin kanssa"
-            ],
-            "explanation": "Tekoäly ja tietokoneet ovat valtavan nopeita laskemaan numeroita. Ihmisen aivot ovat loistavat luovuudessa, mutta suurissa laskuissa kone on salamannopea voittaja."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_2_q6",
@@ -419,21 +435,27 @@ export const categories = [
           },
           {
             "id": "perusteet_2_q15",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Tekoäly ei itse tunne iloa, mutta se osaa kirjoittaa iloisen tarinan. Järjestä asiat siihen järjestykseen, miten tekoäly oikeasti oppii asioita ilosta!",
-            "options": [
+            "correctAnswer": {
+              "Ihmiset kirjoittavat tekstejä iloisista asioista internetiin": "1. vaihe",
+              "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa": "2. vaihe",
+              "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn": "3. vaihe",
+              "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse": "4. vaihe"
+            },
+            "explanation": "Tekoäly oppii asioita lukemalla ihmisten tuottamaa materiaalia. Se oppii sanojen säännöt todella nopeasti, mutta ei silti koskaan koe itse ilon tunnetta.",
+            "draggables": [
               "Ihmiset kirjoittavat tekstejä iloisista asioista internetiin",
               "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa",
               "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn",
               "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse"
             ],
-            "correctAnswer": [
-              "Ihmiset kirjoittavat tekstejä iloisista asioista internetiin",
-              "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa",
-              "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn",
-              "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse"
-            ],
-            "explanation": "Tekoäly oppii asioita lukemalla ihmisten tuottamaa materiaalia. Se oppii sanojen säännöt todella nopeasti, mutta ei silti koskaan koe itse ilon tunnetta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           }
         ]
       },
@@ -502,21 +524,27 @@ export const categories = [
           },
           {
             "id": "perusteet_3_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Tavallinen koodi seuraa sääntöjä tiukasti rivi riviltä. Järjestä perinteisen sähköikkunan toiminta alusta loppuun.",
-            "options": [
+            "correctAnswer": {
+              "Ihminen painaa auton ikkunan nappia.": "1. vaihe",
+              "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'": "2. vaihe",
+              "Ikkunan sähkömoottori käynnistyy.": "3. vaihe",
+              "Ikkuna aukeaa nätisti alas asti.": "4. vaihe"
+            },
+            "explanation": "Tavallinen tietokoneohjelma koostuu hyvin yksinkertaisista \"jos tapahtuu A, tee B\" -säännöistä. Se suorittaa ne aina prikulleen samassa järjestyksessä.",
+            "draggables": [
               "Ihminen painaa auton ikkunan nappia.",
               "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'",
               "Ikkunan sähkömoottori käynnistyy.",
               "Ikkuna aukeaa nätisti alas asti."
             ],
-            "correctAnswer": [
-              "Ihminen painaa auton ikkunan nappia.",
-              "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'",
-              "Ikkunan sähkömoottori käynnistyy.",
-              "Ikkuna aukeaa nätisti alas asti."
-            ],
-            "explanation": "Tavallinen tietokoneohjelma koostuu hyvin yksinkertaisista \"jos tapahtuu A, tee B\" -säännöistä. Se suorittaa ne aina prikulleen samassa järjestyksessä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "perusteet_3_q6",
@@ -618,19 +646,24 @@ export const categories = [
           },
           {
             "id": "perusteet_3_q13",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä autossa olevat asiat yksinkertaisimmasta sääntöohjelmasta kaikkein edistyneimpään tekoälyyn!",
-            "options": [
+            "correctAnswer": {
+              "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija": "1. vaihe",
+              "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan": "2. vaihe",
+              "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä": "3. vaihe"
+            },
+            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan, ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!",
+            "draggables": [
               "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija",
               "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan",
               "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä"
             ],
-            "correctAnswer": [
-              "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija",
-              "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan",
-              "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä"
-            ],
-            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan, ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_3_q14",
@@ -725,21 +758,27 @@ export const categories = [
           },
           {
             "id": "perusteet_4_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tapahtumat, kun robottikättä ohjaava tekoäly yrittää pestä AI vanin tuulilasin, mutta siltä puuttuu ihmisen maalaisjärki!",
-            "options": [
+            "correctAnswer": {
+              "Tekoäly saa koodarilta ohjeen: 'Pese lasi täydellisen puhtaaksi.'": "1. vaihe",
+              "Tekoäly alkaa hangata tuulilasia pesusienellä.": "2. vaihe",
+              "Tekoäly huomaa kamerallaan, että yksi likatahra on hyvin tiukassa.": "3. vaihe",
+              "Tekoäly hankaa tahraa niin lujaa, että koko auton ikkuna särkyy.": "4. vaihe"
+            },
+            "explanation": "Tekoäly pyrkii suorittamaan sille annetun tavoitteen hinnalla millä hyvänsä. Siltä puuttuu maalaisjärki ymmärtää, että fyysiset esineet rikkoutuvat liiallisesta voimasta.",
+            "draggables": [
               "Tekoäly saa koodarilta ohjeen: 'Pese lasi täydellisen puhtaaksi.'",
               "Tekoäly alkaa hangata tuulilasia pesusienellä.",
               "Tekoäly huomaa kamerallaan, että yksi likatahra on hyvin tiukassa.",
               "Tekoäly hankaa tahraa niin lujaa, että koko auton ikkuna särkyy."
             ],
-            "correctAnswer": [
-              "Tekoäly saa koodarilta ohjeen: 'Pese lasi täydellisen puhtaaksi.'",
-              "Tekoäly alkaa hangata tuulilasia pesusienellä.",
-              "Tekoäly huomaa kamerallaan, että yksi likatahra on hyvin tiukassa.",
-              "Tekoäly hankaa tahraa niin lujaa, että koko auton ikkuna särkyy."
-            ],
-            "explanation": "Tekoäly pyrkii suorittamaan sille annetun tavoitteen hinnalla millä hyvänsä. Siltä puuttuu maalaisjärki ymmärtää, että fyysiset esineet rikkoutuvat liiallisesta voimasta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "perusteet_4_q6",
@@ -867,19 +906,24 @@ export const categories = [
           },
           {
             "id": "perusteet_4_q15",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä nämä hahmot sen mukaan, kenellä on eniten kykyä ymmärtää fyysistä maailmaa ja maalaisjärkeä. Aloita fiksuimmasta!",
-            "options": [
+            "correctAnswer": {
+              "Tavallinen 10-vuotias lapsi": "1. vaihe",
+              "Maailman kallein tekstiä lukeva tekoäly": "2. vaihe",
+              "Yksinkertainen, vain valot sytyttävä katkaisija": "3. vaihe"
+            },
+            "explanation": "Sinulla onvaltavasti sellaista maalaisjärkeä ja kykyä ymmärtää oikeaa maailmaa, mitä edes maailman kallein ja nopein digitaalinen tekoäly ei pysty koskaan oppimaan!",
+            "draggables": [
               "Tavallinen 10-vuotias lapsi",
               "Maailman kallein tekstiä lukeva tekoäly",
               "Yksinkertainen, vain valot sytyttävä katkaisija"
             ],
-            "correctAnswer": [
-              "Tavallinen 10-vuotias lapsi",
-              "Maailman kallein tekstiä lukeva tekoäly",
-              "Yksinkertainen, vain valot sytyttävä katkaisija"
-            ],
-            "explanation": "Sinulla onvaltavasti sellaista maalaisjärkeä ja kykyä ymmärtää oikeaa maailmaa, mitä edes maailman kallein ja nopein digitaalinen tekoäly ei pysty koskaan oppimaan!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           }
         ]
       },
@@ -926,19 +970,24 @@ export const categories = [
           },
           {
             "id": "perusteet_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä AI vanin \"aikakoneessa\" tapahtuneet asiat oikeaan aikajärjestykseen, kaikkein vanhimmasta uusimpaan!",
-            "options": [
+            "correctAnswer": {
+              "Tutkijat keksivät ensimmäisen idean tekoälystä": "1. vaihe",
+              "Tietokoneet kehittyvät nopeammiksi vuosikymmenten varrella": "2. vaihe",
+              "Nopeat tietokoneet ja tekoäly laitetaan nykyajan autoihin": "3. vaihe"
+            },
+            "explanation": "Ensin tarvittiin keksijöiden idea. Sen jälkeen piti odottaa pitkään teknologian ja tietokoneiden nopeuden kehittymistä, jotta tekoäly saatiin lopulta toimimaan fiksusti arjessamme.",
+            "draggables": [
               "Tutkijat keksivät ensimmäisen idean tekoälystä",
               "Tietokoneet kehittyvät nopeammiksi vuosikymmenten varrella",
               "Nopeat tietokoneet ja tekoäly laitetaan nykyajan autoihin"
             ],
-            "correctAnswer": [
-              "Tutkijat keksivät ensimmäisen idean tekoälystä",
-              "Tietokoneet kehittyvät nopeammiksi vuosikymmenten varrella",
-              "Nopeat tietokoneet ja tekoäly laitetaan nykyajan autoihin"
-            ],
-            "explanation": "Ensin tarvittiin keksijöiden idea. Sen jälkeen piti odottaa pitkään teknologian ja tietokoneiden nopeuden kehittymistä, jotta tekoäly saatiin lopulta toimimaan fiksusti arjessamme."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_5_q5",
@@ -1061,21 +1110,27 @@ export const categories = [
           },
           {
             "id": "perusteet_5_q13",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tekoälyn historian virstanpylväät loogiseen aikajärjestykseen, vanhimmasta uusimpaan askeleeseen.",
-            "options": [
+            "correctAnswer": {
+              "Keksijät luovat sanan 'tekoäly' ja ideoivat asiaa paperilla.": "1. vaihe",
+              "Tietokoneista alkaa tulla pienempiä ja yhä nopeampia.": "2. vaihe",
+              "Internet keksitään ja se täyttyy teksteistä ja kuvista.": "3. vaihe",
+              "Huippunopeat koneet oppivat valtavasta datasta asioita.": "4. vaihe"
+            },
+            "explanation": "Matka ideasta valmiiseen AIVAN-pelin tekoälyyn on ollut pitkä. Se vaati tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia!",
+            "draggables": [
               "Keksijät luovat sanan 'tekoäly' ja ideoivat asiaa paperilla.",
               "Tietokoneista alkaa tulla pienempiä ja yhä nopeampia.",
               "Internet keksitään ja se täyttyy teksteistä ja kuvista.",
               "Huippunopeat koneet oppivat valtavasta datasta asioita."
             ],
-            "correctAnswer": [
-              "Keksijät luovat sanan 'tekoäly' ja ideoivat asiaa paperilla.",
-              "Tietokoneista alkaa tulla pienempiä ja yhä nopeampia.",
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista.",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita."
-            ],
-            "explanation": "Matka ideasta valmiiseen AIVAN-pelin tekoälyyn on ollut pitkä. Se vaati tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "perusteet_5_q14",
@@ -1170,21 +1225,27 @@ export const categories = [
           },
           {
             "id": "perusteet_6_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tekoälyn \"kapina\" siten, kuten se oikeasti tapahtuisi, jos auto tekisi virheen (ei elokuvien tyyliin)!",
-            "options": [
+            "correctAnswer": {
+              "Koodari tekee vahingossa virheen ohjelmaan.": "1. vaihe",
+              "Tekoäly saa väärän ohjeen ja ajaa harhaan.": "2. vaihe",
+              "Auto pysäytetään turvallisesti napista.": "3. vaihe",
+              "Ihminen korjaa koodin autotallissa kuntoon.": "4. vaihe"
+            },
+            "explanation": "Jos kone tekee jotain outoa, se johtuu aina ihmisen virheestä koodissa tai datassa, ei koskaan koneen omasta pahasta tahdosta tai kapinasta.",
+            "draggables": [
               "Koodari tekee vahingossa virheen ohjelmaan.",
               "Tekoäly saa väärän ohjeen ja ajaa harhaan.",
               "Auto pysäytetään turvallisesti napista.",
               "Ihminen korjaa koodin autotallissa kuntoon."
             ],
-            "correctAnswer": [
-              "Koodari tekee vahingossa virheen ohjelmaan.",
-              "Tekoäly saa väärän ohjeen ja ajaa harhaan.",
-              "Auto pysäytetään turvallisesti napista.",
-              "Ihminen korjaa koodin autotallissa kuntoon."
-            ],
-            "explanation": "Jos kone tekee jotain outoa, se johtuu aina ihmisen virheestä koodissa tai datassa, ei koskaan koneen omasta pahasta tahdosta tai kapinasta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "perusteet_6_q6",
@@ -1286,19 +1347,24 @@ export const categories = [
           },
           {
             "id": "perusteet_6_q13",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä nämä hahmot sen mukaan, kenellä on kaikista VÄHITEN omaa tahtoa! Aloita siitä, jolla ei ole tahtoa ollenkaan.",
-            "options": [
+            "correctAnswer": {
+              "AI vanin tekoälymoottori": "1. vaihe",
+              "Autotallissa asuva pieni hiiri": "2. vaihe",
+              "Tavallinen alakoululainen lapsi": "3. vaihe"
+            },
+            "explanation": "Scifi-elokuvien myyteistä huolimatta tekoälyllä ei ole tippaakaan omaa tahtoa. Jopa pienellä hiirellä on oma tahto etsiä juustoa, mutta ohjelma vain noudattaa koodia!",
+            "draggables": [
               "AI vanin tekoälymoottori",
               "Autotallissa asuva pieni hiiri",
               "Tavallinen alakoululainen lapsi"
             ],
-            "correctAnswer": [
-              "AI vanin tekoälymoottori",
-              "Autotallissa asuva pieni hiiri",
-              "Tavallinen alakoululainen lapsi"
-            ],
-            "explanation": "Scifi-elokuvien myyteistä huolimatta tekoälyllä ei ole tippaakaan omaa tahtoa. Jopa pienellä hiirellä on oma tahto etsiä juustoa, mutta ohjelma vain noudattaa koodia!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_6_q14",
@@ -1389,19 +1455,24 @@ export const categories = [
           },
           {
             "id": "perusteet_7_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tekoälyn aikakoneen tapahtumat vanhimmasta uusimpaan!",
-            "options": [
+            "correctAnswer": {
+              "Tutkijat keksivät ensimmäisen idean tekoälystä.": "1. vaihe",
+              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).": "2. vaihe",
+              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä.": "3. vaihe"
+            },
+            "explanation": "Idea keksittiin jo yli 50 vuotta sitten, mutta tekoälyn toimiminen fiksusti on vaatinut tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia.",
+            "draggables": [
               "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).",
               "Tutkijat keksivät ensimmäisen idean tekoälystä.",
               "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä."
             ],
-            "correctAnswer": [
-              "Tutkijat keksivät ensimmäisen idean tekoälystä.",
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä."
-            ],
-            "explanation": "Idea keksittiin jo yli 50 vuotta sitten, mutta tekoälyn toimiminen fiksusti on vaatinut tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "perusteet_7_q6",
@@ -1517,21 +1588,27 @@ export const categories = [
           },
           {
             "id": "konepellin_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeaan järjestykseen, miten auton tekoäly oppii tunnistamaan liikennemerkit tien poskesta!",
-            "options": [
+            "correctAnswer": {
+              "Ihmiset keräävät tuhansia kuvia erilaisista liikennemerkeistä.": "1. vaihe",
+              "Kuvat syötetään datana tekoälyn ohjelmaan.": "2. vaihe",
+              "Tekoäly oppii kuvista, miltä liikennemerkit näyttävät.": "3. vaihe",
+              "Auto osaa itse tunnistaa stop-merkin tiellä.": "4. vaihe"
+            },
+            "explanation": "Tekoälyn oppiminen alkaa aina datan eli esimerkkikuvien keräämisestä. Kun dataa on tarpeeksi, kone oppii löytämään kuvista säännönmukaisuuksia.",
+            "draggables": [
               "Ihmiset keräävät tuhansia kuvia erilaisista liikennemerkeistä.",
               "Kuvat syötetään datana tekoälyn ohjelmaan.",
               "Tekoäly oppii kuvista, miltä liikennemerkit näyttävät.",
               "Auto osaa itse tunnistaa stop-merkin tiellä."
             ],
-            "correctAnswer": [
-              "Ihmiset keräävät tuhansia kuvia erilaisista liikennemerkeistä.",
-              "Kuvat syötetään datana tekoälyn ohjelmaan.",
-              "Tekoäly oppii kuvista, miltä liikennemerkit näyttävät.",
-              "Auto osaa itse tunnistaa stop-merkin tiellä."
-            ],
-            "explanation": "Tekoälyn oppiminen alkaa aina datan eli esimerkkikuvien keräämisestä. Kun dataa on tarpeeksi, kone oppii löytämään kuvista säännönmukaisuuksia."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_1_q5",
@@ -1641,21 +1718,27 @@ export const categories = [
           },
           {
             "id": "konepellin_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tekoälyn \"tankkausprosessi\" järjestykseen. Miten data kulkee maailmasta auton älyyn?",
-            "options": [
+            "correctAnswer": {
+              "Ihmiset kirjoittavat ja kuvaavat asioita nettiin.": "1. vaihe",
+              "Koodarit keräävät nämä tiedot isoksi datapaketiksi.": "2. vaihe",
+              "Tekoäly lukee datapaketin ja etsii säännönmukaisuuksia.": "3. vaihe",
+              "AI van osaa nyt vastata kuskin kysymyksiin oikein.": "4. vaihe"
+            },
+            "explanation": "Koko tekoälyn nerokkuus perustuu siihen dataan, mitä ihmiset ovat tuottaneet. Ilman meidän juttujamme tekoälyllä ei olisi polttoainetta.",
+            "draggables": [
               "Ihmiset kirjoittavat ja kuvaavat asioita nettiin.",
               "Koodarit keräävät nämä tiedot isoksi datapaketiksi.",
               "Tekoäly lukee datapaketin ja etsii säännönmukaisuuksia.",
               "AI van osaa nyt vastata kuskin kysymyksiin oikein."
             ],
-            "correctAnswer": [
-              "Ihmiset kirjoittavat ja kuvaavat asioita nettiin.",
-              "Koodarit keräävät nämä tiedot isoksi datapaketiksi.",
-              "Tekoäly lukee datapaketin ja etsii säännönmukaisuuksia.",
-              "AI van osaa nyt vastata kuskin kysymyksiin oikein."
-            ],
-            "explanation": "Koko tekoälyn nerokkuus perustuu siihen dataan, mitä ihmiset ovat tuottaneet. Ilman meidän juttujamme tekoälyllä ei olisi polttoainetta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_1_q13",
@@ -1741,21 +1824,27 @@ export const categories = [
           },
           {
             "id": "konepellin_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä algoritmin askeleet oikeaan järjestykseen, jotta AI van osaa käynnistää tuulilasinpyyhkijät sateella!",
-            "options": [
+            "correctAnswer": {
+              "Kamera huomaa sadepisaran lasissa.": "1. vaihe",
+              "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.": "2. vaihe",
+              "Pyyhkijöiden moottori saa sähköä.": "3. vaihe",
+              "Ikkuna pyyhkiytyy täysin puhtaaksi.": "4. vaihe"
+            },
+            "explanation": "Tekoälyn algoritmi etenee loogisesti askeleittain. Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin, ja lopuksi työ suoritetaan.",
+            "draggables": [
               "Kamera huomaa sadepisaran lasissa.",
               "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.",
               "Pyyhkijöiden moottori saa sähköä.",
               "Ikkuna pyyhkiytyy täysin puhtaaksi."
             ],
-            "correctAnswer": [
-              "Kamera huomaa sadepisaran lasissa.",
-              "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.",
-              "Pyyhkijöiden moottori saa sähköä.",
-              "Ikkuna pyyhkiytyy täysin puhtaaksi."
-            ],
-            "explanation": "Tekoälyn algoritmi etenee loogisesti askeleittain. Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin, ja lopuksi työ suoritetaan."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_2_q5",
@@ -1877,21 +1966,27 @@ export const categories = [
           },
           {
             "id": "konepellin_2_q13",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä koodarin työpäivä autotallissa, kun hän rakentaa uutta algoritmia auton navigaattorille!",
-            "options": [
+            "correctAnswer": {
+              "Koodari keksii ongelman, joka pitää ratkaista.": "1. vaihe",
+              "Koodari kirjoittaa ratkaisuun tarkat säännöt askeleittain.": "2. vaihe",
+              "Koodi ladataan auton tekoälyn aivoihin.": "3. vaihe",
+              "Auto osaa reitin perille koodin sääntöjen avulla.": "4. vaihe"
+            },
+            "explanation": "Ennen kuin auto osaa tehdä mitään fiksusti, ihmisen täytyy huomata ongelma ja laatia sille tarkka, askeleittain etenevä ohjekirja eli algoritmi.",
+            "draggables": [
               "Koodari keksii ongelman, joka pitää ratkaista.",
               "Koodari kirjoittaa ratkaisuun tarkat säännöt askeleittain.",
               "Koodi ladataan auton tekoälyn aivoihin.",
               "Auto osaa reitin perille koodin sääntöjen avulla."
             ],
-            "correctAnswer": [
-              "Koodari keksii ongelman, joka pitää ratkaista.",
-              "Koodari kirjoittaa ratkaisuun tarkat säännöt askeleittain.",
-              "Koodi ladataan auton tekoälyn aivoihin.",
-              "Auto osaa reitin perille koodin sääntöjen avulla."
-            ],
-            "explanation": "Ennen kuin auto osaa tehdä mitään fiksusti, ihmisen täytyy huomata ongelma ja laatia sille tarkka, askeleittain etenevä ohjekirja eli algoritmi."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_2_q14",
@@ -1964,21 +2059,27 @@ export const categories = [
           },
           {
             "id": "konepellin_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä AI vanin \"tekoälyn autokoulun\" vaiheet siihen järjestykseen, miten koneoppiminen tapahtuu!",
-            "options": [
+            "correctAnswer": {
+              "Tekoälylle näytetään valtava määrä kuvia ja esimerkkejä liikenteestä.": "1. vaihe",
+              "Tekoäly tekee aluksi paljon virheitä ja harjoittelee toistamalla.": "2. vaihe",
+              "Tekoäly löytää säännöt esimerkkien joukosta ja oppii asian.": "3. vaihe",
+              "Tekoäly osaa lopulta avustaa ajamisessa turvallisesti oikealla tiellä!": "4. vaihe"
+            },
+            "explanation": "Koneoppimisessa kaikki alkaa esimerkeistä, jatkuu pitkän harjoittelun kautta ja päättyy siihen, että säännöt on viimein opittu luotettavasti.",
+            "draggables": [
               "Tekoälylle näytetään valtava määrä kuvia ja esimerkkejä liikenteestä.",
               "Tekoäly tekee aluksi paljon virheitä ja harjoittelee toistamalla.",
               "Tekoäly löytää säännöt esimerkkien joukosta ja oppii asian.",
               "Tekoäly osaa lopulta avustaa ajamisessa turvallisesti oikealla tiellä!"
             ],
-            "correctAnswer": [
-              "Tekoälylle näytetään valtava määrä kuvia ja esimerkkejä liikenteestä.",
-              "Tekoäly tekee aluksi paljon virheitä ja harjoittelee toistamalla.",
-              "Tekoäly löytää säännöt esimerkkien joukosta ja oppii asian.",
-              "Tekoäly osaa lopulta avustaa ajamisessa turvallisesti oikealla tiellä!"
-            ],
-            "explanation": "Koneoppimisessa kaikki alkaa esimerkeistä, jatkuu pitkän harjoittelun kautta ja päättyy siihen, että säännöt on viimein opittu luotettavasti."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_3_q5",
@@ -2089,21 +2190,27 @@ export const categories = [
           },
           {
             "id": "konepellin_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä AI vanin tekoälyn \"virheistä oppiminen\" järjestykseen. Miten se oppii autokoulussaan välttämään ojassa ajamista virtuaalisessa simulaattorissa?",
-            "options": [
+            "correctAnswer": {
+              "Tekoäly ajaa simulaattorissa vahingossa ojaan ja tekee virheen.": "1. vaihe",
+              "Ohjelma antaa miinuspisteitä ojassa ajamisesta (virheestä).": "2. vaihe",
+              "Tekoäly harjoittelee uudelleen ja muuttaa hieman reittiään.": "3. vaihe",
+              "Tuhansien toistojen jälkeen tekoäly oppii pysymään aina keskellä tietä.": "4. vaihe"
+            },
+            "explanation": "Tekoäly voi oppia palkintojen ja rangaistusten (kuten miinuspisteiden) avulla. Se yrittää saada parhaat pisteet harjoittelemalla, toistamalla ja kokeilemalla!",
+            "draggables": [
               "Tekoäly ajaa simulaattorissa vahingossa ojaan ja tekee virheen.",
               "Ohjelma antaa miinuspisteitä ojassa ajamisesta (virheestä).",
               "Tekoäly harjoittelee uudelleen ja muuttaa hieman reittiään.",
               "Tuhansien toistojen jälkeen tekoäly oppii pysymään aina keskellä tietä."
             ],
-            "correctAnswer": [
-              "Tekoäly ajaa simulaattorissa vahingossa ojaan ja tekee virheen.",
-              "Ohjelma antaa miinuspisteitä ojassa ajamisesta (virheestä).",
-              "Tekoäly harjoittelee uudelleen ja muuttaa hieman reittiään.",
-              "Tuhansien toistojen jälkeen tekoäly oppii pysymään aina keskellä tietä."
-            ],
-            "explanation": "Tekoäly voi oppia palkintojen ja rangaistusten (kuten miinuspisteiden) avulla. Se yrittää saada parhaat pisteet harjoittelemalla, toistamalla ja kokeilemalla!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_3_q13",
@@ -2210,21 +2317,27 @@ export const categories = [
           },
           {
             "id": "konepellin_4_q5",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeaan järjestykseen, kuinka auton neuroverkko tunnistaa edessä olevan STOP-merkin yhdistelemällä asioita.",
-            "options": [
+            "correctAnswer": {
+              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.": "1. vaihe",
+              "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.": "2. vaihe",
+              "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.": "3. vaihe",
+              "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa.": "4. vaihe"
+            },
+            "explanation": "Neuroverkko etenee kerroksittain. Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja, ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan.",
+            "draggables": [
               "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
               "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.",
               "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.",
               "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa."
             ],
-            "correctAnswer": [
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
-              "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.",
-              "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.",
-              "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa."
-            ],
-            "explanation": "Neuroverkko etenee kerroksittain. Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja, ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_4_q6",
@@ -2312,21 +2425,27 @@ export const categories = [
           },
           {
             "id": "konepellin_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä neuroverkkoja koskevat asiat yksinkertaisimmasta kaikkein monimutkaisimpaan asiaan.",
-            "options": [
+            "correctAnswer": {
+              "Yksi tavallinen plussalasku paperilla": "1. vaihe",
+              "Yksinkertainen tietokoneohjelma, joka sytyttää valon": "2. vaihe",
+              "Miljoonia asioita kerralla yhdistelevä älykäs neuroverkko": "3. vaihe",
+              "Aito, oikea ja elävä ihmisen aivo": "4. vaihe"
+            },
+            "explanation": "Neuroverkot ovat valtavan edistyneitä työkaluja monimutkaisille pulmille. Ne yrittävät kovasti jäljitellä meidän aitoja aivojamme, jotka ovat yhä maailman ylivoimaisesti älykkäin ja ihmeellisin asia!",
+            "draggables": [
               "Yksi tavallinen plussalasku paperilla",
               "Yksinkertainen tietokoneohjelma, joka sytyttää valon",
               "Miljoonia asioita kerralla yhdistelevä älykäs neuroverkko",
               "Aito, oikea ja elävä ihmisen aivo"
             ],
-            "correctAnswer": [
-              "Yksi tavallinen plussalasku paperilla",
-              "Yksinkertainen tietokoneohjelma, joka sytyttää valon",
-              "Miljoonia asioita kerralla yhdistelevä älykäs neuroverkko",
-              "Aito, oikea ja elävä ihmisen aivo"
-            ],
-            "explanation": "Neuroverkot ovat valtavan edistyneitä työkaluja monimutkaisille pulmille. Ne yrittävät kovasti jäljitellä meidän aitoja aivojamme, jotka ovat yhä maailman ylivoimaisesti älykkäin ja ihmeellisin asia!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_4_q13",
@@ -2412,21 +2531,27 @@ export const categories = [
           },
           {
             "id": "konepellin_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeaan järjestykseen, miten tekoälyn \"salapoliisityö\" etenee, kun se tunnistaa liikennemerkin!",
-            "options": [
+            "correctAnswer": {
+              "Kamera ottaa kuvan edessä olevasta tiestä.": "1. vaihe",
+              "Tekoäly etsii kuvasta reunoja ja kirkkaita värejä.": "2. vaihe",
+              "Tekoäly yhdistää reunat kolmion muotoiseksi kuvioksi.": "3. vaihe",
+              "Tekoäly päättelee muodon olevan kärkikolmio.": "4. vaihe"
+            },
+            "explanation": "Tekoäly pilkkoo kuvan palasiin. Se löytää ensin pelkkiä reunoja, yhdistää niistä muotoja ja lopuksi tunnistaa kokonaisen kuvion hahmontunnistuksen avulla.",
+            "draggables": [
               "Kamera ottaa kuvan edessä olevasta tiestä.",
               "Tekoäly etsii kuvasta reunoja ja kirkkaita värejä.",
               "Tekoäly yhdistää reunat kolmion muotoiseksi kuvioksi.",
               "Tekoäly päättelee muodon olevan kärkikolmio."
             ],
-            "correctAnswer": [
-              "Kamera ottaa kuvan edessä olevasta tiestä.",
-              "Tekoäly etsii kuvasta reunoja ja kirkkaita värejä.",
-              "Tekoäly yhdistää reunat kolmion muotoiseksi kuvioksi.",
-              "Tekoäly päättelee muodon olevan kärkikolmio."
-            ],
-            "explanation": "Tekoäly pilkkoo kuvan palasiin. Se löytää ensin pelkkiä reunoja, yhdistää niistä muotoja ja lopuksi tunnistaa kokonaisen kuvion hahmontunnistuksen avulla."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_5_q5",
@@ -2535,21 +2660,27 @@ export const categories = [
           },
           {
             "id": "konepellin_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä kasvojentunnistuksen askeleet! Miten AI vanin ovet aukeavat, kun se tunnistaa hahmosi?",
-            "options": [
+            "correctAnswer": {
+              "Kamera nappaa kuvan kasvoistasi autotallin edessä.": "1. vaihe",
+              "Tekoäly löytää kuvasta silmiesi ja nenäsi kuvioiden etäisyydet.": "2. vaihe",
+              "Ohjelma vertaa näitä mittoja muistiinsa tallennettuun hahmoosi.": "3. vaihe",
+              "Kone toteaa kuvion täsmäävän oikeaan kuskiin ja avaa lukot.": "4. vaihe"
+            },
+            "explanation": "Kasvojentunnistus on todella tarkkaa salapoliisityötä. Se ei tunnista \"sinua\", vaan kasvosi muodostaman tarkan matemaattisen kuvion ja mittasuhteet!",
+            "draggables": [
               "Kamera nappaa kuvan kasvoistasi autotallin edessä.",
               "Tekoäly löytää kuvasta silmiesi ja nenäsi kuvioiden etäisyydet.",
               "Ohjelma vertaa näitä mittoja muistiinsa tallennettuun hahmoosi.",
               "Kone toteaa kuvion täsmäävän oikeaan kuskiin ja avaa lukot."
             ],
-            "correctAnswer": [
-              "Kamera nappaa kuvan kasvoistasi autotallin edessä.",
-              "Tekoäly löytää kuvasta silmiesi ja nenäsi kuvioiden etäisyydet.",
-              "Ohjelma vertaa näitä mittoja muistiinsa tallennettuun hahmoosi.",
-              "Kone toteaa kuvion täsmäävän oikeaan kuskiin ja avaa lukot."
-            ],
-            "explanation": "Kasvojentunnistus on todella tarkkaa salapoliisityötä. Se ei tunnista \"sinua\", vaan kasvosi muodostaman tarkan matemaattisen kuvion ja mittasuhteet!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_5_q13",
@@ -2635,21 +2766,27 @@ export const categories = [
           },
           {
             "id": "konepellin_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Kuinka tekoälyn epäreilu päätös syntyy? Järjestä tapahtumat syystä seuraukseen!",
-            "options": [
+            "correctAnswer": {
+              "Koodari kerää vahingossa vain yksipuolista opetusdataa.": "1. vaihe",
+              "Tekoäly oppii ja harjoittelee tämän huonon datan avulla.": "2. vaihe",
+              "Tekoälyn mieleen syntyy sääntö, joka on epäreilu (vinouma).": "3. vaihe",
+              "Kone tekee oikeassa elämässä todella hölmön ja väärän päätöksen.": "4. vaihe"
+            },
+            "explanation": "Vinoumat eli harhakäsitykset alkavat aina huonosta datasta (väärästä bensasta). Jos opetus on vinossa, myös koneen oppima sääntö ja lopullinen toiminta ovat vinossa!",
+            "draggables": [
               "Koodari kerää vahingossa vain yksipuolista opetusdataa.",
               "Tekoäly oppii ja harjoittelee tämän huonon datan avulla.",
               "Tekoälyn mieleen syntyy sääntö, joka on epäreilu (vinouma).",
               "Kone tekee oikeassa elämässä todella hölmön ja väärän päätöksen."
             ],
-            "correctAnswer": [
-              "Koodari kerää vahingossa vain yksipuolista opetusdataa.",
-              "Tekoäly oppii ja harjoittelee tämän huonon datan avulla.",
-              "Tekoälyn mieleen syntyy sääntö, joka on epäreilu (vinouma).",
-              "Kone tekee oikeassa elämässä todella hölmön ja väärän päätöksen."
-            ],
-            "explanation": "Vinoumat eli harhakäsitykset alkavat aina huonosta datasta (väärästä bensasta). Jos opetus on vinossa, myös koneen oppima sääntö ja lopullinen toiminta ovat vinossa!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_6_q5",
@@ -2759,21 +2896,27 @@ export const categories = [
           },
           {
             "id": "konepellin_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Koodari huomaa, että AI vanin tekoäly on epäreilu, ja haluaa korjata asian. Järjestä korjausoperaation askeleet autotallissa!",
-            "options": [
+            "correctAnswer": {
+              "Koodari huomaa auton tekevän vinoutuneita ja hölmöjä päätöksiä.": "1. vaihe",
+              "Koodari tutkii tekoälyn saamaa dataa ja löytää sieltä yksipuolisen virheen.": "2. vaihe",
+              "Koodari lisää opetusdataan paljon erilaisia ja reilumpia esimerkkejä.": "3. vaihe",
+              "Tekoäly oppii uudelleen ja toimii jatkossa reilusti kaikkia kohtaan.": "4. vaihe"
+            },
+            "explanation": "Vinoumat eivät ole onneksi ikuisia. Kun huomaamme tekoälyn ajattelevan \"vinosti\", voimme korjata ongelman antamalla sille parempaa, kattavampaa ja monipuolisempaa polttoainetta!",
+            "draggables": [
               "Koodari huomaa auton tekevän vinoutuneita ja hölmöjä päätöksiä.",
               "Koodari tutkii tekoälyn saamaa dataa ja löytää sieltä yksipuolisen virheen.",
               "Koodari lisää opetusdataan paljon erilaisia ja reilumpia esimerkkejä.",
               "Tekoäly oppii uudelleen ja toimii jatkossa reilusti kaikkia kohtaan."
             ],
-            "correctAnswer": [
-              "Koodari huomaa auton tekevän vinoutuneita ja hölmöjä päätöksiä.",
-              "Koodari tutkii tekoälyn saamaa dataa ja löytää sieltä yksipuolisen virheen.",
-              "Koodari lisää opetusdataan paljon erilaisia ja reilumpia esimerkkejä.",
-              "Tekoäly oppii uudelleen ja toimii jatkossa reilusti kaikkia kohtaan."
-            ],
-            "explanation": "Vinoumat eivät ole onneksi ikuisia. Kun huomaamme tekoälyn ajattelevan \"vinosti\", voimme korjata ongelman antamalla sille parempaa, kattavampaa ja monipuolisempaa polttoainetta!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "konepellin_6_q13",
@@ -2859,19 +3002,24 @@ export const categories = [
           },
           {
             "id": "konepellin_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tekoälyn neuroverkon aivovoimistelu! Miten se päättelee näkemänsä STOP-merkin?",
-            "options": [
+            "correctAnswer": {
+              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.": "1. vaihe",
+              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.": "2. vaihe",
+              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa.": "3. vaihe"
+            },
+            "explanation": "Neuroverkko jäljittelee ihmisaivoja. Se yhdistelee tietoja kerroksittain pienistä viivoista ja väreistä aina suuriin ja vaikeisiin kokonaisuuksiin asti.",
+            "draggables": [
               "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
               "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.",
               "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa."
             ],
-            "correctAnswer": [
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
-              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.",
-              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa."
-            ],
-            "explanation": "Neuroverkko jäljittelee ihmisaivoja. Se yhdistelee tietoja kerroksittain pienistä viivoista ja väreistä aina suuriin ja vaikeisiin kokonaisuuksiin asti."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "konepellin_7_q5",
@@ -3005,21 +3153,27 @@ export const categories = [
           },
           {
             "id": "digiturva_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä nämä salasanat heikoimmasta (helpoin arvata) vahvimpaan (turvallisin turvalukko)! Aloita heikoimmasta.",
-            "options": [
+            "correctAnswer": {
+              "auto": "1. vaihe",
+              "Auto123": "2. vaihe",
+              "SininenAutoMeneeKovaa!": "3. vaihe",
+              "S1n!nen@ut0MeneeTodellaK0v@@99!": "4. vaihe"
+            },
+            "explanation": "Yksi sana on aivan liian helppo arvata. Numerot ja erikoismerkit parantavat sitä hieman, mutta pitkä ja monimutkainen salalause on ehdottomasti vahvin lukko!",
+            "draggables": [
               "auto",
               "Auto123",
               "SininenAutoMeneeKovaa!",
               "S1n!nen@ut0MeneeTodellaK0v@@99!"
             ],
-            "correctAnswer": [
-              "auto",
-              "Auto123",
-              "SininenAutoMeneeKovaa!",
-              "S1n!nen@ut0MeneeTodellaK0v@@99!"
-            ],
-            "explanation": "Yksi sana on aivan liian helppo arvata. Numerot ja erikoismerkit parantavat sitä hieman, mutta pitkä ja monimutkainen salalause on ehdottomasti vahvin lukko!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_1_q5",
@@ -3132,21 +3286,27 @@ export const categories = [
           },
           {
             "id": "digiturva_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä fiksut toimintatavat aikajärjestykseen, jos epäilet, että joku digirosvo on saanut AI vanin avaimet (eli salasanasi) käsiinsä! Mitä teet ensimmäisenä?",
-            "options": [
+            "correctAnswer": {
+              "Kerron heti luotettavalle aikuiselle tapahtuneesta.": "1. vaihe",
+              "Vaihdan kyseisen salasanan nopeasti uuteen ja vahvaan.": "2. vaihe",
+              "Tarkistan aikuisen kanssa, onko tililläni tehty jotain outoa.": "3. vaihe",
+              "Jatkan turvallisin mielin automatkaa ja pelaamista.": "4. vaihe"
+            },
+            "explanation": "Aikuinen auttaa aina ensin! Sen jälkeen on todella tärkeää \"lukita ovet\" uudestaan vaihtamalla salasana ja tarkistaa heti, ettei mitään vahinkoa ehtinyt tapahtua.",
+            "draggables": [
               "Kerron heti luotettavalle aikuiselle tapahtuneesta.",
               "Vaihdan kyseisen salasanan nopeasti uuteen ja vahvaan.",
               "Tarkistan aikuisen kanssa, onko tililläni tehty jotain outoa.",
               "Jatkan turvallisin mielin automatkaa ja pelaamista."
             ],
-            "correctAnswer": [
-              "Kerron heti luotettavalle aikuiselle tapahtuneesta.",
-              "Vaihdan kyseisen salasanan nopeasti uuteen ja vahvaan.",
-              "Tarkistan aikuisen kanssa, onko tililläni tehty jotain outoa.",
-              "Jatkan turvallisin mielin automatkaa ja pelaamista."
-            ],
-            "explanation": "Aikuinen auttaa aina ensin! Sen jälkeen on todella tärkeää \"lukita ovet\" uudestaan vaihtamalla salasana ja tarkistaa heti, ettei mitään vahinkoa ehtinyt tapahtua."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_1_q13",
@@ -3232,21 +3392,27 @@ export const categories = [
           },
           {
             "id": "digiturva_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä nämä tiedot sen mukaan, kuinka turvallista niitä on kertoa netissä! Aloita täysin turvallisesta asiasta ja päätä sellaiseen, jota ei saa koskaan jakaa.",
-            "options": [
+            "correctAnswer": {
+              "Lempivärisi tai lempielokuvasi": "1. vaihe",
+              "Pelissä käyttämäsi keksitty nimimerkki": "2. vaihe",
+              "Oma etunimesi ja ikäsi": "3. vaihe",
+              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi": "4. vaihe"
+            },
+            "explanation": "Yleisiä asioita ja nimimerkkejä on turvallista jakaa peleissä. Tarkat henkilötiedot ja yhteystiedot ovat ehdottoman salaisia, ja ne on pidettävä aina piilossa vierailta!",
+            "draggables": [
               "Lempivärisi tai lempielokuvasi",
               "Pelissä käyttämäsi keksitty nimimerkki",
               "Oma etunimesi ja ikäsi",
               "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
             ],
-            "correctAnswer": [
-              "Lempivärisi tai lempielokuvasi",
-              "Pelissä käyttämäsi keksitty nimimerkki",
-              "Oma etunimesi ja ikäsi",
-              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
-            ],
-            "explanation": "Yleisiä asioita ja nimimerkkejä on turvallista jakaa peleissä. Tarkat henkilötiedot ja yhteystiedot ovat ehdottoman salaisia, ja ne on pidettävä aina piilossa vierailta!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_2_q5",
@@ -3357,21 +3523,27 @@ export const categories = [
           },
           {
             "id": "digiturva_2_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Lataat uuden kivan ajopelin puhelimeesi. Järjestä askeleet järjestykseen, jotta yksityisyytesi pysyy alusta asti \"lukitussa hanskalokerossa\"!",
-            "options": [
+            "correctAnswer": {
+              "Lataa peli turvallisesti virallisesta sovelluskaupasta.": "1. vaihe",
+              "Keksi peliin hauska nimimerkki, joka ei ole oikea nimesi.": "2. vaihe",
+              "Valitse profiilikuvaksi jokin pelin tarjoama valmis hahmokuva.": "3. vaihe",
+              "Pelaa peliä turvallisesti jakamatta koskaan omia henkilötietoja.": "4. vaihe"
+            },
+            "explanation": "Yksityisyyden suojaaminen alkaa jo ennen pelin aloittamista. Keksityt nimet ja kuvat varmistavat, että oikeat henkilötietosi pysyvät tiukasti omassa turvassasi.",
+            "draggables": [
               "Lataa peli turvallisesti virallisesta sovelluskaupasta.",
               "Keksi peliin hauska nimimerkki, joka ei ole oikea nimesi.",
               "Valitse profiilikuvaksi jokin pelin tarjoama valmis hahmokuva.",
               "Pelaa peliä turvallisesti jakamatta koskaan omia henkilötietoja."
             ],
-            "correctAnswer": [
-              "Lataa peli turvallisesti virallisesta sovelluskaupasta.",
-              "Keksi peliin hauska nimimerkki, joka ei ole oikea nimesi.",
-              "Valitse profiilikuvaksi jokin pelin tarjoama valmis hahmokuva.",
-              "Pelaa peliä turvallisesti jakamatta koskaan omia henkilötietoja."
-            ],
-            "explanation": "Yksityisyyden suojaaminen alkaa jo ennen pelin aloittamista. Keksityt nimet ja kuvat varmistavat, että oikeat henkilötietosi pysyvät tiukasti omassa turvassasi."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_2_q13",
@@ -3457,21 +3629,27 @@ export const categories = [
           },
           {
             "id": "digiturva_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä toimet oikeaan järjestykseen, kun saat sähköpostiisi todella epäilyttävän ja oudon huijausviestin!",
-            "options": [
+            "correctAnswer": {
+              "Pysähdy hetkeksi ja hengitä rauhassa ilman kiirettä.": "1. vaihe",
+              "Älä missään nimessä klikkaa viestissä olevia linkkejä.": "2. vaihe",
+              "Näytä epäilyttävä viesti heti luotettavalle aikuiselle.": "3. vaihe",
+              "Poistakaa viesti laitteeltasi lopullisesti roskakoriin.": "4. vaihe"
+            },
+            "explanation": "Hätiköinti ja kiire ovat rosvojen paras ystävä. Pysähtymällä ja kysymällä aikuiselta vältät astumasta pelottavaan ansaan.",
+            "draggables": [
               "Pysähdy hetkeksi ja hengitä rauhassa ilman kiirettä.",
               "Älä missään nimessä klikkaa viestissä olevia linkkejä.",
               "Näytä epäilyttävä viesti heti luotettavalle aikuiselle.",
               "Poistakaa viesti laitteeltasi lopullisesti roskakoriin."
             ],
-            "correctAnswer": [
-              "Pysähdy hetkeksi ja hengitä rauhassa ilman kiirettä.",
-              "Älä missään nimessä klikkaa viestissä olevia linkkejä.",
-              "Näytä epäilyttävä viesti heti luotettavalle aikuiselle.",
-              "Poistakaa viesti laitteeltasi lopullisesti roskakoriin."
-            ],
-            "explanation": "Hätiköinti ja kiire ovat rosvojen paras ystävä. Pysähtymällä ja kysymällä aikuiselta vältät astumasta pelottavaan ansaan."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_3_q5",
@@ -3581,21 +3759,27 @@ export const categories = [
           },
           {
             "id": "digiturva_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten toimit, kun saat puhelimeesi tekstarin: \"Pakettisi on jumissa varastolla, maksa 2 euroa linkin kautta heti\"? Järjestä fiksut toimenpiteet!",
-            "options": [
+            "correctAnswer": {
+              "Huomaa, että viesti sisältää oudon linkin ja pyytää maksua.": "1. vaihe",
+              "Mieti rauhassa, oletko edes tilannut mitään pakettia lähiaikoina.": "2. vaihe",
+              "Näytä epäilyttävä huijausviesti heti jollekin aikuiselle.": "3. vaihe",
+              "Aikuinen poistaa huijausviestin turvallisesti laitteeltasi.": "4. vaihe"
+            },
+            "explanation": "Huijausviestit jumiutuneista paketeista ovat nykyään hyvin yleisiä ansoja. Älä koskaan maksa mitään tai klikkaa outoja tekstiviestilinkkejä.",
+            "draggables": [
               "Huomaa, että viesti sisältää oudon linkin ja pyytää maksua.",
               "Mieti rauhassa, oletko edes tilannut mitään pakettia lähiaikoina.",
               "Näytä epäilyttävä huijausviesti heti jollekin aikuiselle.",
               "Aikuinen poistaa huijausviestin turvallisesti laitteeltasi."
             ],
-            "correctAnswer": [
-              "Huomaa, että viesti sisältää oudon linkin ja pyytää maksua.",
-              "Mieti rauhassa, oletko edes tilannut mitään pakettia lähiaikoina.",
-              "Näytä epäilyttävä huijausviesti heti jollekin aikuiselle.",
-              "Aikuinen poistaa huijausviestin turvallisesti laitteeltasi."
-            ],
-            "explanation": "Huijausviestit jumiutuneista paketeista ovat nykyään hyvin yleisiä ansoja. Älä koskaan maksa mitään tai klikkaa outoja tekstiviestilinkkejä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_3_q13",
@@ -3681,21 +3865,27 @@ export const categories = [
           },
           {
             "id": "digiturva_4_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä turvallisen sovelluksen lataamisen askeleet oikeaan järjestykseen, jotta vältät digitaalisen ruosteen!",
-            "options": [
+            "correctAnswer": {
+              "Varmista ensin, että olet laitteen virallisessa sovelluskaupassa.": "1. vaihe",
+              "Etsi sieltä haluamasi uusi peli tai sovellus.": "2. vaihe",
+              "Tarkista sovelluksen saamat tähdet, arvostelut ja latausmäärät.": "3. vaihe",
+              "Lataa peli turvallisin mielin laitteellesi.": "4. vaihe"
+            },
+            "explanation": "Turvallisuus alkaa siitä, että olet oikeassa ja luotettavassa paikassa. Virallinen kauppa ja muiden pelaajien positiiviset kokemukset auttavat varmistamaan, ettei mukana tule pöpöjä.",
+            "draggables": [
               "Varmista ensin, että olet laitteen virallisessa sovelluskaupassa.",
               "Etsi sieltä haluamasi uusi peli tai sovellus.",
               "Tarkista sovelluksen saamat tähdet, arvostelut ja latausmäärät.",
               "Lataa peli turvallisin mielin laitteellesi."
             ],
-            "correctAnswer": [
-              "Varmista ensin, että olet laitteen virallisessa sovelluskaupassa.",
-              "Etsi sieltä haluamasi uusi peli tai sovellus.",
-              "Tarkista sovelluksen saamat tähdet, arvostelut ja latausmäärät.",
-              "Lataa peli turvallisin mielin laitteellesi."
-            ],
-            "explanation": "Turvallisuus alkaa siitä, että olet oikeassa ja luotettavassa paikassa. Virallinen kauppa ja muiden pelaajien positiiviset kokemukset auttavat varmistamaan, ettei mukana tule pöpöjä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_4_q5",
@@ -3805,21 +3995,27 @@ export const categories = [
           },
           {
             "id": "digiturva_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten laitteen puhdistus etenee, jos epäilet saaneesi siihen haittaohjelman (digitaalista ruostetta)? Järjestä toimet!",
-            "options": [
+            "correctAnswer": {
+              "Huomaat, että älylaitteesi alkaa toimia todella hitaasti ja oudosti.": "1. vaihe",
+              "Kerrot asiasta heti luotettavalle aikuiselle ilman viivyttelyä.": "2. vaihe",
+              "Aikuinen laittaa virustorjuntaohjelman etsimään ongelmaa.": "3. vaihe",
+              "Haittaohjelma poistetaan ja laite toimii jälleen normaalisti.": "4. vaihe"
+            },
+            "explanation": "Aikuinen auttaa aina ensin! Virustorjuntaohjelma on kuin digitaalinen pesusieni, joka osaa etsiä ja siivota haitallisen koodin eli \"ruosteen\" pois järjestelmästä.",
+            "draggables": [
               "Huomaat, että älylaitteesi alkaa toimia todella hitaasti ja oudosti.",
               "Kerrot asiasta heti luotettavalle aikuiselle ilman viivyttelyä.",
               "Aikuinen laittaa virustorjuntaohjelman etsimään ongelmaa.",
               "Haittaohjelma poistetaan ja laite toimii jälleen normaalisti."
             ],
-            "correctAnswer": [
-              "Huomaat, että älylaitteesi alkaa toimia todella hitaasti ja oudosti.",
-              "Kerrot asiasta heti luotettavalle aikuiselle ilman viivyttelyä.",
-              "Aikuinen laittaa virustorjuntaohjelman etsimään ongelmaa.",
-              "Haittaohjelma poistetaan ja laite toimii jälleen normaalisti."
-            ],
-            "explanation": "Aikuinen auttaa aina ensin! Virustorjuntaohjelma on kuin digitaalinen pesusieni, joka osaa etsiä ja siivota haitallisen koodin eli \"ruosteen\" pois järjestelmästä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_4_q13",
@@ -3905,21 +4101,27 @@ export const categories = [
           },
           {
             "id": "digiturva_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä fiksut toimenpiteet, kun näet netissä uskomattoman tai todella oudon videon! Miten paljastat mahdollisen valepukuisen liftarin askel askeleelta?",
-            "options": [
+            "correctAnswer": {
+              "Pysähdy ja mieti hetki rauhassa, voiko tämä video todella olla totta.": "1. vaihe",
+              "Etsi videosta outoja virheitä (kuten hassuja sormia tai outoja varjoja).": "2. vaihe",
+              "Tarkista muista luotettavista uutisista (kuten YLE), onko asia oikeasti tapahtunut.": "3. vaihe",
+              "Kerro aikuiselle tai kaverille, että kyseessä saattaa olla tekoälyhuijaus.": "4. vaihe"
+            },
+            "explanation": "Kriittinen ja fiksu medialukutaito alkaa aina pysähtymisestä ja päättyy aidon tiedon tarkistamiseen luotettavista lähteistä.",
+            "draggables": [
               "Pysähdy ja mieti hetki rauhassa, voiko tämä video todella olla totta.",
               "Etsi videosta outoja virheitä (kuten hassuja sormia tai outoja varjoja).",
               "Tarkista muista luotettavista uutisista (kuten YLE), onko asia oikeasti tapahtunut.",
               "Kerro aikuiselle tai kaverille, että kyseessä saattaa olla tekoälyhuijaus."
             ],
-            "correctAnswer": [
-              "Pysähdy ja mieti hetki rauhassa, voiko tämä video todella olla totta.",
-              "Etsi videosta outoja virheitä (kuten hassuja sormia tai outoja varjoja).",
-              "Tarkista muista luotettavista uutisista (kuten YLE), onko asia oikeasti tapahtunut.",
-              "Kerro aikuiselle tai kaverille, että kyseessä saattaa olla tekoälyhuijaus."
-            ],
-            "explanation": "Kriittinen ja fiksu medialukutaito alkaa aina pysähtymisestä ja päättyy aidon tiedon tarkistamiseen luotettavista lähteistä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_5_q5",
@@ -4030,21 +4232,27 @@ export const categories = [
           },
           {
             "id": "digiturva_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet \"valepukuisen liftarin\" luomiseen. Miten rosvo on tehnyt taitavan deepfake-videon julkkiksesta?",
-            "options": [
+            "correctAnswer": {
+              "Rosvo kerää netistä satoja oikeita kuvia ja videoita julkkiksesta.": "1. vaihe",
+              "Tekoäly opetetaan datan avulla tuntemaan henkilön kasvot ja ilmeet.": "2. vaihe",
+              "Rosvo antaa tekoälylle uuden tekstin ja pyytää sitä tekemään videon.": "3. vaihe",
+              "Tekoäly luo feikkivideon, jossa julkkis sanoo rosvon keksimiä asioita.": "4. vaihe"
+            },
+            "explanation": "Tekoäly voi luoda väärennöksen vain siksi, että sille annetaan valtavasti oikeaa kuva- ja äänidataa opiskeltavaksi. Sitten se osaa matkia kohdetta täydellisesti!",
+            "draggables": [
               "Rosvo kerää netistä satoja oikeita kuvia ja videoita julkkiksesta.",
               "Tekoäly opetetaan datan avulla tuntemaan henkilön kasvot ja ilmeet.",
               "Rosvo antaa tekoälylle uuden tekstin ja pyytää sitä tekemään videon.",
               "Tekoäly luo feikkivideon, jossa julkkis sanoo rosvon keksimiä asioita."
             ],
-            "correctAnswer": [
-              "Rosvo kerää netistä satoja oikeita kuvia ja videoita julkkiksesta.",
-              "Tekoäly opetetaan datan avulla tuntemaan henkilön kasvot ja ilmeet.",
-              "Rosvo antaa tekoälylle uuden tekstin ja pyytää sitä tekemään videon.",
-              "Tekoäly luo feikkivideon, jossa julkkis sanoo rosvon keksimiä asioita."
-            ],
-            "explanation": "Tekoäly voi luoda väärennöksen vain siksi, että sille annetaan valtavasti oikeaa kuva- ja äänidataa opiskeltavaksi. Sitten se osaa matkia kohdetta täydellisesti!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_5_q13",
@@ -4130,21 +4338,27 @@ export const categories = [
           },
           {
             "id": "digiturva_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeaan järjestykseen askeleet, kun näet tabletilla oudon ja pelottavan videon, joka saa sinut ahdistuneeksi.",
-            "options": [
+            "correctAnswer": {
+              "Sulje video tai laita laite rauhallisesti pois pöydälle.": "1. vaihe",
+              "Etsi heti käsiisi joku luotettava aikuinen (esim. vanhempi).": "2. vaihe",
+              "Kerro aikuiselle rehellisesti, mitä näit ja miltä se tuntui.": "3. vaihe",
+              "Aikuinen auttaa sinua ja estää pelottavan videon näkymisen jatkossa.": "4. vaihe"
+            },
+            "explanation": "Pelottavat asiat on tärkeä käsitellä yhdessä aikuisen kanssa. Näin paha mieli ei jää vaivaamaan ja laite saadaan tutkittua turvalliseksi.",
+            "draggables": [
               "Sulje video tai laita laite rauhallisesti pois pöydälle.",
               "Etsi heti käsiisi joku luotettava aikuinen (esim. vanhempi).",
               "Kerro aikuiselle rehellisesti, mitä näit ja miltä se tuntui.",
               "Aikuinen auttaa sinua ja estää pelottavan videon näkymisen jatkossa."
             ],
-            "correctAnswer": [
-              "Sulje video tai laita laite rauhallisesti pois pöydälle.",
-              "Etsi heti käsiisi joku luotettava aikuinen (esim. vanhempi).",
-              "Kerro aikuiselle rehellisesti, mitä näit ja miltä se tuntui.",
-              "Aikuinen auttaa sinua ja estää pelottavan videon näkymisen jatkossa."
-            ],
-            "explanation": "Pelottavat asiat on tärkeä käsitellä yhdessä aikuisen kanssa. Näin paha mieli ei jää vaivaamaan ja laite saadaan tutkittua turvalliseksi."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_6_q5",
@@ -4254,21 +4468,27 @@ export const categories = [
           },
           {
             "id": "digiturva_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Ystäväsi on surullinen, koska hän näki netissä jotain todella ahdistavaa, mutta hän ei uskalla kertoa siitä kenellekään. Järjestä, miten autat häntä!",
-            "options": [
+            "correctAnswer": {
+              "Kuuntelet ystävääsi rauhassa ja olet hänen tukenaan tilanteessa.": "1. vaihe",
+              "Kerrot hänelle, että pelottavista asioista ei tarvitse selvitä yksin.": "2. vaihe",
+              "Ehdottamalla, että menette yhdessä kertomaan asiasta aikuiselle.": "3. vaihe",
+              "Aikuinen auttaa teitä molempia ja poistaa ystäväsi pahan mielen.": "4. vaihe"
+            },
+            "explanation": "Joskus kaveria voi jännittää tai hävettää avun pyytäminen. Paras ystävä on sellainen, joka auttaa laittamaan hätävilkut päälle ja menee kaverin kanssa yhdessä aikuisen luo!",
+            "draggables": [
               "Kuuntelet ystävääsi rauhassa ja olet hänen tukenaan tilanteessa.",
               "Kerrot hänelle, että pelottavista asioista ei tarvitse selvitä yksin.",
               "Ehdottamalla, että menette yhdessä kertomaan asiasta aikuiselle.",
               "Aikuinen auttaa teitä molempia ja poistaa ystäväsi pahan mielen."
             ],
-            "correctAnswer": [
-              "Kuuntelet ystävääsi rauhassa ja olet hänen tukenaan tilanteessa.",
-              "Kerrot hänelle, että pelottavista asioista ei tarvitse selvitä yksin.",
-              "Ehdottamalla, että menette yhdessä kertomaan asiasta aikuiselle.",
-              "Aikuinen auttaa teitä molempia ja poistaa ystäväsi pahan mielen."
-            ],
-            "explanation": "Joskus kaveria voi jännittää tai hävettää avun pyytäminen. Paras ystävä on sellainen, joka auttaa laittamaan hätävilkut päälle ja menee kaverin kanssa yhdessä aikuisen luo!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "digiturva_6_q13",
@@ -4354,19 +4574,24 @@ export const categories = [
           },
           {
             "id": "digiturva_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Laita nämä tiedot järjestykseen: aloita siitä, minkä saa kertoa netissä kaikille, ja päätä siihen, mikä pitää salata ehdottomasti!",
-            "options": [
+            "correctAnswer": {
+              "Pelissä käyttämäsi keksitty nimimerkki": "1. vaihe",
+              "Oma etunimesi ja ikäsi": "2. vaihe",
+              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi": "3. vaihe"
+            },
+            "explanation": "Keksityt nimet ja lempivärit ovat täysin turvallisia. Sen sijaan tarkat asuinpaikat ja puhelinnumerot kuuluvat aina lukittuun hanskalokeroon!",
+            "draggables": [
               "Pelissä käyttämäsi keksitty nimimerkki",
               "Oma etunimesi ja ikäsi",
               "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
             ],
-            "correctAnswer": [
-              "Pelissä käyttämäsi keksitty nimimerkki",
-              "Oma etunimesi ja ikäsi",
-              "Koko nimesi, kotiosoitteesi ja puhelinnumerosi"
-            ],
-            "explanation": "Keksityt nimet ja lempivärit ovat täysin turvallisia. Sen sijaan tarkat asuinpaikat ja puhelinnumerot kuuluvat aina lukittuun hanskalokeroon!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "digiturva_7_q5",
@@ -4500,21 +4725,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä hyvän \"huoltotauon\" askeleet oikeaan järjestykseen, kun olet pelannut pitkään!",
-            "options": [
+            "correctAnswer": {
+              "Huomaat, että olet tuijottanut ruutua jo kauan.": "1. vaihe",
+              "Laitat pelilaitteen kokonaan kiinni ja sivuun.": "2. vaihe",
+              "Nouset ylös, venyttelet ja katsot kauas ulos.": "3. vaihe",
+              "Aivosi viilenevät ja olet taas täynnä energiaa.": "4. vaihe"
+            },
+            "explanation": "Ruututauko toimii parhaiten, kun laitat laitteen oikeasti pois, liikut hieman ja lepuutat silmiäsi katsomalla jonnekin kauas horisonttiin.",
+            "draggables": [
               "Huomaat, että olet tuijottanut ruutua jo kauan.",
               "Laitat pelilaitteen kokonaan kiinni ja sivuun.",
               "Nouset ylös, venyttelet ja katsot kauas ulos.",
               "Aivosi viilenevät ja olet taas täynnä energiaa."
             ],
-            "correctAnswer": [
-              "Huomaat, että olet tuijottanut ruutua jo kauan.",
-              "Laitat pelilaitteen kokonaan kiinni ja sivuun.",
-              "Nouset ylös, venyttelet ja katsot kauas ulos.",
-              "Aivosi viilenevät ja olet taas täynnä energiaa."
-            ],
-            "explanation": "Ruututauko toimii parhaiten, kun laitat laitteen oikeasti pois, liikut hieman ja lepuutat silmiäsi katsomalla jonnekin kauas horisonttiin."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_1_q5",
@@ -4625,21 +4856,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä aivojen terveellinen \"iltahuolto\" oikeaan järjestykseen ennen nukkumaanmenoa!",
-            "options": [
+            "correctAnswer": {
+              "Laitat kaikki digilaitteet ja ruudut kiinni tuntia ennen nukkumaanmenoa.": "1. vaihe",
+              "Teet rauhallisia asioita, kuten luet oikeaa kirjaa tai juttelet perheen kanssa.": "2. vaihe",
+              "Menet sänkyyn ja laitat silmät kiinni pimeässä huoneessa.": "3. vaihe",
+              "Aivosi saavat levätä yön yli ja olet aamulla taas virkeä!": "4. vaihe"
+            },
+            "explanation": "Paras tapa varmistaa hyvät ja palauttavat yöunet on antaa aivoille kunnon ruutuvapaa \"jäähdyttelytauko\" jo hyvissä ajoin ennen nukkumaanmenoa.",
+            "draggables": [
               "Laitat kaikki digilaitteet ja ruudut kiinni tuntia ennen nukkumaanmenoa.",
               "Teet rauhallisia asioita, kuten luet oikeaa kirjaa tai juttelet perheen kanssa.",
               "Menet sänkyyn ja laitat silmät kiinni pimeässä huoneessa.",
               "Aivosi saavat levätä yön yli ja olet aamulla taas virkeä!"
             ],
-            "correctAnswer": [
-              "Laitat kaikki digilaitteet ja ruudut kiinni tuntia ennen nukkumaanmenoa.",
-              "Teet rauhallisia asioita, kuten luet oikeaa kirjaa tai juttelet perheen kanssa.",
-              "Menet sänkyyn ja laitat silmät kiinni pimeässä huoneessa.",
-              "Aivosi saavat levätä yön yli ja olet aamulla taas virkeä!"
-            ],
-            "explanation": "Paras tapa varmistaa hyvät ja palauttavat yöunet on antaa aivoille kunnon ruutuvapaa \"jäähdyttelytauko\" jo hyvissä ajoin ennen nukkumaanmenoa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_1_q13",
@@ -4725,21 +4962,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä aivojen yölliset huoltotoimenpiteet oikeaan järjestykseen!",
-            "options": [
+            "correctAnswer": {
+              "Suljet silmät ja nukahdat syvään uneen.": "1. vaihe",
+              "Aivot alkavat lajitella päivän muistoja.": "2. vaihe",
+              "Turha tieto pyyhitään pois ja tärkeä tallennetaan.": "3. vaihe",
+              "Heräät virkeänä ja valmiina uusiin seikkailuihin.": "4. vaihe"
+            },
+            "explanation": "Uni on prosessi, joka vaatii aikaa. Lajittelu ja tallentaminen tapahtuvat vaiheittain, jotta aivosi ovat aamulla taas puhtaat ja nopeat.",
+            "draggables": [
               "Suljet silmät ja nukahdat syvään uneen.",
               "Aivot alkavat lajitella päivän muistoja.",
               "Turha tieto pyyhitään pois ja tärkeä tallennetaan.",
               "Heräät virkeänä ja valmiina uusiin seikkailuihin."
             ],
-            "correctAnswer": [
-              "Suljet silmät ja nukahdat syvään uneen.",
-              "Aivot alkavat lajitella päivän muistoja.",
-              "Turha tieto pyyhitään pois ja tärkeä tallennetaan.",
-              "Heräät virkeänä ja valmiina uusiin seikkailuihin."
-            ],
-            "explanation": "Uni on prosessi, joka vaatii aikaa. Lajittelu ja tallentaminen tapahtuvat vaiheittain, jotta aivosi ovat aamulla taas puhtaat ja nopeat."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_2_q5",
@@ -4850,21 +5093,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_2_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä täydellinen reitti hyviin yöuniin autotallin seikkailujen jälkeen!",
-            "options": [
+            "correctAnswer": {
+              "Lopeta vauhdikkaat pelit ja ruutuaika noin tunti ennen nukkumaanmenoa.": "1. vaihe",
+              "Syö terveellinen iltapala ja pese hampaat rauhassa.": "2. vaihe",
+              "Lue kirjaa tai kuuntele rauhallista tarinaa hämärässä huoneessa.": "3. vaihe",
+              "Laita silmät kiinni ja anna aivojen aloittaa tärkeä yöhuolto.": "4. vaihe"
+            },
+            "explanation": "Hyvät unet vaativat aina pienen valmistautumisen. Iltarutiinit ovat merkki aivoille siitä, että pian mennään nukkumaan.",
+            "draggables": [
               "Lopeta vauhdikkaat pelit ja ruutuaika noin tunti ennen nukkumaanmenoa.",
               "Syö terveellinen iltapala ja pese hampaat rauhassa.",
               "Lue kirjaa tai kuuntele rauhallista tarinaa hämärässä huoneessa.",
               "Laita silmät kiinni ja anna aivojen aloittaa tärkeä yöhuolto."
             ],
-            "correctAnswer": [
-              "Lopeta vauhdikkaat pelit ja ruutuaika noin tunti ennen nukkumaanmenoa.",
-              "Syö terveellinen iltapala ja pese hampaat rauhassa.",
-              "Lue kirjaa tai kuuntele rauhallista tarinaa hämärässä huoneessa.",
-              "Laita silmät kiinni ja anna aivojen aloittaa tärkeä yöhuolto."
-            ],
-            "explanation": "Hyvät unet vaativat aina pienen valmistautumisen. Iltarutiinit ovat merkki aivoille siitä, että pian mennään nukkumaan."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_2_q13",
@@ -4950,21 +5199,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miksi ikärajat ovat olemassa? Järjestä aivojen kasvamiseen liittyvät asiat loogiseen syy-seuraussuhteeseen!",
-            "options": [
+            "correctAnswer": {
+              "Lapsen aivot ovat vasta kehittymässä ja oppimassa maailmasta.": "1. vaihe",
+              "Liian jännittävät ja pelottavat asiat voivat jäädä kummittelemaan mieleen pitkäksi aikaa.": "2. vaihe",
+              "Siksi asiantuntijat ovat asettaneet peleille ja elokuville suojelulliset ikärajat.": "3. vaihe",
+              "Kun aivot kasvavat vanhemmiksi, ne pystyvät turvallisesti käsittelemään vaikeampia asioita.": "4. vaihe"
+            },
+            "explanation": "Ikärajat seuraavat biologista aivojen kasvua. Se mikä on aikuisen aivoille harmitonta viihdettä, voi olla lapsen aivoille todella ahdistavaa.",
+            "draggables": [
               "Lapsen aivot ovat vasta kehittymässä ja oppimassa maailmasta.",
               "Liian jännittävät ja pelottavat asiat voivat jäädä kummittelemaan mieleen pitkäksi aikaa.",
               "Siksi asiantuntijat ovat asettaneet peleille ja elokuville suojelulliset ikärajat.",
               "Kun aivot kasvavat vanhemmiksi, ne pystyvät turvallisesti käsittelemään vaikeampia asioita."
             ],
-            "correctAnswer": [
-              "Lapsen aivot ovat vasta kehittymässä ja oppimassa maailmasta.",
-              "Liian jännittävät ja pelottavat asiat voivat jäädä kummittelemaan mieleen pitkäksi aikaa.",
-              "Siksi asiantuntijat ovat asettaneet peleille ja elokuville suojelulliset ikärajat.",
-              "Kun aivot kasvavat vanhemmiksi, ne pystyvät turvallisesti käsittelemään vaikeampia asioita."
-            ],
-            "explanation": "Ikärajat seuraavat biologista aivojen kasvua. Se mikä on aikuisen aivoille harmitonta viihdettä, voi olla lapsen aivoille todella ahdistavaa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_3_q5",
@@ -5076,21 +5331,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Haluat ladata täysin uuden ja tuntemattoman pelin. Järjestä fiksut turvallisuusaskeleet aikajärjestykseen!",
-            "options": [
+            "correctAnswer": {
+              "Avaa turvallinen ja virallinen sovelluskauppa laitteellasi.": "1. vaihe",
+              "Tarkista pelin tietojen kohdalta sen virallinen ikäraja.": "2. vaihe",
+              "Mieti tai kysy aikuiselta, sopiiko peli todella sinun aivoillesi.": "3. vaihe",
+              "Lataa peli vasta, kun olet varma sen turvallisuudesta.": "4. vaihe"
+            },
+            "explanation": "Aivan kuten et kääntyisi autolla oudoille sivuteille tarkistamatta karttaa, älä koskaan lataa pelejä tarkistamatta ensin niiden ikärajaa.",
+            "draggables": [
               "Avaa turvallinen ja virallinen sovelluskauppa laitteellasi.",
               "Tarkista pelin tietojen kohdalta sen virallinen ikäraja.",
               "Mieti tai kysy aikuiselta, sopiiko peli todella sinun aivoillesi.",
               "Lataa peli vasta, kun olet varma sen turvallisuudesta."
             ],
-            "correctAnswer": [
-              "Avaa turvallinen ja virallinen sovelluskauppa laitteellasi.",
-              "Tarkista pelin tietojen kohdalta sen virallinen ikäraja.",
-              "Mieti tai kysy aikuiselta, sopiiko peli todella sinun aivoillesi.",
-              "Lataa peli vasta, kun olet varma sen turvallisuudesta."
-            ],
-            "explanation": "Aivan kuten et kääntyisi autolla oudoille sivuteille tarkistamatta karttaa, älä koskaan lataa pelejä tarkistamatta ensin niiden ikärajaa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_3_q13",
@@ -5176,21 +5437,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_4_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä toiminnot niin, että ne muodostavat parhaan mahdollisen \"aivojen huolto-ohjelman\" pitkän pelisession jälkeen!",
-            "options": [
+            "correctAnswer": {
+              "Sammuta ruutu ja laita pelilaite turvallisesti sivuun.": "1. vaihe",
+              "Nouse ylös tuolista ja pue ulkovaatteet päällesi.": "2. vaihe",
+              "Mene ulos pihalle ja hypi tai juokse hetki vauhdikkaasti.": "3. vaihe",
+              "Aivosi saavat raitista ilmaa ja olet taas täynnä energiaa.": "4. vaihe"
+            },
+            "explanation": "Siirtymä ruudulta ulos on paras tapa herättää aivot. Oikea liikunta antaa aivoille uutta virtaa paljon paremmin kuin mikään uusi peli!",
+            "draggables": [
               "Sammuta ruutu ja laita pelilaite turvallisesti sivuun.",
               "Nouse ylös tuolista ja pue ulkovaatteet päällesi.",
               "Mene ulos pihalle ja hypi tai juokse hetki vauhdikkaasti.",
               "Aivosi saavat raitista ilmaa ja olet taas täynnä energiaa."
             ],
-            "correctAnswer": [
-              "Sammuta ruutu ja laita pelilaite turvallisesti sivuun.",
-              "Nouse ylös tuolista ja pue ulkovaatteet päällesi.",
-              "Mene ulos pihalle ja hypi tai juokse hetki vauhdikkaasti.",
-              "Aivosi saavat raitista ilmaa ja olet taas täynnä energiaa."
-            ],
-            "explanation": "Siirtymä ruudulta ulos on paras tapa herättää aivot. Oikea liikunta antaa aivoille uutta virtaa paljon paremmin kuin mikään uusi peli!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_4_q5",
@@ -5300,21 +5567,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet jumissa vaikeassa pelikentässä etkä pääse millään eteenpäin. Järjestä askeleet fiksusti, kuinka ratkaiset aivojen jumin liikunnan avulla!",
-            "options": [
+            "correctAnswer": {
+              "Toteat, että aivosi ovat täysin jumissa pelin vaikeuden takia.": "1. vaihe",
+              "Laitat pelin pauselle ja lähdet kävelylle tai potkimaan palloa.": "2. vaihe",
+              "Aivosi rentoutuvat ulkona ja keksivät täysin uusia ratkaisuja.": "3. vaihe",
+              "Palaat takaisin peliin virkeänä ja pääset kentän läpi heti.": "4. vaihe"
+            },
+            "explanation": "Joskus paras tapa edetä pelissä on lopettaa se hetkeksi! Liikunta ja pieni tauko ruudusta auttavat aivoja ratkomaan jumitilanteet paljon tehokkaammin.",
+            "draggables": [
               "Toteat, että aivosi ovat täysin jumissa pelin vaikeuden takia.",
               "Laitat pelin pauselle ja lähdet kävelylle tai potkimaan palloa.",
               "Aivosi rentoutuvat ulkona ja keksivät täysin uusia ratkaisuja.",
               "Palaat takaisin peliin virkeänä ja pääset kentän läpi heti."
             ],
-            "correctAnswer": [
-              "Toteat, että aivosi ovat täysin jumissa pelin vaikeuden takia.",
-              "Laitat pelin pauselle ja lähdet kävelylle tai potkimaan palloa.",
-              "Aivosi rentoutuvat ulkona ja keksivät täysin uusia ratkaisuja.",
-              "Palaat takaisin peliin virkeänä ja pääset kentän läpi heti."
-            ],
-            "explanation": "Joskus paras tapa edetä pelissä on lopettaa se hetkeksi! Liikunta ja pieni tauko ruudusta auttavat aivoja ratkomaan jumitilanteet paljon tehokkaammin."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_4_q13",
@@ -5400,21 +5673,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä fiksut askeleet järjestykseen! Mitä teet, kun huomaat olevasi todella kiukkuinen hävityn pelin jälkeen ja tekee mieli heittää ohjain seinään?",
-            "options": [
+            "correctAnswer": {
+              "Huomaat, että peli aiheuttaa sinulle kiukkua ja todella pahaa mieltä.": "1. vaihe",
+              "Laitat ruudun kiinni ja lasket peliohjaimen turvallisesti sivuun.": "2. vaihe",
+              "Menet juttelemaan luotettavalle aikuiselle tunteistasi ja kiukustasi.": "3. vaihe",
+              "Huomaat, että aikuiselle puhuminen helpottaa ja paha mieli alkaa haihtua.": "4. vaihe"
+            },
+            "explanation": "Tunteita ei saa piilottaa ruutujen taakse. Pysäyttäminen, laitteen sammuttaminen ja \"oikealle apukuskille\" puhuminen on aivoterveydelle paras ratkaisu kiukun iskiessä!",
+            "draggables": [
               "Huomaat, että peli aiheuttaa sinulle kiukkua ja todella pahaa mieltä.",
               "Laitat ruudun kiinni ja lasket peliohjaimen turvallisesti sivuun.",
               "Menet juttelemaan luotettavalle aikuiselle tunteistasi ja kiukustasi.",
               "Huomaat, että aikuiselle puhuminen helpottaa ja paha mieli alkaa haihtua."
             ],
-            "correctAnswer": [
-              "Huomaat, että peli aiheuttaa sinulle kiukkua ja todella pahaa mieltä.",
-              "Laitat ruudun kiinni ja lasket peliohjaimen turvallisesti sivuun.",
-              "Menet juttelemaan luotettavalle aikuiselle tunteistasi ja kiukustasi.",
-              "Huomaat, että aikuiselle puhuminen helpottaa ja paha mieli alkaa haihtua."
-            ],
-            "explanation": "Tunteita ei saa piilottaa ruutujen taakse. Pysäyttäminen, laitteen sammuttaminen ja \"oikealle apukuskille\" puhuminen on aivoterveydelle paras ratkaisu kiukun iskiessä!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_5_q5",
@@ -5525,21 +5804,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten toimit viisaasti, kun autossa matkustaessa alkaa ärsyttää ja tylsistyttää pitkä ajomatka todella paljon? Järjestä aivojen kannalta paras reitti!",
-            "options": [
+            "correctAnswer": {
+              "Huomaat, että olet kiukkuinen pitkän istumisen ja tylsyyden takia.": "1. vaihe",
+              "Sen sijaan että uppoutuisit takaisin ruutuun, kerrot tunteestasi muille autossa.": "2. vaihe",
+              "Keksitte yhdessä aikuisten kanssa jotain hauskaa yhteistä tekemistä tai juteltavaa.": "3. vaihe",
+              "Tylsyys muuttuukin yllättäen kivaksi yhteiseksi hetkeksi oikeiden ihmisten kanssa.": "4. vaihe"
+            },
+            "explanation": "Puhuminen kannattaa aina! Kun kerrot ääneen \"apukuskeille\" että nyt on tylsää, voitte keksiä yhdessä vanhan ajan autoleikkejä tai kuunnella musiikkia ilman ruutuihin pakenemista.",
+            "draggables": [
               "Huomaat, että olet kiukkuinen pitkän istumisen ja tylsyyden takia.",
               "Sen sijaan että uppoutuisit takaisin ruutuun, kerrot tunteestasi muille autossa.",
               "Keksitte yhdessä aikuisten kanssa jotain hauskaa yhteistä tekemistä tai juteltavaa.",
               "Tylsyys muuttuukin yllättäen kivaksi yhteiseksi hetkeksi oikeiden ihmisten kanssa."
             ],
-            "correctAnswer": [
-              "Huomaat, että olet kiukkuinen pitkän istumisen ja tylsyyden takia.",
-              "Sen sijaan että uppoutuisit takaisin ruutuun, kerrot tunteestasi muille autossa.",
-              "Keksitte yhdessä aikuisten kanssa jotain hauskaa yhteistä tekemistä tai juteltavaa.",
-              "Tylsyys muuttuukin yllättäen kivaksi yhteiseksi hetkeksi oikeiden ihmisten kanssa."
-            ],
-            "explanation": "Puhuminen kannattaa aina! Kun kerrot ääneen \"apukuskeille\" että nyt on tylsää, voitte keksiä yhdessä vanhan ajan autoleikkejä tai kuunnella musiikkia ilman ruutuihin pakenemista."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_5_q13",
@@ -5625,21 +5910,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä toiminnot niin, että aivot pysyvät \"oikealla kaistalla\" ja keskittyminen on parhaimmillaan.",
-            "options": [
+            "correctAnswer": {
+              "Päätä, minkä yhden asian aiot tehdä nyt valmiiksi.": "1. vaihe",
+              "Laita puhelin ja muut häiriöt kokonaan pois näkyviltä.": "2. vaihe",
+              "Keskity vain tähän yhteen tehtävään, kunnes se on valmis.": "3. vaihe",
+              "Pidä pieni tauko, ennen kuin aloitat seuraavan asian.": "4. vaihe"
+            },
+            "explanation": "Keskittyminen on helpompaa, kun tiedät mitä teet ja poistat häiriöt. Yksi asia kerrallaan on aivojen nopein reitti maaliin!",
+            "draggables": [
               "Päätä, minkä yhden asian aiot tehdä nyt valmiiksi.",
               "Laita puhelin ja muut häiriöt kokonaan pois näkyviltä.",
               "Keskity vain tähän yhteen tehtävään, kunnes se on valmis.",
               "Pidä pieni tauko, ennen kuin aloitat seuraavan asian."
             ],
-            "correctAnswer": [
-              "Päätä, minkä yhden asian aiot tehdä nyt valmiiksi.",
-              "Laita puhelin ja muut häiriöt kokonaan pois näkyviltä.",
-              "Keskity vain tähän yhteen tehtävään, kunnes se on valmis.",
-              "Pidä pieni tauko, ennen kuin aloitat seuraavan asian."
-            ],
-            "explanation": "Keskittyminen on helpompaa, kun tiedät mitä teet ja poistat häiriöt. Yksi asia kerrallaan on aivojen nopein reitti maaliin!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_6_q5",
@@ -5752,21 +6043,27 @@ export const categories = [
           },
           {
             "id": "aivoterveys_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä päivän tehtävät fiksusti: miten aivot pysyvät tehokkaina aamusta iltaan?",
-            "options": [
+            "correctAnswer": {
+              "Tee vaikein ja tärkein tehtävä heti aamulla.": "1. vaihe",
+              "Pidä kunnon liikuntatauko ja haukkaa happea välissä.": "2. vaihe",
+              "Tee helpommat rutiinitehtävät vasta myöhemmin.": "3. vaihe",
+              "Sammuta ruudut hyvissä ajoin ennen nukkumaanmenoa.": "4. vaihe"
+            },
+            "explanation": "Aivot ovat yleensä parhaimmillaan aamulla. Siksi vaikeat asiat kannattaa hoitaa alta pois, kun keskittymisenergiaa on vielä paljon jäljellä.",
+            "draggables": [
               "Tee vaikein ja tärkein tehtävä heti aamulla.",
               "Pidä kunnon liikuntatauko ja haukkaa happea välissä.",
               "Tee helpommat rutiinitehtävät vasta myöhemmin.",
               "Sammuta ruudut hyvissä ajoin ennen nukkumaanmenoa."
             ],
-            "correctAnswer": [
-              "Tee vaikein ja tärkein tehtävä heti aamulla.",
-              "Pidä kunnon liikuntatauko ja haukkaa happea välissä.",
-              "Tee helpommat rutiinitehtävät vasta myöhemmin.",
-              "Sammuta ruudut hyvissä ajoin ennen nukkumaanmenoa."
-            ],
-            "explanation": "Aivot ovat yleensä parhaimmillaan aamulla. Siksi vaikeat asiat kannattaa hoitaa alta pois, kun keskittymisenergiaa on vielä paljon jäljellä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_6_q13",
@@ -5852,19 +6149,24 @@ export const categories = [
           },
           {
             "id": "aivoterveys_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä aivojen yöllisen huollon (unen) askeleet oikeaan järjestykseen!",
-            "options": [
+            "correctAnswer": {
+              "Laitteiden sininen valo sammutetaan tuntia ennen nukkumaanmenoa.": "1. vaihe",
+              "Silmät suljetaan ja nukahdetaan syvään 9–11 tunnin uneen.": "2. vaihe",
+              "Aivot siivoavat yöllä turhat tiedot pois ja tallentavat päivän tärkeät opit muistiin.": "3. vaihe"
+            },
+            "explanation": "Uni on aivojen vilkkain huoltohetki. Jotta aivot ymmärtävät aloittaa huollon, ruutujen kirkas ja aivoja huijaava valo pitää laittaa ajoissa parkkiin!",
+            "draggables": [
               "Laitteiden sininen valo sammutetaan tuntia ennen nukkumaanmenoa.",
               "Silmät suljetaan ja nukahdetaan syvään 9–11 tunnin uneen.",
               "Aivot siivoavat yöllä turhat tiedot pois ja tallentavat päivän tärkeät opit muistiin."
             ],
-            "correctAnswer": [
-              "Laitteiden sininen valo sammutetaan tuntia ennen nukkumaanmenoa.",
-              "Silmät suljetaan ja nukahdetaan syvään 9–11 tunnin uneen.",
-              "Aivot siivoavat yöllä turhat tiedot pois ja tallentavat päivän tärkeät opit muistiin."
-            ],
-            "explanation": "Uni on aivojen vilkkain huoltohetki. Jotta aivot ymmärtävät aloittaa huollon, ruutujen kirkas ja aivoja huijaava valo pitää laittaa ajoissa parkkiin!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ]
           },
           {
             "id": "aivoterveys_7_q5",
@@ -5998,21 +6300,27 @@ export const categories = [
           },
           {
             "id": "arjessa_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten kasvojentunnistus oikein toimii? Järjestä askeleet järjestykseen, kun avaat puhelimesi lukituksen automatkalla!",
-            "options": [
+            "correctAnswer": {
+              "Katsot puhelimesi kameraan ja se nappaa sinusta kuvan.": "1. vaihe",
+              "Tekoäly skannaa kasvojesi muodot, kuten silmien etäisyyden.": "2. vaihe",
+              "Ohjelma vertaa mittoja puhelimen omistajan tallennettuun kuvaan.": "3. vaihe",
+              "Tekoäly huomaa sinun olevan oikea omistaja ja avaa lukituksen.": "4. vaihe"
+            },
+            "explanation": "Kasvojentunnistus käyttää salapoliisityötä! Se ei katso vain ihonväriä tai tukkaa, vaan kasvojen tarkkoja mittasuhteita varmistaakseen, että olet oikeasti sinä.",
+            "draggables": [
               "Katsot puhelimesi kameraan ja se nappaa sinusta kuvan.",
               "Tekoäly skannaa kasvojesi muodot, kuten silmien etäisyyden.",
               "Ohjelma vertaa mittoja puhelimen omistajan tallennettuun kuvaan.",
               "Tekoäly huomaa sinun olevan oikea omistaja ja avaa lukituksen."
             ],
-            "correctAnswer": [
-              "Katsot puhelimesi kameraan ja se nappaa sinusta kuvan.",
-              "Tekoäly skannaa kasvojesi muodot, kuten silmien etäisyyden.",
-              "Ohjelma vertaa mittoja puhelimen omistajan tallennettuun kuvaan.",
-              "Tekoäly huomaa sinun olevan oikea omistaja ja avaa lukituksen."
-            ],
-            "explanation": "Kasvojentunnistus käyttää salapoliisityötä! Se ei katso vain ihonväriä tai tukkaa, vaan kasvojen tarkkoja mittasuhteita varmistaakseen, että olet oikeasti sinä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_1_q5",
@@ -6121,21 +6429,27 @@ export const categories = [
           },
           {
             "id": "arjessa_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten ääniavustaja toimii, kun pyydät siltä automatkalla uutta vitsiä? Järjestä askeleet fiksusti!",
-            "options": [
+            "correctAnswer": {
+              "Sanot herätyssanan (esim. 'Hei Siri') ja pyydät vitsiä ääneen.": "1. vaihe",
+              "Mikrofoni kuuntelee äänesi ja muuttaa sen digitaaliseksi tiedoksi.": "2. vaihe",
+              "Tekoäly ymmärtää pyyntösi ja etsii tietopankistaan sopivan vitsin.": "3. vaihe",
+              "Puhelimen kaiutin kertoo sinulle todella hauskan vitsin autoista.": "4. vaihe"
+            },
+            "explanation": "Avustaja odottaa aina omaa nimeään! Kun se herää, se nauhoittaa, ymmärtää ja toteuttaa käskysi uskomattoman nopeasti sekunnin murto-osissa.",
+            "draggables": [
               "Sanot herätyssanan (esim. 'Hei Siri') ja pyydät vitsiä ääneen.",
               "Mikrofoni kuuntelee äänesi ja muuttaa sen digitaaliseksi tiedoksi.",
               "Tekoäly ymmärtää pyyntösi ja etsii tietopankistaan sopivan vitsin.",
               "Puhelimen kaiutin kertoo sinulle todella hauskan vitsin autoista."
             ],
-            "correctAnswer": [
-              "Sanot herätyssanan (esim. 'Hei Siri') ja pyydät vitsiä ääneen.",
-              "Mikrofoni kuuntelee äänesi ja muuttaa sen digitaaliseksi tiedoksi.",
-              "Tekoäly ymmärtää pyyntösi ja etsii tietopankistaan sopivan vitsin.",
-              "Puhelimen kaiutin kertoo sinulle todella hauskan vitsin autoista."
-            ],
-            "explanation": "Avustaja odottaa aina omaa nimeään! Kun se herää, se nauhoittaa, ymmärtää ja toteuttaa käskysi uskomattoman nopeasti sekunnin murto-osissa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_1_q13",
@@ -6221,21 +6535,27 @@ export const categories = [
           },
           {
             "id": "arjessa_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä \"ruutuajan taikatempun\" askeleet. Miten algoritmi oppii ehdottamaan sinulle hyviä videoita autotallissa?",
-            "options": [
+            "correctAnswer": {
+              "Katsot videon hassusta kissasta ajamassa isoa leluautoa.": "1. vaihe",
+              "Tekoäly tallentaa muistiin, että pidät todella kissa- ja autovideoista.": "2. vaihe",
+              "Tekoäly etsii valtavasta videokirjastosta lisää samanlaisia videoita.": "3. vaihe",
+              "Ruudulle ilmestyy ehdotuksia muista eläimistä ja hienoista autoista.": "4. vaihe"
+            },
+            "explanation": "Algoritmin työ alkaa aina sinun toiminnastasi. Se seuraa valintojasi, etsii samankaltaisuuksia tietokannasta ja tarjoaa sen perusteella uutta katsottavaa.",
+            "draggables": [
               "Katsot videon hassusta kissasta ajamassa isoa leluautoa.",
               "Tekoäly tallentaa muistiin, että pidät todella kissa- ja autovideoista.",
               "Tekoäly etsii valtavasta videokirjastosta lisää samanlaisia videoita.",
               "Ruudulle ilmestyy ehdotuksia muista eläimistä ja hienoista autoista."
             ],
-            "correctAnswer": [
-              "Katsot videon hassusta kissasta ajamassa isoa leluautoa.",
-              "Tekoäly tallentaa muistiin, että pidät todella kissa- ja autovideoista.",
-              "Tekoäly etsii valtavasta videokirjastosta lisää samanlaisia videoita.",
-              "Ruudulle ilmestyy ehdotuksia muista eläimistä ja hienoista autoista."
-            ],
-            "explanation": "Algoritmin työ alkaa aina sinun toiminnastasi. Se seuraa valintojasi, etsii samankaltaisuuksia tietokannasta ja tarjoaa sen perusteella uutta katsottavaa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_2_q5",
@@ -6344,21 +6664,27 @@ export const categories = [
           },
           {
             "id": "arjessa_2_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten joudut huomaamattasi \"ruutuajan taikatemppuun\" ja valvot vahingossa aivan liian pitkään? Järjestä tapahtumat yleisimpään aikajärjestykseen!",
-            "options": [
+            "correctAnswer": {
+              "Katsot automatkalla yhden kivan viiden minuutin pituisen videon aluksi.": "1. vaihe",
+              "Tekoäly laittaa seuraavan, vielä jännittävämmän videon automaattisesti päälle.": "2. vaihe",
+              "Innostut aiheesta ja katsot yhä useampia uusia videoita peräkkäin ilman taukoa.": "3. vaihe",
+              "Huomaat yllättäen ja täysin järkyttyneenä, että aikaa onkin kulunut jo kaksi tuntia!": "4. vaihe"
+            },
+            "explanation": "Algoritmin tehtävä on tehdä ruutuajasta taianomaista ja helposti koukuttavaa. Kun seuraava video alkaa heti automaattisesti, silmiä on todella vaikea irrottaa ruudusta ajoissa!",
+            "draggables": [
               "Katsot automatkalla yhden kivan viiden minuutin pituisen videon aluksi.",
               "Tekoäly laittaa seuraavan, vielä jännittävämmän videon automaattisesti päälle.",
               "Innostut aiheesta ja katsot yhä useampia uusia videoita peräkkäin ilman taukoa.",
               "Huomaat yllättäen ja täysin järkyttyneenä, että aikaa onkin kulunut jo kaksi tuntia!"
             ],
-            "correctAnswer": [
-              "Katsot automatkalla yhden kivan viiden minuutin pituisen videon aluksi.",
-              "Tekoäly laittaa seuraavan, vielä jännittävämmän videon automaattisesti päälle.",
-              "Innostut aiheesta ja katsot yhä useampia uusia videoita peräkkäin ilman taukoa.",
-              "Huomaat yllättäen ja täysin järkyttyneenä, että aikaa onkin kulunut jo kaksi tuntia!"
-            ],
-            "explanation": "Algoritmin tehtävä on tehdä ruutuajasta taianomaista ja helposti koukuttavaa. Kun seuraava video alkaa heti automaattisesti, silmiä on todella vaikea irrottaa ruudusta ajoissa!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_2_q13",
@@ -6444,21 +6770,27 @@ export const categories = [
           },
           {
             "id": "arjessa_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet! Kuinka tekoäly ohjaa vastustaja-autoa pelissä, kun lähestyt sitä takaapäin?",
-            "options": [
+            "correctAnswer": {
+              "Tekoäly huomaa pelimoottorin kautta, että autosi on lähellä.": "1. vaihe",
+              "Tekoäly laskee pelin sääntöjen avulla, kuinka nopeasti ajat.": "2. vaihe",
+              "Tekoäly antaa vastustaja-autolle käskyn painaa kaasua ja väistää.": "3. vaihe",
+              "Vastustaja-auto kiihdyttää karkuun aivan silmiesi edessä.": "4. vaihe"
+            },
+            "explanation": "Tekoäly havainnoi pelimaailmaa matematiikan avulla. Ensin se huomaa etäisyyden, sitten se tekee laskelmat ja lopuksi se suorittaa toiminnon (kuten väistämisen).",
+            "draggables": [
               "Tekoäly huomaa pelimoottorin kautta, että autosi on lähellä.",
               "Tekoäly laskee pelin sääntöjen avulla, kuinka nopeasti ajat.",
               "Tekoäly antaa vastustaja-autolle käskyn painaa kaasua ja väistää.",
               "Vastustaja-auto kiihdyttää karkuun aivan silmiesi edessä."
             ],
-            "correctAnswer": [
-              "Tekoäly huomaa pelimoottorin kautta, että autosi on lähellä.",
-              "Tekoäly laskee pelin sääntöjen avulla, kuinka nopeasti ajat.",
-              "Tekoäly antaa vastustaja-autolle käskyn painaa kaasua ja väistää.",
-              "Vastustaja-auto kiihdyttää karkuun aivan silmiesi edessä."
-            ],
-            "explanation": "Tekoäly havainnoi pelimaailmaa matematiikan avulla. Ensin se huomaa etäisyyden, sitten se tekee laskelmat ja lopuksi se suorittaa toiminnon (kuten väistämisen)."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_3_q5",
@@ -6567,21 +6899,27 @@ export const categories = [
           },
           {
             "id": "arjessa_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten tekoäly \"näkee\" pelimaailman ja tekee päätöksen tulla kohti? Järjestä vaiheet loogisesti!",
-            "options": [
+            "correctAnswer": {
+              "Pelaaja siirtyy tietämättään tekoälyvihollisen virtuaaliseen näkökenttään.": "1. vaihe",
+              "Tekoälyn sensoriohjelma huomaa pelaajan sijainnin koordinaatit numerona.": "2. vaihe",
+              "Tekoäly valitsee ohjesääntöjensä perusteella parhaan hyökkäystavan.": "3. vaihe",
+              "Tekoälyhahmo aloittaa hyökkäysanimaation pelaajaa kohti.": "4. vaihe"
+            },
+            "explanation": "Tekoälyllä on omat koodatut \"silmät ja korvat\". Ensin sen pitää havaita pelaaja matemaattisten koordinaattien avulla, sitten valita oikea toiminto sääntöjen listasta, ja lopuksi suorittaa animaatio!",
+            "draggables": [
               "Pelaaja siirtyy tietämättään tekoälyvihollisen virtuaaliseen näkökenttään.",
               "Tekoälyn sensoriohjelma huomaa pelaajan sijainnin koordinaatit numerona.",
               "Tekoäly valitsee ohjesääntöjensä perusteella parhaan hyökkäystavan.",
               "Tekoälyhahmo aloittaa hyökkäysanimaation pelaajaa kohti."
             ],
-            "correctAnswer": [
-              "Pelaaja siirtyy tietämättään tekoälyvihollisen virtuaaliseen näkökenttään.",
-              "Tekoälyn sensoriohjelma huomaa pelaajan sijainnin koordinaatit numerona.",
-              "Tekoäly valitsee ohjesääntöjensä perusteella parhaan hyökkäystavan.",
-              "Tekoälyhahmo aloittaa hyökkäysanimaation pelaajaa kohti."
-            ],
-            "explanation": "Tekoälyllä on omat koodatut \"silmät ja korvat\". Ensin sen pitää havaita pelaaja matemaattisten koordinaattien avulla, sitten valita oikea toiminto sääntöjen listasta, ja lopuksi suorittaa animaatio!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_3_q13",
@@ -6667,21 +7005,27 @@ export const categories = [
           },
           {
             "id": "arjessa_4_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä vaiheet loogisesti! Miten robotti-imuri oppii siivoamaan uuden, täysin tuntemattoman autotallin ensimmäistä kertaa?",
-            "options": [
+            "correctAnswer": {
+              "Robotti lähtee liikkeelle ja skannaa ympäristöään sensoreilla.": "1. vaihe",
+              "Se piirtää tekoälynsä muistiin digitaalisen kartan seinistä ja esteistä.": "2. vaihe",
+              "Se laskee fiksuimman ja nopeimman reitin imuroida koko lattia.": "3. vaihe",
+              "Se muistaa oppimansa kartan ja siivoaa huoneen ensi kerralla nopeammin.": "4. vaihe"
+            },
+            "explanation": "Tekoälyn vahvuus on oppiminen! Ensimmäisellä kerralla imuri on hieman hidas, koska se kartoittaa tilaa. Seuraavilla kerroilla se on jo täysi mestari oman karttansa ansiosta.",
+            "draggables": [
               "Robotti lähtee liikkeelle ja skannaa ympäristöään sensoreilla.",
               "Se piirtää tekoälynsä muistiin digitaalisen kartan seinistä ja esteistä.",
               "Se laskee fiksuimman ja nopeimman reitin imuroida koko lattia.",
               "Se muistaa oppimansa kartan ja siivoaa huoneen ensi kerralla nopeammin."
             ],
-            "correctAnswer": [
-              "Robotti lähtee liikkeelle ja skannaa ympäristöään sensoreilla.",
-              "Se piirtää tekoälynsä muistiin digitaalisen kartan seinistä ja esteistä.",
-              "Se laskee fiksuimman ja nopeimman reitin imuroida koko lattia.",
-              "Se muistaa oppimansa kartan ja siivoaa huoneen ensi kerralla nopeammin."
-            ],
-            "explanation": "Tekoälyn vahvuus on oppiminen! Ensimmäisellä kerralla imuri on hieman hidas, koska se kartoittaa tilaa. Seuraavilla kerroilla se on jo täysi mestari oman karttansa ansiosta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_4_q5",
@@ -6791,21 +7135,27 @@ export const categories = [
           },
           {
             "id": "arjessa_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten älykoti ja sen tekoäly toimivat yhdessä askeleittain, kun tulet AI vanilla takaisin kotiin pitkän matkan jälkeen illalla? Järjestä tapahtumat!",
-            "options": [
+            "correctAnswer": {
+              "Autosi lähestyy kotia ja jakaa GPS-sijaintitietonsa kodin tekoälylle.": "1. vaihe",
+              "Älykoti päättelee matkasta, että perhe on saapumassa aivan pian takaisin pihaan.": "2. vaihe",
+              "Tekoäly napsauttaa autotallin pihavalot valmiiksi päälle turvallista parkkeerausta varten.": "3. vaihe",
+              "Älylukko aukeaa automaattisesti, kun se tunnistaa tutun puhelimesi kotiovella.": "4. vaihe"
+            },
+            "explanation": "Kun kaikki laitteet (\"Internet of Things\") keskustelevat fiksusti keskenään, koti tietää jo ennalta, mitä sen asukkaat tarvitsevat!",
+            "draggables": [
               "Autosi lähestyy kotia ja jakaa GPS-sijaintitietonsa kodin tekoälylle.",
               "Älykoti päättelee matkasta, että perhe on saapumassa aivan pian takaisin pihaan.",
               "Tekoäly napsauttaa autotallin pihavalot valmiiksi päälle turvallista parkkeerausta varten.",
               "Älylukko aukeaa automaattisesti, kun se tunnistaa tutun puhelimesi kotiovella."
             ],
-            "correctAnswer": [
-              "Autosi lähestyy kotia ja jakaa GPS-sijaintitietonsa kodin tekoälylle.",
-              "Älykoti päättelee matkasta, että perhe on saapumassa aivan pian takaisin pihaan.",
-              "Tekoäly napsauttaa autotallin pihavalot valmiiksi päälle turvallista parkkeerausta varten.",
-              "Älylukko aukeaa automaattisesti, kun se tunnistaa tutun puhelimesi kotiovella."
-            ],
-            "explanation": "Kun kaikki laitteet (\"Internet of Things\") keskustelevat fiksusti keskenään, koti tietää jo ennalta, mitä sen asukkaat tarvitsevat!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_4_q13",
@@ -6891,21 +7241,27 @@ export const categories = [
           },
           {
             "id": "arjessa_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet AI vanilla ulkomailla ja näet vieraskielisen kyltin huoltoasemalla. Miten kamerakäännös toimii askeleittain?",
-            "options": [
+            "correctAnswer": {
+              "Osoitat puhelimen kameralla outoa ja vieraskielistä kylttiä.": "1. vaihe",
+              "Tekoäly tunnistaa kirjaimet ja sanat suoraan kuvan pikseleistä.": "2. vaihe",
+              "Kääntäjä etsii vieraille sanoille oikeat suomenkieliset vastineet.": "3. vaihe",
+              "Käännetty suomenkielinen teksti ilmestyy puhelimesi ruudulle.": "4. vaihe"
+            },
+            "explanation": "Kamerakäännös on huikea taikatemppu! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti.",
+            "draggables": [
               "Osoitat puhelimen kameralla outoa ja vieraskielistä kylttiä.",
               "Tekoäly tunnistaa kirjaimet ja sanat suoraan kuvan pikseleistä.",
               "Kääntäjä etsii vieraille sanoille oikeat suomenkieliset vastineet.",
               "Käännetty suomenkielinen teksti ilmestyy puhelimesi ruudulle."
             ],
-            "correctAnswer": [
-              "Osoitat puhelimen kameralla outoa ja vieraskielistä kylttiä.",
-              "Tekoäly tunnistaa kirjaimet ja sanat suoraan kuvan pikseleistä.",
-              "Kääntäjä etsii vieraille sanoille oikeat suomenkieliset vastineet.",
-              "Käännetty suomenkielinen teksti ilmestyy puhelimesi ruudulle."
-            ],
-            "explanation": "Kamerakäännös on huikea taikatemppu! Ensin tekoälyn hahmontunnistus lukee tekstin kuvasta, ja sitten kääntäjäohjelma vaihtaa sen ymmärtämällesi kielelle salamannopeasti."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_5_q5",
@@ -7014,21 +7370,27 @@ export const categories = [
           },
           {
             "id": "arjessa_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä vaiheet loogiseen järjestykseen! Miten uuden kielen oppiminen etenee fiksusti, kun käytät älykästä ja mukautuvaa kielisovellusta apuna automatkalla?",
-            "options": [
+            "correctAnswer": {
+              "Avaat älykkään kielisovelluksen puhelimellasi ja aloitat harjoittelun.": "1. vaihe",
+              "Sovellus kysyy sinulta kielen uusia sanoja ja lauseita pelillisten tehtävien avulla.": "2. vaihe",
+              "Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä.": "3. vaihe",
+              "Opit uuden kielen tehokkaasti, koska tekoäly teki harjoittelusta täysin sinulle räätälöityä!": "4. vaihe"
+            },
+            "explanation": "Parhaat kielenoppimissovellukset käyttävät mukautuvaa koneoppimista. Tekoäly huomaa tarkasti, missä olet jo hyvä ja mitä sanoja sinun pitää vielä treenata paljon lisää!",
+            "draggables": [
               "Avaat älykkään kielisovelluksen puhelimellasi ja aloitat harjoittelun.",
               "Sovellus kysyy sinulta kielen uusia sanoja ja lauseita pelillisten tehtävien avulla.",
               "Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä.",
               "Opit uuden kielen tehokkaasti, koska tekoäly teki harjoittelusta täysin sinulle räätälöityä!"
             ],
-            "correctAnswer": [
-              "Avaat älykkään kielisovelluksen puhelimellasi ja aloitat harjoittelun.",
-              "Sovellus kysyy sinulta kielen uusia sanoja ja lauseita pelillisten tehtävien avulla.",
-              "Tekoäly huomaa ne asiat joissa teet paljon virheitä, ja laittaa sinut kertaamaan juuri niitä.",
-              "Opit uuden kielen tehokkaasti, koska tekoäly teki harjoittelusta täysin sinulle räätälöityä!"
-            ],
-            "explanation": "Parhaat kielenoppimissovellukset käyttävät mukautuvaa koneoppimista. Tekoäly huomaa tarkasti, missä olet jo hyvä ja mitä sanoja sinun pitää vielä treenata paljon lisää!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_5_q13",
@@ -7114,21 +7476,27 @@ export const categories = [
           },
           {
             "id": "arjessa_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet aikajärjestykseen! Miten navigaattori oppii, että moottoritiellä on ruuhka, ja varoittaa sinua?",
-            "options": [
+            "correctAnswer": {
+              "Sata ihmistä ajaa samalla moottoritiellä navigaattorit päällä.": "1. vaihe",
+              "Autojono joutuu yllättäen hidastamaan vauhtia kolarin takia.": "2. vaihe",
+              "Ihmisten puhelimet lähettävät tekoälylle automaattisesti tiedon hidastuneesta vauhdista.": "3. vaihe",
+              "Tekoäly värjää kyseisen tienkohdan punaiseksi muiden navigaattoreissa varoituksena.": "4. vaihe"
+            },
+            "explanation": "Tämä on mahtava esimerkki joukkoälystä! Kaikki tiellä olijat auttavat huomaamattaan toisiaan jakamalla sijaintitietoa tekoälylle.",
+            "draggables": [
               "Sata ihmistä ajaa samalla moottoritiellä navigaattorit päällä.",
               "Autojono joutuu yllättäen hidastamaan vauhtia kolarin takia.",
               "Ihmisten puhelimet lähettävät tekoälylle automaattisesti tiedon hidastuneesta vauhdista.",
               "Tekoäly värjää kyseisen tienkohdan punaiseksi muiden navigaattoreissa varoituksena."
             ],
-            "correctAnswer": [
-              "Sata ihmistä ajaa samalla moottoritiellä navigaattorit päällä.",
-              "Autojono joutuu yllättäen hidastamaan vauhtia kolarin takia.",
-              "Ihmisten puhelimet lähettävät tekoälylle automaattisesti tiedon hidastuneesta vauhdista.",
-              "Tekoäly värjää kyseisen tienkohdan punaiseksi muiden navigaattoreissa varoituksena."
-            ],
-            "explanation": "Tämä on mahtava esimerkki joukkoälystä! Kaikki tiellä olijat auttavat huomaamattaan toisiaan jakamalla sijaintitietoa tekoälylle."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_6_q5",
@@ -7237,21 +7605,27 @@ export const categories = [
           },
           {
             "id": "arjessa_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Robottiauto on parkissa autotallissa ja sen pitää lähteä liikkeelle. Järjestä tekoälyn aamuherätys askelettain!",
-            "options": [
+            "correctAnswer": {
+              "Auto käynnistää kaikki kameransa ja lasertutkansa (LiDAR).": "1. vaihe",
+              "Tekoäly rakentaa kuvan autotallin seinistä ja esteistä.": "2. vaihe",
+              "Auto yhdistää navigaattorin ja etsii nopeimman reitin tielle.": "3. vaihe",
+              "Tekoäly laittaa pyörät rullaamaan ja ohjaa auton turvallisesti ovesta ulos.": "4. vaihe"
+            },
+            "explanation": "Auton täytyy ensin nähdä ympäristönsä ja löytää reittinsä (kartta), ennen kuin se uskaltaa siirtää senttiäkään omia renkaitaan!",
+            "draggables": [
               "Auto käynnistää kaikki kameransa ja lasertutkansa (LiDAR).",
               "Tekoäly rakentaa kuvan autotallin seinistä ja esteistä.",
               "Tekoäly laittaa pyörät rullaamaan ja ohjaa auton turvallisesti ovesta ulos.",
               "Auto yhdistää navigaattorin ja etsii nopeimman reitin tielle."
             ],
-            "correctAnswer": [
-              "Auto käynnistää kaikki kameransa ja lasertutkansa (LiDAR).",
-              "Tekoäly rakentaa kuvan autotallin seinistä ja esteistä.",
-              "Auto yhdistää navigaattorin ja etsii nopeimman reitin tielle.",
-              "Tekoäly laittaa pyörät rullaamaan ja ohjaa auton turvallisesti ovesta ulos."
-            ],
-            "explanation": "Auton täytyy ensin nähdä ympäristönsä ja löytää reittinsä (kartta), ennen kuin se uskaltaa siirtää senttiäkään omia renkaitaan!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_6_q13",
@@ -7337,21 +7711,27 @@ export const categories = [
           },
           {
             "id": "arjessa_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä kasvojentunnistuksen askeleet! Miten puhelimesi \"taskussa asuva apuri\" aukeaa?",
-            "options": [
+            "correctAnswer": {
+              "Kamera nappaa kuvan kasvoistasi.": "1. vaihe",
+              "Tekoäly skannaa kasvojesi tarkat mitat ja muodot (esim. silmien etäisyyden).": "2. vaihe",
+              "Ohjelma vertaa mittoja tallennettuun hahmoosi.": "3. vaihe",
+              "Kone toteaa kuvion täsmäävän oikeaan omistajaan ja avaa lukon.": "4. vaihe"
+            },
+            "explanation": "Kasvojentunnistus ei katso vain ihonväriä tai tukkaa, vaan tekee matemaattista salapoliisityötä kasvojesi tarkoista kuvioista tunnistaakseen juuri sinut.",
+            "draggables": [
               "Kamera nappaa kuvan kasvoistasi.",
               "Tekoäly skannaa kasvojesi tarkat mitat ja muodot (esim. silmien etäisyyden).",
               "Ohjelma vertaa mittoja tallennettuun hahmoosi.",
               "Kone toteaa kuvion täsmäävän oikeaan omistajaan ja avaa lukon."
             ],
-            "correctAnswer": [
-              "Kamera nappaa kuvan kasvoistasi.",
-              "Tekoäly skannaa kasvojesi tarkat mitat ja muodot (esim. silmien etäisyyden).",
-              "Ohjelma vertaa mittoja tallennettuun hahmoosi.",
-              "Kone toteaa kuvion täsmäävän oikeaan omistajaan ja avaa lukon."
-            ],
-            "explanation": "Kasvojentunnistus ei katso vain ihonväriä tai tukkaa, vaan tekee matemaattista salapoliisityötä kasvojesi tarkoista kuvioista tunnistaakseen juuri sinut."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "arjessa_7_q5",
@@ -7488,21 +7868,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Autotallin koodari huomaa, että AI vanin tekoäly-ovi tunnistaa huonosti silmälasipäisiä ihmisiä. Järjestä askeleet, joilla tekoäly korjataan reiluksi kaikille!",
-            "options": [
+            "correctAnswer": {
+              "Koodari huomaa, että tekoälyovi ei aina aukea silmälasipäisille ihmisille.": "1. vaihe",
+              "Koodari tutkii opetusdatan ja huomaa, että kuvissa on vain laseittomia ihmisiä.": "2. vaihe",
+              "Koodari syöttää tekoälylle tuhansia uusia opetuskuvia ihmisistä silmälasit päässä.": "3. vaihe",
+              "Tekoäly oppii uuden datan ja avaa jatkossa oven reilusti aivan kaikille.": "4. vaihe"
+            },
+            "explanation": "Epäreilut virheet pystytään korjaamaan! Syöttämällä ohjelmalle parempaa ja tasa-arvoisempaa opetusdataa (vähemmistöt huomioiden), tekoälystä saadaan korjattua reilu peli.",
+            "draggables": [
               "Koodari huomaa, että tekoälyovi ei aina aukea silmälasipäisille ihmisille.",
               "Koodari tutkii opetusdatan ja huomaa, että kuvissa on vain laseittomia ihmisiä.",
               "Koodari syöttää tekoälylle tuhansia uusia opetuskuvia ihmisistä silmälasit päässä.",
               "Tekoäly oppii uuden datan ja avaa jatkossa oven reilusti aivan kaikille."
             ],
-            "correctAnswer": [
-              "Koodari huomaa, että tekoälyovi ei aina aukea silmälasipäisille ihmisille.",
-              "Koodari tutkii opetusdatan ja huomaa, että kuvissa on vain laseittomia ihmisiä.",
-              "Koodari syöttää tekoälylle tuhansia uusia opetuskuvia ihmisistä silmälasit päässä.",
-              "Tekoäly oppii uuden datan ja avaa jatkossa oven reilusti aivan kaikille."
-            ],
-            "explanation": "Epäreilut virheet pystytään korjaamaan! Syöttämällä ohjelmalle parempaa ja tasa-arvoisempaa opetusdataa (vähemmistöt huomioiden), tekoälystä saadaan korjattua reilu peli."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_1_q5",
@@ -7611,21 +7997,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä vaiheet fiksusti aikajärjestykseen! Miten koodari oikeaoppisesti rakentaa AI vaniin täysin reilun, syrjimättömän ja tasa-arvoisen tekoälyapulaisen?",
-            "options": [
+            "correctAnswer": {
+              "Koodari kerää opetusdataa erittäin monenlaisista, erilaisista ja eri-ikäisistä ihmisistä.": "1. vaihe",
+              "Tekoäly koulutetaan ja sille opetetaan asioita tämän reilun ja monipuolisen datan avulla.": "2. vaihe",
+              "Koodari pyytää useita erilaisia ihmisiä (kuten vasenkätisiä ja lapsia) testaamaan laitetta.": "3. vaihe",
+              "Laitteesta tulee mahdollisimman reilu, ja se toimii täydellisesti ihan kaikille ihmisille.": "4. vaihe"
+            },
+            "explanation": "Reilun tekoälyn rakentaminen alkaa aina heti alussa monipuolisesta datasta, ja se varmistetaan lopuksi testaamalla sitä erilaisten ihmisten kanssa yhdessä.",
+            "draggables": [
               "Koodari kerää opetusdataa erittäin monenlaisista, erilaisista ja eri-ikäisistä ihmisistä.",
               "Tekoäly koulutetaan ja sille opetetaan asioita tämän reilun ja monipuolisen datan avulla.",
               "Koodari pyytää useita erilaisia ihmisiä (kuten vasenkätisiä ja lapsia) testaamaan laitetta.",
               "Laitteesta tulee mahdollisimman reilu, ja se toimii täydellisesti ihan kaikille ihmisille."
             ],
-            "correctAnswer": [
-              "Koodari kerää opetusdataa erittäin monenlaisista, erilaisista ja eri-ikäisistä ihmisistä.",
-              "Tekoäly koulutetaan ja sille opetetaan asioita tämän reilun ja monipuolisen datan avulla.",
-              "Koodari pyytää useita erilaisia ihmisiä (kuten vasenkätisiä ja lapsia) testaamaan laitetta.",
-              "Laitteesta tulee mahdollisimman reilu, ja se toimii täydellisesti ihan kaikille ihmisille."
-            ],
-            "explanation": "Reilun tekoälyn rakentaminen alkaa aina heti alussa monipuolisesta datasta, ja se varmistetaan lopuksi testaamalla sitä erilaisten ihmisten kanssa yhdessä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_1_q13",
@@ -7711,21 +8103,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä fiksut askeleet reiluun ajomatkaan! Miten teet esitelmän avoimesti tekoälyä apuna käyttäen?",
-            "options": [
+            "correctAnswer": {
+              "Kysy tekoälyltä ideoita esitelmän rakenteeseen.": "1. vaihe",
+              "Kirjoita itse teksti ja tee kunnon aivovoimistelu.": "2. vaihe",
+              "Laita esitelmän loppuun merkintä, miten hyödynsit tekoälyä.": "3. vaihe",
+              "Palauta hieno ja rehellinen esitelmä opettajalle.": "4. vaihe"
+            },
+            "explanation": "Omien läksyjen huijaaminen on kielletty, mutta AI:n avoimesta käytöstä ideointiin kannattaa kertoa rohkeasti ja avoimesti.",
+            "draggables": [
               "Kysy tekoälyltä ideoita esitelmän rakenteeseen.",
               "Kirjoita itse teksti ja tee kunnon aivovoimistelu.",
               "Laita esitelmän loppuun merkintä, miten hyödynsit tekoälyä.",
               "Palauta hieno ja rehellinen esitelmä opettajalle."
             ],
-            "correctAnswer": [
-              "Kysy tekoälyltä ideoita esitelmän rakenteeseen.",
-              "Kirjoita itse teksti ja tee kunnon aivovoimistelu.",
-              "Laita esitelmän loppuun merkintä, miten hyödynsit tekoälyä.",
-              "Palauta hieno ja rehellinen esitelmä opettajalle."
-            ],
-            "explanation": "Omien läksyjen huijaaminen on kielletty, mutta AI:n avoimesta käytöstä ideointiin kannattaa kertoa rohkeasti ja avoimesti."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_2_q5",
@@ -7835,21 +8233,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_2_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Kirjoitit tarinan, johon otit hienon päähenkilön nimen tekoälyltä. Järjestä oikeat askeleet, kuinka palautat työn reilusti!",
-            "options": [
+            "correctAnswer": {
+              "Tarkista oma tarinasi ja ole siitä ylpeä.": "1. vaihe",
+              "Kirjoita paperin loppuun: 'Päähenkilön nimi ideoitu tekoälyllä'.": "2. vaihe",
+              "Palauta paperi opettajalle hymyillen.": "3. vaihe",
+              "Kerro opettajalle rehellisesti pyydettäessä, miten hieno AI-apuri sinulla oli.": "4. vaihe"
+            },
+            "explanation": "Läpinäkyvyys on valttia. Kun AI:n käytöstä kerrotaan avoimesti, ei tarvitse koskaan jännittää kiinnijäämistä huijauksesta.",
+            "draggables": [
               "Tarkista oma tarinasi ja ole siitä ylpeä.",
               "Kirjoita paperin loppuun: 'Päähenkilön nimi ideoitu tekoälyllä'.",
               "Palauta paperi opettajalle hymyillen.",
               "Kerro opettajalle rehellisesti pyydettäessä, miten hieno AI-apuri sinulla oli."
             ],
-            "correctAnswer": [
-              "Tarkista oma tarinasi ja ole siitä ylpeä.",
-              "Kirjoita paperin loppuun: 'Päähenkilön nimi ideoitu tekoälyllä'.",
-              "Palauta paperi opettajalle hymyillen.",
-              "Kerro opettajalle rehellisesti pyydettäessä, miten hieno AI-apuri sinulla oli."
-            ],
-            "explanation": "Läpinäkyvyys on valttia. Kun AI:n käytöstä kerrotaan avoimesti, ei tarvitse koskaan jännittää kiinnijäämistä huijauksesta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_2_q13",
@@ -7935,21 +8339,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet! Miten tekijänoikeusongelma (luvattomien varaosien käyttö) on alun perin syntynyt joidenkin tekoälyjen kohdalla?",
-            "options": [
+            "correctAnswer": {
+              "Taiteilija on maalannut hienon taulun ja laittanut sen internetiin näytille.": "1. vaihe",
+              "Tekoäly-yritys on ladannut kuvan koneensa opetusdataan kysymättä lupaa.": "2. vaihe",
+              "Tekoäly oppii datan perusteella matkimaan taiteilijan ainutlaatuista tyyliä.": "3. vaihe",
+              "Tuntemattomat ihmiset tekevät tekoälyllä kopioita taiteilijan tyylillä.": "4. vaihe"
+            },
+            "explanation": "Tämä on suuri eettinen ongelma. Taiteilijat ovat vihaisia, koska heidän \"varaosiaan\" (taulujaan) vietiin tekoälyn moottoriin ilman reilua lupaa ja korvausta.",
+            "draggables": [
               "Taiteilija on maalannut hienon taulun ja laittanut sen internetiin näytille.",
               "Tekoäly-yritys on ladannut kuvan koneensa opetusdataan kysymättä lupaa.",
               "Tekoäly oppii datan perusteella matkimaan taiteilijan ainutlaatuista tyyliä.",
               "Tuntemattomat ihmiset tekevät tekoälyllä kopioita taiteilijan tyylillä."
             ],
-            "correctAnswer": [
-              "Taiteilija on maalannut hienon taulun ja laittanut sen internetiin näytille.",
-              "Tekoäly-yritys on ladannut kuvan koneensa opetusdataan kysymättä lupaa.",
-              "Tekoäly oppii datan perusteella matkimaan taiteilijan ainutlaatuista tyyliä.",
-              "Tuntemattomat ihmiset tekevät tekoälyllä kopioita taiteilijan tyylillä."
-            ],
-            "explanation": "Tämä on suuri eettinen ongelma. Taiteilijat ovat vihaisia, koska heidän \"varaosiaan\" (taulujaan) vietiin tekoälyn moottoriin ilman reilua lupaa ja korvausta."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_3_q5",
@@ -8059,21 +8469,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeat askeleet, kun teet tekoälyllä hienon laulun sanoituksen, mutta haluat varmistaa ettet varasta muiden ideoita!",
-            "options": [
+            "correctAnswer": {
+              "Päätät tehdä hauskan musiikkikappaleen AI vanin matkaradiota varten.": "1. vaihe",
+              "Kirjoitat tekoälylle aiheen itse, etkä käske sitä suoraan kopioimaan tuttua laulajaa.": "2. vaihe",
+              "Tekoäly luo sinulle uuden kappaleen, joka perustuu tuhansiin sääntöihin, ei yhteen kopioon.": "3. vaihe",
+              "Olet ylpeä omasta kappaleestasi, joka on aivan uusi eikä kenenkään toisen varastettu työ.": "4. vaihe"
+            },
+            "explanation": "Tekoälyn käyttö on hienoa ja luovaa, kunhan et pyydä ohjelmaa tietoisesti kääntämään ja pöllimään olemassa olevan oikean taiteilijan tarkkaa tyyliä!",
+            "draggables": [
               "Päätät tehdä hauskan musiikkikappaleen AI vanin matkaradiota varten.",
               "Kirjoitat tekoälylle aiheen itse, etkä käske sitä suoraan kopioimaan tuttua laulajaa.",
               "Tekoäly luo sinulle uuden kappaleen, joka perustuu tuhansiin sääntöihin, ei yhteen kopioon.",
               "Olet ylpeä omasta kappaleestasi, joka on aivan uusi eikä kenenkään toisen varastettu työ."
             ],
-            "correctAnswer": [
-              "Päätät tehdä hauskan musiikkikappaleen AI vanin matkaradiota varten.",
-              "Kirjoitat tekoälylle aiheen itse, etkä käske sitä suoraan kopioimaan tuttua laulajaa.",
-              "Tekoäly luo sinulle uuden kappaleen, joka perustuu tuhansiin sääntöihin, ei yhteen kopioon.",
-              "Olet ylpeä omasta kappaleestasi, joka on aivan uusi eikä kenenkään toisen varastettu työ."
-            ],
-            "explanation": "Tekoälyn käyttö on hienoa ja luovaa, kunhan et pyydä ohjelmaa tietoisesti kääntämään ja pöllimään olemassa olevan oikean taiteilijan tarkkaa tyyliä!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_3_q13",
@@ -8159,21 +8575,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_4_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä fiksut askeleet aikajärjestykseen! Miten toimit, jos näet netissä jonkun jakavan tekoälyllä tehtyjä ilkeitä kuvia tutusta ihmisestä?",
-            "options": [
+            "correctAnswer": {
+              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.": "1. vaihe",
+              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.": "2. vaihe",
+              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.": "3. vaihe",
+              "Ilmoittakaa aikuisen kanssa kuvasta sovelluksen ylläpidolle poistoa varten.": "4. vaihe"
+            },
+            "explanation": "\"Kuran\" pysäyttäminen vaatii rohkeutta ja aikuisen apua. Tykkäämättä jättäminen pysäyttää kuvan leviämisen, ja aikuinen osaa auttaa sen poistamisessa netistä.",
+            "draggables": [
               "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
               "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
               "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
               "Ilmoittakaa aikuisen kanssa kuvasta sovelluksen ylläpidolle poistoa varten."
             ],
-            "correctAnswer": [
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
-              "Ilmoittakaa aikuisen kanssa kuvasta sovelluksen ylläpidolle poistoa varten."
-            ],
-            "explanation": "\"Kuran\" pysäyttäminen vaatii rohkeutta ja aikuisen apua. Tykkäämättä jättäminen pysäyttää kuvan leviämisen, ja aikuinen osaa auttaa sen poistamisessa netistä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_4_q5",
@@ -8283,21 +8705,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Teit vahingossa tekoälyllä jotain, joka osoittautuikin noloksi ja pahoitti kaverin mielen. Järjestä askeleet fiksusti, miten korjaat roiskuneen kuran ja pyydät anteeksi!",
-            "options": [
+            "correctAnswer": {
+              "Ymmärrä ja myönnä heti, että tekoälyvitsisi meni aivan liian pitkälle.": "1. vaihe",
+              "Poista kyseinen kuva tai teksti välittömästi kaikista laitteista ja netistä.": "2. vaihe",
+              "Pyydä kaverilta aidosti anteeksi ja kerro, että olit todella ajattelematon.": "3. vaihe",
+              "Sovi kaverin kanssa, ettei tekoälyä käytetä enää koskaan toisten nolamiseen.": "4. vaihe"
+            },
+            "explanation": "Kaikki tekevät joskus virheitä! Tärkeintä on pysäyttää vahinko heti, pyytää aidosti anteeksi ja oppia reilun pelin säännöt tulevaisuutta varten.",
+            "draggables": [
               "Ymmärrä ja myönnä heti, että tekoälyvitsisi meni aivan liian pitkälle.",
               "Poista kyseinen kuva tai teksti välittömästi kaikista laitteista ja netistä.",
               "Pyydä kaverilta aidosti anteeksi ja kerro, että olit todella ajattelematon.",
               "Sovi kaverin kanssa, ettei tekoälyä käytetä enää koskaan toisten nolamiseen."
             ],
-            "correctAnswer": [
-              "Ymmärrä ja myönnä heti, että tekoälyvitsisi meni aivan liian pitkälle.",
-              "Poista kyseinen kuva tai teksti välittömästi kaikista laitteista ja netistä.",
-              "Pyydä kaverilta aidosti anteeksi ja kerro, että olit todella ajattelematon.",
-              "Sovi kaverin kanssa, ettei tekoälyä käytetä enää koskaan toisten nolamiseen."
-            ],
-            "explanation": "Kaikki tekevät joskus virheitä! Tärkeintä on pysäyttää vahinko heti, pyytää aidosti anteeksi ja oppia reilun pelin säännöt tulevaisuutta varten."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_4_q13",
@@ -8383,21 +8811,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten tekoäly oikeastaan luo \"lohduttavan\" vastauksen, kun kerrot sille olevasi surullinen? Järjestä peltisen apukuskin toiminnan askeleet!",
-            "options": [
+            "correctAnswer": {
+              "Kone kuulee ja tunnistaa puheestasi sanan 'surullinen'.": "1. vaihe",
+              "Se etsii tietopankistaan säännön, miten surulliselle ihmiselle vastataan yleensä.": "2. vaihe",
+              "Se valitsee sopivimmat lohduttavat sanat matemaattisesti arvaamalla oikeaa järjestystä.": "3. vaihe",
+              "Se lausuu sanat ääneen kaiuttimesta, vaikka ei itse tunne lainkaan surua.": "4. vaihe"
+            },
+            "explanation": "Aito lohdutus ja empatia ovat ihmisten taitoja. Koneen antama lohdutus on vain puhdasta matematiikkaa ja sääntöjen seuraamista, ei oikeaa myötätuntoa!",
+            "draggables": [
               "Kone kuulee ja tunnistaa puheestasi sanan 'surullinen'.",
               "Se etsii tietopankistaan säännön, miten surulliselle ihmiselle vastataan yleensä.",
               "Se valitsee sopivimmat lohduttavat sanat matemaattisesti arvaamalla oikeaa järjestystä.",
               "Se lausuu sanat ääneen kaiuttimesta, vaikka ei itse tunne lainkaan surua."
             ],
-            "correctAnswer": [
-              "Kone kuulee ja tunnistaa puheestasi sanan 'surullinen'.",
-              "Se etsii tietopankistaan säännön, miten surulliselle ihmiselle vastataan yleensä.",
-              "Se valitsee sopivimmat lohduttavat sanat matemaattisesti arvaamalla oikeaa järjestystä.",
-              "Se lausuu sanat ääneen kaiuttimesta, vaikka ei itse tunne lainkaan surua."
-            ],
-            "explanation": "Aito lohdutus ja empatia ovat ihmisten taitoja. Koneen antama lohdutus on vain puhdasta matematiikkaa ja sääntöjen seuraamista, ei oikeaa myötätuntoa!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_5_q5",
@@ -8508,21 +8942,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten digitaalinen chattibotti oikeasti kykenee \"juttelemaan\" kanssasi niin mukavia asioita autotallissa? Järjestä koneen toiminnan mekaaniset askeleet!",
-            "options": [
+            "correctAnswer": {
+              "Sinä kirjoitat tai sanot ääneen koneelle iloisen ja tavallisen tervehdyksen.": "1. vaihe",
+              "Kone etsii valtavasta muististaan tietoa siitä, miten ihmiset ovat yleensä vastanneet tervehdykseen internetissä.": "2. vaihe",
+              "Kone rakentaa täysin matemaattisesti kaikkein todennäköisimmän ja oikealta kuulostavan vastauslauseen sanoista.": "3. vaihe",
+              "Ruudulle tai kaiuttimeen ilmestyy lopullinen vastaus, joka kuulostaa aivan oikean ihmisen kertomalta asialta.": "4. vaihe"
+            },
+            "explanation": "Chattibotti (kuten ChatGPT) ei pohdi vastauksia tunteella tai aidolla sydämellä, vaan se on täydelliseksi hiottu matemaattinen arvauskone. Se yksinkertaisesti arvaa tilastollisesti, mitkä sanat sopivat kaikkein parhaiten peräkkäin edellisen viestin perusteella.",
+            "draggables": [
               "Sinä kirjoitat tai sanot ääneen koneelle iloisen ja tavallisen tervehdyksen.",
               "Kone etsii valtavasta muististaan tietoa siitä, miten ihmiset ovat yleensä vastanneet tervehdykseen internetissä.",
               "Kone rakentaa täysin matemaattisesti kaikkein todennäköisimmän ja oikealta kuulostavan vastauslauseen sanoista.",
               "Ruudulle tai kaiuttimeen ilmestyy lopullinen vastaus, joka kuulostaa aivan oikean ihmisen kertomalta asialta."
             ],
-            "correctAnswer": [
-              "Sinä kirjoitat tai sanot ääneen koneelle iloisen ja tavallisen tervehdyksen.",
-              "Kone etsii valtavasta muististaan tietoa siitä, miten ihmiset ovat yleensä vastanneet tervehdykseen internetissä.",
-              "Kone rakentaa täysin matemaattisesti kaikkein todennäköisimmän ja oikealta kuulostavan vastauslauseen sanoista.",
-              "Ruudulle tai kaiuttimeen ilmestyy lopullinen vastaus, joka kuulostaa aivan oikean ihmisen kertomalta asialta."
-            ],
-            "explanation": "Chattibotti (kuten ChatGPT) ei pohdi vastauksia tunteella tai aidolla sydämellä, vaan se on täydelliseksi hiottu matemaattinen arvauskone. Se yksinkertaisesti arvaa tilastollisesti, mitkä sanat sopivat kaikkein parhaiten peräkkäin edellisen viestin perusteella."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_5_q13",
@@ -8608,21 +9048,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä tapahtumat niin näet, mihin sähkö kuluu, kun pyydät tekoälyä kertomaan vitsin!",
-            "options": [
+            "correctAnswer": {
+              "Kysyt vitsin puhelimeltasi ja se lähettää pyyntösi nopeasti internetin yli.": "1. vaihe",
+              "Pyyntö saapuu jättimäiseen konesaliin, jossa hyrrää valtavasti tietokoneita.": "2. vaihe",
+              "Koneet tekevät kovaa aivotyötä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.": "3. vaihe",
+              "Vastaus palaa puhelimeesi ja konesalin tuulettimet jäähdyttävät kuumia koneita vedellä.": "4. vaihe"
+            },
+            "explanation": "Vaikka puhelimesi akku ei juuri kuluisi silmissä, jossain todella kaukana isot ja kuumat tietokoneet kuluttavat paljon sähköä juuri sinun pyyntösi vuoksi.",
+            "draggables": [
               "Kysyt vitsin puhelimeltasi ja se lähettää pyyntösi nopeasti internetin yli.",
               "Pyyntö saapuu jättimäiseen konesaliin, jossa hyrrää valtavasti tietokoneita.",
               "Koneet tekevät kovaa aivotyötä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.",
               "Vastaus palaa puhelimeesi ja konesalin tuulettimet jäähdyttävät kuumia koneita vedellä."
             ],
-            "correctAnswer": [
-              "Kysyt vitsin puhelimeltasi ja se lähettää pyyntösi nopeasti internetin yli.",
-              "Pyyntö saapuu jättimäiseen konesaliin, jossa hyrrää valtavasti tietokoneita.",
-              "Koneet tekevät kovaa aivotyötä vitsin luomiseksi, kuluttavat sähköä ja kuumenevat.",
-              "Vastaus palaa puhelimeesi ja konesalin tuulettimet jäähdyttävät kuumia koneita vedellä."
-            ],
-            "explanation": "Vaikka puhelimesi akku ei juuri kuluisi silmissä, jossain todella kaukana isot ja kuumat tietokoneet kuluttavat paljon sähköä juuri sinun pyyntösi vuoksi."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_6_q5",
@@ -8732,21 +9178,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten fiksusti toimiva ja luontoa säästävä koululainen käyttää tekoälyä välttääkseen turhaa sähkönkulutusta? Järjestä askeleet!",
-            "options": [
+            "correctAnswer": {
+              "Päätät tarkasti etukäteen omissa aivoissasi, mihin oikeaan ongelmaan tarvitset nyt apua.": "1. vaihe",
+              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotuksen (promptin).": "2. vaihe",
+              "Tekoäly antaa tarkan vastauksen suoraan, ilman että joudut kokeilemaan sataa eri kertaa.": "3. vaihe",
+              "Olet säästänyt omaa aikaasi ja samalla suuren määrän luonnon arvokasta sähköä ja vettä.": "4. vaihe"
+            },
+            "explanation": "Turha edestakainen sähläys vie aina eniten sähköä! Kun mietit tarkkaan jo etukäteen mitä haluat tekoälyltä kysyä, se tekee laajan työn kerralla oikein ja luonto kiittää.",
+            "draggables": [
               "Päätät tarkasti etukäteen omissa aivoissasi, mihin oikeaan ongelmaan tarvitset nyt apua.",
               "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotuksen (promptin).",
               "Tekoäly antaa tarkan vastauksen suoraan, ilman että joudut kokeilemaan sataa eri kertaa.",
               "Olet säästänyt omaa aikaasi ja samalla suuren määrän luonnon arvokasta sähköä ja vettä."
             ],
-            "correctAnswer": [
-              "Päätät tarkasti etukäteen omissa aivoissasi, mihin oikeaan ongelmaan tarvitset nyt apua.",
-              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotuksen (promptin).",
-              "Tekoäly antaa tarkan vastauksen suoraan, ilman että joudut kokeilemaan sataa eri kertaa.",
-              "Olet säästänyt omaa aikaasi ja samalla suuren määrän luonnon arvokasta sähköä ja vettä."
-            ],
-            "explanation": "Turha edestakainen sähläys vie aina eniten sähköä! Kun mietit tarkkaan jo etukäteen mitä haluat tekoälyltä kysyä, se tekee laajan työn kerralla oikein ja luonto kiittää."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_6_q13",
@@ -8832,21 +9284,27 @@ export const categories = [
           },
           {
             "id": "reilu_peli_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Huomaat, että netissä levitetään tekoälyllä tehtyä noloa huijauskuvaa luokkakaveristasi. Miten pysäytät kiusaamisen (kuran roiskimisen) askeleittain?",
-            "options": [
+            "correctAnswer": {
+              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.": "1. vaihe",
+              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.": "2. vaihe",
+              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.": "3. vaihe",
+              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä.": "4. vaihe"
+            },
+            "explanation": "Tekoälyllä tehdyt ilkeät viestit tai nolatut kuvat (esim. deepfake) ovat aivan oikeaa kiusaamista. Fiksu apukuski pysäyttää leviämisen ja hakee aikuisen avuksi!",
+            "draggables": [
               "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
               "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
               "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
               "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä."
             ],
-            "correctAnswer": [
-              "Älä missään nimessä tykkää kuvasta tai jaa sitä itse eteenpäin.",
-              "Ota ilkeästä kuvasta kuvakaappaus (screenshot) todisteeksi.",
-              "Kerro asiasta heti luotettavalle aikuiselle ja näytä todisteet.",
-              "Ilmoittakaa yhdessä ylläpidolle kuvan poistamiseksi netistä."
-            ],
-            "explanation": "Tekoälyllä tehdyt ilkeät viestit tai nolatut kuvat (esim. deepfake) ovat aivan oikeaa kiusaamista. Fiksu apukuski pysäyttää leviämisen ja hakee aikuisen avuksi!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "reilu_peli_7_q5",
@@ -8980,21 +9438,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_1_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Miten ohjaat tekoälyä parhaaseen lopputulokseen, jos suunnittelet lomamatkaa ystäviesi kanssa? Järjestä ohjauskeskustelun askeleet fiksuun järjestykseen asioiden tarkentuessa!",
-            "options": [
+            "correctAnswer": {
+              "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.": "1. vaihe",
+              "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.": "2. vaihe",
+              "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.": "3. vaihe",
+              "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi.": "4. vaihe"
+            },
+            "explanation": "Tekoäly toimii parhaiten ihmisen työpari, jota ohjataan askel askeleelta kohti parempaa lopputulosta (ns. iteratiivinen promptaus). Yritä pilkkoa isot tehtävät chatin kanssa tällaiseksi vuoropuheluksi!",
+            "draggables": [
               "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.",
               "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.",
               "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.",
               "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi."
             ],
-            "correctAnswer": [
-              "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.",
-              "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.",
-              "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.",
-              "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi."
-            ],
-            "explanation": "Tekoäly toimii parhaiten ihmisen työpari, jota ohjataan askel askeleelta kohti parempaa lopputulosta (ns. iteratiivinen promptaus). Yritä pilkkoa isot tehtävät chatin kanssa tällaiseksi vuoropuheluksi!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_1_q5",
@@ -9104,21 +9568,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_1_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet tekemässä AI vanin mainosjulistetta. Miten hienosäädät (eli iteroit) tekoälyn vastausta yhä paremmaksi askel askeleelta, kun navigaattori ei heti löydä perille?",
-            "options": [
+            "correctAnswer": {
+              "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'": "1. vaihe",
+              "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'": "2. vaihe",
+              "Korjaat ja tarkennat promptia: 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'": "3. vaihe",
+              "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'": "4. vaihe"
+            },
+            "explanation": "Promptaaminen on kokeilua ja auton jatkuvaa ohjaamista oikeaan suuntaan! Jos et ole tyytyväinen heti ensimmäiseen vastaukseen, voit aina jatkaa keskustelua, antaa lisäohjeita ja \"korjata kurssia\".",
+            "draggables": [
               "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'",
               "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'",
               "Korjaat ja tarkennat promptia: 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'",
               "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'"
             ],
-            "correctAnswer": [
-              "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'",
-              "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'",
-              "Korjaat ja tarkennat promptia: 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'",
-              "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'"
-            ],
-            "explanation": "Promptaaminen on kokeilua ja auton jatkuvaa ohjaamista oikeaan suuntaan! Jos et ole tyytyväinen heti ensimmäiseen vastaukseen, voit aina jatkaa keskustelua, antaa lisäohjeita ja \"korjata kurssia\"."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_1_q13",
@@ -9204,21 +9674,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_2_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä oikeat askeleet, kun teet esitelmää ja käytät tekoälyä apuna faktojen etsimisessä!",
-            "options": [
+            "correctAnswer": {
+              "Kysy tekoälyltä tietoa ja faktoja esitelmäsi aiheesta.": "1. vaihe",
+              "Lue tekoälyn antama vastaus huolellisesti ja hieman epäilevästi.": "2. vaihe",
+              "Tarkista samat faktat oikeasta kirjasta tai luotettavalta nettisivulta.": "3. vaihe",
+              "Lisää vasta täysin varmistettu ja oikea tieto omaan esitelmääsi.": "4. vaihe"
+            },
+            "explanation": "Katse ulos tuulilasista! Älä osta sikaa säkissä, vaan varmista aina tekoälyn antaman tiedon oikeellisuus reaalimaailman lähteistä, ennen kuin käytät sitä.",
+            "draggables": [
               "Kysy tekoälyltä tietoa ja faktoja esitelmäsi aiheesta.",
               "Lue tekoälyn antama vastaus huolellisesti ja hieman epäilevästi.",
               "Tarkista samat faktat oikeasta kirjasta tai luotettavalta nettisivulta.",
               "Lisää vasta täysin varmistettu ja oikea tieto omaan esitelmääsi."
             ],
-            "correctAnswer": [
-              "Kysy tekoälyltä tietoa ja faktoja esitelmäsi aiheesta.",
-              "Lue tekoälyn antama vastaus huolellisesti ja hieman epäilevästi.",
-              "Tarkista samat faktat oikeasta kirjasta tai luotettavalta nettisivulta.",
-              "Lisää vasta täysin varmistettu ja oikea tieto omaan esitelmääsi."
-            ],
-            "explanation": "Katse ulos tuulilasista! Älä osta sikaa säkissä, vaan varmista aina tekoälyn antaman tiedon oikeellisuus reaalimaailman lähteistä, ennen kuin käytät sitä."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_2_q5",
@@ -9328,21 +9804,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_2_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Löydät netistä kuvan, jossa valtava lentävä lautanen nostaa teidän perheen AI vanin ilmaan. Miten paljastat sen tekoälyn tekemäksi feikiksi?",
-            "options": [
+            "correctAnswer": {
+              "Ihmettelet, miksi kuva näyttää heti hieman oudolta ja epätodelliselta.": "1. vaihe",
+              "Suurennat kuvaa ja etsit hassuja virheitä, kuten outoja varjoja tai sulaneita renkaita.": "2. vaihe",
+              "Tarkistat uutisista, onko kotikaupungissa todella nähty aitoja lentäviä lautasia.": "3. vaihe",
+              "Tulet järkevään tulokseen, että kuva on pelkkä tekoälyn tekemä huijaus (hallusinaatio).": "4. vaihe"
+            },
+            "explanation": "Ota silmä käteen! Tekoäly tekee usein pieniä virheitä kuviin (kuten kuusi sormea tai olemattomia varjoja). Kun käytät maalaisjärkeä ja tarkistat faktat, feikkikuvat on helppo paljastaa.",
+            "draggables": [
               "Ihmettelet, miksi kuva näyttää heti hieman oudolta ja epätodelliselta.",
               "Suurennat kuvaa ja etsit hassuja virheitä, kuten outoja varjoja tai sulaneita renkaita.",
               "Tarkistat uutisista, onko kotikaupungissa todella nähty aitoja lentäviä lautasia.",
               "Tulet järkevään tulokseen, että kuva on pelkkä tekoälyn tekemä huijaus (hallusinaatio)."
             ],
-            "correctAnswer": [
-              "Ihmettelet, miksi kuva näyttää heti hieman oudolta ja epätodelliselta.",
-              "Suurennat kuvaa ja etsit hassuja virheitä, kuten outoja varjoja tai sulaneita renkaita.",
-              "Tarkistat uutisista, onko kotikaupungissa todella nähty aitoja lentäviä lautasia.",
-              "Tulet järkevään tulokseen, että kuva on pelkkä tekoälyn tekemä huijaus (hallusinaatio)."
-            ],
-            "explanation": "Ota silmä käteen! Tekoäly tekee usein pieniä virheitä kuviin (kuten kuusi sormea tai olemattomia varjoja). Kun käytät maalaisjärkeä ja tarkistat faktat, feikkikuvat on helppo paljastaa."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_2_q13",
@@ -9428,21 +9910,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_3_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä täydellisen palautteen askelmerkit! Miten hiot ja korjaat tekoälyn vastauksen paremmaksi?",
-            "options": [
+            "correctAnswer": {
+              "Kirjoitat tekoälylle ihan ensimmäisen ja alustavan ohjeen.": "1. vaihe",
+              "Huomaat tekoälyn vastauksesta, että se on hieman liian vaikea ymmärtää.": "2. vaihe",
+              "Annat palautetta ja pyydät sitä selittämään asian lapselle sopivilla sanoilla.": "3. vaihe",
+              "Tekoäly muokkaa tekstin heti paremmaksi ja helpommin ymmärrettäväksi.": "4. vaihe"
+            },
+            "explanation": "Tätä kutsutaan iteroinniksi eli hienosäädöksi! Kun opit antamaan hyvää palautetta huonojen vastausten jälkeen, tekoälystä tulee sinulle todellinen superapuri.",
+            "draggables": [
               "Kirjoitat tekoälylle ihan ensimmäisen ja alustavan ohjeen.",
               "Huomaat tekoälyn vastauksesta, että se on hieman liian vaikea ymmärtää.",
               "Annat palautetta ja pyydät sitä selittämään asian lapselle sopivilla sanoilla.",
               "Tekoäly muokkaa tekstin heti paremmaksi ja helpommin ymmärrettäväksi."
             ],
-            "correctAnswer": [
-              "Kirjoitat tekoälylle ihan ensimmäisen ja alustavan ohjeen.",
-              "Huomaat tekoälyn vastauksesta, että se on hieman liian vaikea ymmärtää.",
-              "Annat palautetta ja pyydät sitä selittämään asian lapselle sopivilla sanoilla.",
-              "Tekoäly muokkaa tekstin heti paremmaksi ja helpommin ymmärrettäväksi."
-            ],
-            "explanation": "Tätä kutsutaan iteroinniksi eli hienosäädöksi! Kun opit antamaan hyvää palautetta huonojen vastausten jälkeen, tekoälystä tulee sinulle todellinen superapuri."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_3_q5",
@@ -9551,21 +10039,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_3_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet! Miten koodaat uuden kirjeen englantilaiselle kaverillesi fiksulla palautteella?",
-            "options": [
+            "correctAnswer": {
+              "Pyydät tekoälyä kääntämään suomenkielisen kirjeesi englanniksi kaveria varten.": "1. vaihe",
+              "Huomaat, että tekoälyn käännös kuulostaa aivan liian viralliselta ja jäykältä.": "2. vaihe",
+              "Kirjoitat tekoälylle palautteen: 'Tee tästä tekstistä paljon rennompi ja kaverillisempi'.": "3. vaihe",
+              "Kopioit tekoälyn nopeasti korjaaman, mukavan ja letkeän kirjeen ystävällesi.": "4. vaihe"
+            },
+            "explanation": "Myös käännösohjelmat ovat vain tekoälyjä! Jos ne kääntävät asian liian hienolla ja vanhalla englannilla, riittää että käännät rattia ja pyydät letkeämpää \"slangia\".",
+            "draggables": [
               "Pyydät tekoälyä kääntämään suomenkielisen kirjeesi englanniksi kaveria varten.",
               "Huomaat, että tekoälyn käännös kuulostaa aivan liian viralliselta ja jäykältä.",
               "Kirjoitat tekoälylle palautteen: 'Tee tästä tekstistä paljon rennompi ja kaverillisempi'.",
               "Kopioit tekoälyn nopeasti korjaaman, mukavan ja letkeän kirjeen ystävällesi."
             ],
-            "correctAnswer": [
-              "Pyydät tekoälyä kääntämään suomenkielisen kirjeesi englanniksi kaveria varten.",
-              "Huomaat, että tekoälyn käännös kuulostaa aivan liian viralliselta ja jäykältä.",
-              "Kirjoitat tekoälylle palautteen: 'Tee tästä tekstistä paljon rennompi ja kaverillisempi'.",
-              "Kopioit tekoälyn nopeasti korjaaman, mukavan ja letkeän kirjeen ystävällesi."
-            ],
-            "explanation": "Myös käännösohjelmat ovat vain tekoälyjä! Jos ne kääntävät asian liian hienolla ja vanhalla englannilla, riittää että käännät rattia ja pyydät letkeämpää \"slangia\"."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_3_q13",
@@ -9651,21 +10145,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_4_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä luovan aivoriihen askeleet! Miten keksit tekoälyn avulla täydellisen nimen uudelle autollesi?",
-            "options": [
+            "correctAnswer": {
+              "Pyydät tekoälyä listaamaan 20 hauskaa ja vauhdikasta auton nimeä.": "1. vaihe",
+              "Luet listan läpi ja huomaat, että kaksi nimistä kuulostaa tosi kivoilta.": "2. vaihe",
+              "Pyydät tekoälyä keksimään vielä 10 uutta nimeä juuri näiden kahden tyylillä.": "3. vaihe",
+              "Valitset parhaan nimen, muokkaat sitä vielä hieman itse ja maalaat sen auton kylkeen.": "4. vaihe"
+            },
+            "explanation": "Ideointi on pallottelua. Tekoäly \"heittää\" ideoita, sinä nappaat parhaat ja pyydät lisää samankaltaisia, kunnes täydellinen helmi löytyy!",
+            "draggables": [
               "Pyydät tekoälyä listaamaan 20 hauskaa ja vauhdikasta auton nimeä.",
               "Luet listan läpi ja huomaat, että kaksi nimistä kuulostaa tosi kivoilta.",
               "Pyydät tekoälyä keksimään vielä 10 uutta nimeä juuri näiden kahden tyylillä.",
               "Valitset parhaan nimen, muokkaat sitä vielä hieman itse ja maalaat sen auton kylkeen."
             ],
-            "correctAnswer": [
-              "Pyydät tekoälyä listaamaan 20 hauskaa ja vauhdikasta auton nimeä.",
-              "Luet listan läpi ja huomaat, että kaksi nimistä kuulostaa tosi kivoilta.",
-              "Pyydät tekoälyä keksimään vielä 10 uutta nimeä juuri näiden kahden tyylillä.",
-              "Valitset parhaan nimen, muokkaat sitä vielä hieman itse ja maalaat sen auton kylkeen."
-            ],
-            "explanation": "Ideointi on pallottelua. Tekoäly \"heittää\" ideoita, sinä nappaat parhaat ja pyydät lisää samankaltaisia, kunnes täydellinen helmi löytyy!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_4_q5",
@@ -9775,21 +10275,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_4_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet piirtämässä sarjakuvaa, mutta et tiedä mitä seuraavassa ruudussa tapahtuu. Järjestä luovan apukuskin käyttö oikeaan järjestykseen!",
-            "options": [
+            "correctAnswer": {
+              "Huomaat, että ideasi loppuivat ja olet jumissa sarjakuvan kanssa.": "1. vaihe",
+              "Kirjoitat tekoälylle, mitä sarjakuvassa on tähän asti tapahtunut.": "2. vaihe",
+              "Pyydät tekoälyä antamaan kolme erilaista hassua vaihtoehtoa seuraavaksi tapahtumaksi.": "3. vaihe",
+              "Valitset niistä yhden idean, muokkaat sen itsellesi sopivaksi ja jatkat piirtämistä.": "4. vaihe"
+            },
+            "explanation": "Tekoälylle voi kertoa oman työn tilanteen (kontekstin). Silloin sen antamat uudet ideat osuvat juuri sinun tarpeeseesi ja auttavat eteenpäin!",
+            "draggables": [
               "Huomaat, että ideasi loppuivat ja olet jumissa sarjakuvan kanssa.",
               "Kirjoitat tekoälylle, mitä sarjakuvassa on tähän asti tapahtunut.",
               "Pyydät tekoälyä antamaan kolme erilaista hassua vaihtoehtoa seuraavaksi tapahtumaksi.",
               "Valitset niistä yhden idean, muokkaat sen itsellesi sopivaksi ja jatkat piirtämistä."
             ],
-            "correctAnswer": [
-              "Huomaat, että ideasi loppuivat ja olet jumissa sarjakuvan kanssa.",
-              "Kirjoitat tekoälylle, mitä sarjakuvassa on tähän asti tapahtunut.",
-              "Pyydät tekoälyä antamaan kolme erilaista hassua vaihtoehtoa seuraavaksi tapahtumaksi.",
-              "Valitset niistä yhden idean, muokkaat sen itsellesi sopivaksi ja jatkat piirtämistä."
-            ],
-            "explanation": "Tekoälylle voi kertoa oman työn tilanteen (kontekstin). Silloin sen antamat uudet ideat osuvat juuri sinun tarpeeseesi ja auttavat eteenpäin!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_4_q13",
@@ -9875,21 +10381,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_5_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Haluat tehdä kouluesitelmän, jossa on sekä uutta hienoa tekstiä että upeita kuvia autoista. Järjestä fiksun työskentelyn askeleet!",
-            "options": [
+            "correctAnswer": {
+              "Avaat ensin tekstitekoälyn ja pyydät sitä ideoimaan esitelmän sisältöä.": "1. vaihe",
+              "Kirjoitat tekstin valmiiksi tekoälyn vinkkien ja oman aivotyösi avulla.": "2. vaihe",
+              "Avaat erillisen kuvatekoälyn piirtääksesi esitelmään sopivia kuvia.": "3. vaihe",
+              "Yhdistät valmiin tekstin ja kuvat yhdeksi hienoksi kokonaisuudeksi.": "4. vaihe"
+            },
+            "explanation": "Monimutkaisissa tehtävissä parhaan tuloksen saa, kun käyttää useita eri työkaluja juuri niille sopivissa vaiheissa!",
+            "draggables": [
               "Avaat ensin tekstitekoälyn ja pyydät sitä ideoimaan esitelmän sisältöä.",
               "Kirjoitat tekstin valmiiksi tekoälyn vinkkien ja oman aivotyösi avulla.",
               "Avaat erillisen kuvatekoälyn piirtääksesi esitelmään sopivia kuvia.",
               "Yhdistät valmiin tekstin ja kuvat yhdeksi hienoksi kokonaisuudeksi."
             ],
-            "correctAnswer": [
-              "Avaat ensin tekstitekoälyn ja pyydät sitä ideoimaan esitelmän sisältöä.",
-              "Kirjoitat tekstin valmiiksi tekoälyn vinkkien ja oman aivotyösi avulla.",
-              "Avaat erillisen kuvatekoälyn piirtääksesi esitelmään sopivia kuvia.",
-              "Yhdistät valmiin tekstin ja kuvat yhdeksi hienoksi kokonaisuudeksi."
-            ],
-            "explanation": "Monimutkaisissa tehtävissä parhaan tuloksen saa, kun käyttää useita eri työkaluja juuri niille sopivissa vaiheissa!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_5_q5",
@@ -9998,21 +10510,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_5_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet tekemässä autotallissa peliä ja tarvitset apua monelta tekoälyltä. Järjestä työkalujen käyttö fiksusti ideasta julkaisuun!",
-            "options": [
+            "correctAnswer": {
+              "Ideoit ensin pelin säännöt ja hyvän tarinan tekstigeneraattorin kanssa.": "1. vaihe",
+              "Luot pelin jännittävät hahmot ja maisemat erillisellä kuvageneraattorilla.": "2. vaihe",
+              "Käytät koodaukseen erikoistunutta tekoälyä apuna koodin ohjelmoinnissa.": "3. vaihe",
+              "Teetätät lopuksi kääntäjäsovelluksella pelistäsi myös englanninkielisen version.": "4. vaihe"
+            },
+            "explanation": "Iso ja hieno projekti vaatii kunnon pakillisen työkaluja! Yksi kone keksii, toinen piirtää, kolmas koodaa logiikan ja neljäs hoitaa lopuksi käännökset – aivan kuten oikeassakin pelistudiossa tehhään.",
+            "draggables": [
               "Ideoit ensin pelin säännöt ja hyvän tarinan tekstigeneraattorin kanssa.",
               "Luot pelin jännittävät hahmot ja maisemat erillisellä kuvageneraattorilla.",
               "Käytät koodaukseen erikoistunutta tekoälyä apuna koodin ohjelmoinnissa.",
               "Teetätät lopuksi kääntäjäsovelluksella pelistäsi myös englanninkielisen version."
             ],
-            "correctAnswer": [
-              "Ideoit ensin pelin säännöt ja hyvän tarinan tekstigeneraattorin kanssa.",
-              "Luot pelin jännittävät hahmot ja maisemat erillisellä kuvageneraattorilla.",
-              "Käytät koodaukseen erikoistunutta tekoälyä apuna koodin ohjelmoinnissa.",
-              "Teetätät lopuksi kääntäjäsovelluksella pelistäsi myös englanninkielisen version."
-            ],
-            "explanation": "Iso ja hieno projekti vaatii kunnon pakillisen työkaluja! Yksi kone keksii, toinen piirtää, kolmas koodaa logiikan ja neljäs hoitaa lopuksi käännökset – aivan kuten oikeassakin pelistudiossa tehhään."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_5_q13",
@@ -10098,21 +10616,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_6_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä askeleet fiksusti! Miten muutat vaikean koulutekstin helpoksi tekoälyn avulla?",
-            "options": [
+            "correctAnswer": {
+              "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.": "1. vaihe",
+              "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'": "2. vaihe",
+              "Syötä teksti tekoälylle ja paina 'Lähetä'.": "3. vaihe",
+              "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta.": "4. vaihe"
+            },
+            "explanation": "Aina pitää ensin antaa tekoälylle materiaali (teksti), ja heti perään selkeä ohje siitä, miten haluat sen \"pakattavan\"!",
+            "draggables": [
               "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.",
               "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'",
               "Syötä teksti tekoälylle ja paina 'Lähetä'.",
               "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta."
             ],
-            "correctAnswer": [
-              "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.",
-              "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'",
-              "Syötä teksti tekoälylle ja paina 'Lähetä'.",
-              "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta."
-            ],
-            "explanation": "Aina pitää ensin antaa tekoälylle materiaali (teksti), ja heti perään selkeä ohje siitä, miten haluat sen \"pakattavan\"!"
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_6_q5",
@@ -10221,21 +10745,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_6_q12",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Olet lukenut todella vaikean uutisen robottiautoista ja haluat tehdä siitä kivan muistilistan muille. Järjestä \"siistin pakkaamisen\" askeleet!",
-            "options": [
+            "correctAnswer": {
+              "Syötä uutisen pitkä teksti tekoälyn ohjelmaan.": "1. vaihe",
+              "Anna ohje: 'Tee tästä artikkelista selkeä viiden kohdan muistilista.'": "2. vaihe",
+              "Lue lista ja tarkista, ettei tekoäly jättänyt vahingossa pois jotain todella tärkeää faktaa.": "3. vaihe",
+              "Käytä hienoa ja valmista muistilistaa asioiden esittelemiseen kavereille.": "4. vaihe"
+            },
+            "explanation": "Tekoälyn ohjeistaminen on yksinkertaista, mutta kaikkein tärkein työvaihe on ihmisen tekemä tarkistus lopussa! Näin varmistat, että asiat menivät kyytiin oikein.",
+            "draggables": [
               "Syötä uutisen pitkä teksti tekoälyn ohjelmaan.",
               "Anna ohje: 'Tee tästä artikkelista selkeä viiden kohdan muistilista.'",
               "Lue lista ja tarkista, ettei tekoäly jättänyt vahingossa pois jotain todella tärkeää faktaa.",
               "Käytä hienoa ja valmista muistilistaa asioiden esittelemiseen kavereille."
             ],
-            "correctAnswer": [
-              "Syötä uutisen pitkä teksti tekoälyn ohjelmaan.",
-              "Anna ohje: 'Tee tästä artikkelista selkeä viiden kohdan muistilista.'",
-              "Lue lista ja tarkista, ettei tekoäly jättänyt vahingossa pois jotain todella tärkeää faktaa.",
-              "Käytä hienoa ja valmista muistilistaa asioiden esittelemiseen kavereille."
-            ],
-            "explanation": "Tekoälyn ohjeistaminen on yksinkertaista, mutta kaikkein tärkein työvaihe on ihmisen tekemä tarkistus lopussa! Näin varmistat, että asiat menivät kyytiin oikein."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_6_q13",
@@ -10321,21 +10851,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_7_q4",
-            "type": "ordering",
+            "type": "drag_drop",
             "question": "Järjestä täydellisen ja tarkan promptin (ohjeen) rakennuspalikat! Miten annat navigaattorille parhaan mahdollisen osoitteen?",
-            "options": [
+            "correctAnswer": {
+              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').": "1. vaihe",
+              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').": "2. vaihe",
+              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').": "3. vaihe",
+              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista').": "4. vaihe"
+            },
+            "explanation": "Kun annat koneelle tarkat speksit eli roolin, tehtävän, taustatiedot ja halutun tulostusmuodon, tekoälystä tulee mielettömän taitava ja tarkka työkalu.",
+            "draggables": [
               "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').",
               "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').",
               "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').",
               "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista')."
             ],
-            "correctAnswer": [
-              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').",
-              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').",
-              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').",
-              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista')."
-            ],
-            "explanation": "Kun annat koneelle tarkat speksit eli roolin, tehtävän, taustatiedot ja halutun tulostusmuodon, tekoälystä tulee mielettömän taitava ja tarkka työkalu."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ]
           },
           {
             "id": "kayttotaidot_7_q5",
