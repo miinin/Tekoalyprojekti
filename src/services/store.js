@@ -161,6 +161,37 @@ export const store = {
     return current + amount;
   },
 
+  getMeters: () => {
+    const defaultMeters = { red: 0, yellow: 0, green: 0 };
+    try {
+        return JSON.parse(localStorage.getItem('aivan_meters') || JSON.stringify(defaultMeters));
+    } catch (e) {
+        return defaultMeters;
+    }
+  },
+
+  chargeMeter: (color, amount) => {
+    const meters = store.getMeters();
+    if (meters[color] !== undefined && meters[color] < 100) {
+        meters[color] = Math.min(100, meters[color] + amount);
+        localStorage.setItem('aivan_meters', JSON.stringify(meters));
+        store.syncClassroomProgress();
+        return meters[color] === 100; // Returns true if it just reached full
+    }
+    return false;
+  },
+
+  useMeter: (color) => {
+    const meters = store.getMeters();
+    if (meters[color] >= 100) {
+        meters[color] = 0;
+        localStorage.setItem('aivan_meters', JSON.stringify(meters));
+        store.syncClassroomProgress();
+        return true;
+    }
+    return false;
+  },
+
   spendSparks: async (amount) => {
     const room = store.getRoomCode();
     const current = await store.getSparks();

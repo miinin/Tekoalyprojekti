@@ -14,6 +14,8 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSparks, setCurrentSparks] = useState(0);
+  const [meters, setMeters] = useState({ red: 0, yellow: 0, green: 0 });
+  const [explanationStartTime, setExplanationStartTime] = useState(null);
   const [bossIntroSeen, setBossIntroSeen] = useState(false);
   
   const [bugReportMode, setBugReportMode] = useState(false);
@@ -25,6 +27,7 @@ export default function Quiz() {
 
     const fetchSparks = async () => {
       setCurrentSparks(await store.getSparks());
+      setMeters(store.getMeters());
     };
     fetchSparks();
     const interval = setInterval(fetchSparks, 3000);
@@ -67,15 +70,15 @@ export default function Quiz() {
        setActiveBuff(buff);
        setActivePaint(equipped['body'] || '');
 
-       // Globaalit puskuribuffit (Törmäyksenesto, poistaa 1 väärän monivalinnassa)
+       // UUDET: Latausnopeudet
        const bumper = equipped['bumper'] || '';
-       let bumperProb = 0;
-       if (bumper === 'van-bumper01' || bumper === 'van-bumper05') bumperProb = 0.05;
-       else if (bumper === 'van-bumper02' || bumper === 'van-bumper04') bumperProb = 0.10;
-       else if (bumper === 'van-bumper03' || bumper === 'van-bumper06') bumperProb = 0.15;
-       setBumperBuff(bumperProb);
+       let redCharge = 0;
+       if (bumper === 'van-bumper01' || bumper === 'van-bumper05') redCharge = 10;
+       else if (bumper === 'van-bumper02' || bumper === 'van-bumper04') redCharge = 15;
+       else if (bumper === 'van-bumper06') redCharge = 20;
+       else if (bumper === 'van-bumper03') redCharge = 25;
+       setBumperBuff(redCharge);
 
-       // Globaalit tunkkibuffit (Levitaatio, säästää T/F menetykseltä)
        const jack = equipped['g_jack'] || '';
        let jackProb = 0;
        if (jack === 'g-jack1') jackProb = 0.05;
@@ -83,16 +86,25 @@ export default function Quiz() {
        else if (jack === 'g-jack3') jackProb = 0.15;
        setJackBuff(jackProb);
 
-       // Globaalit työkalubuffit (Järjestely, näyttää virheet)
        const tools = equipped['g_tools'] || '';
-       let toolsLevel = 0;
-       if (tools === 'g-walltools1') toolsLevel = 1;
-       else if (tools === 'g-walltools2') toolsLevel = 2;
-       else if (tools === 'g-walltools3') toolsLevel = 3;
-       else if (tools === 'g-walltools4') toolsLevel = 4;
-       else if (tools === 'g-walltools5') toolsLevel = 2;
-       else if (tools === 'g-walltools6') toolsLevel = 1;
-       setToolsBuff(toolsLevel);
+       let greenCharge = 0;
+       if (tools === 'g-walltools1' || tools === 'g-walltools6') greenCharge = 15;
+       else if (tools === 'g-walltools2' || tools === 'g-walltools5') greenCharge = 25;
+       else if (tools === 'g-walltools3') greenCharge = 40;
+       else if (tools === 'g-walltools4') greenCharge = 60;
+       setToolsBuff(greenCharge);
+
+       const wheels = equipped['wheel'] || '';
+       let yellowCharge = 0;
+       let yellowPower = 1;
+       if (wheels === 'van-wheel01') yellowCharge = 20;
+       else if (wheels === 'van-wheel02') yellowCharge = 35;
+       else if (wheels === 'van-wheel03') yellowCharge = 50;
+       else if (wheels === 'van-wheel04') { yellowCharge = 20; yellowPower = 2; }
+       else if (wheels === 'van-wheel05') { yellowCharge = 50; yellowPower = 2; }
+       else if (wheels === 'van-wheel06') { yellowCharge = 75; yellowPower = 2; }
+       // Tallenna purun voima stateen
+       setRemovedOptions([]);
 
        if (s && s.questions) {
          if (subCategory && subCategory.endsWith('_7')) {
@@ -174,13 +186,7 @@ export default function Quiz() {
     } else {
         setShuffledDraggables([]);
     }
-    if (currentQuestion.type === 'multiple_choice') {
-        let shouldRemove = false;
-        let isBumper = false;
-        
-        if (activeBuff) {
-            shouldRemove = true;
-        } else if (bumperBuff > 0 && Math.random() < bumperBuff) {
+    // Enää ei poisteta valintoja automaattisesti! (Keltainen mittari hoitaa sen manuaalisesti) else if (bumperBuff > 0 && Math.random() < bumperBuff) {
             shouldRemove = true;
             isBumper = true;
         }
@@ -226,22 +232,15 @@ export default function Quiz() {
   const currentQuestion = questions[currentIndex];
   
   if (currentQuestion.type === 'ordering' && orderedItems.length === 0 && !selectedAnswer) {
-    if (activeBuff || toolsBuff >= 4) {
-       const firstCorrect = currentQuestion.correctAnswer[0];
-       const remaining = currentQuestion.options.filter(o => o !== firstCorrect);
-       setOrderedItems([firstCorrect, ...remaining.sort(() => Math.random() - 0.5)]);
-    } else {
+       setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
+  } else {
        setOrderedItems([...currentQuestion.options].sort(() => Math.random() - 0.5));
     }
   }
   
   if (currentQuestion.type === 'drag_drop' && Object.keys(dragTargets).length === 0 && !selectedAnswer) {
-      const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
-      if ((activeBuff || toolsBuff >= 4) && draggables.length > 0) {
-         const firstItem = draggables[0];
-         const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[firstItem] : (currentQuestion.options.find(o => o.item === firstItem)?.target);
-         setDragTargets({ [firstItem]: expected });
-      }
+      // Ei automaattista täyttöä enää
+  }
   }
 
   const handleAnswerSubmit = (answer) => {
@@ -301,12 +300,7 @@ export default function Quiz() {
         }
     }
     
-    if ((currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') && toolsBuff > 0 && !usedToolChecks && !correct) {
-        let wrongItems = [];
-        if (currentQuestion.type === 'ordering') {
-             answer.forEach((item, idx) => {
-                  if (item !== currentQuestion.correctAnswer[idx]) wrongItems.push(item);
-             });
+    // Vanha järjestelybuffi on poistettu);
         } else if (currentQuestion.type === 'drag_drop') {
              const draggables = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
              draggables.forEach(item => {
@@ -325,6 +319,11 @@ export default function Quiz() {
     
     if (correct) {
       setCorrectAnswersCount(prev => prev + 1);
+      // LATAA PUNAISTA MITTARIA
+      if (bumperBuff > 0) {
+          store.chargeMeter('red', bumperBuff);
+          setMeters(store.getMeters());
+      }
     }
     
     const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
@@ -341,6 +340,17 @@ export default function Quiz() {
   };
 
   const handleNext = async () => {
+    
+    // VIHREÄN MITTARIN LATAUS: Oliko ruudulla ainakin 3 sekuntia?
+    if (explanationStartTime && toolsBuff > 0) {
+        const timeSpent = Date.now() - explanationStartTime;
+        if (timeSpent >= 3000) {
+            store.chargeMeter('green', toolsBuff);
+            setMeters(store.getMeters());
+        }
+    }
+    setExplanationStartTime(null);
+
     if (currentIndex < questions.length - 1) {
       setSelectedAnswer(null);
       setShowExplanation(false);
@@ -384,6 +394,139 @@ export default function Quiz() {
   };
 
   // Drag and Drop helpers
+
+  const getYellowPower = () => {
+       const eq = equippedItems['wheel'] || '';
+       if (['van-wheel04', 'van-wheel05', 'van-wheel06'].includes(eq)) return 2;
+       return 1;
+  };
+
+  const useRedMeter = () => {
+      if (store.useMeter('red')) {
+          setMeters(store.getMeters());
+          setSelectedAnswer(null);
+          setShowExplanation(false);
+          setIsCorrect(false);
+          setExplanationStartTime(null);
+          setResults(prev => prev.slice(0, -1)); // Remove the fail output
+      }
+  };
+
+  const useYellowMeter = () => {
+      if (currentQuestion.type !== 'multiple_choice') return;
+      if (store.useMeter('yellow')) {
+          setMeters(store.getMeters());
+          const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
+          let amount = getYellowPower();
+          if (amount > wrongOptions.length) amount = wrongOptions.length;
+          
+          const shuffledWrongs = [...wrongOptions].sort(() => Math.random() - 0.5);
+          setRemovedOptions([...removedOptions, ...shuffledWrongs.slice(0, amount)]);
+      }
+  };
+
+  const useGreenMeter = () => {
+      if (store.useMeter('green')) {
+          setMeters(store.getMeters());
+          
+          // Ohitetaan kysymys ottamalla uusi paketista (sijasta 0 => sija currentIndex)
+          const correctness = store.getQuestionCorrectness()[sub.id] || {};
+          let unasked = [];
+          [...sub.questions].forEach(q => {
+               if (!correctness.hasOwnProperty(q.id) && q.id !== currentQuestion.id && !questions.includes(q)) unasked.push(q);
+          });
+          
+          if (unasked.length === 0) {
+             alert('Aivan on harventanut kaikki kysymykset! Paina Seuraava ohittaaksesi ilman rangaistusta.');
+             setIsCorrect(true);
+             setShowExplanation(true);
+             return;
+          }
+          
+          // Swap question
+          unasked.sort(() => Math.random() - 0.5);
+          const newQ = unasked[0];
+          setQuestions(prev => {
+              let copy = [...prev];
+              copy[currentIndex] = newQ;
+              return copy;
+          });
+          
+          setSelectedAnswer(null);
+          setShowExplanation(false);
+          setIsCorrect(false);
+          setOrderedItems([]);
+          setDragTargets({});
+      }
+  };
+
+  const renderMeters = () => {
+    // Only show if the user has corresponding item equipped
+    const b = bumperBuff > 0;
+    const w = equippedItems['wheel'] && equippedItems['wheel'] !== 'van-wheel01'; // Wheel01 charges but it's base
+    // Actually base wheel DOES charge? Yes it does. We just show yellow if any wheels exist
+    const hasWheels = !!equippedItems['wheel'];
+    const hasTools = toolsBuff > 0;
+
+    return (
+        <div style={{ position: 'fixed', bottom: '1.5rem', left: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', zIndex: 100 }}>
+            {b && (
+                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.red >= 100 && showExplanation && !isCorrect ? 1 : 0.6, transition: 'all 0.3s' }}>
+                   {meters.red >= 100 && showExplanation && !isCorrect && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#ef4444', borderRadius: '50%' }} />}
+                   <button 
+                     disabled={!(meters.red >= 100 && showExplanation && !isCorrect)}
+                     onClick={useRedMeter}
+                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #f87171, #dc2626)', border: '2px solid #7f1d1d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.red >= 100 && showExplanation && !isCorrect) ? 'pointer' : 'default' }}>
+                      <ShieldCheck size={28} color="white" />
+                   </button>
+                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem', gap: '0.2rem' }}>
+                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                         <div style={{ width: `${meters.red}%`, height: '100%', background: '#ef4444' }} />
+                      </div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>UUSINTA</span>
+                   </div>
+                </div>
+            )}
+            
+            {hasWheels && (
+                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice' ? 1 : 0.6, transition: 'all 0.3s' }}>
+                   {meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice' && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#eab308', borderRadius: '50%' }} />}
+                   <button 
+                     disabled={!(meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice')}
+                     onClick={useYellowMeter}
+                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #fde047, #ca8a04)', border: '2px solid #713f12', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.yellow >= 100 && !showExplanation && currentQuestion.type === 'multiple_choice') ? 'pointer' : 'default' }}>
+                      <Disc size={28} color="white" />
+                   </button>
+                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}>
+                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                         <div style={{ width: `${meters.yellow}%`, height: '100%', background: '#eab308' }} />
+                      </div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>POISTO</span>
+                   </div>
+                </div>
+            )}
+
+            {hasTools && (
+                <div style={{ position: 'relative', width: '60px', height: '60px', opacity: meters.green >= 100 && !showExplanation ? 1 : 0.6, transition: 'all 0.3s' }}>
+                   {meters.green >= 100 && !showExplanation && <div className="animate-ping" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: '#22c55e', borderRadius: '50%' }} />}
+                   <button 
+                     disabled={!(meters.green >= 100 && !showExplanation)}
+                     onClick={useGreenMeter}
+                     style={{ position: 'relative', zIndex: 2, background: 'linear-gradient(135deg, #86efac, #16a34a)', border: '2px solid #14532d', borderRadius: '50%', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 5px 15px rgba(0,0,0,0.3)', cursor: (meters.green >= 100 && !showExplanation) ? 'pointer' : 'default' }}>
+                      <Wrench size={28} color="white" />
+                   </button>
+                   <div style={{ position: 'absolute', bottom: '-1.5rem', left: '-1rem', width: '90px', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.2rem' }}>
+                      <div style={{ width: '40px', height: '6px', background: 'rgba(0,0,0,0.5)', borderRadius: '3px', overflow: 'hidden' }}>
+                         <div style={{ width: `${meters.green}%`, height: '100%', background: '#22c55e' }} />
+                      </div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'white', textShadow: '0 1px 2px black' }}>VAIHTO</span>
+                   </div>
+                </div>
+            )}
+        </div>
+    );
+  };
+
   const handleDragStart = (e, item) => e.dataTransfer.setData('text/plain', item);
   const handleDrop = (e, target) => {
     e.preventDefault();

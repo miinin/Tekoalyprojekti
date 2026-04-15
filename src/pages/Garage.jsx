@@ -28,6 +28,7 @@ export default function Garage() {
 
   const [saveCode, setSaveCode] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [showMeterTutorial, setShowMeterTutorial] = useState(false);
 
   const handleCreateSave = async () => {
       setIsSaving(true);
@@ -129,21 +130,21 @@ export default function Garage() {
     { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön ritari', desc: 'Tumma ja puhuva mattamusta.', price: 800, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
     { id: 'van-body12', category: 'body', categoryName: 'Maalipinnat', name: 'AI Team', desc: 'Rakastan sitä, kun promptit loksahtelevat kohdilleen.', price: 1200, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#1e293b' },
     
-    // PUSKURIT
-    { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava ja vähäeleinen perussuoja kaduille.', price: 0, isDefault: true, icon: <ShieldCheck size={28} />, color: '#64748b', bg: '#f1f5f9', buff: { title: 'Törmäyksenesto (Taso 1)', desc: 'Satunnainen mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
-    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä ja tyylikästä retrohenkeä.', price: 800, icon: <ShieldCheck size={28} />, color: '#94a3b8', bg: '#f8fafc', buff: { title: 'Törmäyksenesto (Taso 2)', desc: 'Pieni mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
-    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Kultapuskuri', desc: 'Katujen todellisille mestareille. Bling bling!', price: 2500, icon: <ShieldCheck size={28} />, color: '#d97706', bg: '#fef3c7', buff: { title: 'Törmäyksenesto (Taso 3)', desc: 'Kohtalainen mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
-    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Mattamusta', desc: 'Tyylikäs, erittäin hillitty ja moderni tumma suoja.', price: 1200, icon: <ShieldCheck size={28} />, color: '#1e293b', bg: '#e2e8f0', buff: { title: 'Törmäyksenesto (Taso 2)', desc: 'Pieni mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
-    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Rustiikkinen puskuri', desc: 'Rouheaa asennetta huokuva, ajan patinoima teräs.', price: 600, icon: <ShieldCheck size={28} />, color: '#9a3412', bg: '#ffedd5', buff: { title: 'Törmäyksenesto (Taso 1)', desc: 'Satunnainen mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
-    { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas, lämpimän hohtava pronssisuoja.', price: 1800, icon: <ShieldCheck size={28} />, color: '#b45309', bg: '#fef08a', buff: { title: 'Törmäyksenesto (Taso 3)', desc: 'Kohtalainen mahdollisuus poistaa 1 harhaanjohtava vaihtoehto monivalintatehtävissä.' } },
+    // PUSKURIT (Punainen Mittari: Uusinta)
+    { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja kaduille.', price: 0, isDefault: true, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Hidas)', desc: 'Lataa punaista Uusinta-mittaria +10% jokaisesta oikeasta vastauksesta.' } },
+    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä.', price: 800, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Perus)', desc: 'Lataa punaista Uusinta-mittaria +15% jokaisesta oikeasta vastauksesta.' } },
+    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Kultapuskuri', desc: 'Bling bling!', price: 2500, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Super)', desc: 'Lataa punaista Uusinta-mittaria jopa +25% jokaisesta oikeasta vastauksesta!' } },
+    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Mattamusta', desc: 'Hillitty ja moderni.', price: 1200, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Perus)', desc: 'Lataa punaista Uusinta-mittaria +15% jokaisesta oikeasta vastauksesta.' } },
+    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Rustiikkinen puskuri', desc: 'Rouheaa asennetta huokuva teräs.', price: 600, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Hidas)', desc: 'Lataa punaista Uusinta-mittaria +10% jokaisesta oikeasta vastauksesta.' } },
+    { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas.', price: 1800, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan lataus (Nopea)', desc: 'Lataa punaista Uusinta-mittaria +20% jokaisesta oikeasta vastauksesta.' } },
 
-    // VANTEET
-    { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Klassinen ja kestävä valinta.', price: 0, isDefault: true, icon: <Disc size={28} />, color: '#4b5563', bg: '#f3f4f6' },
-    { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#8b5cf6', bg: '#ede9fe' },
-    { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Maastorenkaat', desc: 'Jykevät renkaat järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Vintage-vanteet', desc: 'Tyylikästä nostalgiaa menneiltä vuosikymmeniltä.', price: 2000, icon: <Disc size={28} />, color: '#f59e0b', bg: '#fef3c7' },
-    { id: 'van-wheel06', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Kartta-apu: Reilu Peli', desc: 'Antaa yhden väärän vastauksen pelastuksen tai vihjeen lumisen haasteen kysymyksissä.' } },
+    // VANTEET (Keltainen Mittari: Vaihtoehdon poisto)
+    { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Kestävä valinta.', price: 0, isDefault: true, icon: <Disc size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kikan lataus (Hidas)', desc: 'Lataa keltaista Kikka-mittaria +20% per ansaittu mitali. Poistaa 1 väärän vaihtoehdon.' } },
+    { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 1200, icon: <Aperture size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kikan lataus (Perus)', desc: 'Lataa keltaista Kikka-mittaria +35% per ansaittu mitali. Poistaa 1 väärän vaihtoehdon.' } },
+    { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 1800, icon: <Sparkles size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kikan lataus (Iso)', desc: 'Lataa keltaista Kikka-mittaria jopa +50% per ansaittu mitali. Poistaa 1 väärän vaihtoehdon.' } },
+    { id: 'van-wheel04', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Maastorenkaat', desc: 'Järeään käyttöön.', price: 800, icon: <Disc size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kikan lataus (Hidas)', desc: 'Lataa keltaista Kikka-mittaria +20% per ansaittu mitali. Poistaa poikkeuksellisesti 2 väärää!' } },
+    { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Vintage-vanteet', desc: 'Tyylikästä nostalgiaa.', price: 2000, icon: <Disc size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kikan lataus (Iso)', desc: 'Lataa keltaista Kikka-mittaria jopa +50% per ansaittu mitali. Poistaa poikkeuksellisesti 2 väärää!' } },
+    { id: 'van-wheel06', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 2500, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Kikan lataus (Super)', desc: 'Lataa keltaista Kikka-mittaria sädäkkää vauhtia (+75% mitalista). Poistaa 2 väärää vaihtoehtoa!' } },
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Roots-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },
@@ -166,18 +167,18 @@ export default function Garage() {
     { id: 'g-walls3', category: 'g_walls', categoryName: 'Seinät', name: 'Nykyaikainen talli', desc: 'Luotettava ja puhdas moderni tyyli.', price: 2000, icon: <Layers size={28} />, color: '#9d174d', bg: '#fbcfe8' },
     { id: 'g-walls4', category: 'g_walls', categoryName: 'Seinät', name: 'Futuristinen halli', desc: 'Korkean teknologian ja lasin liitto.', price: 5000, icon: <Sparkles size={28} />, color: '#831843', bg: '#fbcfe8' },
     
-    // TYÖKALUSARJAT (Mutually Exclusive)
-    { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkalusarja', desc: 'Perustyökalut hienosti esille.', price: 600, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Työkaluavustin (Taso 1)', desc: 'Järjestely-tehtävissä saat nähdä yhden väärin asetetun palikan.' } },
-    { id: 'g-walltools2', category: 'g_tools', categoryName: 'Työkalut', name: 'Parannetut työkalut', desc: 'Kattavampi setti harrastajalle.', price: 1200, icon: <Wrench size={28} />, color: '#ca8a04', bg: '#fef08a', buff: { title: 'Työkaluavustin (Taso 2)', desc: 'Järjestely-tehtävissä saat nähdä kaksi väärin asetettua palikkaa.' } },
-    { id: 'g-walltools3', category: 'g_tools', categoryName: 'Työkalut', name: 'Huipputyökalut', desc: 'Kaikki mitä ammattilainen tarvitsee.', price: 2500, icon: <Sparkles size={28} />, color: '#a16207', bg: '#fef08a', buff: { title: 'Työkaluavustin (Taso 3)', desc: 'Järjestely-tehtävissä saat nähdä jopa kolme väärin asetettua palikkaa.' } },
-    { id: 'g-walltools4', category: 'g_tools', categoryName: 'Työkalut', name: 'Tulevaisuuden työkalut', desc: 'Tulevaisuuden tekijöille.', price: 3000, icon: <Zap size={28} />, color: '#854d0e', bg: '#fef08a', buff: { title: 'Tulevaisuuden Avustin (Taso 4)', desc: 'Järjestely-tehtävissä näet kaikki väärässä olevat palikat ja AI van lukitsee 1 palikan jo valmiiksi!' } },
-    { id: 'g-walltools5', category: 'g_tools', categoryName: 'Työkalut', name: '"Ihan ok" -työkalut', desc: 'Ajaa asiansa, jos ei parempaa ole tarjolla.', price: 2400, icon: <Wrench size={28} />, color: '#71717a', bg: '#f4f4f5', buff: { title: 'Työkaluavustin (Taso 2)', desc: 'Järjestely-tehtävissä saat nähdä kaksi väärin asetettua palikkaa.' } },
-    { id: 'g-walltools6', category: 'g_tools', categoryName: 'Työkalut', name: '"Paremman puutteessa" -työkalut', desc: 'Näilläkin saa jotain aikaiseksi.', price: 2200, icon: <Wrench size={28} />, color: '#3f3f46', bg: '#e4e4e7', buff: { title: 'Työkaluavustin (Taso 1)', desc: 'Järjestely-tehtävissä saat nähdä yhden väärin asetetun palikan.' } },
+    // TYÖKALUSARJAT (Vihreä mittari: Kysymyksen ohitus)
+    { id: 'g-walltools1', category: 'g_tools', categoryName: 'Työkalut', name: 'Työkalusarja', desc: 'Perustyökalut esille.', price: 600, icon: <Wrench size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Hidas)', desc: 'Lataa vihreää Ohitus-mittaria +15% aina kun viivyt oikean vastauksen perusteluissa.' } },
+    { id: 'g-walltools2', category: 'g_tools', categoryName: 'Työkalut', name: 'Parannetut työkalut', desc: 'Kattavampi setti harrastajalle.', price: 1200, icon: <Wrench size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Perus)', desc: 'Lataa vihreää Ohitus-mittaria +25% aina kun viivyt oikean vastauksen perusteluissa.' } },
+    { id: 'g-walltools3', category: 'g_tools', categoryName: 'Työkalut', name: 'Huipputyökalut', desc: 'Kaikki mitä ammattilainen tarvitsee.', price: 2500, icon: <Sparkles size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Nopea)', desc: 'Lataa vihreää Ohitus-mittaria jopa +40% opiskelemassasi perusteluruudussa!' } },
+    { id: 'g-walltools4', category: 'g_tools', categoryName: 'Työkalut', name: 'Tulevaisuuden työkalut', desc: 'Tulevaisuuden tekijöille.', price: 3000, icon: <Zap size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Super)', desc: 'Lataa Ohitus-mittarisi alta aikayksikön (+60%) huolellisella lukemisella!!' } },
+    { id: 'g-walltools5', category: 'g_tools', categoryName: 'Työkalut', name: '"Ihan ok" -työkalut', desc: 'Ajaa asiansa.', price: 2400, icon: <Wrench size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Perus)', desc: 'Lataa vihreää Ohitus-mittaria +25% aina kun viivyt oikean vastauksen perusteluissa.' } },
+    { id: 'g-walltools6', category: 'g_tools', categoryName: 'Työkalut', name: '"Paremman puutteessa" -työkalut', desc: 'Näilläkin saa jotain aikaiseksi.', price: 2200, icon: <Wrench size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Ohituksen lataus (Hidas)', desc: 'Lataa vihreää Ohitus-mittaria +15% aina kun viivyt oikean vastauksen perusteluissa.' } },
 
-    // TUNKIT (Mutually Exclusive)
-    { id: 'g-jack1', category: 'g_jack', categoryName: 'Tunkit', name: 'Perustunkki', desc: 'Nostaa auton turvallisesti.', price: 500, icon: <Disc size={28} />, color: '#64748b', bg: '#f1f5f9', buff: { title: 'Putoamisen esto (Taso 1)', desc: 'Satunnainen mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä virheen sattuessa.' } },
-    { id: 'g-jack2', category: 'g_jack', categoryName: 'Tunkit', name: 'Laatutunkki', desc: 'Nopea ja vahva hallitunkki.', price: 1000, icon: <Disc size={28} />, color: '#475569', bg: '#f1f5f9', buff: { title: 'Putoamisen esto (Taso 2)', desc: 'Pieni mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä virheen sattuessa.' } },
-    { id: 'g-jack3', category: 'g_jack', categoryName: 'Tunkit', name: 'Levitaatiotunkki', desc: 'Auto nousee ilmaan melkein itsestään. Maagista!', price: 2500, icon: <Aperture size={28} />, color: '#334155', bg: '#f1f5f9', buff: { title: 'Levitaatio (Taso 3)', desc: 'Kohtalainen mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä virheen sattuessa.' } }
+    // TUNKIT (Sininen ominaisuus)
+    { id: 'g-jack1', category: 'g_jack', categoryName: 'Tunkit', name: 'Perustunkki', desc: 'Nostaa auton turvallisesti.', price: 500, icon: <Disc size={28} />, color: '#3b82f6', bg: '#dbeafe', buff: { title: 'Putoamisen esto (Taso 1)', desc: 'Satunnainen mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä.' } },
+    { id: 'g-jack2', category: 'g_jack', categoryName: 'Tunkit', name: 'Laatutunkki', desc: 'Nopea ja vahva hallitunkki.', price: 1000, icon: <Disc size={28} />, color: '#3b82f6', bg: '#dbeafe', buff: { title: 'Putoamisen esto (Taso 2)', desc: 'Pieni mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä.' } },
+    { id: 'g-jack3', category: 'g_jack', categoryName: 'Tunkit', name: 'Levitaatiotunkki', desc: 'Auto nousee ilmaan melkein itsestään. Maagista!', price: 2500, icon: <Aperture size={28} />, color: '#3b82f6', bg: '#dbeafe', buff: { title: 'Levitaatio (Taso 3)', desc: 'Kohtalainen mahdollisuus saada toinen yritys Oikein vai väärin -tehtävässä.' } }
   ];
 
   const setCategory = (cat) => {
@@ -299,6 +300,14 @@ export default function Garage() {
                             setSparks(await store.getSparks());
                             setPurchased(await store.getPurchasedItems());
                             setEquipped(await store.getEquippedItems());
+                            
+                            if (['bumper', 'wheel', 'g_tools'].includes(item.category)) {
+                                if (!localStorage.getItem('aivan_meter_tutorial_seen')) {
+                                    localStorage.setItem('aivan_meter_tutorial_seen', 'true');
+                                    setShowMeterTutorial(true);
+                                }
+                            }
+                            
                             if (item.id === 'g-clean' && isTutorialActive) {
                                 store.completeTutorial();
                                 setIsTutorialActive(false);
@@ -867,6 +876,62 @@ export default function Garage() {
 
       </div>
     </div>
+
+    {showMeterTutorial && (
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
+            <div className="modal-content" style={{ background: 'linear-gradient(145deg, #1e293b 0%, #0f172a 100%)', padding: '3rem', borderRadius: '24px', maxWidth: '650px', width: '90%', border: '2px solid #38bdf8', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', overflow: 'hidden' }}>
+                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.5rem' }}>
+                    <X size={28} />
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                    <div style={{ background: '#38bdf8', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(56, 189, 248, 0.4)' }}>
+                        <Zap size={36} color="white" />
+                    </div>
+                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: 'white', letterSpacing: '1px' }}>Erikoiskyvyt avattu!</h2>
+                </div>
+                
+                <p style={{ fontSize: '1.2rem', color: '#cbd5e1', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    Olet juuri hankkinut ensimmäisen varusteesi, joka kytkee päälle <strong>Aktiivisen Mittarin!</strong> Nämä mittarit näkyvät kysymysruutujen kulmassa. Kun saat mittarin täyteen, voit aktivoida upean erikoisvoiman painamalla sitä!
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
+                    <div style={{ background: 'rgba(239, 68, 68, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #ef4444', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <ShieldCheck size={28} color="#ef4444" />
+                        <div>
+                            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '0.2rem' }}>PUNAINEN MITTARI (Puskurit)</strong>
+                            Latautuu oikeista vastauksista. Täynnä antaa "Uusinnan" - saat yrittää väärin mennyttä vastausta ilmaiseksi uudelleen!
+                        </div>
+                    </div>
+                    <div style={{ background: 'rgba(234, 179, 8, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #eab308', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <Disc size={28} color="#eab308" />
+                        <div>
+                            <strong style={{ color: '#eab308', display: 'block', marginBottom: '0.2rem' }}>KELTAINEN MITTARI (Renkaat)</strong>
+                            Latautuu kun saat mitalin tason lopussa. Täynnä voit käyttää sen monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa!
+                        </div>
+                    </div>
+                    <div style={{ background: 'rgba(34, 197, 94, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #22c55e', display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                        <Wrench size={28} color="#22c55e" />
+                        <div>
+                            <strong style={{ color: '#22c55e', display: 'block', marginBottom: '0.2rem' }}>VIHREÄ MITTARI (Työkalut)</strong>
+                            Latautuu, kun vietät aikaa vastauksesi "Perustelut"-laatikon opiskeluun. Täynnä antaa luvan vaihtaa kysymys täysin uuteen.
+                        </div>
+                    </div>
+                </div>
+
+                <p style={{ color: '#94a3b8', fontStyle: 'italic', marginBottom: '2rem' }}>
+                    Vinkki: Kalliimmat ja paremmat osat tallissa saavat nämä mittarit täyttymään todella nopeasti!
+                </p>
+
+                <button 
+                    onClick={() => setShowMeterTutorial(false)}
+                    className="btn-primary"
+                    style={{ width: '100%', padding: '1rem', fontSize: '1.2rem', borderRadius: '12px', background: '#38bdf8', color: 'white', fontWeight: 'bold' }}>
+                    Selvä homma!
+                </button>
+            </div>
+        </div>
+    )}
+
     </>
   );
 }
