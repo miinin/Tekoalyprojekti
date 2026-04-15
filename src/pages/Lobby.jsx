@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
@@ -58,6 +58,26 @@ export default function Lobby() {
     navigate('/roadmap');
   };
 
+
+  const [showClassroom, setShowClassroom] = useState(false);
+  const [classCode, setClassCode] = useState('');
+  const [classNick, setClassNick] = useState('');
+
+  const handleJoinClass = (e) => {
+      e.preventDefault();
+      if (classCode.length < 6 || classNick.length < 2) return;
+      
+      store.clearSinglePlayer();
+      store.setClassroomCode(classCode.toUpperCase(), classNick);
+      
+      setModalState({
+          title: 'Liitytty onnistuneesti!',
+          text: `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
+          buttonText: 'Siirry peliin',
+          onClose: () => navigate('/roadmap')
+      });
+  };
+
   const handleCreateLobby = () => {
     const code = store.generateRoomCode();
     store.setRoomCode(code);
@@ -75,6 +95,10 @@ export default function Lobby() {
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+      <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', position: 'absolute', top: '1.5rem', right: '1.5rem', zIndex: 10, boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+        <GraduationCap size={20} color="#8b5cf6" /> Opettajalle
+      </button>
+
       
       {/* Animated gradient background */}
       <style>{`
@@ -248,8 +272,55 @@ export default function Lobby() {
                 </form>
               </div>
             )}
+
           </div>
         </div>
+
+        {/* LUOKKATILA */}
+        <div className="mode-card" style={{ borderTop: '8px solid #8b5cf6' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#8b5cf6', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
+             <GraduationCap size={36} /> Luokkatila
+          </h2>
+          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
+            {!showClassroom ? (
+              <button className="btn-primary" style={{ background: '#8b5cf6', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(139, 92, 246, 0.4)' }} onClick={() => setShowClassroom(true)}>
+                AVAA OPETUSTILA
+              </button>
+            ) : (
+              <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f5f3ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #ddd6fe' }}>
+                <p style={{ margin: 0, fontSize: '0.9rem', color: '#7c3aed', fontWeight: 'bold', lineHeight: 1.4 }}>
+                   ⚠️ Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
+                </p>
+                <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                  <input 
+                    type="text" 
+                    placeholder="Opettajan koodi (esim. ABCDEF)" 
+                    value={classCode}
+                    maxLength={6}
+                    onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
+                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #c4b5fd', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
+                  />
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <input 
+                        type="text" 
+                        placeholder="Sinun nimimerkkisi" 
+                        value={classNick}
+                        maxLength={15}
+                        onChange={(e) => setClassNick(e.target.value)}
+                        style={{ flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #c4b5fd', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                      />
+                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2} className="btn-primary" style={{ background: '#8b5cf6', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2) ? 0.5 : 1 }}>
+                        <ArrowRight size={24} />
+                      </button>
+                  </div>
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+
       </div>
 
       <button style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.8rem 1.5rem', borderRadius: '20px', color: 'rgba(255,255,255,0.9)', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', position: 'absolute', bottom: '2rem', transition: '0.3s', zIndex: 10 }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'} onClick={() => alert('Asetuksia voi säätää täältä myöhemmin (esim. musiikki ja esteettömyys).')}>

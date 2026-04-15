@@ -1,5 +1,5 @@
 import { categories as defaultCategories } from '../data/questions';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // A simple abstraction over local storage that simulates an async backend like Firebase
@@ -362,5 +362,72 @@ export const store = {
     const reports = store.getBugReports();
     const updated = reports.filter(r => r.id !== reportId);
     localStorage.setItem('aivan_bug_reports', JSON.stringify(updated));
+  },
+
+  // --- CLASSROOM MODE ---
+  getClassroomCode: () => localStorage.getItem('aivan_classroom') || null,
+  getClassroomNickname: () => localStorage.getItem('aivan_classroom_name') || null,
+  setClassroomCode: (code, nickname) => {
+    if (code) {
+      localStorage.setItem('aivan_classroom', code);
+      if (nickname) localStorage.setItem('aivan_classroom_name', nickname);
+    } else {
+      localStorage.removeItem('aivan_classroom');
+      localStorage.removeItem('aivan_classroom_name');
+    }
+  },
+
+  syncClassroomProgress: async () => {
+    const code = store.getClassroomCode();
+    const nickname = store.getClassroomNickname();
+    if (!code || !nickname) return;
+    
+    try {
+      const sparks = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
+      const records = store.getQuestionRecords();
+      let platinum = 0, gold = 0, silver = 0, bronze = 0;
+      Object.values(records).forEach(score => {
+        if (score >= 4) platinum++;
+        else if (score === 3) gold++;
+        else if (score === 2) silver++;
+        else if (score === 1) bronze++;
+      });
+      
+      const location = store.getLastLocation() || { main: '', sub: '' };
+      const locStr = location.main ? (location.sub ? `${location.main} -> ${location.sub}` : location.main) : 'Lobby';
+
+      await setDoc(doc(db, "class_sessions", code, "players", nickname), {
+        sparks,
+        medals: { platinum, gold, silver, bronze },
+        location: locStr,
+        lastUpdate: serverTimestamp()
+      }, { merge: true });
+    } catch (err) {
+      console.error('Luokkatilan synkronointi epäonnistui:', err);
+    }
+  },
+
+  listenToClassroomStatus: (code, callback) => {
+    return onSnapshot(doc(db, "class_sessions", code), (docSnap) => {
+      if (docSnap.exists()) {
+        callback(docSnap.data().status);
+      }
+    });
+  },
+
+  listenToTeacherGifts: (code, nickname, callback) => {
+    return onSnapshot(doc(db, "class_sessions", code, "players", nickname), (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        if (data.teacherGift) {
+          const current = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
+          localStorage.setItem('aivan_sparks', current + data.teacherGift);
+          updateDoc(doc(db, "class_sessions", code, "players", nickname), {
+            teacherGift: 0
+          });
+          if (callback) callback(data.teacherGift);
+        }
+      }
+    });
   }
 };
