@@ -7188,12 +7188,12 @@ export const categories = [
             "type": "reverse_prompt",
             "question": "Älykodin ruudulla lukee: \"Olohuoneen lämpötila nostettu 22 asteeseen ja kaikki ikkunoiden sähköiset kaihtimet suljettu, koska ulkona on kova pakkanen.\" Mikä tekoälyn sääntö teki tämän rutiinin?",
             "options": [
-              "Jos sääennuste lupaa pakkasta, pidä koti lämpimänä ja estä kylmän ilman pääsy ikkunoista.",
-              "Jos ulkona on kova ukkonen, sammuta kaikki kodin sähkölaitteet heti.",
-              "Avaa kaikki ikkunat auki, kun ulkona paistaa kuuma aurinko ja on kesä.",
-              "Laita pimeällä kaikki kodin valot maksimikirkkaudelle jokaiseen huoneeseen."
+              "Jos sääennuste lupaa pakkasta, nosta lämpöä ja sulje ikkunoiden kaihtimet.",
+              "Jos alueella on kova ukkonen, sammuta kaikki kodin herkät sähkölaitteet viipymättä.",
+              "Jos ulkona paistaa kuuma aurinko, pidä koti viileänä avaamalla talon kaikki pääikkunat.",
+              "Jos tulee pimeää, kytke kaikki kodin ja pihan lamput heti maksimikirkkaudelle."
             ],
-            "correctAnswer": "Jos sääennuste lupaa pakkasta, pidä koti lämpimänä ja estä kylmän ilman pääsy ikkunoista.",
+            "correctAnswer": "Jos sääennuste lupaa pakkasta, nosta lämpöä ja sulje ikkunoiden kaihtimet.",
             "explanation": "Älykoti on täynnä if-then (jos-niin) sääntöjä. Koodari on asettanut loogisen rutiinin, jossa sään viileneminen johtaa automaattisesti kodin eristyksen parantamiseen tekoälyn ohjaamana!"
           }
         ]

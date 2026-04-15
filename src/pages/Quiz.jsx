@@ -748,7 +748,7 @@ export default function Quiz() {
                  borderColor = colorPalette[idx % colorPalette.length];
               }
               
-              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'left', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'center', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
               
               if (isRemoved) {
                  btnStyle.opacity = 0.5;
