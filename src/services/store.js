@@ -390,13 +390,15 @@ export const store = {
     
     try {
       const sparks = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
-      const records = store.getQuestionRecords();
+      const stats = store.getNodeStats();
       let platinum = 0, gold = 0, silver = 0, bronze = 0;
-      Object.values(records).forEach(score => {
-        if (score >= 4) platinum++;
-        else if (score === 3) gold++;
-        else if (score === 2) silver++;
-        else if (score === 1) bronze++;
+      Object.keys(stats).forEach(nodeId => {
+          const stat = stats[nodeId];
+          if (!stat || stat.total === 0) return;
+          if (stat.correct === stat.total) platinum++;
+          else if (stat.correct >= Math.floor(stat.total * 0.9)) gold++;
+          else if (stat.correct >= Math.floor(stat.total * 0.7)) silver++;
+          else if (stat.correct >= 2) bronze++;
       });
       
       const location = store.getLastLocation() || { main: '', sub: '' };

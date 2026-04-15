@@ -28,6 +28,8 @@ const Roadmap = () => {
   const [bubbleText, setBubbleText] = useState(null);
 
   useEffect(() => {
+    store.setLastLocation('Kartta', currentMap === 'main' ? 'Päävalikko' : currentMap);
+
     let timeout;
     if (vanPos.message) {
       setBubbleText(vanPos.message);

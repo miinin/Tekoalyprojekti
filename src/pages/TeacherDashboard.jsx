@@ -124,7 +124,7 @@ export default function TeacherDashboard() {
                     
                     <div style={{ display: 'flex', alignItems: 'center', margin: '2rem 0' }}>
                         <div style={{ flexGrow: 1, height: '1px', background: '#e2e8f0' }}></div>
-                        <span style={{ color: '#94a3b8', margin: '0 1rem', fontWeight: 'bold' }}>TAI</span>
+                        <span style={{ color: '#3b82f6', margin: '0 1rem', fontWeight: 'bold' }}>TAI</span>
                         <div style={{ flexGrow: 1, height: '1px', background: '#e2e8f0' }}></div>
                     </div>
                     
@@ -155,9 +155,9 @@ export default function TeacherDashboard() {
                       <h3 style={{ margin: '0 0 0.5rem 0', color: '#64748b', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', textAlign: 'center' }}>Liittymiskoodi</h3>
                       <div style={{ position: 'relative', background: '#f8fafc', border: '2px dashed #cbd5e1', padding: '1.5rem', borderRadius: '16px', fontSize: '3rem', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '6px', color: '#0284c7' }}>
                           {sessionCode}
-                          <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-15px', right: '-15px', background: 'white', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                             <Maximize size={20} />
-                          </button>
+                          <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-15px', right: '-15px', background: 'white', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '20px', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', fontWeight: 'bold', fontSize: '0.9rem' }}>
+    <Maximize size={16} /> SUURENNA
+   </button>
                       </div>
                     </div>
                     
@@ -168,7 +168,7 @@ export default function TeacherDashboard() {
                       <button 
                          onClick={togglePause}
                          style={{ 
-                            background: sessionStatus === 'active' ? '#f59e0b' : '#10b981', 
+                            background: sessionStatus === 'active' ? '#6366f1' : '#10b981', 
                             color: 'white',
                             padding: '1.2rem', 
                             width: '100%', 
@@ -186,13 +186,13 @@ export default function TeacherDashboard() {
                          }}
                       >
                           {sessionStatus === 'active' ? (
-                              <><Pause size={24} /> Pysäytä oppitunti!</>
+                              <><Pause size={24} /> Tauota peli luokalta</>
                           ) : (
                               <><Play size={24} /> Vapauta peli luokalle</>
                           )}
                       </button>
                       <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>
-                          Tämä painike lukitsee välittömästi kaikkien pelaajien ruudut. Käytä silloin kun tarvitset koko luokan huomion!
+                          Tämä painike asettaa oppilaiden pelit väliaikaisesti tauolle, kun haluat antaa yhteisiä ohjeita luokalle.
                       </p>
                     </div>
 
@@ -265,13 +265,13 @@ export default function TeacherDashboard() {
 
         {/* Fullscreen Code Modal */}
         {showFullscreen && (
-            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }} onClick={() => setShowFullscreen(false)}>
+            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(135deg, rgba(224, 242, 254, 0.95) 0%, rgba(219, 234, 254, 0.95) 100%)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }} onClick={() => setShowFullscreen(false)}>
                 <p style={{ color: '#94a3b8', fontSize: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-display)', fontWeight: 'bold', letterSpacing: '2px' }}>Liity peliin koodilla:</p>
                 <div style={{ background: 'white', padding: '4rem 8rem', borderRadius: '32px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                     <h1 style={{ fontSize: '10rem', margin: 0, fontFamily: 'monospace', letterSpacing: '1rem', color: '#0284c7', lineHeight: 1 }}>{sessionCode}</h1>
                 </div>
                 <button style={{ position: 'absolute', top: '3rem', right: '3rem', background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }} onClick={() => setShowFullscreen(false)}>
-                    <X size={64} />
+                    <X size={64} color="#3b82f6" />
                 </button>
             </div>
         )}

@@ -21,6 +21,8 @@ export default function Quiz() {
   const [bugSubmitted, setBugSubmitted] = useState(false);
 
   useEffect(() => {
+    store.setLastLocation('Tehtävä', subCategory);
+
     const fetchSparks = async () => {
       setCurrentSparks(await store.getSparks());
     };
