@@ -551,7 +551,16 @@ export default function Quiz() {
          </div>
       )}
 
-      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
+      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
+        <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', fontFamily: 'monospace', fontSize: '1rem', color: '#64748b', background: 'rgba(241, 245, 249, 0.9)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontWeight: '900', letterSpacing: '1px' }}>
+           {(() => {
+             const mIdx = categories.findIndex(c => c.id === category.id) + 1;
+             const sIdx = category.subcategories.findIndex(sc => sc.id === sub.id);
+             const letter = String.fromCharCode(65 + Math.max(0, sIdx));
+             const qIdx = sub.questions.findIndex(q => q.id === currentQuestion.id) + 1;
+             return `${mIdx}${letter}${qIdx.toString().padStart(2, '0')}`;
+           })()}
+        </div>
         {(() => {
           const styleInfo = getQuestionStyle(currentQuestion.type);
           return (
