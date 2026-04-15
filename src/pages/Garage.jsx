@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Cloud } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -476,7 +476,7 @@ export default function Garage() {
                 disabled={isSaving}
                 className="btn-secondary" 
                 style={{ padding: '0.8rem 1.2rem', background: 'white', color: '#0f172a', borderColor: '#cbd5e1', display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 'bold' }}>
-                <Cloud size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
+                <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
               </button>
           )}
           <button 

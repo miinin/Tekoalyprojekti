@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, DownloadCloud, Info } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
@@ -13,6 +13,7 @@ export default function Lobby() {
   const [showSettings, setShowSettings] = useState(false);
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
+  const [modalState, setModalState] = useState(null);
 
   const handleRestoreCloudSave = async (e) => {
       e.preventDefault();
@@ -21,10 +22,19 @@ export default function Lobby() {
       const success = await store.importProgressFromCloud(loadCode);
       setIsRestoring(false);
       if (success) {
-          alert('Peli ladattiin onnistuneesti rekisterikilvellä: ' + loadCode.toUpperCase());
-          navigate('/roadmap');
+          setModalState({
+              title: 'Tervetuloa takaisin!',
+              text: `Peli ladattiin onnistuneesti rekisterikilvellä ${loadCode.toUpperCase()}. Kaikki kipinäsi ja aiempien pelikertojen eteneminen on palautettu.`,
+              onClose: () => navigate('/roadmap'),
+              buttonText: 'Jatka matkaa'
+          });
       } else {
-          alert('Rekisterikilpeä ei löytynyt tai tilan lataus epäonnistui.');
+          setModalState({
+              title: 'Lataus epäonnistui',
+              text: 'Rekisterikilpeä ei löytynyt tietokannasta, tai huonon nettiyhteyden takia haku epäonnistui. Tarkista koodi ja yritä uudelleen.',
+              onClose: () => setModalState(null),
+              buttonText: 'Takaisin'
+          });
       }
   };
 
@@ -171,7 +181,7 @@ export default function Lobby() {
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.6rem' }}>
                     <label style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                         Lataa peli rekisterikilvellä: 
-                        <button type="button" onClick={() => alert('Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!')} style={{ background: 'none', color: '#0ea5e9', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}><Info size={18} /></button>
+                        <button type="button" onClick={() => setModalState({ title: 'Miten lataaminen toimii?', text: 'Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!', onClose: () => setModalState(null), buttonText: 'Selvä juttu' })} style={{ background: 'none', color: '#0ea5e9', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}><Info size={18} /></button>
                     </label>
                 </div>
                 <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
@@ -195,8 +205,8 @@ export default function Lobby() {
                             style={{ flexGrow: 1, padding: '0.8rem 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1.4rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '4px', fontWeight: '900', color: '#1e293b', background: 'transparent' }}
                          />
                      </div>
-                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0ea5e9', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
-                         {isRestoring ? '...' : <DownloadCloud size={24} />}
+                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#10b981', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
+                         {isRestoring ? '...' : <ArrowRight size={24} />}
                      </button>
                 </form>
             </div>
@@ -245,6 +255,19 @@ export default function Lobby() {
       <button style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', padding: '0.8rem 1.5rem', borderRadius: '20px', color: 'rgba(255,255,255,0.9)', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', position: 'absolute', bottom: '2rem', transition: '0.3s', zIndex: 10 }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'} onClick={() => alert('Asetuksia voi säätää täältä myöhemmin (esim. musiikki ja esteettömyys).')}>
         <Settings size={20} /> Yleiset asetukset
       </button>
+
+      {modalState && (
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={modalState.onClose}>
+            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
+               <button onClick={modalState.onClose} style={{ position: 'absolute', top: '0.8rem', right: '0.8rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
+               <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.8rem', fontFamily: 'var(--font-display)' }}>{modalState.title}</h3>
+               <p style={{ margin: '0 0 2rem 0', fontSize: '1.1rem', whiteSpace: 'pre-wrap' }}>{modalState.text}</p>
+               <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: '1.2rem', padding: '1rem' }} onClick={modalState.onClose}>
+                  {modalState.buttonText || 'Selvä'}
+               </button>
+            </div>
+         </div>
+      )}
 
     </div>
   );
