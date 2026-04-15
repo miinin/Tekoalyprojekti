@@ -143,6 +143,7 @@ export default function Quiz() {
   const [usedToolChecks, setUsedToolChecks] = useState(false);
   const [highlightedWrongItems, setHighlightedWrongItems] = useState([]);
   const [shuffledOptions, setShuffledOptions] = useState([]);
+  const [shuffledDraggables, setShuffledDraggables] = useState([]);
   const [hoveredOptionIdx, setHoveredOptionIdx] = useState(null);
 
   useEffect(() => {
@@ -163,6 +164,13 @@ export default function Quiz() {
         setShuffledOptions([...currentQuestion.options].sort(() => Math.random() - 0.5));
     } else {
         setShuffledOptions(currentQuestion.options ? [...currentQuestion.options] : []);
+    }
+    
+    if (currentQuestion.type === 'drag_drop') {
+        const dItems = currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : []);
+        setShuffledDraggables([...dItems].sort(() => Math.random() - 0.5));
+    } else {
+        setShuffledDraggables([]);
     }
     if (currentQuestion.type === 'multiple_choice') {
         let shouldRemove = false;
@@ -836,7 +844,7 @@ export default function Quiz() {
         {currentQuestion.type === 'drag_drop' && (
           <div>
             <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).map((item, idx) => {
+              {shuffledDraggables.map((item, idx) => {
                 if (dragTargets[item]) return null;
                 const isSelected = selectedDragItem === item;
                 return (
@@ -864,7 +872,7 @@ export default function Quiz() {
                 >
                   <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.4rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', flexGrow: 1 }}>
-                    {(currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).filter(item => dragTargets[item] === target).map((item, idx) => {
+                    {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
                       const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
                       const isItemCorrect = expected === target;
                       return (
@@ -884,7 +892,7 @@ export default function Quiz() {
               ))}
             </div>
             
-            {!showExplanation && (currentQuestion.draggables || (currentQuestion.options ? currentQuestion.options.map(o => o.item) : [])).every(item => dragTargets[item]) && (
+            {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
                <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
                  Tarkista vastaukset
                </button>
