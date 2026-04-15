@@ -8423,14 +8423,14 @@ export const categories = [
           {
             "id": "reilu_peli_3_q9",
             "type": "multiple_choice",
-            "question": "Miksi oikeat taiteilijat ovat joutuneet tekemään kovaa työtä vuosikausia, ennen kuin tekoäly on pystynyt oppimaan maalaamaan upeita kuvia hetkessä?",
+            "question": "Kuvageneraattori pystyy luomaan sekunneissa upeita maalauksia. Mistä tekoäly on oikeastaan alun perin oppinut tuottamaan tällaista taidetta?",
             "options": [
-              "Koska taiteilijat ovat fyysisesti rakentaneet kaikki maailman tietokoneet.",
-              "Koska tekoäly ei osaisi piirtää yhtään mitään, jos ihmiset eivät olisi ensin luoneet sille alkuperäistä oppimateriaalia.",
-              "Koska taiteilijat haluavat aina tahallaan tehdä kaikki asiat todella hitaasti.",
-              "Koska tekoäly on ostanut kaikki maailman piirustuskynät ja paperit salaa itselleen."
+              "Koodarit ovat kirjoittaneet sille säännöt jokaisen mahdollisen kuvan piirtämiseen.",
+              "Se on opiskellut kaiken ihmisten aiemmin verkkoon julkaisemien teosten pohjalta.",
+              "Sen ohjelmistoon on asennettu tehdasasetuksena kaikki maailman valmiit maalaukset.",
+              "Se osaa ladata laitteen muistiin kaikki maailmassa koskaan julkaistut taidekirjat."
             ],
-            "correctAnswer": "Koska tekoäly ei osaisi piirtää yhtään mitään, jos ihmiset eivät olisi ensin luoneet sille alkuperäistä oppimateriaalia.",
+            "correctAnswer": "Se on opiskellut kaiken ihmisten aiemmin verkkoon julkaisemien teosten pohjalta.",
             "explanation": "Generatiivinen tekoäly ei voi ajatella tyhjästä. Sen kyky tuottaa taidetta on täysin riippuvainen ihmisten alkuperäisestä taiteesta. Siksi sitä alkuperäistä taidetta pitää suojella ja kunnioittaa!"
           },
           {
@@ -8494,14 +8494,14 @@ export const categories = [
           {
             "id": "reilu_peli_3_q13",
             "type": "multiple_choice",
-            "question": "Mitä mahtavaa ja reilua tekijänoikeuslaki oikeastaan tekee ja turvaa koko maailmassa?",
+            "question": "Mitä tekijänoikeuslaki oikeastaan tekee ja turvaa koko maailmassa?",
             "options": [
-              "Se estää ikävästi aivan kaikkia ihmisiä ikinä näkemästä hienoja ja uusia teoksia.",
-              "Se takaa sen, että oikeat taiteilijat saavat työstään palkkion ja jaksavat luoda jatkossakin uutta.",
-              "Se hidastaa internetin toimintaa tarkoituksella todella paljon joka päivä.",
-              "Se tekee tietokoneiden akuista nopeammin kuluvia ison sähkönkäytön takia."
+              "Se estää ikävästi aivan kaikkia ihmisiä katsomasta tai ihastelemasta muiden hienoja teoksia.",
+              "Se takaa alkuperäisille tekijöille korvauksen, jotta he pystyvät jatkossakin tekemään uutta.",
+              "Se asettaa laitteisiin jarrun, joka hidastaa langattoman internettiä toimintaa päivittäin.",
+              "Se velvoittaa koko maailman tietokoneet kuluttamaan jatkuvasti kallista sähköä verkon varjossa."
             ],
-            "correctAnswer": "Se takaa sen, että oikeat taiteilijat saavat työstään palkkion ja jaksavat luoda jatkossakin uutta.",
+            "correctAnswer": "Se takaa alkuperäisille tekijöille korvauksen, jotta he pystyvät jatkossakin tekemään uutta.",
             "explanation": "Jos kuka tahansa voisi kopioida toisen tekemän pelin tai musiikin ja myydä sen luvatta omanaan, alkuperäiset tekijät joutuisivat lopettamaan upeiden asioiden tekemisen! Tekijänoikeus suojelee keksijöitä."
           },
           {
