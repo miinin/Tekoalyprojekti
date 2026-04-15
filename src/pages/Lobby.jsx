@@ -152,7 +152,7 @@ export default function Lobby() {
       <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', marginTop: '-3rem', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))', zIndex: 10 }} />
       <p className="animate-fade-in" style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
-      <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '2.5rem', width: '100%', maxWidth: '950px', padding: '0 1.5rem', zIndex: 10 }}>
+      <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', maxWidth: '1200px', padding: '0 1.5rem', zIndex: 10 }}>
         
         {/* YKSINPELI */}
         <div className="mode-card" style={{ borderTop: '8px solid #0ea5e9' }}>
@@ -247,12 +247,7 @@ export default function Lobby() {
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa kavereiden kanssa samassa tallissa. Kerätkää yhdessä Kipinöitä!</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            {!showMultiplayer ? (
-              <button className="btn-primary" style={{ background: '#ec4899', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(236, 72, 153, 0.4)' }} onClick={() => setShowMultiplayer(true)}>
-                AVAA MONINPELI
-              </button>
-            ) : (
-              <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#fdf2f8', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #fbcfe8' }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#fdf2f8', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #fbcfe8' }}>
                 <button className="btn-secondary" style={{ borderColor: '#ec4899', color: '#ec4899', padding: '1rem', background: 'white' }} onClick={handleCreateLobby}>
                   <Plus size={20} /> LUO UUSI HUONE
                 </button>
@@ -271,7 +266,6 @@ export default function Lobby() {
                   </button>
                 </form>
               </div>
-            )}
 
           </div>
         </div>
@@ -284,12 +278,7 @@ export default function Lobby() {
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            {!showClassroom ? (
-              <button className="btn-primary" style={{ background: '#8b5cf6', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(139, 92, 246, 0.4)' }} onClick={() => setShowClassroom(true)}>
-                AVAA OPETUSTILA
-              </button>
-            ) : (
-              <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f5f3ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #ddd6fe' }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f5f3ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #ddd6fe' }}>
                 <p style={{ margin: 0, fontSize: '0.9rem', color: '#7c3aed', fontWeight: 'bold', lineHeight: 1.4 }}>
                    ⚠️ Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
                 </p>
@@ -317,7 +306,6 @@ export default function Lobby() {
                   </div>
                 </form>
               </div>
-            )}
           </div>
         </div>
 
