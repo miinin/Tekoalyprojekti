@@ -9428,7 +9428,7 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Haluat tekoälyn keksivän teille hauskan leikin takapenkille pitkän automatkan ajaksi. Kirjoitat vain: \"Keksi leikki.\" Tekoäly antaa leikin, johon tarvitaan iso jalkapallokenttä ja pallo. Miksi näin kävi?",
             "options": [
-              "Tekoäly kettuili ja vittuili sinulle tahallaan huonolla tuulella.",
+              "Tekoäly kettuili ja kiusasi sinua tahallaan huonolla tuulella.",
               "Ohjeesi oli liian epätarkka, eikä tekoäly tiennyt teidän olevan pienessä autossa.",
               "Autossa on tekoälyn mielestä oikeasti tilaa jalkapallon pelaamiselle.",
               "Tekoäly unohti täysin kaikki suomen kielen oikeat sanat leikeistä."
