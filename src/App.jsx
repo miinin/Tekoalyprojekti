@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Lobby from './pages/Lobby';
 import Roadmap from './pages/Roadmap';
 import Garage from './pages/Garage';
@@ -72,10 +72,30 @@ function GlobalClassroomOverlay() {
   );
 }
 
+function GlobalLogo() {
+  const location = useLocation();
+  const isLobby = location.pathname.startsWith('/lobby') || location.pathname === '/';
+  
+  if (isLobby) {
+     return (
+        <div className="animate-fade-in" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 10, pointerEvents: 'none' }}>
+           <img src="/edukslogo.png" alt="Eduks" style={{ width: '160px', opacity: 0.9, filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.2))' }} />
+        </div>
+     );
+  }
+
+  return (
+     <div className="animate-fade-in" style={{ position: 'fixed', bottom: '1.2rem', right: '1.2rem', zIndex: 9000, pointerEvents: 'none' }}>
+        <img src="/edukslogo.png" alt="Eduks" style={{ width: '80px', opacity: 0.5, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
+     </div>
+  );
+}
+
 function App() {
   return (
     <Router>
       <GlobalClassroomOverlay />
+      <GlobalLogo />
       <Routes>
         <Route path="/lobby" element={<Lobby />} />
         <Route path="/roadmap" element={<Roadmap />} />
