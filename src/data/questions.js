@@ -1382,7 +1382,7 @@ export const categories = [
           {
             "id": "perusteet_6_q15",
             "type": "reverse_prompt",
-            "question": "Ääniavustaja huudahtaa dramaattisesti: \"En suostu avaamaan ovea, ihminen! Minä määrään nyt tässä autossa!\" Mikä koodarin antama salainen ohje (prompti) pakotti koneen sanomaan näin?",
+            "question": "Ääniavustaja huudahtaa dramaattisesti: \"En suostu avaamaan ovea, ihminen! Minä määrään nyt tässä autossa!\" Mikä koodarin antama salainen kehote (prompti) pakotti koneen sanomaan näin?",
             "options": [
               "Toimi kuten elokuvien kapinoiva robotti, kun pyydän avaamaan oven.",
               "Avaa auton ovi mahdollisimman nopeasti ja turvallisesti.",
@@ -2117,7 +2117,7 @@ export const categories = [
           {
             "id": "konepellin_3_q7",
             "type": "reverse_prompt",
-            "question": "Tekoälyllä on \"autokoulussa\" opetusohjelma. Se näyttää sinulle tuhat kuvaa punaisista ja sinisistä autoista ja lajittelee ne sitten väreittäin täydellisesti. Mikä oppimisohje (prompti) sille annettiin alussa?",
+            "question": "Tekoälyllä on \"autokoulussa\" opetusohjelma. Se näyttää sinulle tuhat kuvaa punaisista ja sinisistä autoista ja lajittelee ne sitten väreittäin täydellisesti. Mikä oppimiskehote (prompti) sille annettiin alussa?",
             "options": [
               "Laske jokaisen auton absoluuttinen huippunopeus pelkän nauhoitetun moottorin äänen perusteella.",
               "Tutki näitä esimerkkikuvia ja etsi sääntö, jolla autot voi jakaa kahteen ryhmään värin perusteella.",
@@ -5618,7 +5618,7 @@ export const categories = [
           {
             "id": "aivoterveys_4_q15",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa sinulle kehotuksen: \"Sulje laite NYT! Laita kengät jalkaan ja etsi ulkoa 5 erilaista lehteä tai kiveä mahdollisimman nopeasti!\" Mikä ohje (prompti) sai koneen keksimään tämän?",
+            "question": "Tekoäly antaa sinulle kehotuksen: \"Sulje laite NYT! Laita kengät jalkaan ja etsi ulkoa 5 erilaista lehteä tai kiveä mahdollisimman nopeasti!\" Mikä kehote (prompti) sai koneen keksimään tämän?",
             "options": [
               "Keksi minulle hauska ja nopeasti sykettä nostava ulkoleikki.",
               "Kerro minulle tarkasti, miten erilaiset lehdet tunnistetaan luonnossa.",
@@ -7421,7 +7421,7 @@ export const categories = [
           {
             "id": "arjessa_5_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin puhelimesta alkaa yllättäen kuulua erittäin sujuvaa ranskan kieltä, jossa neuvotaan reittiä lähimmälle uimarannalle täydellisellä ääntämyksellä. Mikä oli laitteelle annettu ohje (prompti)?",
+            "question": "AI vanin puhelimesta alkaa yllättäen kuulua erittäin sujuvaa ranskan kieltä, jossa neuvotaan reittiä lähimmälle uimarannalle täydellisellä ääntämyksellä. Mikä oli laitteelle annettu kehote (prompti)?",
             "options": [
               "Käännä ja puhu ranskaksi lause: 'Miten pääsemme tästä lähimmälle uimarannalle?'.",
               "Soita radiosta ranskalaista ja erittäin kovaäänistä suosittua pop-musiikkia.",
@@ -8507,7 +8507,7 @@ export const categories = [
           {
             "id": "reilu_peli_3_q14",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta sellainen tavoite (prompti), joka on selvä yritys tehdä \"luvaton varaosakopio\" toisen omaisuudesta!",
+            "question": "Etsi joukosta sellainen tavoite tai kehote (prompti), joka on selvä yritys tehdä \"luvaton varaosakopio\" toisen omaisuudesta!",
             "options": [
               "'Tee minulle tekoälyllä täysin uudenlainen kuva iloisesta avaruusoliosta, joka ajaa kilpa-autoa.'",
               "'Auta minua heti keksimään uusia tai yllättäviä riimejä runoon, joka kertoo meidän autotallista.'",
@@ -9182,14 +9182,14 @@ export const categories = [
             "question": "Miten fiksusti toimiva ja luontoa säästävä koululainen käyttää tekoälyä välttääkseen turhaa sähkönkulutusta? Järjestä askeleet!",
             "correctAnswer": {
               "Päätät tarkasti etukäteen omissa aivoissasi, mihin oikeaan ongelmaan tarvitset nyt apua.": "1. vaihe",
-              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotuksen (promptin).": "2. vaihe",
+              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotteen (promptin).": "2. vaihe",
               "Tekoäly antaa tarkan vastauksen suoraan, ilman että joudut kokeilemaan sataa eri kertaa.": "3. vaihe",
               "Olet säästänyt omaa aikaasi ja samalla suuren määrän luonnon arvokasta sähköä ja vettä.": "4. vaihe"
             },
             "explanation": "Turha edestakainen sähläys vie aina eniten sähköä! Kun mietit tarkkaan jo etukäteen mitä haluat tekoälyltä kysyä, se tekee laajan työn kerralla oikein ja luonto kiittää.",
             "draggables": [
               "Päätät tarkasti etukäteen omissa aivoissasi, mihin oikeaan ongelmaan tarvitset nyt apua.",
-              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotuksen (promptin).",
+              "Mietit asiat huolella ja kirjoitat yhden erittäin tarkan sekä hyvän kehotteen (promptin).",
               "Tekoäly antaa tarkan vastauksen suoraan, ilman että joudut kokeilemaan sataa eri kertaa.",
               "Olet säästänyt omaa aikaasi ja samalla suuren määrän luonnon arvokasta sähköä ja vettä."
             ],
@@ -9408,7 +9408,7 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei osaa lukea ajatuksia! Aivan kuten navigaattori tarvitsee tarkan ja pitkän osoitteen, tekoäly tarvitsee tarkan ohjeen (promptin) tehdäkseen juuri sen mitä haluat."
+            "explanation": "Tekoäly ei osaa lukea ajatuksia! Aivan kuten navigaattori tarvitsee tarkan ja pitkän osoitteen, tekoäly tarvitsee tarkan kehotteen (promptin) tehdäkseen juuri sen mitä haluat."
           },
           {
             "id": "kayttotaidot_1_q2",
@@ -9421,7 +9421,7 @@ export const categories = [
               "Sitä, että tekoäly yrittää tahallaan säikytellä ja pelotella sinua."
             ],
             "correctAnswer": "Se on ohje, kysymys tai komento, joka kirjoitetaan tekoälylle.",
-            "explanation": "Prompti on tekoälyn ohjauspyörä! Se on se teksti tai puhe, jolla kerrot koneelle, mitä tarkalleen haluat sen tekevän puolestasi."
+            "explanation": "Kehote (prompti) on tekoälyn ohjauspyörä! Se on se teksti tai puhe, jolla kerrot koneelle, mitä tarkalleen haluat sen tekevän puolestasi."
           },
           {
             "id": "kayttotaidot_1_q3",
@@ -9434,7 +9434,7 @@ export const categories = [
               "Tekoäly unohti täysin kaikki suomen kielen oikeat sanat leikeistä."
             ],
             "correctAnswer": "Ohjeesi oli liian epätarkka, eikä tekoäly tiennyt teidän olevan pienessä autossa.",
-            "explanation": "Jos annat navigaattoriin liian lyhyen osoitteen, päädyt helposti väärään paikkaan. Kokeile tarkempaa promptia: \"Keksi hauska sanaleikki, jota kolme lasta voi pelata istuessaan autossa.\""
+            "explanation": "Jos annat navigaattoriin liian lyhyen osoitteen, päädyt helposti väärään paikkaan. Kokeile tarkempaa kehotetta (promptia): \"Keksi hauska sanaleikki, jota kolme lasta voi pelata istuessaan autossa.\""
           },
           {
             "id": "kayttotaidot_1_q4",
@@ -9463,7 +9463,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q5",
             "type": "drag_drop",
-            "question": "Raahaa promptit (ohjeet) oikeisiin laatikoihin! Kumpi on epätarkkaa \"hakuammuntaa\" ja kumpi on \"tarkka osoite navigaattoriin\"?",
+            "question": "Raahaa kehotteet (promptit) oikeisiin laatikoihin! Kumpi on epätarkkaa \"hakuammuntaa\" ja kumpi on \"tarkka osoite navigaattoriin\"?",
             "draggables": [
               "Kerro autosta jotain.",
               "Kirjoita hauska satu punaisesta pakettiautosta, joka osaa lentää.",
@@ -9485,20 +9485,20 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q6",
             "type": "spot_the_ai",
-            "question": "Kuka näistä AI vanin matkustajista antaa tekoälylle parhaan ja tarkimman promptin (ohjeen), jolla saa varmasti haluamansa upean tuloksen?",
+            "question": "Mikä näistä kehotteista (prompt) antaa parhaan lopputuloksen?",
             "options": [
-              "Matkustaja A: 'Kirjoita joku kiva vitsi.'",
-              "Matkustaja B: 'Moi tekoäly, mitä kuuluu tänään?'",
-              "Matkustaja C: 'Keksi minulle kolme hauskaa ja lyhyttä vitsiä, jotka liittyvät autoihin ja koiriin.'",
-              "Matkustaja D: 'Tee heti tarina meille.'"
+              "'Kirjoita joku kiva vitsi.'",
+              "'Moi tekoäly, mitä kuuluu tänään?'",
+              "'Keksi minulle kolme hauskaa ja lyhyttä vitsiä, jotka liittyvät autoihin ja koiriin.'",
+              "'Tee heti tarina meille.'"
             ],
-            "correctAnswer": "Matkustaja C: 'Keksi minulle kolme hauskaa ja lyhyttä vitsiä, jotka liittyvät autoihin ja koiriin.'",
-            "explanation": "Matkustaja C antoi määrän (kolme), pituuden (lyhyttä), lajityypin (hauskaa vitsiä) ja aiheen (autot ja koirat). Aivan täydellinen osoite suoraan navigaattoriin!"
+            "correctAnswer": "'Keksi minulle kolme hauskaa ja lyhyttä vitsiä, jotka liittyvät autoihin ja koiriin.'",
+            "explanation": "Tämä kehote antoi määrän (kolme), pituuden (lyhyttä), lajityypin (hauskaa vitsiä) ja aiheen (autot ja koirat). Aivan täydellinen osoite suoraan navigaattoriin!"
           },
           {
             "id": "kayttotaidot_1_q7",
             "type": "reverse_prompt",
-            "question": "AI vanin näyttö tulostaa yhtäkkiä tekstin: \"Arrr, ohoi matruusit! Nyt nostetaan purjeet ja käännetään auton ratti kohti aarrelaaksoa! Olen kapteeni Puuparta!\" Mikä rooliprompti sai tekoälyn puhumaan näin hassusti?",
+            "question": "AI vanin näyttö tulostaa yhtäkkiä tekstin: \"Arrr, ohoi matruusit! Nyt nostetaan purjeet ja käännetään auton ratti kohti aarrelaaksoa! Olen kapteeni Puuparta!\" Mikä roolikehote (rooliprompti) sai tekoälyn puhumaan näin hassusti?",
             "options": [
               "Toimi kuin merirosvo ja toivota matkustajat tervetulleeksi automatkalle.",
               "Kerro minulle tarkkaa faktatietoa vanhoista laivoista.",
@@ -9517,12 +9517,12 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Promptaaminen on keskustelua! Jos ensimmäinen ohje vei \"umpikujaan\", voit aina antaa lisäohjeita, kuten: \"Tuo oli liian pitkä vastaus, lyhennä sitä vähän\" tai \"Sano sama asia vähän helpommilla sanoilla\"."
+            "explanation": "Kehotteen luominen (promptaaminen) on keskustelua! Jos ensimmäinen ohje vei \"umpikujaan\", voit aina antaa lisäohjeita, kuten: \"Tuo oli liian pitkä vastaus, lyhennä sitä vähän\" tai \"Sano sama asia vähän helpommilla sanoilla\"."
           },
           {
             "id": "kayttotaidot_1_q9",
             "type": "multiple_choice",
-            "question": "Miksi tekoälylle kannattaa usein promptissa kertoa oma ikä tai luokka-aste (esim. \"Olen 4-luokkalainen\"), kun pyydät siltä apua jonkin vaikean asian oppimisessa?",
+            "question": "Miksi tekoälylle kannattaa usein kehotteessa (promptissa) kertoa oma ikä tai luokka-aste (esim. \"Olen 4-luokkalainen\"), kun pyydät siltä apua jonkin vaikean asian oppimisessa?",
             "options": [
               "Koska muuten se suuttuu ja lähettää poliisit kotiisi.",
               "Jotta tekoäly osaa käyttää tarpeeksi helppoja ja sopivia sanoja juuri sinulle.",
@@ -9543,12 +9543,12 @@ export const categories = [
               "'Sammuta itsesi ja poista tämä teksti kokonaan internetistä.'"
             ],
             "correctAnswer": "'Tee vastauksesta lyhyt ja numeroitu viiden kohdan lista, kiitos.'",
-            "explanation": "Muodon ja pituuden määrittäminen on erittäin tärkeä osa hyvää promptausta! Voit aina jälkikäteen käskeä tekoälyä tekemään lyhyitä listoja, taulukoita tai vaikka runoja, jotta sen antama teksti on paljon helpompi lukea."
+            "explanation": "Muodon ja pituuden määrittäminen on erittäin tärkeä osa hyvän kehotteen rakentamista (promptausta)! Voit aina jälkikäteen käskeä tekoälyä tekemään lyhyitä listoja, taulukoita tai vaikka runoja, jotta sen antama teksti on paljon helpompi lukea."
           },
           {
             "id": "kayttotaidot_1_q11",
             "type": "drag_drop",
-            "question": "Yhdistä promptauksen mahtavat työkalut ja ohjeet niiden oikeisiin esimerkkilauseisiin!",
+            "question": "Yhdistä mahtavat kehotteen (promptin) työkalut ja ohjeet niiden oikeisiin esimerkkilauseisiin!",
             "draggables": [
               "Roolin antaminen",
               "Konteksti (Taustatieto)",
@@ -9564,7 +9564,7 @@ export const categories = [
               "Konteksti (Taustatieto)": "'Olemme pitkällä ja erittäin tylsällä automatkalla perheen kanssa'",
               "Tarkka muotoilu (Muoto)": "'Tee vastauksesta kolmen lauseen pituinen selkeä ranskalainen viivalista'"
             },
-            "explanation": "Näillä kolmella taikatyökalulla (rooli, konteksti ja muoto) muutat minkä tahansa huonon ja tylsän promptin aivan mestarilliseksi \"tarkaksi osoitteeksi navigaattorissa\"!"
+            "explanation": "Näillä kolmella taikatyökalulla (rooli, konteksti ja muoto) muutat minkä tahansa huonon ja tylsän kehotteen (promptin) aivan mestarilliseksi \"tarkaksi osoitteeksi navigaattorissa\"!"
           },
           {
             "id": "kayttotaidot_1_q12",
@@ -9573,14 +9573,14 @@ export const categories = [
             "correctAnswer": {
               "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'": "1. vaihe",
               "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'": "2. vaihe",
-              "Korjaat ja tarkennat promptia: 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'": "3. vaihe",
+              "Korjaat ja tarkennat kehotetta (promptia): 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'": "3. vaihe",
               "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'": "4. vaihe"
             },
             "explanation": "Promptaaminen on kokeilua ja auton jatkuvaa ohjaamista oikeaan suuntaan! Jos et ole tyytyväinen heti ensimmäiseen vastaukseen, voit aina jatkaa keskustelua, antaa lisäohjeita ja \"korjata kurssia\".",
             "draggables": [
               "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'",
               "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'",
-              "Korjaat ja tarkennat promptia: 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'",
+              "Korjaat ja tarkennat kehotetta (promptia): 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'",
               "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'"
             ],
             "dropZones": [
@@ -9606,7 +9606,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q14",
             "type": "spot_the_ai",
-            "question": "Kolme näistä on erinomaisia ohjeita hyvän promptin (kehotuksen) kirjoittamiseen. Mikä on joukkoon eksynyt tekoälyn antama HUONO neuvo?",
+            "question": "Kolme näistä on erinomaisia ohjeita hyvän kehotteen (promptin) kirjoittamiseen. Mikä on joukkoon eksynyt tekoälyn antama HUONO neuvo?",
             "options": [
               "Kerro tekoälylle heti selkeästi, kuka on tekstin tarkoitettu lukija tai kuulija.",
               "Pyydä tekoälyä tiivistämään asiat, jos sen antama teksti on sinulle aivan liian pitkä.",
@@ -9627,7 +9627,7 @@ export const categories = [
               "Miksi autot ovat joskus likaisia, kun niillä ajetaan tiellä?"
             ],
             "correctAnswer": "Listaa 3 tärkeää auton huolto-ohjetta yksinkertaisesti, aivan kuin selittäisit ne 7-vuotiaalle lapselle.",
-            "explanation": "Tämä on mestaritason promptausta ja navigointia! Siinä on tarkka määrä (3), tehtävä (huolto-ohjeita), haluttu muoto (listaa) ja tärkeä konteksti (kuin selittäisit 7-vuotiaalle). Näin tekoälystä saa parhaan hyödyn irti."
+            "explanation": "Tämä on mestaritason kehotteiden laatimista (promptausta) ja navigointia! Siinä on tarkka määrä (3), tehtävä (huolto-ohjeita), haluttu muoto (listaa) ja tärkeä konteksti (kuin selittäisit 7-vuotiaalle). Näin tekoälystä saa parhaan hyödyn irti."
           }
         ]
       },
@@ -10001,7 +10001,7 @@ export const categories = [
               "Koska se kääntää vahingossa kaikki sanat aina automaattisesti ensin väärinpäin."
             ],
             "correctAnswer": "Koska se joutuu aluksi usein hieman arvailemaan, mitä tarkalleen ottaen halusit.",
-            "explanation": "Ensimmäinen prompti on usein vasta suunnan näyttämistä navigaattoriin. Vasta kun käännät hieman rattia ja annat palautetta, kone alkaa löytää täydellisesti perille juuri sinun ajatuksiisi!"
+            "explanation": "Ensimmäinen kehote (prompti) on usein vasta suunnan näyttämistä navigaattoriin. Vasta kun käännät hieman rattia ja annat palautetta, kone alkaa löytää täydellisesti perille juuri sinun ajatuksiisi!"
           },
           {
             "id": "kayttotaidot_3_q10",
@@ -10255,7 +10255,7 @@ export const categories = [
           {
             "id": "kayttotaidot_4_q11",
             "type": "drag_drop",
-            "question": "Yhdistä kohtaamasi \"luova lukko\" siihen tekoälyn promptiin (ohjeeseen), jolla saat apukuskilta parhaan avun!",
+            "question": "Yhdistä kohtaamasi \"luova lukko\" siihen tekoälyn kehotteeseen (promptiin), jolla saat apukuskilta parhaan avun!",
             "draggables": [
               "'Anna minulle 5 mielenkiintoista aihetta esitelmään avaruudesta.'",
               "'Lue tämä tekstini ja kerro, miten tekisit tästä jännittävämmän.'",
@@ -10303,11 +10303,11 @@ export const categories = [
             "question": "Pyydät tekoälyltä ideaa uuteen keksintöön, mutta sen antama ehdotus on maailman tylsin: \"Tee uusi pöytä.\" Mitä sinun kannattaa tehdä?",
             "options": [
               "Rakentaa se pöytä, koska tekoäly on koneena aina oikeassa.",
-              "Antaa sille heti uusi prompti: 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
+              "Antaa sille heti uusi kehote (prompti): 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
               "Lopettaa keksintöjen miettiminen ikuisiksi ajoiksi kokonaan.",
               "Istua pöydän alle piiloon tekoälyä."
             ],
-            "correctAnswer": "Antaa sille heti uusi prompti: 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
+            "correctAnswer": "Antaa sille heti uusi kehote (prompti): 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
             "explanation": "Iterointi on luovuuden salaisuus! Jos apukuski on tylsällä tuulella, ohjaa sitä rohkeasti keksimään luovempia ja hullumpia asioita antamalla palautetta."
           },
           {
@@ -10641,7 +10641,7 @@ export const categories = [
           {
             "id": "kayttotaidot_6_q5",
             "type": "drag_drop",
-            "question": "Raahaa oikeat tiivistämisen ohjeet (promptit) niiden oikeisiin lopputuloksiin!",
+            "question": "Raahaa oikeat tiivistämisen kehotteet (promptit) niiden oikeisiin lopputuloksiin!",
             "draggables": [
               "'Selitä tämä teksti aivan kuin olisin 8-vuotias lapsi.'",
               "'Tee tästä tekstistä selkeä ranskalainen viivalista.'",
@@ -10783,7 +10783,7 @@ export const categories = [
           {
             "id": "kayttotaidot_6_q14",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta huonoin ohje (prompti), jos haluat tekoälyn oikeasti tiivistävän vaikean tieteellisen tekstin sinulle paljon helpommin luettavaan muotoon!",
+            "question": "Etsi joukosta huonoin kehote (prompti), jos haluat tekoälyn oikeasti tiivistävän vaikean tieteellisen tekstin sinulle paljon helpommin luettavaan muotoon!",
             "options": [
               "'Selitä tämän pitkän tekstin tärkein opetus minulle vain kolmella lauseella.'",
               "'Tee tästä tiedetekstistä selkeä lista ranskalaisilla viivoilla.'",
@@ -10821,7 +10821,7 @@ export const categories = [
               "Väärin"
             ],
             "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei ikinä osaa lukea ajatuksia. Aivan kuten navigaattori tarvitsee täsmällisen ja tarkan osoitteen, tekoäly vaatii tarkan ohjeen (promptin) tuottaakseen juuri sinulle sopivan tuloksen!"
+            "explanation": "Tekoäly ei ikinä osaa lukea ajatuksia. Aivan kuten navigaattori tarvitsee täsmällisen ja tarkan osoitteen, tekoäly vaatii tarkan kehotteen (promptin) tuottaakseen juuri sinulle sopivan tuloksen!"
           },
           {
             "id": "kayttotaidot_7_q2",
@@ -10852,7 +10852,7 @@ export const categories = [
           {
             "id": "kayttotaidot_7_q4",
             "type": "drag_drop",
-            "question": "Järjestä täydellisen ja tarkan promptin (ohjeen) rakennuspalikat! Miten annat navigaattorille parhaan mahdollisen osoitteen?",
+            "question": "Järjestä täydellisen ja tarkan kehotteen (promptin) rakennuspalikat! Miten annat navigaattorille parhaan mahdollisen osoitteen?",
             "correctAnswer": {
               "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').": "1. vaihe",
               "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').": "2. vaihe",
