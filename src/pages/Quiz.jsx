@@ -64,6 +64,7 @@ export default function Quiz() {
        setEquippedItems(equipped);
        const extras = equipped['extra'] || '';
        const wheels = equipped['wheel'] || '';
+       const bumper = equipped['bumper'] || '';
        let buff = null;
        
        if (mainCategory === 'digiturva' && extras === 'van-extra06') buff = 'snorkkeli';
