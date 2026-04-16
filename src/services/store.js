@@ -355,6 +355,39 @@ export const store = {
     }
   },
 
+  downloadLocalSave: () => {
+    const payload = { timestamp: new Date().toISOString(), type: 'aivan_save' };
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('aivan_') && key !== 'aivan_room') {
+            payload[key] = localStorage.getItem(key);
+        }
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", `Aivan_Tallennus_${new Date().toLocaleDateString('fi-FI').replace(/\./g, '-')}.json`);
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  },
+
+  importLocalSave: (jsonData) => {
+    if (!jsonData || jsonData.type !== 'aivan_save') return false;
+    
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('aivan_') && key !== 'aivan_room') keysToRemove.push(key);
+    }
+    keysToRemove.forEach(k => localStorage.removeItem(k));
+    
+    Object.keys(jsonData).forEach(k => {
+        if (k.startsWith('aivan_')) localStorage.setItem(k, jsonData[k]);
+    });
+    return true;
+  },
+
   // --- ADMIN METHODS ---
   getAllRooms: () => {
     const rooms = new Set();

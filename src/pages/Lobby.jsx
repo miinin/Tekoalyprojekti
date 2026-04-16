@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload } from 'lucide-react';
 import { store } from '../services/store';
 
 export default function Lobby() {
@@ -14,6 +14,37 @@ export default function Lobby() {
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
   const [modalState, setModalState] = useState(null);
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+          try {
+              const jsonData = JSON.parse(event.target.result);
+              const success = store.importLocalSave(jsonData);
+              if (success) {
+                  setModalState({
+                      title: 'Lataus onnistui!',
+                      text: 'Tiedostosta ladattiin edellinen pelisi. Matka jatkuu!',
+                      onClose: () => navigate('/roadmap'),
+                      buttonText: 'Jatka peliä'
+                  });
+              } else {
+                  throw new Error('Invalid format');
+              }
+          } catch(err) {
+              setModalState({
+                  title: 'Aivan väärä tiedosto',
+                  text: 'Valitsemasi tiedosto ei sisältänyt kelvollista Aivan-tallennusta.',
+                  onClose: () => setModalState(null),
+                  buttonText: 'Takaisin'
+              });
+          }
+      };
+      reader.readAsText(file);
+  };
 
   const handleRestoreCloudSave = async (e) => {
       e.preventDefault();
@@ -237,6 +268,12 @@ export default function Lobby() {
                          {isRestoring ? '...' : <ArrowRight size={24} />}
                      </button>
                 </form>
+                <div style={{ marginTop: '1rem', textAlign: 'center' }}>
+                    <input type="file" accept=".json" style={{ display: 'none' }} ref={fileInputRef} onChange={handleFileUpload} />
+                    <button className="btn-secondary" style={{ fontSize: '0.9rem', padding: '0.5rem 1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }} onClick={() => fileInputRef.current.click()}>
+                        <Upload size={16} /> Tuo tallennustiedostosta
+                    </button>
+                </div>
             </div>
 
 

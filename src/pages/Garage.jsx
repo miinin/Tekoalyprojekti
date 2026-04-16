@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -28,8 +28,12 @@ export default function Garage() {
 
   const [saveCode, setSaveCode] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveError, setSaveError] = useState(false);
+  const [saveError, setSaveError] = useState(null);
   const [showMeterTutorial, setShowMeterTutorial] = useState(false);
+
+  const handleLocalSave = () => {
+      store.downloadLocalSave();
+  };
 
   const handleCreateSave = async () => {
       setIsSaving(true);
@@ -891,13 +895,18 @@ export default function Garage() {
                  <div style={{ background: '#7f1d1d', color: '#fca5a5', padding: '1rem', borderRadius: '8px', fontSize: '1rem', marginBottom: '2rem', fontFamily: 'monospace' }}>
                      Virhekoodi: {saveError}
                  </div>
-                 <button 
-                    onClick={() => setSaveError(null)}
-                    style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: '#ef4444', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', transition: '0.2s', width: '100%' }}
-                    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
-                    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
-                    Selvä homma
-                 </button>
+                 <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
+                     <button 
+                        onClick={() => { setSaveError(null); handleLocalSave(); }}
+                        style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: '#3b82f6', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                        <Download size={24} /> Lataa tallennustiedosto
+                     </button>
+                     <button 
+                        onClick={() => setSaveError(null)}
+                        style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: 'transparent', color: '#fca5a5', fontWeight: 'bold', border: '2px solid #ef4444', cursor: 'pointer' }}>
+                        Palaa peliin
+                     </button>
+                 </div>
              </div>
         </div>
     )}
