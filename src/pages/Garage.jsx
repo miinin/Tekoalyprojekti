@@ -33,13 +33,14 @@ export default function Garage() {
 
   const handleCreateSave = async () => {
       setIsSaving(true);
-      setSaveError(false);
+      setSaveError(null);
       const code = await store.exportProgressToCloud();
       setIsSaving(false);
-      if (code) {
+      
+      if (code && !code._error) {
           setSaveCode(code);
       } else {
-          setSaveError(true);
+          setSaveError(code?._error ? code.message : "Yhteys aikakatkaistiin.");
       }
   };
 
@@ -886,9 +887,12 @@ export default function Garage() {
                      <X size={48} color="#ef4444" />
                  </div>
                  <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#fca5a5' }}>Voi rähmä!</h2>
-                 <p style={{ fontSize: '1.2rem', color: '#fecaca', marginBottom: '2rem', lineHeight: '1.6' }}>Yhteys rekisterikeskukseen katkesi. Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.</p>
+                 <p style={{ fontSize: '1.2rem', color: '#fecaca', marginBottom: '1rem', lineHeight: '1.6' }}>Yhteys rekisterikeskukseen katkesi. Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.</p>
+                 <div style={{ background: '#7f1d1d', color: '#fca5a5', padding: '1rem', borderRadius: '8px', fontSize: '1rem', marginBottom: '2rem', fontFamily: 'monospace' }}>
+                     Virhekoodi: {saveError}
+                 </div>
                  <button 
-                    onClick={() => setSaveError(false)}
+                    onClick={() => setSaveError(null)}
                     style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: '#ef4444', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', transition: '0.2s', width: '100%' }}
                     onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
                     onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>

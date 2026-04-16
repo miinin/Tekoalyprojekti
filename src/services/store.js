@@ -311,7 +311,7 @@ export const store = {
       return code;
     } catch (err) {
       console.error("Save error:", err);
-      return null;
+      return { _error: true, message: err.message || "Tuntematon virhe." };
     }
   },
 
