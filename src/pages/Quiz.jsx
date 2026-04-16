@@ -785,8 +785,9 @@ export default function Quiz() {
            </div>
         )}
 
+        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)' }}>
         {showExplanation && (
-          <div className="animate-fade-in" style={{ padding: '2.5rem', background: isCorrect ? '#f0fdf4' : '#fef2f2', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)', position: 'relative', zIndex: 10 }}>
+          <div className="animate-fade-in" style={{ gridArea: '1 / 1', alignSelf: 'start', padding: '2.5rem', background: isCorrect ? 'rgba(240, 253, 244, 0.95)' : 'rgba(254, 242, 242, 0.95)', backdropFilter: 'blur(8px)', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.15)', position: 'relative', zIndex: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 {isCorrect ? <CheckCircle2 size={42} color="#16a34a" /> : <XCircle size={42} color="#dc2626" />}
@@ -834,7 +835,7 @@ export default function Quiz() {
           </div>
         )}
 
-        <div style={{ opacity: showExplanation ? 0.3 : 1, filter: showExplanation ? 'grayscale(0.7) blur(1px)' : 'none', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: showExplanation ? 'none' : 'auto' }}>
+        <div style={{ gridArea: '1 / 1', zIndex: 1, opacity: showExplanation ? 0.3 : 1, filter: showExplanation ? 'grayscale(0.7) blur(4px)' : 'none', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: showExplanation ? 'none' : 'auto' }}>
         
         {(!showExplanation) && (() => {
             const yrem = quizCharges.yellow - usedCharges.yellow;
@@ -1038,6 +1039,7 @@ export default function Quiz() {
             )}
           </div>
         )}
+        </div>
         </div>
       </div>
     </div>
