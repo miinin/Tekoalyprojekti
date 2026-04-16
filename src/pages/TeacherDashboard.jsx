@@ -276,7 +276,7 @@ export default function TeacherDashboard() {
                     
                     <div>
                       <h3 style={{ margin: '0 0 0.8rem 0', color: '#64748b', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}>Liittymiskoodi</h3>
-                      <div style={{ position: 'relative', background: '#e0f2fe', border: '2px solid #bae6fd', padding: '1.5rem', borderRadius: '24px', fontSize: '3.5rem', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '8px', color: '#0369a1', boxShadow: 'inset 0 4px 10px rgba(3, 105, 161, 0.05)' }}>
+                      <div style={{ position: 'relative', background: '#e0f2fe', border: '2px solid #bae6fd', padding: '1.5rem', borderRadius: '24px', fontSize: 'clamp(2rem, 3vw, 3rem)', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '4px', color: '#0369a1', boxShadow: 'inset 0 4px 10px rgba(3, 105, 161, 0.05)', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {sessionCode}
                           <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-15px', right: '-15px', background: 'white', border: '2px solid #bae6fd', color: '#0369a1', borderRadius: '20px', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 8px 15px rgba(2, 132, 199, 0.15)', fontWeight: 'bold', fontSize: '0.9rem', transition: 'transform 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
                               <Maximize size={16} /> LAAJENNA

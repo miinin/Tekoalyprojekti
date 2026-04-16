@@ -31,10 +31,6 @@ export default function Garage() {
   const [saveError, setSaveError] = useState(null);
   const [showMeterTutorial, setShowMeterTutorial] = useState(false);
 
-  const handleLocalSave = () => {
-      store.downloadLocalSave();
-  };
-
   const handleCreateSave = async () => {
       setIsSaving(true);
       setSaveError(null);
@@ -896,11 +892,6 @@ export default function Garage() {
                      Virhekoodi: {saveError}
                  </div>
                  <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                     <button 
-                        onClick={() => { setSaveError(null); handleLocalSave(); }}
-                        style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: '#3b82f6', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-                        <Download size={24} /> Lataa tallennustiedosto
-                     </button>
                      <button 
                         onClick={() => setSaveError(null)}
                         style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: 'transparent', color: '#fca5a5', fontWeight: 'bold', border: '2px solid #ef4444', cursor: 'pointer' }}>
