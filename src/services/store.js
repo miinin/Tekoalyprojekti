@@ -305,7 +305,7 @@ export const store = {
       }
       
       const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error('Firebase timeout')), 5000);
+          setTimeout(() => reject(new Error('Firebase timeout')), 10000);
       });
       await Promise.race([setDoc(doc(db, "saves", code), payload), timeoutPromise]);
       return code;

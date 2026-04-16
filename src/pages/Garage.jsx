@@ -28,16 +28,18 @@ export default function Garage() {
 
   const [saveCode, setSaveCode] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState(false);
   const [showMeterTutorial, setShowMeterTutorial] = useState(false);
 
   const handleCreateSave = async () => {
       setIsSaving(true);
+      setSaveError(false);
       const code = await store.exportProgressToCloud();
       setIsSaving(false);
       if (code) {
           setSaveCode(code);
       } else {
-          alert('Voi rähmä, yhteys rekisterikeskukseen katkesi! Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.');
+          setSaveError(true);
       }
   };
 
@@ -876,6 +878,25 @@ export default function Garage() {
 
       </div>
     </div>
+
+    {saveError && (
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
+             <div className="modal-content" style={{ background: 'linear-gradient(145deg, #7f1d1d 0%, #450a0a 100%)', padding: '3rem', borderRadius: '24px', maxWidth: '500px', width: '90%', border: '2px solid #ef4444', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', textAlign: 'center' }}>
+                 <div style={{ background: 'rgba(239,68,68,0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto', border: '2px solid #ef4444' }}>
+                     <X size={48} color="#ef4444" />
+                 </div>
+                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#fca5a5' }}>Voi rähmä!</h2>
+                 <p style={{ fontSize: '1.2rem', color: '#fecaca', marginBottom: '2rem', lineHeight: '1.6' }}>Yhteys rekisterikeskukseen katkesi. Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.</p>
+                 <button 
+                    onClick={() => setSaveError(false)}
+                    style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: '#ef4444', color: 'white', fontWeight: 'bold', border: 'none', cursor: 'pointer', transition: '0.2s', width: '100%' }}
+                    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
+                    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}>
+                    Selvä homma
+                 </button>
+             </div>
+        </div>
+    )}
 
     {showMeterTutorial && (
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
