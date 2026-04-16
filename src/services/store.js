@@ -181,6 +181,23 @@ export const store = {
     return false;
   },
 
+  getUsedMapBoosts: () => {
+    try {
+        return JSON.parse(localStorage.getItem('aivan_used_map_boosts') || '{}');
+    } catch (e) {
+        return {};
+    }
+  },
+
+  useMapBoost: (mapId, color) => {
+    const used = store.getUsedMapBoosts();
+    const key = `${mapId}_${color}`;
+    used[key] = (used[key] || 0) + 1;
+    localStorage.setItem('aivan_used_map_boosts', JSON.stringify(used));
+    store.syncClassroomProgress();
+    return true;
+  },
+
   spendSparks: async (amount) => {
     const room = store.getRoomCode();
     const current = await store.getSparks();
@@ -263,6 +280,8 @@ export const store = {
     localStorage.removeItem('aivan_garage_tuition');
     localStorage.removeItem('aivan_last_main');
     localStorage.removeItem('aivan_last_sub');
+    localStorage.removeItem('aivan_used_map_boosts');
+    localStorage.removeItem('aivan_teacher_boosts');
     store.setRoomCode(null);
   },
 

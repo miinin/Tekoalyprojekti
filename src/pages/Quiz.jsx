@@ -76,8 +76,11 @@ export default function Quiz() {
 
        // UUDET: Kertakäyttöiset lataukset
        let redCharge = 0;
-       if ( bumper === 'van-bumper02' || bumper === 'van-bumper04' || bumper === 'van-bumper06') redCharge = 1;
-       else if (bumper === 'van-bumper03') redCharge = 2;
+       if (bumper === 'van-bumper05') redCharge = 2;
+       else if (bumper === 'van-bumper02') redCharge = 3;
+       else if (bumper === 'van-bumper04') redCharge = 4;
+       else if (bumper === 'van-bumper06') redCharge = 5;
+       else if (bumper === 'van-bumper03') redCharge = 6;
 
        let jackChargeProb = 0;
        const jack = equipped['g_jack'] || '';
@@ -88,20 +91,35 @@ export default function Quiz() {
 
        let greenCharge = 0;
        const tools = equipped['g_tools'] || '';
-       if (tools === 'g-walltools2' || tools === 'g-walltools3') greenCharge = 1;
-       else if (tools === 'g-walltools4') greenCharge = 2;
+       if (tools === 'g-walltools6') greenCharge = 2;
+       else if (tools === 'g-walltools1') greenCharge = 3;
+       else if (tools === 'g-walltools5') greenCharge = 4;
+       else if (tools === 'g-walltools2') greenCharge = 5;
+       else if (tools === 'g-walltools3') greenCharge = 6;
+       else if (tools === 'g-walltools4') greenCharge = 7;
 
        let yellowCharge = 0;
-       if (wheels === 'van-wheel02' || wheels === 'van-wheel03') yellowCharge = 1;
-       else if (wheels === 'van-wheel05') yellowCharge = 2;
+       if (wheels === 'van-wheel04') yellowCharge = 2;
+       else if (wheels === 'van-wheel02') yellowCharge = 3;
+       else if (wheels === 'van-wheel03') yellowCharge = 4;
+       else if (wheels === 'van-wheel05') yellowCharge = 5;
 
        // Lisäosat (Map-specific)
-       if (mainCategory === 'digiturva' && extras === 'van-extra06') redCharge += 1;
-       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 1;
-       if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 1;
-       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') yellowCharge += 2;
+       if (mainCategory === 'digiturva' && extras === 'van-extra06') redCharge += 3;
+       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 3;
+       if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 3;
+       
+       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') yellowCharge += 5;
+       else if (wheels === 'van-wheel06') yellowCharge += 2;
 
        setQuizCharges({ red: redCharge, yellow: yellowCharge, green: greenCharge });
+       
+       const usedMapBoosts = store.getUsedMapBoosts();
+       setUsedCharges({ 
+           red: usedMapBoosts[`${mainCategory}_red`] || 0, 
+           yellow: usedMapBoosts[`${mainCategory}_yellow`] || 0, 
+           green: usedMapBoosts[`${mainCategory}_green`] || 0 
+       });
        setRemovedOptions([]);
 
        if (s && s.questions) {
@@ -365,6 +383,7 @@ export default function Quiz() {
 
   const useCharge = (color) => {
       if (usedCharges[color] < quizCharges[color]) {
+          store.useMapBoost(mainCategory, color);
           setUsedCharges(prev => ({ ...prev, [color]: prev[color] + 1 }));
           return true;
       }
