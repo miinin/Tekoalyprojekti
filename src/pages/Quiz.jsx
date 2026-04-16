@@ -25,6 +25,7 @@ export default function Quiz() {
   const [bugReportMode, setBugReportMode] = useState(false);
   const [bugText, setBugText] = useState('');
   const [bugSubmitted, setBugSubmitted] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     store.setLastLocation('Tehtävä', subCategory);
@@ -442,24 +443,16 @@ export default function Quiz() {
   };
 
   const useGreenMeter = () => {
+      let candidates = [...sub.questions].filter(q => q.id !== currentQuestion.id && !questions.includes(q));
+      
+      if (candidates.length === 0) {
+          setNotification("Tässä kategoriassa ei valitettavasti ole joutilaina muita tehtäviä mihin vaihtaa!");
+          return;
+      }
+      
       if (useCharge('green')) {
-          // Ohitetaan kysymys ottamalla uusi paketista (sijasta 0 => sija currentIndex)
-          const correctness = store.getQuestionCorrectness()[sub.id] || {};
-          let unasked = [];
-          [...sub.questions].forEach(q => {
-               if (!correctness.hasOwnProperty(q.id) && q.id !== currentQuestion.id && !questions.includes(q)) unasked.push(q);
-          });
-          
-          if (unasked.length === 0) {
-             alert('Aivan on harventanut kaikki kysymykset! Paina Seuraava ohittaaksesi ilman rangaistusta.');
-             setIsCorrect(true);
-             setShowExplanation(true);
-             return;
-          }
-          
-          // Swap question
-          unasked.sort(() => Math.random() - 0.5);
-          const newQ = unasked[0];
+          candidates.sort(() => Math.random() - 0.5);
+          const newQ = candidates[0];
           setQuestions(prev => {
               let copy = [...prev];
               copy[currentIndex] = newQ;
@@ -471,6 +464,7 @@ export default function Quiz() {
           setIsCorrect(false);
           setOrderedItems([]);
           setDragTargets({});
+          setRemovedOptions([]);
       }
   };
 
@@ -757,6 +751,17 @@ export default function Quiz() {
                   </div>
                 </div>
              )}
+           </div>
+        )}
+        
+        {notification && (
+           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+              <div className="animate-fade-in" style={{ background: 'white', padding: '2rem', borderRadius: '24px', maxWidth: '450px', width: '100%', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
+                  <AlertTriangle size={56} color="#f59e0b" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+                  <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Huomio</h3>
+                  <p style={{ margin: '0 0 2rem 0', color: '#475569', fontSize: '1.15rem', lineHeight: '1.6' }}>{notification}</p>
+                  <button className="btn-primary" style={{ width: '100%', padding: '1.1rem', fontSize: '1.1rem' }} onClick={() => setNotification(null)}>Okei, selvä juttu!</button>
+              </div>
            </div>
         )}
         {(() => {

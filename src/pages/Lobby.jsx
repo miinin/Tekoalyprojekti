@@ -150,8 +150,15 @@ export default function Lobby() {
   const handleCreateLobby = () => {
     const code = store.generateRoomCode();
     store.setRoomCode(code);
-    alert(`Yhteistyöhuone luotu koodilla:\n\n${code}\n\nJaa tämä koodi ystävillesi! Muut voivat liittyä peliin syöttämällä koodin Lobbyssa. Keräätte yhdessä pisteitä (Kipinöitä) samaan autotalliin!`);
-    navigate('/roadmap');
+    setModalState({
+        title: 'Yhteistyöhuone luotu!',
+        text: `Koodi on: ${code}\n\nJaa tämä koodi ystävillesi! Muut voivat liittyä peliin syöttämällä koodin Lobbyssa. Keräätte yhdessä Kipinöitä!`,
+        buttonText: 'Siirry kartalle',
+        onClose: () => {
+            setModalState(null);
+            navigate('/roadmap');
+        }
+    });
   };
 
   const handleJoinLobby = (e) => {
