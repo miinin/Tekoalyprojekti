@@ -3800,7 +3800,7 @@ export const categories = [
             "question": "Mikä näistä sähköpostien otsikoista yrittää selvästi kalastella tietojasi robottihuijauksen avulla? Etsi ansa!",
             "options": [
               "'Luokkaretken aikataulu ja pakkauslista ensi viikolle'",
-              "'Kutsu: Kallen syntymäpäiväjuhlat ensi sunnuntaina!'",
+              "'Kutsu: Saagan syntymäpäiväjuhlat ensi sunnuntaina!'",
               "'TÄRKEÄÄ: Tilisi on hakkeroitu, kirjaudu sisään TÄSTÄ HETI!'",
               "'Hei! Tässä on ne kivat kuvat eilisistä jalkapallotreeneistä.'"
             ],
@@ -6480,14 +6480,14 @@ export const categories = [
           {
             "id": "arjessa_1_q15",
             "type": "reverse_prompt",
-            "question": "Puhelimesi näyttöön ilmestyy viesti: \"Hei Matti! Tunnistin kasvosi hienosti. Puhelimen lukitus on nyt auki, tervetuloa.\" Mikä teko käynnisti tämän?",
+            "question": "Puhelimesi näyttöön ilmestyy viesti: \"Hei Samu! Tunnistin kasvosi hienosti. Puhelimen lukitus on nyt auki, tervetuloa.\" Mikä teko käynnisti tämän?",
             "options": [
-              "Matti huusi puhelimelle erittäin kovaa: 'Avaa ovi heti!'.",
-              "Matti soitti ystävälleen Matille tavallisella puhelulla.",
-              "Matti katsoi suoraan puhelimen lukitusruudun etukameraan.",
-              "Matti piirsi puhelimen ruutuun salaisen siksak-kuvion sormellaan."
+              "Samu huusi puhelimelle erittäin kovaa: 'Avaa ovi heti!'.",
+              "Samu soitti ystävälleen Eemille tavallisella puhelulla.",
+              "Samu katsoi suoraan puhelimen lukitusruudun etukameraan.",
+              "Samu piirsi puhelimen ruutuun salaisen siksak-kuvion sormellaan."
             ],
-            "correctAnswer": "Matti katsoi suoraan puhelimen lukitusruudun etukameraan.",
+            "correctAnswer": "Samu katsoi suoraan puhelimen lukitusruudun etukameraan.",
             "explanation": "Kasvojentunnistus ei vaadi puhumista tai koskemista. Pelkkä suora katse kameraan riittää kertomaan tekoälylle, että laitteen oikea omistaja yrittää avata sen!"
           }
         ]
@@ -9649,7 +9649,7 @@ export const categories = [
           {
             "id": "kayttotaidot_2_q2",
             "type": "multiple_choice",
-            "question": "Mitä koodarit ja nörtit tarkoittavat, kun he sanovat, että AI vanin tekoäly \"hallusinoi\"?",
+            "question": "Mitä koodarit ja asiantuntijat tarkoittavat, kun he sanovat, että AI vanin tekoäly \"hallusinoi\"?",
             "options": [
               "Sitä, että kone nukahtaa ja näkee unia lentävistä sähköautoista.",
               "Sitä, että tekoäly keksii täysin olemattoman tiedon ja esittää sen varmana faktana.",
@@ -9734,7 +9734,7 @@ export const categories = [
           {
             "id": "kayttotaidot_2_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly vastaa sinulle: \"Koirien hajuaisti on todella tarkka. Tämä tieto löytyy useiden biologiaa käsittelevien yliopistojen virallisista tutkimuksista.\" Millä fiksulla promptilla sait sen kertomaan tämän?",
+            "question": "Tekoäly vastaa sinulle: \"Koirien hajuaisti on todella tarkka. Tämä tieto löytyy useiden biologiaa käsittelevien yliopistojen virallisista tutkimuksista.\" Millä fiksulla kehotteella (promptilla) sait sen kertomaan tämän?",
             "options": [
               "Kerro minulle nopeasti jokin täysin keksitty valhe ja fakta koirista.",
               "Kerro miten hyvä koiran hajuaisti on ja mainitse luotettava lähde tiedolle.",
@@ -9810,14 +9810,14 @@ export const categories = [
               "Ihmettelet, miksi kuva näyttää heti hieman oudolta ja epätodelliselta.": "1. vaihe",
               "Suurennat kuvaa ja etsit hassuja virheitä, kuten outoja varjoja tai sulaneita renkaita.": "2. vaihe",
               "Tarkistat uutisista, onko kotikaupungissa todella nähty aitoja lentäviä lautasia.": "3. vaihe",
-              "Tulet järkevään tulokseen, että kuva on pelkkä tekoälyn tekemä huijaus (hallusinaatio).": "4. vaihe"
+              "Tulet järkevään tulokseen, että kuva ei ole aito valokuva, vaan tekoälyllä tehty kuva.": "4. vaihe"
             },
             "explanation": "Ota silmä käteen! Tekoäly tekee usein pieniä virheitä kuviin (kuten kuusi sormea tai olemattomia varjoja). Kun käytät maalaisjärkeä ja tarkistat faktat, feikkikuvat on helppo paljastaa.",
             "draggables": [
               "Ihmettelet, miksi kuva näyttää heti hieman oudolta ja epätodelliselta.",
               "Suurennat kuvaa ja etsit hassuja virheitä, kuten outoja varjoja tai sulaneita renkaita.",
               "Tarkistat uutisista, onko kotikaupungissa todella nähty aitoja lentäviä lautasia.",
-              "Tulet järkevään tulokseen, että kuva on pelkkä tekoälyn tekemä huijaus (hallusinaatio)."
+              "Tulet järkevään tulokseen, että kuva ei ole aito valokuva, vaan tekoälyllä tehty kuva."
             ],
             "dropZones": [
               "1. vaihe",
@@ -10326,7 +10326,7 @@ export const categories = [
           {
             "id": "kayttotaidot_4_q15",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa sinulle hassun listan nimiä: \"Kura-Kalle 3000, Mutahirviö-X ja Sukkulapossu.\" Mikä oli ohjeesi (promptisi)?",
+            "question": "Tekoäly antaa sinulle hassun listan nimiä: \"Kuramönksä 3000, Mutahirviö-X ja Sukkulapossu.\" Mikä oli ohjeesi (promptisi)?",
             "options": [
               "Listaa minulle asiallisia ja hienoja tieteellisiä nimiä uudelle avaruusraketille.",
               "Keksi 3 hauskaa ja hieman outoa nimeä uudelle mutaiselle mönkijälle.",
