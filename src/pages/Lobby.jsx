@@ -16,37 +16,7 @@ export default function Lobby() {
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
   const [modalState, setModalState] = useState(null);
-  const fileInputRef = useRef(null);
 
-  const handleFileUpload = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-          try {
-              const jsonData = JSON.parse(event.target.result);
-              const success = store.importLocalSave(jsonData);
-              if (success) {
-                  setModalState({
-                      title: 'Lataus onnistui!',
-                      text: 'Tiedostosta ladattiin edellinen pelisi. Matka jatkuu!',
-                      onClose: () => navigate('/roadmap'),
-                      buttonText: 'Jatka peliä'
-                  });
-              } else {
-                  throw new Error('Invalid format');
-              }
-          } catch(err) {
-              setModalState({
-                  title: 'Aivan väärä tiedosto',
-                  text: 'Valitsemasi tiedosto ei sisältänyt kelvollista Aivan-tallennusta.',
-                  onClose: () => setModalState(null),
-                  buttonText: 'Takaisin'
-              });
-          }
-      };
-      reader.readAsText(file);
-  };
 
   const handleRestoreCloudSave = async (e) => {
       e.preventDefault();
@@ -103,26 +73,49 @@ export default function Lobby() {
       if (classCode.length < 6 || classNick.length < 2) return;
       
       setJoinClassLoading(true);
-      store.clearSinglePlayer();
       const upperCode = classCode.toUpperCase();
-      store.setClassroomCode(upperCode, classNick);
-      const success = await store.syncClassroomProgress();
       
-      if (success) {
-          try {
+      let sessionExists = false;
+      let reqTut = null;
+
+      try {
              const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
              const sessionDoc = await Promise.race([getDoc(doc(db, "class_sessions", upperCode)), timeoutPromise]);
              if (sessionDoc.exists()) {
-                const rt = sessionDoc.data().requireTutorial;
-                if (typeof rt === 'boolean') {
-                    store.setTutorialSkipped(!rt);
-                }
+                 sessionExists = true;
+                 const rt = sessionDoc.data().requireTutorial;
+                 if (typeof rt === 'boolean') {
+                     reqTut = rt;
+                 }
              }
-          } catch(err) {
-             console.warn("Could not fetch tutorial state");
-          }
+      } catch(err) {
+          setJoinClassLoading(false);
+          setModalState({
+              title: 'Yhteys laitteelta estetty',
+              text: 'Selaimesi tai oppilaitoksen verkko estää yhteyden opettajan paneeliin (Firebase timeout). \n\nJos käytät AdBlockia, ota se pois päältä. Jos olet koulun verkossa, kokeile jakaa netti omasta puhelimesta.',
+              buttonText: 'Takaisin',
+              onClose: () => setModalState(null)
+          });
+          return;
       }
+
+      if (!sessionExists) {
+          setJoinClassLoading(false);
+          setModalState({
+              title: 'Luokkaa ei löydy',
+              text: 'Tarkista opettajan koodi uudelleen, sellaista luokkaa ei tällä hetkellä ole avoinna!',
+              buttonText: 'Takaisin',
+              onClose: () => setModalState(null)
+          });
+          return;
+      }
+
+      // Start actual session logic now that we know room exists
+      store.clearSinglePlayer();
+      store.setClassroomCode(upperCode, classNick);
+      if (reqTut !== null) store.setTutorialSkipped(!reqTut);
       
+      const success = await store.syncClassroomProgress();
       setJoinClassLoading(false);
       
       if (success) {
@@ -135,8 +128,8 @@ export default function Lobby() {
       } else {
           store.clearSinglePlayer();
           setModalState({
-              title: 'Yhteys laitteelta estetty',
-              text: 'Selaimesi tai oppilaitoksen verkko estää yhteyden opettajan paneeliin (Firebase timeout). \n\nJos käytät AdBlockia, ota se pois päältä. Jos olet koulun verkossa, kokeile jakaa netti omasta puhelimesta.',
+              title: 'Yhteys palvelimeen pätkäisi',
+              text: 'Kirjautuminen opettajan huoneeseen onnistui, mutta luokkatietojen tallentaminen epäonnistui kireän verkon palomuurin takia.',
               buttonText: 'Takaisin',
               onClose: () => setModalState(null)
           });
@@ -301,12 +294,6 @@ export default function Lobby() {
                          {isRestoring ? '...' : <ArrowRight size={24} />}
                      </button>
                 </form>
-                <div style={{ marginTop: '1rem', textAlign: 'center' }}>
-                    <input type="file" accept=".json" style={{ display: 'none' }} ref={fileInputRef} onChange={handleFileUpload} />
-                    <button className="btn-secondary" style={{ fontSize: '0.9rem', padding: '0.5rem 1rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }} onClick={() => fileInputRef.current.click()}>
-                        <Upload size={16} /> Tuo tallennustiedostosta
-                    </button>
-                </div>
             </div>
 
 
