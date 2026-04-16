@@ -474,87 +474,6 @@ export default function Quiz() {
       }
   };
 
-  const renderMeters = () => {
-    const ChargeTab = ({ color, icon: Icon, label, disabled, onClick }) => {
-        const remaining = quizCharges[color] - usedCharges[color];
-        const totalAvailable = (remaining > 0 ? remaining : 0) + (teacherBoosts[color] || 0);
-        const isActive = totalAvailable > 0 && !disabled;
-        
-        const colorMaps = {
-            red: { bg: '#ef4444', hover: '#dc2626', text: 'white', shadow: 'rgba(239,68,68,0.4)', disabledBg: '#fee2e2' },
-            yellow: { bg: '#eab308', hover: '#ca8a04', text: 'white', shadow: 'rgba(234,179,8,0.4)', disabledBg: '#fef08a' },
-            green: { bg: '#22c55e', hover: '#16a34a', text: 'white', shadow: 'rgba(34,197,94,0.4)', disabledBg: '#dcfce7' }
-        };
-        const c = colorMaps[color];
-        
-        if (quizCharges[color] === 0 && (teacherBoosts[color] || 0) === 0) return null;
-
-        return (
-            <button 
-                disabled={!isActive}
-                onClick={onClick}
-                style={{ 
-                    flex: '1 1 0', 
-                    minWidth: '0', 
-                    height: '54px', 
-                    position: 'relative', 
-                    border: 'none', 
-                    background: isActive ? c.bg : c.disabledBg,
-                    cursor: isActive ? 'pointer' : 'not-allowed',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.6rem',
-                    transition: 'all 0.3s',
-                    padding: '0 1rem',
-                    boxShadow: isActive ? `0 4px 15px ${c.shadow}` : 'none',
-                    borderBottomLeftRadius: '16px',
-                    borderBottomRightRadius: '16px',
-                    borderTop: 'none',
-                    opacity: isActive ? 1 : 0.6
-                }}
-                onMouseOver={e => { if (isActive) e.currentTarget.style.background = c.hover; }}
-                onMouseOut={e => { if (isActive) e.currentTarget.style.background = c.bg; }}
-            >
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    {isActive && <div className="animate-ping" style={{ position: 'absolute', width: '20px', height: '20px', background: 'white', borderRadius: '50%', opacity: 0.5 }} />}
-                    <Icon size={20} color={isActive ? c.text : '#94a3b8'} />
-                    <span style={{ fontWeight: 'bold', fontSize: '1rem', color: isActive ? c.text : '#64748b', letterSpacing: '1px', whiteSpace: 'nowrap' }}>
-                        {label} {totalAvailable > 0 && `(x${totalAvailable})`}
-                    </span>
-                </div>
-            </button>
-        );
-    };
-
-    return (
-        <div style={{ display: 'flex', width: '100%', gap: '8px', flexWrap: 'nowrap', marginTop: '-2rem', padding: '0 2.5rem', position: 'relative', zIndex: 1 }}>
-            <ChargeTab 
-               color="red" 
-               icon={ShieldCheck} 
-               label="UUSINTA"
-               disabled={!(showExplanation && !isCorrect)}
-               onClick={useRedMeter}
-            />
-            
-            <ChargeTab 
-               color="yellow" 
-               icon={Disc} 
-               label="POISTO"
-               disabled={showExplanation || currentQuestion.type !== 'multiple_choice'}
-               onClick={useYellowMeter}
-            />
-
-            <ChargeTab 
-               color="green" 
-               icon={Wrench} 
-               label="VAIHTO"
-               disabled={showExplanation}
-               onClick={useGreenMeter}
-            />
-        </div>
-    );
-  };
 
   const handleDragStart = (e, item) => e.dataTransfer.setData('text/plain', item);
   const handleDrop = (e, target) => {
@@ -893,14 +812,48 @@ export default function Quiz() {
               </div>
             </div>
 
-            <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px' }} onClick={handleNext}>
-              {currentIndex < questions.length - 1 ? 'Seuraava Kysymys' : 'Suoritettu! Jatka tästä'}
-              <ArrowRight size={24} />
-            </button>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+                {!isCorrect && (() => {
+                    const rrem = quizCharges.red - usedCharges.red;
+                    const rtotal = (rrem > 0 ? rrem : 0) + (teacherBoosts.red || 0);
+                    return (
+                       <button onClick={useRedMeter} disabled={rtotal === 0} style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: 'none', background: rtotal > 0 ? '#ef4444' : '#f1f5f9', color: rtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 15px rgba(239,68,68,0.3)' : 'none' }}>
+                          <ShieldCheck size={24} /> UUSINTA {rtotal > 0 && `(${rtotal})`}
+                       </button>
+                    );
+                })()}
+
+                <button className="btn-primary" style={{ flex: 1, padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px' }} onClick={handleNext}>
+                  {currentIndex < questions.length - 1 ? 'Seuraava Kysymys' : 'Suoritettu! Jatka tästä'}
+                  <ArrowRight size={24} />
+                </button>
+            </div>
           </div>
         )}
 
         <div style={{ opacity: showExplanation ? 0.3 : 1, filter: showExplanation ? 'grayscale(0.7) blur(1px)' : 'none', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: showExplanation ? 'none' : 'auto' }}>
+        
+        {(!showExplanation) && (() => {
+            const yrem = quizCharges.yellow - usedCharges.yellow;
+            const ytotal = (yrem > 0 ? yrem : 0) + (teacherBoosts.yellow || 0);
+
+            const grem = quizCharges.green - usedCharges.green;
+            const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
+            
+            return (
+               <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
+                  {currentQuestion.type === 'multiple_choice' && (
+                  <button onClick={useYellowMeter} disabled={ytotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: ytotal > 0 ? '#eab308' : '#f1f5f9', color: ytotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: ytotal > 0 ? '0 4px 10px rgba(234,179,8,0.3)' : 'none', transition: 'all 0.2s' }}>
+                     <Disc size={20} /> POISTO {ytotal > 0 && `(${ytotal})`}
+                  </button>
+                  )}
+                  <button onClick={useGreenMeter} disabled={gtotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: gtotal > 0 ? '#22c55e' : '#f1f5f9', color: gtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: gtotal > 0 ? '0 4px 10px rgba(34,197,94,0.3)' : 'none', transition: 'all 0.2s' }}>
+                     <Wrench size={20} /> VAIHTO {gtotal > 0 && `(${gtotal})`}
+                  </button>
+               </div>
+            );
+        })()}
+
         {/* Regular Multiple Choice / True-False / Scenario / etc */}
         {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -1076,8 +1029,6 @@ export default function Quiz() {
         )}
         </div>
       </div>
-
-      {renderMeters()}
     </div>
   );
 }
