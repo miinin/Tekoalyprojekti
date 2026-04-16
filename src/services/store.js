@@ -535,21 +535,24 @@ export const store = {
         const data = docSnap.data();
         let updated = false;
 
-        if (data.teacherGift) {
+        const processedSparksId = localStorage.getItem('aivan_last_teacher_spark_id');
+        if (data.teacherGift && data.teacherGift.amount && String(data.teacherGift.id) !== processedSparksId) {
+          localStorage.setItem('aivan_last_teacher_spark_id', String(data.teacherGift.id));
           const current = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
-          localStorage.setItem('aivan_sparks', current + data.teacherGift);
+          localStorage.setItem('aivan_sparks', current + data.teacherGift.amount);
           updated = true;
-          if (callback) callback({ sparks: data.teacherGift });
+          if (callback) callback({ sparks: data.teacherGift.amount });
         }
         
-        if (data.teacherBoostsGift) {
+        const processedBoostsId = localStorage.getItem('aivan_last_teacher_boost_id');
+        if (data.teacherBoostsGift && data.teacherBoostsGift.amount && String(data.teacherBoostsGift.id) !== processedBoostsId) {
+           localStorage.setItem('aivan_last_teacher_boost_id', String(data.teacherBoostsGift.id));
            const currentBoosts = store.getTeacherBoosts();
-           Object.keys(data.teacherBoostsGift).forEach(color => {
-               currentBoosts[color] = (currentBoosts[color] || 0) + data.teacherBoostsGift[color];
-           });
+           const color = data.teacherBoostsGift.color;
+           currentBoosts[color] = (currentBoosts[color] || 0) + data.teacherBoostsGift.amount;
            localStorage.setItem('aivan_teacher_boosts', JSON.stringify(currentBoosts));
            updated = true;
-           if (callback) callback({ boosts: data.teacherBoostsGift });
+           if (callback) callback({ boosts: { [color]: data.teacherBoostsGift.amount } });
         }
 
         if (updated) {

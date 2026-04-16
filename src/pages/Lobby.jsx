@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload } from 'lucide-react';
 import { store } from '../services/store';
+import { db } from '../firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function Lobby() {
   const navigate = useNavigate();
@@ -102,8 +104,25 @@ export default function Lobby() {
       
       setJoinClassLoading(true);
       store.clearSinglePlayer();
-      store.setClassroomCode(classCode.toUpperCase(), classNick);
+      const upperCode = classCode.toUpperCase();
+      store.setClassroomCode(upperCode, classNick);
       const success = await store.syncClassroomProgress();
+      
+      if (success) {
+          try {
+             const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+             const sessionDoc = await Promise.race([getDoc(doc(db, "class_sessions", upperCode)), timeoutPromise]);
+             if (sessionDoc.exists()) {
+                const rt = sessionDoc.data().requireTutorial;
+                if (typeof rt === 'boolean') {
+                    store.setTutorialSkipped(!rt);
+                }
+             }
+          } catch(err) {
+             console.warn("Could not fetch tutorial state");
+          }
+      }
+      
       setJoinClassLoading(false);
       
       if (success) {

@@ -17,6 +17,10 @@ export default function TeacherDashboard() {
   // Protection / Error state
   const [errorMsg, setErrorMsg] = useState('');
   
+  // PIN protection
+  const [newPin, setNewPin] = useState('');
+  const [resumePin, setResumePin] = useState('');
+  
   // Generating a readable 6-character code
   const generateCode = () => {
      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -28,6 +32,10 @@ export default function TeacherDashboard() {
   };
 
   const createSession = async () => {
+      if (newPin.length < 4) {
+          setErrorMsg('Kirjoita vähintään 4-numeroinen PIN-koodi ensin.');
+          return;
+      }
       const code = generateCode();
       setSessionCode(code);
       setSessionStatus('active');
@@ -38,6 +46,7 @@ export default function TeacherDashboard() {
           await Promise.race([setDoc(doc(db, "class_sessions", code), {
               status: 'active',
               requireTutorial: requireTutorial,
+              teacherPin: newPin,
               createdAt: serverTimestamp()
           }), timeoutPromise]);
       } catch (err) {
@@ -46,7 +55,10 @@ export default function TeacherDashboard() {
   };
 
   const resumeExistingSession = async () => {
-      if (resumeCode.length < 6) return;
+      if (resumeCode.length < 6 || resumePin.length < 4) {
+          setErrorMsg('Täytä koodi ja PIN.');
+          return;
+      }
       setErrorMsg('Yhdistetään...');
       const code = resumeCode.toUpperCase();
       
@@ -56,6 +68,11 @@ export default function TeacherDashboard() {
           
           if (!docSnap.exists()) {
               setErrorMsg('Huonekoodia ei löydy. Tarkista koodi.');
+              return;
+          }
+          const data = docSnap.data();
+          if (data.teacherPin && data.teacherPin !== resumePin) {
+              setErrorMsg('Väärä PIN-koodi.');
               return;
           }
           setErrorMsg('');
@@ -85,14 +102,14 @@ export default function TeacherDashboard() {
   const giveSparks = async (nickname, amount) => {
       if (!sessionCode) return;
       await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
-          teacherGift: amount
+          teacherGift: { amount, id: Date.now() }
       }, { merge: true });
   };
 
   const giveBoost = async (nickname, color, amount) => {
       if (!sessionCode) return;
       await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
-          teacherBoostsGift: { [color]: amount }
+          teacherBoostsGift: { color, amount, id: Date.now() }
       }, { merge: true });
   };
 
@@ -151,6 +168,22 @@ export default function TeacherDashboard() {
                     
 
 
+                    {/* PIN input for new session */}
+                    <div style={{ marginBottom: '1.5rem', textAlign: 'left', background: '#eff6ff', padding: '1.2rem', borderRadius: '12px', border: '2px solid #bfdbfe' }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', color: '#1e40af', marginBottom: '0.6rem', fontSize: '0.95rem' }}>
+                            <Lock size={16} /> Luo oppitunnin PIN-suoja (vähintään 4 merkkiä)
+                        </label>
+                        <input
+                            type="password"
+                            placeholder="Esim. 1234"
+                            value={newPin}
+                            maxLength={8}
+                            onChange={e => { setNewPin(e.target.value); setErrorMsg(''); }}
+                            style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '10px', border: '2px solid #93c5fd', fontSize: '1.1rem', outline: 'none', boxSizing: 'border-box', letterSpacing: '4px' }}
+                        />
+                        <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.85rem', color: '#3b82f6' }}>Tarvitset tätä koodia jos haluat jatkaa oppituntia myöhemmin. Muista se!</p>
+                    </div>
+
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', textAlign: 'left' }}>
                        <input type="checkbox" id="tut" checked={requireTutorial} onChange={e => setRequireTutorial(e.target.checked)} style={{ minWidth: '24px', height: '24px', cursor: 'pointer', marginTop: '3px' }} />
                        <label htmlFor="tut" style={{ fontSize: '1rem', color: '#334155', cursor: 'pointer', lineHeight: 1.4, margin: 0 }}>
@@ -164,7 +197,7 @@ export default function TeacherDashboard() {
                         </div>
                     )}
 
-                    <button className="btn-primary" onClick={createSession} style={{ padding: '1.5rem 3rem', fontSize: '1.5rem', background: '#0284c7', width: '100%', marginBottom: '2rem', cursor: 'pointer' }}>
+                    <button className="btn-primary" onClick={createSession} disabled={newPin.length < 4} style={{ padding: '1.5rem 3rem', fontSize: '1.5rem', background: newPin.length < 4 ? '#94a3b8' : '#0284c7', width: '100%', marginBottom: '2rem', cursor: newPin.length < 4 ? 'not-allowed' : 'pointer' }}>
                         Luo uusi pelisessio
                     </button>
                     
@@ -184,8 +217,16 @@ export default function TeacherDashboard() {
                           onChange={(e) => { setResumeCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setErrorMsg(''); }}
                           style={{ flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '2px', outline: 'none' }}
                        />
+                       <input 
+                          type="password" 
+                          placeholder="PIN"
+                          value={resumePin}
+                          maxLength={8}
+                          onChange={(e) => { setResumePin(e.target.value); setErrorMsg(''); }}
+                          style={{ width: '100px', padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '4px', outline: 'none' }}
+                       />
                     </div>
-                    <button onClick={resumeExistingSession} disabled={resumeCode.length < 6} style={{ background: '#10b981', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', fontWeight: 'bold', cursor: resumeCode.length < 6 ? 'not-allowed' : 'pointer', opacity: resumeCode.length < 6 ? 0.5 : 1, width: '100%', fontSize: '1.1rem' }}>
+                    <button onClick={resumeExistingSession} disabled={resumeCode.length < 6 || resumePin.length < 4} style={{ background: '#10b981', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', fontWeight: 'bold', cursor: (resumeCode.length < 6 || resumePin.length < 4) ? 'not-allowed' : 'pointer', opacity: (resumeCode.length < 6 || resumePin.length < 4) ? 0.5 : 1, width: '100%', fontSize: '1.1rem' }}>
                        Jatka oppituntia
                     </button>
 

@@ -25,9 +25,14 @@ function GlobalClassroomOverlay() {
             unsubStatus = store.listenToClassroomStatus(code, (status) => {
                setIsPaused(status === 'paused');
             });
-            unsubSparks = store.listenToTeacherGifts(code, nick, (amount) => {
-               if (amount && amount > 0) {
-                   setGiftPopup(amount);
+            unsubSparks = store.listenToTeacherGifts(code, nick, (payload) => {
+               if (payload && payload.sparks && payload.sparks > 0) {
+                   setGiftPopup({ type: 'sparks', amount: payload.sparks });
+                   setTimeout(() => setGiftPopup(null), 4000);
+               } else if (payload && payload.boosts) {
+                   const color = Object.keys(payload.boosts)[0];
+                   const amount = payload.boosts[color];
+                   setGiftPopup({ type: 'boost', amount, color });
                    setTimeout(() => setGiftPopup(null), 4000);
                }
             });
@@ -55,7 +60,7 @@ function GlobalClassroomOverlay() {
           </div>
         )}
         
-        {giftPopup && (
+        {giftPopup && giftPopup.type === 'sparks' && (
           <div className="animate-bounce" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 99998, background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', border: '3px solid #f59e0b', padding: '1.5rem 2rem', borderRadius: '24px', boxShadow: '0 20px 40px rgba(245,158,11,0.3)', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
               <div style={{ background: '#f59e0b', padding: '1rem', borderRadius: '50%' }}>
                   <Gift size={32} color="white" />
@@ -63,7 +68,21 @@ function GlobalClassroomOverlay() {
               <div>
                   <h3 style={{ margin: '0 0 0.2rem 0', color: '#d97706', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Opettajalta lahja!</h3>
                   <div style={{ fontSize: '2rem', fontWeight: '900', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      +{giftPopup} <Zap size={28} fill="#b45309" />
+                      +{giftPopup.amount} <Zap size={28} fill="#b45309" />
+                  </div>
+              </div>
+          </div>
+        )}
+        
+        {giftPopup && giftPopup.type === 'boost' && (
+          <div className="animate-bounce" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 99998, background: 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)', border: '3px solid #6366f1', padding: '1.5rem 2rem', borderRadius: '24px', boxShadow: '0 20px 40px rgba(99,102,241,0.3)', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+              <div style={{ background: '#6366f1', padding: '1rem', borderRadius: '50%' }}>
+                  <Gift size={32} color="white" />
+              </div>
+              <div>
+                  <h3 style={{ margin: '0 0 0.2rem 0', color: '#4338ca', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Opettajalta tehostin!</h3>
+                  <div style={{ fontSize: '2rem', fontWeight: '900', color: '#312e81', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      +{giftPopup.amount} {giftPopup.color === 'red' ? 'Tuliseinään' : giftPopup.color === 'yellow' ? 'Reiluun Peliin' : giftPopup.color === 'green' ? 'Digiturvaan' : 'Tehostinta'}
                   </div>
               </div>
           </div>
