@@ -816,8 +816,11 @@ export default function Quiz() {
                 {!isCorrect && (() => {
                     const rrem = quizCharges.red - usedCharges.red;
                     const rtotal = (rrem > 0 ? rrem : 0) + (teacherBoosts.red || 0);
+                    const rTitle = rtotal > 0 
+                       ? "Sait Uusinnan! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
+                       : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi Uusintoja!" : "Ei uusintoja jäljellä. Tarvitset paremman varusteen Autotallista tai vaihdan karttaa.");
                     return (
-                       <button onClick={useRedMeter} disabled={rtotal === 0} style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: 'none', background: rtotal > 0 ? '#ef4444' : '#f1f5f9', color: rtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 15px rgba(239,68,68,0.3)' : 'none' }}>
+                       <button title={rTitle} onClick={useRedMeter} disabled={rtotal === 0} style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: 'none', background: rtotal > 0 ? '#ef4444' : '#f1f5f9', color: rtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 15px rgba(239,68,68,0.3)' : 'none' }}>
                           <ShieldCheck size={24} /> UUSINTA {rtotal > 0 && `(${rtotal})`}
                        </button>
                     );
@@ -840,14 +843,22 @@ export default function Quiz() {
             const grem = quizCharges.green - usedCharges.green;
             const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
             
+            const yTitle = ytotal > 0 
+               ? "Poista yksi tai useampi väärä vastausvaihtoehto!" 
+               : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Passiivinen: Osta Autotallista paremmat renkaat saadaksesi Poistoja käyttöön!" : "Ei poistoja jäljellä. Vaihda karttaa tai osta paremmat renkaat Autotallista.");
+
+            const gTitle = gtotal > 0 
+               ? "Vaihda tämä tehtävä kokonaan toiseen rangaistuksetta!" 
+               : (quizCharges.green === 0 && (teacherBoosts.green || 0) === 0 ? "Passiivinen: Osta Autotallista paremmat työkalut saadaksesi Vaihtoja käyttöön!" : "Ei vaihtoja jäljellä. Vaihda karttaa tai osta paremmat työkalut Autotallista.");
+
             return (
                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem' }}>
                   {currentQuestion.type === 'multiple_choice' && (
-                  <button onClick={useYellowMeter} disabled={ytotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: ytotal > 0 ? '#eab308' : '#f1f5f9', color: ytotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: ytotal > 0 ? '0 4px 10px rgba(234,179,8,0.3)' : 'none', transition: 'all 0.2s' }}>
+                  <button title={yTitle} onClick={useYellowMeter} disabled={ytotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: ytotal > 0 ? '#eab308' : '#f1f5f9', color: ytotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: ytotal > 0 ? '0 4px 10px rgba(234,179,8,0.3)' : 'none', transition: 'all 0.2s' }}>
                      <Disc size={20} /> POISTO {ytotal > 0 && `(${ytotal})`}
                   </button>
                   )}
-                  <button onClick={useGreenMeter} disabled={gtotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: gtotal > 0 ? '#22c55e' : '#f1f5f9', color: gtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: gtotal > 0 ? '0 4px 10px rgba(34,197,94,0.3)' : 'none', transition: 'all 0.2s' }}>
+                  <button title={gTitle} onClick={useGreenMeter} disabled={gtotal === 0} style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: 'none', background: gtotal > 0 ? '#22c55e' : '#f1f5f9', color: gtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: gtotal > 0 ? '0 4px 10px rgba(34,197,94,0.3)' : 'none', transition: 'all 0.2s' }}>
                      <Wrench size={20} /> VAIHTO {gtotal > 0 && `(${gtotal})`}
                   </button>
                </div>
@@ -937,17 +948,17 @@ export default function Quiz() {
 
         {/* Ordering Logic */}
         {currentQuestion.type === 'ordering' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {orderedItems.map((item, idx) => (
-              <div key={idx} style={{ padding: '1.5rem 1.8rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '35px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 8px 25px rgba(0,0,0,0.06)', fontSize: '1.2rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span style={{ width: '30px', height: '30px', flexShrink: 0, background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
+              <div key={idx} style={{ padding: '0.8rem 1.2rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 4px 15px rgba(0,0,0,0.06)', fontSize: '1.05rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                  <span style={{ width: '28px', height: '28px', flexShrink: 0, background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
                 </div>
                 {!showExplanation && (
-                  <div style={{ display: 'flex', gap: '0.8rem' }}>
-                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'up')}><ArrowUp size={24} /></button>
-                    <button style={{ width: '45px', height: '45px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'down')}><ArrowDown size={24} /></button>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button style={{ width: '38px', height: '38px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx > 0 ? 'pointer' : 'not-allowed', opacity: idx > 0 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'up')}><ArrowUp size={20} /></button>
+                    <button style={{ width: '38px', height: '38px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: idx < orderedItems.length - 1 ? 'pointer' : 'not-allowed', opacity: idx < orderedItems.length - 1 ? 1 : 0.3, background: 'var(--primary-color)', color: 'white', border: 'none', borderRadius: '50%', boxShadow: '0 4px 10px rgba(76, 133, 17, 0.3)', transition: 'transform 0.2s' }} onClick={() => moveItem(idx, 'down')}><ArrowDown size={20} /></button>
                   </div>
                 )}
               </div>
@@ -971,7 +982,7 @@ export default function Quiz() {
         {/* Drag and Drop Logic */}
         {currentQuestion.type === 'drag_drop' && (
           <div>
-            <div style={{ display: 'flex', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', gap: '0.7rem', marginBottom: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
               {shuffledDraggables.map((item, idx) => {
                 if (dragTargets[item]) return null;
                 const isSelected = selectedDragItem === item;
@@ -981,7 +992,7 @@ export default function Quiz() {
                     draggable={!showExplanation}
                     onDragStart={(e) => handleDragStart(e, item)}
                     onClick={() => handleClickDragItem(item)}
-                    style={{ padding: '1rem 1.5rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '30px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '1.1rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 6px 15px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
+                    style={{ padding: '0.6rem 1rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
                   >
                     {item}
                   </div>
@@ -989,17 +1000,17 @@ export default function Quiz() {
               })}
             </div>
 
-            <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
                 <div 
                   key={target}
                   onDrop={(e) => !showExplanation && handleDrop(e, target)}
                   onDragOver={handleDragOver}
                   onClick={() => handleClickDropZone(target)}
-                  style={{ flex: '1 1 250px', minHeight: '220px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
+                  style={{ flex: '1 1 200px', minHeight: '140px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                 >
-                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.4rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', flexGrow: 1 }}>
+                  <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
                     {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
                       const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
                       const isItemCorrect = expected === target;
@@ -1009,7 +1020,7 @@ export default function Quiz() {
                           draggable={!showExplanation}
                           onDragStart={(e) => handleDragStart(e, item)}
                           onClick={(e) => handleRemoveFromDropZone(e, item)}
-                          style={{ padding: '1rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '25px', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                          style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '16px', fontSize: '0.95rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
                         >
                           {item}
                         </div>
