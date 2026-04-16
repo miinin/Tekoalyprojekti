@@ -346,20 +346,36 @@ export default function TeacherDashboard() {
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.8rem' }}>
                             {/* Anna Kaikille -paneeli */}
-                            <div style={{ background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)', padding: '2rem', borderRadius: '24px', border: '1px solid #334155', boxShadow: '0 15px 40px rgba(0,0,0,0.2)' }}>
-                                <h3 style={{ margin: '0 0 1.5rem 0', color: '#f8fafc', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px' }}>
-                                    <Zap size={24} color="#38bdf8" fill="#38bdf8" /> Lähetä resurssipaketti koko luokalle
+                            <div style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)', padding: '2rem', borderRadius: '24px', border: '2px solid #bae6fd', boxShadow: '0 10px 30px rgba(2, 132, 199, 0.1)' }}>
+                                <h3 style={{ margin: '0 0 1.5rem 0', color: '#0369a1', fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px' }}>
+                                    <Zap size={24} color="#0ea5e9" fill="#0ea5e9" /> Lähetä resurssipaketti koko luokalle
                                 </h3>
                                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-                                    <button onClick={() => giveSparksToAll(10)} style={{ background: 'rgba(255,255,255,0.1)', color: '#bae6fd', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '14px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='rgba(255,255,255,0.2)'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255,255,255,0.1)'; e.currentTarget.style.transform='translateY(0)'}}>
-                                        Anna 10 Kipinää <Zap size={18} fill="#f59e0b" color="#f59e0b"/>
-                                    </button>
-                                    <button onClick={() => giveSparksToAll(50)} style={{ background: 'rgba(255,255,255,0.1)', color: '#bae6fd', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '14px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='rgba(255,255,255,0.2)'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255,255,255,0.1)'; e.currentTarget.style.transform='translateY(0)'}}>
-                                        Anna 50 Kipinää <Zap size={18} fill="#f59e0b" color="#f59e0b"/>
-                                    </button>
-                                    <button onClick={() => giveBoostToAll('red', 1)} style={{ background: 'rgba(255,255,255,0.1)', color: '#bae6fd', padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.1rem', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '14px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='rgba(255,255,255,0.2)'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255,255,255,0.1)'; e.currentTarget.style.transform='translateY(0)'}}>
-                                        <ShieldCheck size={18} color="#38bdf8" /> +1 Uusinta
-                                    </button>
+                                    {/* Kipinät Kaikille */}
+                                    <div style={{ display: 'flex', gap: '0.8rem', paddingRight: '1rem', borderRight: '2px solid #bae6fd' }}>
+                                        <button onClick={() => giveSparksToAll(50)} style={{ background: 'white', color: '#0369a1', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px solid #7dd3fc', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 8px 15px rgba(2, 132, 199, 0.1)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 10px rgba(0,0,0,0.02)'}}>
+                                            +50 <Zap size={16} fill="#f59e0b" color="#f59e0b"/>
+                                        </button>
+                                        <button onClick={() => giveSparksToAll(100)} style={{ background: 'white', color: '#0369a1', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px solid #7dd3fc', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 8px 15px rgba(2, 132, 199, 0.1)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 10px rgba(0,0,0,0.02)'}}>
+                                            +100 <Zap size={16} fill="#f59e0b" color="#f59e0b"/>
+                                        </button>
+                                        <button onClick={() => giveSparksToAll(500)} style={{ background: '#f8fafc', color: '#0284c7', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px solid #0ea5e9', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.boxShadow='0 8px 15px rgba(2, 132, 199, 0.1)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 10px rgba(0,0,0,0.02)'}}>
+                                            +500 <Zap size={16} fill="#f59e0b" color="#f59e0b"/>
+                                        </button>
+                                    </div>
+                                    
+                                    {/* Apuvälineet Kaikille */}
+                                    <div style={{ display: 'flex', gap: '0.8rem' }}>
+                                        <button onClick={() => giveBoostToAll('red', 1)} style={{ background: 'white', color: '#0369a1', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px dashed #7dd3fc', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.borderColor='#0ea5e9'; e.currentTarget.style.color='#0ea5e9'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.borderColor='#7dd3fc'; e.currentTarget.style.color='#0369a1'}}>
+                                            <ShieldCheck size={16} /> +1 Uusinta
+                                        </button>
+                                        <button onClick={() => giveBoostToAll('yellow', 1)} style={{ background: 'white', color: '#0369a1', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px dashed #7dd3fc', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.borderColor='#0ea5e9'; e.currentTarget.style.color='#0ea5e9'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.borderColor='#7dd3fc'; e.currentTarget.style.color='#0369a1'}}>
+                                            <Disc size={16} /> +1 Poisto
+                                        </button>
+                                        <button onClick={() => giveBoostToAll('green', 1)} style={{ background: 'white', color: '#0369a1', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1rem', border: '1px dashed #7dd3fc', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-2px)'; e.currentTarget.style.borderColor='#0ea5e9'; e.currentTarget.style.color='#0ea5e9'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.borderColor='#7dd3fc'; e.currentTarget.style.color='#0369a1'}}>
+                                            <Wrench size={16} /> +1 Vaihto
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             
