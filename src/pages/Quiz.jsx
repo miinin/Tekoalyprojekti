@@ -160,6 +160,7 @@ export default function Quiz() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [earnedSparks, setEarnedSparks] = useState(0);
+  const [currentQuestionSparks, setCurrentQuestionSparks] = useState(0);
   const [results, setResults] = useState([]);
 
   // States for special types
@@ -310,10 +311,30 @@ export default function Quiz() {
     }
     
     const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
-    const diff = store.saveQuestionRecord(currentQuestion.id, earned * sparkRewardMultiplier);
+    const baseDiff = store.saveQuestionRecord(currentQuestion.id, earned * sparkRewardMultiplier);
+    
+    // Ympäristöbonus (Talli)
+    const floor = equippedItems['g_floor'] || '';
+    const walls = equippedItems['g_walls'] || '';
+    let garageBonus = 0;
+    if (floor === 'g-clean') garageBonus += 0.05;
+    else if (floor === 'g-floor-base') garageBonus += 0.10;
+    else if (floor === 'g-floor2') garageBonus += 0.15;
+    else if (floor === 'g-floor3') garageBonus += 0.25;
+
+    if (walls === 'g-walls-base') garageBonus += 0.05;
+    else if (walls === 'g-walls2') garageBonus += 0.10;
+    else if (walls === 'g-walls3') garageBonus += 0.15;
+    else if (walls === 'g-walls4') garageBonus += 0.25;
+
+    const diff = Math.floor(baseDiff * (1 + garageBonus));
+
     if (diff > 0) {
         store.addSparks(diff).then(() => {});
         setEarnedSparks(prev => prev + diff);
+        setCurrentQuestionSparks(diff);
+    } else {
+        setCurrentQuestionSparks(0);
     }
     store.saveQuestionCorrectness(sub.id, currentQuestion.id, correct);
     
@@ -852,9 +873,9 @@ export default function Quiz() {
                   {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
                 </h2>
               </div>
-              {isCorrect && (
+              {isCorrect && currentQuestionSparks > 0 && (
                 <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: '#fef3c7', color: '#d97706', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                  <Zap size={24} fill="#d97706" /> +{store.getTestMode() ? 500 : 50} Kipinää
+                  <Zap size={24} fill="#d97706" /> +{currentQuestionSparks} Kipinää
                 </div>
               )}
             </div>
