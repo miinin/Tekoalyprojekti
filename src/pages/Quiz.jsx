@@ -14,7 +14,11 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSparks, setCurrentSparks] = useState(0);
-  const [meters, setMeters] = useState({ red: 0, yellow: 0, green: 0 });
+  
+  const [teacherBoosts, setTeacherBoosts] = useState({ red: 0, yellow: 0, green: 0 });
+  const [quizCharges, setQuizCharges] = useState({ red: 0, yellow: 0, green: 0 });
+  const [usedCharges, setUsedCharges] = useState({ red: 0, yellow: 0, green: 0 });
+
   const [explanationStartTime, setExplanationStartTime] = useState(null);
   const [bossIntroSeen, setBossIntroSeen] = useState(false);
   
@@ -27,7 +31,7 @@ export default function Quiz() {
 
     const fetchSparks = async () => {
       setCurrentSparks(await store.getSparks());
-      setMeters(store.getMeters());
+      setTeacherBoosts(store.getTeacherBoosts());
     };
     fetchSparks();
     const interval = setInterval(fetchSparks, 3000);
@@ -70,40 +74,34 @@ export default function Quiz() {
        setActiveBuff(buff);
        setActivePaint(equipped['body'] || '');
 
-       // UUDET: Latausnopeudet
-       const bumper = equipped['bumper'] || '';
+       // UUDET: Kertakäyttöiset lataukset
        let redCharge = 0;
-       if (bumper === 'van-bumper01' || bumper === 'van-bumper05') redCharge = 10;
-       else if (bumper === 'van-bumper02' || bumper === 'van-bumper04') redCharge = 15;
-       else if (bumper === 'van-bumper06') redCharge = 20;
-       else if (bumper === 'van-bumper03') redCharge = 25;
-       setBumperBuff(redCharge);
+       if ( bumper === 'van-bumper02' || bumper === 'van-bumper04' || bumper === 'van-bumper06') redCharge = 1;
+       else if (bumper === 'van-bumper03') redCharge = 2;
 
+       let jackChargeProb = 0;
        const jack = equipped['g_jack'] || '';
-       let jackProb = 0;
-       if (jack === 'g-jack1') jackProb = 0.05;
-       else if (jack === 'g-jack2') jackProb = 0.10;
-       else if (jack === 'g-jack3') jackProb = 0.15;
-       setJackBuff(jackProb);
+       if (jack === 'g-jack1') jackChargeProb = 0.05;
+       else if (jack === 'g-jack2') jackChargeProb = 0.10;
+       else if (jack === 'g-jack3') jackChargeProb = 0.15;
+       setJackBuff(jackChargeProb);
 
-       const tools = equipped['g_tools'] || '';
        let greenCharge = 0;
-       if (tools === 'g-walltools1' || tools === 'g-walltools6') greenCharge = 15;
-       else if (tools === 'g-walltools2' || tools === 'g-walltools5') greenCharge = 25;
-       else if (tools === 'g-walltools3') greenCharge = 40;
-       else if (tools === 'g-walltools4') greenCharge = 60;
-       setToolsBuff(greenCharge);
+       const tools = equipped['g_tools'] || '';
+       if (tools === 'g-walltools2' || tools === 'g-walltools3') greenCharge = 1;
+       else if (tools === 'g-walltools4') greenCharge = 2;
 
-       // wheels already declared
        let yellowCharge = 0;
-       let yellowPower = 1;
-       if (wheels === 'van-wheel01') yellowCharge = 20;
-       else if (wheels === 'van-wheel02') yellowCharge = 35;
-       else if (wheels === 'van-wheel03') yellowCharge = 50;
-       else if (wheels === 'van-wheel04') { yellowCharge = 20; yellowPower = 2; }
-       else if (wheels === 'van-wheel05') { yellowCharge = 50; yellowPower = 2; }
-       else if (wheels === 'van-wheel06') { yellowCharge = 75; yellowPower = 2; }
-       // Tallenna purun voima stateen
+       if (wheels === 'van-wheel02' || wheels === 'van-wheel03') yellowCharge = 1;
+       else if (wheels === 'van-wheel05') yellowCharge = 2;
+
+       // Lisäosat (Map-specific)
+       if (mainCategory === 'digiturva' && extras === 'van-extra06') redCharge += 1;
+       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 1;
+       if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 1;
+       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') yellowCharge += 2;
+
+       setQuizCharges({ red: redCharge, yellow: yellowCharge, green: greenCharge });
        setRemovedOptions([]);
 
        if (s && s.questions) {
@@ -349,7 +347,6 @@ export default function Quiz() {
       if (newMedalLevel > oldMedalLevel) {
           const medalNames = { 4: 'platinum', 3: 'gold', 2: 'silver', 1: 'bronze' };
           setWowMedal(medalNames[newMedalLevel] || null);
-          store.chargeMeter('yellow', 100);
       }
 
       // Kipinät on jo tallennettu jokaisen kysymyksen jälkeen (use-tapaus 3)
@@ -366,9 +363,22 @@ export default function Quiz() {
        return 1;
   };
 
+  const useCharge = (color) => {
+      if (usedCharges[color] < quizCharges[color]) {
+          setUsedCharges(prev => ({ ...prev, [color]: prev[color] + 1 }));
+          return true;
+      }
+      if (teacherBoosts[color] > 0) {
+          if (store.useTeacherBoost(color)) {
+              setTeacherBoosts(store.getTeacherBoosts());
+              return true;
+          }
+      }
+      return false;
+  };
+
   const useRedMeter = () => {
-      if (store.useMeter('red')) {
-          setMeters(store.getMeters());
+      if (useCharge('red')) {
           setSelectedAnswer(null);
           setShowExplanation(false);
           setIsCorrect(false);
@@ -379,8 +389,7 @@ export default function Quiz() {
 
   const useYellowMeter = () => {
       if (currentQuestion.type !== 'multiple_choice') return;
-      if (store.useMeter('yellow')) {
-          setMeters(store.getMeters());
+      if (useCharge('yellow')) {
           const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
           let amount = getYellowPower();
           if (amount > wrongOptions.length) amount = wrongOptions.length;
@@ -391,9 +400,7 @@ export default function Quiz() {
   };
 
   const useGreenMeter = () => {
-      if (store.useMeter('green')) {
-          setMeters(store.getMeters());
-          
+      if (useCharge('green')) {
           // Ohitetaan kysymys ottamalla uusi paketista (sijasta 0 => sija currentIndex)
           const correctness = store.getQuestionCorrectness()[sub.id] || {};
           let unasked = [];
@@ -426,61 +433,52 @@ export default function Quiz() {
   };
 
   const renderMeters = () => {
-    const b = bumperBuff > 0;
-    const hasWheels = !!equippedItems['wheel'];
-    const hasTools = toolsBuff > 0;
-    
-    if (!b && !hasWheels && !hasTools) return null;
-
-    const MeterTab = ({ color, icon: Icon, percentage, label, tip, disabled, onClick }) => {
-        const isFull = percentage >= 100;
-        const isActive = isFull && !disabled;
-        const p = Math.min(100, Math.max(0, percentage));
+    const ChargeTab = ({ color, icon: Icon, label, disabled, onClick }) => {
+        const remaining = quizCharges[color] - usedCharges[color];
+        const totalAvailable = (remaining > 0 ? remaining : 0) + (teacherBoosts[color] || 0);
+        const isActive = totalAvailable > 0 && !disabled;
         
         const colorMaps = {
-            red: { bg: '#ef4444', hover: '#dc2626', text: 'white', shadow: 'rgba(239,68,68,0.4)', loader: '#cbd5e1' },
-            yellow: { bg: '#eab308', hover: '#ca8a04', text: 'white', shadow: 'rgba(234,179,8,0.4)', loader: '#cbd5e1' },
-            green: { bg: '#22c55e', hover: '#16a34a', text: 'white', shadow: 'rgba(34,197,94,0.4)', loader: '#cbd5e1' }
+            red: { bg: '#ef4444', hover: '#dc2626', text: 'white', shadow: 'rgba(239,68,68,0.4)', disabledBg: '#fee2e2' },
+            yellow: { bg: '#eab308', hover: '#ca8a04', text: 'white', shadow: 'rgba(234,179,8,0.4)', disabledBg: '#fef08a' },
+            green: { bg: '#22c55e', hover: '#16a34a', text: 'white', shadow: 'rgba(34,197,94,0.4)', disabledBg: '#dcfce7' }
         };
         const c = colorMaps[color];
+        
+        if (quizCharges[color] === 0 && (teacherBoosts[color] || 0) === 0) return null;
 
         return (
             <button 
                 disabled={!isActive}
                 onClick={onClick}
-                title={tip}
                 style={{ 
                     flex: '1 1 0', 
                     minWidth: '0', 
                     height: '54px', 
                     position: 'relative', 
                     border: 'none', 
-                    background: isActive ? c.bg : '#f1f5f9',
+                    background: isActive ? c.bg : c.disabledBg,
                     cursor: isActive ? 'pointer' : 'not-allowed',
-                    overflow: 'hidden',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '0.6rem',
                     transition: 'all 0.3s',
                     padding: '0 1rem',
-                    boxShadow: isActive ? `0 4px 15px ${c.shadow}` : 'inset 0 4px 6px rgba(0,0,0,0.05)',
+                    boxShadow: isActive ? `0 4px 15px ${c.shadow}` : 'none',
                     borderBottomLeftRadius: '16px',
                     borderBottomRightRadius: '16px',
                     borderTop: 'none',
+                    opacity: isActive ? 1 : 0.6
                 }}
                 onMouseOver={e => { if (isActive) e.currentTarget.style.background = c.hover; }}
                 onMouseOut={e => { if (isActive) e.currentTarget.style.background = c.bg; }}
             >
-                {!isActive && (
-                    <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: `${p}%`, background: c.loader, zIndex: 1, transition: 'width 0.5s ease-out' }} />
-                )}
-                
-                <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.6rem', opacity: isActive ? 1 : 0.6 }}>
+                <div style={{ position: 'relative', zIndex: 2, display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                     {isActive && <div className="animate-ping" style={{ position: 'absolute', width: '20px', height: '20px', background: 'white', borderRadius: '50%', opacity: 0.5 }} />}
-                    <Icon size={20} color={isActive ? c.text : '#64748b'} />
-                    <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: isActive ? c.text : '#475569', letterSpacing: '1px', whiteSpace: 'nowrap' }}>
-                        {label} {(!isActive && percentage > 0) ? `(${Math.floor(p)}%)` : ''}
+                    <Icon size={20} color={isActive ? c.text : '#94a3b8'} />
+                    <span style={{ fontWeight: 'bold', fontSize: '1rem', color: isActive ? c.text : '#64748b', letterSpacing: '1px', whiteSpace: 'nowrap' }}>
+                        {label} {totalAvailable > 0 && `(x${totalAvailable})`}
                     </span>
                 </div>
             </button>
@@ -489,41 +487,29 @@ export default function Quiz() {
 
     return (
         <div style={{ display: 'flex', width: '100%', gap: '8px', flexWrap: 'nowrap', marginTop: '-2rem', padding: '0 2.5rem', position: 'relative', zIndex: 1 }}>
-            {b && (
-                <MeterTab 
-                   color="red" 
-                   icon={ShieldCheck} 
-                   percentage={meters.red} 
-                   label="UUSINTA"
-                   tip="Puskuri: Mahdollistaa väärän vastauksen yrittämisen uudelleen. Latautuu oikeista vastauksista."
-                   disabled={!(showExplanation && !isCorrect)}
-                   onClick={useRedMeter}
-                />
-            )}
+            <ChargeTab 
+               color="red" 
+               icon={ShieldCheck} 
+               label="UUSINTA"
+               disabled={!(showExplanation && !isCorrect)}
+               onClick={useRedMeter}
+            />
             
-            {hasWheels && (
-                <MeterTab 
-                   color="yellow" 
-                   icon={Disc} 
-                   percentage={meters.yellow} 
-                   label="POISTO"
-                   tip="Renkaat: Poistaa yhden väärän vaihtoehdon. Latautuu kun saavutat uuden mitalitason kartalla!"
-                   disabled={showExplanation || currentQuestion.type !== 'multiple_choice'}
-                   onClick={useYellowMeter}
-                />
-            )}
+            <ChargeTab 
+               color="yellow" 
+               icon={Disc} 
+               label="POISTO"
+               disabled={showExplanation || currentQuestion.type !== 'multiple_choice'}
+               onClick={useYellowMeter}
+            />
 
-            {hasTools && (
-                <MeterTab 
-                   color="green" 
-                   icon={Wrench} 
-                   percentage={meters.green} 
-                   label="VAIHTO"
-                   tip="Työkalut: Ohittaa kysymyksen rangaistuksetta ja arpoo uuden. Latautuu kun luet opetusmateriaaleja/näyttöjä!"
-                   disabled={showExplanation}
-                   onClick={useGreenMeter}
-                />
-            )}
+            <ChargeTab 
+               color="green" 
+               icon={Wrench} 
+               label="VAIHTO"
+               disabled={showExplanation}
+               onClick={useGreenMeter}
+            />
         </div>
     );
   };

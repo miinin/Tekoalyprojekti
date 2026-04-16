@@ -161,31 +161,20 @@ export const store = {
     return current + amount;
   },
 
-  getMeters: () => {
+  getTeacherBoosts: () => {
     const defaultMeters = { red: 0, yellow: 0, green: 0 };
     try {
-        return JSON.parse(localStorage.getItem('aivan_meters') || JSON.stringify(defaultMeters));
+        return JSON.parse(localStorage.getItem('aivan_teacher_boosts') || JSON.stringify(defaultMeters));
     } catch (e) {
         return defaultMeters;
     }
   },
 
-  chargeMeter: (color, amount) => {
-    const meters = store.getMeters();
-    if (meters[color] !== undefined && meters[color] < 100) {
-        meters[color] = Math.min(100, meters[color] + amount);
-        localStorage.setItem('aivan_meters', JSON.stringify(meters));
-        store.syncClassroomProgress();
-        return meters[color] === 100; // Returns true if it just reached full
-    }
-    return false;
-  },
-
-  useMeter: (color) => {
-    const meters = store.getMeters();
-    if (meters[color] >= 100) {
-        meters[color] = 0;
-        localStorage.setItem('aivan_meters', JSON.stringify(meters));
+  useTeacherBoost: (color) => {
+    const boosts = store.getTeacherBoosts();
+    if (boosts[color] > 0) {
+        boosts[color] -= 1;
+        localStorage.setItem('aivan_teacher_boosts', JSON.stringify(boosts));
         store.syncClassroomProgress();
         return true;
     }
@@ -487,13 +476,30 @@ export const store = {
     return onSnapshot(doc(db, "class_sessions", code, "players", nickname), (docSnap) => {
       if (docSnap.exists()) {
         const data = docSnap.data();
+        let updated = false;
+
         if (data.teacherGift) {
           const current = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
           localStorage.setItem('aivan_sparks', current + data.teacherGift);
-          updateDoc(doc(db, "class_sessions", code, "players", nickname), {
-            teacherGift: 0
-          });
-          if (callback) callback(data.teacherGift);
+          updated = true;
+          if (callback) callback({ sparks: data.teacherGift });
+        }
+        
+        if (data.teacherBoostsGift) {
+           const currentBoosts = store.getTeacherBoosts();
+           Object.keys(data.teacherBoostsGift).forEach(color => {
+               currentBoosts[color] = (currentBoosts[color] || 0) + data.teacherBoostsGift[color];
+           });
+           localStorage.setItem('aivan_teacher_boosts', JSON.stringify(currentBoosts));
+           updated = true;
+           if (callback) callback({ boosts: data.teacherBoostsGift });
+        }
+
+        if (updated) {
+            updateDoc(doc(db, "class_sessions", code, "players", nickname), {
+              teacherGift: null,
+              teacherBoostsGift: null
+            });
         }
       }
     });

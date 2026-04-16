@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -85,6 +85,13 @@ export default function TeacherDashboard() {
       if (!sessionCode) return;
       await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
           teacherGift: amount
+      }, { merge: true });
+  };
+
+  const giveBoost = async (nickname, color, amount) => {
+      if (!sessionCode) return;
+      await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
+          teacherBoostsGift: { [color]: amount }
       }, { merge: true });
   };
 
@@ -301,16 +308,29 @@ export default function TeacherDashboard() {
                                         </div>
 
                                         {/* Buff Buttons */}
-                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <button onClick={() => giveSparks(p.id, 50)} style={{ background: '#fef3c7', color: '#d97706', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 50 Kipinää">
-                                                +50 <Zap size={14} fill="#d97706" />
-                                            </button>
-                                            <button onClick={() => giveSparks(p.id, 100)} style={{ background: '#fed7aa', color: '#c2410c', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 100 Kipinää">
-                                                +100 <Zap size={14} fill="#c2410c" />
-                                            </button>
-                                            <button onClick={() => giveSparks(p.id, 500)} style={{ background: '#fcd34d', color: '#b45309', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 500 Kipinää!">
-                                                +500 <Zap size={14} fill="#b45309" />
-                                            </button>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <button onClick={() => giveSparks(p.id, 50)} style={{ background: '#fef3c7', color: '#d97706', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 50 Kipinää">
+                                                    +50 <Zap size={14} fill="#d97706" />
+                                                </button>
+                                                <button onClick={() => giveSparks(p.id, 100)} style={{ background: '#fed7aa', color: '#c2410c', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 100 Kipinää">
+                                                    +100 <Zap size={14} fill="#c2410c" />
+                                                </button>
+                                                <button onClick={() => giveSparks(p.id, 500)} style={{ background: '#fcd34d', color: '#b45309', border: 'none', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 500 Kipinää!">
+                                                    +500 <Zap size={14} fill="#b45309" />
+                                                </button>
+                                            </div>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <button onClick={() => giveBoost(p.id, 'red', 1)} style={{ background: '#fee2e2', color: '#ef4444', border: '1px solid #fca5a5', padding: '0.4rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 1 Uusinta">
+                                                    <ShieldCheck size={14} /> +1 Uusinta
+                                                </button>
+                                                <button onClick={() => giveBoost(p.id, 'yellow', 1)} style={{ background: '#fef08a', color: '#ca8a04', border: '1px solid #fde047', padding: '0.4rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 1 Poisto">
+                                                    <Disc size={14} /> +1 Poisto
+                                                </button>
+                                                <button onClick={() => giveBoost(p.id, 'green', 1)} style={{ background: '#dcfce7', color: '#22c55e', border: '1px solid #bbf7d0', padding: '0.4rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.3rem', transition: '0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'} title="Anna 1 Vaihto">
+                                                    <Wrench size={14} /> +1 Vaihto
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     
