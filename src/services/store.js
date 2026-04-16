@@ -296,7 +296,10 @@ export const store = {
           }
       }
       
-      await setDoc(doc(db, "saves", code), payload);
+      const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('Firebase timeout')), 5000);
+      });
+      await Promise.race([setDoc(doc(db, "saves", code), payload), timeoutPromise]);
       return code;
     } catch (err) {
       console.error("Save error:", err);
@@ -309,7 +312,11 @@ export const store = {
       if (!code || typeof code !== 'string') return false;
       const upperCode = code.toUpperCase().trim();
       const docRef = doc(db, "saves", upperCode);
-      const docSnap = await getDoc(docRef);
+      
+      const timeoutPromise = new Promise((_, reject) => {
+          setTimeout(() => reject(new Error('Firebase timeout')), 5000);
+      });
+      const docSnap = await Promise.race([getDoc(docRef), timeoutPromise]);
       
       if (docSnap.exists()) {
           const data = docSnap.data();

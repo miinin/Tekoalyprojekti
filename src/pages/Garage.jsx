@@ -37,7 +37,7 @@ export default function Garage() {
       if (code) {
           setSaveCode(code);
       } else {
-          alert('Tallennus epäonnistui! Tarkista nettiyhteys tai Firebase-asetukset.');
+          alert('Voi rähmä, yhteys rekisterikeskukseen katkesi! Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.');
       }
   };
 
