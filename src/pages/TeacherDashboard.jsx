@@ -14,10 +14,8 @@ export default function TeacherDashboard() {
   const [resumeCode, setResumeCode] = useState('');
   const [showFullscreen, setShowFullscreen] = useState(false);
 
-  // PIN protection
-  const [newPin, setNewPin] = useState('');
-  const [resumePin, setResumePin] = useState('');
-  const [pinError, setPinError] = useState('');
+  // Protection / Error state
+  const [errorMsg, setErrorMsg] = useState('');
   
   // Generating a readable 6-character code
   const generateCode = () => {
@@ -30,38 +28,41 @@ export default function TeacherDashboard() {
   };
 
   const createSession = async () => {
-      if (newPin.length < 4) {
-          setPinError('Kirjoita vähintään 4-numeroinen PIN-koodi ensin.');
-          return;
-      }
       const code = generateCode();
       setSessionCode(code);
       setSessionStatus('active');
-      setPinError('');
+      setErrorMsg('');
       
-      await setDoc(doc(db, "class_sessions", code), {
-          status: 'active',
-          requireTutorial: requireTutorial,
-          createdAt: serverTimestamp(),
-          teacherPin: newPin   // tallennetaan PIN Firebaseen huoneen mukana
-      });
+      try {
+          const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+          await Promise.race([setDoc(doc(db, "class_sessions", code), {
+              status: 'active',
+              requireTutorial: requireTutorial,
+              createdAt: serverTimestamp()
+          }), timeoutPromise]);
+      } catch (err) {
+          setErrorMsg('Yhteys opettajan paneeliin estetty verkkosi puolelta (Firebase timeout).');
+      }
   };
 
   const resumeExistingSession = async () => {
-      if (resumeCode.length < 6 || resumePin.length < 4) return;
-      setPinError('');
+      if (resumeCode.length < 6) return;
+      setErrorMsg('Yhdistetään...');
       const code = resumeCode.toUpperCase();
-      const docSnap = await getDoc(doc(db, "class_sessions", code));
-      if (!docSnap.exists()) {
-          setPinError('Huonekoodia ei löydy. Tarkista koodi.');
-          return;
+      
+      try {
+          const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+          const docSnap = await Promise.race([getDoc(doc(db, "class_sessions", code)), timeoutPromise]);
+          
+          if (!docSnap.exists()) {
+              setErrorMsg('Huonekoodia ei löydy. Tarkista koodi.');
+              return;
+          }
+          setErrorMsg('');
+          setSessionCode(code);
+      } catch (err) {
+          setErrorMsg('Yhteys epäonnistui - verkko estää yhteyden (Firebase timeout).');
       }
-      const data = docSnap.data();
-      if (data.teacherPin && data.teacherPin !== resumePin) {
-          setPinError('Väärä PIN-koodi. Vain opettaja voi jatkaa tätä oppituntia.');
-          return;
-      }
-      setSessionCode(code);
   }
   
   const endSession = async () => {
@@ -148,21 +149,7 @@ export default function TeacherDashboard() {
                     <h2 style={{ fontSize: '2.2rem', margin: '0 0 1rem 0', fontFamily: 'var(--font-display)', color: '#0f172a' }}>Aloita oppitunti</h2>
                     <p style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '2rem', lineHeight: 1.6 }}>Luokkatilassa opettajana seuraat oppilaiden edistymistä reaaliajassa, palkitset heitä Kipinöillä ja voit tarvittaessa lukita peliruudut hetkeksi saadaksesi luokan huomion.</p>
                     
-                    {/* PIN input for new session */}
-                    <div style={{ marginBottom: '1.5rem', textAlign: 'left', background: '#eff6ff', padding: '1.2rem', borderRadius: '12px', border: '2px solid #bfdbfe' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', color: '#1e40af', marginBottom: '0.6rem', fontSize: '0.95rem' }}>
-                            <Lock size={16} /> Luo oppitunnin PIN-suoja (vähintään 4 merkkiä)
-                        </label>
-                        <input
-                            type="password"
-                            placeholder="Esim. 1234"
-                            value={newPin}
-                            maxLength={8}
-                            onChange={e => { setNewPin(e.target.value); setPinError(''); }}
-                            style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '10px', border: '2px solid #93c5fd', fontSize: '1.1rem', outline: 'none', boxSizing: 'border-box', letterSpacing: '4px' }}
-                        />
-                        <p style={{ margin: '0.5rem 0 0 0', fontSize: '0.85rem', color: '#3b82f6' }}>Tarvitset tätä koodia jos haluat jatkaa oppituntia myöhemmin. Muista se!</p>
-                    </div>
+
 
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '12px', border: '1px solid #e2e8f0', textAlign: 'left' }}>
                        <input type="checkbox" id="tut" checked={requireTutorial} onChange={e => setRequireTutorial(e.target.checked)} style={{ minWidth: '24px', height: '24px', cursor: 'pointer', marginTop: '3px' }} />
@@ -171,13 +158,13 @@ export default function TeacherDashboard() {
                        </label>
                     </div>
 
-                    {pinError && (
+                    {errorMsg && (
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: '#fef2f2', border: '1px solid #fecaca', padding: '0.8rem 1rem', borderRadius: '10px', marginBottom: '1rem', color: '#dc2626', fontWeight: 'bold', textAlign: 'left' }}>
-                            <AlertTriangle size={18} /> {pinError}
+                            <AlertTriangle size={18} /> {errorMsg}
                         </div>
                     )}
 
-                    <button className="btn-primary" onClick={createSession} disabled={newPin.length < 4} style={{ padding: '1.5rem 3rem', fontSize: '1.5rem', background: newPin.length < 4 ? '#94a3b8' : '#0284c7', width: '100%', marginBottom: '2rem', cursor: newPin.length < 4 ? 'not-allowed' : 'pointer' }}>
+                    <button className="btn-primary" onClick={createSession} style={{ padding: '1.5rem 3rem', fontSize: '1.5rem', background: '#0284c7', width: '100%', marginBottom: '2rem', cursor: 'pointer' }}>
                         Luo uusi pelisessio
                     </button>
                     
@@ -194,19 +181,11 @@ export default function TeacherDashboard() {
                           placeholder="Huonekoodi (ABCDEF)"
                           value={resumeCode}
                           maxLength={6}
-                          onChange={(e) => { setResumeCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setPinError(''); }}
+                          onChange={(e) => { setResumeCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setErrorMsg(''); }}
                           style={{ flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '2px', outline: 'none' }}
                        />
-                       <input 
-                          type="password" 
-                          placeholder="PIN"
-                          value={resumePin}
-                          maxLength={8}
-                          onChange={(e) => { setResumePin(e.target.value); setPinError(''); }}
-                          style={{ width: '100px', padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '4px', outline: 'none' }}
-                       />
                     </div>
-                    <button onClick={resumeExistingSession} disabled={resumeCode.length < 6 || resumePin.length < 4} style={{ background: '#10b981', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', fontWeight: 'bold', cursor: (resumeCode.length < 6 || resumePin.length < 4) ? 'not-allowed' : 'pointer', opacity: (resumeCode.length < 6 || resumePin.length < 4) ? 0.5 : 1, width: '100%', fontSize: '1.1rem' }}>
+                    <button onClick={resumeExistingSession} disabled={resumeCode.length < 6} style={{ background: '#10b981', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '12px', fontWeight: 'bold', cursor: resumeCode.length < 6 ? 'not-allowed' : 'pointer', opacity: resumeCode.length < 6 ? 0.5 : 1, width: '100%', fontSize: '1.1rem' }}>
                        Jatka oppituntia
                     </button>
 
