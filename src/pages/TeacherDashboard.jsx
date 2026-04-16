@@ -225,7 +225,7 @@ export default function TeacherDashboard() {
                     )}
                     
                     <button 
-                        onClick={startSession} 
+                        onClick={createSession} 
                         style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.3)', transition: 'all 0.2s', letterSpacing: '1px' }}
                         onMouseOver={e=>e.currentTarget.style.transform='translateY(-3px)'} 
                         onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}
