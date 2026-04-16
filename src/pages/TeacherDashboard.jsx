@@ -113,6 +113,28 @@ export default function TeacherDashboard() {
       }, { merge: true });
   };
 
+  const giveSparksToAll = async (amount) => {
+      if (!sessionCode) return;
+      const tid = Date.now();
+      const promises = players.map(p => 
+          setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
+              teacherGift: { amount, id: tid + '_' + p.id }
+          }, { merge: true })
+      );
+      await Promise.all(promises);
+  };
+
+  const giveBoostToAll = async (color, amount) => {
+      if (!sessionCode) return;
+      const tid = Date.now();
+      const promises = players.map(p => 
+          setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
+              teacherBoostsGift: { color, amount, id: tid + '_' + p.id }
+          }, { merge: true })
+      );
+      await Promise.all(promises);
+  };
+
   useEffect(() => {
       if (!sessionCode) return;
       
@@ -305,9 +327,23 @@ export default function TeacherDashboard() {
                             <p style={{ color: '#64748b', fontSize: '1.1rem' }}>Oppilaat voivat liittyä Aulasta klikkaamalla <strong>Liity oppituntiin</strong> painiketta ja syöttämällä koodin <strong>{sessionCode}</strong>.</p>
                         </div>
                     ) : (
-                        <div style={{ display: 'grid', gap: '1rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                            {/* Anna Kaikille -paneeli */}
+                            <div style={{ background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)', padding: '1.2rem', borderRadius: '16px', border: '2px solid #bbf7d0', boxShadow: '0 4px 15px rgba(34,197,94,0.1)' }}>
+                                <h3 style={{ margin: '0 0 1rem 0', color: '#166534', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <Users size={20} /> Anna kaikille luokassa
+                                </h3>
+                                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                    <button onClick={() => giveSparksToAll(10)} className="btn-primary" style={{ background: '#f59e0b', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '1rem', border: 'none' }}>Anna 10 Kipinää <Zap size={16}/></button>
+                                    <button onClick={() => giveSparksToAll(50)} className="btn-primary" style={{ background: '#d97706', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '1rem', border: 'none' }}>Anna 50 Kipinää <Zap size={16}/></button>
+                                    <button onClick={() => giveBoostToAll('red', 1)} className="btn-secondary" style={{ background: '#fecaca', color: '#b91c1c', border: '1px solid #f87171', padding: '0.6rem 1rem' }}>+1 Uusinta</button>
+                                </div>
+                            </div>
+                            
+                            {/* Oppilaat */}
+                            <div style={{ display: 'grid', gap: '1rem' }}>
                             {players.map(p => (
-                                <div key={p.id} className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem', border: '2px solid #e2e8f0', borderRadius: '16px', background: '#f8fafc', gap: '2rem' }}>
+                                <div key={p.id} className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem', border: '2px solid #e2e8f0', borderRadius: '16px', background: '#f8fafc', gap: '2rem', flexWrap: 'wrap' }}>
                                     
                                     <div style={{ flex: '1 1 200px' }}>
                                         <h3 style={{ margin: '0 0 5px 0', fontSize: '1.4rem', color: '#0f172a' }}>{p.id}</h3>
@@ -318,13 +354,23 @@ export default function TeacherDashboard() {
                                     
                                     <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
                                         {/* Stats */}
-                                        <div style={{ display: 'flex', gap: '1.5rem' }}>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: '#d97706', background: '#fef3c7', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid #fde68a' }}>
-                                                <Zap size={20} fill="#d97706" /> {p.sparks || 0}
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <div style={{ display: 'flex', gap: '1rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: '#d97706', background: '#fef3c7', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid #fde68a' }}>
+                                                    <Zap size={20} fill="#d97706" /> {p.sparks || 0}
+                                                </div>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1rem', color: '#334155', background: '#f1f5f9', padding: '0.5rem 0.8rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                                                    <Medal size={16} fill="#94a3b8" color="#64748b" title="Platina" /><span style={{color: '#64748b'}}>{p.medals?.platinum || 0}</span>
+                                                    <Medal size={16} fill="#f59e0b" color="#d97706" title="Kulta" /> <span style={{color: '#d97706'}}>{p.medals?.gold || 0}</span>
+                                                    <Medal size={16} fill="#cbd5e1" color="#94a3b8" title="Hopea" /> <span style={{color: '#94a3b8'}}>{p.medals?.silver || 0}</span>
+                                                    <Medal size={16} fill="#b45309" color="#92400e" title="Pronssi" /> <span style={{color: '#92400e'}}>{p.medals?.bronze || 0}</span>
+                                                </div>
                                             </div>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: '#334155', background: '#f1f5f9', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                                                <Medal size={20} fill="#94a3b8" color="#64748b" /> Platinaa: {p.medals?.platinum || 0}
-                                            </div>
+                                            {p.globalStats && p.globalStats.attempts > 0 && (
+                                                <div style={{ fontSize: '0.9rem', color: '#475569', fontWeight: 'bold', background: '#e0f2fe', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #bae6fd', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                    Tarkkuus: {p.globalStats.correct} oikein / {p.globalStats.attempts} yritystä ({Math.round((p.globalStats.correct / p.globalStats.attempts) * 100)}%)
+                                                </div>
+                                            )}
                                         </div>
 
                                         {/* Buff Buttons */}

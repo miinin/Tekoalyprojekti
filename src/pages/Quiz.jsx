@@ -338,6 +338,7 @@ export default function Quiz() {
         setCurrentQuestionSparks(0);
     }
     store.saveQuestionCorrectness(sub.id, currentQuestion.id, correct);
+    store.trackAttempt(correct);
     
     setResults(prev => [...prev, { id: currentQuestion.id, earned, max, type: currentQuestion.type, correct }]);
     setIsCorrect(correct);

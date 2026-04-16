@@ -106,6 +106,16 @@ export const store = {
     return { correct, total: totalNodeQuestionsCount };
   },
 
+  trackAttempt: (isCorrect) => {
+    try {
+        const stats = JSON.parse(localStorage.getItem('aivan_global_stats') || '{"attempts":0, "correct":0}');
+        stats.attempts++;
+        if (isCorrect) stats.correct++;
+        localStorage.setItem('aivan_global_stats', JSON.stringify(stats));
+        store.syncClassroomProgress();
+    } catch(e) {}
+  },
+
   getNodeStats: () => {
     return JSON.parse(localStorage.getItem('aivan_node_stats') || '{}');
   },
@@ -504,10 +514,16 @@ export const store = {
           }
       }
 
+      let globalStats = { attempts: 0, correct: 0 };
+      try {
+          globalStats = JSON.parse(localStorage.getItem('aivan_global_stats') || '{"attempts":0, "correct":0}');
+      } catch(e) {}
+
       const dataPayload = {
         sparks,
         medals: { platinum, gold, silver, bronze },
         location: locStr,
+        globalStats,
         rawData,
         lastUpdate: serverTimestamp()
       };

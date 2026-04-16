@@ -7,7 +7,7 @@ import Quiz from './pages/Quiz';
 import Admin from './pages/Admin';
 import TeacherDashboard from './pages/TeacherDashboard';
 import { store } from './services/store';
-
+import confetti from 'canvas-confetti';
 import { Zap, Gift } from 'lucide-react';
 
 function GlobalClassroomOverlay() {
@@ -28,12 +28,14 @@ function GlobalClassroomOverlay() {
             unsubSparks = store.listenToTeacherGifts(code, nick, (payload) => {
                if (payload && payload.sparks && payload.sparks > 0) {
                    setGiftPopup({ type: 'sparks', amount: payload.sparks });
-                   setTimeout(() => setGiftPopup(null), 4000);
+                   confetti({ particleCount: 150, spread: 80, origin: { y: 0.8, x: 0.9 }, colors: ['#f59e0b', '#fbbf24', '#fcd34d'] });
+                   setTimeout(() => setGiftPopup(null), 5000);
                } else if (payload && payload.boosts) {
                    const color = Object.keys(payload.boosts)[0];
                    const amount = payload.boosts[color];
                    setGiftPopup({ type: 'boost', amount, color });
-                   setTimeout(() => setGiftPopup(null), 4000);
+                   confetti({ particleCount: 100, spread: 70, origin: { y: 0.8, x: 0.9 }, colors: ['#6366f1', '#818cf8', '#c7d2fe'] });
+                   setTimeout(() => setGiftPopup(null), 5000);
                }
             });
          }
@@ -66,9 +68,10 @@ function GlobalClassroomOverlay() {
                   <Gift size={32} color="white" />
               </div>
               <div>
-                  <h3 style={{ margin: '0 0 0.2rem 0', color: '#d97706', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Opettajalta lahja!</h3>
-                  <div style={{ fontSize: '2rem', fontWeight: '900', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      +{giftPopup.amount} <Zap size={28} fill="#b45309" />
+                  <h3 style={{ margin: '0 0 0.2rem 0', color: '#d97706', fontSize: '1.2rem', fontWeight: 'bold' }}>Mahtavaa! 🤩</h3>
+                  <div style={{ marginBottom: '0.4rem', color: '#b45309', fontSize: '0.95rem' }}>Opettaja huomasi ahkeruutesi!</div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#b45309', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      +{giftPopup.amount} <Zap size={32} fill="#b45309" />
                   </div>
               </div>
           </div>
@@ -80,9 +83,10 @@ function GlobalClassroomOverlay() {
                   <Gift size={32} color="white" />
               </div>
               <div>
-                  <h3 style={{ margin: '0 0 0.2rem 0', color: '#4338ca', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Opettajalta tehostin!</h3>
-                  <div style={{ fontSize: '2rem', fontWeight: '900', color: '#312e81', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      +{giftPopup.amount} {giftPopup.color === 'red' ? 'Tuliseinään' : giftPopup.color === 'yellow' ? 'Reiluun Peliin' : giftPopup.color === 'green' ? 'Digiturvaan' : 'Tehostinta'}
+                  <h3 style={{ margin: '0 0 0.2rem 0', color: '#4338ca', fontSize: '1.2rem', fontWeight: 'bold' }}>Opettajalta apupaketti! 🚀</h3>
+                  <div style={{ marginBottom: '0.4rem', color: '#312e81', fontSize: '0.95rem' }}>Nyt meni hienosti!</div>
+                  <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#312e81', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      +{giftPopup.amount} {giftPopup.color === 'red' ? 'Uusinta' : giftPopup.color === 'yellow' ? 'Poisto' : giftPopup.color === 'green' ? 'Vaihto' : 'Tehostinta'}
                   </div>
               </div>
           </div>
