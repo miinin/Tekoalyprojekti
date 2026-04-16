@@ -9413,7 +9413,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q2",
             "type": "multiple_choice",
-            "question": "Mitä sana \"promptaus\" tai \"prompti\" tarkoittaa, kun käytät AI vanin tekoälyä autotallissa?",
+            "question": "Mitä sana kehote (prompti) tarkoittaa, kun käytät AI vanin tekoälyä autotallissa?",
             "options": [
               "Sitä, että auton ovet laitetaan nopeasti lukkoon kaukosäätimellä.",
               "Se on ohje, kysymys tai komento, joka kirjoitetaan tekoälylle.",
@@ -9446,7 +9446,7 @@ export const categories = [
               "Valitse tekoälyn ideoista kiinnostavimmat pysähdykset ja pyydä tekemään niistä päiväaikataulu.": "3. vaihe",
               "Pyydä tekoälyä lopuksi tiivistämään koko valmis reittisuunnitelma helppolukuiseksi taulukoksi.": "4. vaihe"
             },
-            "explanation": "Tekoäly toimii parhaiten ihmisen työpari, jota ohjataan askel askeleelta kohti parempaa lopputulosta (ns. iteratiivinen promptaus). Yritä pilkkoa isot tehtävät chatin kanssa tällaiseksi vuoropuheluksi!",
+            "explanation": "Tekoäly toimii parhaiten ihmisen työpari, jota ohjataan askel askeleelta kohti parempaa lopputulosta (ns. iteratiivinen kehotteiden tarkentaminen). Yritä pilkkoa isot tehtävät chatin kanssa tällaiseksi vuoropuheluksi!",
             "draggables": [
               "Kerro tekoälylle ensin matkan lähtö- ja päätepiste sekä käytettävissä oleva matka-aika.",
               "Kun tekoäly ehdottaa suorinta tietä, kerro että haluaisitte nähdä matkalla outoja nähtävyyksiä.",
@@ -9485,7 +9485,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä kehotteista (prompt) antaa parhaan lopputuloksen?",
+            "question": "Mikä näistä kehotteista (prompteista) antaa parhaan lopputuloksen?",
             "options": [
               "'Kirjoita joku kiva vitsi.'",
               "'Moi tekoäly, mitä kuuluu tänään?'",
@@ -9576,7 +9576,7 @@ export const categories = [
               "Korjaat ja tarkennat kehotetta (promptia): 'Tee lauseesta paljon hauskempi ja lisää siihen sana raketti.'": "3. vaihe",
               "Tekoäly vihdoin onnistuu tavoitteessa: 'AI van on maantien nopein raketti, hyppää kyytiin!'": "4. vaihe"
             },
-            "explanation": "Promptaaminen on kokeilua ja auton jatkuvaa ohjaamista oikeaan suuntaan! Jos et ole tyytyväinen heti ensimmäiseen vastaukseen, voit aina jatkaa keskustelua, antaa lisäohjeita ja \"korjata kurssia\".",
+            "explanation": "Kehotteiden hiominen (promptaaminen) on kokeilua ja auton jatkuvaa ohjaamista oikeaan suuntaan! Jos et ole tyytyväinen heti ensimmäiseen vastaukseen, voit aina jatkaa keskustelua, antaa lisäohjeita ja \"korjata kurssia\".",
             "draggables": [
               "Kirjoitat ensin yksinkertaisesti: 'Keksi minulle mainoslause autolle.'",
               "Tekoäly antaa sinulle todella tylsän lauseen: 'Tämä on erittäin hyvä auto ajaa.'",
@@ -9619,7 +9619,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin näyttöruutu sylkee iloisesti ulos tekstin: \"1. Tarkista renkaiden ilmat. 2. Pese likaiset ikkunat. 3. Tankkaa auto.\" (Koko ohje on kirjoitettu 7-vuotiaalle sopivalla selkeällä ja helpolla sanastolla). Millä upealla promptilla tämä saatiin aikaan?",
+            "question": "AI vanin näyttöruutu sylkee iloisesti ulos tekstin: \"1. Tarkista renkaiden ilmat. 2. Pese likaiset ikkunat. 3. Tankkaa auto.\" (Koko ohje on kirjoitettu 7-vuotiaalle sopivalla selkeällä ja helpolla sanastolla). Millä upealla kehotteella (promptilla) tämä saatiin aikaan?",
             "options": [
               "Kerro minulle jotain autosta ja sen renkaista tänään.",
               "Kirjoita minulle pitkä auto-opas aikuisille ja tee siitä yli 10 sivua pitkä.",
