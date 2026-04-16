@@ -9485,7 +9485,7 @@ export const categories = [
           {
             "id": "kayttotaidot_1_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä kehotteista (prompteista) antaa parhaan lopputuloksen?",
+            "question": "Mikä näistä kehotteista (prompt) antaa parhaan lopputuloksen?",
             "options": [
               "'Kirjoita joku kiva vitsi.'",
               "'Moi tekoäly, mitä kuuluu tänään?'",
@@ -9621,10 +9621,10 @@ export const categories = [
             "type": "reverse_prompt",
             "question": "AI vanin näyttöruutu sylkee iloisesti ulos tekstin: \"1. Tarkista renkaiden ilmat. 2. Pese likaiset ikkunat. 3. Tankkaa auto.\" (Koko ohje on kirjoitettu 7-vuotiaalle sopivalla selkeällä ja helpolla sanastolla). Millä upealla kehotteella (promptilla) tämä saatiin aikaan?",
             "options": [
-              "Kerro minulle jotain autosta ja sen renkaista tänään.",
-              "Kirjoita minulle pitkä auto-opas aikuisille ja tee siitä yli 10 sivua pitkä.",
+              "Selitä pikkulapselle erittäin lyhyesti kolme hyvää syytä, miksi autojen ikkunat likaantuvat tiellä ajaessa.",
+              "Kirjoita selkeä ja ymmärrettävä ohje auton renkaiden ja öljyjen tarkistamisesta ammattitason mekaanikolle.",
               "Listaa 3 tärkeää auton huolto-ohjetta yksinkertaisesti, aivan kuin selittäisit ne 7-vuotiaalle lapselle.",
-              "Miksi autot ovat joskus likaisia, kun niillä ajetaan tiellä?"
+              "Tee pitkä, raskailla sivistyssanoilla täytetty ammattilaisteksti auton huoltotoimenpiteistä ja pesemisestä."
             ],
             "correctAnswer": "Listaa 3 tärkeää auton huolto-ohjetta yksinkertaisesti, aivan kuin selittäisit ne 7-vuotiaalle lapselle.",
             "explanation": "Tämä on mestaritason kehotteiden laatimista (promptausta) ja navigointia! Siinä on tarkka määrä (3), tehtävä (huolto-ohjeita), haluttu muoto (listaa) ja tärkeä konteksti (kuin selittäisit 7-vuotiaalle). Näin tekoälystä saa parhaan hyödyn irti."
