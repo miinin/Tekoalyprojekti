@@ -94,20 +94,34 @@ export default function Lobby() {
   const [classCode, setClassCode] = useState('');
   const [classNick, setClassNick] = useState('');
 
+  const [joinClassLoading, setJoinClassLoading] = useState(false);
+
   const handleJoinClass = async (e) => {
       e.preventDefault();
       if (classCode.length < 6 || classNick.length < 2) return;
       
+      setJoinClassLoading(true);
       store.clearSinglePlayer();
       store.setClassroomCode(classCode.toUpperCase(), classNick);
-      await store.syncClassroomProgress();
+      const success = await store.syncClassroomProgress();
+      setJoinClassLoading(false);
       
-      setModalState({
-          title: 'Liitytty onnistuneesti!',
-          text: `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
-          buttonText: 'Siirry peliin',
-          onClose: () => navigate('/roadmap')
-      });
+      if (success) {
+          setModalState({
+              title: 'Liitytty onnistuneesti!',
+              text: `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
+              buttonText: 'Siirry peliin',
+              onClose: () => navigate('/roadmap')
+          });
+      } else {
+          store.clearSinglePlayer();
+          setModalState({
+              title: 'Yhteys laitteelta estetty',
+              text: 'Selaimesi tai oppilaitoksen verkko estää yhteyden opettajan paneeliin (Firebase timeout). \n\nJos käytät AdBlockia, ota se pois päältä. Jos olet koulun verkossa, kokeile jakaa netti omasta puhelimesta.',
+              buttonText: 'Takaisin',
+              onClose: () => setModalState(null)
+          });
+      }
   };
 
   const handleCreateLobby = () => {
@@ -341,8 +355,8 @@ export default function Lobby() {
                         onChange={(e) => setClassNick(e.target.value)}
                         style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #6ee7b7', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                       />
-                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2} className="btn-primary" style={{ background: '#059669', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2) ? 0.5 : 1 }}>
-                        <ArrowRight size={24} />
+                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2 || joinClassLoading} className="btn-primary" style={{ background: '#059669', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2 || joinClassLoading) ? 0.5 : 1 }}>
+                        {joinClassLoading ? '...' : <ArrowRight size={24} />}
                       </button>
                   </div>
                 </form>

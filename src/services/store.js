@@ -504,15 +504,20 @@ export const store = {
           }
       }
 
-      await setDoc(doc(db, "class_sessions", code, "players", nickname), {
+      const dataPayload = {
         sparks,
         medals: { platinum, gold, silver, bronze },
         location: locStr,
         rawData,
         lastUpdate: serverTimestamp()
-      }, { merge: true });
+      };
+      
+      const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+      await Promise.race([setDoc(doc(db, "class_sessions", code, "players", nickname), dataPayload, { merge: true }), timeoutPromise]);
+      return true;
     } catch (err) {
       console.error('Luokkatilan synkronointi epäonnistui:', err);
+      return false;
     }
   },
 
@@ -563,7 +568,8 @@ export const store = {
           const docRef = doc(db, "class_sessions", upperCode, "players", nickname);
           
           try {
-             const sessionDoc = await getDoc(doc(db, "class_sessions", upperCode));
+             const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+             const sessionDoc = await Promise.race([getDoc(doc(db, "class_sessions", upperCode)), timeoutPromise]);
              if (sessionDoc.exists()) {
                 const rt = sessionDoc.data().requireTutorial;
                 if (typeof rt === 'boolean') {
@@ -573,7 +579,10 @@ export const store = {
           } catch(e) {}
           
           let docSnap;
-          try { docSnap = await getDoc(docRef); } catch(e) {}
+          try { 
+              const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
+              docSnap = await Promise.race([getDoc(docRef), timeoutPromise]); 
+          } catch(e) {}
           
           if (docSnap && docSnap.exists() && docSnap.data().rawData) {
               const data = docSnap.data().rawData;
