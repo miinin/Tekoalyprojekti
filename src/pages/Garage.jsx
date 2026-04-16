@@ -658,7 +658,7 @@ export default function Garage() {
                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
                       <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
                    </div>
-                   <b>Mikä suoritus!</b> Ansaitsit juuri ensimmäisen Tiekartan mestarin pokaalisi ja se toimitettiin Autotalliin!<br/><br/>Oletko valmis keräämään ne kaikki? Voit ihailla saavutuksiasi Palkintokaapissa.
+                   <b>Loistosuoritus!</b> Ansaitsit pokaalin selvitettyäsi kartan.<br/><br/>Voit ihastella palkintojasi palkintokaapista - löydätkö sen tallistasi?
                    <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
                         localStorage.setItem('aivan_trophy_tuition', 'true');
                         setShowTrophyTuition(false);

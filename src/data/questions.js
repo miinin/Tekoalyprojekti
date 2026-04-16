@@ -5118,7 +5118,7 @@ export const categories = [
           {
             "id": "aivoterveys_2_q13",
             "type": "multiple_choice",
-            "question": "Mitä \"unihiekka\" tekee aivojesi kovalevylle yöllä?",
+            "question": "Mitä riittävä ja hyvä uni tekee aivojesi kovalevylle yöllä?",
             "options": [
               "Se tyhjentää aivot kokonaan kaikista asioista, joita olet oppinut.",
               "Se järjestelee opitut asiat oikeisiin kansioihin ja puhdistaa roskat.",
@@ -5534,7 +5534,7 @@ export const categories = [
           {
             "id": "aivoterveys_4_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin kojelauta näyttää, että päivittäinen \"ruutuaika-bensa\" on lopussa. Aivosi kaipaavat oikeaa toimintaa. Autotallin edessä on pyörä, pallo ja hyppynaru. Miten hyödynnät näitä aivojesi parhaaksi?",
+            "question": "SKENAARIO: AI vanin kojelauta näyttää, että päivittäinen ruutuaika on lopussa. Aivosi kaipaavat oikeaa toimintaa. Autotallin edessä on pyörä, pallo ja hyppynaru. Miten hyödynnät näitä aivojesi parhaaksi?",
             "options": [
               "Otan valokuvan niistä ja jatkan videoiden katselua autossa.",
               "Valitsen yhden välineen ja leikin sillä kunnolla ulkona.",
@@ -5832,11 +5832,11 @@ export const categories = [
             "question": "Miten aivosi ja kehosi usein kertovat sinulle, että olet yrittänyt piilottaa jotain pahaa mieltä liiallisen ruutuajan taakse?",
             "options": [
               "Alat heti haukotella ja silmäsi tuntuvat pelkästään raskailta.",
-              "Tunnet itsesi todella ärtyneeksi, levottomaksi tai huonotuuliseksi laitteen sulkemisen jälkeen.",
+              "Tunnet itsesi todella ärtyneeksi tai huonotuuliseksi.",
               "Alat yhtäkkiä kuulla auton radion soivan päässäsi itsekseen.",
               "Puhelimesi akku latautuu yllättäen vahingossa aivan täyteen itsestään."
             ],
-            "correctAnswer": "Tunnet itsesi todella ärtyneeksi, levottomaksi tai huonotuuliseksi laitteen sulkemisen jälkeen.",
+            "correctAnswer": "Tunnet itsesi todella ärtyneeksi tai huonotuuliseksi.",
             "explanation": "Ärtymys ja kiukku ruudun sammuttamisen jälkeen ovat aivojen hätähuuto! Ne kertovat, että olet yrittänyt piilottaa jotain tunnetta tai tarvetta laitteen taakse aivan liian kauan."
           },
           {
@@ -5943,14 +5943,14 @@ export const categories = [
               "Uuden kielen opiskelu ja jännittävän videopelin pelaaminen"
             ],
             "dropZones": [
-              "Onnistuu (Helpot rutiinit)",
-              "Epäonnistuu (Vaatii keskittymistä)"
+              "Helpot rutiinit",
+              "Vaatii keskittymistä"
             ],
             "correctAnswer": {
-              "Tutun koulumatkan käveleminen ja musiikin kuuntelu": "Onnistuu (Helpot rutiinit)",
-              "Tiskikoneen tyhjentäminen ja samalla kuulumisten juttelu": "Onnistuu (Helpot rutiinit)",
-              "Vaikeiden läksyjen tekeminen ja puhelimella viestittely": "Epäonnistuu (Vaatii keskittymistä)",
-              "Uuden kielen opiskelu ja jännittävän videopelin pelaaminen": "Epäonnistuu (Vaatii keskittymistä)"
+              "Tutun koulumatkan käveleminen ja musiikin kuuntelu": "Helpot rutiinit",
+              "Tiskikoneen tyhjentäminen ja samalla kuulumisten juttelu": "Helpot rutiinit",
+              "Vaikeiden läksyjen tekeminen ja puhelimella viestittely": "Vaatii keskittymistä",
+              "Uuden kielen opiskelu ja jännittävän videopelin pelaaminen": "Vaatii keskittymistä"
             },
             "explanation": "Aivot osaavat tehdä automaattisia asioita yhtä aikaa, mutta kaksi vaikeaa ja uutta asiaa kerralla on mahdoton tehtävä jopa neroille."
           },
@@ -6247,7 +6247,7 @@ export const categories = [
               "Syön kilon sokeria ennen aloittamista."
             ],
             "correctAnswer": "Laitan puhelimen äänettömälle toiseen huoneeseen ja poistan kaikki häiriöt.",
-            "explanation": "Keskittyminen ja syvä flow-tila onnistuvat vain silloin, kun aivot saavat työskennellä ilman jatkuvia \"kiviä tiellä\" eli puhelimen piippauksia tai taustahälyä! ________________"
+            "explanation": "Keskittyminen ja syvä flow-tila onnistuvat vain silloin, kun aivot saavat työskennellä ilman jatkuvia \"kiviä tiellä\" eli puhelimen piippauksia tai taustahälyä!"
           }
         ]
       }
