@@ -86,7 +86,7 @@ function GlobalClassroomOverlay() {
                   <h3 style={{ margin: '0 0 0.2rem 0', color: '#4338ca', fontSize: '1.2rem', fontWeight: 'bold' }}>Opettajalta apupaketti! 🚀</h3>
                   <div style={{ marginBottom: '0.4rem', color: '#312e81', fontSize: '0.95rem' }}>Nyt meni hienosti!</div>
                   <div style={{ fontSize: '2.2rem', fontWeight: '900', color: '#312e81', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      +{giftPopup.amount} {giftPopup.color === 'red' ? 'Uusinta' : giftPopup.color === 'yellow' ? 'Poisto' : giftPopup.color === 'green' ? 'Vaihto' : 'Tehostinta'}
+                      +{giftPopup.amount} {giftPopup.color === 'red' ? 'Yritä uudelleen' : giftPopup.color === 'yellow' ? 'Poisto' : giftPopup.color === 'green' ? 'Vaihto' : 'Tehostinta'}
                   </div>
               </div>
           </div>

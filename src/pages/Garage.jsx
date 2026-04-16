@@ -133,13 +133,13 @@ export default function Garage() {
     { id: 'van-body11', category: 'body', categoryName: 'Maalipinnat', name: 'Yön ritari', desc: 'Tumma ja puhuva mattamusta.', price: 800, icon: <PaintBucket size={28} />, color: '#1e293b', bg: '#f1f5f9' },
     { id: 'van-body12', category: 'body', categoryName: 'Maalipinnat', name: 'AI Team', desc: 'Rakastan sitä, kun promptit loksahtelevat kohdilleen.', price: 1200, icon: <PaintBucket size={28} />, color: '#ef4444', bg: '#1e293b' },
     
-    // PUSKURIT (Punainen Mittari: Uusinta)
+    // PUSKURIT (Punainen Mittari: Yritä uudelleen)
     { id: 'van-bumper01', category: 'bumper', categoryName: 'Puskurit', name: 'Peruspuskuri', desc: 'Luotettava perussuoja kaduille.', price: 0, isDefault: true, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2' },
-    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Rustiikkinen puskuri', desc: 'Rouheaa asennetta huokuva teräs.', price: 150, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan apu', desc: 'Antaa +2 Uusintaa per kartta!' } },
-    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä.', price: 300, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan apu', desc: 'Antaa +3 Uusintaa per kartta!' } },
-    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Mattamusta', desc: 'Hillitty ja moderni.', price: 600, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan apu', desc: 'Antaa +4 Uusintaa per kartta!' } },
-    { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas.', price: 1000, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusinnan apu', desc: 'Antaa +5 Uusintaa per kartta!' } },
-    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Kultapuskuri', desc: 'Bling bling!', price: 1500, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Arvokas uusinta', desc: 'Antaa peräti +6 Uusintaa per kartta!' } },
+    { id: 'van-bumper05', category: 'bumper', categoryName: 'Puskurit', name: 'Rustiikkinen puskuri', desc: 'Rouheaa asennetta huokuva teräs.', price: 150, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusi yritys', desc: 'Antaa 2 uutta yritystä väärin menneisiin kysymyksiin per kartta!' } },
+    { id: 'van-bumper02', category: 'bumper', categoryName: 'Puskurit', name: 'Kromipuskuri', desc: 'Kiiltävää näyttävyyttä.', price: 300, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusi yritys', desc: 'Antaa 3 uutta yritystä väärin menneisiin kysymyksiin per kartta!' } },
+    { id: 'van-bumper04', category: 'bumper', categoryName: 'Puskurit', name: 'Mattamusta', desc: 'Hillitty ja moderni.', price: 600, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusi yritys', desc: 'Antaa 4 uutta yritystä väärin menneisiin kysymyksiin per kartta!' } },
+    { id: 'van-bumper06', category: 'bumper', categoryName: 'Puskurit', name: 'Pronssipuskuri', desc: 'Hillityn arvokas.', price: 1000, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusi yritys', desc: 'Antaa 5 uutta yritystä väärin menneisiin kysymyksiin per kartta!' } },
+    { id: 'van-bumper03', category: 'bumper', categoryName: 'Puskurit', name: 'Kultapuskuri', desc: 'Bling bling!', price: 1500, icon: <ShieldCheck size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Arvokas yritys', desc: 'Antaa peräti 6 uutta yritystä väärin menneisiin kysymyksiin per kartta!' } },
 
     // VANTEET (Keltainen Mittari: Vaihtoehdon poisto)
     { id: 'van-wheel01', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Peltivanteet', desc: 'Kestävä valinta.', price: 0, isDefault: true, icon: <Disc size={28} />, color: '#eab308', bg: '#fef08a' },
@@ -155,7 +155,7 @@ export default function Garage() {
     { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff' },
     { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 800, icon: <ShieldCheck size={28} />, color: '#fb7185', bg: '#fee2e2', buff: { title: 'Vuoristoapu', desc: 'Vinssi antaa +3 Vaihto-apua Aivoterveys-kartalla!' } },
     { id: 'van-extra05', category: 'extra', categoryName: 'Erityisosat', name: 'Sivuikkuna takatilaan', desc: 'Lisää valoa ja tilan tunnetta.', price: 600, icon: <Grid size={28} />, color: '#3b82f6', bg: '#dbeafe' },
-    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 1000, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Sukellusvaruste', desc: 'Antaa +3 Uusintaa Digiturva-kartalla!' } },
+    { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 1000, icon: <Map size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Sukellusvaruste', desc: 'Antaa 3 uutta yritystä Digiturva-kartalla!' } },
     { id: 'van-extra07', category: 'extra', categoryName: 'Erityisosat', name: 'Erämaa-antenni', desc: 'Jotta poppi pauhaa erämaassakin.', price: 700, icon: <Radio size={28} />, color: '#8b5cf6', bg: '#ede9fe', buff: { title: 'Erämaayhteys', desc: 'Antaa +3 Poistoa Konepellin alle -kartalla!' } }
   ];
 
@@ -923,8 +923,8 @@ export default function Garage() {
                     <div style={{ background: 'rgba(239, 68, 68, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #ef4444', display: 'flex', gap: '1rem', alignItems: 'center' }}>
                         <ShieldCheck size={28} color="#ef4444" />
                         <div>
-                            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '0.2rem' }}>UUSINTA (Puskurit)</strong>
-                            Saat yrittää väärin mennyttä vastausta ilmaiseksi uudelleen.
+                            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '0.2rem' }}>YRITÄ UUDELLEEN (Puskurit)</strong>
+                            Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.
                         </div>
                     </div>
                     <div style={{ background: 'rgba(234, 179, 8, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #eab308', display: 'flex', gap: '1rem', alignItems: 'center' }}>

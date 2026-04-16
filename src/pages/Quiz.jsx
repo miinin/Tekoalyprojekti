@@ -823,11 +823,11 @@ export default function Quiz() {
                     const rrem = quizCharges.red - usedCharges.red;
                     const rtotal = (rrem > 0 ? rrem : 0) + (teacherBoosts.red || 0);
                     const rTitle = rtotal > 0 
-                       ? "Sait Uusinnan! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
-                       : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi Uusintoja!" : "Ei uusintoja jäljellä. Tarvitset paremman varusteen Autotallista tai vaihdan karttaa.");
+                       ? "Sait uuden yrityksen! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
+                       : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi lisäyrityksiä!" : "Ei yrityksiä jäljellä. Tarvitset paremman varusteen Autotallista tai vaihda karttaa.");
                     return (
                        <button title={rTitle} onClick={useRedMeter} disabled={rtotal === 0} style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: 'none', background: rtotal > 0 ? '#ef4444' : '#f1f5f9', color: rtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 15px rgba(239,68,68,0.3)' : 'none' }}>
-                          <ShieldCheck size={24} /> UUSINTA {rtotal > 0 && `(${rtotal})`}
+                          <ShieldCheck size={24} /> YRITÄ UUDELLEEN {rtotal > 0 && `(${rtotal})`}
                        </button>
                     );
                 })()}
