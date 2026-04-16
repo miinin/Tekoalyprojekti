@@ -15,7 +15,10 @@ export default function Admin() {
   // -- Bug Reports State --
   const [bugReports, setBugReports] = useState([]);
 
-  const loadData = () => {
+  const [loading, setLoading] = useState(false);
+
+  const loadData = async () => {
+    setLoading(true);
     const r = store.getAllRooms();
     setRooms(r);
     
@@ -26,10 +29,12 @@ export default function Admin() {
     });
     setRoomSparks(sparksData);
 
-    // Load bugs
+    // Load bugs from Firebase
     if (store.getBugReports) {
-      setBugReports(store.getBugReports());
+      const reports = await store.getBugReports();
+      setBugReports(reports);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -173,10 +178,15 @@ export default function Admin() {
         <div className="glass-panel" style={{ padding: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
             <h2 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>Avoimet Virheilmoitukset <span style={{ background: '#e2e8f0', padding: '0.2rem 0.8rem', borderRadius: '20px', fontSize: '1rem' }}>{bugReports.length}</span></h2>
+            <button className="btn-secondary" onClick={loadData} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <RefreshCcw size={16} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
+              {loading ? 'Ladataan...' : 'Päivitä'}
+            </button>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-             {bugReports.length === 0 && (
+             {loading && <p style={{ color: 'var(--text-muted)' }}>Haetaan raportteja Firebasesta...</p>}
+             {!loading && bugReports.length === 0 && (
                 <p style={{ color: 'var(--text-muted)' }}>Ei uusia virheilmoituksia. Kaikki kunnossa!</p>
              )}
              {bugReports.map(report => (
@@ -187,9 +197,9 @@ export default function Admin() {
                         <p style={{ margin: 0, whiteSpace: 'pre-wrap', color: '#1e293b' }}>{report.text}</p>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <button className="btn-secondary" style={{ color: '#16a34a', borderColor: '#bbf7d0', padding: '0.6rem 1.2rem', whiteSpace: 'nowrap' }} onClick={() => {
+                        <button className="btn-secondary" style={{ color: '#16a34a', borderColor: '#bbf7d0', padding: '0.6rem 1.2rem', whiteSpace: 'nowrap' }} onClick={async () => {
                             if (window.confirm('Kuitataanko ilmoitus käsitellyksi ja poistetaanko se listalta?')) {
-                                store.deleteBugReport(report.id);
+                                await store.deleteBugReport(report.id);
                                 loadData();
                             }
                         }}>

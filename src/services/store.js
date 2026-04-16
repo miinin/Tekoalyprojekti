@@ -1,5 +1,5 @@
 import { categories as defaultCategories } from '../data/questions';
-import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // A simple abstraction over local storage that simulates an async backend like Firebase
@@ -380,25 +380,38 @@ export const store = {
   
 
   // --- BUG REPORTS ---
-  getBugReports: () => {
-    return JSON.parse(localStorage.getItem('aivan_bug_reports') || '[]');
+  getBugReports: async () => {
+    try {
+      const snapshot = await getDocs(collection(db, 'bug_reports'));
+      const reports = [];
+      snapshot.forEach(d => reports.push({ id: d.id, ...d.data() }));
+      // Sortaa uusimmat ensin
+      reports.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      return reports;
+    } catch (e) {
+      console.error('getBugReports error:', e);
+      return [];
+    }
   },
 
-  saveBugReport: (questionId, text) => {
-    const reports = store.getBugReports();
-    reports.push({
-      id: Date.now().toString(),
-      questionId,
-      text,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('aivan_bug_reports', JSON.stringify(reports));
+  saveBugReport: async (questionId, text) => {
+    try {
+      await addDoc(collection(db, 'bug_reports'), {
+        questionId,
+        text,
+        date: new Date().toISOString()
+      });
+    } catch (e) {
+      console.error('saveBugReport error:', e);
+    }
   },
 
-  deleteBugReport: (reportId) => {
-    const reports = store.getBugReports();
-    const updated = reports.filter(r => r.id !== reportId);
-    localStorage.setItem('aivan_bug_reports', JSON.stringify(updated));
+  deleteBugReport: async (reportId) => {
+    try {
+      await deleteDoc(doc(db, 'bug_reports', reportId));
+    } catch (e) {
+      console.error('deleteBugReport error:', e);
+    }
   },
 
   // --- CLASSROOM MODE ---
