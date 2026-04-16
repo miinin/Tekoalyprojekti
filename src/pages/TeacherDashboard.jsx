@@ -21,6 +21,8 @@ export default function TeacherDashboard() {
   const [newPin, setNewPin] = useState('');
   const [resumePin, setResumePin] = useState('');
   
+  const [confirmModal, setConfirmModal] = useState(null);
+  
   // Generating a readable 6-character code
   const generateCode = () => {
      const chars = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
@@ -83,13 +85,20 @@ export default function TeacherDashboard() {
   }
   
   const endSession = async () => {
-      if (window.confirm("Haluatko varmasti sulkea tämän oppitunnin? Pelaajat eivät enää näe peliä.")) {
-         if (sessionCode) {
-            await updateDoc(doc(db, "class_sessions", sessionCode), { status: 'ended' });
-         }
-         setSessionCode('');
-         setPlayers([]);
-      }
+      setConfirmModal({
+          title: 'Päätä oppitunti permanently?',
+          text: 'Haluatko varmasti päättää ja pysyvästi sulkea tämän oppitunnin? Kaikki pelaajat katkaistaan välittömästi luokasta, eivätkä he pääse enää samalla koodilla takaisin sisään.',
+          confirmText: 'Kyllä, päätä tunti',
+          confirmColor: '#dc2626',
+          onConfirm: async () => {
+              if (sessionCode) {
+                  await updateDoc(doc(db, "class_sessions", sessionCode), { status: 'ended' });
+              }
+              setSessionCode('');
+              setPlayers([]);
+              setConfirmModal(null);
+          }
+      });
   };
 
   const togglePause = async () => {
@@ -179,8 +188,16 @@ export default function TeacherDashboard() {
               </div>
            </div>
            
-           <button onClick={() => navigate('/lobby')} style={{ padding: '0.8rem 1.5rem', background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '14px', color: '#475569', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255, 255, 255, 0.5)'; e.currentTarget.style.transform='translateY(0)'}}>
-               <LogOut size={20} /> Sulje
+           <button onClick={() => {
+                 setConfirmModal({
+                     title: 'Siirry Päävalikkoon',
+                     text: `Voit myöhemmin palata takaisin tähän aktiiviseen oppituntiin päävalikosta.\n\nOta sitä varten talteen luokkasi Liittymiskoodi: ${sessionCode} ja asettamasi PIN. (Peli jatkuu normaalisti oppilailla taustalla)`,
+                     confirmText: 'Palaa Päävalikkoon',
+                     confirmColor: '#3b82f6',
+                     onConfirm: () => navigate('/lobby')
+                 });
+             }} style={{ padding: '0.8rem 1.5rem', background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '14px', color: '#475569', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255, 255, 255, 0.5)'; e.currentTarget.style.transform='translateY(0)'}}>
+               <LogOut size={20} /> Päävalikkoon
            </button>
         </div>
 
@@ -458,6 +475,19 @@ export default function TeacherDashboard() {
                     )}
                 </div>
                 
+            </div>
+        )}
+
+        {confirmModal && (
+            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }}>
+                <div className="animate-bounce" style={{ background: 'white', padding: '2.5rem', borderRadius: '24px', width: '90%', maxWidth: '500px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', border: `2px solid ${confirmModal.confirmColor || '#3b82f6'}`, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><AlertTriangle color={confirmModal.confirmColor || '#3b82f6'} size={28} /> {confirmModal.title}</h3>
+                    <p style={{ margin: 0, fontSize: '1.1rem', color: '#475569', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{confirmModal.text}</p>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                        <button onClick={confirmModal.onConfirm} style={{ flex: 1, padding: '1rem', background: confirmModal.confirmColor || '#3b82f6', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.1rem', cursor: 'pointer' }}>{confirmModal.confirmText}</button>
+                        <button onClick={() => setConfirmModal(null)} style={{ padding: '1rem 2rem', background: 'transparent', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.1rem', cursor: 'pointer' }}>Peruuta</button>
+                    </div>
+                </div>
             </div>
         )}
 

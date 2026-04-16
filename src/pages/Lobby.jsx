@@ -116,6 +116,14 @@ export default function Lobby() {
       if (reqTut !== null) store.setTutorialSkipped(!reqTut);
       
       const success = await store.syncClassroomProgress();
+      
+      if (success && reqTut === true) {
+          const currentSparks = await store.getSparks();
+          if (currentSparks < 200) {
+              await store.addSparks(200);
+          }
+      }
+
       setJoinClassLoading(false);
       
       if (success) {
@@ -123,7 +131,10 @@ export default function Lobby() {
               title: 'Liitytty onnistuneesti!',
               text: `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
               buttonText: 'Siirry peliin',
-              onClose: () => navigate('/roadmap')
+              onClose: () => {
+                  if (reqTut === true) navigate('/garage');
+                  else navigate('/roadmap');
+              }
           });
       } else {
           store.clearSinglePlayer();
