@@ -1,23 +1,30 @@
 export const AI_ROADMAP_DATA = {
   main: {
     nodes: [
-      { id: 'perusteet', top: '47.5%', left: '25.0%' },
-      { id: 'konepellin', top: '76.8%', left: '31.6%' },
-      { id: 'arjessa', top: '82.1%', left: '51.7%' },
-      { id: 'reilu_peli', top: '66.9%', left: '70.3%' },
-      { id: 'kayttotaidot', top: '28.9%', left: '71.7%' },
-      { id: 'aivoterveys', top: '37.6%', left: '51.7%' },
-      { id: 'digiturva', top: '27.9%', left: '39.5%' },
-      { id: 'start_point', top: '53.1%', left: '52.7%', isJunction: true }
+      { id: 'start_point', top: '53.2%', left: '53.2%', isJunction: true },
+      { id: 'main_j_1', top: '52.1%', left: '58.0%', isJunction: true },
+      { id: 'main_j_5', top: '65.7%', left: '65.9%', isJunction: true },
+      { id: 'arjessa', top: '80.9%', left: '54.6%' },
+      { id: 'konepellin', top: '75.5%', left: '34.5%' },
+      { id: 'main_j_24', top: '57.4%', left: '39.7%', isJunction: true },
+      { id: 'kayttotaidot', top: '32.5%', left: '69.6%' },
+      { id: 'reilu_peli', top: '66.0%', left: '71.1%' },
+      { id: 'aivoterveys', top: '40.1%', left: '49.4%' },
+      { id: 'perusteet', top: '49.7%', left: '27.7%' },
+      { id: 'digiturva', top: '31.1%', left: '37.5%' }
     ],
     paths: {
-      'start_point-kayttotaidot': [{top:"53.3%",left:"52.9%"},{top:"52.7%",left:"56.7%"},{top:"52.6%",left:"59.1%"},{top:"47.6%",left:"60.3%"},{top:"44.5%",left:"63.3%"},{top:"41.9%",left:"63.5%"},{top:"38.4%",left:"62.7%"},{top:"35.4%",left:"65.4%"},{top:"33.7%",left:"66.9%"},{top:"33.2%",left:"68.3%"},{top:"32.9%",left:"70.3%"},{top:"30.8%",left:"72.4%"},{top:"28.9%",left:"71.7%"}],
-      'start_point-aivoterveys': [{top:"53.1%",left:"52.7%"},{top:"50.2%",left:"49.8%"},{top:"48.9%",left:"47.2%"},{top:"46.7%",left:"50.1%"},{top:"45.4%",left:"52.6%"},{top:"43.2%",left:"50.2%"},{top:"41.8%",left:"47.9%"},{top:"38.2%",left:"52.4%"},{top:"37.6%",left:"51.7%"}],
-      'start_point-perusteet': [{top:"53.1%",left:"52.7%"},{top:"57.6%",left:"49.9%"},{top:"57.7%",left:"47.7%"},{top:"55.6%",left:"43.9%"},{top:"57.3%",left:"40.1%"},{top:"57.3%",left:"36.9%"},{top:"53.9%",left:"36.9%"},{top:"53.1%",left:"32.5%"},{top:"50.8%",left:"30.6%"},{top:"50.2%",left:"27.9%"},{top:"47.8%",left:"25.3%"},{top:"47.5%",left:"25.0%"}],
-      'start_point-reilu_peli': [{top:"52.8%",left:"52.7%"},{top:"52.9%",left:"57.2%"},{top:"53.3%",left:"60.0%"},{top:"55.8%",left:"63.5%"},{top:"59.9%",left:"64.1%"},{top:"63.6%",left:"64.0%"},{top:"66.9%",left:"66.4%"},{top:"68.1%",left:"68.1%"},{top:"65.4%",left:"71.4%"},{top:"66.9%",left:"70.3%"}],
-      'start_point-arjessa': [{top:"53.3%",left:"53.0%"},{top:"52.6%",left:"56.8%"},{top:"53.7%",left:"60.9%"},{top:"56.8%",left:"63.9%"},{top:"61.6%",left:"64.1%"},{top:"66.8%",left:"66.0%"},{top:"69.7%",left:"67.2%"},{top:"74.7%",left:"64.8%"},{top:"79.2%",left:"62.2%"},{top:"79.9%",left:"58.6%"},{top:"80.8%",left:"55.6%"},{top:"82.1%",left:"51.7%"}],
-      'start_point-konepellin': [{top:"53.1%",left:"52.8%"},{top:"56.9%",left:"50.2%"},{top:"57.6%",left:"47.0%"},{top:"55.5%",left:"43.6%"},{top:"57.7%",left:"39.2%"},{top:"58.2%",left:"37.3%"},{top:"61.8%",left:"35.5%"},{top:"64.8%",left:"35.4%"},{top:"67.6%",left:"33.0%"},{top:"71.6%",left:"29.6%"},{top:"76.8%",left:"31.6%"}],
-      'start_point-digiturva': [{top:"52.8%",left:"53.3%"},{top:"57.0%",left:"50.5%"},{top:"57.5%",left:"47.1%"},{top:"55.7%",left:"43.6%"},{top:"56.5%",left:"40.3%"},{top:"58.1%",left:"37.9%"},{top:"55.3%",left:"36.9%"},{top:"53.3%",left:"33.3%"},{top:"51.0%",left:"30.8%"},{top:"50.9%",left:"28.3%"},{top:"48.5%",left:"25.9%"},{top:"43.9%",left:"26.0%"},{top:"40.8%",left:"30.5%"},{top:"38.4%",left:"32.7%"},{top:"35.9%",left:"35.1%"},{top:"32.4%",left:"36.5%"},{top:"27.7%",left:"39.2%"},{top:"27.9%",left:"39.5%"}]
+      'start_point-main_j_1': [{top:"53.2%",left:"53.2%"},{top:"52.1%",left:"58.0%"}],
+      'main_j_1-main_j_5': [{top:"52.1%",left:"58.0%"},{top:"53.7%",left:"62.0%"},{top:"58.7%",left:"64.3%"},{top:"62.5%",left:"64.3%"},{top:"65.7%",left:"65.9%"}],
+      'main_j_5-arjessa': [{top:"65.7%",left:"65.9%"},{top:"70.9%",left:"66.9%"},{top:"76.2%",left:"63.8%"},{top:"79.5%",left:"61.5%"},{top:"79.9%",left:"57.2%"},{top:"80.9%",left:"54.6%"}],
+      'arjessa-konepellin': [{top:"80.9%",left:"54.6%"},{top:"80.4%",left:"49.0%"},{top:"78.9%",left:"45.5%"},{top:"77.3%",left:"42.6%"},{top:"77.0%",left:"39.0%"},{top:"74.6%",left:"37.0%"},{top:"75.5%",left:"34.5%"}],
+      'konepellin-main_j_24': [{top:"75.5%",left:"34.5%"},{top:"79.3%",left:"29.0%"},{top:"78.2%",left:"26.3%"},{top:"70.9%",left:"27.6%"},{top:"69.2%",left:"31.1%"},{top:"67.4%",left:"33.3%"},{top:"64.6%",left:"36.2%"},{top:"59.5%",left:"37.9%"},{top:"57.4%",left:"39.7%"}],
+      'main_j_24-start_point': [{top:"57.4%",left:"39.7%"},{top:"55.9%",left:"43.0%"},{top:"56.2%",left:"45.6%"},{top:"57.3%",left:"48.6%"},{top:"56.1%",left:"50.9%"},{top:"53.2%",left:"53.2%"}],
+      'main_j_1-kayttotaidot': [{top:"51.6%",left:"59.3%"},{top:"47.2%",left:"60.2%"},{top:"45.3%",left:"62.0%"},{top:"44.1%",left:"63.4%"},{top:"40.3%",left:"63.3%"},{top:"37.6%",left:"62.9%"},{top:"35.3%",left:"65.0%"},{top:"33.3%",left:"67.1%"},{top:"32.5%",left:"69.6%"}],
+      'main_j_5-reilu_peli': [{top:"67.7%",left:"67.8%"},{top:"66.0%",left:"71.1%"}],
+      'start_point-aivoterveys': [{top:"51.8%",left:"52.1%"},{top:"50.8%",left:"49.6%"},{top:"49.3%",left:"47.1%"},{top:"46.6%",left:"50.0%"},{top:"44.8%",left:"52.5%"},{top:"43.2%",left:"49.3%"},{top:"40.9%",left:"47.5%"},{top:"40.1%",left:"49.4%"}],
+      'main_j_24-perusteet': [{top:"56.9%",left:"37.1%"},{top:"54.0%",left:"36.3%"},{top:"53.3%",left:"32.7%"},{top:"50.4%",left:"31.0%"},{top:"50.4%",left:"29.3%"},{top:"49.7%",left:"27.7%"}],
+      'perusteet-digiturva': [{top:"49.7%",left:"27.7%"},{top:"46.8%",left:"29.2%"},{top:"42.7%",left:"30.7%"},{top:"39.2%",left:"33.2%"},{top:"35.9%",left:"35.6%"},{top:"31.1%",left:"37.5%"}]
     }
   },
   sub: {
