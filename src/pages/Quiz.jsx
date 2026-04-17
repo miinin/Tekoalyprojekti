@@ -722,12 +722,9 @@ export default function Quiz() {
 
       <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
         <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center', zIndex: 10 }}>
-           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#334155'} onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>
+           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#ef4444'} onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>
               <AlertTriangle size={16} /> Ilmoita virheestä
            </button>
-           <div style={{ fontFamily: 'monospace', fontSize: '1rem', color: '#64748b', background: 'rgba(241, 245, 249, 0.9)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontWeight: '900', letterSpacing: '1px' }}>
-              {currentQuestion.id}
-           </div>
         </div>
         
         {bugReportMode && (
@@ -737,7 +734,7 @@ export default function Quiz() {
              ) : (
                 <div>
                   <p style={{ fontSize: '1rem', color: '#475569', marginBottom: '1rem', lineHeight: 1.5 }}>
-                    Tekoäly kehittyy nopeasti ja tieto voi vanhentua. Olemme myös poikkeuksellisesti vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan tällä tasolla, kerro siitä meille, jotta voimme korjata sen!
+                    Tekoäly kehittyy nopeasti ja tieto voi vanhentua. Olemme myös poikkeuksellisesti vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan tällä tasolla, kerro siitä meille, jotta voimme korjata sen! Kysymyksen koodi <b>{currentQuestion.id}</b> liitetään automaattisesti ilmoitukseen.
                   </p>
                   <textarea 
                     value={bugText}
@@ -777,7 +774,7 @@ export default function Quiz() {
         {(() => {
           const styleInfo = getQuestionStyle(currentQuestion.type);
           return (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.8rem', backgroundColor: styleInfo.bg, color: styleInfo.color, padding: '0.6rem 1.4rem', borderRadius: '30px', fontSize: '1.2rem', fontWeight: '800', marginBottom: '2rem', fontFamily: 'var(--font-display)', border: `2px solid ${styleInfo.border}`, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', backgroundColor: styleInfo.color, color: 'white', padding: '0.6rem 1.2rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '900', marginBottom: '1.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '1px', boxShadow: `0 4px 15px ${styleInfo.color}50` }}>
               {styleInfo.icon}
               {styleInfo.text}
             </div>
@@ -836,7 +833,14 @@ export default function Quiz() {
                        ? "Sait uuden yrityksen! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
                        : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi lisäyrityksiä!" : "Ei yrityksiä jäljellä. Tarvitset paremman varusteen Autotallista tai vaihda karttaa.");
                     return (
-                       <button title={rTitle} onClick={useRedMeter} disabled={rtotal === 0} style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: 'none', background: rtotal > 0 ? '#ef4444' : '#f1f5f9', color: rtotal > 0 ? 'white' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 15px rgba(239,68,68,0.3)' : 'none' }}>
+                       <button 
+                          title={rTitle} 
+                          onClick={useRedMeter} 
+                          disabled={rtotal === 0} 
+                          onMouseEnter={(e) => { if(rtotal > 0) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(239,68,68,0.2)'; } }}
+                          onMouseLeave={(e) => { if(rtotal > 0) { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)'; } }}
+                          style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: rtotal > 0 ? '3px solid #fca5a5' : '3px solid #e2e8f0', background: rtotal > 0 ? 'white' : '#f8fafc', color: rtotal > 0 ? '#dc2626' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s', fontFamily: 'var(--font-main)' }}
+                       >
                           <ShieldCheck size={24} /> YRITÄ UUDELLEEN {rtotal > 0 && `(${rtotal})`}
                        </button>
                     );
