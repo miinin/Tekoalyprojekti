@@ -173,10 +173,10 @@ export default function Lobby() {
     <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '1rem', zIndex: 10 }}>
         <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-            <GraduationCap size={20} color="#059669" /> Opettajalle
+            <GraduationCap size={20} color="#0284c7" /> Opettajalle
         </button>
         <div style={{ position: 'relative' }}>
-          <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem', borderRadius: '50%', color: 'white', cursor: 'pointer', transition: '0.3s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
+          <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)', padding: '0.8rem', borderRadius: '50%', color: '#047857', cursor: 'pointer', transition: '0.3s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.1)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}>
               <Settings size={22} />
           </button>
           {showSettings && (
@@ -216,7 +216,7 @@ export default function Lobby() {
         .lobby-bg {
             position: absolute;
             inset: -20px;
-            background: linear-gradient(-45deg, #0ea5e9, #3b82f6, #4f46e5, #6366f1);
+            background: linear-gradient(-45deg, #ecfdf5, #d1fae5, #bbf7d0, #a7f3d0);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             z-index: -2;
@@ -224,7 +224,7 @@ export default function Lobby() {
         .lobby-overlay {
             position: absolute;
             inset: -20px;
-            background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.5));
+            background: radial-gradient(circle at center, transparent, rgba(167, 243, 208, 0.4));
             z-index: -1;
         }
         .mode-card {
@@ -256,7 +256,7 @@ export default function Lobby() {
       <div className="lobby-overlay" />
 
       <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', marginTop: '-3rem', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))', zIndex: 10 }} />
-      <p className="animate-fade-in" style={{ color: 'rgba(255,255,255,0.95)', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
+      <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
       <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', maxWidth: '1200px', padding: '0 1.5rem', zIndex: 10 }}>
         
@@ -271,7 +271,7 @@ export default function Lobby() {
 
 
             {store.hasProgress() && (
-              <button className="btn-primary" onClick={handleContinueSinglePlayer} style={{ background: '#10b981', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.4)' }}>
+              <button className="btn-primary" onClick={handleContinueSinglePlayer} style={{ background: '#2563eb', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(37, 99, 235, 0.4)' }}>
                 JATKA PELIÄ
               </button>
             )}
@@ -308,7 +308,7 @@ export default function Lobby() {
                             style={{ minWidth: 0, flexGrow: 1, padding: '0.8rem 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1.1rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '2px', fontWeight: '900', color: '#1e293b', background: 'transparent' }}
                          />
                      </div>
-                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#10b981', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
+                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#2563eb', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
                          {isRestoring ? '...' : <ArrowRight size={24} />}
                      </button>
                 </form>
@@ -319,28 +319,28 @@ export default function Lobby() {
         </div>
 
         {/* MONINPELI */}
-        <div className="mode-card" style={{ borderTop: '8px solid #ec4899' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#ec4899', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
+        <div className="mode-card" style={{ borderTop: '8px solid #3b82f6' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#3b82f6', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
             <Users size={36} /> Yhteistyömoodi
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa kavereiden kanssa samassa tallissa. Kerätkää yhdessä Kipinöitä!</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#fdf2f8', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #fbcfe8' }}>
-                <button className="btn-secondary" style={{ borderColor: '#ec4899', color: '#ec4899', padding: '1rem', background: 'white' }} onClick={handleCreateLobby}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#eff6ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #bfdbfe' }}>
+                <button className="btn-secondary" style={{ borderColor: '#3b82f6', color: '#3b82f6', padding: '1rem', background: 'white' }} onClick={handleCreateLobby}>
                   <Plus size={20} /> LUO UUSI HUONE
                 </button>
-                <div style={{ height: '1px', background: '#fbcfe8', margin: '0.5rem 0' }}></div>
-                <label style={{ color: '#be185d', fontWeight: 'bold', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Liity kaverin peliin koodilla:</label>
+                <div style={{ height: '1px', background: '#bfdbfe', margin: '0.5rem 0' }}></div>
+                <label style={{ color: '#1d4ed8', fontWeight: 'bold', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Liity kaverin peliin koodilla:</label>
                 <form onSubmit={handleJoinLobby} style={{ display: 'flex', gap: '0.5rem' }}>
                   <input 
                     type="text" 
                     placeholder="Esim. TurboKissa" 
                     value={joinCode}
                     onChange={(e) => setJoinCode(e.target.value)}
-                    style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #fbcfe8', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                    style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #bfdbfe', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                   />
-                  <button type="submit" className="btn-primary" style={{ background: '#ec4899', padding: '1rem', borderRadius: '12px' }}>
+                  <button type="submit" className="btn-primary" style={{ background: '#3b82f6', padding: '1rem', borderRadius: '12px' }}>
                     <ArrowRight size={24} />
                   </button>
                 </form>
@@ -350,15 +350,15 @@ export default function Lobby() {
         </div>
 
         {/* LUOKKATILA */}
-        <div className="mode-card" style={{ borderTop: '8px solid #059669' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#059669', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
+        <div className="mode-card" style={{ borderTop: '8px solid #0284c7' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#0284c7', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
              <GraduationCap size={36} /> Luokkatila
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#ecfdf5', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #a7f3d0' }}>
-                <p style={{ margin: 0, fontSize: '0.9rem', color: '#047857', fontWeight: 'bold', lineHeight: 1.4 }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0f9ff', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #bae6fd' }}>
+                <p style={{ margin: 0, fontSize: '0.9rem', color: '#0369a1', fontWeight: 'bold', lineHeight: 1.4 }}>
                    <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
                 </p>
                 <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
@@ -368,7 +368,7 @@ export default function Lobby() {
                     value={classCode}
                     maxLength={6}
                     onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
-                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #6ee7b7', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
+                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #7dd3fc', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
                   />
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input 
@@ -377,9 +377,9 @@ export default function Lobby() {
                         value={classNick}
                         maxLength={15}
                         onChange={(e) => setClassNick(e.target.value)}
-                        style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #6ee7b7', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                        style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #7dd3fc', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                       />
-                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2 || joinClassLoading} className="btn-primary" style={{ background: '#059669', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2 || joinClassLoading) ? 0.5 : 1 }}>
+                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2 || joinClassLoading} className="btn-primary" style={{ background: '#0284c7', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2 || joinClassLoading) ? 0.5 : 1 }}>
                         {joinClassLoading ? '...' : <ArrowRight size={24} />}
                       </button>
                   </div>
