@@ -497,19 +497,10 @@ export default function Lobby() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <Zap size={20} /> Hyödynnetyt tekoälypalvelut
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              {/* Voit korvata Rocket-ikonin aineella näin: <img src="/antigravity.png" alt="Google Antigravity" style={{ height: '32px', objectFit: 'contain' }} /> */}
-                              <Rocket size={26} color="#7c3aed" /> Google Antigravity
-                          </span>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              {/* Voit korvata BookText-ikonin aineella näin: <img src="/notebooklm.png" alt="NotebookLM" style={{ height: '32px', objectFit: 'contain' }} /> */}
-                              <BookText size={26} color="#0284c7" /> NotebookLM
-                          </span>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              {/* Voit korvata Sparkles-ikonin aineella näin: <img src="/gemini.png" alt="Google Gemini" style={{ height: '32px', objectFit: 'contain' }} /> */}
-                              <Sparkles size={26} color="#ec4899" /> Google Gemini
-                          </span>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Antigravity</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>NotebookLM</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Gemini</span>
                       </div>
                   </div>
 
