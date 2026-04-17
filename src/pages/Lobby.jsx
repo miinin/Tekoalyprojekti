@@ -226,7 +226,7 @@ export default function Lobby() {
 
       <div className="animate-fade-in" style={{
          position: 'relative',
-         background: 'rgba(255, 255, 255, 0.15)',
+         background: 'rgba(255, 255, 255, 0.55)',
          backdropFilter: 'blur(25px)',
          WebkitBackdropFilter: 'blur(25px)',
          border: '1px solid rgba(255,255,255,0.8)',
@@ -438,7 +438,11 @@ export default function Lobby() {
                     Heikki Laivamaa<br />
                     Pauli Hirvonen
                   </p>
-                  <p style={{ marginTop: '3.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset pelitestaajille:</p>
+                  <p style={{ marginTop: '3.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Kiitokset konsultoinnista:</p>
+                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.4rem' }}>
+                    Ville Myllys ja Ville Schalin
+                  </p>
+                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset pelitestaajille:</p>
                   <p style={{ fontStyle: 'italic', color: '#475569', fontSize: '1.3rem' }}>
                     Samu, Saaga, Eemi ja Otavian Anne, Lauri ja Kari.
                   </p>
