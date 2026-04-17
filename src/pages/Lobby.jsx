@@ -482,9 +482,9 @@ export default function Lobby() {
                           <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Samu</span>
                           <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Saaga</span>
                           <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Eemi</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Otavian Anne</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Lauri</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Kari</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Anne Rongas</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Lauri Ylä-Jussila</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Kari A. Hintikka</span>
                       </div>
                   </div>
 
