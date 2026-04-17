@@ -539,8 +539,8 @@ export default function Garage() {
                         className="category-header" 
                         onClick={() => setCategory(catId)}
                         style={{ 
-                          borderColor: activeCategory === catId ? 'var(--primary-color)' : 'rgba(0,0,0,0.05)',
-                          background: activeCategory === catId ? '#f8fafc' : 'rgba(255,255,255,0.7)',
+                          borderColor: activeCategory === catId ? '#10b981' : 'rgba(0,0,0,0.05)',
+                          background: activeCategory === catId ? '#ecfdf5' : 'rgba(255,255,255,0.7)',
                           pointerEvents: isLocked ? 'none' : 'auto',
                           opacity: isLocked ? 0.4 : 1,
                           filter: isLocked ? 'grayscale(100%)' : 'none',
@@ -548,10 +548,10 @@ export default function Garage() {
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                           {catId === 'body' && <PaintBucket size={18} color="var(--primary-color)" />}
-                           {catId === 'bumper' && <ShieldCheck size={18} color="var(--primary-color)" />}
-                           {catId === 'wheel' && <Aperture size={18} color="var(--primary-color)" />}
-                           {catId === 'extra' && <Zap size={18} color="var(--primary-color)" />}
+                           {catId === 'body' && <PaintBucket size={18} color="#10b981" />}
+                           {catId === 'bumper' && <ShieldCheck size={18} color="#10b981" />}
+                           {catId === 'wheel' && <Aperture size={18} color="#10b981" />}
+                           {catId === 'extra' && <Zap size={18} color="#10b981" />}
                            <span style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>{category.name}</span>
                         </div>
                       </div>
