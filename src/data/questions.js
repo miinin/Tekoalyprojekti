@@ -3762,17 +3762,17 @@ export const categories = [
             "type": "drag_drop",
             "question": "Miten toimit, kun saat puhelimeesi tekstarin: \"Pakettisi on jumissa varastolla, maksa 2 euroa linkin kautta heti\"? Järjestä fiksut toimenpiteet!",
             "correctAnswer": {
-              "Huomaa, että viesti sisältää oudon linkin ja pyytää maksua.": "1. vaihe",
-              "Mieti rauhassa, oletko edes tilannut mitään pakettia lähiaikoina.": "2. vaihe",
-              "Näytä epäilyttävä huijausviesti heti jollekin aikuiselle.": "3. vaihe",
-              "Aikuinen poistaa huijausviestin turvallisesti laitteeltasi.": "4. vaihe"
+              "Saat oudon viestin, jossa vaaditaan rahaa tai pikaista toimintaa.": "1. vaihe",
+              "Pysähdyt rauhassa, etkä missään nimessä klikkaa linkkiä.": "2. vaihe",
+              "Näytät epäilyttävän viestin luotettavalle aikuiselle.": "3. vaihe",
+              "Poistatte huijausviestin laitteelta turvallisesti.": "4. vaihe"
             },
             "explanation": "Huijausviestit jumiutuneista paketeista ovat nykyään hyvin yleisiä ansoja. Älä koskaan maksa mitään tai klikkaa outoja tekstiviestilinkkejä.",
             "draggables": [
-              "Huomaa, että viesti sisältää oudon linkin ja pyytää maksua.",
-              "Mieti rauhassa, oletko edes tilannut mitään pakettia lähiaikoina.",
-              "Näytä epäilyttävä huijausviesti heti jollekin aikuiselle.",
-              "Aikuinen poistaa huijausviestin turvallisesti laitteeltasi."
+              "Saat oudon viestin, jossa vaaditaan rahaa tai pikaista toimintaa.",
+              "Pysähdyt rauhassa, etkä missään nimessä klikkaa linkkiä.",
+              "Näytät epäilyttävän viestin luotettavalle aikuiselle.",
+              "Poistatte huijausviestin laitteelta turvallisesti."
             ],
             "dropZones": [
               "1. vaihe",
