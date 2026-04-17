@@ -428,23 +428,27 @@ export default function Lobby() {
       {showInfoBox && (
          <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.45)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
+            <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={28} /></button>
                
                <h2 style={{ fontSize: '2.8rem', color: '#047857', fontFamily: 'var(--font-display)', margin: '0 0 2.5rem 0' }}>Pelin Tekijät</h2>
                <div style={{ fontSize: '1.4rem', color: '#334155', fontFamily: 'var(--font-main)', lineHeight: '1.6' }}>
-                  <p style={{ fontWeight: 'bold', fontSize: '1.6rem', marginBottom: '2.5rem' }}>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.6rem', marginBottom: '2rem' }}>
                     Miika Miinin<br />
                     Heikki Laivamaa<br />
                     Pauli Hirvonen
                   </p>
-                  <p style={{ marginTop: '3.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Kiitokset konsultoinnista:</p>
-                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.4rem' }}>
+                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset konsultoinnista:</p>
+                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.3rem' }}>
                     Ville Myllys ja Ville Schalin
                   </p>
-                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset pelitestaajille:</p>
+                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Kiitokset pelitestaajille:</p>
                   <p style={{ fontStyle: 'italic', color: '#475569', fontSize: '1.3rem' }}>
                     Samu, Saaga, Eemi ja Otavian Anne, Lauri ja Kari.
+                  </p>
+                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Hyödynnetyt tekoälypalvelut:</p>
+                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.3rem' }}>
+                    Google Antigravity, NotebookLM sekä Google Gemini
                   </p>
                </div>
             </div>
