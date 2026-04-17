@@ -10466,10 +10466,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Mitä kannattaa tehdä, jos yrität käyttää yhtä tekoälyä kaikkeen mahdolliseen, mutta huomaat, ettei se osaa tehdä jotain tiettyä erikoistehtävää (kuten musiikkia) kunnolla?",
             "options": [
-              "Jatka yrittämistä samalla ohjelmalla loputtomiin, kunnes se pakostakin oppii asian.",
+              "Jatka yrittämistä täsmälleen samalla ohjelmalla loputtomiin, kunnes laite pakostakin oppii kokonaan uuden taidon itsestään.",
               "Hae netistä toinen, juuri kyseiseen tehtävään (esim. musiikkiin) erikoistunut tekoälytyökalu.",
-              "Sammuta laite ja päätä, ettei kyseistä tehtävää voi ylipäätään edes tehdä.",
-              "Laita laite hetkeksi pakastimeen ja toivo, että se toimii paremmin jäähdyttyään."
+              "Sammuta laite täysin ja tee lopullinen päätös, ettei kyseistä luovaa tehtävää voi ylipäätään edes ohjelmallisesti tehdä missään.",
+              "Odota rauhallisin mielin muutamia vuosia ja toivo sormet ristissä, että kyseinen sama työkalu keksisi joskus tulevaisuudessa oppia asian."
             ],
             "correctAnswer": "Hae netistä toinen, juuri kyseiseen tehtävään (esim. musiikkiin) erikoistunut tekoälytyökalu.",
             "explanation": "Maailma on täynnä satoja erilaisia tekoälyjä! Jos yksi ei osaa jotain, kannattaa vaihtaa fiksusti \"työkalupakin lokeroa\" ja etsiä ongelmaan erikoistunut apukuski."
@@ -10480,9 +10480,9 @@ export const categories = [
             "question": "SKENAARIO: Haluat lähettää isoäidille syntymäpäiväonnittelut englanniksi ja lisäksi haluat, että viesti lausutaan hänelle ääneen kuin oikean ihmisen puhe. Mitä digityökaluja yhdistelet fiksusti?",
             "options": [
               "Käytän ensin kääntäjää viestin kääntämiseen ja sitten puhesynteesiä (lukijaa) äänen lukemiseen.",
-              "Käytän kuvageneraattoria ja pyydän sitä maalaamaan kuvan, joka pitää kovasti ääntä.",
-              "Avaan pelkän navigaattorin ja laitan sen huutamaan onnitteluita isoäidin talon pihalle.",
-              "Kirjoitan viestin suomeksi ja työnnän puhelimen mikrofonin suoraan laatikkoon."
+              "Käytän yksinkertaista kuvageneraattoria ja pyydän sitä erikseen maalaamaan uskomattoman hienon kuvan, joka pitää kovasti onnitteluiden ääntä.",
+              "Avaan puhelimesta pelkän perinteisen navigaattorin kovemmalle ja pyydän luukuttamaan onnitteluita ääneen suoraan isoäidin talon virtuaalisella pihalla.",
+              "Kirjoitan viestin paperille pelkästään suomeksi ja yritän sen jälkeen työntää oman puhelimeni ja sen koko mikrofonin suoraan ulkona olevaan postilaatikkoon."
             ],
             "correctAnswer": "Käytän ensin kääntäjää viestin kääntämiseen ja sitten puhesynteesiä (lukijaa) äänen lukemiseen.",
             "explanation": "Yhdistelemällä ohjelmia olet superkuski! Yksi työkalu hoitaa tekstin ymmärtämisen ja kääntämisen ja toinen (text-to-speech eli puhesynteesi) hoitaa sen muuttamisen aidon kuuloiseksi ääneksi."
@@ -10513,17 +10513,17 @@ export const categories = [
             "type": "drag_drop",
             "question": "Olet tekemässä autotallissa peliä ja tarvitset apua monelta tekoälyltä. Järjestä työkalujen käyttö fiksusti ideasta julkaisuun!",
             "correctAnswer": {
-              "Ideoit ensin pelin säännöt ja hyvän tarinan tekstigeneraattorin kanssa.": "1. vaihe",
-              "Luot pelin jännittävät hahmot ja maisemat erillisellä kuvageneraattorilla.": "2. vaihe",
-              "Käytät koodaukseen erikoistunutta tekoälyä apuna koodin ohjelmoinnissa.": "3. vaihe",
-              "Teetätät lopuksi kääntäjäsovelluksella pelistäsi myös englanninkielisen version.": "4. vaihe"
+              "Keksit aivan ensimmäiseksi pelin täydelliset säännöt ja rakenteellisen suunnitelman tekstigeneraattorin kanssa.": "1. vaihe",
+              "Ohjelmoit edellisen vaiheen suunnitelman mukaisen pelikoodin toimivaksi koodaustekoälyllä.": "2. vaihe",
+              "Kun peli toimii, teetät kuvageneraattorilla upeat taidegrafiikat valmiiseen peliin upotettavaksi.": "3. vaihe",
+              "Aivan viimeisenä askeleena käännät täysin valmiin ja testatun pelisi monelle muulle kielelle kääntäjäsovelluksella.": "4. vaihe"
             },
-            "explanation": "Iso ja hieno projekti vaatii kunnon pakillisen työkaluja! Yksi kone keksii, toinen piirtää, kolmas koodaa logiikan ja neljäs hoitaa lopuksi käännökset – aivan kuten oikeassakin pelistudiossa tehhään.",
+            "explanation": "Iso ja hieno projekti vaatii kunnon pakillisen työkaluja ja loogista loppusuoraa! Yksi kone keksii, toinen koodaa logiikan, kolmas tekee ulkoasun ja neljäs hoitaa lopuksi vasta valmiin pelin kääntämisen.",
             "draggables": [
-              "Ideoit ensin pelin säännöt ja hyvän tarinan tekstigeneraattorin kanssa.",
-              "Luot pelin jännittävät hahmot ja maisemat erillisellä kuvageneraattorilla.",
-              "Käytät koodaukseen erikoistunutta tekoälyä apuna koodin ohjelmoinnissa.",
-              "Teetätät lopuksi kääntäjäsovelluksella pelistäsi myös englanninkielisen version."
+              "Keksit aivan ensimmäiseksi pelin täydelliset säännöt ja rakenteellisen suunnitelman tekstigeneraattorin kanssa.",
+              "Ohjelmoit edellisen vaiheen suunnitelman mukaisen pelikoodin toimivaksi koodaustekoälyllä.",
+              "Kun peli toimii, teetät kuvageneraattorilla upeat taidegrafiikat valmiiseen peliin upotettavaksi.",
+              "Aivan viimeisenä askeleena käännät täysin valmiin ja testatun pelisi monelle muulle kielelle kääntäjäsovelluksella."
             ],
             "dropZones": [
               "1. vaihe",
@@ -10543,7 +10543,7 @@ export const categories = [
               "Ne menevät paljon helpommin rikki tai räjähtävät kuin vain yhtä pientä asiaa tekevät ohjelmat."
             ],
             "correctAnswer": "Ne eivät välttämättä ole yhtä tarkkoja tietyssä erikoistehtävässä kuin juuri siihen erikoistunut työkalu.",
-            "explanation": "Sama laite, joka yrittää tehdä vähän kaikkea, on usein kompromissi. Jos haluat oikeasti maailmanluokan laulun tai monimutkaisen videon, kannattaa käyttää pelkästään siihen tehtyä superohjelmaa! (Sveitsinlinkkari on kiva, mutta vasara on parempi naulaamiseen)."
+            "explanation": "Sama laite, joka yrittää tehdä vähän kaikkea, on usein kompromissi. Jos haluat oikeasti maailmanluokan laulun tai monimutkaisen videon, kannattaa käyttää pelkästään siihen tehtyä superohjelmaa! (Linkkuveitsi on kiva, mutta vasara on parempi naulaamiseen)."
           },
           {
             "id": "kayttotaidot_5_q14",
