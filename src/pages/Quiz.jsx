@@ -877,38 +877,46 @@ export default function Quiz() {
 
             return (
                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
-                  <button 
+                  <div 
                      onMouseEnter={() => setHoveredTool('yellow')}
                      onMouseLeave={() => setHoveredTool(null)}
-                     onClick={useYellowMeter} 
-                     disabled={!canUseYellow} 
-                     style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: canUseYellow ? 'white' : '#f8fafc', border: canUseYellow ? '2px solid #eab308' : '2px solid #e2e8f0', color: canUseYellow ? '#ca8a04' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', cursor: canUseYellow ? 'pointer' : 'not-allowed', boxShadow: canUseYellow ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                     onClick={() => { if (canUseYellow) useYellowMeter(); }}
+                     style={{ position: 'relative', display: 'inline-block', cursor: canUseYellow ? 'pointer' : 'not-allowed' }}
                   >
-                     <Disc size={20} /> Poisto {ytotal > 0 && `(${ytotal})`}
+                     <button 
+                        disabled={!canUseYellow} 
+                        style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: canUseYellow ? 'white' : '#f8fafc', border: canUseYellow ? '2px solid #eab308' : '2px solid #e2e8f0', color: canUseYellow ? '#ca8a04' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', pointerEvents: 'none', boxShadow: canUseYellow ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                     >
+                        <Disc size={20} /> Poisto {ytotal > 0 && `(${ytotal})`}
+                     </button>
                      {hoveredTool === 'yellow' && (
-                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: '110%', left: '50%', transform: 'translateX(-50%)', marginBottom: '0.5rem', background: '#fffbeb', border: '2px solid #fcd34d', color: '#b45309', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4' }}>
-                           <div style={{ position: 'absolute', bottom: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #fcd34d' }}></div>
-                           <div style={{ position: 'absolute', bottom: '-4px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '5px solid #fffbeb' }}></div>
+                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', background: '#fffbeb', border: '2px solid #fcd34d', color: '#b45309', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center' }}>
+                           <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #fcd34d' }}></div>
+                           <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #fffbeb' }}></div>
                            {yTitle}
                         </div>
                      )}
-                  </button>
-                  <button 
+                  </div>
+                  <div 
                      onMouseEnter={() => setHoveredTool('green')}
                      onMouseLeave={() => setHoveredTool(null)}
-                     onClick={useGreenMeter} 
-                     disabled={gtotal === 0} 
-                     style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: gtotal > 0 ? 'white' : '#f8fafc', border: gtotal > 0 ? '2px solid #22c55e' : '2px solid #e2e8f0', color: gtotal > 0 ? '#166534' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: gtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                     onClick={() => { if (gtotal > 0) useGreenMeter(); }}
+                     style={{ position: 'relative', display: 'inline-block', cursor: gtotal > 0 ? 'pointer' : 'not-allowed' }}
                   >
-                     <Wrench size={20} /> Vaihto {gtotal > 0 && `(${gtotal})`}
+                     <button 
+                        disabled={gtotal === 0} 
+                        style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: gtotal > 0 ? 'white' : '#f8fafc', border: gtotal > 0 ? '2px solid #22c55e' : '2px solid #e2e8f0', color: gtotal > 0 ? '#166534' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', pointerEvents: 'none', boxShadow: gtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                     >
+                        <Wrench size={20} /> Vaihto {gtotal > 0 && `(${gtotal})`}
+                     </button>
                      {hoveredTool === 'green' && (
-                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: '110%', left: '50%', transform: 'translateX(-50%)', marginBottom: '0.5rem', background: '#f0fdf4', border: '2px solid #86efac', color: '#166534', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4' }}>
-                           <div style={{ position: 'absolute', bottom: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '7px solid transparent', borderRight: '7px solid transparent', borderTop: '7px solid #86efac' }}></div>
-                           <div style={{ position: 'absolute', bottom: '-4px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '5px solid #f0fdf4' }}></div>
+                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', background: '#f0fdf4', border: '2px solid #86efac', color: '#166534', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center' }}>
+                           <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #86efac' }}></div>
+                           <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #f0fdf4' }}></div>
                            {gTitle}
                         </div>
                      )}
-                  </button>
+                  </div>
                </div>
             );
         })()}
