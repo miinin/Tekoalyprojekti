@@ -442,22 +442,27 @@ export default function Lobby() {
                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '100%', maxWidth: '1100px', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
                   
                   {/* Kehittäjät */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.5rem 2rem', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1rem' }}>
-                          <Users size={22} color="#0ea5e9" /> Vastaavat Kehittäjät
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2.5rem 2rem', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '2rem' }}>
+                          <Users size={24} color="#0ea5e9" /> Vastaavat Kehittäjät
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '0.8rem' }}>
-                          <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '45px', objectFit: 'contain', opacity: 0.95 }} />
-                          <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#94a3b8', margin: '0 0.5rem' }}>:</span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '0.4rem' }}><Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> <Paintbrush size={18} color="#0284c7" /></div> Miika Miinin
-                          </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '0.4rem' }}><Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /></div> Heikki Laivamaa
-                          </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '0.4rem' }}><Paintbrush size={18} color="#0284c7" /></div> Pauli Hirvonen
-                          </span>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', justifyContent: 'center', gap: '1.2rem', width: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1rem' }}>
+                              <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '65px', objectFit: 'contain', opacity: 0.95 }} />
+                          </div>
+                          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#cbd5e1', display: 'flex', alignItems: 'center' }}>:</div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '220px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /> <Paintbrush size={22} color="#0284c7" /></div>
+                              Miika Miinin
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /></div>
+                              Heikki Laivamaa
+                          </div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Paintbrush size={22} color="#0284c7" /></div>
+                              Pauli Hirvonen
+                          </div>
                       </div>
                   </div>
 
