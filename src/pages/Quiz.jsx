@@ -430,8 +430,11 @@ export default function Quiz() {
   const useYellowMeter = () => {
       const isValidTarget = currentQuestion.options && currentQuestion.options.length > 2;
       if (!isValidTarget) return;
+      
+      const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
+      if (wrongOptions.length === 0) return;
+
       if (useCharge('yellow')) {
-          const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
           let amount = getYellowPower();
           if (amount > wrongOptions.length) amount = wrongOptions.length;
           
@@ -848,13 +851,16 @@ export default function Quiz() {
             const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
             
             const isMultipleChoice = currentQuestion.options && currentQuestion.options.length > 2;
-            const canUseYellow = isMultipleChoice && ytotal > 0;
+            const wrongOptionsLeft = currentQuestion.options ? currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o)).length : 0;
+            const canUseYellow = isMultipleChoice && ytotal > 0 && wrongOptionsLeft > 0;
 
             const yTitle = !isMultipleChoice 
                ? "Poisto toimii vain tehtävissä, joissa on useita vastausvaihtoehtoja."
-               : (ytotal > 0 
-                  ? "Poista yksi väärä vastausvaihtoehto!" 
-                  : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä."));
+               : (wrongOptionsLeft === 0 
+                  ? "Kaikki väärät vaihtoehdot on jo poistettu!"
+                  : (ytotal > 0 
+                     ? "Poista väärä vastausvaihtoehto!" 
+                     : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä.")));
 
             const gTitle = gtotal > 0 
                ? "Vaihda tämä tehtävä kokonaan toiseen rangaistuksetta!" 
