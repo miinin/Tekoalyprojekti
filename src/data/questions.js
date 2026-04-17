@@ -2961,7 +2961,7 @@ export const categories = [
       },
       {
         "id": "konepellin_7",
-        "name": "G. Erikoiskoe – Yskivä Moottori",
+        "name": "Erikoiskoe - yskivä moottori",
         "questions": [
           {
             "id": "konepellin_7_q1",
@@ -4533,7 +4533,7 @@ export const categories = [
       },
       {
         "id": "digiturva_7",
-        "name": "G. Tarkastuspiste – Maantierosvon Tietulli",
+        "name": "Tarkastuspiste - maantierosvon tietulli",
         "questions": [
           {
             "id": "digiturva_7_q1",
@@ -6108,7 +6108,7 @@ export const categories = [
       },
       {
         "id": "aivoterveys_7",
-        "name": "Erikoiskoe: sumuinen yöajo",
+        "name": "Erikoiskoe - sumuinen yöajo",
         "questions": [
           {
             "id": "aivoterveys_7_q1",
@@ -7670,7 +7670,7 @@ export const categories = [
       },
       {
         "id": "arjessa_7",
-        "name": "G. Erikoiskoe – Kaaosristeys",
+        "name": "Erikoiskoe - kaaosristeys",
         "questions": [
           {
             "id": "arjessa_7_q1",
