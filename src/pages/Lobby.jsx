@@ -172,6 +172,9 @@ export default function Lobby() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '1rem', zIndex: 10 }}>
+        <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
+            <GraduationCap size={20} color="#059669" /> Opettajalle
+        </button>
         <div style={{ position: 'relative' }}>
           <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.2)', border: '1px solid rgba(255,255,255,0.3)', padding: '0.8rem', borderRadius: '50%', color: 'white', cursor: 'pointer', transition: '0.3s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.3)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
               <Settings size={22} />
@@ -200,9 +203,6 @@ export default function Lobby() {
                </div>
           )}
         </div>
-        <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-            <GraduationCap size={20} color="#059669" /> Opettajalle
-        </button>
       </div>
 
       
