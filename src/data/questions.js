@@ -7823,7 +7823,7 @@ export const categories = [
   },
   {
     "id": "reilu_peli",
-    "name": "Reilu peli (Etiikka)",
+    "name": "Reilu peli",
     "subcategories": [
       {
         "id": "reilu_peli_1",
