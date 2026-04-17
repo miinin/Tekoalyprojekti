@@ -10851,16 +10851,27 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_7_q4",
-            "type": "multiple_choice",
-            "question": "Vastauksen onnistuminen riippuu täysin ohjeestasi (kehote eli prompti). Voit kertoa ohjeessa asian historian, säännöt, roolin ja muodon aivan missä järjestyksessä tahansa! Mikä seuraavista ei kuitenkaan siis koskaan kuulu turvalliseen tekoälyohjeeseen?",
-            "options": [
-              "Tekoälyn oman roolin määrittäminen, kuten esimerkiksi ohje 'Toimi kuin olisit kokenut opettaja'.",
-              "Säännöt toivotulle tekstin ulkonäölle, kuten 'Kirjoita vastaus kolmena ranskalaisena viivana'.",
-              "Taustatietojen ja kontekstin kertominen asiasta, ohjeistamalla 'Selitä asia 10-vuotiaalle'.",
-              "Oman koulun kirjautumissalasanan, puhelinnumeron ja tarkan kotiosoitteen luovuttaminen."
+            "type": "drag_drop",
+            "question": "Tekoälyn antamat faktat voivat joskus olla keksittyjä eli hallusinaatioita. Järjestä vaiheet oikeaan turvalliseen järjestykseen, kun löydät AI vanin vastauksesta täysin uuden ja yllättävän faktan esitelmääsi varten!",
+            "draggables": [
+              "Luet tekoälyn kirjoittaman uuden ja yllättävän faktan sen antamasta vastauksesta.",
+              "Etsit aivan vastaavan faktatiedon jostain toisesta luotettavasta lähteestä tai oppikirjasta.",
+              "Vertaat huolellisesti tekoälyn tekstiä ja virallisen lähteen tekstiä toisiinsa oikeellisuuden varmistamiseksi.",
+              "Kirjoitat lopulta kokonaan omilla huolellisilla tutkimuksillasi vahvistetut turvalliset faktat esitykseesi."
             ],
-            "correctAnswer": "Oman koulun kirjautumissalasanan, puhelinnumeron ja tarkan kotiosoitteen luovuttaminen.",
-            "explanation": "Hyvään kehotteeseen kannattaa poimia palikoita kuten rooli, tausta ja haluttu muoto – aivan vapaassa järjestyksessä! Sitä vastoin henkilökohtaisia tärkeitä salasanoja ei koskaan syötetä yhdellekään tekoälylle."
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe",
+              "4. vaihe"
+            ],
+            "correctAnswer": {
+              "Luet tekoälyn kirjoittaman uuden ja yllättävän faktan sen antamasta vastauksesta.": "1. vaihe",
+              "Etsit aivan vastaavan faktatiedon jostain toisesta luotettavasta lähteestä tai oppikirjasta.": "2. vaihe",
+              "Vertaat huolellisesti tekoälyn tekstiä ja virallisen lähteen tekstiä toisiinsa oikeellisuuden varmistamiseksi.": "3. vaihe",
+              "Kirjoitat lopulta kokonaan omilla huolellisilla tutkimuksillasi vahvistetut turvalliset faktat esitykseesi.": "4. vaihe"
+            },
+            "explanation": "Lähdekritiikki vaatii aina kärsivällisyyttä! Faktojen lukemisen jälkeen tieto on aina pysähdyttävä varmistamaan erillisestä, turvallisesta toisesta lähteestä ennen sen käyttöä omassa tärkeässä työssä."
           },
           {
             "id": "kayttotaidot_7_q5",
