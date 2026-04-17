@@ -1116,7 +1116,7 @@ const Roadmap = () => {
             )}
             
             {/* Submap Tutoriaalit */}
-            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 0 && !closedTuition[0] && (
+            {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 0 && !closedTuition[0] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Valitse ensimmäinen kategoria napsauttamalla vihreää pallukkaa.
@@ -1131,7 +1131,7 @@ const Roadmap = () => {
               </div>
             )}
             
-            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 1 && !closedTuition[1] && (
+            {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 1 && !closedTuition[1] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: 'var(--primary-color)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
@@ -1146,7 +1146,7 @@ const Roadmap = () => {
               </div>
             )}
             
-            {!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 2 && !closedTuition[2] && (
+            {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 2 && !closedTuition[2] && (
               <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin vastaamiesi kysymysten opettavaisiin selityksiin. Lue siis perustelut aina huolella jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
