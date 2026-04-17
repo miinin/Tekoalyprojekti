@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket } from 'lucide-react';
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -445,15 +445,15 @@ export default function Lobby() {
                           </div>
                           <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '36px', objectFit: 'contain', opacity: 0.9, marginTop: '0.5rem' }} />
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              <Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> <Paintbrush size={18} color="#0284c7" /> Miika Miinin
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <div style={{ display: 'flex', gap: '0.5rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /> <Paintbrush size={22} color="#0284c7" /></div> Miika Miinin
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              <Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> Heikki Laivamaa
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <div style={{ display: 'flex', gap: '0.5rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /></div> Heikki Laivamaa
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              <Paintbrush size={18} color="#0284c7" /> Pauli Hirvonen
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Paintbrush size={22} color="#0284c7" /> Pauli Hirvonen
                           </span>
                       </div>
                   </div>
@@ -463,12 +463,12 @@ export default function Lobby() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <GraduationCap size={20} /> Erityiskiitokset konsultoinnista
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              <ShieldCheck size={18} color="#ca8a04" /> Ville Myllys
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <ShieldCheck size={22} color="#ca8a04" /> Ville Myllys
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                              <Paintbrush size={18} color="#ca8a04" /> Ville Schalin
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Paintbrush size={22} color="#ca8a04" /> Ville Schalin
                           </span>
                       </div>
                   </div>
@@ -478,13 +478,17 @@ export default function Lobby() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <Play size={20} /> Kiitokset pelitestaajille
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Samu</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Saaga</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Eemi</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Anne Rongas</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Lauri Ylä-Jussila</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Kari A. Hintikka</span>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', width: '100%' }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Samu</span>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Saaga</span>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Eemi</span>
+                          </div>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Anne Rongas</span>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Lauri Ylä-Jussila</span>
+                              <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Kari A. Hintikka</span>
+                          </div>
                       </div>
                   </div>
 
@@ -493,10 +497,19 @@ export default function Lobby() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <Zap size={20} /> Hyödynnetyt tekoälypalvelut
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Antigravity</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>NotebookLM</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Gemini</span>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              {/* Voit korvata Rocket-ikonin aineella näin: <img src="/antigravity.png" alt="Google Antigravity" style={{ height: '32px', objectFit: 'contain' }} /> */}
+                              <Rocket size={26} color="#7c3aed" /> Google Antigravity
+                          </span>
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              {/* Voit korvata BookText-ikonin aineella näin: <img src="/notebooklm.png" alt="NotebookLM" style={{ height: '32px', objectFit: 'contain' }} /> */}
+                              <BookText size={26} color="#0284c7" /> NotebookLM
+                          </span>
+                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.6rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '16px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              {/* Voit korvata Sparkles-ikonin aineella näin: <img src="/gemini.png" alt="Google Gemini" style={{ height: '32px', objectFit: 'contain' }} /> */}
+                              <Sparkles size={26} color="#ec4899" /> Google Gemini
+                          </span>
                       </div>
                   </div>
 
