@@ -849,23 +849,26 @@ export default function Quiz() {
             const grem = quizCharges.green - usedCharges.green;
             const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
             
-            const yTitle = ytotal > 0 
-               ? "Poista yksi tai useampi väärä vastausvaihtoehto!" 
-               : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Passiivinen: Osta Autotallista paremmat renkaat saadaksesi Poistoja käyttöön!" : "Ei poistoja jäljellä. Vaihda karttaa tai osta paremmat renkaat Autotallista.");
+            const isMultipleChoice = currentQuestion.type === 'multiple_choice';
+            const canUseYellow = isMultipleChoice && ytotal > 0;
+
+            const yTitle = !isMultipleChoice 
+               ? "Poisto toimii vain monivalintatehtävissä."
+               : (ytotal > 0 
+                  ? "Poista yksi väärä vastausvaihtoehto!" 
+                  : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä."));
 
             const gTitle = gtotal > 0 
                ? "Vaihda tämä tehtävä kokonaan toiseen rangaistuksetta!" 
-               : (quizCharges.green === 0 && (teacherBoosts.green || 0) === 0 ? "Passiivinen: Osta Autotallista paremmat työkalut saadaksesi Vaihtoja käyttöön!" : "Ei vaihtoja jäljellä. Vaihda karttaa tai osta paremmat työkalut Autotallista.");
+               : (quizCharges.green === 0 && (teacherBoosts.green || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää vaihtoja!" : "Ei vaihtoja jäljellä.");
 
             return (
-               <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
-                  {currentQuestion.type === 'multiple_choice' && (
-                  <button title={yTitle} onClick={useYellowMeter} disabled={ytotal === 0} style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', background: ytotal > 0 ? 'rgba(234, 179, 8, 0.08)' : 'transparent', border: ytotal > 0 ? '2px solid rgba(234, 179, 8, 0.4)' : '1px dashed #cbd5e1', color: ytotal > 0 ? '#a16207' : '#94a3b8', fontWeight: '600', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                     <Disc size={18} /> Poisto {ytotal > 0 && `(${ytotal})`}
+               <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
+                  <button title={yTitle} onClick={useYellowMeter} disabled={!canUseYellow} style={{ padding: '0.8rem 1.4rem', borderRadius: '16px', background: canUseYellow ? 'white' : '#f8fafc', border: canUseYellow ? '2px solid #eab308' : '2px solid #e2e8f0', color: canUseYellow ? '#ca8a04' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', cursor: canUseYellow ? 'pointer' : 'not-allowed', boxShadow: canUseYellow ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}>
+                     <Disc size={20} /> Poisto {ytotal > 0 && `(${ytotal})`}
                   </button>
-                  )}
-                  <button title={gTitle} onClick={useGreenMeter} disabled={gtotal === 0} style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', background: gtotal > 0 ? 'rgba(34, 197, 94, 0.08)' : 'transparent', border: gtotal > 0 ? '2px solid rgba(34, 197, 94, 0.4)' : '1px dashed #cbd5e1', color: gtotal > 0 ? '#15803d' : '#94a3b8', fontWeight: '600', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                     <Wrench size={18} /> Vaihto {gtotal > 0 && `(${gtotal})`}
+                  <button title={gTitle} onClick={useGreenMeter} disabled={gtotal === 0} style={{ padding: '0.8rem 1.4rem', borderRadius: '16px', background: gtotal > 0 ? 'white' : '#f8fafc', border: gtotal > 0 ? '2px solid #22c55e' : '2px solid #e2e8f0', color: gtotal > 0 ? '#166534' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: gtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}>
+                     <Wrench size={20} /> Vaihto {gtotal > 0 && `(${gtotal})`}
                   </button>
                </div>
             );
