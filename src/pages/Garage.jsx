@@ -319,7 +319,7 @@ export default function Garage() {
                             setPurchased(await store.getPurchasedItems());
                             setEquipped(await store.getEquippedItems());
                             
-                            if (['bumper', 'wheel', 'g_tools'].includes(item.category)) {
+                            if (item.buff && !item.buff.isSpark) {
                                 if (!localStorage.getItem('aivan_meter_tutorial_seen')) {
                                     localStorage.setItem('aivan_meter_tutorial_seen', 'true');
                                     setShowMeterTutorial(true);
@@ -345,6 +345,12 @@ export default function Garage() {
                            const success = await store.equipItem(item.id, slot);
                            if (success) {
                              setEquipped(await store.getEquippedItems());
+                             if (item.buff && !item.buff.isSpark) {
+                                 if (!localStorage.getItem('aivan_meter_tutorial_seen')) {
+                                     localStorage.setItem('aivan_meter_tutorial_seen', 'true');
+                                     setShowMeterTutorial(true);
+                                 }
+                             }
                            }
                         }
                       }}
