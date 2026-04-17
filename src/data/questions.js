@@ -9900,10 +9900,10 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Pyydät tekoälyltä vitsiä autoista, mutta se kirjoittaa sinulle kymmenen sivun pituisen erittäin tylsän kertomuksen. Miten teet fiksun \"ratinkäännön\" tässä tilanteessa?",
             "options": [
-              "Heitän puhelimen roskikseen, koska se on mennyt pysyvästi rikki.",
+              "Kirjoitan tekoälylle malliksi aivan uuden, erittäin lyhyen vitsin, jotta se oppii pituuden.",
               "Kirjoitan sille: 'Tuo oli aivan liian pitkä. Kerro vain yksi todella lyhyt ja hauska vitsi.'",
-              "Luen kaikki kymmenen sivua väkisin, jotta tekoäly ei pahoita mieltään.",
-              "Käsken sitä tulostamaan tarinan paperille koko luokalle luettavaksi."
+              "Aloitan välittömästi uuden chatin ja kokeilen kysyä samaa asiaa eri hakusanoilla.",
+              "Kopioin tekoälyn tekstin, poistan osan ja liitän sen takaisin chatille korjattuna luettavaksi."
             ],
             "correctAnswer": "Kirjoitan sille: 'Tuo oli aivan liian pitkä. Kerro vain yksi todella lyhyt ja hauska vitsi.'",
             "explanation": "Anna tekoälylle rohkeasti reilua palautetta! Se ei ikinä pahastu, vaan yrittää heti uudelleen auttaa sinua täsmälleen sinun uuden, tarkemman ohjeesi mukaisesti."
@@ -10009,9 +10009,9 @@ export const categories = [
             "question": "SKENAARIO: Olet koodaamassa tekoälyllä sääntöjä autotallin uuteen lautapeliin. Säännöt ovat muuten oikein hyvät, mutta niistä puuttuu kokonaan noppien heittäminen. Mitä sinun kannattaa kirjoittaa?",
             "options": [
               "'Säännöt ovat hienot, mutta lisää niihin vielä yksi kohta noppien heittämisestä.'",
-              "'Koko peli on aivan surkea, poista kaikki säännöt ja tee shakkipeli.'",
-              "'Miksi noppia käytetään peleissä, onko siihen joku historiallinen syy?'",
-              "'Unohda koko lautapeli, mennään mieluummin ulos ajamaan polkupyörillä.'"
+              "'Unohda nämä säännöt, tee uusi versio jossa on noppien lisäksi useampia pelilautoja.'",
+              "'Säännöt ovat liian pitkät, keksitkö tähän väliin täysin uusia ja satunnaisia hahmoja peliä varten?'",
+              "'Laske pelin kaikki tähänastiset säännöt uudelleen sattumanvaraisessa järjestyksessä ruudulle.'"
             ],
             "correctAnswer": "'Säännöt ovat hienot, mutta lisää niihin vielä yksi kohta noppien heittämisestä.'",
             "explanation": "Tämä on täydellistä iteroimista! Kehut olemassa olevaa pohjaa (joten tekoäly ei muuta kaikkea) ja kerrot selvästi, mikä yksi uusi \"varaosan\" ohjeeseen pitää vielä lisätä."
@@ -10040,7 +10040,7 @@ export const categories = [
           {
             "id": "kayttotaidot_3_q12",
             "type": "drag_drop",
-            "question": "Järjestä askeleet! Miten koodaat uuden kirjeen englantilaiselle kaverillesi fiksulla palautteella?",
+            "question": "Järjestä askeleet! Miten saat tekoälyn avulla tehtyä uuden kirjeen englantilaiselle kaverillesi fiksulla palautteella?",
             "correctAnswer": {
               "Pyydät tekoälyä kääntämään suomenkielisen kirjeesi englanniksi kaveria varten.": "1. vaihe",
               "Huomaat, että tekoälyn käännös kuulostaa aivan liian viralliselta ja jäykältä.": "2. vaihe",
@@ -10092,10 +10092,10 @@ export const categories = [
             "type": "reverse_prompt",
             "question": "AI vanin ruudulla ollut sekava taulukko pyyhkiytyy pois ja tekoäly kirjoittaa sen tilalle: \"Tässä yksinkertaisemmin: auto koostuu korista, moottorista ja renkaista.\" Mikä oli sinun korjausliikkeesi (promptisi)?",
             "options": [
-              "Piirrä minulle yksityiskohtainen kuva isosta urheiluautosta sivulta päin.",
+              "Toit asiat esille aivan liian lyhyesti. Esitä koko alkuperäinen tieto yksityiskohtaisen pistelistan muodossa.",
               "Tuo edellinen taulukko oli liian sekava, tiivistä sen pääasiat yhdellä helpolla lauseella.",
-              "Kirjoita minulle kokonainen kouluessee kaikista maailman uusimmista keksinnöistä.",
-              "Laske matemaattisesti, kuinka nopeasti tavallinen auto kiihtyy nollasta sataan."
+              "Tuo taulukko oli liian helppo. Käytä erittäin vaikeita ja monimutkaisia sivistyssanoja autojen rakenteesta.",
+              "Listaa minulle taulukkoon mahdollisimman monta erilaista autonrengasmerkkiä ja laske niiden keskihinnat."
             ],
             "correctAnswer": "Tuo edellinen taulukko oli liian sekava, tiivistä sen pääasiat yhdellä helpolla lauseella.",
             "explanation": "Kun laite lähtee \"väärälle reitille\" vaikeiden taulukoiden kanssa, uusi komento korjaa sen heti. Tekoälyä kannattaa ohjata rohkeasti, jos se menee asiassa liian syvälle nörtteilyyn!"

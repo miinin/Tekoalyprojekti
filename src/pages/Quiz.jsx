@@ -860,12 +860,12 @@ export default function Quiz() {
             return (
                <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
                   {currentQuestion.type === 'multiple_choice' && (
-                  <button title={yTitle} onClick={useYellowMeter} disabled={ytotal === 0} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', background: ytotal > 0 ? 'rgba(234, 179, 8, 0.08)' : 'transparent', border: ytotal > 0 ? '2px solid rgba(234, 179, 8, 0.4)' : '1px dashed #cbd5e1', color: ytotal > 0 ? '#a16207' : '#94a3b8', fontWeight: '600', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                     <Disc size={16} /> Poisto {ytotal > 0 && `(${ytotal})`}
+                  <button title={yTitle} onClick={useYellowMeter} disabled={ytotal === 0} style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', background: ytotal > 0 ? 'rgba(234, 179, 8, 0.08)' : 'transparent', border: ytotal > 0 ? '2px solid rgba(234, 179, 8, 0.4)' : '1px dashed #cbd5e1', color: ytotal > 0 ? '#a16207' : '#94a3b8', fontWeight: '600', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: ytotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                     <Disc size={18} /> Poisto {ytotal > 0 && `(${ytotal})`}
                   </button>
                   )}
-                  <button title={gTitle} onClick={useGreenMeter} disabled={gtotal === 0} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', background: gtotal > 0 ? 'rgba(34, 197, 94, 0.08)' : 'transparent', border: gtotal > 0 ? '2px solid rgba(34, 197, 94, 0.4)' : '1px dashed #cbd5e1', color: gtotal > 0 ? '#15803d' : '#94a3b8', fontWeight: '600', fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                     <Wrench size={16} /> Vaihto {gtotal > 0 && `(${gtotal})`}
+                  <button title={gTitle} onClick={useGreenMeter} disabled={gtotal === 0} style={{ padding: '0.6rem 1.2rem', borderRadius: '8px', background: gtotal > 0 ? 'rgba(34, 197, 94, 0.08)' : 'transparent', border: gtotal > 0 ? '2px solid rgba(34, 197, 94, 0.4)' : '1px dashed #cbd5e1', color: gtotal > 0 ? '#15803d' : '#94a3b8', fontWeight: '600', fontSize: '1rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: gtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: 'none', transition: 'all 0.2s', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                     <Wrench size={18} /> Vaihto {gtotal > 0 && `(${gtotal})`}
                   </button>
                </div>
             );
