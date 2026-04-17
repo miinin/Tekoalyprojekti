@@ -13,6 +13,8 @@ export default function Lobby() {
   const [testMode, setTestMode] = useState(store.getTestMode());
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
   const [showSettings, setShowSettings] = useState(false);
+  const [showTestMedals, setShowTestMedals] = useState(false);
+  const [showTestPlatinums, setShowTestPlatinums] = useState(false);
   const [showInfoBox, setShowInfoBox] = useState(false);
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
@@ -273,6 +275,13 @@ export default function Lobby() {
                          <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
                        </div>
                     </div>
+                    {testMode && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.5rem', paddingTop: '1rem', borderTop: '2px solid #e2e8f0' }}>
+                           <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 'bold' }}>Testaa loppuanimaatioita:</span>
+                           <button onClick={() => setShowTestMedals(true)} style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '0.6rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.85rem', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>Kaikki pokaalit</button>
+                           <button onClick={() => setShowTestPlatinums(true)} style={{ background: '#f59e0b', color: 'white', border: 'none', padding: '0.6rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '0.85rem', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }}>Kaikki platinaa</button>
+                        </div>
+                    )}
                  </div>
             )}
           </div>
@@ -510,6 +519,35 @@ export default function Lobby() {
          </div>
       )}
 
+      {showTestMedals && (
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTestMedals(false)}>
+            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px', cursor: 'default' }} onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowTestMedals(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.4rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24} /></button>
+              <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#1d4ed8', textAlign: 'center', textShadow: '0 4px 10px rgba(29, 78, 216, 0.3)' }}>HURRAA! KAIKKI LÄPI!</h1>
+              <img src="/trophy/medal-gold.png" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain' }} />
+              <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#eff6ff', padding: '1rem', borderRadius: '12px' }}>
+                Mahtavaa työtä, olet todellinen virtuoosi! Olet kerännyt mitalin aivan jokaisesta kartan tehtävästä.<br/><br/>
+                Uskallatko vielä yrittää huipulle asti? Tavoittele platinaista mitalia jokaisesta kategoriasta vastaamalla kaikkiin tehtäviin täydellisesti!
+              </p>
+              <button className="btn-primary" style={{ width: '100%', background: '#2563eb', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowTestMedals(false)}>Haaste vastaanotettu!</button>
+            </div>
+         </div>
+      )}
+
+      {showTestPlatinums && (
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(8px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTestPlatinums(false)}>
+            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px', cursor: 'default' }} onClick={e => e.stopPropagation()}>
+              <button onClick={() => setShowTestPlatinums(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.4rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={24} /></button>
+              <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#b45309', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>TÄYDELLINEN SUORITUS!</h1>
+              <img src="/trophy/medal-plat.png" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain' }} />
+              <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
+                AIVAN USKOMATONTA! Olet saavuttanut legendaarisen platinamitalin aivan jokaisessa pelin osiossa!<br/><br/>
+                Olet saavuttanut ÄLLIÄ-pelin absoluuttisen huipun. Olet selvästikin tekoälyn ja digiturvan todellinen mestari. Vuolaat onnittelut huikeasta urakasta!
+              </p>
+              <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowTestPlatinums(false)}>Olen mestari!</button>
+            </div>
+         </div>
+      )}
     </div>
   );
 }
