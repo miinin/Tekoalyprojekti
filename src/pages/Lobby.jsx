@@ -439,8 +439,11 @@ export default function Lobby() {
                   
                   {/* Kehittäjät */}
                   <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
-                          <Users size={20} /> Vastaavat Kehittäjät
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
+                              <Users size={20} /> Vastaavat Kehittäjät
+                          </div>
+                          <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '36px', objectFit: 'contain', opacity: 0.9, marginTop: '0.5rem' }} />
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
                           <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
@@ -461,8 +464,12 @@ export default function Lobby() {
                           <GraduationCap size={20} /> Erityiskiitokset konsultoinnista
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>Ville Myllys</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>Ville Schalin</span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>
+                              <ShieldCheck size={18} /> Ville Myllys
+                          </span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>
+                              <Paintbrush size={18} /> Ville Schalin
+                          </span>
                       </div>
                   </div>
 
