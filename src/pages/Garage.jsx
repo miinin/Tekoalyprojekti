@@ -924,54 +924,54 @@ export default function Garage() {
     )}
 
     {showMeterTutorial && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
-            <div className="modal-content" style={{ background: 'linear-gradient(145deg, #1e293b 0%, #0f172a 100%)', padding: '3rem', borderRadius: '24px', maxWidth: '650px', width: '90%', border: '2px solid #38bdf8', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', overflow: 'hidden' }}>
-                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'transparent', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: '0.5rem' }}>
-                    <X size={28} />
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: '3rem', borderRadius: '32px', maxWidth: '650px', width: '90%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative', overflow: 'hidden' }}>
+                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
+                    <X size={24} />
                 </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                    <div style={{ background: '#38bdf8', padding: '1rem', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 20px rgba(56, 189, 248, 0.4)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: '2rem' }}>
+                    <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: '1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
                         <Zap size={36} color="white" />
                     </div>
-                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: 'white', letterSpacing: '1px' }}>Erikoiskyvyt avattu!</h2>
+                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Erikoiskyvyt avattu!</h2>
                 </div>
                 
-                <p style={{ fontSize: '1.2rem', color: '#cbd5e1', lineHeight: '1.6', marginBottom: '2rem' }}>
+                <p style={{ fontSize: '1.15rem', color: '#334155', lineHeight: '1.6', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
                     Olet juuri hankkinut ensimmäisen varusteesi, joka antaa sinulle <strong>karttakohtaisia apuja!</strong> Näet ne kysymysruutujen kulmassa pelatessasi.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'rgba(239, 68, 68, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #ef4444', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <ShieldCheck size={28} color="#ef4444" />
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
+                    <div style={{ background: '#fef2f2', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fecaca', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <ShieldCheck size={32} color="#ef4444" style={{ flexShrink: 0 }} />
                         <div>
-                            <strong style={{ color: '#ef4444', display: 'block', marginBottom: '0.2rem' }}>YRITÄ UUDELLEEN (Puskurit)</strong>
-                            Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.
+                            <strong style={{ color: '#dc2626', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Yritä uudelleen <span style={{ color: '#ef4444', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Puskurit)</span></strong>
+                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.</span>
                         </div>
                     </div>
-                    <div style={{ background: 'rgba(234, 179, 8, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #eab308', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <Disc size={28} color="#eab308" />
+                    <div style={{ background: '#fffbeb', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <Disc size={32} color="#eab308" style={{ flexShrink: 0 }} />
                         <div>
-                            <strong style={{ color: '#eab308', display: 'block', marginBottom: '0.2rem' }}>POISTO (Renkaat)</strong>
-                            Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.
+                            <strong style={{ color: '#d97706', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Poisto <span style={{ color: '#eab308', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Renkaat)</span></strong>
+                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.</span>
                         </div>
                     </div>
-                    <div style={{ background: 'rgba(34, 197, 94, 0.2)', padding: '1rem', borderRadius: '12px', borderLeft: '4px solid #22c55e', display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <Wrench size={28} color="#22c55e" />
+                    <div style={{ background: '#f0fdf4', padding: '1.2rem', borderRadius: '16px', border: '1px solid #bbf7d0', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <Wrench size={32} color="#22c55e" style={{ flexShrink: 0 }} />
                         <div>
-                            <strong style={{ color: '#22c55e', display: 'block', marginBottom: '0.2rem' }}>VAIHTO (Työkalut)</strong>
-                            Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!
+                            <strong style={{ color: '#16a34a', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Vaihto <span style={{ color: '#22c55e', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Työkalut)</span></strong>
+                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!</span>
                         </div>
                     </div>
                 </div>
 
-                <p style={{ color: '#94a3b8', fontStyle: 'italic', marginBottom: '2rem' }}>
-                    Vinkki: Omat apusi ovat ns. karttakohtainen potti (esim. 5kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!
+                <p style={{ color: '#64748b', fontStyle: 'italic', marginBottom: '2rem', fontSize: '0.95rem', background: '#f8fafc', padding: '1rem', borderRadius: '12px' }}>
+                    💡 <strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!
                 </p>
 
                 <button 
                     onClick={() => setShowMeterTutorial(false)}
                     className="btn-primary"
-                    style={{ width: '100%', padding: '1rem', fontSize: '1.2rem', borderRadius: '12px', background: '#38bdf8', color: 'white', fontWeight: 'bold' }}>
+                    style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', borderRadius: '16px', background: '#0ea5e9', color: 'white', fontWeight: 'bold' }}>
                     Selvä homma!
                 </button>
             </div>
