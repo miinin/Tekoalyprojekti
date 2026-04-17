@@ -322,12 +322,12 @@ export default function Lobby() {
         {/* MONINPELI */}
         <div className="mode-card" style={{ borderTop: '8px solid #0d9488' }}>
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#0d9488', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
-            <Users size={36} /> Yhteistyömoodi
+            <Users size={36} /> Yhteistyötila
           </h2>
-          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa kavereiden kanssa samassa tallissa. Kerätkää yhdessä Kipinöitä!</p>
+          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa kavereiden kanssa samassa tallissa. Kerätkää kipinöitä yhdessä!</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdfa', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #5eead4' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem' }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdfa', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #5eead4', flexGrow: 1, justifyContent: 'flex-end' }}>
                 <button className="btn-secondary" style={{ borderColor: '#0d9488', color: '#0d9488', padding: '1rem', background: 'white' }} onClick={handleCreateLobby}>
                   <Plus size={20} /> LUO UUSI HUONE
                 </button>
@@ -357,8 +357,8 @@ export default function Lobby() {
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdf4', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #86efac' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem' }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdf4', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #86efac', flexGrow: 1, justifyContent: 'flex-end' }}>
                 <p style={{ margin: 0, fontSize: '0.9rem', color: '#166534', fontWeight: 'bold', lineHeight: 1.4 }}>
                    <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
                 </p>
