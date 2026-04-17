@@ -10851,27 +10851,16 @@ export const categories = [
           },
           {
             "id": "kayttotaidot_7_q4",
-            "type": "drag_drop",
-            "question": "Järjestä täydellisen ja tarkan kehotteen (promptin) rakennuspalikat! Miten annat navigaattorille parhaan mahdollisen osoitteen?",
-            "correctAnswer": {
-              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').": "1. vaihe",
-              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').": "2. vaihe",
-              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').": "3. vaihe",
-              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista').": "4. vaihe"
-            },
-            "explanation": "Kun annat koneelle tarkat speksit eli roolin, tehtävän, taustatiedot ja halutun tulostusmuodon, tekoälystä tulee mielettömän taitava ja tarkka työkalu.",
-            "draggables": [
-              "Kerro tekoälylle ensin rooli (esim. 'Toimi kuin fysiikan opettaja').",
-              "Anna sille selkeä tehtävä (esim. 'Selitä miten auton sähkömoottori toimii').",
-              "Lisää konteksti ja kohde (esim. 'Käytä helppoja sanoja, koska selität asian 10-vuotiaalle').",
-              "Määritä vastauksen muoto (esim. 'Tee vastauksesta lyhyt, kolmen kohdan ranskalainen viivalista')."
+            "type": "multiple_choice",
+            "question": "Vastauksen onnistuminen riippuu täysin ohjeestasi (kehote eli prompti). Voit kertoa ohjeessa asian historian, säännöt, roolin ja muodon aivan missä järjestyksessä tahansa! Mikä seuraavista ei kuitenkaan siis koskaan kuulu turvalliseen tekoälyohjeeseen?",
+            "options": [
+              "Tekoälyn oman roolin määrittäminen, kuten esimerkiksi ohje 'Toimi kuin olisit kokenut opettaja'.",
+              "Säännöt toivotulle tekstin ulkonäölle, kuten 'Kirjoita vastaus kolmena ranskalaisena viivana'.",
+              "Taustatietojen ja kontekstin kertominen asiasta, ohjeistamalla 'Selitä asia 10-vuotiaalle'.",
+              "Oman koulun kirjautumissalasanan, puhelinnumeron ja tarkan kotiosoitteen luovuttaminen."
             ],
-            "dropZones": [
-              "1. vaihe",
-              "2. vaihe",
-              "3. vaihe",
-              "4. vaihe"
-            ]
+            "correctAnswer": "Oman koulun kirjautumissalasanan, puhelinnumeron ja tarkan kotiosoitteen luovuttaminen.",
+            "explanation": "Hyvään kehotteeseen kannattaa poimia palikoita kuten rooli, tausta ja haluttu muoto – aivan vapaassa järjestyksessä! Sitä vastoin henkilökohtaisia tärkeitä salasanoja ei koskaan syötetä yhdellekään tekoälylle."
           },
           {
             "id": "kayttotaidot_7_q5",
@@ -10949,10 +10938,10 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: AI vanin käyttöohje on täynnä todella vaikeita ja puuduttavia insinöörisanoja. Aikaa tarkan napin etsimiseen on vain minuutti. Miten käytät tekoälyn pakkaustaitoja eli kykyä laittaa \"tavarat siististi kyytiin\"?",
             "options": [
-              "Pyydän tekoälyä kääntämään laitteen 10-sivuisen ohjekirjan suoraan latinaksi.",
-              "Käsken tekoälyn lukemaan koko pitkän tekstin minulle erittäin hitaasti ääneen.",
+              "Kopioin vaikean insinööritekstin tekoälylle ja vaadin sitä välittömästi kääntämään laitteen pitkän ohjekirjan suoraan vanhaan antiikin latinaksi.",
+              "Käsken monimutkaisen ja hitaan tekoälyn lukemaan koko tieteellisen teknisen tekstin laitteen omalta näytöltä minulle todella hitaasti ääneen korvaan.",
               "Kopioin vaikean tekstin tekoälylle ja pyydän sitä tiivistämään ohjeen pelkkiin kolmeen tärkeimpään askelmerkkiin (ranskalaisiin viivoihin).",
-              "Pyydän tekoälyä ostamaan netistä minulle uuden, erilaisen radion autoon."
+              "Suljen vaikealukuisen ohjekirjan kokonaan lukematta sitä lainkaan itse ja pyydän sitten tekoälyä nopeasti ostamaan verkosta kokonaan uuden ja erilaisen koneen."
             ],
             "correctAnswer": "Kopioin vaikean tekstin tekoälylle ja pyydän sitä tiivistämään ohjeen pelkkiin kolmeen tärkeimpään askelmerkkiin (ranskalaisiin viivoihin).",
             "explanation": "Pitkien tekstien ja vaikeiden faktojen tiivistäminen \"selkosuomeksi\" tai ranskalaisiksi viivoiksi (bullet points) on tekoälyn ylivoimaisesti vahvinta osaamista ja uskomattoman kätevä käyttötaito!"
