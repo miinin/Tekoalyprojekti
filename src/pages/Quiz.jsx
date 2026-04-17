@@ -890,10 +890,12 @@ export default function Quiz() {
                         <Disc size={20} /> Poisto {ytotal > 0 && `(${ytotal})`}
                      </button>
                      {hoveredTool === 'yellow' && (
-                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', background: '#fffbeb', border: '2px solid #fcd34d', color: '#b45309', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center' }}>
-                           <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #fcd34d' }}></div>
-                           <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #fffbeb' }}></div>
-                           {yTitle}
+                        <div style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
+                           <div className="animate-fade-in" style={{ position: 'relative', background: '#fffbeb', border: '2px solid #fcd34d', color: '#b45309', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}>
+                              <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #fcd34d' }}></div>
+                              <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #fffbeb' }}></div>
+                              {yTitle}
+                           </div>
                         </div>
                      )}
                   </div>
@@ -910,10 +912,12 @@ export default function Quiz() {
                         <Wrench size={20} /> Vaihto {gtotal > 0 && `(${gtotal})`}
                      </button>
                      {hoveredTool === 'green' && (
-                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', background: '#f0fdf4', border: '2px solid #86efac', color: '#166534', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', zIndex: 100, boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center' }}>
-                           <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #86efac' }}></div>
-                           <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #f0fdf4' }}></div>
-                           {gTitle}
+                        <div style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
+                           <div className="animate-fade-in" style={{ position: 'relative', background: '#f0fdf4', border: '2px solid #86efac', color: '#166534', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}>
+                              <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #86efac' }}></div>
+                              <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #f0fdf4' }}></div>
+                              {gTitle}
+                           </div>
                         </div>
                      )}
                   </div>
