@@ -833,16 +833,30 @@ export default function Quiz() {
                        ? "Sait uuden yrityksen! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
                        : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi lisäyrityksiä!" : "Ei yrityksiä jäljellä. Tarvitset paremman varusteen Autotallista tai vaihda karttaa.");
                     return (
-                       <button 
-                          title={rTitle} 
-                          onClick={useRedMeter} 
-                          disabled={rtotal === 0} 
-                          onMouseEnter={(e) => { if(rtotal > 0) { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(239,68,68,0.2)'; } }}
-                          onMouseLeave={(e) => { if(rtotal > 0) { e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)'; } }}
-                          style={{ flex: 1, padding: '1.2rem', borderRadius: '16px', border: rtotal > 0 ? '3px solid #fca5a5' : '3px solid #e2e8f0', background: rtotal > 0 ? 'white' : '#f8fafc', color: rtotal > 0 ? '#dc2626' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', boxShadow: rtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s', fontFamily: 'var(--font-main)' }}
+                       <div 
+                          onMouseEnter={(e) => { setHoveredTool('red'); if(rtotal > 0) { e.currentTarget.style.transform = 'translateY(-2px)'; } }}
+                          onMouseLeave={(e) => { setHoveredTool(null); if(rtotal > 0) { e.currentTarget.style.transform = 'none'; } }}
+                          onClick={() => { if(rtotal > 0) useRedMeter(); }}
+                          onMouseDown={(e) => { if(rtotal > 0) e.currentTarget.style.transform = 'scale(0.98)'; }}
+                          onMouseUp={(e) => { if(rtotal > 0) e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                          style={{ flex: 1, position: 'relative', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', transition: '0.1s' }}
                        >
-                          <ShieldCheck size={24} /> YRITÄ UUDELLEEN {rtotal > 0 && `(${rtotal})`}
-                       </button>
+                           <button 
+                              disabled={rtotal === 0} 
+                              style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', border: rtotal > 0 ? '3px solid #fca5a5' : '3px solid #e2e8f0', background: rtotal > 0 ? 'white' : '#f8fafc', color: rtotal > 0 ? '#dc2626' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', pointerEvents: 'none', boxShadow: rtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', fontFamily: 'var(--font-main)' }}
+                           >
+                              <ShieldCheck size={24} /> YRITÄ UUDELLEEN {rtotal > 0 && `(${rtotal})`}
+                           </button>
+                           {hoveredTool === 'red' && (
+                              <div style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
+                                 <div className="animate-fade-in" style={{ position: 'relative', background: '#fef2f2', border: '2px solid #fca5a5', color: '#b91c1c', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.95rem', width: '260px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'var(--font-main)', fontWeight: 'normal' }}>
+                                    <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #fca5a5' }}></div>
+                                    <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #fef2f2' }}></div>
+                                    {rTitle}
+                                 </div>
+                              </div>
+                           )}
+                       </div>
                     );
                 })()}
 
