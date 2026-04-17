@@ -170,41 +170,7 @@ export default function Lobby() {
   };
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-      <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '1rem', zIndex: 10 }}>
-        <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.9)', border: 'none', padding: '0.8rem 1.5rem', borderRadius: '20px', color: '#0f172a', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-            <GraduationCap size={20} color="#15803d" /> Opettajalle
-        </button>
-        <div style={{ position: 'relative' }}>
-          <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(0,0,0,0.05)', border: '1px solid rgba(0,0,0,0.1)', padding: '0.8rem', borderRadius: '50%', color: '#047857', cursor: 'pointer', transition: '0.3s' }} onMouseOver={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.1)'} onMouseOut={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.05)'}>
-              <Settings size={22} />
-          </button>
-          {showSettings && (
-               <div className="animate-fade-in" style={{ position: 'absolute', top: '120%', right: 0, width: '300px', backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem', border: '2px solid #cbd5e1', boxShadow: '0 15px 40px rgba(0,0,0,0.5)', zIndex: 100 }}>
-                  <h3 style={{ margin: 0, borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', color: '#334155', fontFamily: 'var(--font-main)' }}>Asetukset</h3>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                     <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Ohita opastus</span>
-                     <div 
-                       className="toggle-track"
-                       onClick={() => { const v = !skipTutorial; setSkipTutorial(v); store.setTutorialSkipped(v); }}
-                       style={{ background: skipTutorial ? '#10b981' : '#cbd5e1' }}>
-                       <div className="toggle-thumb" style={{ left: skipTutorial ? '23px' : '3px' }} />
-                     </div>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                     <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Testitila (+100k kipinää)</span>
-                     <div 
-                       className="toggle-track"
-                       onClick={() => { const v = !testMode; setTestMode(v); store.setTestMode(v); }}
-                       style={{ background: testMode ? '#10b981' : '#cbd5e1' }}>
-                       <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
-                     </div>
-                  </div>
-               </div>
-          )}
-        </div>
-      </div>
-
+    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2.5rem 1rem' }}>
       
       {/* Animated gradient background */}
       <style>{`
@@ -257,10 +223,61 @@ export default function Lobby() {
       <div className="lobby-bg" />
       <div className="lobby-overlay" />
 
-      <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', marginTop: '-3rem', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.4))', zIndex: 10 }} />
-      <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
+      <div className="animate-fade-in" style={{
+         position: 'relative',
+         background: 'rgba(255, 255, 255, 0.35)',
+         backdropFilter: 'blur(25px)',
+         WebkitBackdropFilter: 'blur(25px)',
+         border: '1px solid rgba(255,255,255,0.8)',
+         boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
+         borderRadius: '36px',
+         padding: '4rem 2.5rem 3.5rem 2.5rem',
+         display: 'flex',
+         flexDirection: 'column',
+         alignItems: 'center',
+         width: '100%',
+         maxWidth: '1250px',
+         zIndex: 10
+      }}>
 
-      <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', maxWidth: '1200px', padding: '0 1.5rem', zIndex: 10 }}>
+        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '1rem', zIndex: 15 }}>
+          <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              <GraduationCap size={20} color="#15803d" /> Opettajalle
+          </button>
+          <div style={{ position: 'relative' }}>
+            <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', width: '44px', height: '44px', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: '0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+                <Settings size={22} color="#15803d" />
+            </button>
+            {showSettings && (
+                 <div className="animate-fade-in" style={{ position: 'absolute', top: '120%', right: 0, width: '300px', backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem', border: '2px solid #cbd5e1', boxShadow: '0 15px 40px rgba(0,0,0,0.5)', zIndex: 100, textAlign: 'left' }}>
+                    <h3 style={{ margin: 0, borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', color: '#334155', fontFamily: 'var(--font-main)' }}>Asetukset</h3>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                       <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Ohita opastus</span>
+                       <div 
+                         className="toggle-track"
+                         onClick={() => { const v = !skipTutorial; setSkipTutorial(v); store.setTutorialSkipped(v); }}
+                         style={{ background: skipTutorial ? '#10b981' : '#cbd5e1' }}>
+                         <div className="toggle-thumb" style={{ left: skipTutorial ? '23px' : '3px' }} />
+                       </div>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                       <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Testitila (+100k kipinää)</span>
+                       <div 
+                         className="toggle-track"
+                         onClick={() => { const v = !testMode; setTestMode(v); store.setTestMode(v); }}
+                         style={{ background: testMode ? '#10b981' : '#cbd5e1' }}>
+                         <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
+                       </div>
+                    </div>
+                 </div>
+            )}
+          </div>
+        </div>
+
+        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
+        <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
+
+        <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', zIndex: 10 }}>
         
         {/* YKSINPELI */}
         <div className="mode-card" style={{ borderTop: '8px solid #059669' }}>
@@ -388,10 +405,8 @@ export default function Lobby() {
               </div>
           </div>
         </div>
-
       </div>
-
-      
+      </div>
 
       {modalState && (
          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={modalState.onClose}>
