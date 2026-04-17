@@ -10550,9 +10550,9 @@ export const categories = [
             "type": "spot_the_ai",
             "question": "Etsi joukosta lausahdus, joka neuvoo käyttämään \"tekoälytyökalua pakista\" selvästi aivan täysin väärään ja hölmöön tarkoitukseen!",
             "options": [
-              "'Käytä musiikkitekoälyä säveltämään kiva taustamusiikki luokan omaan näytelmään.'",
-              "'Jos haluat korjata saksan kielen läksysi kielioppivirheet, kokeile tekstitekoälyä.'",
-              "'Kun etsit nopeinta autoreittiä mökille, käytä reittinavigaattoria puhelimessasi.'",
+              "'Käytä verkosta löytyvää edistynyttä musiikkitekoälyä säveltämään ja tuottamaan kiva instrumentaalinen taustamusiikki luokan omaan kevätjuhlanäytelmään.'",
+              "'Jos haluat korjata saksan kielen pitkät läksysi ja niiden monimutkaiset kielioppivirheet nopeasti, kokeile ehdottomasti kirjoittavaa tekstitekoälyä.'",
+              "'Kun matkustat perheesi kanssa lomalle ja etsit kaikkein nopeinta autoreittiä perille asti uudelle kesämökille, käytä täysin normaalia reittinavigaattoria puhelimessasi.'",
               "'Käytä kameran yksinkertaista kääntäjäsovellusta kirjoittamaan viiden sivun satu avaruusolioista.'"
             ],
             "correctAnswer": "'Käytä kameran yksinkertaista kääntäjäsovellusta kirjoittamaan viiden sivun satu avaruusolioista.'",
@@ -10617,19 +10617,19 @@ export const categories = [
           {
             "id": "kayttotaidot_6_q4",
             "type": "drag_drop",
-            "question": "Järjestä askeleet fiksusti! Miten muutat vaikean koulutekstin helpoksi tekoälyn avulla?",
+            "question": "Järjestä askeleet fiksusti! Miten saat tekoälyn avulla järjestettyä omat sekavat leikki-ideasi selkeäksi listaksi?",
             "correctAnswer": {
-              "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.": "1. vaihe",
-              "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'": "2. vaihe",
-              "Syötä teksti tekoälylle ja paina 'Lähetä'.": "3. vaihe",
-              "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta.": "4. vaihe"
+              "Keksit paperille paljon sekavia ja hassuja sääntöideoita upeaan uuteen ulkoleikkiin.": "1. vaihe",
+              "Kirjoitat omat muistiinpanosi tekoälylle liittäen ohjeen: 'Tee tästä sekavasta tekstistä siisti ja selkeä numeroitu sääntölista'.": "2. vaihe",
+              "Painat 'Lähetä' -nappia ja odotat, kun ammattimaisen apukuskin ohjelmisto lajittelee omat sääntösi selkeille riveille.": "3. vaihe",
+              "Kopioit tekoälyn jäsentämän siistin leikkiohjeen talteen ja pystyt suoraan luettamaan säännöt kavereille todella helposti.": "4. vaihe"
             },
-            "explanation": "Aina pitää ensin antaa tekoälylle materiaali (teksti) ja heti perään selkeä ohje siitä, miten haluat sen \"pakattavan\"!",
+            "explanation": "Tekoäly on mestari lajittelemaan ihmisen omia sekavia ja hullunkurisia luonnoksia selkeiksi, helppolukuisiksi listoiksi aivan silmänräpäyksessä!",
             "draggables": [
-              "Kopioi tai valokuvaa vaikea teksti oppikirjasta laitteeseen.",
-              "Kirjoita tekoälylle ohje: 'Tiivistä tämä teksti lyhyesti ja selkosuomeksi.'",
-              "Syötä teksti tekoälylle ja paina 'Lähetä'.",
-              "Lue tekoälyn palauttama lyhyt ja selkeä tiivistelmä aiheesta."
+              "Keksit paperille paljon sekavia ja hassuja sääntöideoita upeaan uuteen ulkoleikkiin.",
+              "Kirjoitat omat muistiinpanosi tekoälylle liittäen ohjeen: 'Tee tästä sekavasta tekstistä siisti ja selkeä numeroitu sääntölista'.",
+              "Painat 'Lähetä' -nappia ja odotat, kun ammattimaisen apukuskin ohjelmisto lajittelee omat sääntösi selkeille riveille.",
+              "Kopioit tekoälyn jäsentämän siistin leikkiohjeen talteen ja pystyt suoraan luettamaan säännöt kavereille todella helposti."
             ],
             "dropZones": [
               "1. vaihe",
@@ -10714,10 +10714,10 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Laitat tekoälyn tiivistämään pitkän historian läksyn muistilistaksi kokeeseen kertaamista varten. Luet pelkän tiivistelmän, mutta kokeessa kysytäänkin tarkkaa vuosilukua, jota ei ollut tekoälyn tiivistelmässä mukana! Mitä tästä opimme?",
             "options": [
-              "Tekoäly tiivistää huonosti ja on siksi aivan täysin hyödytön koulussa.",
+              "Koska tekoälyn tekemä automaattinen tiivistelmä saattaa poiketa kirjasta, on laite ja kaikki sen antamat tekstit kaiken kaikkiaan aivan täysin täysin hyödyttömiä koulukäytössä.",
               "Tiivistelmä auttaa ymmärtämään ison kuvan, mutta tarkat yksityiskohdat kannattaa lukea oikeasta kirjasta.",
-              "Opettaja toimi täysin väärin kysyessään kokeessa tarkkaa vuosilukua.",
-              "Tekoäly poisti vuosiluvut kokonaan, koska numerot vievät aina liikaa tilaa tietokoneelta."
+              "Historian koetta parhaillaan pitävä tai suunnitteleva opettaja toimi kieltämättä täysin itse väärin ja kohtuuttomasti kysyessään yllättäen noin tarkkaa lukua.",
+              "Tekoälyn todella monimutkainen matemaattinen ohjelmisto poisti automaattisesti kaikki vuosiluvut kokonaan tekstin joukosta siksi, koska matemaattiset numerot vievät aina liikaa kallista tallennustilaa tietokoneiston omalta rajalliselta kovalevyltä."
             ],
             "correctAnswer": "Tiivistelmä auttaa ymmärtämään ison kuvan, mutta tarkat yksityiskohdat kannattaa lukea oikeasta kirjasta.",
             "explanation": "Tekoälyn tekemä muistilista on mahtava kertausapu, mutta se ei korvaa koko oppikirjan lukemista. Tärkeät \"pienet varaosat\" ja faktat pitää usein opetella alkuperäisestä tekstistä!"
