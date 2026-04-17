@@ -10232,9 +10232,9 @@ export const categories = [
             "question": "Miksi tekoäly on niin uskomattoman nopea ja hyvä heittelemään satoja uusia ideoita pöytään sekunneissa?",
             "options": [
               "Koska se on opetettu valtavalla määrällä internetin tekstejä ja tarinoita, joita se osaa yhdistellä uusin tavoin.",
-              "Koska se varastaa nopeasti kaikki parhaat ideat muiden ihmisten salaisista aivoituksista.",
-              "Koska se on juonut todella paljon energiajuomia autotallin pimeässä nurkassa.",
-              "Koska tekoälyn sisällä asuu sata pientä kirjailijaa, jotka kirjoittavat todella nopeasti."
+              "Koska se pystyy varastamaan nopeasti täsmälleen samoja ideoita koko internetistä, joita keksijät miettivät salaa.",
+              "Koska sen ohjelmisto on kytketty tietokoneeseen, joka yrittää automaattisesti piirtää uusia tauluja ja keksiä uusia asioita koko ajan väsymättä.",
+              "Koska tekoälyn valtavan koodiston sisällä työskentelee salaa satoja pieniä ja älykkäitä kirjoittajia, jotka tekevät sääntöjä pitkälle aamuun."
             ],
             "correctAnswer": "Koska se on opetettu valtavalla määrällä internetin tekstejä ja tarinoita, joita se osaa yhdistellä uusin tavoin.",
             "explanation": "Koska kielimallit ovat lukeneet miljoonia tarinoita, kirjoja ja artikkeleita, niillä on valtava \"varasto\" asioita, joista ne voivat rakentaa matemaattisesti uusia ja luovia yhdistelmiä."
@@ -10244,10 +10244,10 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Suunnittelette luokan kanssa uutta teatteriesitystä, mutta jännittävä loppuratkaisu puuttuu. Miten tekoäly voi pelastaa teatteriesityksen aivoriihen?",
             "options": [
-              "Se voi mennä lavalle näyttelemään esityksen teidän puolestanne täysin yksin.",
+              "Tekoäly ohjelmoidaan menemään virtuaalisesti lavalle näyttelemään upea esitys poissaolevien puolestanne alusta loppuun saakka ilman kenenkään omaa osallistumista.",
               "Syötätte sille tarinan alun ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
-              "Se voi sammuttaa luokan valot ja kertoa kaikkien nukkumaan menosta.",
-              "Se voi tulostaa internetistä aivan toisen, jo olemassa olevan näytelmän kopion teille."
+              "Sammutatte luokan valot ja luotatte siihen, että se päättää kaikkien nukkumaanmeno-ohjeet täydellisesti ilman, että kenenkään ihmisen tarvitsee lisätä asioita.",
+              "Se voi skannata internetistä ja tulostaa täysin valmiin kopion olemassaolevasta näytelmästä, jonka esitätte suoraan sellaisenaan ilman luovaa loppuratkaisua."
             ],
             "correctAnswer": "Syötätte sille tarinan alun ja pyydätte sitä keksimään viisi erilaista yllättävää loppuratkaisua, joista voitte äänestää parhaan.",
             "explanation": "Tekoäly voi jatkaa siitä, mihin ihmisen mielikuvitus loppuu! Kun annatte sille alkutiedot, se voi antaa uusia näkökulmia ja yllättäviä vaihtoehtoja aivoriihen avuksi."
@@ -10302,10 +10302,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Pyydät tekoälyltä ideaa uuteen keksintöön, mutta sen antama ehdotus on maailman tylsin: \"Tee uusi pöytä.\" Mitä sinun kannattaa tehdä?",
             "options": [
-              "Rakentaa se pöytä, koska tekoäly on koneena aina oikeassa.",
+              "Päätät suoraan rakentaa sen uuden puisen pöydän, koska huippuedistynyt tekoäly tietää laitteena luonnollisesti aivan kaikista keksinnöistä paljon paremmin kuin ihminen.",
               "Antaa sille heti uusi kehote (prompti): 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
-              "Lopettaa keksintöjen miettiminen ikuisiksi ajoiksi kokonaan.",
-              "Istua pöydän alle piiloon tekoälyä."
+              "Sinun kannattaa sulkea laite, mennä ulos ja päättää, ettet yritä enää koskaan keksiä ainoatakaan uutta ja siistiä keksintöä moisen epäonnistumisen takia.",
+              "Suutut täysin sille annetusta vastauksesta, piilotat näyttöruudun näkyvistä pöydän alle, etkä tahdo tutustua koko sovellukseen lainkaan missään myöhemmässäkään vaiheessa."
             ],
             "correctAnswer": "Antaa sille heti uusi kehote (prompti): 'Tuo oli tylsä idea, keksi paljon oudompi ja hassumpi keksintö!'",
             "explanation": "Iterointi on luovuuden salaisuus! Jos apukuski on tylsällä tuulella, ohjaa sitä rohkeasti keksimään luovempia ja hullumpia asioita antamalla palautetta."
@@ -10326,14 +10326,14 @@ export const categories = [
           {
             "id": "kayttotaidot_4_q15",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa sinulle hassun listan nimiä: \"Kuramönksä 3000, Mutahirviö-X ja Sukkulapossu.\" Mikä oli ohjeesi (promptisi)?",
+            "question": "Tekoäly antaa sinulle hassun listan nimiä: \"Kuramönksä 3000, Mutahirviö-X ja Sukkulapossu.\" Mikä oli kehotteesi (promptisi)?",
             "options": [
               "Listaa minulle asiallisia ja hienoja tieteellisiä nimiä uudelle avaruusraketille.",
-              "Keksi 3 hauskaa ja hieman outoa nimeä uudelle mutaiselle mönkijälle.",
+              "Keksi kolme hauskaa ja hieman outoa nimeä uudelle mutaiselle mönkijälle.",
               "Mitkä ovat maailman kolme yleisintä etunimeä, joita pojille annetaan?",
               "Käännä minulle englanniksi sanat kura, hirviö ja possu."
             ],
-            "correctAnswer": "Keksi 3 hauskaa ja hieman outoa nimeä uudelle mutaiselle mönkijälle.",
+            "correctAnswer": "Keksi kolme hauskaa ja hieman outoa nimeä uudelle mutaiselle mönkijälle.",
             "explanation": "Nimi-ideoiden keksiminen on yksi hauskimpia asioita, joita tekoälyn kanssa voi tehdä! Kun annat sille teeman (mutainen mönkijä) ja sävyn (hauska ja outo), se keksii hetkessä vaihtoehtoja, joista voit valita suosikkisi."
           }
         ]

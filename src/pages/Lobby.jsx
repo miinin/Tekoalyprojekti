@@ -216,7 +216,7 @@ export default function Lobby() {
         .lobby-bg {
             position: absolute;
             inset: -20px;
-            background: linear-gradient(-45deg, #0ea5e9, #10b981, #059669, #f59e0b);
+            background: linear-gradient(-45deg, #bae6fd, #e0f2fe, #d1fae5, #fef3c7);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
             z-index: -2;
