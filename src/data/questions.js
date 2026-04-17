@@ -3948,14 +3948,14 @@ export const categories = [
           {
             "id": "digiturva_4_q9",
             "type": "multiple_choice",
-            "question": "Auton kojelauta pyytää sinua päivittämään sen käyttöjärjestelmän uuteen versioon. Mitä teet?",
+            "question": "AI vanin älykäs kosketusnäyttö ilmoittaa, että laitteelle on saatavilla tärkeä ohjelmistopäivitys. Mitä teet?",
             "options": [
-              "Päivitän sen heti, koska päivitykset korjaavat tietoturva-aukkoja.",
-              "Ohitan päivityksen, koska ne ovat oikeasti aina viruksia.",
-              "Sammutan auton ja piilotan avaimet roskikseen.",
-              "Odotan ainakin kolme vuotta ennen uutta päivitystä."
+              "Asennan päivityksen heti, koska päivitykset korjaavat tietoturva-aukkoja.",
+              "Ohitan päivityksen, koska ne ovat oikeasti melkein aina viruksia.",
+              "Sammutan auton virtanapista ja piilotan avaimet roskikseen.",
+              "Odotan ainakin pari vuotta, jotta uusi päivitys on varmasti valmis."
             ],
-            "correctAnswer": "Päivitän sen heti, koska päivitykset korjaavat tietoturva-aukkoja.",
+            "correctAnswer": "Asennan päivityksen heti, koska päivitykset korjaavat tietoturva-aukkoja.",
             "explanation": "Päivitykset ovat kuin laittaisi uutta ruosteenestoainetta laitteen pintaan! Ne korjaavat ohjelmiston vanhoja virheitä ja pitävät virukset loitolla."
           },
           {
