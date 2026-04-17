@@ -146,9 +146,17 @@ export default function Quiz() {
             wrong.sort(() => Math.random() - 0.5);
             correct.sort(() => Math.random() - 0.5);
             
-            // Priorisoi: Kysymättömät -> Väärin vastatut -> Oikein vastatut
-            const selected = [...unasked, ...wrong, ...correct].slice(0, 5);
-            selected.sort(() => Math.random() - 0.5); // Sekoitetaan ettei aina tule helppoja peräkkäin
+            let pool = [...unasked, ...wrong];
+            let selected = [];
+            
+            if (pool.length > 0) {
+               // Jos jäljellä on alle 5 vastaamatonta tai väärää, näytetään vain ne.
+               selected = pool.slice(0, 5);
+            } else {
+               // Jos kaikki on jo tehty (kategoriapalkin uudelleenpeluu), näytetään satunnaiset vanhat 5
+               selected = correct.slice(0, 5);
+            }
+            selected.sort(() => Math.random() - 0.5);
             setQuestions(selected);
          }
        }
