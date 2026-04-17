@@ -1396,7 +1396,7 @@ export const categories = [
       },
       {
         "id": "perusteet_7",
-        "name": "G. Tarkastuspiste – Tiukka Katsastus",
+        "name": "Tarkastuspiste - tiukka katsastus",
         "questions": [
           {
             "id": "perusteet_7_q1",
@@ -9243,7 +9243,7 @@ export const categories = [
       },
       {
         "id": "reilu_peli_7",
-        "name": "G. Tarkastuspiste – Häijy Kaahari",
+        "name": "Tarkastuspiste - häijy kaahari",
         "questions": [
           {
             "id": "reilu_peli_7_q1",
@@ -10810,7 +10810,7 @@ export const categories = [
       },
       {
         "id": "kayttotaidot_7",
-        "name": "G. Finaali – Suuri Mestariralli",
+        "name": "Finaali - suuri mestariralli",
         "questions": [
           {
             "id": "kayttotaidot_7_q1",

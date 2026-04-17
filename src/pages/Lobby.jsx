@@ -479,6 +479,9 @@ export default function Lobby() {
                               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                   <Paintbrush size={24} color="#ca8a04" /> Ville Schalin
                               </span>
+                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <Settings size={24} color="#ca8a04" /> Matti Riikonen
+                              </span>
                           </div>
                       </div>
 
