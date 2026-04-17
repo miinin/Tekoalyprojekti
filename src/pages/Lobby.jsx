@@ -431,25 +431,62 @@ export default function Lobby() {
             <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={28} /></button>
                
-               <h2 style={{ fontSize: '2.8rem', color: '#047857', fontFamily: 'var(--font-display)', margin: '0 0 2.5rem 0' }}>Pelin Tekijät</h2>
-               <div style={{ fontSize: '1.4rem', color: '#334155', fontFamily: 'var(--font-main)', lineHeight: '1.6' }}>
-                  <p style={{ fontWeight: 'bold', fontSize: '1.6rem', marginBottom: '2rem' }}>
-                    Miika Miinin<br />
-                    Heikki Laivamaa<br />
-                    Pauli Hirvonen
-                  </p>
-                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset konsultoinnista:</p>
-                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.3rem' }}>
-                    Ville Myllys ja Ville Schalin
-                  </p>
-                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Kiitokset pelitestaajille:</p>
-                  <p style={{ fontStyle: 'italic', color: '#475569', fontSize: '1.3rem' }}>
-                    Samu, Saaga, Eemi ja Otavian Anne, Lauri ja Kari.
-                  </p>
-                  <p style={{ marginTop: '2.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Hyödynnetyt tekoälypalvelut:</p>
-                  <p style={{ fontWeight: 'bold', color: '#334155', fontSize: '1.3rem' }}>
-                    Google Antigravity, NotebookLM sekä Google Gemini
-                  </p>
+               <h2 style={{ fontSize: '3.4rem', background: 'linear-gradient(135deg, #10b981, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-display)', margin: '0 0 2.5rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                  Pelin Tekijät
+               </h2>
+               
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%', maxWidth: '850px', fontFamily: 'var(--font-main)' }}>
+                  
+                  {/* Kehittäjät */}
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
+                          <Users size={20} /> Vastaavat Kehittäjät
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Miika Miinin</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Heikki Laivamaa</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Pauli Hirvonen</span>
+                      </div>
+                  </div>
+
+                  {/* Konsultit */}
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
+                          <GraduationCap size={20} /> Erityiskiitokset konsultoinnista
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>Ville Myllys</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>Ville Schalin</span>
+                      </div>
+                  </div>
+
+                  {/* Testaajat */}
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
+                          <Play size={20} /> Kiitokset pelitestaajille
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Samu</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Saaga</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Eemi</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Otavian Anne</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Lauri</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Kari</span>
+                      </div>
+                  </div>
+
+                  {/* AI Palvelut */}
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
+                          <Zap size={20} /> Hyödynnetyt tekoälypalvelut
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>Google Antigravity</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>NotebookLM</span>
+                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>Google Gemini</span>
+                      </div>
+                  </div>
+
                </div>
             </div>
          </div>
