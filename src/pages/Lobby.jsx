@@ -435,29 +435,27 @@ export default function Lobby() {
             <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem 3.5rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', minHeight: '80vh', maxHeight: '95vh', overflowY: 'auto', zIndex: 10, textAlign: 'center' }}>
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
-               <h2 style={{ fontSize: '3.2rem', background: 'linear-gradient(135deg, #10b981, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-display)', margin: '0 0 2rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                  Pelin Tekijät
+                  Kuskit ja apukuskit
                </h2>
                
                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '100%', maxWidth: '1100px', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
                   
                   {/* Kehittäjät */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '3rem', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1.2rem', marginBottom: '2.5rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '2px' }}>
-                              <Users size={28} color="#0ea5e9" /> Vastaavat Kehittäjät
-                          </div>
-                          <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '70px', objectFit: 'contain', opacity: 0.95 }} />
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.5rem 2rem', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1rem' }}>
+                          <Users size={22} color="#0ea5e9" /> Vastaavat Kehittäjät
                       </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.5rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.2rem' }}><Settings size={28} color="#0284c7" /> <BookOpen size={28} color="#0284c7" /> <Paintbrush size={28} color="#0284c7" /></div> Miika Miinin
+                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '0.8rem' }}>
+                          <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '45px', objectFit: 'contain', opacity: 0.95 }} />
+                          <span style={{ fontSize: '1.8rem', fontWeight: 'bold', color: '#94a3b8', margin: '0 0.5rem' }}>:</span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
+                              <div style={{ display: 'flex', gap: '0.4rem' }}><Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> <Paintbrush size={18} color="#0284c7" /></div> Miika Miinin
                           </span>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.5rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.2rem' }}><Settings size={28} color="#0284c7" /> <BookOpen size={28} color="#0284c7" /></div> Heikki Laivamaa
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
+                              <div style={{ display: 'flex', gap: '0.4rem' }}><Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /></div> Heikki Laivamaa
                           </span>
-                          <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.5rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
-                              <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.2rem' }}><Paintbrush size={28} color="#0284c7" /></div> Pauli Hirvonen
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.8rem 1.2rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)' }}>
+                              <div style={{ display: 'flex', gap: '0.4rem' }}><Paintbrush size={18} color="#0284c7" /></div> Pauli Hirvonen
                           </span>
                       </div>
                   </div>
@@ -466,7 +464,7 @@ export default function Lobby() {
                       {/* Konsultit */}
                       <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <GraduationCap size={24} color="#ca8a04" /> Erikoiskonsultointi
+                              <GraduationCap size={24} color="#ca8a04" /> Kiitos konsultoinnista!
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexGrow: 1, justifyContent: 'center' }}>
                               <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
@@ -495,7 +493,7 @@ export default function Lobby() {
                       {/* AI Palvelut */}
                       <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <Zap size={24} color="#8b5cf6" /> AI-Palvelut
+                              <Zap size={24} color="#8b5cf6" /> Tekoälypalvelut
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexGrow: 1, justifyContent: 'center' }}>
                               {['Google Antigravity', 'NotebookLM', 'Google Gemini'].map(name => (
