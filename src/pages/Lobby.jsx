@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush } from 'lucide-react';
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -443,9 +443,15 @@ export default function Lobby() {
                           <Users size={20} /> Vastaavat Kehittäjät
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Miika Miinin</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Heikki Laivamaa</span>
-                          <span style={{ padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>Pauli Hirvonen</span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
+                              <Settings size={18} /> <BookOpen size={18} /> <Paintbrush size={18} /> Miika Miinin
+                          </span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
+                              <Settings size={18} /> <BookOpen size={18} /> Heikki Laivamaa
+                          </span>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
+                              <Paintbrush size={18} /> Pauli Hirvonen
+                          </span>
                       </div>
                   </div>
 
