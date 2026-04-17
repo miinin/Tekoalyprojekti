@@ -3963,12 +3963,12 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Kaverisi autotallissa on irrallinen muistitikku, josta hän sanoo: \"Tällä tikulla on aivan sika hieno peli, laita tää sun koneeseen!\" Et kuitenkaan tiedä, kenen tikku on tai mistä se on peräisin. Mitä teet?",
             "options": [
-              "En laita tikkua koneeseen, koska siinä voi olla digitaalista ruostetta.",
+              "En laita tikkua koneeseen, koska siinä voi olla haittaohjelmia.",
               "Laitan tikun koneeseen, mutta en avaa peliä heti.",
               "Kopioin tikun sisällön ensin isän omalle tietokoneelle.",
               "Laitan tikun kiinni ja alan heti pelata peliä innoissani."
             ],
-            "correctAnswer": "En laita tikkua koneeseen, koska siinä voi olla digitaalista ruostetta.",
+            "correctAnswer": "En laita tikkua koneeseen, koska siinä voi olla haittaohjelmia.",
             "explanation": "Tuntemattomat muistitikut ovat valtava riski! Niissä voi piillä haittaohjelmia, jotka tarttuvat koneellesi täysin huomaamatta heti tikun kytkemisen jälkeen."
           },
           {
