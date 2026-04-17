@@ -147,7 +147,7 @@ export default function Garage() {
     { id: 'van-wheel02', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Alumiinivanteet', desc: 'Kevyet ja tyylikkäät.', price: 300, icon: <Aperture size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Väärän poisto', desc: 'Antaa +3 Poistoa per kartta!' } },
     { id: 'van-wheel03', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Erikoisvanteet', desc: 'Kun vain paras kelpaa.', price: 600, icon: <Sparkles size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Väärän poisto', desc: 'Antaa +4 Poistoa per kartta!' } },
     { id: 'van-wheel05', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Vintage-vanteet', desc: 'Tyylikästä nostalgiaa.', price: 1000, icon: <Disc size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Väärän poisto', desc: 'Antaa +5 Poistoa per kartta!' } },
-    { id: 'van-wheel06', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 800, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Talvipito', desc: 'Perus +2 Poistoa, mutta Reilu peli -kartalla antaa jopa +5 Poistoa!' } },
+    { id: 'van-wheel06', category: 'wheel', categoryName: 'Renkaat ja vanteet', name: 'Talvirenkaat', desc: 'Pitoa liukkaille.', price: 800, icon: <Disc size={28} />, color: '#0ea5e9', bg: '#e0f2fe', buff: { title: 'Talvipito', desc: 'Antaa +2 poistoa per kartta ja tämän lisäksi +3 poistoa Reilu peli -kartalla.' } },
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Roots-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7' },
@@ -884,7 +884,13 @@ export default function Garage() {
                       <span style={{ fontWeight: '900', fontSize: '1.1rem', color: hoveredObj.color || '#166534', textTransform: 'uppercase', letterSpacing: '0.5px', textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>{hoveredObj.buff.title}</span>
                    </div>
                    <div style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#334155', fontWeight: '500' }}>
-                      {hoveredObj.buff.desc}
+                      {hoveredObj.buff.desc.split(/(poistoa|poisto|vaihtoa|vaihto\-apua|vaihto|uutta yritystä|toinen yritys|uusia yrityksiä|uusi yritys)/i).map((part, i) => {
+                          const lower = part.toLowerCase();
+                          if (lower.startsWith('poisto')) return <b key={i} style={{color: '#d97706'}}>{part}</b>;
+                          if (lower.startsWith('vaihto')) return <b key={i} style={{color: '#15803d'}}>{part}</b>;
+                          if (lower.includes('yritys') || lower.includes('yrityk')) return <b key={i} style={{color: '#b91c1c'}}>{part}</b>;
+                          return part;
+                      })}
                    </div>
                 </div>
               )}
