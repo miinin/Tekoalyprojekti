@@ -746,7 +746,7 @@ const Roadmap = () => {
                     handleNodeClick(node.id, currentMap === 'main');
                 }
             }}
-            className={isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : "")}
+            className={(isLastNode && !isLocked && !medal) ? "animate-wiggle-strong" : (isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : ""))}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 height: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -754,10 +754,10 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '3px solid white' : (medal ? '0' : '4px solid white'),
-                borderColor: medal ? 'transparent' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? 'white' : (isLastNode ? '#fef08a' : 'white')),
+                border: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '3px solid white' : (medal ? '0' : (isLastNode ? '4px solid #fbbf24' : '4px solid white')),
+                borderColor: medal ? 'transparent' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? 'white' : (isLastNode ? '#fbbf24' : 'white')),
                 boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '0 0 0 5px rgba(255,255,255,0.7)' : (isLastNode && !isLocked ? '0 0 25px rgba(251, 191, 36, 0.6)' : '0 8px 20px rgba(0,0,0,0.2)')),
-                background: medal ? 'transparent' : (isLocked ? '#94a3b8' : (isLastNode ? 'var(--secondary-color)' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
+                background: medal ? 'transparent' : (isLocked ? '#94a3b8' : (isLastNode ? '#fbbf24' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
                 opacity: isLocked ? 0.8 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
@@ -799,7 +799,12 @@ const Roadmap = () => {
                       }
                   };
                   if (isLastNode) {
-                      return <span style={{ fontSize: fSize, fontWeight: 900, color: 'white', fontFamily: 'var(--font-display)' }}>!</span>;
+                      return (
+                          <svg width={currentMap === 'main' ? '40px' : '32px'} height={currentMap === 'main' ? '40px' : '32px'} viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" style={{ overflow: 'visible' }}>
+                              <path d="M12 4v10" />
+                              <path d="M12 20v.01" />
+                          </svg>
+                      );
                   }
                   const iconName = getIconString(currentMap === 'main' ? node.id : currentMap);
                   return <MatIcon name={iconName} />;
