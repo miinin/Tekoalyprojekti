@@ -446,57 +446,57 @@ export default function Lobby() {
                           <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '36px', objectFit: 'contain', opacity: 0.9, marginTop: '0.5rem' }} />
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
-                              <Settings size={18} /> <BookOpen size={18} /> <Paintbrush size={18} /> Miika Miinin
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> <Paintbrush size={18} color="#0284c7" /> Miika Miinin
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
-                              <Settings size={18} /> <BookOpen size={18} /> Heikki Laivamaa
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Settings size={18} color="#0284c7" /> <BookOpen size={18} color="#0284c7" /> Heikki Laivamaa
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#dcfce7', color: '#15803d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(22, 163, 74, 0.15)' }}>
-                              <Paintbrush size={18} /> Pauli Hirvonen
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Paintbrush size={18} color="#0284c7" /> Pauli Hirvonen
                           </span>
                       </div>
                   </div>
 
                   {/* Konsultit */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <GraduationCap size={20} /> Erityiskiitokset konsultoinnista
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>
-                              <ShieldCheck size={18} /> Ville Myllys
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <ShieldCheck size={18} color="#ca8a04" /> Ville Myllys
                           </span>
-                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#fef3c7', color: '#b45309', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 10px rgba(245, 158, 11, 0.15)' }}>
-                              <Paintbrush size={18} /> Ville Schalin
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                              <Paintbrush size={18} color="#ca8a04" /> Ville Schalin
                           </span>
                       </div>
                   </div>
 
                   {/* Testaajat */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <Play size={20} /> Kiitokset pelitestaajille
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Samu</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Saaga</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Eemi</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Anne Rongas</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Lauri Ylä-Jussila</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#e0e7ff', color: '#4338ca', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(67, 56, 202, 0.1)' }}>Kari A. Hintikka</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Samu</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Saaga</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Eemi</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Anne Rongas</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Lauri Ylä-Jussila</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Kari A. Hintikka</span>
                       </div>
                   </div>
 
                   {/* AI Palvelut */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '2px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '1.2rem' }}>
                           <Zap size={20} /> Hyödynnetyt tekoälypalvelut
                       </div>
                       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0.8rem' }}>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>Google Antigravity</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>NotebookLM</span>
-                          <span style={{ padding: '0.5rem 1.2rem', background: '#fce7f3', color: '#be185d', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(190, 24, 93, 0.1)' }}>Google Gemini</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Antigravity</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>NotebookLM</span>
+                          <span style={{ padding: '0.6rem 1.4rem', background: '#ffffff', color: '#334155', border: '1px solid #cbd5e1', borderRadius: '100px', fontWeight: '500', fontSize: '1.2rem', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>Google Gemini</span>
                       </div>
                   </div>
 
