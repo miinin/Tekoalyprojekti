@@ -93,10 +93,10 @@ export default function Quiz() {
 
        let greenCharge = 0;
        const tools = equipped['g_tools'] || '';
-       if (tools === 'g-walltools6') greenCharge = 2;
-       else if (tools === 'g-walltools1') greenCharge = 3;
-       else if (tools === 'g-walltools5') greenCharge = 4;
-       else if (tools === 'g-walltools2') greenCharge = 5;
+       if (tools === 'g-walltools1') greenCharge = 2;
+       else if (tools === 'g-walltools2') greenCharge = 3;
+       else if (tools === 'g-walltools6') greenCharge = 4;
+       else if (tools === 'g-walltools5') greenCharge = 5;
        else if (tools === 'g-walltools3') greenCharge = 6;
        else if (tools === 'g-walltools4') greenCharge = 7;
 
@@ -428,7 +428,8 @@ export default function Quiz() {
   };
 
   const useYellowMeter = () => {
-      if (currentQuestion.type !== 'multiple_choice') return;
+      const isValidTarget = currentQuestion.options && currentQuestion.options.length > 2;
+      if (!isValidTarget) return;
       if (useCharge('yellow')) {
           const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
           let amount = getYellowPower();
@@ -846,11 +847,11 @@ export default function Quiz() {
             const grem = quizCharges.green - usedCharges.green;
             const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
             
-            const isMultipleChoice = currentQuestion.type === 'multiple_choice';
+            const isMultipleChoice = currentQuestion.options && currentQuestion.options.length > 2;
             const canUseYellow = isMultipleChoice && ytotal > 0;
 
             const yTitle = !isMultipleChoice 
-               ? "Poisto toimii vain monivalintatehtävissä."
+               ? "Poisto toimii vain tehtävissä, joissa on useita vastausvaihtoehtoja."
                : (ytotal > 0 
                   ? "Poista yksi väärä vastausvaihtoehto!" 
                   : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä."));
