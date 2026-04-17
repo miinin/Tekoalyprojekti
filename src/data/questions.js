@@ -4551,10 +4551,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Mitä tarkoittaa omien tietojen pitäminen \"lukitussa hanskalokerossa\"?",
             "options": [
-              "Tavaroiden piilottamista oikeaan autoon.",
+              "Sitä, että piilotat kaikki arvokkaat fyysiset tavarasi oikean auton suljettuun hanskalokeroon turvaan mahdollisilta varkailta.",
               "Yksityisten tietojen (kuten nimen, osoitteen ja koulun) pitämistä turvassa ja poissa julkisesta netistä.",
-              "Kaikkien nettisivujen sulkemista.",
-              "Sitä, ettei netissä saa pelata koskaan."
+              "Kaikkien käyttämiesi nettisivujen lopullista sulkemista ja älylaitteiden virtapainikkeen sammuttamista varmuuden vuoksi.",
+              "Sellaista ehdotonta sääntöä, ettei netissä saa koskaan enää pelata mitään pelejä tai vierailla suosikkisivustoilla."
             ],
             "correctAnswer": "Yksityisten tietojen (kuten nimen, osoitteen ja koulun) pitämistä turvassa ja poissa julkisesta netistä.",
             "explanation": "Omat tärkeät henkilötiedot pidetään aina piilossa \"lukitussa hanskalokerossa\", eikä niitä jaeta chateissa koskaan vieraille ihmisille."
@@ -4653,10 +4653,10 @@ export const categories = [
             "type": "multiple_choice",
             "question": "Miksi kaksivaiheinen tunnistautuminen (kuten puhelimeen tuleva koodi) on tärkeää salasanojen lisäksi?",
             "options": [
-              "Se tekee autosta paljon nopeamman ajaa.",
+              "Koska se on digitaalinen erikoisominaisuus, joka tekee käyttämästäsi pelilaitteesta automaattisesti huomattavasti nopeamman verrattuna perusversioihin.",
               "Se on vahva lisälukko: vaikka rosvo arvaa salasanasi, hän ei pääse sisään ilman puhelintasi.",
-              "Se piilottaa laitteen kokonaan internetistä.",
-              "Se maksaa tilillesi ilmaista rahaa joka päivä."
+              "Koska kyseinen ominaisuus piilottaa kotisi internet-yhteyden kokonaan näkymättömiin muulta maailmalta ja estää samalla kaikki häiriöt.",
+              "Koska kyseessä on uudenlainen palkitsemisjärjestelmä, joka siirtää pelitilillesi valtavia määriä ilmaista virtuaalivaluuttaa joka aamu."
             ],
             "correctAnswer": "Se on vahva lisälukko: vaikka rosvo arvaa salasanasi, hän ei pääse sisään ilman puhelintasi.",
             "explanation": "Se toimii erinomaisena \"turvalukkona\". Vaikka salasana vuotaisi varkaille, pelitilisi pysyy turvassa ilman toista varmistuskoodia!"
@@ -4666,13 +4666,13 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Kuulet pelin äänichatissa kaverisi äänen, mutta hän pyytää kiireesti antamaan pelitilisi salasanan. Ääni kuulostaa oikealta, mutta pyyntö on todella outo. Mitä teet?",
             "options": [
-              "Annan salasanan heti, koska ääni on tuttu.",
+              "Kerron oman salasanani nopeasti joko mikrofoniin tai suoraan ykstyisviestillä, sillä tutun ihmisen pyyntöihin pitää voida luottaa täysin.",
               "Soitan kaverille oikealla puhelimella varmistaakseni asian, sillä kyseessä voi olla väärennetty ääni.",
-              "Lähetän salasanani kaikille muillekin pelaajille.",
-              "Nauran ja poistan pelin kokonaan."
+              "Kirjoitan salasanani saman tien pelin yleiseen ryhmächattiin, jotta kaikki muutkin läsnäolijat voivat auttaa ystävääni vaikeassa tilanteessa.",
+              "Suljen yhteysmikrofonin välittömästi, poistan pelin pysyvästi laitteeltani ja haen konesalistani täysin uuden tietokoneen pelaamista varten."
             ],
             "correctAnswer": "Soitan kaverille oikealla puhelimella varmistaakseni asian, sillä kyseessä voi olla väärennetty ääni.",
-            "explanation": "Tekoäly voi kloonata \"valepukuisille liftareille\" aivan aidon kuuloisen äänen! Omat salasanat pidetään aina itsellä ja oudot pyynnöt pitää varmistaa muuta kautta. ________________"
+            "explanation": "Tekoäly voi kloonata \"valepukuisille liftareille\" aivan aidon kuuloisen äänen! Omat salasanat pidetään aina itsellä ja oudot pyynnöt pitää varmistaa muuta kautta."
           }
         ]
       }

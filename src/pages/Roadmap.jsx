@@ -66,6 +66,85 @@ const Roadmap = () => {
   const [editWaypoints, setEditWaypoints] = useState([]);
   const [showMedalTutorial, setShowMedalTutorial] = useState(false);
   const [showWowMedal, setShowWowMedal] = useState(null);
+  const [showAllMedalsCelebration, setShowAllMedalsCelebration] = useState(false);
+  const [showAllPlatinumsCelebration, setShowAllPlatinumsCelebration] = useState(false);
+
+  const schoolConfetti = () => {
+    var duration = 5 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 99999 };
+    
+    function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+    
+    var interval = setInterval(function() {
+      var timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) return clearInterval(interval);
+      var particleCount = 50 * (timeLeft / duration);
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+  };
+
+  const fireworksConfetti = () => {
+    var duration = 10 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 40, spread: 360, ticks: 80, zIndex: 99999 };
+    
+    function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+    
+    var interval = setInterval(function() {
+      var timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) return clearInterval(interval);
+      var particleCount = 80 * (timeLeft / duration);
+      confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+  };
+
+  useEffect(() => {
+    let counts = { platinum: 0, gold: 0, silver: 0, bronze: 0 };
+    let totalNodes = 0;
+    const stats = store.getNodeStats();
+    
+    const calculateMedal = (stat) => {
+        if (!stat || stat.total === 0) return null;
+        if (stat.correct === stat.total && stat.total > 0) return 'platinum';
+        if (stat.correct >= Math.floor(stat.total * 0.9)) return 'gold';
+        if (stat.correct >= Math.floor(stat.total * 0.7)) return 'silver';
+        if (stat.correct >= 2) return 'bronze';
+        return null;
+    };
+
+    Object.keys(AI_ROADMAP_DATA.sub).forEach(mapId => {
+        const subData = AI_ROADMAP_DATA.sub[mapId];
+        if (subData && subData.nodes) {
+            subData.nodes.forEach(node => {
+                if (!node.isJunction) {
+                    totalNodes++;
+                    const m = calculateMedal(stats[node.id]);
+                    if (m) counts[m]++;
+                }
+            });
+        }
+    });
+
+    const totalMedals = counts.platinum + counts.gold + counts.silver + counts.bronze;
+    
+    if (totalNodes > 0 && typeof window !== 'undefined') {
+        if (counts.platinum === totalNodes) {
+             if (localStorage.getItem('seenAllPlatinums') !== 'true') {
+                 setShowAllPlatinumsCelebration(true);
+                 localStorage.setItem('seenAllPlatinums', 'true');
+                 fireworksConfetti();
+             }
+        } else if (totalMedals === totalNodes) {
+             if (localStorage.getItem('seenAllMedals') !== 'true' && localStorage.getItem('seenAllPlatinums') !== 'true') {
+                 setShowAllMedalsCelebration(true);
+                 localStorage.setItem('seenAllMedals', 'true');
+                 schoolConfetti();
+             }
+        }
+    }
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -1130,6 +1209,34 @@ const Roadmap = () => {
                 </p>
 
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.5rem', padding: '1.5rem' }} onClick={() => setShowWowMedal(null)}>Upeaa, jatka matkaa!</button>
+              </div>
+            )}
+
+            {showAllMedalsCelebration && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
+                <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#1d4ed8', textAlign: 'center', textShadow: '0 4px 10px rgba(29, 78, 216, 0.3)' }}>HURRAA! KAIKKI LÄPI!</h1>
+                <img src="/trophy/medal-gold.png" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                
+                <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#eff6ff', padding: '1rem', borderRadius: '12px' }}>
+                  Mahtavaa työtä, olet todellinen virtuoosi! Olet kerännyt mitalin aivan jokaisesta kartan tehtävästä.<br/><br/>
+                  Uskallatko vielä yrittää huipulle asti? Tavoittele platinaista mitalia jokaisesta kategoriasta vastaamalla kaikkiin tehtäviin täydellisesti!
+                </p>
+
+                <button className="btn-primary" style={{ width: '100%', background: '#2563eb', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowAllMedalsCelebration(false)}>Haaste vastaanotettu!</button>
+              </div>
+            )}
+
+            {showAllPlatinumsCelebration && (
+              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
+                <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#b45309', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>TÄYDELLINEN SUORITUS!</h1>
+                <img src="/trophy/medal-plat.png" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                
+                <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
+                  AIVAN USKOMATONTA! Olet saavuttanut legendaarisen platinamitalin aivan jokaisessa pelin osiossa!<br/><br/>
+                  Olet saavuttanut ÄLLIÄ-pelin absoluuttisen huipun. Olet selvästikin tekoälyn ja digiturvan todellinen mestari. Vuolaat onnittelut huikeasta urakasta!
+                </p>
+
+                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowAllPlatinumsCelebration(false)}>Olen mestari!</button>
               </div>
             )}
         <div style={mapInnerStyle} onClick={handleMapClick}>
