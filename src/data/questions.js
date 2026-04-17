@@ -3149,7 +3149,7 @@ export const categories = [
               "Kysyn salasanan kaverilta ja annan sen hänelle."
             ],
             "correctAnswer": "En koskaan anna salasanaani kenellekään vieraalle.",
-            "explanation": "Et antaisi AI vanin avaimia oikealle maantierosvollekaan! Salasanat pidetään aina ominaan, eikä niitä jaeta edes ystävällisille tyypeille netissä."
+            "explanation": "Et antaisi **AI vanin** avaimia oikealle maantierosvollekaan! Salasanat pidetään aina ominaan, eikä niitä jaeta edes ystävällisille tyypeille netissä."
           },
           {
             "id": "digiturva_1_q4",
@@ -3263,7 +3263,7 @@ export const categories = [
           {
             "id": "digiturva_1_q11",
             "type": "drag_drop",
-            "question": "Raahaa salasanan palaset oikeille paikoilleen, jotta niistä muodostuu yksi pitkä ja vahva \"salalause\"! (Lause on: VihreäAutoAjaa100!)",
+            "question": "Raahaa salasanan palaset oikeille paikoilleen, jotta niistä muodostuu yksi lauseenomainen ja vahva \"salalause\"! Mieti, mikä olisi looginen ja sääntöjen mukainen järjestys sanoille.",
             "draggables": [
               "Vihreä",
               "Auto",
