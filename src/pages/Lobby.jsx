@@ -13,6 +13,7 @@ export default function Lobby() {
   const [testMode, setTestMode] = useState(store.getTestMode());
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
   const [showSettings, setShowSettings] = useState(false);
+  const [showInfoBox, setShowInfoBox] = useState(false);
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
   const [modalState, setModalState] = useState(null);
@@ -225,7 +226,7 @@ export default function Lobby() {
 
       <div className="animate-fade-in" style={{
          position: 'relative',
-         background: 'rgba(255, 255, 255, 0.35)',
+         background: 'rgba(255, 255, 255, 0.15)',
          backdropFilter: 'blur(25px)',
          WebkitBackdropFilter: 'blur(25px)',
          border: '1px solid rgba(255,255,255,0.8)',
@@ -244,8 +245,11 @@ export default function Lobby() {
           <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
               <GraduationCap size={20} color="#15803d" /> Opettajalle
           </button>
+          <button onClick={() => setShowInfoBox(true)} title="Tietoa pelistä" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: '0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              <Info size={22} color="#15803d" />
+          </button>
           <div style={{ position: 'relative' }}>
-            <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', width: '44px', height: '44px', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: '0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+            <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: '0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
                 <Settings size={22} color="#15803d" />
             </button>
             {showSettings && (
@@ -417,6 +421,28 @@ export default function Lobby() {
                <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: '1.2rem', padding: '1rem' }} onClick={modalState.onClose}>
                   {modalState.buttonText || 'Selvä'}
                </button>
+            </div>
+         </div>
+      )}
+
+      {showInfoBox && (
+         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
+            <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.45)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
+               <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={28} /></button>
+               
+               <h2 style={{ fontSize: '2.8rem', color: '#047857', fontFamily: 'var(--font-display)', margin: '0 0 2.5rem 0' }}>Pelin Tekijät</h2>
+               <div style={{ fontSize: '1.4rem', color: '#334155', fontFamily: 'var(--font-main)', lineHeight: '1.6' }}>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.6rem', marginBottom: '2.5rem' }}>
+                    Miika Miinin<br />
+                    Heikki Laivamaa<br />
+                    Pauli Hirvonen
+                  </p>
+                  <p style={{ marginTop: '3.5rem', color: '#15803d', fontSize: '1.6rem', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Erityiskiitokset pelitestaajille:</p>
+                  <p style={{ fontStyle: 'italic', color: '#475569', fontSize: '1.3rem' }}>
+                    Samu, Saaga, Eemi ja Otavian Anne, Lauri ja Kari.
+                  </p>
+               </div>
             </div>
          </div>
       )}
