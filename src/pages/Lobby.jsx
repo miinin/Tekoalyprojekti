@@ -209,22 +209,24 @@ export default function Lobby() {
       {/* Animated gradient background */}
       <style>{`
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% { background-position: 0% 0%; }
+            25% { background-position: 100% 20%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 20% 100%; }
+            100% { background-position: 0% 0%; }
         }
         .lobby-bg {
             position: absolute;
             inset: -20px;
-            background: linear-gradient(-45deg, #ecfdf5, #d1fae5, #bbf7d0, #a7f3d0);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: linear-gradient(110deg, #fef3c7, #fef08a, #d9f99d, #bbf7d0, #fbcfe8, #fef08a);
+            background-size: 300% 300%;
+            animation: gradientBG 20s ease-in-out infinite;
             z-index: -2;
         }
         .lobby-overlay {
             position: absolute;
             inset: -20px;
-            background: radial-gradient(circle at center, transparent, rgba(167, 243, 208, 0.4));
+            background: radial-gradient(circle at center, transparent, rgba(250, 204, 21, 0.15));
             z-index: -1;
         }
         .mode-card {
