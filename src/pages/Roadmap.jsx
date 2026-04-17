@@ -799,7 +799,7 @@ const Roadmap = () => {
                       }
                   };
                   if (isLastNode) {
-                      return <MatIcon name="emoji_events" />; // Pokaali/kulta -ikoni pomolle
+                      return <span style={{ fontSize: fSize, fontWeight: 900, color: 'white', fontFamily: 'var(--font-display)' }}>!</span>;
                   }
                   const iconName = getIconString(currentMap === 'main' ? node.id : currentMap);
                   return <MatIcon name={iconName} />;
