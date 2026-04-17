@@ -831,7 +831,7 @@ export default function Quiz() {
                     const rtotal = (rrem > 0 ? rrem : 0) + (teacherBoosts.red || 0);
                     const rTitle = rtotal > 0 
                        ? "Sait uuden yrityksen! Kokeile samaa tehtävää uudelleen rangaistuksetta." 
-                       : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Passiivinen: Asenna Autotallissa erikoisvaruste (esim. Snorkkeli) saadaksesi lisäyrityksiä!" : "Ei yrityksiä jäljellä. Tarvitset paremman varusteen Autotallista tai vaihda karttaa.");
+                       : (quizCharges.red === 0 && (teacherBoosts.red || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi uusia yrityksiä" : "Ei yrityksiä jäljellä. Tarvitset paremman varusteen Autotallista tai vaihda karttaa.");
                     return (
                        <div 
                           onMouseEnter={(e) => { setHoveredTool('red'); if(rtotal > 0) { e.currentTarget.style.transform = 'translateY(-2px)'; } }}

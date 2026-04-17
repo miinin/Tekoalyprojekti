@@ -6108,7 +6108,7 @@ export const categories = [
       },
       {
         "id": "aivoterveys_7",
-        "name": "G. Erikoiskoe – Sumuinen Yöajo",
+        "name": "Erikoiskoe: sumuinen yöajo",
         "questions": [
           {
             "id": "aivoterveys_7_q1",

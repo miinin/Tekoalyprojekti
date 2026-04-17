@@ -154,7 +154,7 @@ export const AI_ROADMAP_DATA = {
         { id: 'aivoterveys_4', top: '54.4%', left: '66.4%' },
         { id: 'aivoterveys_5', top: '62.5%', left: '81.0%' },
         { id: 'aivoterveys_6', top: '79.0%', left: '77.9%' },
-        { id: 'aivoterveys_7', top: '85.9%', left: '44.7%' },
+        { id: 'aivoterveys_7', top: '77.0%', left: '43.8%' },
         { id: 'jun_1', top: '81.2%', left: '74.0%', isJunction: true },
         { id: 'jun_2', top: '76.6%', left: '74.5%', isJunction: true },
         { id: 'jun_3', top: '46.8%', left: '54.7%', isJunction: true },
