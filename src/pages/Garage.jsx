@@ -570,8 +570,8 @@ export default function Garage() {
                         className="category-header" 
                         onClick={() => setCategory(catId)}
                         style={{ 
-                          borderColor: activeCategory === catId ? '#8b5cf6' : 'rgba(0,0,0,0.05)',
-                          background: activeCategory === catId ? '#f5f3ff' : 'rgba(255,255,255,0.7)',
+                          borderColor: activeCategory === catId ? '#ea580c' : 'rgba(0,0,0,0.05)',
+                          background: activeCategory === catId ? '#ffedd5' : 'rgba(255,255,255,0.7)',
                           pointerEvents: isLocked ? 'none' : 'auto',
                           opacity: isLocked ? 0.4 : 1,
                           filter: isLocked ? 'grayscale(100%)' : 'none',
@@ -579,10 +579,10 @@ export default function Garage() {
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                           {catId === 'g_floor' && <Grid size={18} color="#8b5cf6" />}
-                           {catId === 'g_walls' && <Layers size={18} color="#8b5cf6" />}
-                           {catId === 'g_tools' && <Wrench size={18} color="#8b5cf6" />}
-                           {catId === 'g_jack' && <Disc size={18} color="#8b5cf6" />}
+                           {catId === 'g_floor' && <Grid size={18} color="#ea580c" />}
+                           {catId === 'g_walls' && <Layers size={18} color="#ea580c" />}
+                           {catId === 'g_tools' && <Wrench size={18} color="#ea580c" />}
+                           {catId === 'g_jack' && <Disc size={18} color="#ea580c" />}
                            <span style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>{category.name}</span>
                         </div>
                       </div>
