@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -970,8 +970,9 @@ export default function Garage() {
                     </div>
                 </div>
 
-                <p style={{ color: '#64748b', fontStyle: 'italic', marginBottom: '2rem', fontSize: '0.95rem', background: '#f8fafc', padding: '1rem', borderRadius: '12px' }}>
-                    💡 <strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!
+                <p style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#64748b', fontStyle: 'italic', marginBottom: '2rem', fontSize: '0.95rem', background: '#f8fafc', padding: '1.2rem', borderRadius: '12px', border: '1px solid #f1f5f9' }}>
+                    <Lightbulb size={22} color="#eab308" style={{ flexShrink: 0 }} />
+                    <span style={{ lineHeight: '1.5' }}><strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!</span>
                 </p>
 
                 <button 
