@@ -319,15 +319,12 @@ export default function Quiz() {
     const floor = equippedItems['g_floor'] || '';
     const walls = equippedItems['g_walls'] || '';
     let garageBonus = 0;
-    if (floor === 'g-clean') garageBonus += 0.05;
-    else if (floor === 'g-floor-base') garageBonus += 0.10;
-    else if (floor === 'g-floor2') garageBonus += 0.15;
-    else if (floor === 'g-floor3') garageBonus += 0.25;
+    if (floor === 'g-floor3') garageBonus += 0.10;
 
-    if (walls === 'g-walls-base') garageBonus += 0.05;
+    if (walls === 'g-walls-base') garageBonus += 0.00;
     else if (walls === 'g-walls2') garageBonus += 0.10;
-    else if (walls === 'g-walls3') garageBonus += 0.15;
-    else if (walls === 'g-walls4') garageBonus += 0.25;
+    else if (walls === 'g-walls3') garageBonus += 0.20;
+    else if (walls === 'g-walls4') garageBonus += 0.30;
 
     const diff = Math.floor(baseDiff * (1 + garageBonus));
 

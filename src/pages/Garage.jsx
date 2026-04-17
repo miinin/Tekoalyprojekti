@@ -163,12 +163,12 @@ export default function Garage() {
     { id: 'g-clean', category: 'g_floor', categoryName: 'Lattia', name: 'Siivous', desc: 'Raivaa seittien ja lian pahin kerros.', price: 200, icon: <Sparkles size={28} />, color: '#854d0e', bg: '#fefce8' },
     { id: 'g-floor-base', category: 'g_floor', categoryName: 'Lattia', name: 'Öljytahrojen poisto', desc: 'Siivoaa öljyläikät.', price: 400, icon: <Grid size={28} />, color: '#a16207', bg: '#fefce8' },
     { id: 'g-floor2', category: 'g_floor', categoryName: 'Lattia', name: 'Säröjen korjaus', desc: 'Korjaa lattian säröt.', price: 800, icon: <Grid size={28} />, color: '#78716c', bg: '#f5f5f4' },
-    { id: 'g-floor3', category: 'g_floor', categoryName: 'Lattia', name: 'Betonilattia', desc: 'Uusi kestävä betonivalu.', price: 1500, icon: <Grid size={28} />, color: '#44403c', bg: '#e7e5e4' },
+    { id: 'g-floor3', category: 'g_floor', categoryName: 'Lattia', name: 'Betonilattia', desc: 'Uusi kestävä betonivalu.', price: 1500, icon: <Grid size={28} />, color: '#44403c', bg: '#e7e5e4', buff: { title: 'Työviihtyvyys', desc: 'Antaa pysyvän +10% lisän kaikkiin tienattuihin Kipinöihin!', isSpark: true } },
     
     { id: 'g-walls-base', category: 'g_walls', categoryName: 'Seinät', name: 'Seinien pesu', desc: 'Pesee lian seiniltä.', price: 500, icon: <Layers size={28} />, color: '#9a3412', bg: '#ffedd5' },
-    { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#c2410c', bg: '#ffedd5' },
-    { id: 'g-walls3', category: 'g_walls', categoryName: 'Seinät', name: 'Nykyaikainen talli', desc: 'Luotettava ja puhdas moderni tyyli.', price: 2000, icon: <Layers size={28} />, color: '#64748b', bg: '#f1f5f9' },
-    { id: 'g-walls4', category: 'g_walls', categoryName: 'Seinät', name: 'Futuristinen halli', desc: 'Korkean teknologian ja lasin liitto.', price: 5000, icon: <Sparkles size={28} />, color: '#334155', bg: '#e2e8f0' },
+    { id: 'g-walls2', category: 'g_walls', categoryName: 'Seinät', name: 'Syväpuhdistus', desc: 'Korjaa ja syväpuhdistaa seinät.', price: 1200, icon: <Layers size={28} />, color: '#c2410c', bg: '#ffedd5', buff: { title: 'Kiviseinät (Taso 1)', desc: 'Antaa pysyvän +10% lisän Kipinöihin!', isSpark: true } },
+    { id: 'g-walls3', category: 'g_walls', categoryName: 'Seinät', name: 'Nykyaikainen talli', desc: 'Luotettava ja puhdas moderni tyyli.', price: 2000, icon: <Layers size={28} />, color: '#64748b', bg: '#f1f5f9', buff: { title: 'Moderni tila (Taso 2)', desc: 'Antaa pysyvän +20% lisän Kipinöihin!', isSpark: true } },
+    { id: 'g-walls4', category: 'g_walls', categoryName: 'Seinät', name: 'Futuristinen halli', desc: 'Korkean teknologian ja lasin liitto.', price: 5000, icon: <Sparkles size={28} />, color: '#334155', bg: '#e2e8f0', buff: { title: 'Tulevaisuus (Maksimi)', desc: 'Antaa pysyvän +30% lisän Kipinöihin!', isSpark: true } },
     
     // TYÖKALUSARJAT (Vihreä mittari: Kysymyksen ohitus)
     { id: 'g-walltools6', category: 'g_tools', categoryName: 'Työkalut', name: '"Paremman puutteessa" -työkalut', desc: 'Näilläkin saa jotain aikaiseksi.', price: 150, icon: <Wrench size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Kysymyksen vaihto', desc: 'Antaa +2 Vaihtoa per kartta!' } },
@@ -203,6 +203,15 @@ export default function Garage() {
         meetsPrereq = false;
         prereqText = 'VAATII EDELLISEN';
     } else if (item.id === 'g-floor3' && !purchased.includes('g-floor2')) {
+        meetsPrereq = false;
+        prereqText = 'VAATII EDELLISEN';
+    } else if (item.id === 'g-walls2' && !purchased.includes('g-walls-base')) {
+        meetsPrereq = false;
+        prereqText = 'VAATII EDELLISEN';
+    } else if (item.id === 'g-walls3' && !purchased.includes('g-walls2')) {
+        meetsPrereq = false;
+        prereqText = 'VAATII EDELLISEN';
+    } else if (item.id === 'g-walls4' && !purchased.includes('g-walls3')) {
         meetsPrereq = false;
         prereqText = 'VAATII EDELLISEN';
     }
@@ -258,7 +267,13 @@ export default function Garage() {
            onMouseLeave={() => setHoveredItem(null)}>
            
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
-              {item.buff && <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.color || '#22c55e'}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }} title="Tällä esineellä on apulaiteominaisuus!"><div style={{ position: 'absolute', top: '-40px', right: '4px', color: 'rgba(255,255,255,0.95)', fontSize: '1.2rem', transform: 'rotate(15deg)' }}>✦</div></div>}
+              {item.buff && (
+                  <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e')}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }} title={`${item.buff.title}: ${item.buff.desc}`}>
+                      <div style={{ position: 'absolute', top: '-40px', right: '0px', color: 'rgba(255,255,255,0.95)', transform: 'rotate(15deg)', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
+                         {item.buff.isSpark ? <Zap size={18} fill="white" /> : '✦'}
+                      </div>
+                  </div>
+              )}
               {item.category === 'body' ? (
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
                     <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '30% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
