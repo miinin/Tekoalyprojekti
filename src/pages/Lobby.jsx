@@ -171,7 +171,7 @@ export default function Lobby() {
   };
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '2.5rem 1rem' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '1rem' }}>
       
       {/* Animated gradient background */}
       <style>{`
@@ -205,10 +205,10 @@ export default function Lobby() {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            padding: 2.5rem;
+            padding: 2rem;
             position: relative;
             overflow: hidden;
-            min-height: 520px;
+            min-height: 440px;
         }
         .mode-card:hover {
             transform: translateY(-8px);
@@ -232,7 +232,7 @@ export default function Lobby() {
          border: '1px solid rgba(255,255,255,0.8)',
          boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
          borderRadius: '36px',
-         padding: '4rem 2.5rem 3.5rem 2.5rem',
+         padding: '2rem 2.5rem',
          display: 'flex',
          flexDirection: 'column',
          alignItems: 'center',
@@ -278,8 +278,8 @@ export default function Lobby() {
           </div>
         </div>
 
-        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '160px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
-        <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 3.5rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
+        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '130px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
+        <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 2rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
         <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', zIndex: 10 }}>
         
