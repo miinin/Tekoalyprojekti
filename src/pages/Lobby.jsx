@@ -385,19 +385,17 @@ export default function Lobby() {
                 </p>
                 <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                   <input 
-                    className="class-code-input"
                     type="text" 
-                    placeholder="OPETTAJAN KOODI (ESIM. ABCDEF)" 
+                    placeholder="Opettajan koodi (esim. ABCDEF)" 
                     value={classCode}
                     maxLength={6}
                     onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
-                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1.2rem', outline: 'none', textTransform: 'uppercase', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}
+                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                   />
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input 
-                        className="class-code-input"
                         type="text" 
-                        placeholder="SINUN NIMIMERKKISI" 
+                        placeholder="Sinun nimimerkkisi" 
                         value={classNick}
                         maxLength={15}
                         onChange={(e) => setClassNick(e.target.value)}
