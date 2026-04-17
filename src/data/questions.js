@@ -10785,10 +10785,10 @@ export const categories = [
             "type": "spot_the_ai",
             "question": "Etsi joukosta huonoin kehote (prompti), jos haluat tekoälyn oikeasti tiivistävän vaikean tieteellisen tekstin sinulle paljon helpommin luettavaan muotoon!",
             "options": [
-              "'Selitä tämän pitkän tekstin tärkein opetus minulle vain kolmella lauseella.'",
-              "'Tee tästä tiedetekstistä selkeä lista ranskalaisilla viivoilla.'",
+              "'Selitä tämän erittäin pitkän ja monimutkaisen tiedetekstin ehdottomasti tärkein opetus minulle ytimekkäästi ja ymmärrettävästi vain kolmella selkeällä lauseella.'",
+              "'Tee koko tästä vaikeasta ja pitkäveteisestä tiedetekstistä nopeasti silmäiltävä, erittäin selkeä ja ytimekäs lista alusta loppuun käyttämällä pelkkiä ranskalaisia viivoja.'",
               "'Kirjoita tämä teksti täsmälleen yhtä pitkänä takaisin, mutta vaihda sanat paljon vaikeampiin sivistyssanoihin.'",
-              "'Tiivistä ja selitä tämä teksti niin helpoksi, että 1-luokkalainenkin ymmärtää sen heti.'"
+              "'Tiivistä ja selitä tämä koko sekava teksti niin helpoilla ja arkisilla sanoilla, että jopa täysin asiaa tuntematon 1-luokkalainenkin ymmärtäisi sen pääpointin aivan heti.'"
             ],
             "correctAnswer": "'Kirjoita tämä teksti täsmälleen yhtä pitkänä takaisin, mutta vaihda sanat paljon vaikeampiin sivistyssanoihin.'",
             "explanation": "Tämä ohje on täysi vastakohta tiivistämiselle! Jos vaikeutat sanoja ja pidät tekstin pitkänä, teet \"matkatavaroiden pakkaamisesta\" aivan tahallaan hankalampaa ja raskaampaa lukea."
@@ -10841,10 +10841,10 @@ export const categories = [
             "type": "scenario",
             "question": "SKENAARIO: Olet tekemässä tärkeää esitelmää. Miten toimit, jotta \"katse pysyy ulos tuulilasista\" ja varmistat tekoälyn antamien tietojen olevan oikeasti totta?",
             "options": [
-              "Kopioin aina täysin suoraan sen ihka ensimmäisen tuloksen, jonka tekoäly minulle antaa.",
+              "Kopioin ja liitän koko esitelmääni aina automaattisesti aivan täysin suoraan sen kaikkein ensimmäisen vastaustuloksen, jonka tekoäly minulle kyseisellä hetkellä kirjoittaa.",
               "Tarkistan tekoälyn antamat samat faktat myös oikeasta kirjasta tai muusta luotettavasta ja virallisesta lähteestä.",
-              "Kirjoitan tekoälyn antamat tekstit esitelmään vain punaisella värillä.",
-              "Jätän koko esitelmän tekemättä, koska tekoäly on täysin hyödytön."
+              "Päätän kirjoittaa esitykseeni kaikki tekoälyn keksimät ja antamat valmiit tekstit ainoastaan kirkkaan punaisella värillä, jotta opettaja varmasti huomaa ne erikseen ruudulta.",
+              "Kaiken miettimisen jälkeen päätän vain jättää koko tärkeän esitelmäni tekemättä heti alkuunsa, koska tekoäly ja kaikki sen tuomat mahdollisuudet ovat koulutyössä täysin hyödyttömiä."
             ],
             "correctAnswer": "Tarkistan tekoälyn antamat samat faktat myös oikeasta kirjasta tai muusta luotettavasta ja virallisesta lähteestä.",
             "explanation": "Lähdekritiikki ja ristiintarkistus ovat supertaitoja. Älä koskaan luota sokeasti yhteen lähteeseen tai tekoälyn nopeaan vastaukseen, vaan varmista tärkeät faktat aina toisaalta!"
