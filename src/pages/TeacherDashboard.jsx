@@ -1,9 +1,31 @@
 /* eslint-disable react-hooks/purity */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { categories } from '../data/questions';
+
+const CategoryAccordion = ({ category }) => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+        <div style={{ background: isOpen ? '#f0f9ff' : '#f8fafc', border: `1px solid ${isOpen ? '#bae6fd' : '#e2e8f0'}`, borderRadius: '16px', overflow: 'hidden', transition: 'all 0.2s', boxShadow: isOpen ? '0 4px 12px rgba(2, 132, 199, 0.05)' : 'none' }}>
+            <button onClick={() => setIsOpen(!isOpen)} style={{ width: '100%', padding: '1rem 1.2rem', background: 'transparent', border: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', fontSize: '1.05rem', color: isOpen ? '#0369a1' : '#334155', cursor: 'pointer' }}>
+                <div style={{ textAlign: 'left' }}>{category.name}</div>
+                <ChevronDown size={20} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
+            </button>
+            {isOpen && (
+                <div style={{ padding: '0 1.2rem 1.2rem 1.2rem' }}>
+                    <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#475569', fontSize: '0.95rem' }}>
+                        {category.subcategories.map(sub => (
+                            <li key={sub.id} style={{ marginBottom: '0.4rem', lineHeight: 1.4 }}>{sub.name}</li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+        </div>
+    );
+};
 
 export default function TeacherDashboard() {
   const navigate = useNavigate();
@@ -289,7 +311,7 @@ export default function TeacherDashboard() {
                 </div>
             </div>
         ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(320px, 1fr) 3fr', gap: '2rem', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(400px, 2.5fr) minmax(280px, 1.2fr)', gap: '2rem', alignItems: 'start' }}>
                 
                 {/* Sidebar */}
                 <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
@@ -478,6 +500,20 @@ export default function TeacherDashboard() {
                     )}
                 </div>
                 
+                {/* Categories Help Column */}
+                <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
+                        <BookOpen size={28} color="#0284c7" />
+                        <h2 style={{ fontSize: '1.5rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a' }}>Kategoriat</h2>
+                    </div>
+                    <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>Kartalla näkyvät aihealueet ja niihin sisältyvät kysymyskategoriat.</p>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        {categories.map(cat => (
+                            <CategoryAccordion key={cat.id} category={cat} />
+                        ))}
+                    </div>
+                </div>
+
             </div>
         )}
 
