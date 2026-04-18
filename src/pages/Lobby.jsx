@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket } from 'lucide-react';
 import { store } from '../services/store';
@@ -7,7 +7,6 @@ import { doc, getDoc } from 'firebase/firestore';
 
 export default function Lobby() {
   const navigate = useNavigate();
-  const [showMultiplayer, setShowMultiplayer] = useState(false);
   const [joinCode, setJoinCode] = useState('');
   
   const [testMode, setTestMode] = useState(store.getTestMode());
@@ -62,8 +61,6 @@ export default function Lobby() {
     navigate('/roadmap');
   };
 
-
-  const [showClassroom, setShowClassroom] = useState(false);
   const [classCode, setClassCode] = useState('');
   const [classNick, setClassNick] = useState('');
 
@@ -89,7 +86,7 @@ export default function Lobby() {
                      reqTut = rt;
                  }
              }
-      } catch(err) {
+      } catch(error) { console.error(error);
           setJoinClassLoading(false);
           setModalState({
               title: 'Yhteys laitteelta estetty',
@@ -316,7 +313,7 @@ export default function Lobby() {
                 <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
                      <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #cbd5e1', overflow: 'hidden' }}>
                          <div style={{ background: '#1d4ed8', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
-                             <div style={{ display: 'flex', gridTemplateColumns: 'repeat(3, 1fr)', width: '22px', height: '22px', gap: '2px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
+                             <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '22px', height: '22px', gap: '2px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
                                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '6px', height: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={6} fill="#fde047" color="#fde047" strokeWidth={1} />}</div>)}
                             </div>
                             FIN

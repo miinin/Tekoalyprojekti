@@ -92,7 +92,7 @@ export const store = {
   saveQuestionCorrectness: (nodeId, questionId, isCorrect) => {
     const correctness = store.getQuestionCorrectness();
     if (!correctness[nodeId]) correctness[nodeId] = {};
-    if (isCorrect || !correctness[nodeId].hasOwnProperty(questionId)) { 
+    if (isCorrect || !Object.prototype.hasOwnProperty.call(correctness[nodeId], questionId)) { 
         correctness[nodeId][questionId] = isCorrect;
         localStorage.setItem('aivan_question_correctness', JSON.stringify(correctness));
     }
@@ -113,7 +113,7 @@ export const store = {
         if (isCorrect) stats.correct++;
         localStorage.setItem('aivan_global_stats', JSON.stringify(stats));
         store.syncClassroomProgress();
-    } catch(e) {}
+    } catch(error) { console.error(error); }
   },
 
   getNodeStats: () => {
@@ -170,7 +170,8 @@ export const store = {
     const defaultMeters = { red: 0, yellow: 0, green: 0 };
     try {
         return JSON.parse(localStorage.getItem('aivan_teacher_boosts') || JSON.stringify(defaultMeters));
-    } catch (e) {
+    } catch (error) {
+        console.error(error);
         return defaultMeters;
     }
   },
@@ -189,7 +190,8 @@ export const store = {
   getUsedMapBoosts: () => {
     try {
         return JSON.parse(localStorage.getItem('aivan_used_map_boosts') || '{}');
-    } catch (e) {
+    } catch (error) {
+        console.error(error);
         return {};
     }
   },
@@ -512,7 +514,7 @@ export const store = {
       let globalStats = { attempts: 0, correct: 0 };
       try {
           globalStats = JSON.parse(localStorage.getItem('aivan_global_stats') || '{"attempts":0, "correct":0}');
-      } catch(e) {}
+      } catch(error) { console.error(error); }
 
       const dataPayload = {
         sparks,
@@ -590,13 +592,13 @@ export const store = {
                     store.setTutorialSkipped(!rt);
                 }
              }
-          } catch(e) {}
+          } catch(error) { console.error(error); }
           
           let docSnap;
           try { 
               const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
               docSnap = await Promise.race([getDoc(docRef), timeoutPromise]); 
-          } catch(e) {}
+          } catch(error) { console.error(error); }
           
           if (docSnap && docSnap.exists() && docSnap.data().rawData) {
               const data = docSnap.data().rawData;
@@ -619,7 +621,8 @@ export const store = {
               await store.syncClassroomProgress();
               return false; // New
           }
-      } catch (err) {
+      } catch (error) {
+          console.error(error);
           store.clearSinglePlayer();
           store.setClassroomCode(code.toUpperCase().trim(), nickname);
           await store.syncClassroomProgress();

@@ -7,7 +7,6 @@ export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
   const navigate = useNavigate();
   
-  const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState(null);
   const [sub, setSub] = useState(null);
   
@@ -19,7 +18,6 @@ export default function Quiz() {
   const [quizCharges, setQuizCharges] = useState({ red: 0, yellow: 0, green: 0 });
   const [usedCharges, setUsedCharges] = useState({ red: 0, yellow: 0, green: 0 });
 
-  const [explanationStartTime, setExplanationStartTime] = useState(null);
   const [bossIntroSeen, setBossIntroSeen] = useState(false);
   
   const [bugReportMode, setBugReportMode] = useState(false);
@@ -37,14 +35,13 @@ export default function Quiz() {
     fetchSparks();
     const interval = setInterval(fetchSparks, 3000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [equippedItems, setEquippedItems] = useState({});
   const [activeBuff, setActiveBuff] = useState(null);
   const [hoveredTool, setHoveredTool] = useState(null);
-  const [bumperBuff, setBumperBuff] = useState(0);
   const [jackBuff, setJackBuff] = useState(0);
-  const [toolsBuff, setToolsBuff] = useState(0);
   const [activePaint, setActivePaint] = useState('');
   const [wowMedal, setWowMedal] = useState(null);
   const [jackSaved, setJackSaved] = useState(false);
@@ -53,7 +50,6 @@ export default function Quiz() {
   useEffect(() => {
     const fetchQuestionsAndBuffs = async () => {
        const loadedCategories = store.getQuestions();
-       setCategories(loadedCategories);
        
        const cat = loadedCategories.find(c => c.id === mainCategory);
        setCategory(cat);
@@ -137,7 +133,7 @@ export default function Quiz() {
             const correct = [];
             
             [...s.questions].forEach(q => {
-               if (!correctness.hasOwnProperty(q.id)) unasked.push(q);
+               if (!Object.prototype.hasOwnProperty.call(correctness, q.id)) unasked.push(q);
                else if (correctness[q.id] === false) wrong.push(q);
                else correct.push(q);
             });
@@ -172,7 +168,6 @@ export default function Quiz() {
   const [showSummary, setShowSummary] = useState(false);
   const [earnedSparks, setEarnedSparks] = useState(0);
   const [currentQuestionSparks, setCurrentQuestionSparks] = useState(0);
-  const [results, setResults] = useState([]);
   const [nextEnabled, setNextEnabled] = useState(true);
 
   // States for special types
@@ -215,7 +210,7 @@ export default function Quiz() {
     } else {
         setShuffledDraggables([]);
     }
-  }, [currentIndex, questions, activeBuff, bumperBuff]);
+  }, [currentIndex, questions, activeBuff]);
 
   useEffect(() => {
     if (showExplanation) {
@@ -335,11 +330,6 @@ export default function Quiz() {
     
     if (correct) {
       setCorrectAnswersCount(prev => prev + 1);
-      // LATAA PUNAISTA MITTARIA
-      if (bumperBuff > 0) {
-          store.chargeMeter('red', bumperBuff);
-          setMeters(store.getMeters());
-      }
     }
     
     const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
@@ -367,25 +357,12 @@ export default function Quiz() {
     }
     store.saveQuestionCorrectness(sub.id, currentQuestion.id, correct);
     store.trackAttempt(correct);
-    
-    setResults(prev => [...prev, { id: currentQuestion.id, earned, max, type: currentQuestion.type, correct }]);
     setIsCorrect(correct);
-    setExplanationStartTime(Date.now());
     setShowExplanation(true);
   };
 
   const handleNext = async () => {
     
-    // VIHREÄN MITTARIN LATAUS: Oliko ruudulla ainakin 3 sekuntia?
-    if (explanationStartTime && toolsBuff > 0) {
-        const timeSpent = Date.now() - explanationStartTime;
-        if (timeSpent >= 3000) {
-            store.chargeMeter('green', toolsBuff);
-            setMeters(store.getMeters());
-        }
-    }
-    setExplanationStartTime(null);
-
     if (currentIndex < questions.length - 1) {
       setSelectedAnswer(null);
       setShowExplanation(false);
@@ -395,7 +372,6 @@ export default function Quiz() {
       setCurrentIndex(currentIndex + 1);
     } else {
       // End of quiz handling: calculate dynamic high score delta per question
-      const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
       
       const oldStat = store.getNodeStats()[sub.id] || { correct: 0, total: sub.questions.length };
       const getMedalLevel = (c, t) => {
@@ -432,7 +408,7 @@ export default function Quiz() {
        return 1;
   };
 
-  const useCharge = (color) => {
+  const consumeCharge = (color) => {
       if (usedCharges[color] < quizCharges[color]) {
           store.useMapBoost(mainCategory, color);
           setUsedCharges(prev => ({ ...prev, [color]: prev[color] + 1 }));
@@ -447,24 +423,22 @@ export default function Quiz() {
       return false;
   };
 
-  const useRedMeter = () => {
-      if (useCharge('red')) {
+  const consumeRedMeter = () => {
+      if (consumeCharge('red')) {
           setSelectedAnswer(null);
           setShowExplanation(false);
           setIsCorrect(false);
-          setExplanationStartTime(null);
-          setResults(prev => prev.slice(0, -1)); // Remove the fail output
       }
   };
 
-  const useYellowMeter = () => {
+  const consumeYellowMeter = () => {
       const isValidTarget = currentQuestion.options && currentQuestion.options.length > 2;
       if (!isValidTarget) return;
       
       const wrongOptions = currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o));
       if (wrongOptions.length === 0) return;
 
-      if (useCharge('yellow')) {
+      if (consumeCharge('yellow')) {
           let amount = getYellowPower();
           if (amount > wrongOptions.length) amount = wrongOptions.length;
           
@@ -473,7 +447,7 @@ export default function Quiz() {
       }
   };
 
-  const useGreenMeter = () => {
+  const consumeGreenMeter = () => {
       let candidates = [...sub.questions].filter(q => q.id !== currentQuestion.id && !questions.includes(q));
       
       if (candidates.length === 0) {
@@ -481,7 +455,7 @@ export default function Quiz() {
           return;
       }
       
-      if (useCharge('green')) {
+      if (consumeCharge('green')) {
           candidates.sort(() => Math.random() - 0.5);
           const newQ = candidates[0];
           setQuestions(prev => {
@@ -857,7 +831,7 @@ export default function Quiz() {
                        <div 
                           onMouseEnter={(e) => { setHoveredTool('red'); if(rtotal > 0) { e.currentTarget.style.transform = 'translateY(-2px)'; } }}
                           onMouseLeave={(e) => { setHoveredTool(null); if(rtotal > 0) { e.currentTarget.style.transform = 'none'; } }}
-                          onClick={() => { if(rtotal > 0) useRedMeter(); }}
+                          onClick={() => { if(rtotal > 0) consumeRedMeter(); }}
                           onMouseDown={(e) => { if(rtotal > 0) e.currentTarget.style.transform = 'scale(0.98)'; }}
                           onMouseUp={(e) => { if(rtotal > 0) e.currentTarget.style.transform = 'translateY(-2px)'; }}
                           style={{ flex: 1, position: 'relative', cursor: rtotal > 0 ? 'pointer' : 'not-allowed', transition: '0.1s' }}
@@ -938,7 +912,7 @@ export default function Quiz() {
                   <div 
                      onMouseEnter={() => setHoveredTool('yellow')}
                      onMouseLeave={() => setHoveredTool(null)}
-                     onClick={() => { if (canUseYellow) useYellowMeter(); }}
+                     onClick={() => { if (canUseYellow) consumeYellowMeter(); }}
                      style={{ position: 'relative', display: 'inline-block', cursor: canUseYellow ? 'pointer' : 'not-allowed' }}
                   >
                      <button 
@@ -960,7 +934,7 @@ export default function Quiz() {
                   <div 
                      onMouseEnter={() => setHoveredTool('green')}
                      onMouseLeave={() => setHoveredTool(null)}
-                     onClick={() => { if (gtotal > 0) useGreenMeter(); }}
+                     onClick={() => { if (gtotal > 0) consumeGreenMeter(); }}
                      style={{ position: 'relative', display: 'inline-block', cursor: gtotal > 0 ? 'pointer' : 'not-allowed' }}
                   >
                      <button 

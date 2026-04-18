@@ -112,6 +112,7 @@ export default function Garage() {
     
     const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const carUpgrades = [
@@ -679,7 +680,7 @@ export default function Garage() {
                     
                     <div style={{ background: 'white', border: '3px solid #cbd5e1', borderRadius: '12px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden', margin: '0 1rem' }}>
                        <div style={{ background: '#0ea5e9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.2rem', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
-                          <div style={{ display: 'flex', gridTemplateColumns: 'repeat(3, 1fr)', width: '32px', height: '32px', gap: '3px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginBottom: '8px' }}>
+                          <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '32px', height: '32px', gap: '3px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginBottom: '8px' }}>
                              {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '8px', height: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={8} fill="#fde047" color="#fde047" strokeWidth={1} />}</div>)}
                           </div>
                           FIN
@@ -856,7 +857,6 @@ export default function Garage() {
                   const isOwned = purchased.includes(item.id);
                   const slot = item.category === 'extra' ? item.id : item.category;
                   const isEquipped = equipped[slot] === item.id || (!equipped[slot] && item.isDefault);
-                  const hoverActiveCategoryItem = Object.values(carUpgrades).find(u => u.id === hoveredItem);
                   
                   let shouldShow = false;
                   let isPreview = false;
@@ -893,7 +893,7 @@ export default function Garage() {
                       <span style={{ fontWeight: '900', fontSize: '1.1rem', color: hoveredObj.color || '#166534', textTransform: 'uppercase', letterSpacing: '0.5px', textShadow: '0 1px 1px rgba(0,0,0,0.1)' }}>{hoveredObj.buff.title}</span>
                    </div>
                    <div style={{ fontSize: '0.95rem', lineHeight: '1.5', color: '#334155', fontWeight: '500' }}>
-                      {hoveredObj.buff.desc.split(/(poistoa|poisto|vaihtoa|vaihto\-apua|vaihto|uutta yritystä|toinen yritys|uusia yrityksiä|uusi yritys)/i).map((part, i) => {
+                      {hoveredObj.buff.desc.split(/(poistoa|poisto|vaihtoa|vaihto-apua|vaihto|uutta yritystä|toinen yritys|uusia yrityksiä|uusi yritys)/i).map((part, i) => {
                           const lower = part.toLowerCase();
                           if (lower.startsWith('poisto')) return <b key={i} style={{color: '#d97706'}}>{part}</b>;
                           if (lower.startsWith('vaihto')) return <b key={i} style={{color: '#15803d'}}>{part}</b>;

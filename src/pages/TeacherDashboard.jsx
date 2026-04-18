@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/purity */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info } from 'lucide-react';
@@ -52,6 +53,7 @@ export default function TeacherDashboard() {
               createdAt: serverTimestamp()
           }), timeoutPromise]);
       } catch (err) {
+          console.error(err);
           setErrorMsg('Yhteys opettajan paneeliin estetty verkkosi puolelta (Firebase timeout).');
       }
   };
@@ -80,6 +82,7 @@ export default function TeacherDashboard() {
           setErrorMsg('');
           setSessionCode(code);
       } catch (err) {
+          console.error(err);
           setErrorMsg('Yhteys epäonnistui - verkko estää yhteyden (Firebase timeout).');
       }
   }

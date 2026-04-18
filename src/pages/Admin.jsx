@@ -38,7 +38,9 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    loadData();
+    setTimeout(() => {
+       loadData();
+    }, 0);
   }, []);
 
   // -- Room Handlers --
@@ -52,7 +54,7 @@ export default function Admin() {
   const handleBulkDelete = () => {
     if (window.confirm(`Haluatko varmasti poistaa ${selectedRooms.size} huonetta?`)) {
       selectedRooms.forEach(roomId => store.deleteRoom(roomId));
-      setSelectedRooms(newSelected => new Set());
+      setSelectedRooms(new Set());
       loadData();
     }
   };

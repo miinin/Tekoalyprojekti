@@ -9,7 +9,9 @@ import {
   Lock,
   Zap,
   Medal,
-  Info
+  Info,
+  XCircle,
+  Lightbulb
 } from 'lucide-react';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 import confetti from 'canvas-confetti';
@@ -21,8 +23,6 @@ const Roadmap = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentMap, setCurrentMap] = useState('main');
-  const [dataVersion] = useState(`Versio 1.07`);
-  const [versionColor] = useState('var(--danger)'); // Punainen
   const [vanPos, setVanPos] = useState({ top: '50%', left: '50%', direction: 1, isTunnel: false, stepTime: 0 });
   const [isMoving, setIsMoving] = useState(false);
   const [bubbleText, setBubbleText] = useState(null);
@@ -39,6 +39,7 @@ const Roadmap = () => {
       }, 1000);
     }
     return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vanPos.message, bubbleText]);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completed_lessons');
@@ -64,7 +65,6 @@ const Roadmap = () => {
   }, [completedLessons.length]);
   const [puffs, setPuffs] = useState([]);
   const [toastMessage, setToastMessage] = useState(null);
-  const mapRef = useRef(null);
   const consumedReturnRef = useRef(false);
 
   // Edit Mode States
@@ -215,8 +215,6 @@ const Roadmap = () => {
                 }));
                 setCurrentLocationId(completedNodeId);
 
-                // Etsi seuraava reitti tästä pisteestä
-                const nextPathKey = Object.keys(subData.paths).find(key => key.startsWith(`${completedNodeId}-`));
                 // Odotetaan käyttäjän klikkausta jos reitti on, jotta vanhanaikainen automagia ei sotke paluuta
             }
         } else {
@@ -265,6 +263,7 @@ const Roadmap = () => {
             }
         }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMap, location.search]);
 
   const mainAdjacency = {};
@@ -400,7 +399,6 @@ const Roadmap = () => {
         if (node) {
             // Etsitään edellinen completed-rasti, jotta tiedetään voidaanko ajaa pitkin viivaa
             const mapNodes = currentData.nodes.map(n => n.id);
-            const userDone = completedLessons.filter(id => mapNodes.includes(id));
             const params = new URLSearchParams(window.location.search);
             const completedNodeId = params.get('completed');
 
@@ -535,15 +533,6 @@ const Roadmap = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const mainMapOrder = [
-    'perusteet',
-    'konepellin',
-    'arjessa',
-    'etiikka',
-    'kayttotaidot',
-    'huippu'
-  ];
-
   const getMapAsset = (mapId) => {
     const assets = {
       'main': '/map-bg.jpg',
@@ -670,15 +659,6 @@ const Roadmap = () => {
     return null;
   };
 
-  const getMedalStyles = (medal) => {
-    switch(medal) {
-      case 'platinum': return { border: '#e2e8f0', shadow: 'rgba(226, 232, 240, 1)', bg: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #f1f5f9 50%, #cbd5e1 80%, #f8fafc 100%)' };
-      case 'gold': return { border: '#fbbf24', shadow: 'rgba(251, 191, 36, 1)', bg: 'linear-gradient(135deg, #fef08a 0%, #fbbf24 22%, #ffffff 38%, #f59e0b 58%, #b45309 80%, #fef08a 100%)' };
-      case 'silver': return { border: '#e2e8f0', shadow: 'rgba(203, 213, 225, 0.8)', bg: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 30%, #94a3b8 50%, #475569 80%, #ffffff 100%)' };
-      case 'bronze': return { border: '#d97706', shadow: 'rgba(217, 119, 6, 0.8)', bg: 'linear-gradient(135deg, #fcd34d 0%, #b45309 30%, #78350f 50%, #451a03 80%, #fcd34d 100%)' };
-      default: return null;
-    }
-  };
 
   const renderMapNodes = () => {
     const data = currentMap === 'main' ? AI_ROADMAP_DATA.main : AI_ROADMAP_DATA.sub[currentMap];
@@ -693,9 +673,6 @@ const Roadmap = () => {
       const labelText = currentMap === 'main' 
           ? (mainMapLabel || node.id)
           : (subcategory ? subcategory.name : node.id);
-
-      const nodeIndexParts = node.id.split('_');
-      const nodeIndexNum = parseInt(nodeIndexParts[nodeIndexParts.length - 1]);
 
       let isLastNode = false;
       let isLocked = false;
@@ -716,7 +693,6 @@ const Roadmap = () => {
       }
       const isCompleted = completedLessons.includes(node.id);
       const medal = currentMap === 'main' ? getMainmapMedal(node.id) : getSubmapMedal(node.id);
-      const mStyles = getMedalStyles(medal);
 
       const isFirstEverTarget = !store.getTutorialSkipped() && currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
       const isFirstSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
@@ -1176,13 +1152,14 @@ const Roadmap = () => {
               <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     <b>Kerää osaamismitaleja!</b><br/><br/>
-                    Kun vastaat tason kysymyksiin, sinulle on tarjolla mitaleja sen mukaan, kuinka moneen saat oikean vastauksen. Mitä paremmin osaat, sitä kirkkaamman mitalin ansaitset!<br/><br/>
-                    <span style={{ fontSize: '1rem', color: '#0369a1', background: '#e0f2fe', padding: '0.4rem 0.8rem', borderRadius: '8px', display: 'inline-block', marginBottom: '1rem' }}>
-                        💡 <b>Vinkki:</b> Kirkkaimpiin mitaleihin sama taso pitää pelata useamman kerran, jotta saat kerättyä aina uusia vaihtuvia kysymyksiä!
-                    </span><br/>
+                    Mitä enemmän oikeita vastauksia keräät, sitä kirkkaamman mitalin ansaitset!<br/><br/>
+                    <div style={{ fontSize: '1rem', color: '#0369a1', background: '#e0f2fe', padding: '0.6rem 0.8rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem' }}>
+                        <Lightbulb size={20} color="#0284c7" style={{ flexShrink: 0 }} />
+                        <div style={{ textAlign: 'left' }}><b>Vinkki:</b> Pelaa taso läpi useammin saadaksesi uusia kysymyksiä!</div>
+                    </div>
                     <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                         <span style={{ width: '28px', textAlign: 'center', fontWeight: '900', color: '#ef4444' }}>❌</span> 
+                         <div style={{ width: '28px', display: 'flex', justifyContent: 'center' }}><XCircle size={28} color="#ef4444" /></div> 
                          Ei mitalia... yritä uudelleen!
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -1199,7 +1176,7 @@ const Roadmap = () => {
                        </li>
                        <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-plat.png" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
-                         Platina: Kaikki oikein! Täydellistä!
+                         Platina: Kaikki oikein!
                        </li>
                     </ul>
                 </div>
