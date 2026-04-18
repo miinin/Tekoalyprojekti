@@ -122,13 +122,8 @@ export const store = {
 
   saveNodeStats: (nodeId, correctCount, totalCount) => {
     const stats = store.getNodeStats();
-    const currentStat = stats[nodeId];
-    
-    // Only save if it's the first time OR if the new completion ratio is strictly better
-    if (!currentStat || (correctCount / totalCount) > (currentStat.correct / currentStat.total)) {
-        stats[nodeId] = { correct: correctCount, total: totalCount };
-        localStorage.setItem('aivan_node_stats', JSON.stringify(stats));
-    }
+    stats[nodeId] = { correct: correctCount, total: totalCount };
+    localStorage.setItem('aivan_node_stats', JSON.stringify(stats));
   },
 
   getSparks: async () => {

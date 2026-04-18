@@ -1535,7 +1535,7 @@ export const categories = [
               "Se noudattaa tiukkoja sääntöjä rivi riviltä."
             ],
             "correctAnswer": "Se osaa luoda aivan uuden tekstin tai kappaleen pyynnöstä.",
-            "explanation": "Tavallinen cd-soitin toistaa vain ennalta tehtyä tietoa. Tekoäly pystyy yhdistelemään asioita ja tuottamaan aivan uutta, ennen olemassa olemattomaa sisältöä, kuten runoja. ________________"
+            "explanation": "Tavallinen cd-soitin toistaa vain ennalta tehtyä tietoa. Tekoäly pystyy yhdistelemään asioita ja tuottamaan aivan uutta, ennen olemassa olemattomaa sisältöä, kuten runoja."
           }
         ]
       }
