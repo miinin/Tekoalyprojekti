@@ -760,15 +760,15 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '3px solid white' : (medal ? '0' : '4px solid white'),
-                borderColor: medal ? 'transparent' : 'white',
-                boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '0 0 0 5px rgba(255,255,255,0.7)' : (isLastNode && !isLocked ? '0 0 25px rgba(255, 255, 255, 0.9)' : '0 8px 20px rgba(0,0,0,0.2)')),
-                background: medal ? 'transparent' : (isLocked ? '#94a3b8' : (isLastNode ? '#fbbf24' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
-                opacity: isLocked ? 0.8 : 1,
+                border: (isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '3px solid white' : (medal ? '0' : `4px solid ${(isLastNode && isLocked) ? '#fbbf24' : 'white'}`),
+                borderColor: medal ? 'transparent' : ((isLastNode && isLocked) ? '#fbbf24' : 'white'),
+                boxShadow: medal ? 'none' : ((isFirstEverTarget || isFirstSubTarget || isSecondSubTarget) ? '0 0 0 5px rgba(255,255,255,0.7)' : (isLastNode && !isLocked ? '0 0 25px rgba(255, 255, 255, 0.9)' : ((isLastNode && isLocked) ? '0 4px 15px rgba(251, 191, 36, 0.2)' : '0 8px 20px rgba(0,0,0,0.2)'))),
+                background: medal ? 'transparent' : (isLocked ? (isLastNode ? '#475569' : '#94a3b8') : (isLastNode ? '#fbbf24' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
+                opacity: isLocked ? 0.9 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
           >
-            {isLocked ? <Lock size={20} color="white" /> : 
+            {isLocked ? <span className="material-symbols-outlined" style={{ fontSize: currentMap === 'main' ? '2rem' : '1.5rem', color: isLastNode ? '#fbbf24' : 'white', opacity: 0.6, userSelect: 'none' }}>lock</span> : 
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {medal ? (
                    <img 
