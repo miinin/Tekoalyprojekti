@@ -439,9 +439,9 @@ export default function TeacherDashboard() {
                          onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}
                       >
                           {sessionStatus === 'active' ? (
-                              <><Pause size={24} fill="white" /> Keskeytä peli luokkatilassa</>
+                              <><Pause size={24} color="white" strokeWidth={2.5} /> Keskeytä peli luokkatilassa</>
                           ) : (
-                              <><Play size={24} fill="white" /> Vapauta pelit</>
+                              <><Play size={24} color="white" strokeWidth={2.5} /> Vapauta pelit</>
                           )}
                       </button>
                       <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>
@@ -460,8 +460,8 @@ export default function TeacherDashboard() {
                             <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
                                 {sessionCode}
                             </div>
-                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
-                                {sessionStatus === 'active' ? <Pause size={20} fill="white" /> : <Play size={20} fill="white" />}
+                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                                {sessionStatus === 'active' ? <Pause size={24} color="white" strokeWidth={2.5} /> : <Play size={24} color="white" strokeWidth={2.5} style={{ marginLeft: '4px' }} />}
                             </button>
                         </div>
                     )}
