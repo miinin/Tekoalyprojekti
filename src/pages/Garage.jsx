@@ -107,10 +107,6 @@ export default function Garage() {
          });
       });
       setEarnedMedals(mCounts);
-      
-      if (earned.length > 0 && !localStorage.getItem('aivan_trophy_tuition')) {
-         setShowTrophyTuition(true);
-      }
     };
     fetchData();
     
@@ -673,21 +669,7 @@ export default function Garage() {
                    }}>Eikun hommiin!</button>
                 </div>
               )}
-              
-              {showTrophyTuition && (
-                <div className="animate-bounce" style={{ position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '1.5rem 3rem 1.5rem 2rem', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 90, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%' }}>
-                   <button onClick={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
-                   <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
-                      <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
-                   </div>
-                   <b>Loistosuoritus!</b> Ansaitsit pokaalin selvitettyäsi kartan.<br/><br/>Voit ihastella palkintojasi palkintokaapista - löydätkö sen tallistasi?
-                   <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
-                        localStorage.setItem('aivan_trophy_tuition', 'true');
-                        setShowTrophyTuition(false);
-                        setShowTrophyCabinet(true);
-                   }}>Avaa Palkintokaappi</button>
-                </div>
-              )}
+
               
                {saveCode && (
                  <div className="animate-bounce" style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 90, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '600px' }}>
@@ -719,6 +701,26 @@ export default function Garage() {
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        
                        <div style={{ position: 'relative', display: 'flex', maxHeight: '100%', maxWidth: '1400px', justifyContent: 'center', alignItems: 'center' }}>
+                           {showTrophyTuition && (
+                             <div className="animate-bounce" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem 2rem 2.5rem', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 650, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%' }}>
+                                <button onClick={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
+                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                   <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
+                                </div>
+                                {earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0 ? (
+                                    <><b>Upeaa työtä!</b><br/><br/>Suorittamalla tehtäviä kartalla olet ansainnut hienoja palkintoja. Täällä voit ihastella saavutuksiasi!</>
+                                ) : (
+                                    <><b>Tervetuloa palkintokaapille!</b><br/><br/>Tällä hetkellä täällä on vielä hieman tyhjää... Suorittamalla tehtäviä kartalla voit tienata mitaleja tai jopa pokaaleja!</>
+                                )}
+                                <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
+                                     localStorage.setItem('aivan_trophy_tuition', 'true');
+                                     setShowTrophyTuition(false);
+                                }}>Selvä juttu!</button>
+                             </div>
+                           )}
+                           <h2 style={{ position: 'absolute', top: '3%', left: '50%', transform: 'translateX(-50%)', zIndex: 6, color: '#fef3c7', fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', whiteSpace: 'nowrap', letterSpacing: '4px', textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.8), 0 0 20px rgba(234, 179, 8, 0.5)', margin: 0, pointerEvents: 'none' }}>
+                               Palkintokaappi
+                           </h2>
                            <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ maxHeight: '90vh', maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
                        
                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
@@ -799,7 +801,7 @@ export default function Garage() {
                 <>
                   <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
                   <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
-                  <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => setShowTrophyCabinet(true)} />
+                  <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => { setShowTrophyCabinet(true); if (!localStorage.getItem('aivan_trophy_tuition')) { setShowTrophyTuition(true); } }} />
                 </>
               )}
 
