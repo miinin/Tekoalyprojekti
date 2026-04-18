@@ -6,19 +6,101 @@ import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { categories } from '../data/questions';
 
+const topicDictionary = {
+  // Pääkategoriat
+  "perusteet": "Tekoälyn alkeet ja käsitteet",
+  "konepellin": "Teknologia, Datatiede ja Algoritmit",
+  "digiturva": "Tietoturva ja Yksityisyydensuoja",
+  "aivoterveys": "Hyvinvointi ja Tasapaino",
+  "arjessa": "Sovellukset ja Vaikutus elämään",
+  "reilu_peli": "Etiikka ja Lait",
+  "kayttotaidot": "Tekoälyn käytännön soveltaminen ja Promptaus",
+
+  // Reilu peli
+  "reilu_peli_1": "Tasa-arvo, esteettömyys ja syrjinnän välttäminen",
+  "reilu_peli_2": "Vastuukysymykset ja päätöksenteko",
+  "reilu_peli_3": "Tekijänoikeudet ja lähteiden luvaton käyttö",
+  "reilu_peli_4": "Nettietiketti, Deepfake ja valeuutiset",
+  "reilu_peli_5": "Koneen ja ihmisen ero, inhimillistäminen",
+  "reilu_peli_6": "Ympäristövaikutukset ja energiankulutus",
+  "reilu_peli_7": "Kertaus ja tasokoe (Etiikka)",
+
+  // Konepellin alla
+  "konepellin_1": "Datan kerääminen, laatu ja massadata",
+  "konepellin_2": "Algoritmien peruskäsitteet ja logiikka",
+  "konepellin_3": "Koneoppiminen ja mallien kouluttaminen",
+  "konepellin_4": "Neuroverkot ja ihmisaivojen jäljittely",
+  "konepellin_5": "Kuvantunnistus ja analytiikka",
+  "konepellin_6": "Vinoumat datassa ja harhaisuus (Bias)",
+  "konepellin_7": "Kertaus ja tasokoe (Teknologia)",
+
+  // Digiturva
+  "digiturva_1": "Salasanat ja vahva tunnistautuminen",
+  "digiturva_2": "Yksityisyydensuoja ja omat tiedot",
+  "digiturva_3": "Tietojenkalastelu (Phishing)",
+  "digiturva_4": "Haittaohjelmat ja virukset",
+  "digiturva_5": "Some-huijaukset ja valeprofiilit",
+  "digiturva_6": "Kiusaaminen ja häirintä (Turvataidot)",
+  "digiturva_7": "Kertaus ja tasokoe (Turvallisuus)",
+
+  // Aivoterveys
+  "aivoterveys_1": "Ruutuaika ja tauotus",
+  "aivoterveys_2": "Unen merkitys oppimiselle",
+  "aivoterveys_3": "Ikärajat ja haitallinen sisältö",
+  "aivoterveys_4": "Ulkoilu ja liikunta",
+  "aivoterveys_5": "Aito sosiaalinen vuorovaikutus",
+  "aivoterveys_6": "Keskittymiskyky ja häiriötekijät",
+  "aivoterveys_7": "Kertaus ja tasokoe (Hyvinvointi)",
+
+  // Arjessa
+  "arjessa_1": "Älypuhelimet ja virtuaaliavustajat",
+  "arjessa_2": "Somen ja videoiden suosittelualgoritmit",
+  "arjessa_3": "Pelien tekoäly ja botit",
+  "arjessa_4": "Älylaitteet koulussa ja kotona",
+  "arjessa_5": "Kielenkääntäjät",
+  "arjessa_6": "Arkipäivän rutiinien automatisointi",
+  "arjessa_7": "Kertaus ja tasokoe (Sovellukset)",
+
+  // Perusteet
+  "perusteet_1": "Mitä tekoäly tarkoittaa",
+  "perusteet_2": "Tekoälyn älykkyys vs. Ihmisen luovuus",
+  "perusteet_3": "Tekoäly vs. perinteinen koodi",
+  "perusteet_4": "Tekoälyn rajoitteet ja virheet",
+  "perusteet_5": "Tekoälyn historia ja kehitys",
+  "perusteet_6": "Yleiset harhaluulot (myytinmurtajat)",
+  "perusteet_7": "Kertaus ja tasokoe (Perusteet)",
+
+  // Käyttötaidot
+  "kayttotaidot_1": "Kehotteiden (prompts) kirjoittaminen",
+  "kayttotaidot_2": "Lähdekritiikki ja tiedon arviointi",
+  "kayttotaidot_3": "Iterointi ja tulosten parantelu",
+  "kayttotaidot_4": "Tekoäly ideointityökaluna",
+  "kayttotaidot_5": "Oikean palvelun valitseminen",
+  "kayttotaidot_6": "Tekoälyn etiikka koulutehtävissä",
+  "kayttotaidot_7": "Finaali ja loppukoe"
+};
+
+const getTopic = (id) => topicDictionary[id] || "";
+
 const CategoryAccordion = ({ category }) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <div style={{ background: isOpen ? '#f0f9ff' : '#f8fafc', border: `1px solid ${isOpen ? '#bae6fd' : '#e2e8f0'}`, borderRadius: '16px', overflow: 'hidden', transition: 'all 0.2s', boxShadow: isOpen ? '0 4px 12px rgba(2, 132, 199, 0.05)' : 'none' }}>
             <button onClick={() => setIsOpen(!isOpen)} style={{ width: '100%', padding: '1rem 1.2rem', background: 'transparent', border: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', fontSize: '1.05rem', color: isOpen ? '#0369a1' : '#334155', cursor: 'pointer' }}>
-                <div style={{ textAlign: 'left' }}>{category.name}</div>
+                <div style={{ textAlign: 'left' }}>
+                    {category.name}
+                    {getTopic(category.id) && <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 'normal', marginTop: '0.2rem' }}>Teema: {getTopic(category.id)}</div>}
+                </div>
                 <ChevronDown size={20} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
             </button>
             {isOpen && (
                 <div style={{ padding: '0 1.2rem 1.2rem 1.2rem' }}>
                     <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#475569', fontSize: '0.95rem' }}>
                         {category.subcategories.map(sub => (
-                            <li key={sub.id} style={{ marginBottom: '0.4rem', lineHeight: 1.4 }}>{sub.name}</li>
+                            <li key={sub.id} style={{ marginBottom: '0.6rem', lineHeight: 1.4 }}>
+                                <strong>{sub.name}</strong>
+                                {getTopic(sub.id) && <span style={{ display: 'block', color: '#64748b', fontSize: '0.85rem', marginTop: '0.1rem' }}>&rarr; {getTopic(sub.id)}</span>}
+                            </li>
                         ))}
                     </ul>
                 </div>
@@ -45,6 +127,8 @@ export default function TeacherDashboard() {
   const [resumePin, setResumePin] = useState('');
   
   const [confirmModal, setConfirmModal] = useState(null);
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
   
   // Generating a readable 6-character code
   const generateCode = () => {
@@ -311,17 +395,23 @@ export default function TeacherDashboard() {
                 </div>
             </div>
         ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 1fr) minmax(400px, 2.5fr) minmax(280px, 1.2fr)', gap: '2rem', alignItems: 'start' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: `${leftSidebarOpen ? 'minmax(280px, 1fr)' : '80px'} minmax(400px, 2.5fr) ${rightSidebarOpen ? 'minmax(280px, 1.2fr)' : '80px'}`, gap: '2rem', alignItems: 'start', transition: 'grid-template-columns 0.3s ease-in-out' }}>
                 
                 {/* Sidebar */}
-                <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: leftSidebarOpen ? '2.5rem' : '2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: leftSidebarOpen ? '2.5rem' : '1.5rem', transition: 'all 0.3s', overflow: 'hidden' }}>
                     
+                    <button onClick={() => setLeftSidebarOpen(!leftSidebarOpen)} style={{ position: 'absolute', top: '15px', right: leftSidebarOpen ? '15px' : 'auto', left: leftSidebarOpen ? 'auto' : '50%', transform: leftSidebarOpen ? 'none' : 'translateX(-50%)', background: 'white', border: '1px solid #e2e8f0', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', zIndex: 10 }}>
+                        <ChevronDown size={18} style={{ transform: leftSidebarOpen ? 'rotate(90deg)' : 'rotate(-90deg)', transition: 'transform 0.3s' }} />
+                    </button>
+
+                    {leftSidebarOpen ? (
+                        <>
                     <div>
                       <h3 style={{ margin: '0 0 0.8rem 0', color: '#64748b', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', textAlign: 'center', fontWeight: 'bold' }}>Liittymiskoodi</h3>
-                      <div style={{ position: 'relative', background: '#e0f2fe', border: '2px solid #bae6fd', padding: '1.5rem', borderRadius: '24px', fontSize: 'clamp(2rem, 3vw, 3rem)', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '4px', color: '#0369a1', boxShadow: 'inset 0 4px 10px rgba(3, 105, 161, 0.05)' }}>
+                      <div style={{ position: 'relative', background: '#e0f2fe', border: '2px solid #bae6fd', padding: '1.2rem 1rem', borderRadius: '24px', fontSize: 'clamp(1.8rem, 3vw, 2.5rem)', fontFamily: 'monospace', textAlign: 'center', fontWeight: '900', letterSpacing: '2px', color: '#0369a1', boxShadow: 'inset 0 4px 10px rgba(3, 105, 161, 0.05)', wordBreak: 'break-all' }}>
                           {sessionCode}
-                          <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-15px', right: '-15px', background: 'white', border: '2px solid #bae6fd', color: '#0369a1', borderRadius: '20px', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 8px 15px rgba(2, 132, 199, 0.15)', fontWeight: 'bold', fontSize: '0.9rem', transition: 'transform 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
-                              <Maximize size={16} /> LAAJENNA
+                          <button onClick={() => setShowFullscreen(true)} title="Näytä koko ruudulla" style={{ position: 'absolute', top: '-12px', right: '-12px', background: 'white', border: '2px solid #bae6fd', color: '#0369a1', borderRadius: '20px', padding: '0.3rem 0.8rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer', boxShadow: '0 8px 15px rgba(2, 132, 199, 0.15)', fontWeight: 'bold', fontSize: '0.8rem', transition: 'transform 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.05)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                              <Maximize size={14} /> LAAJENNA
                           </button>
                       </div>
                     </div>
@@ -368,6 +458,17 @@ export default function TeacherDashboard() {
                           <LogOut size={18} /> Päätä oppitunti
                       </button>
                     </div>
+                        </>
+                    ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 'auto 0', gap: '3rem' }}>
+                            <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
+                                {sessionCode}
+                            </div>
+                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+                                {sessionStatus === 'active' ? <Pause size={20} fill="white" /> : <Play size={20} fill="white" />}
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* Dashboard / Roster */}
@@ -501,17 +602,31 @@ export default function TeacherDashboard() {
                 </div>
                 
                 {/* Categories Help Column */}
-                <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
-                        <BookOpen size={28} color="#0284c7" />
-                        <h2 style={{ fontSize: '1.5rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a' }}>Kategoriat</h2>
-                    </div>
-                    <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>Kartalla näkyvät aihealueet ja niihin sisältyvät kysymyskategoriat.</p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        {categories.map(cat => (
-                            <CategoryAccordion key={cat.id} category={cat} />
-                        ))}
-                    </div>
+                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: rightSidebarOpen ? '2.5rem' : '2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', transition: 'all 0.3s', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                    <button onClick={() => setRightSidebarOpen(!rightSidebarOpen)} style={{ position: 'absolute', top: '15px', left: rightSidebarOpen ? '15px' : '50%', transform: rightSidebarOpen ? 'none' : 'translateX(-50%)', background: 'white', border: '1px solid #e2e8f0', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', zIndex: 10 }}>
+                        <ChevronDown size={18} style={{ transform: rightSidebarOpen ? 'rotate(-90deg)' : 'rotate(90deg)', transition: 'transform 0.3s' }} />
+                    </button>
+
+                    {rightSidebarOpen ? (
+                        <>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem', marginTop: '1rem' }}>
+                                <BookOpen size={28} color="#0284c7" />
+                                <h2 style={{ fontSize: '1.5rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a' }}>Kategoriat</h2>
+                            </div>
+                            <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>Kartalla näkyvät aihealueet ja niihin sisältyvät kysymyskategoriat.</p>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
+                                {categories.map(cat => (
+                                    <CategoryAccordion key={cat.id} category={cat} />
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: 'auto 0' }}>
+                            <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: 'bold', color: '#64748b', letterSpacing: '2px', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <BookOpen size={20} color="#64748b" style={{ transform: 'rotate(90deg)' }} /> KATEGORIAT
+                            </div>
+                        </div>
+                    )}
                 </div>
 
             </div>
