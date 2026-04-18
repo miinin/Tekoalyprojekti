@@ -394,7 +394,7 @@ export default function TeacherDashboard() {
             <div style={{ display: 'grid', gridTemplateColumns: `${leftSidebarOpen ? 'minmax(280px, 1fr)' : '80px'} minmax(400px, 2.5fr) ${rightSidebarOpen ? 'minmax(280px, 1.2fr)' : '80px'}`, gap: '2rem', alignItems: 'start', transition: 'grid-template-columns 0.3s ease-in-out' }}>
                 
                 {/* Sidebar */}
-                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: leftSidebarOpen ? '2.5rem' : '6rem 1rem 2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: leftSidebarOpen ? '2.5rem' : '1.5rem', transition: 'all 0.3s', overflow: 'hidden' }}>
+                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: leftSidebarOpen ? '5rem 2.5rem 2.5rem 2.5rem' : '6rem 1rem 2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: leftSidebarOpen ? '2.5rem' : '1.5rem', transition: 'all 0.3s', overflow: 'hidden' }}>
                     
                     <button onClick={() => setLeftSidebarOpen(!leftSidebarOpen)} title={leftSidebarOpen ? "Piilota sivupalkki" : "Näytä sivupalkki"} style={{ position: 'absolute', top: '24px', right: leftSidebarOpen ? '24px' : 'auto', left: leftSidebarOpen ? 'auto' : '50%', transform: leftSidebarOpen ? 'none' : 'translateX(-50%)', background: '#f8fafc', border: '2px solid #bae6fd', borderRadius: '50%', padding: 0, width: '40px', minWidth: '40px', height: '40px', minHeight: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#0284c7', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.15)', zIndex: 10, transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform=leftSidebarOpen ? 'scale(1.1)' : 'translateX(-50%) scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform=leftSidebarOpen ? 'none' : 'translateX(-50%)'}>
                         {leftSidebarOpen ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
@@ -598,14 +598,14 @@ export default function TeacherDashboard() {
                 </div>
                 
                 {/* Categories Help Column */}
-                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: rightSidebarOpen ? '2.5rem' : '6rem 1rem 2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', transition: 'all 0.3s', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: rightSidebarOpen ? '5rem 2.5rem 2.5rem 2.5rem' : '6rem 1rem 2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', transition: 'all 0.3s', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                     <button onClick={() => setRightSidebarOpen(!rightSidebarOpen)} title={rightSidebarOpen ? "Piilota kategoriat" : "Näytä kategoriat"} style={{ position: 'absolute', top: '24px', left: rightSidebarOpen ? '24px' : '50%', transform: rightSidebarOpen ? 'none' : 'translateX(-50%)', background: '#f8fafc', border: '2px solid #bae6fd', borderRadius: '50%', padding: 0, width: '40px', minWidth: '40px', height: '40px', minHeight: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#0284c7', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.15)', zIndex: 10, transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform=rightSidebarOpen ? 'scale(1.1)' : 'translateX(-50%) scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform=rightSidebarOpen ? 'none' : 'translateX(-50%)'}>
                         {rightSidebarOpen ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
                     </button>
 
                     {rightSidebarOpen ? (
                         <>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem', marginTop: '1rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem' }}>
                                 <BookOpen size={28} color="#0284c7" />
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a' }}>Kategoriat</h2>
                             </div>
@@ -614,7 +614,7 @@ export default function TeacherDashboard() {
                                 <select 
                                     value={activeCategoryIndex} 
                                     onChange={e => setActiveCategoryIndex(Number(e.target.value))} 
-                                    style={{ width: '100%', padding: '1.2rem 1.5rem', borderRadius: '20px', border: '2px solid #bae6fd', background: '#f0f9ff', fontSize: '1.05rem', fontWeight: 'bold', color: '#0369a1', outline: 'none', cursor: 'pointer', appearance: 'none', backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230284c7%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem top 50%', backgroundSize: '0.8rem auto', boxShadow: '0 4px 6px rgba(2, 132, 199, 0.05)' }}
+                                    style={{ width: '100%', padding: '1.2rem 3.5rem 1.2rem 1.5rem', borderRadius: '20px', border: '2px solid #bae6fd', background: '#f0f9ff', fontSize: '1.05rem', fontWeight: 'bold', color: '#0369a1', outline: 'none', cursor: 'pointer', appearance: 'none', backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230284c7%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem top 50%', backgroundSize: '0.8rem auto', boxShadow: '0 4px 6px rgba(2, 132, 199, 0.05)' }}
                                 >
                                     {categories.map((cat, i) => <option key={cat.id} value={i}>{cat.name}</option>)}
                                 </select>
@@ -628,12 +628,15 @@ export default function TeacherDashboard() {
                                             </div>
                                         )}
                                         <h3 style={{ margin: '0 0 1rem 0', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 'bold' }}>Alueet ({categories[activeCategoryIndex].subcategories.length})</h3>
-                                        <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                                        <ul style={{ paddingLeft: '0', margin: 0, listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                             {categories[activeCategoryIndex].subcategories.map(sub => (
-                                                <li key={sub.id} style={{ position: 'relative', paddingLeft: '1.5rem' }}>
-                                                    <div style={{ position: 'absolute', left: 0, top: '8px', width: '8px', height: '8px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 0 2px #bae6fd' }}></div>
-                                                    <strong style={{ color: '#0f172a', display: 'block', marginBottom: '0.3rem', fontSize: '1.05rem' }}>{sub.name}</strong>
-                                                    {getTopic(sub.id) && <span style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.4, display: 'flex', gap: '0.5rem' }}><span style={{ color: '#94a3b8' }}>&rarr;</span> {getTopic(sub.id)}</span>}
+                                                <li key={sub.id} style={{ marginBottom: '0.2rem', padding: '1.2rem', background: 'white', borderRadius: '16px', borderLeft: '4px solid #0ea5e9', boxShadow: '0 4px 6px rgba(0,0,0,0.02)', borderRight: '1px solid #e2e8f0', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+                                                    <div style={{ color: '#0f172a', fontWeight: '900', fontSize: '1.1rem', marginBottom: '0.5rem' }}>
+                                                        {getTopic(sub.id) || "Yleinen"}
+                                                    </div>
+                                                    <div style={{ color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                                                        <BookOpen size={16} color="#94a3b8" /> Kirjaus kartalla: <span style={{ color: '#0284c7', fontWeight: 'bold' }}>{sub.name}</span>
+                                                    </div>
                                                 </li>
                                             ))}
                                         </ul>
