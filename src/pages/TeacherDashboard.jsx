@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/purity */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { categories } from '../data/questions';
@@ -400,8 +400,8 @@ export default function TeacherDashboard() {
                 {/* Sidebar */}
                 <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: leftSidebarOpen ? '2.5rem' : '2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', display: 'flex', flexDirection: 'column', gap: leftSidebarOpen ? '2.5rem' : '1.5rem', transition: 'all 0.3s', overflow: 'hidden' }}>
                     
-                    <button onClick={() => setLeftSidebarOpen(!leftSidebarOpen)} style={{ position: 'absolute', top: '15px', right: leftSidebarOpen ? '15px' : 'auto', left: leftSidebarOpen ? 'auto' : '50%', transform: leftSidebarOpen ? 'none' : 'translateX(-50%)', background: 'white', border: '1px solid #e2e8f0', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', zIndex: 10 }}>
-                        <ChevronDown size={18} style={{ transform: leftSidebarOpen ? 'rotate(90deg)' : 'rotate(-90deg)', transition: 'transform 0.3s' }} />
+                    <button onClick={() => setLeftSidebarOpen(!leftSidebarOpen)} title={leftSidebarOpen ? "Piilota sivupalkki" : "Näytä sivupalkki"} style={{ position: 'absolute', top: '24px', right: leftSidebarOpen ? '24px' : 'auto', left: leftSidebarOpen ? 'auto' : '50%', transform: leftSidebarOpen ? 'none' : 'translateX(-50%)', background: '#f8fafc', border: '2px solid #bae6fd', borderRadius: '50%', padding: 0, width: '40px', minWidth: '40px', height: '40px', minHeight: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#0284c7', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.15)', zIndex: 10, transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform=leftSidebarOpen ? 'scale(1.1)' : 'translateX(-50%) scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform=leftSidebarOpen ? 'none' : 'translateX(-50%)'}>
+                        {leftSidebarOpen ? <ChevronLeft size={24} /> : <ChevronRight size={24} />}
                     </button>
 
                     {leftSidebarOpen ? (
@@ -603,8 +603,8 @@ export default function TeacherDashboard() {
                 
                 {/* Categories Help Column */}
                 <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: rightSidebarOpen ? '2.5rem' : '2.5rem 1rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', transition: 'all 0.3s', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                    <button onClick={() => setRightSidebarOpen(!rightSidebarOpen)} style={{ position: 'absolute', top: '15px', left: rightSidebarOpen ? '15px' : '50%', transform: rightSidebarOpen ? 'none' : 'translateX(-50%)', background: 'white', border: '1px solid #e2e8f0', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#64748b', boxShadow: '0 2px 5px rgba(0,0,0,0.05)', zIndex: 10 }}>
-                        <ChevronDown size={18} style={{ transform: rightSidebarOpen ? 'rotate(-90deg)' : 'rotate(90deg)', transition: 'transform 0.3s' }} />
+                    <button onClick={() => setRightSidebarOpen(!rightSidebarOpen)} title={rightSidebarOpen ? "Piilota kategoriat" : "Näytä kategoriat"} style={{ position: 'absolute', top: '24px', left: rightSidebarOpen ? '24px' : '50%', transform: rightSidebarOpen ? 'none' : 'translateX(-50%)', background: '#f8fafc', border: '2px solid #bae6fd', borderRadius: '50%', padding: 0, width: '40px', minWidth: '40px', height: '40px', minHeight: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#0284c7', boxShadow: '0 4px 10px rgba(2, 132, 199, 0.15)', zIndex: 10, transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.transform=rightSidebarOpen ? 'scale(1.1)' : 'translateX(-50%) scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform=rightSidebarOpen ? 'none' : 'translateX(-50%)'}>
+                        {rightSidebarOpen ? <ChevronRight size={24} /> : <ChevronLeft size={24} />}
                     </button>
 
                     {rightSidebarOpen ? (
