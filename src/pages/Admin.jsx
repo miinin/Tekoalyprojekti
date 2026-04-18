@@ -16,6 +16,31 @@ export default function Admin() {
   const [bugReports, setBugReports] = useState([]);
 
   const [loading, setLoading] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState('');
+  const [authError, setAuthError] = useState(false);
+
+  const expectedHash = '43e0a67e19a08df07e5d2e6ae5dbf2d27b87a16caee2d5c93a36b1a15e8cf415';
+
+  const handleLogin = async (e) => {
+      e.preventDefault();
+      try {
+          const msgUint8 = new TextEncoder().encode(passwordInput);
+          const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+          const hashArray = Array.from(new Uint8Array(hashBuffer));
+          const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+          
+          if (hashHex === expectedHash) {
+              setIsAuthenticated(true);
+              setAuthError(false);
+          } else {
+              setAuthError(true);
+              setPasswordInput('');
+          }
+      } catch (err) {
+          console.error(err);
+      }
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -38,10 +63,13 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-       loadData();
-    }, 0);
-  }, []);
+    if (isAuthenticated) {
+        setTimeout(() => {
+           loadData();
+        }, 0);
+    }
+     
+  }, [isAuthenticated]);
 
   // -- Room Handlers --
   const handleToggleRoom = (roomId) => {
@@ -70,6 +98,23 @@ export default function Admin() {
     store.setRoomSparks(roomId, roomSparks[roomId] || 0);
     alert('Kipinät päivitetty!');
   };
+
+  if (!isAuthenticated) {
+      return (
+          <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '2rem', background: '#f8fafc' }}>
+             <div style={{ background: 'white', padding: '3rem', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', maxWidth: '400px', width: '100%', textAlign: 'center' }}>
+                 <ShieldAlert size={64} color="#ef4444" style={{ marginBottom: '1rem' }} />
+                 <h2 style={{ fontFamily: 'var(--font-display)', margin: '0 0 1.5rem 0', color: '#1e293b' }}>Ylläpito</h2>
+                 <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <input type="password" value={passwordInput} onChange={e => setPasswordInput(e.target.value)} placeholder="Salasana" style={{ padding: '1rem', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '1.1rem', outline: 'none' }} />
+                    {authError && <div style={{ color: '#ef4444', fontSize: '0.9rem', fontWeight: 'bold' }}>Väärä salasana</div>}
+                    <button type="submit" className="btn-primary" style={{ background: '#ef4444', padding: '1rem', fontSize: '1.1rem' }}>Kirjaudu</button>
+                    <button type="button" className="btn-secondary" onClick={() => navigate('/lobby')} style={{ padding: '0.8rem' }}>Peruuta</button>
+                 </form>
+             </div>
+          </div>
+      );
+  }
 
   return (
     <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
