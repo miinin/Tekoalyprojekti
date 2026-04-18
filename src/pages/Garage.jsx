@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -270,7 +270,7 @@ export default function Garage() {
               {item.buff && (
                   <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e')}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }} title={`${item.buff.title}: ${item.buff.desc}`}>
                       <div style={{ position: 'absolute', top: '-40px', right: '0px', color: 'rgba(255,255,255,0.95)', transform: 'rotate(15deg)', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-                         {item.buff.isSpark ? <Zap size={18} fill="white" /> : '✦'}
+                         {item.buff.isSpark ? <Zap size={18} fill="white" /> : (item.id === 'van-wheel06' ? <Snowflake size={18} /> : '✦')}
                       </div>
                   </div>
               )}
@@ -650,6 +650,7 @@ export default function Garage() {
               {isTutorialActive && !hideTutorialBox && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 3rem 1.2rem 1.5rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
                    Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen. Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!
                 </div>
               )}

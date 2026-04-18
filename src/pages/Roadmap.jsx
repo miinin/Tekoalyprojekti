@@ -56,6 +56,12 @@ const Roadmap = () => {
   useEffect(() => {
       localStorage.setItem('closed_tuition', JSON.stringify(closedTuition));
   }, [closedTuition]);
+  
+  useEffect(() => {
+      if (completedLessons.length === 0) {
+          setClosedTuition({ 0: false, 1: false, 2: false });
+      }
+  }, [completedLessons.length]);
   const [puffs, setPuffs] = useState([]);
   const [toastMessage, setToastMessage] = useState(null);
   const mapRef = useRef(null);
@@ -714,7 +720,7 @@ const Roadmap = () => {
 
       const isFirstEverTarget = !store.getTutorialSkipped() && currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
       const isFirstSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
-      const isSecondSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1 && closedTuition[1];
+      const isSecondSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_2' && completedLessons.length === 1;
 
       const labelPos = node.labelPos || 'bottom';
       let labelStyle = { top: '100%', left: '50%', transform: 'translate(-50%, 0.66rem)' };
@@ -1000,7 +1006,7 @@ const Roadmap = () => {
         <div style={{ display: 'flex', gap: '1rem', pointerEvents: 'auto' }}>
           <button 
             onClick={() => navigate('/garage')}
-            className={!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? "animate-wiggle-glow-soft-alt" : ""}
+            className={!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 ? "animate-wiggle-glow-soft-alt" : ""}
             style={{ 
                 backgroundColor: 'white', 
                 border: 'none', 
@@ -1009,17 +1015,17 @@ const Roadmap = () => {
                 display: 'flex', 
                 alignItems: 'center', 
                 gap: '0.6rem', 
-                boxShadow: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? undefined : '0 4px 12px rgba(0,0,0,0.1)',
+                boxShadow: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 ? undefined : '0 4px 12px rgba(0,0,0,0.1)',
                 cursor: 'pointer',
-                transition: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1] ? 'none' : 'transform 0.2s'
+                transition: !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 ? 'none' : 'transform 0.2s'
             }}
             onMouseOver={(e) => {
-                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1)) {
                     e.currentTarget.style.transform = 'scale(1.05)';
                 }
             }}
             onMouseOut={(e) => {
-                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 && closedTuition[1])) {
+                if (!(!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1)) {
                     e.currentTarget.style.transform = 'scale(1)';
                 }
             }}
