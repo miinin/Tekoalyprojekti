@@ -173,6 +173,7 @@ export default function Quiz() {
   const [earnedSparks, setEarnedSparks] = useState(0);
   const [currentQuestionSparks, setCurrentQuestionSparks] = useState(0);
   const [results, setResults] = useState([]);
+  const [nextEnabled, setNextEnabled] = useState(true);
 
   // States for special types
   const [orderedItems, setOrderedItems] = useState([]);
@@ -215,6 +216,26 @@ export default function Quiz() {
         setShuffledDraggables([]);
     }
   }, [currentIndex, questions, activeBuff, bumperBuff]);
+
+  useEffect(() => {
+    if (showExplanation) {
+      const comps = store.getCompletions();
+      const uniqueComps = [...new Set(comps)];
+      // First two categories: if the user hasn't successfully completed 2 separate categories yet, 
+      // OR if they have completed exactly 2 but this is one of them (replaying).
+      if (uniqueComps.length < 2 || (uniqueComps.length === 2 && uniqueComps.includes(sub?.id))) {
+        setNextEnabled(false);
+        const timer = setTimeout(() => {
+          setNextEnabled(true);
+        }, 3000);
+        return () => clearTimeout(timer);
+      } else {
+        setNextEnabled(true);
+      }
+    } else {
+      setNextEnabled(true);
+    }
+  }, [showExplanation, sub?.id]);
 
   if (!category || !sub) {
     return (
@@ -860,9 +881,28 @@ export default function Quiz() {
                     );
                 })()}
 
-                <button className="btn-primary" style={{ flex: 1, padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px' }} onClick={handleNext}>
-                  {currentIndex < questions.length - 1 ? 'Seuraava Kysymys' : 'Suoritettu! Jatka tästä'}
-                  <ArrowRight size={24} />
+                <button 
+                  className={nextEnabled ? "btn-primary" : ""} 
+                  disabled={!nextEnabled}
+                  style={{ 
+                    flex: 1, padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px',
+                    background: nextEnabled ? undefined : '#94a3b8',
+                    color: nextEnabled ? undefined : 'white',
+                    cursor: nextEnabled ? 'pointer' : 'not-allowed',
+                    border: nextEnabled ? undefined : 'none',
+                    fontFamily: 'var(--font-main)',
+                    fontWeight: 'bold',
+                    transition: 'all 0.3s ease'
+                  }} 
+                  onClick={handleNext}
+                >
+                  {!nextEnabled ? (
+                    <>Lue <ArrowUp size={24} /></>
+                  ) : currentIndex < questions.length - 1 ? (
+                    <>Seuraava Kysymys <ArrowRight size={24} /></>
+                  ) : (
+                    <>Suoritettu! Jatka tästä <ArrowRight size={24} /></>
+                  )}
                 </button>
             </div>
           </div>
