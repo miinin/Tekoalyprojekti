@@ -288,85 +288,105 @@ export default function TeacherDashboard() {
 
         {!sessionCode ? (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexGrow: 1, gap: '2rem' }}>
-                <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '5rem 4rem', borderRadius: '32px', textAlign: 'center', maxWidth: '650px', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', border: '1px solid rgba(255, 255, 255, 0.6)' }}>
-                    <div style={{ display: 'inline-flex', background: '#f0f9ff', padding: '1.5rem', borderRadius: '24px', marginBottom: '1.5rem', border: '2px solid #bae6fd', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.1)' }}>
-                        <Users size={64} color="#0284c7" />
-                    </div>
-                    <h2 style={{ fontSize: '2.4rem', margin: '0 0 1rem 0', fontFamily: 'var(--font-display)', color: '#0f172a', letterSpacing: '-0.5px' }}>Uusi oppitunti</h2>
-                    <p style={{ fontSize: '1.2rem', color: '#64748b', marginBottom: '3rem', lineHeight: 1.6 }}>Seuraa oppilaiden edistymistä reaaliajassa, palkitse heitä juhlallisilla Kipinöillä ja ota luokka haltuun lukitsemalla näytöt tarvittaessa.</p>
+                <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '3rem', borderRadius: '32px', maxWidth: '1000px', width: '100%', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', border: '1px solid rgba(255, 255, 255, 0.6)', display: 'flex', flexWrap: 'wrap', gap: '3rem', position: 'relative' }}>
                     
-                    {/* PIN input for new session */}
-                    <div style={{ marginBottom: '2rem', textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>
-                            <Lock size={18} color="#3b82f6" /> Luo PIN-koodi (väh. 4 merkkiä)
-                        </label>
-                        <input
-                            type="password"
-                            placeholder="Esim. 1234"
-                            value={newPin}
-                            maxLength={8}
-                            onChange={e => { setNewPin(e.target.value); setErrorMsg(''); }}
-                            style={{ width: '100%', padding: '1rem 1.2rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.2rem', outline: 'none', boxSizing: 'border-box', letterSpacing: '4px', transition: 'border-color 0.2s', background: '#f8fafc' }}
-                            onFocus={e => e.target.style.borderColor = '#3b82f6'}
-                            onBlur={e => e.target.style.borderColor = '#cbd5e1'}
-                        />
-                        <p style={{ margin: '0.8rem 0 0 0', fontSize: '0.9rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Info size={14}/> Tarvitset koodin jos jatkat tuntia myöhemmin.</p>
-                    </div>
-
-                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.2rem', marginBottom: '2.5rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'left', cursor: 'pointer', transition: 'background 0.2s' }} onClick={() => setRequireTutorial(!requireTutorial)} onMouseOver={e=>e.currentTarget.style.background='#f1f5f9'} onMouseOut={e=>e.currentTarget.style.background='#f8fafc'}>
-                       <input type="checkbox" id="tut" checked={requireTutorial} onChange={e => setRequireTutorial(e.target.checked)} style={{ minWidth: '24px', height: '24px', cursor: 'pointer', marginTop: '3px', accentColor: '#3b82f6' }} onClick={e => e.stopPropagation()} />
-                       <label htmlFor="tut" style={{ fontSize: '1rem', color: '#475569', cursor: 'pointer', lineHeight: 1.5, margin: 0 }} onClick={e => e.stopPropagation()}>
-                           <strong style={{ display: 'block', marginBottom: '0.3rem', color: '#0f172a', fontSize: '1.1rem' }}>Opastus ensikertalaisille (Tutorial)</strong> Varmista, että uudet oppilaat käyvät pelin pikaoppaan läpi ymmärtääkseen miten Kipinöitä jaetaan.
-                       </label>
-                    </div>
-
-                    {errorMsg && (
-                        <div className="animate-shake" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: '#fef2f2', border: '1px solid #fecaca', padding: '1rem 1.2rem', borderRadius: '14px', marginBottom: '1.5rem', color: '#dc2626', fontWeight: 'bold', textAlign: 'left', boxShadow: '0 4px 10px rgba(220, 38, 38, 0.1)' }}>
-                            <AlertTriangle size={20} color="#dc2626" /> {errorMsg}
+                    {/* Left side: Uusi oppitunti */}
+                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            <div style={{ display: 'inline-flex', background: '#f0f9ff', padding: '1.2rem', borderRadius: '24px', marginBottom: '1rem', border: '2px solid #bae6fd', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.1)' }}>
+                                <Users size={48} color="#0284c7" />
+                            </div>
+                            <h2 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)', color: '#0f172a', letterSpacing: '-0.5px' }}>Uusi oppitunti</h2>
+                            <p style={{ fontSize: '1.05rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Hallitse luokkaa ja jaa Kipinöitä reaaliajassa.</p>
                         </div>
-                    )}
-                    
-                    <button 
-                        onClick={createSession} 
-                        style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.3)', transition: 'all 0.2s', letterSpacing: '1px' }}
-                        onMouseOver={e=>e.currentTarget.style.transform='translateY(-3px)'} 
-                        onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}
-                    >
-                        PERUSTA LUOKKA
-                    </button>
-                    
-                    <div style={{ display: 'flex', alignItems: 'center', margin: '2.5rem 0' }}>
-                        <div style={{ flexGrow: 1, height: '1px', background: 'rgba(0,0,0,0.1)' }}></div>
-                        <span style={{ color: '#64748b', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', padding: '0 1rem' }}>TAI</span>
-                        <div style={{ flexGrow: 1, height: '1px', background: 'rgba(0,0,0,0.1)' }}></div>
+                        
+                        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '1.2rem', justifyContent: 'center' }}>
+                            {/* PIN input for new session */}
+                            <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
+                                <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>
+                                    <Lock size={18} color="#3b82f6" /> Luo PIN-koodi (väh. 4 merkkiä)
+                                </label>
+                                <input
+                                    type="password"
+                                    placeholder="Esim. 1234"
+                                    value={newPin}
+                                    maxLength={8}
+                                    onChange={e => { setNewPin(e.target.value); setErrorMsg(''); }}
+                                    style={{ width: '100%', padding: '1rem 1.2rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.1rem', outline: 'none', boxSizing: 'border-box', letterSpacing: '4px', transition: 'border-color 0.2s', background: '#f8fafc' }}
+                                    onFocus={e => e.target.style.borderColor = '#3b82f6'}
+                                    onBlur={e => e.target.style.borderColor = '#cbd5e1'}
+                                />
+                                <p style={{ margin: '0.8rem 0 0 0', fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Info size={14}/> Tarvitset koodin jos jatkat tuntia myöhemmin.</p>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'left', cursor: 'pointer', transition: 'background 0.2s' }} onClick={() => setRequireTutorial(!requireTutorial)} onMouseOver={e=>e.currentTarget.style.background='#f1f5f9'} onMouseOut={e=>e.currentTarget.style.background='#f8fafc'}>
+                               <input type="checkbox" id="tut" checked={requireTutorial} onChange={e => setRequireTutorial(e.target.checked)} style={{ minWidth: '22px', height: '22px', cursor: 'pointer', marginTop: '3px', accentColor: '#3b82f6' }} onClick={e => e.stopPropagation()} />
+                               <label htmlFor="tut" style={{ fontSize: '0.9rem', color: '#475569', cursor: 'pointer', lineHeight: 1.4, margin: 0 }} onClick={e => e.stopPropagation()}>
+                                   <strong style={{ display: 'block', marginBottom: '0.2rem', color: '#0f172a', fontSize: '1rem' }}>Opastus ensikertalaisille</strong> Varmista, että uudet oppilaat käyvät pikaoppaan läpi.
+                               </label>
+                            </div>
+                        </div>
+
+                        {errorMsg && (
+                            <div className="animate-shake" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: '#fef2f2', border: '1px solid #fecaca', padding: '1rem', borderRadius: '14px', marginTop: '1.5rem', color: '#dc2626', fontWeight: 'bold', textAlign: 'left', fontSize: '0.95rem' }}>
+                                <AlertTriangle size={20} color="#dc2626" /> {errorMsg}
+                            </div>
+                        )}
+                        
+                        <button 
+                            onClick={createSession} 
+                            style={{ width: '100%', padding: '1.2rem', fontSize: '1.2rem', background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', color: 'white', border: 'none', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.3)', transition: 'all 0.2s', letterSpacing: '1px', marginTop: '1.5rem' }}
+                            onMouseOver={e=>e.currentTarget.style.transform='translateY(-3px)'} 
+                            onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}
+                        >
+                            PERUSTA LUOKKA
+                        </button>
                     </div>
                     
-                    <h3 style={{ fontSize: '1.5rem', margin: '0 0 1.5rem 0', fontFamily: 'var(--font-display)', color: '#0f172a' }}>Jatka aiempaa tuntia</h3>
-                    <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '1rem' }}>
-                       <input 
-                          type="text" 
-                          placeholder="Huonekoodi (A8X1)"
-                          value={resumeCode}
-                          maxLength={6}
-                          onChange={(e) => { setResumeCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setErrorMsg(''); }}
-                          style={{ flexGrow: 1, padding: '1rem 1.2rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '2px', outline: 'none', transition: 'border-color 0.2s', background: '#f8fafc' }}
-                          onFocus={e => e.target.style.borderColor = '#10b981'}
-                          onBlur={e => e.target.style.borderColor = '#cbd5e1'}
-                       />
-                       <input 
-                          type="password" 
-                          placeholder="PIN"
-                          value={resumePin}
-                          maxLength={8}
-                          onChange={(e) => { setResumePin(e.target.value); setErrorMsg(''); }}
-                          style={{ width: '120px', padding: '1rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.1rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '4px', outline: 'none', transition: 'border-color 0.2s', background: '#f8fafc' }}
-                          onFocus={e => e.target.style.borderColor = '#10b981'}
-                          onBlur={e => e.target.style.borderColor = '#cbd5e1'}
-                       />
+                    {/* Right side: Jatka aiempaa */}
+                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '1px solid #e2e8f0' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            <div style={{ display: 'inline-flex', background: '#ecfdf5', padding: '1.2rem', borderRadius: '24px', marginBottom: '1rem', border: '2px solid #6ee7b7', boxShadow: '0 10px 25px rgba(16, 185, 129, 0.1)' }}>
+                                <Lock size={48} color="#059669" />
+                            </div>
+                            <h2 style={{ fontSize: '2rem', margin: '0 0 0.5rem 0', fontFamily: 'var(--font-display)', color: '#0f172a', letterSpacing: '-0.5px' }}>Palauta istunto</h2>
+                            <p style={{ fontSize: '1.05rem', color: '#64748b', margin: 0, lineHeight: 1.5 }}>Jatka aiemmin keskeytettyä oppituntia.</p>
+                        </div>
+                        
+                        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '1.2rem', justifyContent: 'center' }}>
+                            <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
+                                <label style={{ display: 'block', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>Aiemman tunnin koodi</label>
+                                <input 
+                                   type="text" 
+                                   placeholder="Esim. A8X1K9"
+                                   value={resumeCode}
+                                   maxLength={6}
+                                   onChange={(e) => { setResumeCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')); setErrorMsg(''); }}
+                                   style={{ width: '100%', boxSizing: 'border-box', padding: '1rem 1.2rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.2rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '4px', outline: 'none', transition: 'border-color 0.2s', background: '#f8fafc' }}
+                                   onFocus={e => e.target.style.borderColor = '#10b981'}
+                                   onBlur={e => e.target.style.borderColor = '#cbd5e1'}
+                                />
+                            </div>
+
+                            <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
+                                <label style={{ display: 'block', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>Tunnin PIN-koodi</label>
+                                <input 
+                                   type="password" 
+                                   placeholder="PIN"
+                                   value={resumePin}
+                                   maxLength={8}
+                                   onChange={(e) => { setResumePin(e.target.value); setErrorMsg(''); }}
+                                   style={{ width: '100%', boxSizing: 'border-box', padding: '1rem 1.2rem', borderRadius: '14px', border: '2px solid #cbd5e1', fontSize: '1.2rem', textAlign: 'center', fontWeight: 'bold', letterSpacing: '4px', outline: 'none', transition: 'border-color 0.2s', background: '#f8fafc' }}
+                                   onFocus={e => e.target.style.borderColor = '#10b981'}
+                                   onBlur={e => e.target.style.borderColor = '#cbd5e1'}
+                                />
+                            </div>
+                        </div>
+                        
+                        <button onClick={resumeExistingSession} disabled={resumeCode.length < 6 || resumePin.length < 4} style={{ background: 'white', color: '#10b981', border: '2px solid #10b981', padding: '1.2rem', borderRadius: '16px', fontWeight: 'bold', cursor: (resumeCode.length < 6 || resumePin.length < 4) ? 'not-allowed' : 'pointer', opacity: (resumeCode.length < 6 || resumePin.length < 4) ? 0.5 : 1, width: '100%', fontSize: '1.2rem', transition: 'all 0.2s', marginTop: '1.5rem' }} onMouseOver={e=>{if(!(resumeCode.length < 6 || resumePin.length < 4)){e.currentTarget.style.background='#10b981'; e.currentTarget.style.color='white'; e.currentTarget.style.boxShadow='0 10px 25px rgba(16, 185, 129, 0.3)'}}} onMouseOut={e=>{if(!(resumeCode.length < 6 || resumePin.length < 4)){e.currentTarget.style.background='white'; e.currentTarget.style.color='#10b981'; e.currentTarget.style.boxShadow='none'}}}>
+                           PALAUTA ISTUNTO
+                        </button>
                     </div>
-                    <button onClick={resumeExistingSession} disabled={resumeCode.length < 6 || resumePin.length < 4} style={{ background: 'white', color: '#10b981', border: '2px solid #10b981', padding: '1rem 2rem', borderRadius: '14px', fontWeight: 'bold', cursor: (resumeCode.length < 6 || resumePin.length < 4) ? 'not-allowed' : 'pointer', opacity: (resumeCode.length < 6 || resumePin.length < 4) ? 0.5 : 1, width: '100%', fontSize: '1.2rem', transition: 'all 0.2s' }} onMouseOver={e=>{if(!(resumeCode.length < 6 || resumePin.length < 4)){e.currentTarget.style.background='#10b981'; e.currentTarget.style.color='white'; e.currentTarget.style.boxShadow='0 10px 25px rgba(16, 185, 129, 0.3)'}}} onMouseOut={e=>{if(!(resumeCode.length < 6 || resumePin.length < 4)){e.currentTarget.style.background='white'; e.currentTarget.style.color='#10b981'; e.currentTarget.style.boxShadow='none'}}}>
-                       PALAUTA ISTUNTO
-                    </button>
 
                 </div>
             </div>
