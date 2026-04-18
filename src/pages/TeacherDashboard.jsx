@@ -82,32 +82,7 @@ const topicDictionary = {
 
 const getTopic = (id) => topicDictionary[id] || "";
 
-const CategoryAccordion = ({ category }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    return (
-        <div style={{ background: isOpen ? '#f0f9ff' : '#f8fafc', border: `1px solid ${isOpen ? '#bae6fd' : '#e2e8f0'}`, borderRadius: '16px', overflow: 'hidden', transition: 'all 0.2s', boxShadow: isOpen ? '0 4px 12px rgba(2, 132, 199, 0.05)' : 'none' }}>
-            <button onClick={() => setIsOpen(!isOpen)} style={{ width: '100%', padding: '1rem 1.2rem', background: 'transparent', border: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', fontSize: '1.05rem', color: isOpen ? '#0369a1' : '#334155', cursor: 'pointer' }}>
-                <div style={{ textAlign: 'left' }}>
-                    {category.name}
-                    {getTopic(category.id) && <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 'normal', marginTop: '0.2rem' }}>Teema: {getTopic(category.id)}</div>}
-                </div>
-                <ChevronDown size={20} style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }} />
-            </button>
-            {isOpen && (
-                <div style={{ padding: '0 1.2rem 1.2rem 1.2rem' }}>
-                    <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#475569', fontSize: '0.95rem' }}>
-                        {category.subcategories.map(sub => (
-                            <li key={sub.id} style={{ marginBottom: '0.6rem', lineHeight: 1.4 }}>
-                                <strong>{sub.name}</strong>
-                                {getTopic(sub.id) && <span style={{ display: 'block', color: '#64748b', fontSize: '0.85rem', marginTop: '0.1rem' }}>&rarr; {getTopic(sub.id)}</span>}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div>
-    );
-};
+
 
 export default function TeacherDashboard() {
   const navigate = useNavigate();
@@ -129,6 +104,7 @@ export default function TeacherDashboard() {
   const [confirmModal, setConfirmModal] = useState(null);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   
   // Generating a readable 6-character code
   const generateCode = () => {
@@ -614,10 +590,35 @@ export default function TeacherDashboard() {
                                 <h2 style={{ fontSize: '1.5rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a' }}>Kategoriat</h2>
                             </div>
                             <p style={{ color: '#64748b', fontSize: '0.95rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>Kartalla näkyvät aihealueet ja niihin sisältyvät kysymyskategoriat.</p>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', overflowY: 'auto' }}>
-                                {categories.map(cat => (
-                                    <CategoryAccordion key={cat.id} category={cat} />
-                                ))}
+                            <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                                <select 
+                                    value={activeCategoryIndex} 
+                                    onChange={e => setActiveCategoryIndex(Number(e.target.value))} 
+                                    style={{ width: '100%', padding: '1.2rem 1.5rem', borderRadius: '20px', border: '2px solid #bae6fd', background: '#f0f9ff', fontSize: '1.05rem', fontWeight: 'bold', color: '#0369a1', outline: 'none', cursor: 'pointer', appearance: 'none', backgroundImage: 'url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%230284c7%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1.5rem top 50%', backgroundSize: '0.8rem auto', boxShadow: '0 4px 6px rgba(2, 132, 199, 0.05)' }}
+                                >
+                                    {categories.map((cat, i) => <option key={cat.id} value={i}>{cat.name}</option>)}
+                                </select>
+                                
+                                {categories[activeCategoryIndex] && (
+                                    <div style={{ marginTop: '1.5rem', background: '#f8fafc', borderRadius: '24px', padding: '1.8rem', border: '1px solid #e2e8f0', flexGrow: 1, boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.02)' }}>
+                                        {getTopic(categories[activeCategoryIndex].id) && (
+                                            <div style={{ marginBottom: '1.5rem', paddingBottom: '1.2rem', borderBottom: '2px dashed #cbd5e1' }}>
+                                                <h3 style={{ margin: '0 0 0.5rem 0', color: '#0ea5e9', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 'bold' }}>Pääteema</h3>
+                                                <div style={{ fontWeight: 'bold', color: '#1e293b', fontSize: '1.15rem' }}>{getTopic(categories[activeCategoryIndex].id)}</div>
+                                            </div>
+                                        )}
+                                        <h3 style={{ margin: '0 0 1rem 0', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 'bold' }}>Alueet ({categories[activeCategoryIndex].subcategories.length})</h3>
+                                        <ul style={{ paddingLeft: '0.5rem', margin: 0, listStyleType: 'none', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+                                            {categories[activeCategoryIndex].subcategories.map(sub => (
+                                                <li key={sub.id} style={{ position: 'relative', paddingLeft: '1.5rem' }}>
+                                                    <div style={{ position: 'absolute', left: 0, top: '8px', width: '8px', height: '8px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 0 2px #bae6fd' }}></div>
+                                                    <strong style={{ color: '#0f172a', display: 'block', marginBottom: '0.3rem', fontSize: '1.05rem' }}>{sub.name}</strong>
+                                                    {getTopic(sub.id) && <span style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.4, display: 'flex', gap: '0.5rem' }}><span style={{ color: '#94a3b8' }}>&rarr;</span> {getTopic(sub.id)}</span>}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                             </div>
                         </>
                     ) : (
