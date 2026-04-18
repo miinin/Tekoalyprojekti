@@ -73,7 +73,7 @@ export default function Quiz() {
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') buff = 'vinssi';
        if (mainCategory === 'konepellin' && extras === 'van-extra07') buff = 'eramaa-antenni';
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
-       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') buff = 'talvirenkaat';
+       if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') buff = 'talvirenkaat';
        setActiveBuff(buff);
        setActivePaint(equipped['body'] || '');
 
@@ -112,7 +112,7 @@ export default function Quiz() {
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 3;
        if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 3;
        
-       if (mainCategory === 'reilu_peli' && wheels === 'van-wheel06') yellowCharge += 5;
+       if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') yellowCharge += 5;
        else if (wheels === 'van-wheel06') yellowCharge += 2;
 
        setQuizCharges({ red: redCharge, yellow: yellowCharge, green: greenCharge });
