@@ -291,7 +291,7 @@ export default function TeacherDashboard() {
                 <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '3rem', borderRadius: '32px', maxWidth: '1000px', width: '100%', boxShadow: '0 20px 50px rgba(0,0,0,0.08)', border: '1px solid rgba(255, 255, 255, 0.6)', display: 'flex', flexWrap: 'wrap', gap: '3rem', position: 'relative' }}>
                     
                     {/* Left side: Uusi oppitunti */}
-                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', background: 'white', borderRadius: '24px', padding: '2.5rem', border: '1px solid #e2e8f0', boxShadow: '0 10px 40px rgba(0,0,0,0.03)' }}>
                         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                             <div style={{ display: 'inline-flex', background: '#f0f9ff', padding: '1.2rem', borderRadius: '24px', marginBottom: '1rem', border: '2px solid #bae6fd', boxShadow: '0 10px 25px rgba(2, 132, 199, 0.1)' }}>
                                 <Users size={48} color="#0284c7" />
@@ -344,7 +344,7 @@ export default function TeacherDashboard() {
                     </div>
                     
                     {/* Right side: Jatka aiempaa */}
-                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '1px solid #e2e8f0' }}>
+                    <div style={{ flex: '1 1 350px', display: 'flex', flexDirection: 'column', background: 'white', borderRadius: '24px', padding: '2.5rem', border: '1px solid #e2e8f0', boxShadow: '0 10px 40px rgba(0,0,0,0.03)' }}>
                         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
                             <div style={{ display: 'inline-flex', background: '#ecfdf5', padding: '1.2rem', borderRadius: '24px', marginBottom: '1rem', border: '2px solid #6ee7b7', boxShadow: '0 10px 25px rgba(16, 185, 129, 0.1)' }}>
                                 <Lock size={48} color="#059669" />
