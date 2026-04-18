@@ -44,6 +44,7 @@ export default function Lobby() {
   const handleNewSinglePlayer = async () => {
     store.clearSinglePlayer();
     store.setTutorialSkipped(skipTutorial);
+    if (skipTutorial) store.grantSkipTutorialRewards();
     
     // Antigravity fix: clearSinglePlayer pyyhkii kaikki rahat (ml. testirahat), 
     // joten testitilan 100k lisätään vasta nollaamisen jälkeen!

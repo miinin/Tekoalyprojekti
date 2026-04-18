@@ -141,6 +141,21 @@ export const store = {
     localStorage.setItem('aivan_tutorial_skipped', skipped ? 'true' : 'false');
   },
 
+  grantSkipTutorialRewards: () => {
+    const room = store.getRoomCode();
+    const keyItems = room ? `aivan_items_${room}` : 'aivan_items';
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem(keyItems)) || []; } catch (error) { console.error(error); }
+    if (!items.includes('g-clean')) items.push('g-clean');
+    localStorage.setItem(keyItems, JSON.stringify(items));
+    
+    const keyEq = room ? `aivan_equipped_${room}` : 'aivan_equipped';
+    let equipped = {};
+    try { equipped = JSON.parse(localStorage.getItem(keyEq)) || {}; } catch (error) { console.error(error); }
+    equipped['g_floor'] = 'g-clean';
+    localStorage.setItem(keyEq, JSON.stringify(equipped));
+  },
+
   getTutorialCompleted: () => {
     return localStorage.getItem('aivan_tutorial_completed') === 'true';
   },
@@ -618,6 +633,11 @@ export const store = {
           } else {
               store.clearSinglePlayer();
               store.setClassroomCode(upperCode, nickname);
+              
+              if (store.getTutorialSkipped()) {
+                  store.grantSkipTutorialRewards();
+              }
+              
               await store.syncClassroomProgress();
               return false; // New
           }
@@ -625,6 +645,11 @@ export const store = {
           console.error(error);
           store.clearSinglePlayer();
           store.setClassroomCode(code.toUpperCase().trim(), nickname);
+          
+          if (store.getTutorialSkipped()) {
+              store.grantSkipTutorialRewards();
+          }
+          
           await store.syncClassroomProgress();
           return false;
       }
