@@ -13,6 +13,7 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentSparks, setCurrentSparks] = useState(0);
+  const [hoverStreak, setHoverStreak] = useState(false);
   
   const [teacherBoosts, setTeacherBoosts] = useState({ red: 0, yellow: 0, green: 0 });
   const [quizCharges, setQuizCharges] = useState({ red: 0, yellow: 0, green: 0 });
@@ -650,9 +651,22 @@ export default function Quiz() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
           {currentStreak >= 2 && (
-             <div className="animate-pulse" style={{ fontWeight: '900', background: 'linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#78350f', border: '2px solid #fde68a', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
+             <div 
+                className="animate-pulse" 
+                onMouseEnter={() => setHoverStreak(true)}
+                onMouseLeave={() => setHoverStreak(false)}
+                style={{ position: 'relative', fontWeight: '900', background: 'linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#78350f', border: '2px solid #fde68a', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)', cursor: 'default' }}>
                 <Flame size={20} fill="#f97316" color="#9a3412" strokeWidth={2} />
                 KIPINÄKETJU {currentStreak}
+                
+                {hoverStreak && (
+                    <div className="animate-fade-in" style={{ position: 'absolute', top: 'calc(100% + 12px)', right: 0, width: '270px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', zIndex: 100, color: '#334155', fontSize: '0.9rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textTransform: 'none', letterSpacing: 'normal' }}>
+                        <div style={{ position: 'absolute', top: '-11px', right: '35px', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
+                        <div style={{ position: 'absolute', top: '-7px', right: '35px', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
+                        <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem' }}>Liekeissä! 🔥</div>
+                        Vastaa oikein peräkkäin kasvattaaksesi ketjua. Yli 5 ketju antaa <b>+5%</b> ja yli 10 ketju <b>+10%</b> bonuskipinöitä. Väärä vastaus nollaa ketjun.
+                    </div>
+                )}
              </div>
           )}
           <div style={{ fontWeight: 'bold', background: '#fef3c7', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d97706', border: '2px solid #fde68a' }}>

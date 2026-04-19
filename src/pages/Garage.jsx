@@ -23,6 +23,7 @@ export default function Garage() {
   const [bestStreak, setBestStreak] = useState(0);
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [selectedTrophyObj, setSelectedTrophyObj] = useState(null);
+  const [hoverPlaque, setHoverPlaque] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
   const [hoverCabinet, setHoverCabinet] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -801,13 +802,25 @@ export default function Garage() {
                            
                            {/* Kipinäketjun ennätyslaatta (hyllyjen välissä / yläosassa) */}
                            {bestStreak > 0 && (
-                               <div style={{ position: 'absolute', top: '48.5%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 30, background: 'linear-gradient(145deg, #fef08a, #d97706)', padding: '0.6rem 1.8rem', borderRadius: '8px', border: '3px solid #78350f', boxShadow: '0 8px 25px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: '0.8rem', pointerEvents: 'none' }}>
+                               <div 
+                                    onMouseEnter={() => setHoverPlaque(true)}
+                                    onMouseLeave={() => setHoverPlaque(false)}
+                                    style={{ position: 'absolute', top: '48.5%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 30, background: 'linear-gradient(145deg, #fef08a, #d97706)', padding: '0.6rem 1.8rem', borderRadius: '8px', border: '3px solid #78350f', boxShadow: '0 8px 25px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: '0.8rem', pointerEvents: 'auto', cursor: 'help' }}>
                                     <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
                                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                         <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: '#78350f', fontWeight: '900', letterSpacing: '1px', marginBottom: '-2px' }}>Ketjuennätys</span>
                                         <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#451a03', fontFamily: 'monospace', textShadow: '0 1px 0 rgba(255,255,255,0.3)' }}>{bestStreak}</span>
                                     </div>
                                     <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
+                                    
+                                    {hoverPlaque && (
+                                        <div className="animate-fade-in" style={{ position: 'absolute', top: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', zIndex: 100, color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textTransform: 'none', letterSpacing: 'normal', pointerEvents: 'none' }}>
+                                            <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
+                                            <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
+                                            <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem', textAlign: 'center' }}>Paras putkesi koskaan! 🔥</div>
+                                            Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä.
+                                        </div>
+                                    )}
                                </div>
                            )}
                            
