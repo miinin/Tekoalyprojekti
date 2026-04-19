@@ -24,3 +24,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# AI and Debug Dumps
+*.cjs
+*.mjs
+*.txt
+*.md
+!README.md
+!kieliasu_havainnot.md
+test*.js
+sim_click.js
