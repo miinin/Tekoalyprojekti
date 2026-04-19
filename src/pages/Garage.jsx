@@ -819,7 +819,7 @@ export default function Garage() {
                                                    <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
                                               ))}
                                           </div>
-                                          <div style={{ position: 'absolute', top: '30%', right: '-30%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
+                                          <div style={{ position: 'absolute', bottom: '0', right: '-15%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
                                                {count}
                                           </div>
                                       </div>
@@ -833,13 +833,10 @@ export default function Garage() {
 
                      {selectedTrophyObj && (
                         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
-                            <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
+                             <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
                                 <X size={40} />
-                            </button>
-                            <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '90vw', maxHeight: '65vh', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))' }} />
-                            <h2 style={{ marginTop: '2rem', color: '#fef3c7', fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '4px', textShadow: '0 4px 15px rgba(0,0,0,0.9), 0 0 25px rgba(234,179,8,0.5)', textAlign: 'center', padding: '0 2rem' }}>
-                                {selectedTrophyObj.name}
-                            </h2>
+                             </button>
+                             <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))', padding: '2rem' }} />
                         </div>
                      )}
 
