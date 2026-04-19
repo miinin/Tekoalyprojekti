@@ -729,7 +729,7 @@ export default function Garage() {
                            </h2>
                            <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ maxHeight: '90vh', maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
                        
-                           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default' }}
+                           <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default', pointerEvents: isEditMode ? 'auto' : 'none' }}
                             onClick={(e) => {
                                if (!isEditMode) return;
                                const rect = e.currentTarget.getBoundingClientRect();
