@@ -785,13 +785,14 @@ export default function Garage() {
                                         <span style={{ fontSize: '1.2rem', fontWeight: '900', color: '#451a03', fontFamily: 'monospace', textShadow: '0 1px 0 rgba(255,255,255,0.3)' }}>{bestStreak}</span>
                                     </div>
                                     <Flame size={22} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
-                                    
                                     {hoverPlaque && (
-                                        <div className="animate-fade-in" style={{ position: 'absolute', top: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', zIndex: 100, color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textTransform: 'none', letterSpacing: 'normal', pointerEvents: 'none' }}>
-                                            <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
-                                            <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
-                                            <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem', textAlign: 'center' }}>Paras putkesi koskaan! 🔥</div>
-                                            Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä. Mitalihyllyssä näkyy vain parhaat palat!
+                                        <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 100 }}>
+                                            <div className="animate-fade-in" style={{ position: 'relative', marginTop: '15px', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textAlign: 'left' }}>
+                                                <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
+                                                <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
+                                                <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem', textAlign: 'center' }}>Paras putkesi koskaan! 🔥</div>
+                                                Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä. Mitalihyllyssä näkyy vain parhaat palat!
+                                            </div>
                                         </div>
                                     )}
                                </div>

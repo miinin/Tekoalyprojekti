@@ -500,7 +500,7 @@ export default function Lobby() {
                       {/* AI Palvelut */}
                       <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <Zap size={24} color="#8b5cf6" /> Tekoälypalvelut
+                              <Zap size={24} color="#f97316" /> Tekoälypalvelut
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexGrow: 1, justifyContent: 'center' }}>
                               {['Google Antigravity', 'NotebookLM', 'Google Gemini'].map(name => (
