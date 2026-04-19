@@ -337,6 +337,7 @@ export const store = {
     localStorage.removeItem('aivan_last_sub');
     localStorage.removeItem('aivan_used_map_boosts');
     localStorage.removeItem('aivan_teacher_boosts');
+    localStorage.removeItem('aivan_streak_stats');
     store.setRoomCode(null);
   },
 
@@ -642,11 +643,17 @@ export const store = {
              }
           } catch(error) { console.error(error); }
           
+          let fetchError = false;
           let docSnap;
           try { 
               const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
               docSnap = await Promise.race([getDoc(docRef), timeoutPromise]); 
-          } catch(error) { console.error(error); }
+          } catch(error) { 
+              console.error(error); 
+              fetchError = true;
+          }
+          
+          if (fetchError) return 'error';
           
           if (docSnap && docSnap.exists() && docSnap.data().rawData) {
               const data = docSnap.data().rawData;
@@ -676,15 +683,7 @@ export const store = {
           }
       } catch (error) {
           console.error(error);
-          store.clearSinglePlayer();
-          store.setClassroomCode(code.toUpperCase().trim(), nickname);
-          
-          if (store.getTutorialSkipped()) {
-              store.grantSkipTutorialRewards();
-          }
-          
-          await store.syncClassroomProgress();
-          return false;
+          return 'error';
       }
   },
 };

@@ -109,41 +109,34 @@ export default function Lobby() {
           return;
       }
 
-      // Start actual session logic now that we know room exists
-      store.clearSinglePlayer();
-      store.setClassroomCode(upperCode, classNick);
-      if (reqTut !== null) store.setTutorialSkipped(!reqTut);
-      
-      const success = await store.syncClassroomProgress();
-      
-      if (success && reqTut === true) {
-          const currentSparks = await store.getSparks();
-          if (currentSparks < 200) {
-              await store.addSparks(200);
-          }
-      }
-
+      // Start actual session logic using the robust joinClassroom method
+      const joinResult = await store.joinClassroom(upperCode, classNick);
       setJoinClassLoading(false);
-      
-      if (success) {
+
+      if (joinResult === 'error') {
           setModalState({
-              title: 'Liitytty onnistuneesti!',
-              text: `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
-              buttonText: 'Siirry peliin',
-              onClose: () => {
-                  if (reqTut === true) navigate('/garage');
-                  else navigate('/roadmap');
-              }
-          });
-      } else {
-          store.clearSinglePlayer();
-          setModalState({
-              title: 'Yhteys palvelimeen pätkäisi',
-              text: 'Kirjautuminen opettajan huoneeseen onnistui, mutta luokkatietojen tallentaminen epäonnistui kireän verkon palomuurin takia.',
+              title: 'Yhteysongelma',
+              text: 'Emme saaneet ladattua mahdollisia aiempia tietojasi tekoälyluokasta, emmekä tyhjennä peliäsi vahingossa! Tarkista verkkoyhteys ja yritä liittyä luokkaan uudelleen.',
               buttonText: 'Takaisin',
               onClose: () => setModalState(null)
           });
+          return;
       }
+      
+      const reqTutFixed = typeof reqTut === 'boolean' ? reqTut : false;
+      const willShowGarage = (joinResult === true) ? false : reqTutFixed; // If resumed, don't force Garage unless needed. Let's just follow reqTut if new player.
+
+      setModalState({
+          title: 'Liitytty onnistuneesti!',
+          text: (joinResult === true) 
+              ? `Tervetuloa takaisin, ${classNick}! Pelitilanteesi on palautettu.` 
+              : `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
+          buttonText: 'Siirry peliin',
+          onClose: () => {
+              if (reqTutFixed && joinResult !== true) navigate('/garage');
+              else navigate('/roadmap');
+          }
+      });
   };
 
   const handleCreateLobby = () => {
