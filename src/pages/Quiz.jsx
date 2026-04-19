@@ -649,7 +649,6 @@ export default function Quiz() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
           {currentStreak >= 2 && (
              <div className="animate-pulse" style={{ fontWeight: '900', background: 'linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#78350f', border: '2px solid #fde68a', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
                 <Flame size={20} fill="#f97316" color="#9a3412" strokeWidth={2} />
