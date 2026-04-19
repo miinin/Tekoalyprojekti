@@ -658,7 +658,8 @@ export default function Garage() {
               {showGreenPulse && (
                 <div className="animate-bounce" style={{ position: 'absolute', top: '2rem', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '1.2rem 3rem 1.2rem 1.5rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 50, textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', maxWidth: '500px', width: '90%' }}>
                    <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
-                   <b>Tulipa siistiä!</b> Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
+                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
+                   Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
                 </div>
               )}
               
