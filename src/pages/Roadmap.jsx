@@ -720,7 +720,7 @@ const Roadmap = () => {
             onClick={() => {
                 if (isLocked) {
                     if (isLastNode) {
-                        showToast("Aja ensin aiemmat etapit läpi, jotta AI-pakusi on viritetty kuntoon tätä erikoiskoetta varten!");
+                        showToast(<span>Aja ensin aiemmat etapit läpi, jotta <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van</span> on viritetty kuntoon tätä erikoiskoetta varten!</span>);
                     } else {
                         showToast("Tämä etappi aukeaa myöhemmin! Suorita ensin aiemmat pysäkit.");
                     }

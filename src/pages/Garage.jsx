@@ -22,6 +22,7 @@ export default function Garage() {
   const [earnedMedals, setEarnedMedals] = useState({ platinum: 0, gold: 0, silver: 0, bronze: 0 });
   const [bestStreak, setBestStreak] = useState(0);
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
+  const [selectedTrophyObj, setSelectedTrophyObj] = useState(null);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
   const [hoverCabinet, setHoverCabinet] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -753,12 +754,15 @@ export default function Garage() {
                        </div>
 
                        {/* Ylähylly: Pokaalit */}
-                       <div style={{ position: 'absolute', top: '12.09%', left: '21.83%', width: '56.42%', height: '34.85%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none', paddingBottom: '1%' }}>
+                       <div style={{ position: 'absolute', top: '12.09%', left: '21.83%', width: '56.42%', height: '34.85%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'auto', paddingBottom: '1%' }}>
                            {trophyMap.map(t => { 
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
-                                   <div key={t.id} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s' }}>
-                                       <img src={`/trophy/${t.id}.png`} style={{ maxHeight: '90%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom' }} alt={t.name} />
+                                   <div 
+                                      key={t.id} 
+                                      onClick={() => { if (isEarned) setSelectedTrophyObj(t); }}
+                                      style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s', cursor: isEarned ? 'zoom-in' : 'default' }}>
+                                       <img src={`/trophy/${t.id}.png`} style={{ maxHeight: '90%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom', transition: 'transform 0.2s' }} onMouseEnter={e => { if(isEarned) e.currentTarget.style.transform='scale(1.05)' }} onMouseOut={e => { if(isEarned) e.currentTarget.style.transform='scale(1)' }} alt={t.name} />
                                    </div>
                                );
                            })}
@@ -808,6 +812,19 @@ export default function Garage() {
                            
                         </div>
                      </div>
+
+                     {selectedTrophyObj && (
+                        <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={() => setSelectedTrophyObj(null)}>
+                            <button onClick={() => setSelectedTrophyObj(null)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
+                                <X size={40} />
+                            </button>
+                            <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} className="animate-bounce" style={{ maxWidth: '90vw', maxHeight: '72vh', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))' }} />
+                            <h2 style={{ marginTop: '2.5rem', color: '#fef3c7', fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '4px', textShadow: '0 4px 15px rgba(0,0,0,0.9), 0 0 25px rgba(234,179,8,0.5)', textAlign: 'center', padding: '0 2rem' }}>
+                                {selectedTrophyObj.name}
+                            </h2>
+                        </div>
+                     )}
+
                   </div>
                )}
 
