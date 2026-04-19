@@ -770,59 +770,63 @@ export default function Garage() {
                            })}
                        </div>
                        
-                       {/* Alahylly: Mitalit */}
-                       <div style={{ position: 'absolute', top: '50.66%', left: '22.17%', width: '55.42%', height: '33.95%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none', paddingBottom: '1%' }}>
-                            {['platinum', 'gold', 'silver', 'bronze'].map(type => {
-                                 const count = earnedMedals[type] || 0;
-                                 if (count === 0) {
-                                     // Show placeholder if no medals
-                                     return (
-                                          <div key={type} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', opacity: 0.15, filter: 'brightness(0)', height: '100%' }}>
-                                              <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ maxHeight: '60%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom' }} />
-                                          </div>
-                                     );
-                                 }
-                                 
-                                 const maxShow = Math.min(count, 10);
-                                 
-                                 return (
-                                     <div key={type} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
-                                         <div style={{ position: 'relative', height: '60%', aspectRatio: '1/1' }}>
-                                             {Array.from({ length: maxShow }).map((_, i) => (
-                                                  <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
-                                             ))}
-                                         </div>
-                                         <div style={{ position: 'absolute', top: '25%', right: '-30%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '1rem', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
-                                              {count}
-                                         </div>
-                                     </div>
-                                 );
-                            })}
-                           </div>
+                       {/* Alahylly: Mitalit ja Ketjuennätys */}
+                       <div style={{ position: 'absolute', top: '50.66%', left: '22.17%', width: '55.42%', height: '33.95%', zIndex: 5, pointerEvents: 'none', paddingBottom: '1%' }}>
                            
-                           {/* Kipinäketjun ennätyslaatta (hyllyjen välissä / yläosassa) */}
+                           {/* Kipinäketjun ennätyslaatta (alahyllyn takaseinä) */}
                            {bestStreak > 0 && (
                                <div 
                                     onMouseEnter={() => setHoverPlaque(true)}
                                     onMouseLeave={() => setHoverPlaque(false)}
-                                    style={{ position: 'absolute', top: '48.5%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 30, background: 'linear-gradient(145deg, #fef08a, #d97706)', padding: '0.6rem 1.8rem', borderRadius: '8px', border: '3px solid #78350f', boxShadow: '0 8px 25px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: '0.8rem', pointerEvents: 'auto', cursor: 'help' }}>
-                                    <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                                    style={{ position: 'absolute', top: '25%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1, background: 'linear-gradient(145deg, #fef08a, #d97706)', padding: '0.4rem 1.4rem', borderRadius: '8px', border: '3px solid #78350f', boxShadow: '0 8px 25px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: '0.6rem', pointerEvents: 'auto', cursor: 'help' }}>
+                                    <Flame size={22} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
                                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                        <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: '#78350f', fontWeight: '900', letterSpacing: '1px', marginBottom: '-2px' }}>Ketjuennätys</span>
-                                        <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#451a03', fontFamily: 'monospace', textShadow: '0 1px 0 rgba(255,255,255,0.3)' }}>{bestStreak}</span>
+                                        <span style={{ fontSize: '0.55rem', textTransform: 'uppercase', color: '#78350f', fontWeight: '900', letterSpacing: '1px', marginBottom: '-2px' }}>Ketjuennätys</span>
+                                        <span style={{ fontSize: '1.2rem', fontWeight: '900', color: '#451a03', fontFamily: 'monospace', textShadow: '0 1px 0 rgba(255,255,255,0.3)' }}>{bestStreak}</span>
                                     </div>
-                                    <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
+                                    <Flame size={22} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
                                     
                                     {hoverPlaque && (
                                         <div className="animate-fade-in" style={{ position: 'absolute', top: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', zIndex: 100, color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textTransform: 'none', letterSpacing: 'normal', pointerEvents: 'none' }}>
                                             <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
                                             <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
                                             <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem', textAlign: 'center' }}>Paras putkesi koskaan! 🔥</div>
-                                            Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä.
+                                            Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä. Mitalihyllyssä näkyy vain parhaat palat!
                                         </div>
                                     )}
                                </div>
                            )}
+
+                           {/* Mitalien flex-laatikko hyllyn pohjalla */}
+                           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '100%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'none' }}>
+                             {['platinum', 'gold', 'silver', 'bronze'].map(type => {
+                                  const count = earnedMedals[type] || 0;
+                                  if (count === 0) {
+                                      // Show placeholder if no medals
+                                      return (
+                                           <div key={type} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', opacity: 0.15, filter: 'brightness(0)', height: '100%' }}>
+                                               <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ maxHeight: '55%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom' }} />
+                                           </div>
+                                      );
+                                  }
+                                  
+                                  const maxShow = Math.min(count, 10);
+                                  
+                                  return (
+                                      <div key={type} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
+                                          <div style={{ position: 'relative', height: '55%', aspectRatio: '1/1' }}>
+                                              {Array.from({ length: maxShow }).map((_, i) => (
+                                                   <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
+                                              ))}
+                                          </div>
+                                          <div style={{ position: 'absolute', top: '30%', right: '-30%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
+                                               {count}
+                                          </div>
+                                      </div>
+                                  );
+                             })}
+                           </div>
+                        </div>
                            
                         </div>
                      </div>
