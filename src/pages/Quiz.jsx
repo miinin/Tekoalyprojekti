@@ -347,7 +347,7 @@ export default function Quiz() {
     if (streakData.current >= 10) streakBonusRatio = 0.10;
     else if (streakData.current >= 5) streakBonusRatio = 0.05;
 
-    const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
+    const sparkRewardMultiplier = 1;
     
     // Ympäristöbonus (Talli)
     const floor = equippedItems['g_floor'] || '';

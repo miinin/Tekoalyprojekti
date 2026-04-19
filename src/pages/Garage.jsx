@@ -786,10 +786,10 @@ export default function Garage() {
                                     </div>
                                     <Flame size={22} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
                                     {hoverPlaque && (
-                                        <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 100 }}>
-                                            <div className="animate-fade-in" style={{ position: 'relative', marginTop: '15px', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textAlign: 'left' }}>
-                                                <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #fde68a' }} />
-                                                <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid rgba(255, 255, 255, 0.98)' }} />
+                                        <div style={{ position: 'absolute', bottom: '100%', left: 0, right: 0, display: 'flex', justifyContent: 'center', pointerEvents: 'none', zIndex: 100 }}>
+                                            <div className="animate-fade-in" style={{ position: 'relative', marginBottom: '15px', width: '260px', background: 'rgba(255, 255, 255, 0.98)', padding: '1rem', borderRadius: '12px', border: '3px solid #fde68a', boxShadow: '0 10px 25px rgba(0,0,0,0.4)', color: '#334155', fontSize: '0.95rem', lineHeight: '1.4', fontWeight: 'normal', cursor: 'default', textAlign: 'left' }}>
+                                                <div style={{ position: 'absolute', bottom: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: '11px solid #fde68a' }} />
+                                                <div style={{ position: 'absolute', bottom: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: '11px solid rgba(255, 255, 255, 0.98)' }} />
                                                 <div style={{ fontWeight: 'bold', color: '#d97706', marginBottom: '0.4rem', textAlign: 'center' }}>Paras putkesi koskaan! 🔥</div>
                                                 Tämä on tähän asti suurin määrä oikeita vastauksia, jotka olet antanut peräkkäin ilman virheitä. Mitalihyllyssä näkyy vain parhaat palat!
                                             </div>
@@ -1035,6 +1035,56 @@ export default function Garage() {
                     Selvä homma!
                 </button>
             </div>
+        </div>
+    )}
+
+    {/* Testitilan sivupaneeli pokaalien ja mitalien jakamiseen */}
+    {store.getTestMode() && (
+        <div style={{ position: 'fixed', bottom: '2rem', left: '2rem', background: 'rgba(15, 23, 42, 0.9)', padding: '1.5rem', borderRadius: '16px', color: 'white', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '1rem', border: '2px solid #ef4444', backdropFilter: 'blur(10px)' }}>
+           <h3 style={{ margin: 0, color: '#ef4444', textAlign: 'center', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Testipaneeli (Palkinnot)</h3>
+           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+              <button 
+                  onClick={() => {
+                      const stats = store.getNodeStats();
+                      const unearnedTrophy = trophyMap.find(t => {
+                          const cat = categories.find(c => c.id === t.mapId);
+                          const finalSub = cat?.subcategories.find(sub => sub.id.endsWith('_7'));
+                          return finalSub && (!stats[finalSub.id] || stats[finalSub.id].correct < 7);
+                      });
+                      if (unearnedTrophy) {
+                          const cat = categories.find(c => c.id === unearnedTrophy.mapId);
+                          const finalSub = cat.subcategories.find(sub => sub.id.endsWith('_7'));
+                          store.saveNodeStats(finalSub.id, 10, 10);
+                          fetchData();
+                      } else {
+                          categories.forEach(c => {
+                             const finalSub = c.subcategories.find(s => s.id.endsWith('_7'));
+                             if (finalSub) store.saveNodeStats(finalSub.id, 0, 10);
+                          });
+                          fetchData();
+                      }
+                  }} 
+                  style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'black', border: 'none', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                 Anna Pokaali
+              </button>
+              <button 
+                  onClick={() => {
+                      const stats = store.getNodeStats();
+                      // find a subcategory without platinum (10/10) to progress medals
+                      const sub = categories.flatMap(c => c.subcategories).find(s => !s.id.endsWith('_7') && (!stats[s.id] || stats[s.id].correct < 10));
+                      if (sub) {
+                           store.saveNodeStats(sub.id, 10, 10);
+                           fetchData();
+                      } else {
+                           localStorage.removeItem('aivan_node_stats');
+                           fetchData();
+                      }
+                  }}
+                  style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
+                 Anna Mitali
+              </button>
+           </div>
+           <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.8, textAlign: 'center', lineHeight: 1.4 }}>Klikkaa lisätäksesi nopeasti!<br/>Jos kaikki on saatu, uusi klikkaus nollaa ne.</p>
         </div>
     )}
 
