@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
-import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, ShieldCheck, Disc, Wrench } from 'lucide-react';
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
 
 export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
@@ -24,6 +24,10 @@ export default function Quiz() {
   const [bugText, setBugText] = useState('');
   const [bugSubmitted, setBugSubmitted] = useState(false);
   const [notification, setNotification] = useState(null);
+
+  const [currentStreak, setCurrentStreak] = useState(() => store.getStreakStats().current);
+  const [showStreakTutorial, setShowStreakTutorial] = useState(false);
+  const [streakEarnedSparks, setStreakEarnedSparks] = useState(0);
 
   useEffect(() => {
     store.setLastLocation('Tehtävä', subCategory);
@@ -332,29 +336,48 @@ export default function Quiz() {
       setCorrectAnswersCount(prev => prev + 1);
     }
     
+    const streakData = store.trackStreak(correct);
+    setCurrentStreak(streakData.current);
+    if (streakData.justReached === 5 && !store.getTutorialSkipped()) {
+        setShowStreakTutorial(true);
+    }
+    
+    let streakBonusRatio = 0;
+    if (streakData.current >= 10) streakBonusRatio = 0.10;
+    else if (streakData.current >= 5) streakBonusRatio = 0.05;
+
     const sparkRewardMultiplier = store.getTestMode() ? 10 : 1;
-    const baseDiff = store.saveQuestionRecord(currentQuestion.id, earned * sparkRewardMultiplier);
     
     // Ympäristöbonus (Talli)
     const floor = equippedItems['g_floor'] || '';
     const walls = equippedItems['g_walls'] || '';
     let garageBonus = 0;
     if (floor === 'g-floor3') garageBonus += 0.10;
-
     if (walls === 'g-walls-base') garageBonus += 0.00;
     else if (walls === 'g-walls2') garageBonus += 0.10;
     else if (walls === 'g-walls3') garageBonus += 0.20;
     else if (walls === 'g-walls4') garageBonus += 0.30;
 
-    const diff = Math.floor(baseDiff * (1 + garageBonus));
+    const totalBonusRatio = garageBonus + streakBonusRatio;
+    
+    const totalEarnedBeforeDiff = Math.floor(earned * sparkRewardMultiplier * (1 + totalBonusRatio));
+    const diff = store.saveQuestionRecord(currentQuestion.id, totalEarnedBeforeDiff);
 
     if (diff > 0) {
         store.addSparks(diff).then(() => {});
         setEarnedSparks(prev => prev + diff);
         setCurrentQuestionSparks(diff);
+        
+        if (streakBonusRatio > 0 && correct && diff > 0) {
+             setStreakEarnedSparks(Math.floor(earned * sparkRewardMultiplier * streakBonusRatio));
+        } else {
+             setStreakEarnedSparks(0);
+        }
     } else {
         setCurrentQuestionSparks(0);
+        setStreakEarnedSparks(0);
     }
+
     store.saveQuestionCorrectness(sub.id, currentQuestion.id, correct);
     store.trackAttempt(correct);
     setIsCorrect(correct);
@@ -626,6 +649,13 @@ export default function Quiz() {
           </span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flex: 1, justifyContent: 'flex-end' }}>
+          {currentStreak >= 2 && (
+             <div className="animate-pulse" style={{ fontWeight: '900', background: 'linear-gradient(135deg, #fef08a 0%, #f59e0b 100%)', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#78350f', border: '2px solid #fde68a', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
+                <Flame size={20} fill="#f97316" color="#9a3412" strokeWidth={2} />
+                KIPINÄKETJU {currentStreak}
+             </div>
+          )}
           <div style={{ fontWeight: 'bold', background: '#fef3c7', padding: '0.4rem 1rem', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#d97706', border: '2px solid #fde68a' }}>
             <Zap size={20} fill="#d97706" />
             {currentSparks}
@@ -802,11 +832,18 @@ export default function Quiz() {
                   {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
                 </h2>
               </div>
-              {isCorrect && currentQuestionSparks > 0 && (
-                <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: '#fef3c7', color: '#d97706', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                  <Zap size={24} fill="#d97706" /> +{currentQuestionSparks} Kipinää
-                </div>
-              )}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                {isCorrect && currentQuestionSparks > 0 && (
+                  <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: '#fef3c7', color: '#d97706', padding: '0.6rem 1.5rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+                    <Zap size={24} fill="#d97706" /> +{currentQuestionSparks} Kipinää
+                  </div>
+                )}
+                {isCorrect && streakEarnedSparks > 0 && (
+                  <div className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'linear-gradient(135deg, #fef08a, #f59e0b)', color: '#78350f', padding: '0.4rem 1.2rem', borderRadius: '50px', fontWeight: 'bold', fontSize: '1.05rem', boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)' }}>
+                    <Flame size={20} fill="#f97316" color="#9a3412" /> +{streakEarnedSparks} Ketjusta!
+                  </div>
+                )}
+              </div>
             </div>
             
             <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: '1.5rem 2.5rem', borderRadius: '20px', display: 'flex', gap: '1.8rem', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
@@ -1133,6 +1170,41 @@ export default function Quiz() {
         </div>
         </div>
       </div>
+      
+      {showStreakTutorial && (
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #f59e0b', padding: '3rem', borderRadius: '32px', maxWidth: '650px', width: '90%', boxShadow: '0 30px 100px rgba(245, 158, 11, 0.3)', color: 'var(--text-main)', position: 'relative', overflow: 'hidden' }}>
+                <button onClick={() => setShowStreakTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
+                    <XCircle size={24} />
+                </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: '2rem' }}>
+                    <div style={{ background: 'linear-gradient(135deg, #fef08a, #f59e0b)', padding: '1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(245, 158, 11, 0.2)' }}>
+                        <Flame size={44} fill="#f97316" color="#9a3412" />
+                    </div>
+                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#d97706', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Olet liekeissä!</h2>
+                </div>
+                
+                <p style={{ fontSize: '1.15rem', color: '#334155', lineHeight: '1.6', marginBottom: '1.5rem', fontFamily: 'var(--font-main)' }}>
+                    Sait juuri <strong style={{color: '#d97706'}}>5. kysymyksen oikein putkeen</strong>, mikä tarkoittaa että <strong>Kipinäketjusi</strong> on nyt käynnissä! 
+                </p>
+                
+                <div style={{ background: '#fffbeb', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '2rem' }}>
+                    <Zap size={32} color="#d97706" style={{ flexShrink: 0 }} />
+                    <span style={{ color: '#78350f', fontSize: '1.05rem', lineHeight: '1.5' }}>
+                        Jatkossa Kipinäketju palkitsee sinut lisäkipinöillä! Yli 5 putki antaa <strong>+5% kipinöitä</strong> ja yli 10 putki jopa <strong>+10% kipinöitä</strong>. Pidä putki yllä, ja voit ihailla uutta Kipinäketju-ennätystäsi myöhemmin Palkintokaapissasi!
+                    </span>
+                </div>
+
+                <button 
+                    onClick={() => setShowStreakTutorial(false)}
+                    className="btn-primary"
+                    style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', borderRadius: '16px', background: '#f59e0b', color: 'white', fontWeight: 'bold' }}>
+                    Liekeissä ollaan!
+                </button>
+            </div>
+        </div>
+      )}
+
     </div>
   );
 }

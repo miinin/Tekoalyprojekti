@@ -116,6 +116,39 @@ export const store = {
     } catch(error) { console.error(error); }
   },
 
+  getStreakStats: () => {
+    try {
+        return JSON.parse(localStorage.getItem('aivan_streak_stats') || '{"current":0, "best":0}');
+    } catch (e) {
+        return { current: 0, best: 0 };
+    }
+  },
+
+  trackStreak: (isCorrect) => {
+    try {
+        const stats = store.getStreakStats();
+        const oldCurrent = stats.current;
+        if (isCorrect) {
+            stats.current++;
+            if (stats.current > stats.best) {
+                stats.best = stats.current;
+            }
+        } else {
+            stats.current = 0;
+        }
+        localStorage.setItem('aivan_streak_stats', JSON.stringify(stats));
+        
+        let justReached = null;
+        if (oldCurrent < 5 && stats.current === 5) justReached = 5;
+        if (oldCurrent < 10 && stats.current === 10) justReached = 10;
+        
+        return { ...stats, justReached };
+    } catch (error) { 
+        console.error(error); 
+        return { current: 0, best: 0, justReached: null }; 
+    }
+  },
+
   getNodeStats: () => {
     return JSON.parse(localStorage.getItem('aivan_node_stats') || '{}');
   },

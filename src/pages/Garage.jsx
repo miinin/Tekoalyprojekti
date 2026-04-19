@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake, Flame } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -20,6 +20,7 @@ export default function Garage() {
 
   const [earnedTrophies, setEarnedTrophies] = useState([]);
   const [earnedMedals, setEarnedMedals] = useState({ platinum: 0, gold: 0, silver: 0, bronze: 0 });
+  const [bestStreak, setBestStreak] = useState(0);
   const [showTrophyCabinet, setShowTrophyCabinet] = useState(false);
   const [showTrophyTuition, setShowTrophyTuition] = useState(false);
   const [hoverCabinet, setHoverCabinet] = useState(false);
@@ -76,6 +77,7 @@ export default function Garage() {
       setPurchased(await store.getPurchasedItems());
       setEquipped(await store.getEquippedItems());
       setCompletedLessons(store.getCompletions());
+      setBestStreak(store.getStreakStats().best);
 
       // Palkintokaapin laskenta
       const stats = store.getNodeStats();
@@ -791,6 +793,19 @@ export default function Garage() {
                                  );
                             })}
                            </div>
+                           
+                           {/* Kipinäketjun ennätyslaatta (hyllyjen välissä / yläosassa) */}
+                           {bestStreak > 0 && (
+                               <div style={{ position: 'absolute', top: '48.5%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 30, background: 'linear-gradient(145deg, #fef08a, #d97706)', padding: '0.6rem 1.8rem', borderRadius: '8px', border: '3px solid #78350f', boxShadow: '0 8px 25px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', gap: '0.8rem', pointerEvents: 'none' }}>
+                                    <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))' }} />
+                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                        <span style={{ fontSize: '0.65rem', textTransform: 'uppercase', color: '#78350f', fontWeight: '900', letterSpacing: '1px', marginBottom: '-2px' }}>Ketjuennätys</span>
+                                        <span style={{ fontSize: '1.4rem', fontWeight: '900', color: '#451a03', fontFamily: 'monospace', textShadow: '0 1px 0 rgba(255,255,255,0.3)' }}>{bestStreak}</span>
+                                    </div>
+                                    <Flame size={28} fill="#f97316" color="#78350f" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))', transform: 'scaleX(-1)' }} />
+                               </div>
+                           )}
+                           
                         </div>
                      </div>
                   </div>
