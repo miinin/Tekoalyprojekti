@@ -834,10 +834,12 @@ export default function Garage() {
 
                      {selectedTrophyObj && (
                         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
-                             <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
+                             <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
                                 <X size={40} />
                              </button>
-                             <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '90vw', maxHeight: '85vh', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))', padding: '2rem' }} />
+                             <div style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', border: '5px solid #eab308', borderRadius: '24px', padding: '2.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.5)', maxWidth: '90vw', maxHeight: '85vh', boxSizing: 'border-box' }}>
+                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 15px 35px rgba(234, 179, 8, 0.4))' }} />
+                             </div>
                         </div>
                      )}
 
