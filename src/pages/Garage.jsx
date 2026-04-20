@@ -229,7 +229,7 @@ export default function Garage() {
        btnColor = '#94a3b8';
        cursor = 'not-allowed';
     } else if (!meetsPrereq && !isOwned) {
-       btnText = prereqText;
+       btnText = <span style={{ lineHeight: '1.2', display: 'inline-block', fontSize: '0.75rem' }}>VAATII EDELLISEN<br/>(⚡ {item.price})</span>;
        btnBg = '#f1f5f9';
        btnColor = '#94a3b8';
        cursor = 'not-allowed';
