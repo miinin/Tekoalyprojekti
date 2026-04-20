@@ -838,8 +838,8 @@ export default function Garage() {
                                 <X size={40} />
                              </button>
                              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '80%', height: '80%', boxSizing: 'border-box' }}>
-                                 {/* mixBlendMode: 'multiply' poistaa valkoisen taustan kuvasta kätevästi */}
-                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', mixBlendMode: 'multiply', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))' }} />
+                                 {/* Mikäli PNG on jo valmiiksi läpinäkyvä, mitään kikkailuja tai varjoja ei tarvita. */}
+                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain' }} />
                              </div>
                         </div>
                      )}
