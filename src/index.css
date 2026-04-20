@@ -72,11 +72,11 @@ button {
 }
 
 button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(0);
 }
 
 button:active {
-  transform: translateY(0);
+  transform: translateY(0) translateZ(0);
 }
 
 .btn-primary {
@@ -119,8 +119,8 @@ button:active {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(10px) translateZ(0); }
+  to { opacity: 1; transform: translateY(0) translateZ(0); }
 }
 
 .animate-fade-in {
