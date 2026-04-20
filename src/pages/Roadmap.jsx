@@ -693,6 +693,7 @@ const Roadmap = () => {
       }
       const isCompleted = completedLessons.includes(node.id);
       const medal = currentMap === 'main' ? getMainmapMedal(node.id) : getSubmapMedal(node.id);
+      const activeMedal = !isLocked ? medal : null;
 
       const isFirstEverTarget = !store.getTutorialSkipped() && currentMap === 'main' && node.id === 'perusteet' && completedLessons.length === 0;
       const isFirstSubTarget = !store.getTutorialSkipped() && currentMap === 'perusteet' && node.id === 'perusteet_1' && completedLessons.length === 0;
@@ -728,7 +729,7 @@ const Roadmap = () => {
                     handleNodeClick(node.id, currentMap === 'main');
                 }
             }}
-            className={(isLastNode && !isLocked && !medal) ? "animate-wiggle-strong" : (isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : ""))}
+            className={(isLastNode && !isLocked && !activeMedal) ? "animate-wiggle-strong" : (isSecondSubTarget ? "animate-wiggle-strong-alt" : ((isFirstEverTarget || isFirstSubTarget) ? "animate-wiggle-strong" : ""))}
             style={{
                 width: currentMap === 'main' ? '4.5rem' : '3.6rem',
                 height: currentMap === 'main' ? '4.5rem' : '3.6rem',
@@ -736,20 +737,20 @@ const Roadmap = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                border: medal ? '0' : `4px solid ${(isLastNode && isLocked) ? '#fbbf24' : 'white'}`,
-                borderColor: medal ? 'transparent' : ((isLastNode && isLocked) ? '#fbbf24' : 'white'),
-                boxShadow: medal ? 'none' : ((isLastNode && isLocked) ? '0 4px 15px rgba(251, 191, 36, 0.2)' : '0 8px 20px rgba(0,0,0,0.2)'),
-                background: medal ? 'transparent' : (isLocked ? (isLastNode ? '#475569' : '#94a3b8') : (isLastNode ? '#fbbf24' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
+                border: activeMedal ? '0' : `4px solid ${(isLastNode && isLocked) ? '#fbbf24' : 'white'}`,
+                borderColor: activeMedal ? 'transparent' : ((isLastNode && isLocked) ? '#fbbf24' : 'white'),
+                boxShadow: activeMedal ? 'none' : ((isLastNode && isLocked) ? '0 4px 15px rgba(251, 191, 36, 0.2)' : '0 8px 20px rgba(0,0,0,0.2)'),
+                background: activeMedal ? 'transparent' : (isLocked ? (isLastNode ? '#78350f' : '#94a3b8') : (isLastNode ? '#fbbf24' : (isCompleted ? 'var(--accent-color)' : 'var(--primary-color)'))),
                 opacity: isLocked ? 0.9 : 1,
                 cursor: isLocked ? 'not-allowed' : 'pointer'
             }}
           >
             {isLocked ? <span className="material-symbols-outlined" style={{ fontSize: currentMap === 'main' ? '2rem' : '1.5rem', color: isLastNode ? '#fbbf24' : 'white', opacity: 0.6, userSelect: 'none' }}>lock</span> : 
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               {medal ? (
+               {activeMedal ? (
                    <img 
-                     src={`/trophy/medal-${medal === 'platinum' ? 'plat' : medal}.png`}
-                     alt={medal}
+                     src={`/trophy/medal-${activeMedal === 'platinum' ? 'plat' : activeMedal}.png`}
+                     alt={activeMedal}
                      style={{ 
                        position: 'absolute',
                        top: '50%',
