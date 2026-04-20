@@ -833,12 +833,13 @@ export default function Garage() {
                      </div>
 
                      {selectedTrophyObj && (
-                        <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
+                        <div className="animate-fade-in" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
                              <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
                                 <X size={40} />
                              </button>
-                             <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '85vw', maxHeight: '80vh', boxSizing: 'border-box' }}>
-                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))' }} />
+                             <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '80%', height: '80%', boxSizing: 'border-box' }}>
+                                 {/* mixBlendMode: 'multiply' poistaa valkoisen taustan kuvasta kätevästi */}
+                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain', mixBlendMode: 'multiply', filter: 'drop-shadow(0 20px 60px rgba(234, 179, 8, 0.4))' }} />
                              </div>
                         </div>
                      )}
