@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare } from 'lucide-react';
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -235,7 +235,10 @@ export default function Lobby() {
          zIndex: 10
       }}>
 
-        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '1rem', zIndex: 15 }}>
+        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '0.8rem', zIndex: 15, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+          <a href="https://eduks.fi/aivan" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textDecoration: 'none', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
+              <MessageSquare size={20} color="#15803d" /> Anna palautetta
+          </a>
           <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
               <GraduationCap size={20} color="#15803d" /> Opettajalle
           </button>
