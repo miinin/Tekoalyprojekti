@@ -45,6 +45,7 @@ export default function Quiz() {
   }, []);
 
   const [equippedItems, setEquippedItems] = useState({});
+  const [ownedItems, setOwnedItems] = useState([]);
   const [activeBuff, setActiveBuff] = useState(null);
   const [hoveredTool, setHoveredTool] = useState(null);
   const [jackBuff, setJackBuff] = useState(0);
@@ -66,17 +67,20 @@ export default function Quiz() {
        // Lataa varusteet Buffeja varten
        const equipped = await store.getEquippedItems();
        setEquippedItems(equipped);
-       const extras = equipped['extra'] || '';
+       
+       const purchased = await store.getPurchasedItems();
+       setOwnedItems(purchased);
+       
        const wheels = equipped['wheel'] || '';
        const bumper = equipped['bumper'] || '';
        let buff = null;
        
-       if (mainCategory === 'digiturva' && extras === 'van-extra06') buff = 'snorkkeli';
-       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') buff = 'vinssi';
-       if (mainCategory === 'konepellin' && extras === 'van-extra07') buff = 'eramaa-antenni';
-       if (mainCategory === 'reilu_peli' && extras === 'van-extra05') buff = 'sivuikkuna';
+       if (mainCategory === 'digiturva' && purchased.includes('van-extra06')) buff = 'snorkkeli';
+       if (mainCategory === 'aivoterveys' && purchased.includes('van-extra04')) buff = 'vinssi';
+       if (mainCategory === 'arjessa' && purchased.includes('van-extra07')) buff = 'eramaa-antenni';
+       if (mainCategory === 'reilu_peli' && purchased.includes('van-extra05')) buff = 'sivuikkuna';
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
-       if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') buff = 'talvirenkaat';
+       if (mainCategory === 'kayttotaidot' && purchased.includes('van-wheel06')) buff = 'talvirenkaat';
        setActiveBuff(buff);
        setActivePaint(equipped['body'] || '');
 
@@ -110,13 +114,14 @@ export default function Quiz() {
        else if (wheels === 'van-wheel03') yellowCharge = 4;
        else if (wheels === 'van-wheel05') yellowCharge = 5;
 
-       // Lisäosat (Map-specific)
-       if (mainCategory === 'digiturva' && extras === 'van-extra06') redCharge += 3;
-       if (mainCategory === 'reilu_peli' && extras === 'van-extra05') redCharge += 3;
-       if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 3;
-       if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 3;
+       // Lisäosat (Map-specific), nyt suoraan ostetuista riippumatta onko valittuna tallissa!
+       if (mainCategory === 'digiturva' && purchased.includes('van-extra06')) redCharge += 3;
+       if (mainCategory === 'reilu_peli' && purchased.includes('van-extra05')) redCharge += 3;
+       if (mainCategory === 'aivoterveys' && purchased.includes('van-extra04')) greenCharge += 3;
+       if (mainCategory === 'arjessa' && purchased.includes('van-extra07')) yellowCharge += 3;
        
-       if (extras === 'van-extra02') greenCharge += 1;
+       // Yleiset lisäosat
+       if (purchased.includes('van-extra02')) greenCharge += 1;
        
        if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') yellowCharge += 5;
        else if (wheels === 'van-wheel06') yellowCharge += 2;
@@ -343,11 +348,10 @@ export default function Quiz() {
     }
     
     let trackOptions = {};
-    const extras = equippedItems['extra'] || '';
-    if (extras === 'van-extra01') {
+    if (ownedItems.includes('van-extra01')) {
         trackOptions.dropToFive = true;
     }
-    if (extras === 'van-extra03' && !correct && !streakForgivenForLevel) {
+    if (ownedItems.includes('van-extra03') && !correct && !streakForgivenForLevel) {
         trackOptions.forgiveBreak = true;
         setStreakForgivenForLevel(true);
     }
