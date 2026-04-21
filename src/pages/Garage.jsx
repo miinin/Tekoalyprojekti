@@ -310,8 +310,8 @@ export default function Garage() {
                   <div style={{ 
                       color: item.buff && !item.buff.isSpark ? (item.color || '#475569') : (item.buff?.isSpark ? '#f59e0b' : '#475569'), 
                       zIndex: 1, 
-                      marginTop: 'auto', 
-                      marginBottom: '0.6rem',
+                      marginTop: '0.5rem', 
+                      marginBottom: '0.8rem',
                       background: 'linear-gradient(135deg, #cbd5e1 0%, #f1f5f9 100%)',
                       width: '56px',
                       height: '56px',
@@ -336,7 +336,7 @@ export default function Garage() {
                     })()}
                   </div>
               )}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: item.category === 'body' ? 'auto' : 0 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: 'auto' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                       <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.8)' : 'none' }}>{item.name}</span>
                   </div>
