@@ -32,6 +32,7 @@ export default function Garage() {
   const [saveCode, setSaveCode] = useState(null);
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
+  const [hoverSaveBtn, setHoverSaveBtn] = useState(false);
   const [showMeterTutorial, setShowMeterTutorial] = useState(false);
 
   const handleCreateSave = async () => {
@@ -541,13 +542,23 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           {!isTutorialActive && (
-              <button 
-                onClick={handleCreateSave} 
-                disabled={isSaving}
-                className="btn-secondary" 
-                style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
-              </button>
+              <div style={{ position: 'relative' }} onMouseEnter={() => setHoverSaveBtn(true)} onMouseLeave={() => setHoverSaveBtn(false)}>
+                  <button 
+                    onClick={handleCreateSave} 
+                    disabled={isSaving}
+                    className="btn-secondary" 
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                    <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
+                  </button>
+                  {hoverSaveBtn && (
+                      <div className="animate-fade-in" style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '12px', background: 'rgba(255,255,255,0.98)', border: '3px solid #0ea5e9', padding: '1rem 1.2rem', borderRadius: '12px', color: '#334155', fontSize: '0.90rem', width: '280px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', pointerEvents: 'none', zIndex: 100, lineHeight: '1.4' }}>
+                          <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #0ea5e9' }} />
+                          <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderBottom: '8px solid rgba(255,255,255,0.98)' }} />
+                          <div style={{ fontWeight: 'bold', color: '#0ea5e9', display: 'block', marginBottom: '0.4rem', fontSize: '1.05rem', fontFamily: 'var(--font-display)', letterSpacing: '1px' }}>TALLENNA PELI</div>
+                          Saat rekisteritunnuksen, joka sinun pitää painaa mieleesi tai kirjoittaa paperille, jotta voit myöhemmin jatkaa peliäsi.
+                      </div>
+                  )}
+              </div>
           )}
           <button 
              className={`btn-secondary ${showGreenPulse ? 'animate-wiggle-glow' : (!isTutorialActive && sparks === 0 ? 'animate-pulse' : '')}`} 
