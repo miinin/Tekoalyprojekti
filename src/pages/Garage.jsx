@@ -584,7 +584,7 @@ export default function Garage() {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
                   <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', margin: 0, fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
-                  <button onClick={() => setShowMeterTutorial(prev => !prev)} title="Mitä Kipinöillä tehdään?" style={{ background: '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>?</button>
+                  <button onClick={() => setShowMeterTutorial(prev => !prev)} title="Mitä Kipinöillä tehdään?" style={{ background: 'transparent', color: '#94a3b8', border: '1.5px solid #cbd5e1', borderRadius: '50%', width: '22px', height: '22px', minWidth: '22px', minHeight: '22px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', flexShrink: 0 }} onMouseOver={e => { e.currentTarget.style.color = '#3b82f6'; e.currentTarget.style.borderColor = '#3b82f6'; }} onMouseOut={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = '#cbd5e1'; }}>?</button>
                 </div>
                 {Object.entries(categorisedCar).map(([catId, category]) => {
                   const isLocked = isTutorialActive;
@@ -1045,11 +1045,11 @@ export default function Garage() {
                     <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: '1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
                         <Zap size={36} color="white" />
                     </div>
-                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Erikoiskyvyt avattu!</h2>
+                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Kipinät ja Erikoiskyvyt</h2>
                 </div>
                 
                 <p style={{ fontSize: '1.15rem', color: '#334155', lineHeight: '1.6', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
-                    Olet juuri hankkinut ensimmäisen varusteesi, joka antaa sinulle <strong>karttakohtaisia apuja!</strong> Näet ne kysymysruutujen kulmassa pelatessasi.
+                    Kipinöillä voit hankkia autotallista varusteita, jotka antavat sinulle <strong>karttakohtaisia apuja!</strong> Näet apuvälineet kysymysruutujen kulmassa pelatessasi.
                 </p>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
