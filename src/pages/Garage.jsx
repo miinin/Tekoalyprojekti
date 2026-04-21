@@ -290,10 +290,8 @@ export default function Garage() {
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
               {item.buff && (
                   <>
-                    <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e')}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }}>
-                        <div style={{ position: 'absolute', top: '-40px', right: '0px', color: 'rgba(255,255,255,0.95)', transform: 'rotate(15deg)', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-                           {item.buff.isSpark ? <Zap size={18} fill="white" /> : (item.id === 'van-wheel06' ? <Snowflake size={18} /> : '✦')}
-                        </div>
+                    <div style={{ position: 'absolute', top: '6px', right: '8px', color: item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e'), zIndex: 10, filter: 'drop-shadow(0px 2px 3px rgba(0,0,0,0.15))', transform: 'rotate(10deg)' }}>
+                           {item.buff.isSpark ? <Zap size={20} fill="currentColor" /> : (item.id === 'van-wheel06' ? <Snowflake size={20} /> : <span style={{ fontSize: '1.4rem', fontWeight: 'bold' }}>✦</span>)}
                     </div>
                     {hoveredItem === item.id && (
                         <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 5px)', left: '50%', transform: 'translateX(-50%)', width: '240px', background: 'rgba(255, 255, 255, 0.98)', padding: '0.9rem', borderRadius: '12px', border: `3px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}`, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', color: '#334155', fontSize: '0.85rem', lineHeight: '1.5', fontWeight: 'normal', cursor: 'default', textAlign: 'center', zIndex: 100, pointerEvents: 'none' }}>
