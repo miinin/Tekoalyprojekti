@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake, Flame } from 'lucide-react';
+import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake, Flame, RefreshCw, Eraser, Shield } from 'lucide-react';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
 
@@ -291,7 +291,15 @@ export default function Garage() {
               {item.buff && (
                   <>
                     <div style={{ position: 'absolute', top: '6px', right: '8px', color: item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e'), zIndex: 10, filter: 'drop-shadow(0px 2px 3px rgba(0,0,0,0.15))', transform: 'rotate(10deg)' }}>
-                           {item.buff.isSpark ? <Zap size={20} fill="currentColor" /> : (item.id === 'van-wheel06' ? <Snowflake size={20} /> : <span style={{ fontSize: '1.4rem', fontWeight: 'bold' }}>✦</span>)}
+                           {(() => {
+                               if (item.buff.isSpark) return <Zap size={20} fill="currentColor" />;
+                               if (item.id === 'van-wheel06') return <Snowflake size={20} />;
+                               const t = (item.buff.title || '').toLowerCase();
+                               if (t.includes('vaihto')) return <RefreshCw size={20} />;
+                               if (t.includes('poisto')) return <Eraser size={20} />;
+                               if (t.includes('uusi yrity')) return <Shield size={20} fill="currentColor" />;
+                               return <span style={{ fontSize: '1.4rem', fontWeight: 'bold' }}>✦</span>;
+                           })()}
                     </div>
                     {hoveredItem === item.id && (
                         <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 5px)', left: '50%', transform: 'translateX(-50%)', width: '240px', background: 'rgba(255, 255, 255, 0.98)', padding: '0.9rem', borderRadius: '12px', border: `3px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}`, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', color: '#334155', fontSize: '0.85rem', lineHeight: '1.5', fontWeight: 'normal', cursor: 'default', textAlign: 'center', zIndex: 100, pointerEvents: 'none' }}>
