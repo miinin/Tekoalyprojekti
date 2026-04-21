@@ -326,7 +326,7 @@ export default function Quiz() {
     if (currentQuestion.type === 'true_false' && !correct && !usedSecondChance) {
         let saved = false;
         let isJack = false;
-        if (activeBuff) {
+        if (activeBuff === 'sivuikkuna' || activeBuff === 'snorkkeli') {
             saved = true;
         } else if (jackBuff > 0 && Math.random() < jackBuff) {
             saved = true;
@@ -850,7 +850,14 @@ export default function Quiz() {
 
         {usedSecondChance && (
            <div style={{ color: '#d97706', background: '#fef3c7', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
-              <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : "AI vanin varuste pelasti sinut väärältä vastaukselta! Yritä uudelleen."}
+              <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : (
+                 <>
+                   {renderTextWithAivanGradient("AI vanin")} varuste 
+                   <span style={{ fontWeight: '900', color: '#b45309', marginLeft: '2px' }}>
+                     {activeBuff === 'sivuikkuna' ? 'Sivuikkuna takatilaan' : (activeBuff === 'snorkkeli' ? 'Snorkkeli' : activeBuff)}
+                   </span> pelasti sinut väärältä vastaukselta! Yritä uudelleen.
+                 </>
+              )}
            </div>
         )}
 
