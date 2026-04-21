@@ -290,17 +290,7 @@ export default function Garage() {
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
               {item.buff && (
                   <>
-                    <div style={{ position: 'absolute', top: '6px', right: '8px', color: item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e'), zIndex: 10, filter: 'drop-shadow(0px 2px 3px rgba(0,0,0,0.15))', transform: 'rotate(10deg)' }}>
-                           {(() => {
-                               if (item.buff.isSpark) return <Zap size={20} fill="currentColor" />;
-                               if (item.id === 'van-wheel06') return <Snowflake size={20} />;
-                               const t = (item.buff.title || '').toLowerCase();
-                               if (t.includes('vaihto')) return <RefreshCw size={20} />;
-                               if (t.includes('poisto')) return <Eraser size={20} />;
-                               if (t.includes('uusi yrity')) return <Shield size={20} fill="currentColor" />;
-                               return <span style={{ fontSize: '1.4rem', fontWeight: 'bold' }}>✦</span>;
-                           })()}
-                    </div>
+
                     {hoveredItem === item.id && (
                         <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 5px)', left: '50%', transform: 'translateX(-50%)', width: '240px', background: 'rgba(255, 255, 255, 0.98)', padding: '0.9rem', borderRadius: '12px', border: `3px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}`, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', color: '#334155', fontSize: '0.85rem', lineHeight: '1.5', fontWeight: 'normal', cursor: 'default', textAlign: 'center', zIndex: 100, pointerEvents: 'none' }}>
                             <div style={{ position: 'absolute', bottom: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: `11px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}` }} />
@@ -318,7 +308,7 @@ export default function Garage() {
                   </div>
               ) : (
                   <div style={{ 
-                      color: '#475569', 
+                      color: item.buff && !item.buff.isSpark ? (item.color || '#475569') : (item.buff?.isSpark ? '#f59e0b' : '#475569'), 
                       zIndex: 1, 
                       marginTop: 'auto', 
                       marginBottom: '0.6rem',
@@ -333,7 +323,17 @@ export default function Garage() {
                       border: '1px solid #94a3b8',
                       flexShrink: 0
                   }}>
-                    {React.cloneElement(item.icon, { size: 28 })}
+                    {(() => {
+                        if (item.buff) {
+                            if (item.buff.isSpark) return <Zap size={28} fill="currentColor" />;
+                            if (item.id === 'van-wheel06') return <Snowflake size={28} />;
+                            const t = (item.buff.title || '').toLowerCase();
+                            if (t.includes('vaihto')) return <RefreshCw size={28} />;
+                            if (t.includes('poisto')) return <Eraser size={28} />;
+                            if (t.includes('uusi yrity')) return <Shield size={28} fill="currentColor" />;
+                        }
+                        return React.cloneElement(item.icon, { size: 28 });
+                    })()}
                   </div>
               )}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: item.category === 'body' ? 'auto' : 0 }}>
