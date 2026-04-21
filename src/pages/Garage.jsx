@@ -539,6 +539,15 @@ export default function Garage() {
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
           <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
+            <button
+                onClick={() => setShowMeterTutorial(true)}
+                title="Mitä Kipinät ovat?"
+                style={{
+                   background: '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', marginLeft: '0.5rem', boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
+                }}
+            >
+               ?
+            </button>
           </div>
           {!isTutorialActive && (
               <button 
@@ -741,6 +750,7 @@ export default function Garage() {
                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
                     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
+                       <button onClick={(e) => { e.stopPropagation(); setShowTrophyTuition(true); }} title="Kaapin ohje" style={{ position: 'absolute', top: '2rem', left: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>?</button>
                        
                        <div style={{ position: 'relative', display: 'flex', maxHeight: '100%', maxWidth: '1400px', justifyContent: 'center', alignItems: 'center' }}>
                            {showTrophyTuition && (
