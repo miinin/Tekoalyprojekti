@@ -551,10 +551,8 @@ export default function Garage() {
                     <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
                   </button>
                   {hoverSaveBtn && (
-                      <div className="animate-fade-in" style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '12px', background: 'rgba(255,255,255,0.98)', border: '3px solid #0ea5e9', padding: '1rem 1.2rem', borderRadius: '12px', color: '#334155', fontSize: '0.90rem', width: '280px', textAlign: 'center', boxShadow: '0 10px 25px rgba(0,0,0,0.2)', pointerEvents: 'none', zIndex: 100, lineHeight: '1.4' }}>
-                          <div style={{ position: 'absolute', top: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderBottom: '11px solid #0ea5e9' }} />
-                          <div style={{ position: 'absolute', top: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderBottom: '8px solid rgba(255,255,255,0.98)' }} />
-                          <div style={{ fontWeight: 'bold', color: '#0ea5e9', display: 'block', marginBottom: '0.4rem', fontSize: '1.05rem', fontFamily: 'var(--font-display)', letterSpacing: '1px' }}>TALLENNA PELI</div>
+                      <div className="animate-fade-in" style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '8px', background: 'rgba(15, 23, 42, 0.9)', padding: '0.6rem 0.8rem', borderRadius: '8px', color: '#f1f5f9', fontSize: '0.8rem', width: '220px', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', pointerEvents: 'none', zIndex: 100, lineHeight: '1.4' }}>
+                          <div style={{ position: 'absolute', top: '-6px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderBottom: '6px solid rgba(15, 23, 42, 0.9)' }} />
                           Saat rekisteritunnuksen, joka sinun pitää painaa mieleesi tai kirjoittaa paperille, jotta voit myöhemmin jatkaa peliäsi.
                       </div>
                   )}
@@ -1099,9 +1097,9 @@ export default function Garage() {
 
     {/* Testitilan sivupaneeli pokaalien ja mitalien jakamiseen */}
     {store.getTestMode() && (
-        <div style={{ position: 'fixed', bottom: '2rem', left: '2rem', background: 'rgba(15, 23, 42, 0.9)', padding: '1.5rem', borderRadius: '16px', color: 'white', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '1rem', border: '2px solid #ef4444', backdropFilter: 'blur(10px)' }}>
-           <h3 style={{ margin: 0, color: '#ef4444', textAlign: 'center', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Testipaneeli (Palkinnot)</h3>
-           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.8rem' }}>
+        <div style={{ position: 'fixed', bottom: '1rem', left: '1rem', background: 'rgba(15, 23, 42, 0.7)', padding: '0.6rem 0.8rem', borderRadius: '8px', color: '#94a3b8', zIndex: 9999, display: 'flex', flexDirection: 'column', gap: '0.5rem', border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(4px)' }}>
+           <h3 style={{ margin: 0, color: '#cbd5e1', textAlign: 'center', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Dev: Palkinnot</h3>
+           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.4rem' }}>
               <button 
                   onClick={() => {
                       const stats = store.getNodeStats();
@@ -1123,8 +1121,8 @@ export default function Garage() {
                           fetchData();
                       }
                   }} 
-                  style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: 'black', border: 'none', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
-                 Anna Pokaali
+                  style={{ background: 'rgba(255,255,255,0.1)', color: '#fcd34d', border: 'none', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'normal', fontSize: '0.7rem' }}>
+                 +Pokaali
               </button>
               <button 
                   onClick={() => {
@@ -1139,11 +1137,10 @@ export default function Garage() {
                            fetchData();
                       }
                   }}
-                  style={{ background: 'linear-gradient(135deg, #3b82f6, #2563eb)', color: 'white', border: 'none', padding: '0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>
-                 Anna Mitali
+                  style={{ background: 'rgba(255,255,255,0.1)', color: '#93c5fd', border: 'none', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'normal', fontSize: '0.7rem' }}>
+                 +Mitali
               </button>
            </div>
-           <p style={{ margin: 0, fontSize: '0.8rem', opacity: 0.8, textAlign: 'center', lineHeight: 1.4 }}>Klikkaa lisätäksesi nopeasti!<br/>Jos kaikki on saatu, uusi klikkaus nollaa ne.</p>
         </div>
     )}
 
