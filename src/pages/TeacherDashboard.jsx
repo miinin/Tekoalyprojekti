@@ -460,8 +460,8 @@ export default function TeacherDashboard() {
                             <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
                                 {sessionCode}
                             </div>
-                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '48px', height: '48px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
-                                {sessionStatus === 'active' ? <Pause size={24} color="white" strokeWidth={2.5} /> : <Play size={24} color="white" strokeWidth={2.5} style={{ marginLeft: '4px' }} />}
+                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '52px', height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                                {sessionStatus === 'active' ? <Pause size={26} color="white" strokeWidth={3} /> : <Play size={26} color="white" strokeWidth={3} style={{ marginLeft: '4px' }} />}
                             </button>
                         </div>
                     )}
