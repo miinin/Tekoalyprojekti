@@ -341,6 +341,7 @@ export const store = {
     localStorage.removeItem('aivan_garage_tuition');
     localStorage.removeItem('aivan_trophy_tuition');
     localStorage.removeItem('aivan_meter_tutorial_seen');
+    localStorage.removeItem('closed_tuition');
     localStorage.removeItem('aivan_last_main');
     localStorage.removeItem('aivan_last_sub');
     localStorage.removeItem('aivan_used_map_boosts');

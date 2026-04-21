@@ -58,11 +58,6 @@ const Roadmap = () => {
       localStorage.setItem('closed_tuition', JSON.stringify(closedTuition));
   }, [closedTuition]);
   
-  useEffect(() => {
-      if (completedLessons.length === 0) {
-          setClosedTuition({ 0: false, 1: false, 2: false });
-      }
-  }, [completedLessons.length]);
   const [puffs, setPuffs] = useState([]);
   const [toastMessage, setToastMessage] = useState(null);
   const consumedReturnRef = useRef(false);
