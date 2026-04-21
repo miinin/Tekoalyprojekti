@@ -18,6 +18,7 @@ export default function Quiz() {
   const [teacherBoosts, setTeacherBoosts] = useState({ red: 0, yellow: 0, green: 0 });
   const [quizCharges, setQuizCharges] = useState({ red: 0, yellow: 0, green: 0 });
   const [usedCharges, setUsedCharges] = useState({ red: 0, yellow: 0, green: 0 });
+  const [streakForgivenForLevel, setStreakForgivenForLevel] = useState(false);
 
   const [bossIntroSeen, setBossIntroSeen] = useState(false);
   
@@ -73,6 +74,7 @@ export default function Quiz() {
        if (mainCategory === 'digiturva' && extras === 'van-extra06') buff = 'snorkkeli';
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') buff = 'vinssi';
        if (mainCategory === 'konepellin' && extras === 'van-extra07') buff = 'eramaa-antenni';
+       if (mainCategory === 'reilu_peli' && extras === 'van-extra05') buff = 'sivuikkuna';
        // Voit mapata lumiketjut myöhemmin mihin tahansa kenttään. Tässä esimerkki:
        if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') buff = 'talvirenkaat';
        setActiveBuff(buff);
@@ -110,8 +112,11 @@ export default function Quiz() {
 
        // Lisäosat (Map-specific)
        if (mainCategory === 'digiturva' && extras === 'van-extra06') redCharge += 3;
+       if (mainCategory === 'reilu_peli' && extras === 'van-extra05') redCharge += 3;
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 3;
        if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 3;
+       
+       if (extras === 'van-extra02') yellowCharge += 1;
        
        if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') yellowCharge += 5;
        else if (wheels === 'van-wheel06') yellowCharge += 2;
@@ -337,7 +342,17 @@ export default function Quiz() {
       setCorrectAnswersCount(prev => prev + 1);
     }
     
-    const streakData = store.trackStreak(correct);
+    let trackOptions = {};
+    const extras = equippedItems['extra'] || '';
+    if (extras === 'van-extra01') {
+        trackOptions.dropToFive = true;
+    }
+    if (extras === 'van-extra03' && !correct && !streakForgivenForLevel) {
+        trackOptions.forgiveBreak = true;
+        setStreakForgivenForLevel(true);
+    }
+    
+    const streakData = store.trackStreak(correct, trackOptions);
     setCurrentStreak(streakData.current);
     if (streakData.justReached === 5 && !store.getTutorialSkipped()) {
         setShowStreakTutorial(true);

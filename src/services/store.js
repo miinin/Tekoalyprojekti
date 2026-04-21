@@ -124,7 +124,7 @@ export const store = {
     }
   },
 
-  trackStreak: (isCorrect) => {
+  trackStreak: (isCorrect, options = {}) => {
     try {
         const stats = store.getStreakStats();
         const oldCurrent = stats.current;
@@ -134,7 +134,13 @@ export const store = {
                 stats.best = stats.current;
             }
         } else {
-            stats.current = 0;
+            if (options.forgiveBreak) {
+                // Katkeaminen annetaan anteeksi, ketju jatkuu samasta kohtaa
+            } else if (options.dropToFive) {
+                stats.current = 5;
+            } else {
+                stats.current = 0;
+            }
         }
         localStorage.setItem('aivan_streak_stats', JSON.stringify(stats));
         
