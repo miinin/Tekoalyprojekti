@@ -116,7 +116,7 @@ export default function Quiz() {
        if (mainCategory === 'aivoterveys' && extras === 'van-extra04') greenCharge += 3;
        if (mainCategory === 'konepellin' && extras === 'van-extra07') yellowCharge += 3;
        
-       if (extras === 'van-extra02') yellowCharge += 1;
+       if (extras === 'van-extra02') greenCharge += 1;
        
        if (mainCategory === 'kayttotaidot' && wheels === 'van-wheel06') yellowCharge += 5;
        else if (wheels === 'van-wheel06') yellowCharge += 2;

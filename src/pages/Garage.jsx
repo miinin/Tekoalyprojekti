@@ -152,8 +152,8 @@ export default function Garage() {
 
     // EXTRA
     { id: 'van-extra01', category: 'extra', categoryName: 'Erityisosat', name: 'Roots-ahdin', desc: 'Lisää tehoa konepellille!', price: 2000, icon: <Zap size={28} />, color: '#f59e0b', bg: '#fef3c7', buff: { title: 'Ahdettu ketju', desc: 'Kipinäketju putoaa nollan sijasta viiteen. Bonus on aina varma!', isSpark: true } },
-    { id: 'van-extra02', category: 'extra', categoryName: 'Erityisosat', name: 'Työkalusarja vaativiin oloihin', desc: 'Valmiina kaikkiin remontteihin tien päällä.', price: 1000, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Väärän vaihtoehdon poisto', desc: 'Antaa +1 Poistoa muiden työkalujen lisäksi.' } },
-    { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff', buff: { title: 'Varavirtalähde', desc: 'Ensimmäinen väärä vastaus annetaan anteeksi, eikä ketju katkea.' } },
+    { id: 'van-extra02', category: 'extra', categoryName: 'Erityisosat', name: 'Työkalusarja vaativiin oloihin', desc: 'Valmiina kaikkiin remontteihin tien päällä.', price: 1000, icon: <Wrench size={28} />, color: '#eab308', bg: '#fef08a', buff: { title: 'Kysymyksen vaihto', desc: 'Antaa +1 Vaihdon muiden työkalujen lisäksi.' } },
+    { id: 'van-extra03', category: 'extra', categoryName: 'Erityisosat', name: 'Taakkateline ja lisävalot', desc: 'Taakkateline ja lisävalot katolle.', price: 1500, icon: <Sparkles size={28} />, color: '#6366f1', bg: '#e0e7ff', buff: { title: 'Parempi näkyvyys', desc: 'Ensimmäinen väärä vastaus annetaan anteeksi, eikä Kipinäketju katkea.' } },
     { id: 'van-extra04', category: 'extra', categoryName: 'Erityisosat', name: 'Vinssi', desc: 'Vinssi, jolla kapuaa korkeimmallekin vuorelle.', price: 800, icon: <ShieldCheck size={28} />, color: '#22c55e', bg: '#dcfce7', buff: { title: 'Kysymyksen vaihto', desc: 'Antaa +3 Vaihto-apua Aivoterveys-kartalla!' } },
     { id: 'van-extra05', category: 'extra', categoryName: 'Erityisosat', name: 'Sivuikkuna takatilaan', desc: 'Lisää valoa ja tilan tunnetta.', price: 600, icon: <Grid size={28} />, color: '#3b82f6', bg: '#dbeafe', buff: { title: 'Uusi yritys', desc: 'Antaa +3 Uutta yritystä Reilu peli -kartalla!' } },
     { id: 'van-extra06', category: 'extra', categoryName: 'Erityisosat', name: 'Snorkkeli', desc: 'Vedenaalaisiin seikkailuihin.', price: 1000, icon: <Map size={28} />, color: '#ef4444', bg: '#fee2e2', buff: { title: 'Uusi yritys', desc: 'Antaa +3 Uutta yritystä Digiturva-kartalla!' } },
@@ -188,6 +188,17 @@ export default function Garage() {
   const setCategory = (cat) => {
     if (isTutorialActive && cat !== 'g_floor') return;
     setActiveCategory(cat);
+  };
+
+  const renderBuffDesc = (desc) => {
+    if (!desc) return null;
+    const parts = desc.split(/(kipinäketju|kipinäketjun)/i);
+    return parts.map((part, i) => {
+        if (/kipinäketju/i.test(part)) {
+            return <span key={i} style={{ color: '#d97706', fontWeight: '900', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '0 2px' }}><Flame size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', margin: '0 2px', transform: 'translateY(1px)' }} fill="#f97316" color="#9a3412" />{part}</span>;
+        }
+        return part;
+    });
   };
 
   const renderSquareItem = (item) => {
@@ -269,11 +280,21 @@ export default function Garage() {
            
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
               {item.buff && (
-                  <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e')}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }} title={`${item.buff.title}: ${item.buff.desc}`}>
-                      <div style={{ position: 'absolute', top: '-40px', right: '0px', color: 'rgba(255,255,255,0.95)', transform: 'rotate(15deg)', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
-                         {item.buff.isSpark ? <Zap size={18} fill="white" /> : (item.id === 'van-wheel06' ? <Snowflake size={18} /> : '✦')}
-                      </div>
-                  </div>
+                  <>
+                    <div style={{ position: 'absolute', top: 0, right: 0, width: 0, height: 0, borderTop: `45px solid ${item.buff.isSpark ? '#f59e0b' : (item.color || '#22c55e')}`, borderLeft: '45px solid transparent', zIndex: 10, filter: 'drop-shadow(-2px 2px 4px rgba(0,0,0,0.1))' }}>
+                        <div style={{ position: 'absolute', top: '-40px', right: '0px', color: 'rgba(255,255,255,0.95)', transform: 'rotate(15deg)', display: 'flex', alignItems: 'center', justifyItems: 'center' }}>
+                           {item.buff.isSpark ? <Zap size={18} fill="white" /> : (item.id === 'van-wheel06' ? <Snowflake size={18} /> : '✦')}
+                        </div>
+                    </div>
+                    {hoveredItem === item.id && (
+                        <div className="animate-fade-in" style={{ position: 'absolute', bottom: 'calc(100% + 5px)', left: '50%', transform: 'translateX(-50%)', width: '240px', background: 'rgba(255, 255, 255, 0.98)', padding: '0.9rem', borderRadius: '12px', border: `3px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}`, boxShadow: '0 10px 25px rgba(0,0,0,0.3)', color: '#334155', fontSize: '0.85rem', lineHeight: '1.5', fontWeight: 'normal', cursor: 'default', textAlign: 'center', zIndex: 100, pointerEvents: 'none' }}>
+                            <div style={{ position: 'absolute', bottom: '-11px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: `11px solid ${item.buff.isSpark ? '#fde68a' : '#bbf7d0'}` }} />
+                            <div style={{ position: 'absolute', bottom: '-7px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '11px solid transparent', borderRight: '11px solid transparent', borderTop: '11px solid rgba(255, 255, 255, 0.98)' }} />
+                            <div style={{ fontWeight: '900', color: item.buff.isSpark ? '#d97706' : '#16a34a', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{item.buff.title}</div>
+                            {renderBuffDesc(item.buff.desc)}
+                        </div>
+                    )}
+                  </>
               )}
               {item.category === 'body' ? (
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
