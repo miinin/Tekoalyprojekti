@@ -806,7 +806,7 @@ export default function Garage() {
                        </div>
 
                        {/* Ylähylly: Pokaalit */}
-                       <div style={{ position: 'absolute', top: '12.09%', left: '21.83%', width: '56.42%', height: '34.85%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'auto', paddingBottom: '0', transform: 'translateY(1.5%)' }}>
+                       <div style={{ position: 'absolute', top: '12.09%', left: '21.83%', width: '55%', height: '34.85%', display: 'flex', justifyContent: 'space-around', alignItems: 'flex-end', zIndex: 5, pointerEvents: 'auto', paddingBottom: '0', paddingRight: '0.5%', transform: 'translateY(1.5%)' }}>
                            {trophyMap.map(t => { 
                                const isEarned = earnedTrophies.includes(t.id);
                                return (
@@ -814,7 +814,7 @@ export default function Garage() {
                                       key={t.id} 
                                       onClick={() => { if (isEarned) setSelectedTrophyObj(t); }}
                                       style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s', cursor: isEarned ? 'zoom-in' : 'default' }}>
-                                       <img src={`/trophy/${t.id}.png`} style={{ maxHeight: '90%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom', transition: 'transform 0.2s' }} onMouseEnter={e => { if(isEarned) e.currentTarget.style.transform='scale(1.05)' }} onMouseOut={e => { if(isEarned) e.currentTarget.style.transform='scale(1)' }} alt={t.name} />
+                                       <img src={`/trophy/${t.id}.png`} style={{ maxHeight: '82%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom', transition: 'transform 0.2s' }} onMouseEnter={e => { if(isEarned) e.currentTarget.style.transform='scale(1.05)' }} onMouseOut={e => { if(isEarned) e.currentTarget.style.transform='scale(1)' }} alt={t.name} />
                                    </div>
                                );
                            })}
