@@ -203,9 +203,13 @@ const Roadmap = () => {
     if (currentMap !== 'main' && AI_ROADMAP_DATA.sub[currentMap]) {
         const subData = AI_ROADMAP_DATA.sub[currentMap];
         
-        if (completedNodeId) {
-            // Tultiin juuri tasolta: aseta paku viimeksi suoritetulle pisteelle
-            const completedNode = subData.nodes.find(n => n.id === completedNodeId);
+        const completions = store.getCompletions();
+        const mapNodeIds = subData.nodes.filter(n => !n.isJunction).map(n => n.id);
+        const highestCompleted = completedNodeId || mapNodeIds.slice().reverse().find(id => completions.includes(id));
+        
+        if (highestCompleted) {
+            // Tultiin juuri tasolta tai palattiin kartalle: aseta paku viimeksi suoritetulle pisteelle
+            const completedNode = subData.nodes.find(n => n.id === highestCompleted);
             if (completedNode) {
                 setVanPos(prev => ({ 
                     ...prev, 
@@ -213,9 +217,7 @@ const Roadmap = () => {
                     left: completedNode.left, 
                     stepTime: 0 
                 }));
-                setCurrentLocationId(completedNodeId);
-
-                // Odotetaan käyttäjän klikkausta jos reitti on, jotta vanhanaikainen automagia ei sotke paluuta
+                setCurrentLocationId(highestCompleted);
             }
         } else {
             // Normaali saapuminen alakarttaan
