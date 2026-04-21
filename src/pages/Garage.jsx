@@ -582,7 +582,10 @@ export default function Garage() {
         <div className="garage-left">
            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <div>
-                <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', textAlign: 'left', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                  <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', margin: 0, fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
+                  <button onClick={() => setShowMeterTutorial(prev => !prev)} title="Mitä Kipinöillä tehdään?" style={{ background: '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 'bold', cursor: 'pointer', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>?</button>
+                </div>
                 {Object.entries(categorisedCar).map(([catId, category]) => {
                   const isLocked = isTutorialActive;
                   return (
@@ -668,13 +671,6 @@ export default function Garage() {
               </div>
             )}
 
-            {['g_tools', 'wheel', 'extra'].includes(activeCategory) && (
-                 <div className="animate-fade-in" style={{ marginTop: '3rem', paddingBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
-                     <button onClick={() => setShowMeterTutorial(prev => !prev)} className="btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', background: '#fef3c7', color: '#d97706', borderColor: '#fde68a', padding: '0.8rem 1.5rem', borderRadius: '12px' }}>
-                         <Zap size={20} fill="#f59e0b" /> Mitä Kipinöillä tehdään? <span style={{ background: '#f59e0b', color: 'white', borderRadius: '50%', width: '22px', height: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: 'bold', marginLeft: '0.5rem' }}>?</span>
-                     </button>
-                 </div>
-            )}
         </div>
 
         {/* RIGHT COLUMN: Visual Preview Graphic */}
