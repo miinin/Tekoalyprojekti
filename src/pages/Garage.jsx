@@ -192,10 +192,19 @@ export default function Garage() {
 
   const renderBuffDesc = (desc) => {
     if (!desc) return null;
-    const parts = desc.split(/(kipinäketju|kipinäketjun)/i);
+    const parts = desc.split(/(kipinäketju[a-zäö]*|vaihtoa?|vaihdon|poistoa?|poiston|uusi yritys|uutta yritystä)/i);
     return parts.map((part, i) => {
         if (/kipinäketju/i.test(part)) {
-            return <span key={i} style={{ color: '#d97706', fontWeight: '900', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '0 2px' }}><Flame size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', margin: '0 2px', transform: 'translateY(1px)' }} fill="#f97316" color="#9a3412" />{part}</span>;
+            return <span key={i} style={{ color: '#d97706', fontWeight: '900', letterSpacing: '0.5px', padding: '0 2px' }}><Flame size={14} style={{ display: 'inline', verticalAlign: 'text-bottom', margin: '0 2px', transform: 'translateY(1px)' }} fill="#f97316" color="#9a3412" />{part}</span>;
+        }
+        if (/vaihto|vaihdon/i.test(part)) {
+            return <b key={i} style={{ color: '#16a34a' }}>{part}</b>;
+        }
+        if (/poisto/i.test(part)) {
+            return <b key={i} style={{ color: '#ca8a04' }}>{part}</b>;
+        }
+        if (/uusi yrity|uutta yrity/i.test(part)) {
+            return <b key={i} style={{ color: '#dc2626' }}>{part}</b>;
         }
         return part;
     });
