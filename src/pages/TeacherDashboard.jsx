@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/purity */
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { db } from '../firebase';
@@ -461,7 +462,11 @@ export default function TeacherDashboard() {
                                 {sessionCode}
                             </div>
                             <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '52px', height: '52px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
-                                {sessionStatus === 'active' ? <Pause size={26} color="white" strokeWidth={3} /> : <Play size={26} color="white" strokeWidth={3} style={{ marginLeft: '4px' }} />}
+                                {sessionStatus === 'active' ? (
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+                                ) : (
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" style={{ marginLeft: '4px' }}><path d="M6 4l14 8-14 8V4z"/></svg>
+                                )}
                             </button>
                         </div>
                     )}
@@ -673,7 +678,7 @@ export default function TeacherDashboard() {
         )}
 
         {/* Fullscreen Code Modal */}
-        {showFullscreen && (
+        {showFullscreen && createPortal(
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(135deg, rgba(224, 242, 254, 0.95) 0%, rgba(219, 234, 254, 0.95) 100%)', backdropFilter: 'blur(10px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }} onClick={() => setShowFullscreen(false)}>
                 <p style={{ color: '#94a3b8', fontSize: '2rem', marginBottom: '1rem', fontFamily: 'var(--font-display)', fontWeight: 'bold', letterSpacing: '2px' }}>Liity peliin koodilla:</p>
                 <div style={{ background: 'white', padding: '4rem 8rem', borderRadius: '32px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
@@ -682,7 +687,8 @@ export default function TeacherDashboard() {
                 <button style={{ position: 'absolute', top: '3rem', right: '3rem', background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }} onClick={() => setShowFullscreen(false)}>
                     <X size={64} color="#3b82f6" />
                 </button>
-            </div>
+            </div>,
+            document.body
         )}
 
     </div>
