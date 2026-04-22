@@ -542,12 +542,12 @@ export default function Garage() {
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           {!isTutorialActive && (
-              <div style={{ position: 'relative' }} onMouseEnter={() => setHoverSaveBtn(true)} onMouseLeave={() => setHoverSaveBtn(false)}>
+              <div style={{ position: 'relative', display: 'flex' }} onMouseEnter={() => setHoverSaveBtn(true)} onMouseLeave={() => setHoverSaveBtn(false)}>
                   <button 
                     onClick={handleCreateSave} 
                     disabled={isSaving}
                     className="btn-secondary" 
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold' }}>
+                    style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold' }}>
                     <Save size={24} /> {isSaving ? 'TALLENNETAAN...' : 'Luo jatkamiskoodi'}
                   </button>
                   {hoverSaveBtn && (
