@@ -548,7 +548,7 @@ export default function Garage() {
                     disabled={isSaving}
                     className="btn-secondary" 
                     style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <Save size={20} color="#0ea5e9" /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
+                    <Save size={20} /> {isSaving ? 'Tallennetaan...' : 'Luo jatkamiskoodi'}
                   </button>
                   {hoverSaveBtn && (
                       <div className="animate-fade-in" style={{ position: 'absolute', top: '100%', left: '50%', transform: 'translateX(-50%)', marginTop: '8px', background: 'rgba(15, 23, 42, 0.9)', padding: '0.6rem 0.8rem', borderRadius: '8px', color: '#f1f5f9', fontSize: '0.8rem', width: '220px', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.3)', pointerEvents: 'none', zIndex: 100, lineHeight: '1.4' }}>
