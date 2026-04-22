@@ -113,6 +113,11 @@ export default function Lobby() {
       const joinResult = await store.joinClassroom(upperCode, classNick);
       setJoinClassLoading(false);
 
+      if (joinResult !== true && joinResult !== 'error') {
+          // New player inside a classroom needs the initial 200 sparks to buy the required tool!
+          await store.addSparks(200);
+      }
+
       if (joinResult === 'error') {
           setModalState({
               title: 'Yhteysongelma',
