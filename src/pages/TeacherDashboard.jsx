@@ -461,11 +461,14 @@ export default function TeacherDashboard() {
                             <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
                                 {sessionCode}
                             </div>
-                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '52px', height: '52px', minWidth: '52px', minHeight: '52px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)' }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)', padding: 0 }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
                                 {sessionStatus === 'active' ? (
-                                    <div style={{ width: '24px', height: '24px', display: 'flex' }}><svg style={{ width: '100%', height: '100%' }} viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="4" width="5" height="16" rx="1"/><rect x="13" y="4" width="5" height="16" rx="1"/></svg></div>
+                                    <div style={{ display: 'flex', gap: '6px', pointerEvents: 'none' }}>
+                                        <div style={{ width: '6px', height: '22px', backgroundColor: 'white', borderRadius: '2px', flexShrink: 0 }} />
+                                        <div style={{ width: '6px', height: '22px', backgroundColor: 'white', borderRadius: '2px', flexShrink: 0 }} />
+                                    </div>
                                 ) : (
-                                    <div style={{ width: '26px', height: '26px', display: 'flex', paddingLeft: '4px' }}><svg style={{ width: '100%', height: '100%' }} viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M6 4l14 8-14 8V4z"/></svg></div>
+                                    <div style={{ width: 0, height: 0, borderTop: '12px solid transparent', borderBottom: '12px solid transparent', borderLeft: '20px solid white', marginLeft: '6px', pointerEvents: 'none', flexShrink: 0 }} />
                                 )}
                             </button>
                         </div>
