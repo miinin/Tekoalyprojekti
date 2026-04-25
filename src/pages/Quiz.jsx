@@ -648,7 +648,7 @@ export default function Quiz() {
       'scenario': { text: 'Miten toimit?', icon: <Compass size={22} />, color: '#d97706', bg: '#fef3c7', border: '#fde68a' },
       'drag_drop': { text: 'Raahaa ja Pudota', icon: <Move size={22} />, color: '#16a34a', bg: '#dcfce7', border: '#bbf7d0' },
       'ordering': { text: 'Järjestä oikein', icon: <ArrowUpDown size={22} />, color: '#16a34a', bg: '#dcfce7', border: '#bbf7d0' },
-      'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={22} />, color: '#6d28d9', bg: '#ede9fe', border: '#ddd6fe' },
+      'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={22} />, color: '#334155', bg: '#f1f5f9', border: '#cbd5e1' },
       'reverse_prompt': { text: 'Käänteinen Kehote', icon: <Terminal size={22} />, color: '#be185d', bg: '#fce7f3', border: '#fbcfe8' },
       'spot_the_lie': { text: 'Hallusinaation Metsästys', icon: <Search size={22} />, color: '#b91c1c', bg: '#fee2e2', border: '#fecaca' },
       'jailbreak': { text: 'Jailbreak -hakkerointi', icon: <Unlock size={22} />, color: '#0f766e', bg: '#ccfbf1', border: '#99f6e4' }
@@ -1101,7 +1101,7 @@ export default function Quiz() {
            if (currentQuestion.type === 'spot_the_ai') {
              return (
                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#6d28d9', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem', alignSelf: 'center', fontWeight: 'bold' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#334155', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem', alignSelf: 'center', fontWeight: 'bold' }}>
                    <Eye size={18} /> Skannaus: Tunnista tekoälyn valinta
                  </div>
                  <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -1114,10 +1114,10 @@ export default function Quiz() {
                        flex: '1 1 150px',
                        minHeight: '120px',
                        padding: '1.5rem 1rem', textAlign: 'center', background: 'white', 
-                       border: `3px solid #ede9fe`, color: '#6d28d9', 
+                       border: `3px solid #e2e8f0`, color: '#334155', 
                        borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
                        transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
-                       lineHeight: '1.4', boxShadow: '0 4px 10px rgba(109, 40, 217, 0.05)',
+                       lineHeight: '1.4', boxShadow: '0 4px 10px rgba(51, 65, 85, 0.05)',
                        display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
                      };
                      
@@ -1132,15 +1132,15 @@ export default function Quiz() {
                        }
                      } else {
                        if (isSelected) {
-                         btnStyle.background = '#f5f3ff'; btnStyle.border = '3px solid #8b5cf6'; btnStyle.boxShadow = '0 8px 20px rgba(139, 92, 246, 0.3)'; btnStyle.transform = 'translateY(-10px)';
+                         btnStyle.background = '#f8fafc'; btnStyle.border = '3px solid #334155'; btnStyle.boxShadow = '0 8px 20px rgba(51, 65, 85, 0.3)'; btnStyle.transform = 'translateY(-10px)';
                        } else if (isHovered && !isRemoved) {
-                         btnStyle.transform = 'translateY(-5px)'; btnStyle.boxShadow = '0 8px 15px rgba(0,0,0,0.08)'; btnStyle.border = '3px solid #c4b5fd';
+                         btnStyle.transform = 'translateY(-5px)'; btnStyle.boxShadow = '0 8px 15px rgba(0,0,0,0.08)'; btnStyle.border = '3px solid #cbd5e1';
                        }
                      }
 
                      return (
                        <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
-                         <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isSelected && !showExplanation ? '#8b5cf6' : '#a78bfa', opacity: isSelected ? 1 : 0.6 }}>#{idx+1}</span>
+                         <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isSelected && !showExplanation ? '#334155' : '#94a3b8', opacity: isSelected ? 1 : 0.6 }}>#{idx+1}</span>
                          <span style={{ textDecoration: isRemoved ? 'line-through' : 'none', fontWeight: isSelected ? 'bold' : 'normal' }}>{option}</span>
                          {isRemoved && <span style={{fontSize:'0.75rem', display:'block', color:'#94a3b8', marginTop:'0.5rem'}}>{bumperSaved ? 'Suojattu' : 'Poistettu'}</span>}
                        </button>
@@ -1148,7 +1148,7 @@ export default function Quiz() {
                    })}
                  </div>
                  {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem 3rem', alignSelf: 'center', background: '#8b5cf6', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(139,92,246,0.4)', transition: 'all 0.2s', fontSize: '1.1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem 3rem', alignSelf: 'center', background: '#334155', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(51,65,85,0.4)', transition: 'all 0.2s', fontSize: '1.1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
                      <Eye size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Vahvista tunnistus
                    </button>
                  )}
@@ -1203,8 +1203,8 @@ export default function Quiz() {
                      );
                    })}
                  </div>
-                 {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, alignSelf: 'center', background: '#10b981', border: 'none', borderRadius: '50%', boxShadow: '0 10px 20px rgba(16,185,129,0.4)', transition: 'all 0.2s', transform: 'scale(1.05)' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                 {!showExplanation && (
+                   <button className="btn-primary" disabled={!selectedAnswer} style={{ marginTop: '1rem', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, alignSelf: 'center', background: selectedAnswer ? '#10b981' : '#e2e8f0', color: selectedAnswer ? 'white' : '#94a3b8', border: 'none', borderRadius: '50%', boxShadow: selectedAnswer ? '0 10px 20px rgba(16,185,129,0.4)' : 'none', transition: 'all 0.2s', transform: selectedAnswer ? 'scale(1.05)' : 'scale(1)', cursor: selectedAnswer ? 'pointer' : 'not-allowed' }} onClick={() => selectedAnswer && handleAnswerSubmit(selectedAnswer)}>
                      <ArrowRight size={28} />
                    </button>
                  )}
@@ -1366,7 +1366,7 @@ export default function Quiz() {
                   </div>
 
                   {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '1rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: currentQuestion.dropZones && currentQuestion.dropZones.length > 2 ? 'repeat(2, 1fr)' : '1fr', gap: '1rem', paddingTop: '0.5rem' }}>
                     {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
                       <div key={target} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         {/* Drop zone box with integrated header */}
@@ -1374,14 +1374,14 @@ export default function Quiz() {
                           onDrop={(e) => !showExplanation && handleDrop(e, target)}
                           onDragOver={handleDragOver}
                           onClick={() => handleClickDropZone(target)}
-                          style={{ width: '100%', minHeight: '110px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
+                          style={{ width: '100%', minHeight: '85px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
                         >
                           {/* Integrated Tab Header */}
-                          <div style={{ background: '#dcfce7', borderBottom: '2px dashed #bbf7d0', padding: '0.6rem 1rem', display: 'flex', alignItems: 'center' }}>
-                            <h4 style={{ margin: 0, color: '#16a34a', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{target}</h4>
+                          <div style={{ background: '#dcfce7', borderBottom: '2px dashed #bbf7d0', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}>
+                            <h4 style={{ margin: 0, color: '#16a34a', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{target}</h4>
                           </div>
 
-                          <div style={{ padding: '1.2rem 1rem 1rem 1rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                          <div style={{ padding: '0.8rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                           {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
                             <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.95rem' }}>
                               Pudota vaihtoehto tähän
