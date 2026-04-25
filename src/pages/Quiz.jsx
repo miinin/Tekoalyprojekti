@@ -1095,73 +1095,14 @@ export default function Quiz() {
              );
            }
 
-           // === SPOT THE AI ===
-           if (currentQuestion.type === 'spot_the_ai') {
-             return (
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                 <div style={{ padding: '0.5rem', background: '#020617', borderRadius: '24px', border: '1px solid #1e293b', marginTop: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
-                   <div style={{ padding: '1rem', color: '#10b981', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #1e293b' }}>
-                     <Search size={16} /> Scanning logic parameters...
-                   </div>
-                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                     {shuffledOptions.map((option, idx) => {
-                       const isSelected = selectedAnswer === option;
-                       const isRemoved = removedOptions.includes(option);
-                       const isHovered = hoveredOptionIdx === idx;
-                       
-                       let borderColor = '#10b981';
-                       let btnStyle = { 
-                         padding: '1.2rem', textAlign: 'left', background: '#0f172a', 
-                         border: `2px dashed ${borderColor}50`, color: '#34d399', 
-                         borderRadius: '12px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
-                         transition: 'all 0.2s', fontSize: '1.05rem', fontFamily: 'monospace', 
-                         lineHeight: '1.5'
-                       };
-                       
-                       if (isRemoved) { btnStyle.opacity = 0.3; }
-                       else if (showExplanation) {
-                         if (option === currentQuestion.correctAnswer) {
-                           btnStyle.border = `2px solid ${borderColor}`; btnStyle.background = `${borderColor}20`; btnStyle.boxShadow = `0 0 20px ${borderColor}30`;
-                         } else if (isSelected) {
-                           btnStyle.border = `2px solid #ef4444`; btnStyle.color = '#f87171'; btnStyle.background = '#ef444420';
-                         } else {
-                           btnStyle.opacity = 0.3;
-                         }
-                       } else {
-                         if (isSelected) {
-                           btnStyle.background = `${borderColor}20`; btnStyle.border = `2px solid ${borderColor}`; btnStyle.color = '#fff'; btnStyle.boxShadow = `0 0 15px ${borderColor}40`;
-                         } else if (isHovered && !isRemoved) {
-                           btnStyle.border = `2px dotted ${borderColor}`; btnStyle.transform = 'translateY(-2px)';
-                         }
-                       }
 
-                       return (
-                         <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
-                           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
-                             <div style={{ opacity: 0.5 }}>[{idx+1}]</div>
-                             <div style={{ flexGrow: 1, textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</div>
-                           </div>
-                           {isRemoved && <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.5rem' }}>// DELETED BY BUMPER</div>}
-                         </button>
-                       );
-                     })}
-                   </div>
-                 </div>
-                 {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'center', background: '#10b981', border: 'none', color: '#064e3b' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                     <Search size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Analysoi kohde
-                   </button>
-                 )}
-               </div>
-             );
-           }
 
            // === REVERSE PROMPT ===
            if (currentQuestion.type === 'reverse_prompt') {
              return (
                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '1.5rem' }}>
                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>
-                   <Terminal size={16} /> Kumpi prompti tuotti yllä olevan tuloksen?
+                   <Terminal size={16} /> Valitse oikea kehote (prompt):
                  </div>
                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                    {shuffledOptions.map((option, idx) => {
@@ -1172,16 +1113,16 @@ export default function Quiz() {
                      let btnStyle = { 
                        padding: '1.2rem 1.5rem', textAlign: 'left', background: 'white', 
                        border: `2px solid transparent`, color: '#334155', 
-                       borderRadius: '24px 24px 24px 4px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
-                       transition: 'all 0.2s', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
+                       borderRadius: '24px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
+                       transition: 'all 0.3s ease-in-out', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
                        lineHeight: '1.5', boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
-                       maxWidth: '90%', alignSelf: 'flex-start'
+                       width: '100%'
                      };
                      
                      if (isRemoved) { btnStyle.opacity = 0.4; }
                      else if (showExplanation) {
                        if (option === currentQuestion.correctAnswer) {
-                         btnStyle.border = `2px solid #3b82f6`; btnStyle.background = '#eff6ff';
+                         btnStyle.border = `2px solid #10b981`; btnStyle.background = '#ecfdf5';
                        } else if (isSelected) {
                          btnStyle.border = `2px solid #ef4444`; btnStyle.background = '#fef2f2';
                        } else {
@@ -1189,7 +1130,7 @@ export default function Quiz() {
                        }
                      } else {
                        if (isSelected) {
-                         btnStyle.background = '#3b82f6'; btnStyle.color = 'white'; btnStyle.borderRadius = '24px 24px 4px 24px'; btnStyle.alignSelf = 'flex-end'; btnStyle.boxShadow = '0 8px 20px rgba(59,130,246,0.3)';
+                         btnStyle.background = '#10b981'; btnStyle.color = 'white'; btnStyle.boxShadow = '0 8px 20px rgba(16,185,129,0.3)';
                        } else if (isHovered && !isRemoved) {
                          btnStyle.transform = 'translateY(-2px)'; btnStyle.boxShadow = '0 8px 15px rgba(0,0,0,0.08)';
                        }
@@ -1204,8 +1145,8 @@ export default function Quiz() {
                    })}
                  </div>
                  {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'flex-end', background: '#3b82f6', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(59,130,246,0.4)', transition: 'all 0.2s', transform: 'scale(1.05)' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                     Syötä prompti <ArrowRight size={20} style={{ display: 'inline', marginLeft: '8px', verticalAlign: 'middle' }} />
+                   <button className="btn-primary" style={{ marginTop: '1rem', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, alignSelf: 'center', background: '#10b981', border: 'none', borderRadius: '50%', boxShadow: '0 10px 20px rgba(16,185,129,0.4)', transition: 'all 0.2s', transform: 'scale(1.05)' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                     <ArrowUp size={28} />
                    </button>
                  )}
                </div>
@@ -1368,22 +1309,21 @@ export default function Quiz() {
                   {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '1rem' }}>
                     {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
-                      <div key={target} style={{ position: 'relative' }}>
+                      <div key={target} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         {/* Tab header */}
                         <div style={{
-                          position: 'absolute',
-                          top: '-16px',
-                          left: '16px',
                           background: 'var(--primary-color)',
                           color: 'white',
-                          padding: '0.2rem 1rem',
-                          borderRadius: '12px 12px 0 0',
+                          padding: '0.4rem 1.2rem',
+                          borderRadius: '16px 16px 0 0',
                           fontSize: '0.85rem',
                           fontWeight: 'bold',
                           textTransform: 'uppercase',
                           letterSpacing: '1px',
                           zIndex: 2,
-                          boxShadow: '0 -2px 5px rgba(0,0,0,0.05)'
+                          position: 'relative',
+                          marginLeft: '1rem',
+                          marginBottom: '-2px'
                         }}>
                           {target}
                         </div>
@@ -1393,7 +1333,7 @@ export default function Quiz() {
                           onDrop={(e) => !showExplanation && handleDrop(e, target)}
                           onDragOver={handleDragOver}
                           onClick={() => handleClickDropZone(target)}
-                          style={{ minHeight: '90px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', padding: '1.8rem 1rem 1rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1 }}
+                          style={{ width: '100%', minHeight: '90px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', padding: '1.8rem 1rem 1rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1 }}
                         >
                           {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
                             <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.95rem' }}>

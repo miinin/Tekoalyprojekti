@@ -647,17 +647,17 @@ export const categories = [
           {
             "id": "perusteet_3_q13",
             "type": "drag_drop",
-            "question": "Järjestä autossa olevat asiat yksinkertaisimmasta sääntöohjelmasta kaikkein edistyneimpään tekoälyyn!",
+            "question": "Kuinka edistynyt tekoälynavigaattori tekee päätöksiä vaiheittain? Aseta vaiheet oikeaan järjestykseen!",
             "correctAnswer": {
-              "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija": "1. vaihe",
-              "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan": "2. vaihe",
-              "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä": "3. vaihe"
+              "Kerää dataa (lukee karttoja ja liikenneruuhkia)": "1. vaihe",
+              "Analysoi (yhdistelee sääntöjä ja päättelee)": "2. vaihe",
+              "Tekee päätöksen (antaa kuljettajalle uuden reitin)": "3. vaihe"
             },
-            "explanation": "Yksinkertaiset koneet tekevät vain yhtä asiaa, tavalliset ohjelmat toimivat tiukkojen sääntöjen mukaan ja tekoäly osaa yhdistellä tietoa sekä keksiä uutta!",
+            "explanation": "Edistynyt tekoälytoiminto etenee aina tiedonkeruusta (Data) analysointiin (Päättely) ja lopulta varsinaiseen toimenpiteeseen (Päätös).",
             "draggables": [
-              "Sisävalo, jossa on vain mekaaninen päälle/pois-katkaisija",
-              "Vakionopeudensäädin, joka pitää nopeuden aina samana sääntöjen mukaan",
-              "Tekoälynavigaattori, joka tarkkailee säätä ja keksii uusia kiertoreittejä"
+              "Kerää dataa (lukee karttoja ja liikenneruuhkia)",
+              "Analysoi (yhdistelee sääntöjä ja päättelee)",
+              "Tekee päätöksen (antaa kuljettajalle uuden reitin)"
             ],
             "dropZones": [
               "1. vaihe",
