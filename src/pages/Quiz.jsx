@@ -1326,10 +1326,19 @@ export default function Quiz() {
           if (isSequenceTask) {
             return (
               <div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'flex-start' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '1.5rem', alignItems: 'flex-start' }}>
                   
                   {/* Vasen puoli: Vaihtoehdot */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', background: 'rgba(255,255,255,0.4)', padding: '1rem', borderRadius: '24px', border: '2px dashed #cbd5e1' }}>
+                  <div 
+                    onDragOver={handleDragOver}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      if (!showExplanation && selectedDragItem) {
+                        handleRemoveFromDropZone(e, selectedDragItem);
+                      }
+                    }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'rgba(255,255,255,0.4)', padding: '0.8rem', borderRadius: '24px', border: '2px dashed #cbd5e1', minHeight: '200px' }}
+                  >
                     <h4 style={{ margin: '0 0 0.2rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
                     {shuffledDraggables.map((item, idx) => {
                       const isPlaced = !!dragTargets[item];
@@ -1374,7 +1383,7 @@ export default function Quiz() {
                           onDrop={(e) => !showExplanation && handleDrop(e, target)}
                           onDragOver={handleDragOver}
                           onClick={() => handleClickDropZone(target)}
-                          style={{ width: '100%', minHeight: '85px', border: selectedDragItem ? '3px dashed #bae6fd' : '2px solid #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
+                          style={{ width: '100%', minHeight: '65px', border: selectedDragItem ? '3px dashed #bae6fd' : '2px solid #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
                         >
                           {/* Integrated Tab Header */}
                           <div style={{ background: '#e2e8f0', borderBottom: '2px solid #cbd5e1', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}>
@@ -1383,8 +1392,8 @@ export default function Quiz() {
 
                           <div style={{ padding: '0.8rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                           {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
-                            <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.95rem' }}>
-                              Pudota vaihtoehto tähän
+                            <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.85rem', border: '2px dashed #cbd5e1', borderRadius: '12px' }}>
+                              Pudota tähän
                             </div>
                           )}
 
@@ -1453,6 +1462,11 @@ export default function Quiz() {
                   >
                     <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
+                      {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
+                        <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.9rem', border: '2px dashed #cbd5e1', borderRadius: '12px' }}>
+                          Pudota tähän
+                        </div>
+                      )}
                       {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
                         const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
                         const isItemCorrect = expected === target;
