@@ -1329,8 +1329,8 @@ export default function Quiz() {
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'flex-start' }}>
                   
                   {/* Vasen puoli: Vaihtoehdot */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.4)', padding: '1.5rem', borderRadius: '24px', border: '2px dashed #cbd5e1' }}>
-                    <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', background: 'rgba(255,255,255,0.4)', padding: '1rem', borderRadius: '24px', border: '2px dashed #cbd5e1' }}>
+                    <h4 style={{ margin: '0 0 0.2rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
                     {shuffledDraggables.map((item, idx) => {
                       const isPlaced = !!dragTargets[item];
                       const isSelected = selectedDragItem === item;
@@ -1341,12 +1341,12 @@ export default function Quiz() {
                           onDragStart={!isPlaced ? (e) => handleDragStart(e, item) : undefined}
                           onClick={!isPlaced ? () => handleClickDragItem(item) : undefined}
                           style={{ 
-                            padding: '0.8rem 1.2rem', 
+                            padding: '0.6rem 1rem', 
                             background: isPlaced ? 'transparent' : (isSelected ? 'var(--secondary-color)' : 'var(--primary-color)'), 
                             color: isPlaced ? 'transparent' : 'white', 
                             borderRadius: '16px', 
                             cursor: isPlaced ? 'default' : (showExplanation ? 'default' : 'pointer'), 
-                            fontSize: '1rem', 
+                            fontSize: '0.95rem', 
                             fontWeight: 'bold', 
                             fontFamily: 'var(--font-main)', 
                             boxShadow: isPlaced ? 'none' : '0 4px 10px rgba(0,0,0,0.15)', 
@@ -1366,7 +1366,7 @@ export default function Quiz() {
                   </div>
 
                   {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
-                  <div style={{ display: 'grid', gridTemplateColumns: currentQuestion.dropZones && currentQuestion.dropZones.length > 2 ? 'repeat(2, 1fr)' : '1fr', gap: '1rem', paddingTop: '0.5rem' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', paddingTop: '0' }}>
                     {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
                       <div key={target} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                         {/* Drop zone box with integrated header */}
