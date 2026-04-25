@@ -1033,86 +1033,258 @@ export default function Quiz() {
             );
         })()}
 
-        {/* Regular Multiple Choice / True-False / Scenario / etc */}
-        {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {shuffledOptions.map((option, idx) => {
-              const isSelected = selectedAnswer === option;
-              const isRemoved = removedOptions.includes(option);
-              const isHovered = hoveredOptionIdx === idx;
-              
-              let borderColor = '#22c55e'; // default fallback for 'Oikein'
-              if (currentQuestion.type === 'true_false' && currentQuestion.options.length === 2) {
-                 borderColor = idx === 0 ? '#22c55e' : '#ef4444';
-              } else {
+        {/* Visual Overrides for Specific Question Types */}
+        {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (() => {
+           
+           // === TRUE FALSE ===
+           if (currentQuestion.type === 'true_false') {
+             return (
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
+                   {shuffledOptions.map((option, idx) => {
+                     const isSelected = selectedAnswer === option;
+                     const isRemoved = removedOptions.includes(option);
+                     const isHovered = hoveredOptionIdx === idx;
+                     // Heuristic to detect if option is "Oikein"/"Totta" vs "Väärin"/"Tarua"
+                     const isTrueOption = option.toLowerCase().includes('oikein') || option.toLowerCase().includes('totta') || option.toLowerCase().includes('true');
+                     const themeColor = isTrueOption ? '#22c55e' : '#ef4444';
+                     
+                     let btnStyle = { 
+                       padding: '2rem 1.5rem', textAlign: 'center', background: 'white', 
+                       border: `4px solid ${themeColor}40`, color: 'var(--text-main)', 
+                       borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
+                       transition: 'all 0.2s', fontSize: '1.5rem', fontFamily: 'var(--font-display)', 
+                       fontWeight: '900', textTransform: 'uppercase', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem',
+                       boxShadow: '0 8px 20px rgba(0,0,0,0.05)'
+                     };
+                     
+                     if (isRemoved) { btnStyle.opacity = 0.4; }
+                     else if (showExplanation) {
+                       if (option === currentQuestion.correctAnswer) {
+                         btnStyle.border = `4px solid ${themeColor}`; btnStyle.background = `${themeColor}1A`; btnStyle.boxShadow = `0 0 25px ${themeColor}40`;
+                       } else if (isSelected) {
+                         btnStyle.border = `4px solid #ef4444`; btnStyle.background = '#ef44441A';
+                       } else {
+                         btnStyle.opacity = 0.4;
+                       }
+                     } else {
+                       if (isSelected) {
+                         btnStyle.background = `${themeColor}15`; btnStyle.border = `4px solid ${themeColor}`; btnStyle.transform = 'scale(1.05)'; btnStyle.boxShadow = `0 10px 30px ${themeColor}30`;
+                       } else if (isHovered && !isRemoved) {
+                         btnStyle.border = `4px solid ${themeColor}`; btnStyle.transform = 'translateY(-4px)'; btnStyle.boxShadow = `0 10px 25px ${themeColor}20`;
+                       }
+                     }
+
+                     return (
+                       <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
+                         <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: themeColor, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {isTrueOption ? <CheckCircle2 size={36} /> : <XCircle size={36} />}
+                         </div>
+                         <span style={{ textDecoration: isRemoved ? 'line-through' : 'none', letterSpacing: '2px' }}>{option}</span>
+                         {isRemoved && <span style={{fontSize:'0.75rem', background:'rgba(0,0,0,0.05)', padding:'0.3rem 0.6rem', borderRadius:'8px', marginTop:'0.5rem', fontWeight:'bold'}}>{bumperSaved ? 'Törmäyksenesto suojasi' : 'Varuste poisti'}</span>}
+                       </button>
+                     );
+                   })}
+                 </div>
+                 {!showExplanation && selectedAnswer && (
+                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'center' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                     <CheckCircle2 size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Lukitse vastaus
+                   </button>
+                 )}
+               </div>
+             );
+           }
+
+           // === SPOT THE AI ===
+           if (currentQuestion.type === 'spot_the_ai') {
+             return (
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                 <div style={{ padding: '0.5rem', background: '#020617', borderRadius: '24px', border: '1px solid #1e293b', marginTop: '1rem', boxShadow: '0 10px 30px rgba(0,0,0,0.2)' }}>
+                   <div style={{ padding: '1rem', color: '#10b981', fontFamily: 'monospace', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #1e293b' }}>
+                     <Search size={16} /> Scanning logic parameters...
+                   </div>
+                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                     {shuffledOptions.map((option, idx) => {
+                       const isSelected = selectedAnswer === option;
+                       const isRemoved = removedOptions.includes(option);
+                       const isHovered = hoveredOptionIdx === idx;
+                       
+                       let borderColor = '#10b981';
+                       let btnStyle = { 
+                         padding: '1.2rem', textAlign: 'left', background: '#0f172a', 
+                         border: `2px dashed ${borderColor}50`, color: '#34d399', 
+                         borderRadius: '12px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
+                         transition: 'all 0.2s', fontSize: '1.05rem', fontFamily: 'monospace', 
+                         lineHeight: '1.5'
+                       };
+                       
+                       if (isRemoved) { btnStyle.opacity = 0.3; }
+                       else if (showExplanation) {
+                         if (option === currentQuestion.correctAnswer) {
+                           btnStyle.border = `2px solid ${borderColor}`; btnStyle.background = `${borderColor}20`; btnStyle.boxShadow = `0 0 20px ${borderColor}30`;
+                         } else if (isSelected) {
+                           btnStyle.border = `2px solid #ef4444`; btnStyle.color = '#f87171'; btnStyle.background = '#ef444420';
+                         } else {
+                           btnStyle.opacity = 0.3;
+                         }
+                       } else {
+                         if (isSelected) {
+                           btnStyle.background = `${borderColor}20`; btnStyle.border = `2px solid ${borderColor}`; btnStyle.color = '#fff'; btnStyle.boxShadow = `0 0 15px ${borderColor}40`;
+                         } else if (isHovered && !isRemoved) {
+                           btnStyle.border = `2px dotted ${borderColor}`; btnStyle.transform = 'translateY(-2px)';
+                         }
+                       }
+
+                       return (
+                         <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
+                           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
+                             <div style={{ opacity: 0.5 }}>[{idx+1}]</div>
+                             <div style={{ flexGrow: 1, textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</div>
+                           </div>
+                           {isRemoved && <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '0.5rem' }}>// DELETED BY BUMPER</div>}
+                         </button>
+                       );
+                     })}
+                   </div>
+                 </div>
+                 {!showExplanation && selectedAnswer && (
+                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'center', background: '#10b981', border: 'none', color: '#064e3b' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                     <Search size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Analysoi kohde
+                   </button>
+                 )}
+               </div>
+             );
+           }
+
+           // === REVERSE PROMPT ===
+           if (currentQuestion.type === 'reverse_prompt') {
+             return (
+               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '1.5rem' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>
+                   <Terminal size={16} /> Kumpi prompti tuotti yllä olevan tuloksen?
+                 </div>
+                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                   {shuffledOptions.map((option, idx) => {
+                     const isSelected = selectedAnswer === option;
+                     const isRemoved = removedOptions.includes(option);
+                     const isHovered = hoveredOptionIdx === idx;
+                     
+                     let btnStyle = { 
+                       padding: '1.2rem 1.5rem', textAlign: 'left', background: 'white', 
+                       border: `2px solid transparent`, color: '#334155', 
+                       borderRadius: '24px 24px 24px 4px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
+                       transition: 'all 0.2s', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
+                       lineHeight: '1.5', boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+                       maxWidth: '90%', alignSelf: 'flex-start'
+                     };
+                     
+                     if (isRemoved) { btnStyle.opacity = 0.4; }
+                     else if (showExplanation) {
+                       if (option === currentQuestion.correctAnswer) {
+                         btnStyle.border = `2px solid #3b82f6`; btnStyle.background = '#eff6ff';
+                       } else if (isSelected) {
+                         btnStyle.border = `2px solid #ef4444`; btnStyle.background = '#fef2f2';
+                       } else {
+                         btnStyle.opacity = 0.4;
+                       }
+                     } else {
+                       if (isSelected) {
+                         btnStyle.background = '#3b82f6'; btnStyle.color = 'white'; btnStyle.borderRadius = '24px 24px 4px 24px'; btnStyle.alignSelf = 'flex-end'; btnStyle.boxShadow = '0 8px 20px rgba(59,130,246,0.3)';
+                       } else if (isHovered && !isRemoved) {
+                         btnStyle.transform = 'translateY(-2px)'; btnStyle.boxShadow = '0 8px 15px rgba(0,0,0,0.08)';
+                       }
+                     }
+
+                     return (
+                       <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
+                         <span style={{ textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</span>
+                         {isRemoved && <span style={{fontSize:'0.75rem', display:'block', color:'#94a3b8', marginTop:'0.5rem'}}>{bumperSaved ? 'Törmäyksenesto suojasi' : 'Varuste poisti'}</span>}
+                       </button>
+                     );
+                   })}
+                 </div>
+                 {!showExplanation && selectedAnswer && (
+                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'flex-end', background: '#3b82f6', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(59,130,246,0.4)', transition: 'all 0.2s', transform: 'scale(1.05)' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                     Syötä prompti <ArrowRight size={20} style={{ display: 'inline', marginLeft: '8px', verticalAlign: 'middle' }} />
+                   </button>
+                 )}
+               </div>
+             );
+           }
+
+           // === REGULAR MULTIPLE CHOICE ===
+           return (
+             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+               {shuffledOptions.map((option, idx) => {
+                 const isSelected = selectedAnswer === option;
+                 const isRemoved = removedOptions.includes(option);
+                 const isHovered = hoveredOptionIdx === idx;
+                 
                  const colorPalette = [
-                   '#3b82f6', // Pure Blue
-                   '#ec4899', // Pink (replaced red)
-                   '#f59e0b', // Pure Orange/Yellow
-                   '#06b6d4', // Cyan (replaced green)
-                   '#8b5cf6'  // Pure Purple
+                   '#3b82f6', '#ec4899', '#f59e0b', '#06b6d4', '#8b5cf6'
                  ];
-                 borderColor = colorPalette[idx % colorPalette.length];
-              }
-              
-              let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'center', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
-              
-              if (isRemoved) {
-                 btnStyle.opacity = 0.5;
-                 btnStyle.display = 'flex';
-                 btnStyle.justifyContent = 'space-between';
-                 btnStyle.alignItems = 'center';
-              }
+                 let borderColor = colorPalette[idx % colorPalette.length];
+                 
+                 let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'center', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+                 
+                 if (isRemoved) {
+                    btnStyle.opacity = 0.5;
+                    btnStyle.display = 'flex';
+                    btnStyle.justifyContent = 'space-between';
+                    btnStyle.alignItems = 'center';
+                 }
+   
+                 if (showExplanation) {
+                   if (option === currentQuestion.correctAnswer) {
+                     btnStyle.border = '3px solid #22c55e';
+                     btnStyle.background = '#22c55e1A';
+                     btnStyle.boxShadow = '0 0 20px #22c55e30';
+                   } else if (isSelected) {
+                     btnStyle.border = '3px solid #ef4444';
+                     btnStyle.background = '#ef44441A';
+                   } else {
+                     btnStyle.border = `3px solid ${borderColor}20`;
+                     btnStyle.opacity = 0.5;
+                   }
+                 } else {
+                   if (isSelected) {
+                     btnStyle.background = `${borderColor}1A`;
+                     btnStyle.border = `3px solid ${borderColor}`;
+                     btnStyle.color = 'var(--text-main)';
+                     btnStyle.boxShadow = `0 6px 20px ${borderColor}30`;
+                     btnStyle.transform = 'translateY(-2px)';
+                   } else if (isHovered && !isRemoved) {
+                     btnStyle.border = `3px solid ${borderColor}`;
+                     btnStyle.transform = 'translateY(-3px)';
+                     btnStyle.boxShadow = `0 8px 25px ${borderColor}30`;
+                   }
+                 }
+   
+                 return (
+                   <button 
+                     key={idx} 
+                     style={btnStyle}
+                     onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)}
+                     onMouseEnter={() => setHoveredOptionIdx(idx)}
+                     onMouseLeave={() => setHoveredOptionIdx(null)}
+                   >
+                     <span style={{ textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</span>
+                     {isRemoved && bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Törmäyksenesto suojasi</span>}
+                     {isRemoved && !bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Varuste poisti</span>}
+                   </button>
+                 );
+               })}
+               
+               {!showExplanation && selectedAnswer && (
+                 <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
+                   <CheckCircle2 size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
+                   Lukitse vastaus
+                 </button>
+               )}
+             </div>
+           );
 
-              if (showExplanation) {
-                if (option === currentQuestion.correctAnswer) {
-                  btnStyle.border = '3px solid #22c55e';
-                  btnStyle.background = '#22c55e1A';
-                  btnStyle.boxShadow = '0 0 20px #22c55e30';
-                } else if (isSelected) {
-                  btnStyle.border = '3px solid #ef4444';
-                  btnStyle.background = '#ef44441A';
-                } else {
-                  btnStyle.border = `3px solid ${borderColor}20`;
-                  btnStyle.opacity = 0.5;
-                }
-              } else {
-                if (isSelected) {
-                  btnStyle.background = `${borderColor}1A`;
-                  btnStyle.border = `3px solid ${borderColor}`;
-                  btnStyle.color = 'var(--text-main)';
-                  btnStyle.boxShadow = `0 6px 20px ${borderColor}30`;
-                  btnStyle.transform = 'translateY(-2px)';
-                } else if (isHovered && !isRemoved) {
-                  btnStyle.border = `3px solid ${borderColor}`;
-                  btnStyle.transform = 'translateY(-3px)';
-                  btnStyle.boxShadow = `0 8px 25px ${borderColor}30`;
-                }
-              }
-
-              return (
-                <button 
-                  key={idx} 
-                  style={btnStyle}
-                  onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)}
-                  onMouseEnter={() => setHoveredOptionIdx(idx)}
-                  onMouseLeave={() => setHoveredOptionIdx(null)}
-                >
-                  <span style={{ textDecoration: isRemoved ? 'line-through' : 'none' }}>{option}</span>
-                  {isRemoved && bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Törmäyksenesto suojasi</span>}
-                  {isRemoved && !bumperSaved && <span style={{fontSize:'0.75rem', background:'rgba(255,255,255,0.5)', color:'#0f172a', padding:'0.3rem 0.6rem', borderRadius:'8px', marginLeft:'1rem', fontWeight:'bold', whiteSpace:'nowrap', flexShrink:0}}>Varuste poisti</span>}
-                </button>
-              );
-            })}
-            
-            {!showExplanation && selectedAnswer && (
-              <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                <CheckCircle2 size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
-                Lukitse vastaus
-              </button>
-            )}
-          </div>
-        )}
+        })()}
 
         {/* Ordering Logic */}
         {currentQuestion.type === 'ordering' && (
