@@ -1148,13 +1148,122 @@ export default function Quiz() {
         )}
 
         {/* Drag and Drop / Järjestely Logic */}
-        {currentQuestion.type === 'drag_drop' && (
-          <div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'flex-start' }}>
-              
-              {/* Vasen puoli: Vaihtoehdot */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.4)', padding: '1.5rem', borderRadius: '24px', border: '2px dashed #cbd5e1' }}>
-                <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
+        {currentQuestion.type === 'drag_drop' && (() => {
+          const isSequenceTask = currentQuestion.dropZones && currentQuestion.dropZones.some(z => /vaihe/i.test(z) || /^\d+\./.test(z));
+          
+          if (isSequenceTask) {
+            return (
+              <div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', alignItems: 'flex-start' }}>
+                  
+                  {/* Vasen puoli: Vaihtoehdot */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: 'rgba(255,255,255,0.4)', padding: '1.5rem', borderRadius: '24px', border: '2px dashed #cbd5e1' }}>
+                    <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
+                    {shuffledDraggables.map((item, idx) => {
+                      const isPlaced = !!dragTargets[item];
+                      const isSelected = selectedDragItem === item;
+                      return (
+                        <div 
+                          key={idx} 
+                          draggable={!isPlaced && !showExplanation}
+                          onDragStart={!isPlaced ? (e) => handleDragStart(e, item) : undefined}
+                          onClick={!isPlaced ? () => handleClickDragItem(item) : undefined}
+                          style={{ 
+                            padding: '0.8rem 1.2rem', 
+                            background: isPlaced ? 'transparent' : (isSelected ? 'var(--secondary-color)' : 'var(--primary-color)'), 
+                            color: isPlaced ? 'transparent' : 'white', 
+                            borderRadius: '16px', 
+                            cursor: isPlaced ? 'default' : (showExplanation ? 'default' : 'pointer'), 
+                            fontSize: '1rem', 
+                            fontWeight: 'bold', 
+                            fontFamily: 'var(--font-main)', 
+                            boxShadow: isPlaced ? 'none' : '0 4px 10px rgba(0,0,0,0.15)', 
+                            transform: isSelected ? 'scale(1.02)' : 'scale(1)', 
+                            transition: 'all 0.2s', 
+                            border: isPlaced ? '2px dashed #cbd5e1' : (isSelected ? '2px solid white' : '2px solid transparent'),
+                            userSelect: isPlaced ? 'none' : 'auto'
+                          }}
+                        >
+                          {item}
+                        </div>
+                      );
+                    })}
+                    {shuffledDraggables.every(item => dragTargets[item]) && (
+                      <div style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic', textAlign: 'center', marginTop: '1rem' }}>Kaikki sijoitettu!</div>
+                    )}
+                  </div>
+
+                  {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', paddingTop: '1rem' }}>
+                    {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
+                      <div key={target} style={{ position: 'relative' }}>
+                        {/* Tab header */}
+                        <div style={{
+                          position: 'absolute',
+                          top: '-16px',
+                          left: '16px',
+                          background: 'var(--primary-color)',
+                          color: 'white',
+                          padding: '0.2rem 1rem',
+                          borderRadius: '12px 12px 0 0',
+                          fontSize: '0.85rem',
+                          fontWeight: 'bold',
+                          textTransform: 'uppercase',
+                          letterSpacing: '1px',
+                          zIndex: 2,
+                          boxShadow: '0 -2px 5px rgba(0,0,0,0.05)'
+                        }}>
+                          {target}
+                        </div>
+
+                        {/* Drop zone box */}
+                        <div 
+                          onDrop={(e) => !showExplanation && handleDrop(e, target)}
+                          onDragOver={handleDragOver}
+                          onClick={() => handleClickDropZone(target)}
+                          style={{ minHeight: '90px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', padding: '1.8rem 1rem 1rem 1rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1 }}
+                        >
+                          {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
+                            <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.95rem' }}>
+                              Pudota vaihtoehto tähän
+                            </div>
+                          )}
+
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
+                            {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
+                            const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+                            const isItemCorrect = expected === target;
+                            return (
+                              <div 
+                                key={idx} 
+                                draggable={!showExplanation}
+                                onDragStart={(e) => handleDragStart(e, item)}
+                                onClick={(e) => handleRemoveFromDropZone(e, item)}
+                                style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '12px', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                              >
+                                {item}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
+                   <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
+                     Tarkista vastaukset
+                   </button>
+                )}
+              </div>
+            );
+          }
+
+          // Vanha layout luokittelutehtäville (AIvanin kyytiin / Jätä tien sivuun)
+          return (
+            <div>
+              <div style={{ display: 'flex', gap: '0.7rem', marginBottom: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {shuffledDraggables.map((item, idx) => {
                   if (dragTargets[item]) return null;
                   const isSelected = selectedDragItem === item;
@@ -1164,28 +1273,24 @@ export default function Quiz() {
                       draggable={!showExplanation}
                       onDragStart={(e) => handleDragStart(e, item)}
                       onClick={() => handleClickDragItem(item)}
-                      style={{ padding: '0.8rem 1.2rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '16px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '1rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.02)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
+                      style={{ padding: '0.6rem 1rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
                     >
                       {item}
                     </div>
                   );
                 })}
-                {shuffledDraggables.every(item => dragTargets[item]) && (
-                  <div style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic', textAlign: 'center', marginTop: '1rem' }}>Kaikki sijoitettu!</div>
-                )}
               </div>
 
-              {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
                   <div 
                     key={target}
                     onDrop={(e) => !showExplanation && handleDrop(e, target)}
                     onDragOver={handleDragOver}
                     onClick={() => handleClickDropZone(target)}
-                    style={{ minHeight: '100px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '20px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '0.8rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.8)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
+                    style={{ flex: '1 1 200px', minHeight: '140px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                   >
-                    <h3 style={{ margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem' }}>{target}</h3>
+                    <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
                       {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
                         const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
@@ -1196,7 +1301,7 @@ export default function Quiz() {
                             draggable={!showExplanation}
                             onDragStart={(e) => handleDragStart(e, item)}
                             onClick={(e) => handleRemoveFromDropZone(e, item)}
-                            style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '12px', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                            style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '16px', fontSize: '0.95rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
                           >
                             {item}
                           </div>
@@ -1206,15 +1311,15 @@ export default function Quiz() {
                   </div>
                 ))}
               </div>
+              
+              {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
+                 <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
+                   Tarkista vastaukset
+                 </button>
+              )}
             </div>
-            
-            {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
-               <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
-                 Tarkista vastaukset
-               </button>
-            )}
-          </div>
-        )}
+          );
+        })()}
         </div>
         </div>
       </div>
