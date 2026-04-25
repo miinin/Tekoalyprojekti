@@ -1342,7 +1342,7 @@ export default function Quiz() {
                           onClick={!isPlaced ? () => handleClickDragItem(item) : undefined}
                           style={{ 
                             padding: '0.6rem 1rem', 
-                            background: isPlaced ? 'transparent' : (isSelected ? 'var(--secondary-color)' : 'var(--primary-color)'), 
+                            background: isPlaced ? 'transparent' : (isSelected ? '#059669' : '#10b981'), 
                             color: isPlaced ? 'transparent' : 'white', 
                             borderRadius: '16px', 
                             cursor: isPlaced ? 'default' : (showExplanation ? 'default' : 'pointer'), 
@@ -1374,11 +1374,11 @@ export default function Quiz() {
                           onDrop={(e) => !showExplanation && handleDrop(e, target)}
                           onDragOver={handleDragOver}
                           onClick={() => handleClickDropZone(target)}
-                          style={{ width: '100%', minHeight: '85px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.7)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
+                          style={{ width: '100%', minHeight: '85px', border: selectedDragItem ? '3px dashed #bae6fd' : '2px solid #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
                         >
                           {/* Integrated Tab Header */}
-                          <div style={{ background: '#dcfce7', borderBottom: '2px dashed #bbf7d0', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}>
-                            <h4 style={{ margin: 0, color: '#16a34a', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{target}</h4>
+                          <div style={{ background: '#e2e8f0', borderBottom: '2px solid #cbd5e1', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}>
+                            <h4 style={{ margin: 0, color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{target}</h4>
                           </div>
 
                           <div style={{ padding: '0.8rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -1434,7 +1434,7 @@ export default function Quiz() {
                       draggable={!showExplanation}
                       onDragStart={(e) => handleDragStart(e, item)}
                       onClick={() => handleClickDragItem(item)}
-                      style={{ padding: '0.6rem 1rem', background: isSelected ? 'var(--secondary-color)' : 'var(--primary-color)', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
+                      style={{ padding: '0.6rem 1rem', background: isSelected ? '#059669' : '#10b981', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
                     >
                       {item}
                     </div>
@@ -1449,7 +1449,7 @@ export default function Quiz() {
                     onDrop={(e) => !showExplanation && handleDrop(e, target)}
                     onDragOver={handleDragOver}
                     onClick={() => handleClickDropZone(target)}
-                    style={{ flex: '1 1 200px', minHeight: '140px', border: selectedDragItem ? '3px dashed var(--secondary-color)' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? 'rgba(242, 169, 0, 0.05)' : 'rgba(255,255,255,0.6)', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
+                    style={{ flex: '1 1 200px', minHeight: '140px', border: selectedDragItem ? '3px dashed #bae6fd' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                   >
                     <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
