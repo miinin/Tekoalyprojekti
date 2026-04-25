@@ -1419,6 +1419,7 @@ export default function Quiz() {
                           })}
                         </div>
                       </div>
+                    </div>
                     ))}
                   </div>
                 </div>
