@@ -196,10 +196,6 @@ export default function Lobby() {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            will-change: transform, backdrop-filter;
-            backface-visibility: hidden;
             border-radius: 28px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
@@ -227,12 +223,6 @@ export default function Lobby() {
 
       <div className="animate-fade-in" style={{
          position: 'relative',
-         background: 'rgba(255, 255, 255, 0.55)',
-         backdropFilter: 'blur(25px)',
-         WebkitBackdropFilter: 'blur(25px)',
-         border: '1px solid rgba(255,255,255,0.8)',
-         boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
-         borderRadius: '36px',
          padding: '2rem 2.5rem',
          display: 'flex',
          flexDirection: 'column',
@@ -244,6 +234,19 @@ export default function Lobby() {
          maxWidth: '1250px',
          zIndex: 10
       }}>
+
+        <div style={{
+           position: 'absolute',
+           inset: 0,
+           background: 'rgba(255, 255, 255, 0.55)',
+           backdropFilter: 'blur(25px)',
+           WebkitBackdropFilter: 'blur(25px)',
+           border: '1px solid rgba(255,255,255,0.8)',
+           boxShadow: '0 25px 60px rgba(0,0,0,0.15)',
+           borderRadius: '36px',
+           zIndex: -1,
+           pointerEvents: 'none'
+        }} />
 
         <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '0.8rem', zIndex: 15, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           <a href="https://eduks.fi/aivan" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textDecoration: 'none', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
@@ -436,7 +439,8 @@ export default function Lobby() {
       {showInfoBox && (
          <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            <div style={{ position: 'relative', background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', padding: '4rem 2.5rem 3.5rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', minHeight: '80vh', maxHeight: '95vh', overflowY: 'auto', zIndex: 10, textAlign: 'center' }}>
+            <div style={{ position: 'relative', padding: '4rem 2.5rem 3.5rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', minHeight: '80vh', maxHeight: '95vh', overflowY: 'auto', zIndex: 10, textAlign: 'center' }}>
+               <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', zIndex: -1, pointerEvents: 'none' }} />
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
                <h2 style={{ fontSize: '3.2rem', background: 'linear-gradient(135deg, #10b981, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-display)', margin: '0 0 2rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
