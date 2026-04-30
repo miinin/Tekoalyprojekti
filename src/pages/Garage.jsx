@@ -430,7 +430,13 @@ export default function Garage() {
           gap: 1.5rem;
           align-items: start;
         }
-        @media (min-width: 1100px) {
+        @media (min-width: 1100px) and (max-width: 1399px) {
+          .garage-grid {
+            grid-template-columns: 200px 320px 1fr;
+            gap: 1rem;
+          }
+        }
+        @media (min-width: 1400px) {
           .garage-grid {
             grid-template-columns: 260px 420px 1fr;
           }
@@ -680,7 +686,7 @@ export default function Garage() {
             position: 'relative', 
             width: '100%',
             aspectRatio: '16/9',
-            minHeight: '400px',
+            minHeight: 'clamp(250px, 40vh, 400px)',
             borderRadius: '24px', 
             overflow: 'hidden', 
             border: '4px solid rgba(76, 133, 17, 0.4)',
