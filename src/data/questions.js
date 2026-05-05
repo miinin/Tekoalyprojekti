@@ -10,13 +10,13 @@ export const categories = [
           {
             "id": "perusteet_1_q1",
             "type": "true_false",
-            "question": "AI vanin kojelaudassa asuu pieni oikea keksijä, joka vastaa kaikkiin kysymyksiin.",
+            "question": "AI vanin kojelaudassa asuva tekoäly on ihmisen koodaama erikoisohjelma, eikä oikea elävä olento.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei ole oikea elävä ihminen tai olento, vaan ihmisen koodaama erikoisohjelma. Se asuu laitteissa koodin muodossa!"
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan oikein! Tekoäly ei ole oikea elävä ihminen tai olento, vaan ihmisen koodaama erikoisohjelma. Se asuu laitteissa koodin muodossa."
           },
           {
             "id": "perusteet_1_q2",
@@ -110,13 +110,13 @@ export const categories = [
           {
             "id": "perusteet_1_q8",
             "type": "true_false",
-            "question": "Tekoälyn toiminta on puhdasta taikuutta, jota edes sen keksijät ja koodarit eivät ymmärrä.",
+            "question": "Tekoäly perustuu koodiin, jonka asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei ole taikuutta. Se perustuu koodiin, jonka fiksut asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle."
+            "correctAnswer": "Oikein",
+            "explanation": "Juuri näin! Tekoäly ei ole taikuutta, vaan se perustuu koodiin, jonka fiksut asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle."
           },
           {
             "id": "perusteet_1_q9",
@@ -168,13 +168,13 @@ export const categories = [
           {
             "id": "perusteet_1_q12",
             "type": "true_false",
-            "question": "Ensimmäiset tekoälyt syntyivät aivan itsekseen autotallin perällä lojuneista vanhoista varaosista.",
+            "question": "Ohjelmat eivät synny itsekseen, vaan tekoäly on aina ihmisen rakentama ja koodaama.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Ohjelmat eivät synny itsekseen. Tekoäly on aina ihmisen rakentama ja koodaama erikoisohjelma."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Ohjelmat eivät synny itsekseen. Tekoäly on aina ihmisen rakentama ja koodaama erikoisohjelma."
           },
           {
             "id": "perusteet_1_q13",
@@ -232,13 +232,13 @@ export const categories = [
           {
             "id": "perusteet_2_q1",
             "type": "true_false",
-            "question": "AI vanin navigaattori on ollut päällä koko päivän. Sille pitää antaa välillä tauko, jotta se ei väsy ja tule vihaiseksi.",
+            "question": "Tekoäly on tietokoneohjelma, joka ei väsy tai suutu, vaikka se tekisi töitä kellon ympäri.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly on tietokoneohjelma, jolla ei ole tunteita. Se ei väsy, kyllästy tai suutu, vaikka se tekisi töitä kellon ympäri!"
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Tekoäly on tietokoneohjelma, jolla ei ole tunteita. Se ei väsy, kyllästy tai suutu, vaikka se tekisi töitä kellon ympäri."
           },
           {
             "id": "perusteet_2_q2",
@@ -338,13 +338,13 @@ export const categories = [
           {
             "id": "perusteet_2_q8",
             "type": "true_false",
-            "question": "Pysähdytte huoltoasemalle tauolle. Auton tekoäly on ahkeroinut reittien kanssa monta tuntia, joten sillekin kannattaa ostaa oma hampurilainen.",
+            "question": "Tekoäly ei tunne nälkää eikä pysty syömään ruokaa, vaan se tarvitsee toimiakseen ainoastaan sähköä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Toisin kuin ihminen, tekoäly ei tunne nälkää eikä se pysty syömään ruokaa. Se tarvitsee toimiakseen ainoastaan sähköä!"
+            "correctAnswer": "Oikein",
+            "explanation": "Näinhän se on! Toisin kuin ihminen, tekoäly ei tunne nälkää eikä se pysty syömään ruokaa. Se tarvitsee toimiakseen ainoastaan sähköä."
           },
           {
             "id": "perusteet_2_q9",
@@ -466,13 +466,13 @@ export const categories = [
           {
             "id": "perusteet_3_q1",
             "type": "true_false",
-            "question": "Koska tekoäly oppii jatkuvasti uutta käsittelemästään datasta, koodarin ei tarvitse enää ohjelmoida tekoälylle tavoitteita, sääntöjä tai rajoituksia.",
+            "question": "Vaikka tekoäly oppii datasta, se toimii aina ihmisen rakentamien algoritmien ja sääntöjen puitteissa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoälykin on pohjimmiltaan ohjelma. Vaikka se osaa soveltaa datasta oppimaansa, se toimii aina ihmisen rakentamien algoritmien, alkuperäisten sääntöjen ja tavoitteiden puitteissa!"
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Tekoälykin on pohjimmiltaan ohjelma. Vaikka se osaa soveltaa datasta oppimaansa, se toimii aina alkuperäisten sääntöjen ja tavoitteiden puitteissa."
           },
           {
             "id": "perusteet_3_q2",
@@ -575,13 +575,13 @@ export const categories = [
           {
             "id": "perusteet_3_q8",
             "type": "true_false",
-            "question": "Tavallinen cd-soitin osaa ihan itse keksiä ja säveltää täysin uusia ja upeita lauluja, jos vanhat levyt alkavat kyllästyttää automatkalla.",
+            "question": "Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvitaan tekoälyä, sillä tavallinen cd-soitin soittaa vain valmiita kappaleita.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tavallinen soitin soittaa vain ne kappaleet, jotka on jo valmiiksi tehty. Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvittaisiin tekoälyä."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Tavallinen soitin soittaa vain ne kappaleet, jotka on jo valmiiksi tehty. Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvitaan tekoälyä."
           },
           {
             "id": "perusteet_3_q9",
@@ -700,13 +700,13 @@ export const categories = [
           {
             "id": "perusteet_4_q1",
             "type": "true_false",
-            "question": "AI vanin tekoäly on niin viisas, että se osaa vaihtaa autoon uuden renkaan ihan itse, jos vanha puhkeaa matkalla.",
+            "question": "Vaikka tekoäly voi antaa ohjeet renkaan vaihtoon, siltä puuttuu kyky ymmärtää fyysistä maailmaa ja kädet työn tekemiseen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly voi kertoa sinulle parhaat ohjeet renkaan vaihtoon ruudulla, mutta siltä puuttuu täysin kyky ymmärtää fyysistä maailmaa sekä oikeat kädet työn tekemiseen!"
+            "correctAnswer": "Oikein",
+            "explanation": "Täysin oikein! Tekoäly voi kertoa sinulle parhaat ohjeet, mutta siltä puuttuu kyky ymmärtää fyysistä maailmaa sekä oikeat kädet työn tekemiseen."
           },
           {
             "id": "perusteet_4_q2",
@@ -809,13 +809,13 @@ export const categories = [
           {
             "id": "perusteet_4_q8",
             "type": "true_false",
-            "question": "Auton tekoäly osaa maistaa ja kertoa sinulle, onko evääksi otettu limonadi liian hapanta tai onko voileivässä tarpeeksi suolaa.",
+            "question": "Tekoälyllä ei ole kieltä tai aisteja, joten se ei voi kokea tai ymmärtää fyysisen maailman makuja ja hajuja.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly on tietokoneohjelma, jolla ei ole kieltä tai aisteja. Se ei voi kokea tai ymmärtää fyysisen maailman makuja ja hajuja, kuten ihminen voi."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Tekoäly on tietokoneohjelma, jolla ei ole aisteja. Se ei voi kokea fyysisen maailman makuja ja hajuja, kuten ihminen voi."
           },
           {
             "id": "perusteet_4_q9",
@@ -934,13 +934,13 @@ export const categories = [
           {
             "id": "perusteet_5_q1",
             "type": "true_false",
-            "question": "Tekoäly on aivan upouusi keksintö, jota kukaan ihminen ei ollut edes miettinyt ennen viime vuotta.",
+            "question": "Ihmiset ovat ideoineet ja kokeilleet tekoälyä jo kymmeniä vuosia sitten, vaikka nykyään koneet ovat vasta tarpeeksi nopeita sen pyörittämiseen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Ihmiset ovat ideoineet ja kokeilleet tekoälyä jo kymmeniä vuosia sitten, kauan ennen kuin sinä tai edes vanhempasi olitte syntyneet! Vasta nykyään koneet ovat tarpeeksi nopeita sen pyörittämiseen."
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Tekoälyä on ideoitu kymmeniä vuosia sitten, kauan ennen kuin sinä olit syntynyt. Vasta nykyään koneet ovat tarpeeksi nopeita sen pyörittämiseen."
           },
           {
             "id": "perusteet_5_q2",
@@ -1040,13 +1040,13 @@ export const categories = [
           {
             "id": "perusteet_5_q8",
             "type": "true_false",
-            "question": "Vanhan ajan valtavat, kokonaisen huoneen kokoiset tietokoneet olivat paljon nopeampia kuin sinun nykyinen pieni älypuhelimesi.",
+            "question": "Vanhat, huoneen kokoiset tietokoneet olivat erittäin hitaita verrattuna nykyiseen älypuhelimeesi.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Vaikka vanhat tietokoneet olivat jättimäisiä, ne olivat uskomattoman hitaita! Puhelimesi on niihin verrattuna todellinen superkone ja siksi edistynyt tekoäly mahtuu nykyään taskuun."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Vaikka vanhat tietokoneet olivat jättimäisiä, ne olivat hitaita. Puhelimesi on niihin verrattuna superkone, ja siksi edistynyt tekoäly mahtuu nykyään taskuun."
           },
           {
             "id": "perusteet_5_q9",
@@ -1167,13 +1167,13 @@ export const categories = [
           {
             "id": "perusteet_6_q1",
             "type": "true_false",
-            "question": "AI vanin kojelaudassa asuva tekoäly haluaa salaa valloittaa koko maailman ja muuttaa kaikki ihmiset roboteiksi.",
+            "question": "Oikeassa elämässä tekoälyllä ei ole omaa tahtoa tai haluja, joten se ei yritä valloittaa maailmaa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tämä on tuttu myytti elokuvista! Oikeassa elämässä tekoälyllä ei ole omaa tahtoa tai haluja, joten se ei yritä valloittaa maailmaa."
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Maailmanvalloitus on tuttu myytti elokuvista. Oikeassa elämässä tekoälyllä ei ole omaa tahtoa, joten se ei yritä valloittaa maailmaa."
           },
           {
             "id": "perusteet_6_q2",
@@ -1276,13 +1276,13 @@ export const categories = [
           {
             "id": "perusteet_6_q8",
             "type": "true_false",
-            "question": "Jos jätät AI vanin autotalliin yksin yöksi, tekoäly voi alkaa salaa rakentaa omaa robottiarmeijaa työkaluistasi.",
+            "question": "Koneet eivät tee salaisia suunnitelmia; tekoäly sammuu ja odottaa kiltisti heti, kun laitat sen pois päältä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Koneet eivät tee salaisia suunnitelmia. Tekoälyllä ei ole omaa tahtoa eikä se yritä valloittaa maailmaa, vaan se sammuu ja odottaa kiltisti heti, kun laitat sen pois päältä."
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan oikein! Tekoälyllä ei ole omaa tahtoa. Se ei tee salaisia suunnitelmia, vaan sammuu ja odottaa kiltisti heti, kun laitat sen pois päältä."
           },
           {
             "id": "perusteet_6_q9",
@@ -1401,13 +1401,13 @@ export const categories = [
           {
             "id": "perusteet_7_q1",
             "type": "true_false",
-            "question": "Tekoäly on taikuutta ja laitteiden sisällä asuva elävä olento, jolla on omat tunteet.",
+            "question": "Tekoäly ei koskaan ole taikuutta tai oikea elävä olento, vaan ihmisten koodaama ohjelma.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei koskaan ole taikuutta tai oikea elävä olento. Se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka tarvitsee toimiakseen vain sähköä ja koodia."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka tarvitsee toimiakseen vain sähköä ja koodia."
           },
           {
             "id": "perusteet_7_q2",
@@ -1503,13 +1503,13 @@ export const categories = [
           {
             "id": "perusteet_7_q8",
             "type": "true_false",
-            "question": "Tekoäly on mestari yhdessä lajissa. Esimerkiksi täydellinen shakkitekoäly ymmärtää heti, miten potkaistaan rangaistuspotku jalkapallossa.",
+            "question": "Tekoäly on erikoisosaaja vain siinä yhdessä asiassa, mihin se on koodattu, ja esimerkiksi shakkiohjelma on neuvoton jalkapallon säännöissä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly on erikoisosaaja vain siinä yhdessä ainoassa asiassa, mihin se on koodattu. Shakkiohjelma on täysin neuvoton fyysisen maailman ja muiden lajien edessä."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Tekoäly on mestari yhdessä lajissa. Shakkiohjelma on täysin neuvoton fyysisen maailman ja muiden lajien edessä."
           },
           {
             "id": "perusteet_7_q9",
@@ -1552,13 +1552,13 @@ export const categories = [
           {
             "id": "konepellin_1_q1",
             "type": "true_false",
-            "question": "AI vanin kojelaudassa oleva tekoäly toimii samalla bensiinillä kuin auton moottori.",
+            "question": "Tekoälyn todellinen polttoaine on valtava määrä dataa, kuten tekstejä ja kuvia.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoälyn oikea polttoaine ei ole bensiini, vaan data! Ilman valtavaa määrää tietoa, kuten tekstejä ja kuvia, tekoäly ei toimi."
+            "correctAnswer": "Oikein",
+            "explanation": "Täsmälleen! Tekoälyn oikea polttoaine ei ole bensiini, vaan data! Ilman tietoa tekoäly ei toimi."
           },
           {
             "id": "konepellin_1_q2",
@@ -1660,13 +1660,13 @@ export const categories = [
           {
             "id": "konepellin_1_q8",
             "type": "true_false",
-            "question": "Tekoäly voi osata täydellisesti italiaa, vaikka sille ei olisi koskaan syötetty yhtään italiankielistä tekstiä datana.",
+            "question": "Tekoäly osaa puhua kieliä vain, jos sille on ensin syötetty datana valtavasti tekstejä kyseisellä kielellä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Väärin! Tekoäly ei osaa taikoa tietoa tyhjästä. Se osaa puhua kieliä vain, jos sille on ensin syötetty datana miljoonia lauseita kyseisellä kielellä."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Tekoäly ei osaa taikoa tietoa tyhjästä. Se vaatii opetusta ja miljoonia lauseita kyseisellä kielellä."
           },
           {
             "id": "konepellin_1_q9",
@@ -1788,13 +1788,13 @@ export const categories = [
           {
             "id": "konepellin_2_q1",
             "type": "true_false",
-            "question": "AI vanin tekoäly keksii aivan omat sääntönsä ajamiseen, eikä sen tarvitse kuunnella koodarin antamia ohjeita.",
+            "question": "Tekoäly ei keksi omia sääntöjä, vaan se noudattaa ihmisen kirjoittamia tarkkoja askeleita ja algoritmeja.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä ja askeleita. Sillä ei ole aitoja \"omia sääntöjä\", vaan se toimii täsmälleen askeleittain koodarin antaman reseptin mukaan!"
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä ja askeleita. Se toimii koodarin antaman reseptin mukaan."
           },
           {
             "id": "konepellin_2_q2",
@@ -1896,13 +1896,13 @@ export const categories = [
           {
             "id": "konepellin_2_q8",
             "type": "true_false",
-            "question": "Jos koodari jättää algoritmista vahingossa yhden tärkeän askeleen pois, auton tekoäly osaa kyllä maalaisjärjellä lisätä sen sinne.",
+            "question": "Jos koodari tekee algoritmivaiheessa virheen, tekoäly toistaa saman virheen, sillä siltä puuttuu maalaisjärki.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä ja askeleita. Se ei itse tiedä, mitä puuttuu, vaan tekee täsmälleen sen virheen, jonka koodari vahingossa teki!"
+            "correctAnswer": "Oikein",
+            "explanation": "Juuri näin! Tekoäly ei osaa lisätä puuttuvaa askelta, vaan tekee täsmälleen sen virheen, jonka koodari vahingossa teki."
           },
           {
             "id": "konepellin_2_q9",
@@ -2023,13 +2023,13 @@ export const categories = [
           {
             "id": "konepellin_3_q1",
             "type": "true_false",
-            "question": "AI vanin tekoäly oppii peruuttamaan täydellisesti heti ensimmäisellä kerralla, eikä sen tarvitse koskaan harjoitella esimerkkien avulla.",
+            "question": "Tekoäly tarvitsee valtavasti toistoja ja harjoittelua esimerkkien avulla oppiakseen asiat kunnolla.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly on kuin kuka tahansa autokoululainen! Se tarvitsee valtavasti toistoja ja harjoittelua annettujen esimerkkien avulla oppiakseen asiat kunnolla."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Tekoäly on kuin kuka tahansa oppilas. Se tarvitsee valtavasti toistoja oppiakseen asiat kunnolla koneoppimisen kautta."
           },
           {
             "id": "konepellin_3_q2",
@@ -2130,13 +2130,13 @@ export const categories = [
           {
             "id": "konepellin_3_q8",
             "type": "true_false",
-            "question": "Koneoppimisessa tekoäly ei koskaan tee yhtään virhettä, vaan sen oppiminen on aivan alusta alkaen sataprosenttisen täydellistä.",
+            "question": "Koneoppimisen alkuvaiheessa tekoäly tekee paljon virheitä, mutta suurten toistomäärien avulla siitä tulee huipputaitava.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Päinvastoin! Alussa tekoäly tekee pelkkiä virheitä. Se on vain erittäin nopea harjoittelemaan, joten suurten toistomäärien ja esimerkkien kautta siitä tulee huipputaitava."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Alussa tekoäly tekee pelkkiä virheitä. Se on vain erittäin nopea harjoittelemaan, ja oppii esimerkeistä toistojen kautta."
           },
           {
             "id": "konepellin_3_q9",
@@ -2260,13 +2260,13 @@ export const categories = [
           {
             "id": "konepellin_4_q1",
             "type": "true_false",
-            "question": "AI vanin kojelaudan sisällä on oikeat, biologiset aivot ratkomassa vaikeita pulmia.",
+            "question": "Neuroverkko on tietokoneohjelma, joka on rakennettu jäljittelemään ihmisaivojen tapaa yhdistellä asioita verkostona.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Neuroverkko ei ole oikea aivo, vaan tietokoneohjelma. Se on vain rakennettu jäljittelemään ihmisaivojen tapaa yhdistellä asioita toisiinsa verkostona!"
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Se ei ole oikea aivo, vaan tietokoneohjelma. Se jäljittelee ihmisaivojen tapaa yhdistellä asioita toisiinsa verkostona."
           },
           {
             "id": "konepellin_4_q2",
@@ -2368,13 +2368,13 @@ export const categories = [
           {
             "id": "konepellin_4_q8",
             "type": "true_false",
-            "question": "Neuroverkko sai nimensä siitä, että se keksittiin alun perin pyydystämään digitaalisia kaloja internetin verkosta.",
+            "question": "Nimi 'neuroverkko' viittaa ihmisen aivojen hermosoluihin (neuroneihin) ja niiden muodostamaan sähköiseen verkostoon.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Nimi \"neuroverkko\" (neural network) tulee biologiasta! Sana viittaa ihmisen aivojen hermosoluihin (neuroneihin) ja niiden muodostamaan sähköiseen verkostoon."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Nimi (neural network) tulee biologiasta ja viittaa ihmisen aivojen hermosoluihin."
           },
           {
             "id": "konepellin_4_q9",
@@ -2495,13 +2495,13 @@ export const categories = [
           {
             "id": "konepellin_5_q1",
             "type": "true_false",
-            "question": "Auton peruutuskameran tekoäly tunnistaa koiran vilkaisemalla sitä kerran, aivan kuten oikea ihminen tekee.",
+            "question": "Tekoäly ei näe koiraa samoin kuin ihminen, vaan etsii kuvasta matemaattisia kuvioita ja muotoja tunnistaakseen sen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei näe asioita eläiminä tai esineinä kuten ihminen. Se tekee salapoliisin työtä ja etsii kuvasta matemaattisia kuvioita ja muotoja tunnistaakseen koiran!"
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan! Tekoäly tekee salapoliisin työtä ja etsii kuvasta matemaattisia kuvioita ja muotoja tunnistaakseen asiat hahmontunnistuksella."
           },
           {
             "id": "konepellin_5_q2",
@@ -2603,13 +2603,13 @@ export const categories = [
           {
             "id": "konepellin_5_q8",
             "type": "true_false",
-            "question": "Auton tekoäly on niin taitava salapoliisi, että se osaa päätellä kiven sisällä olevat mineraalit pelkästään katsomalla sen pintaa.",
+            "question": "Tekoälyn hahmontunnistus perustuu vain pintamuotoihin ja väreihin, eikä se osaa nähdä pintaa syvemmälle.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Hahmontunnistus perustuu vain asioihin, jotka kone voi havaita kuvasta, kuten muotoihin ja väreihin. Se ei osaa nähdä pintaa syvemmälle tai taikoa tietoa kiven sisältä!"
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Hahmontunnistus perustuu vain asioihin, jotka kone voi havaita kuvasta, kuten muotoihin ja väreihin."
           },
           {
             "id": "konepellin_5_q9",
@@ -2730,13 +2730,13 @@ export const categories = [
           {
             "id": "konepellin_6_q1",
             "type": "true_false",
-            "question": "Tekoäly on aina sataprosenttisen reilu ja oikeudenmukainen kaikkia kohtaan, riippumatta siitä mitä sille on opetettu.",
+            "question": "Jos tekoälyn oppima data on epäreilua, myös tekoälyn tekemistä päätöksistä tulee epäreiluja, jolloin puhutaan vinoumasta.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly ei ole automaattisesti reilu. Jos sen oppima tieto (data) on epäreilua tai puutteellista, tekoäly oppii myös tekemään epäreiluja päätöksiä eli siihen tulee \"vinouma\"."
+            "correctAnswer": "Oikein",
+            "explanation": "Juuri näin. Tekoäly oppii datasta. Jos data on epäreilua tai puutteellista, tekoäly oppii myös tekemään epäreiluja päätöksiä (vinouma)."
           },
           {
             "id": "konepellin_6_q2",
@@ -2838,13 +2838,13 @@ export const categories = [
           {
             "id": "konepellin_6_q8",
             "type": "true_false",
-            "question": "Jos AI vanin tekoäly tekee epäreilun päätöksen, se tekee sen siksi, että sillä on ilkeä ja paha luonne.",
+            "question": "Tekoälyllä ei ole omaa luonnetta, ja se tekee epäreiluja päätöksiä vain, jos sille on syötetty vinoutunutta opetusdataa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoälyllä ei ole lainkaan luonnetta tai omia tunteita! Se tekee epäreiluja päätöksiä vain siksi, että koodari on vahingossa syöttänyt sille vinoutunutta tai puutteellista opetusdataa."
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Tekoälyllä ei ole ilkeää luonnetta tai tunteita. Se tekee virheitä siksi, että koodari on vahingossa syöttänyt sille vinoutunutta dataa."
           },
           {
             "id": "konepellin_6_q9",
@@ -3068,13 +3068,13 @@ export const categories = [
           {
             "id": "konepellin_7_q8",
             "type": "true_false",
-            "question": "Jos koodari jättää algoritmista vahingossa askeleen pois, tekoäly osaa kyllä maalaisjärjellään lisätä sen sinne.",
+            "question": "Koska tekoälyllä ei ole omaa maalaisjärkeä, se noudattaa algoritmin askeleita sokeasti ja toistaa koodarin tekemät virheet.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoäly noudattaa algoritmin askeleita täysin sokeasti. Jos koodari tekee virheen, kone toistaa täsmälleen tuon saman virheen, koska sillä ei ole omaa maalaisjärkeä."
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Tekoäly noudattaa algoritmin askeleita sokeasti. Jos koodari tekee virheen, kone toistaa tuon saman virheen."
           },
           {
             "id": "konepellin_7_q9",
@@ -3117,13 +3117,13 @@ export const categories = [
           {
             "id": "digiturva_1_q1",
             "type": "true_false",
-            "question": "Vahva ja turvallinen salasana AI vanin tietokoneeseen on aina pelkkä oma etunimesi, koska sen muistaa itse parhaiten.",
+            "question": "Oma etunimesi on liian helppo arvata, joten vahvan salasanan pitää olla pitkä, monimutkainen ja vain sinun tiedossasi.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Oma etunimi on liian helppo arvata! Vahva salasana on kuin auton turvalukko: sen pitää olla pitkä, monimutkainen ja vain sinun tiedossasi."
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan! Oma etunimi on liian helppo arvata. Vahva salasana on kuin auton turvalukko: pitkä, monimutkainen ja salainen."
           },
           {
             "id": "digiturva_1_q2",
@@ -3226,13 +3226,13 @@ export const categories = [
           {
             "id": "digiturva_1_q8",
             "type": "true_false",
-            "question": "On täysin turvallista käyttää täsmälleen samaa \"salasana123\" -turvalukkoa puhelimessa, pelitilillä ja sähköpostissa yhtä aikaa.",
+            "question": "Jokaiseen tärkeään palveluun kannattaa luoda eri salasana, jotta maantierosvot eivät pääse yhdellä arvauksella kaikkialle.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Jos käytät samaa avainta joka paikkaan, maantierosvo pääsee sisään aivan kaikkialle, jos hän arvaa salasanasi kerran! Käytä aina eri salasanaa tärkeissä tileissä."
+            "correctAnswer": "Oikein",
+            "explanation": "Juuri näin! Jos käytät samaa avainta, maantierosvo pääsee sisään kaikkialle arvatessaan salasanasi kerran. Käytä eri salasanaa eri tileissä."
           },
           {
             "id": "digiturva_1_q9",
@@ -3356,13 +3356,13 @@ export const categories = [
           {
             "id": "digiturva_2_q1",
             "type": "true_false",
-            "question": "On ihan turvallista kertoa oma kotiosoite ja puhelinnumero uudelle pelikaverille netissä, jos hän vaikuttaa todella kiltiltä.",
+            "question": "Omat henkilötiedot kuuluvat 'lukittuun hanskalokeroon', eikä niitä saa jakaa netissä vieraille ihmisille.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Omat henkilötiedot kuuluvat \"lukittuun hanskalokeroon\". Niitä ei koskaan saa jakaa netin chateissa vieraille ihmisille, vaikka he olisivat kuinka mukavia tahansa!"
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Omat henkilötiedot, kuten kotiosoite tai puhelinnumero, kuuluvat lukittuun tilaan. Niitä ei koskaan saa jakaa netissä vieraille."
           },
           {
             "id": "digiturva_2_q2",
@@ -3465,13 +3465,13 @@ export const categories = [
           {
             "id": "digiturva_2_q8",
             "type": "true_false",
-            "question": "Kaikki netissä olevat ihmiset ovat aina varmasti sitä mitä sanovat. Esimerkiksi 10-vuotias \"AutoEetu\" on aivan varmasti oikea lapsi.",
+            "question": "Netissä kuka tahansa voi teeskennellä, joten et voi koskaan olla 100 % varma chättikaverin oikeasta henkilöllisyydestä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Netissä kuka tahansa voi teeskennellä ja väittää olevansa mitä vain. Siksi emme koskaan jaa yksityisiä tietojamme, vaikka juttukaveri vaikuttaisi tutulta tai samanikäiseltä!"
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan oikein. Netissä voi teeskennellä ja väittää olevansa mitä vain. Siksi yksityisiä tietoja ei pidä jakaa täysin vieraille ihmisille."
           },
           {
             "id": "digiturva_2_q9",
@@ -3593,13 +3593,13 @@ export const categories = [
           {
             "id": "digiturva_3_q1",
             "type": "true_false",
-            "question": "Saat viestin, että olet voittanut upouuden superauton, vaikka et koskaan osallistunut mihinkään kilpailuun. Sinun kannattaa heti klikata viestin linkkiä lunastaaksesi voiton.",
+            "question": "Jos sähköpostissa luvataan sinun voittaneen uuden auton ilman kilpailua, kyseessä on todennäköisesti maantierosvon ansa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Jos tarjous on liian hyvä ollakseen totta, se on lähes varmasti maantierosvon ansa! Älä koskaan klikkaa tällaisia outoja yllätyslinkkejä."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Jos tarjous on liian hyvä ollakseen totta, se on lähes varmasti ansa. Älä koskaan klikkaa tällaisia outoja yllätyslinkkejä."
           },
           {
             "id": "digiturva_3_q2",
@@ -3702,13 +3702,13 @@ export const categories = [
           {
             "id": "digiturva_3_q8",
             "type": "true_false",
-            "question": "Jos oudossa sähköpostissa on kuva virallisesta pelilogosta tai oikeasta kaupasta, viesti on aivan varmasti aito ja täysin turvallinen klikata.",
+            "question": "Virallisen firman logon näkeminen viestissä ei takaa sen turvallisuutta, sillä huijarit kopioivat niitä helposti.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Maantierosvot osaavat erittäin helposti kopioida oikeiden firmojen logoja ja kuvia viesteihinsä. Logon näkeminen ei siis koskaan tarkoita, että viesti olisi oikeasti turvallinen!"
+            "correctAnswer": "Oikein",
+            "explanation": "Juuri näin! Maantierosvot osaavat erittäin helposti kopioida oikeiden firmojen logoja. Logon näkeminen ei tarkoita, että viesti olisi aito."
           },
           {
             "id": "digiturva_3_q9",
@@ -3937,13 +3937,13 @@ export const categories = [
           {
             "id": "digiturva_4_q8",
             "type": "true_false",
-            "question": "Tietokonevirus tai haittaohjelma voi rikkoa autotallin älylaitteet oikeasti fyysisesti palasiksi, aivan kuten oikea vasara.",
+            "question": "Haittaohjelma on näkymätöntä koodia, joka voi rikkoa laitteen ohjelmistoja tai varastaa tietoja, muttei hajota laitetta fyysisesti palasiksi.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Digitaalinen ruoste on näkymätöntä koodia, ei oikea työkalu. Se rikkoo laitteen ohjelmistoja ja saattaa varastaa tietoja, mutta se ei hajota näyttölasia fyysisesti palasiksi!"
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Digitaalinen ruoste on koodia, ei vasara. Se rikkoo ohjelmistoja ja voi varastaa tietoja, mutta se ei hajota näyttölasia palasiksi."
           },
           {
             "id": "digiturva_4_q9",
@@ -4065,13 +4065,13 @@ export const categories = [
           {
             "id": "digiturva_5_q1",
             "type": "true_false",
-            "question": "Kaikki videot ja kuvat, joita näet AI vanin ruudulta tai omasta puhelimestasi netissä, ovat aina 100 % aitoja ja totta.",
+            "question": "Tekoälyn avulla voidaan luoda syväväärennöksiä (deepfake), jotka näyttävät aidoilta mutta ovat täysin keksittyjä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Tekoälyn avulla voidaan luoda syväväärennöksiä eli deepfake-videoita, jotka näyttävät aidoilta, mutta ovat täysin keksittyjä \"valepukuisia liftareita\"!"
+            "correctAnswer": "Oikein",
+            "explanation": "Totta! Kaikki näkemäsi kuvat eivät ole totta. Tekoälyllä voidaan luoda syväväärennöksiä, jotka näyttävät aidoilta mutta ovat keksittyjä."
           },
           {
             "id": "digiturva_5_q2",
@@ -4174,13 +4174,13 @@ export const categories = [
           {
             "id": "digiturva_5_q8",
             "type": "true_false",
-            "question": "Jos videolla puhelimessa puhuva henkilö kuulostaa ääneltään täysin tutulta, ääni on 100 % varmasti oikea. Tekoäly ei osaa väärentää ääniä.",
+            "question": "Tekoäly voi pienen ääninäytteen avulla oppia matkimaan kenen tahansa tuttusi ääntä lähes täydellisesti.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Äänen kloonaus on yleinen syväväärennös! Tekoäly voi oppia matkimaan kenen tahansa tuttusi tai vaikkapa julkkiksen ääntä täydellisesti vain pienen ääninäytteen avulla."
+            "correctAnswer": "Oikein",
+            "explanation": "Kyllä! Äänen kloonaus on yleinen syväväärennös. Tekoäly voi matkia kenen tahansa ääntä todella vakuuttavasti."
           },
           {
             "id": "digiturva_5_q9",
@@ -4302,13 +4302,13 @@ export const categories = [
           {
             "id": "digiturva_6_q1",
             "type": "true_false",
-            "question": "Jos netissä tulee vastaan pelottava tai outo kuva, paras ratkaisu on laittaa laite piiloon sängyn alle ja olla kertomatta asiasta kenellekään.",
+            "question": "Jos netissä tulee vastaan pelottava tai outo kuva, laita 'hätävilkut päälle' ja kerro asiasta heti luotettavalle aikuiselle.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Pelottavat asiat netissä eivät katoa piilottamalla. Laita \"hätävilkut päälle\" ja kerro asiasta heti rohkeasti jollekin luotettavalle aikuiselle!"
+            "correctAnswer": "Oikein",
+            "explanation": "Oikein! Pelottavat asiat netissä eivät katoa laitteen piilottamisella. Laita hätävilkut päälle ja kerro rohkeasti aikuiselle."
           },
           {
             "id": "digiturva_6_q2",
@@ -4411,13 +4411,13 @@ export const categories = [
           {
             "id": "digiturva_6_q8",
             "type": "true_false",
-            "question": "Jos vahingossa klikkaat outoa linkkiä ja laite menee jumiin, sinun pitää yrittää korjata se salaa itse, jotta kukaan ei huomaa.",
+            "question": "Jos klikkaat outoa linkkiä ja laite menee jumiin, älä yritä korjata sitä salaa vaan pyydä apua aikuiselta.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Väärin",
-            "explanation": "Vahinkoja sattuu kaikille, eikä niitä kannata hävetä! Älä yritä korjata laitetta salaa, vaan laita hätävilkut päälle ja hae aikuinen. Yhdessä ongelma selviää nopeammin."
+            "correctAnswer": "Oikein",
+            "explanation": "Aivan! Vahinkoja sattuu kaikille. Älä yritä korjata laitetta salaa, vaan hae aikuinen. Yhdessä ongelma selviää nopeammin."
           },
           {
             "id": "digiturva_6_q9",
