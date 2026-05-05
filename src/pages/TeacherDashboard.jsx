@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { categories } from '../data/questions';
@@ -106,6 +106,11 @@ export default function TeacherDashboard() {
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
   const [rightSidebarOpen, setRightSidebarOpen] = useState(true);
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const [expandedStudents, setExpandedStudents] = useState({});
+  
+  const toggleStudent = (id) => {
+    setExpandedStudents(prev => ({ ...prev, [id]: !prev[id] }));
+  };
   
   // Generating a readable 6-character code
   const generateCode = () => {
@@ -528,78 +533,110 @@ export default function TeacherDashboard() {
                             
                             {/* Oppilaat */}
                             <div style={{ display: 'grid', gap: '1.2rem' }}>
-                            {players.map(p => (
-                                <div key={p.id} className="animate-fade-in" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem 2rem', border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', gap: '2rem', flexWrap: 'wrap', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
+                            {players.map(p => {
+                                const isExpanded = expandedStudents[p.id];
+                                return (
+                                <div key={p.id} className="animate-fade-in" style={{ padding: '1.5rem 2rem', border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s', cursor: 'pointer' }} onClick={() => toggleStudent(p.id)} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
                                     
-                                    <div style={{ flex: '1 1 200px' }}>
-                                        <h3 style={{ margin: '0 0 5px 0', fontSize: '1.4rem', color: '#0f172a' }}>{p.id}</h3>
-                                        <div style={{ color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold' }}>
-                                            <Star size={14} color="#f59e0b" fill="#f59e0b" /> Sijainti: {p.location || 'Aula'}
-                                        </div>
-                                    </div>
-                                    
-                                    <div style={{ display: 'flex', gap: '2rem', alignItems: 'center', flexWrap: 'wrap' }}>
-                                        {/* Stats */}
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                            <div style={{ display: 'flex', gap: '1rem' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: '#d97706', background: '#fef3c7', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid #fde68a' }}>
-                                                    <Zap size={20} fill="#d97706" /> {p.sparks || 0}
-                                                </div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1rem', color: '#334155', background: '#f1f5f9', padding: '0.5rem 0.8rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                                                    <Medal size={16} fill="#94a3b8" color="#64748b" title="Platina" /><span style={{color: '#64748b'}}>{p.medals?.platinum || 0}</span>
-                                                    <Medal size={16} fill="#f59e0b" color="#d97706" title="Kulta" /> <span style={{color: '#d97706'}}>{p.medals?.gold || 0}</span>
-                                                    <Medal size={16} fill="#cbd5e1" color="#94a3b8" title="Hopea" /> <span style={{color: '#94a3b8'}}>{p.medals?.silver || 0}</span>
-                                                    <Medal size={16} fill="#b45309" color="#92400e" title="Pronssi" /> <span style={{color: '#92400e'}}>{p.medals?.bronze || 0}</span>
-                                                </div>
-                                            </div>
-                                            {p.globalStats && p.globalStats.attempts > 0 && (
-                                                <div style={{ width: '100%', marginTop: '0.4rem' }}>
-                                                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold', marginBottom: '0.4rem' }}>
-                                                        <span>Vastaustarkkuus: {p.globalStats.correct} / {p.globalStats.attempts}</span>
-                                                        <span style={{ color: Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 80 ? '#10b981' : Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 50 ? '#f59e0b' : '#ef4444' }}>{Math.round((p.globalStats.correct / p.globalStats.attempts) * 100)}%</span>
-                                                    </div>
-                                                    <div style={{ width: '100%', height: '10px', background: '#f1f5f9', borderRadius: '5px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
-                                                        <div style={{ 
-                                                            width: `${Math.round((p.globalStats.correct / p.globalStats.attempts) * 100)}%`, 
-                                                            height: '100%', 
-                                                            background: Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 80 ? 'linear-gradient(90deg, #34d399, #10b981)' : Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 50 ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #f87171, #ef4444)', 
-                                                            borderRadius: '5px', 
-                                                            transition: 'width 0.5s ease-out' 
-                                                        }}></div>
-                                                    </div>
-                                                </div>
+                                    {/* Summary View */}
+                                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+                                        <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#0f172a' }}>{p.id}</h3>
+                                            {!isExpanded && p.location && (
+                                               <span style={{ color: '#64748b', fontSize: '0.85rem' }}><Star size={12} color="#f59e0b" fill="#f59e0b" style={{ verticalAlign: 'middle', marginRight: '4px' }} />{p.location}</span>
                                             )}
                                         </div>
-
-                                        {/* Buff Buttons */}
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                                            <div style={{ display: 'flex', gap: '0.6rem' }}>
-                                                <button onClick={() => giveSparks(p.id, 50)} style={{ background: '#f8fafc', color: '#475569', border: '1px solid #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 50 Kipinää">
-                                                    +50 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
-                                                </button>
-                                                <button onClick={() => giveSparks(p.id, 100)} style={{ background: '#f8fafc', color: '#475569', border: '1px solid #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 100 Kipinää">
-                                                    +100 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
-                                                </button>
-                                                <button onClick={() => giveSparks(p.id, 500)} style={{ background: '#f1f5f9', color: '#334155', border: '1px solid #94a3b8', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#64748b'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f1f5f9'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#334155'}} title="Anna 500 Kipinää!">
-                                                    +500 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
-                                                </button>
+                                        
+                                        {!isExpanded && (
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.1rem', color: '#d97706', background: '#fef3c7', padding: '0.4rem 0.8rem', borderRadius: '10px' }}>
+                                                    <Zap size={18} fill="#d97706" /> {p.sparks || 0}
+                                                </div>
+                                                {p.globalStats && p.globalStats.attempts > 0 && (
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1rem', color: '#475569', background: '#f1f5f9', padding: '0.4rem 0.8rem', borderRadius: '10px' }}>
+                                                        <CheckCircle2 size={16} color="#10b981" /> {p.globalStats.correct} / {p.globalStats.attempts}
+                                                    </div>
+                                                )}
+                                                <ChevronDown size={20} color="#94a3b8" style={{ transform: 'rotate(0)', transition: 'transform 0.3s' }} />
                                             </div>
-                                            <div style={{ display: 'flex', gap: '0.6rem' }}>
-                                                <button onClick={() => giveBoost(p.id, 'red', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Yritä uudelleen -apu">
-                                                    <ShieldCheck size={14} /> +1 Yritä uudelleen
-                                                </button>
-                                                <button onClick={() => giveBoost(p.id, 'yellow', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Poisto">
-                                                    <Disc size={14} /> +1 Poisto
-                                                </button>
-                                                <button onClick={() => giveBoost(p.id, 'green', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Vaihto">
-                                                    <Wrench size={14} /> +1 Vaihto
-                                                </button>
+                                        )}
+                                        
+                                        {isExpanded && (
+                                            <div style={{ marginLeft: 'auto' }}>
+                                                <ChevronDown size={20} color="#94a3b8" style={{ transform: 'rotate(180deg)', transition: 'transform 0.3s' }} />
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                     
+                                    {/* Expanded View */}
+                                    {isExpanded && (
+                                        <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', gap: '2rem', flexWrap: 'wrap' }} onClick={e => e.stopPropagation()}>
+                                            
+                                            <div style={{ flex: '1 1 200px' }}>
+                                                <div style={{ color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                                                    <Star size={14} color="#f59e0b" fill="#f59e0b" /> Sijainti: {p.location || 'Aula'}
+                                                </div>
+                                                
+                                                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1.2rem', color: '#d97706', background: '#fef3c7', padding: '0.5rem 1rem', borderRadius: '12px', border: '1px solid #fde68a' }}>
+                                                        <Zap size={20} fill="#d97706" /> {p.sparks || 0}
+                                                    </div>
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', fontSize: '1rem', color: '#334155', background: '#f1f5f9', padding: '0.5rem 0.8rem', borderRadius: '12px', border: '1px solid #e2e8f0', flexWrap: 'wrap' }}>
+                                                        <Medal size={16} fill="#94a3b8" color="#64748b" title="Platina" /><span style={{color: '#64748b'}}>{p.medals?.platinum || 0}</span>
+                                                        <Medal size={16} fill="#f59e0b" color="#d97706" title="Kulta" /> <span style={{color: '#d97706'}}>{p.medals?.gold || 0}</span>
+                                                        <Medal size={16} fill="#cbd5e1" color="#94a3b8" title="Hopea" /> <span style={{color: '#94a3b8'}}>{p.medals?.silver || 0}</span>
+                                                        <Medal size={16} fill="#b45309" color="#92400e" title="Pronssi" /> <span style={{color: '#92400e'}}>{p.medals?.bronze || 0}</span>
+                                                    </div>
+                                                </div>
+
+                                                {p.globalStats && p.globalStats.attempts > 0 && (
+                                                    <div style={{ width: '100%' }}>
+                                                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold', marginBottom: '0.4rem' }}>
+                                                            <span>Vastaustarkkuus: {p.globalStats.correct} / {p.globalStats.attempts}</span>
+                                                            <span style={{ color: Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 80 ? '#10b981' : Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 50 ? '#f59e0b' : '#ef4444' }}>{Math.round((p.globalStats.correct / p.globalStats.attempts) * 100)}%</span>
+                                                        </div>
+                                                        <div style={{ width: '100%', height: '10px', background: '#f1f5f9', borderRadius: '5px', overflow: 'hidden', border: '1px solid #e2e8f0' }}>
+                                                            <div style={{ 
+                                                                width: `${Math.round((p.globalStats.correct / p.globalStats.attempts) * 100)}%`, 
+                                                                height: '100%', 
+                                                                background: Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 80 ? 'linear-gradient(90deg, #34d399, #10b981)' : Math.round((p.globalStats.correct / p.globalStats.attempts) * 100) >= 50 ? 'linear-gradient(90deg, #fbbf24, #f59e0b)' : 'linear-gradient(90deg, #f87171, #ef4444)', 
+                                                                borderRadius: '5px', 
+                                                                transition: 'width 0.5s ease-out' 
+                                                            }}></div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                                                <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                                                    <button onClick={() => giveSparks(p.id, 50)} style={{ background: '#f8fafc', color: '#475569', border: '1px solid #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 50 Kipinää">
+                                                        +50 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
+                                                    </button>
+                                                    <button onClick={() => giveSparks(p.id, 100)} style={{ background: '#f8fafc', color: '#475569', border: '1px solid #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 100 Kipinää">
+                                                        +100 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
+                                                    </button>
+                                                    <button onClick={() => giveSparks(p.id, 500)} style={{ background: '#f1f5f9', color: '#334155', border: '1px solid #94a3b8', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#64748b'; e.currentTarget.style.color='#0f172a'}} onMouseOut={e=>{e.currentTarget.style.background='#f1f5f9'; e.currentTarget.style.borderColor='#94a3b8'; e.currentTarget.style.color='#334155'}} title="Anna 500 Kipinää!">
+                                                        +500 <Zap size={14} fill="#f59e0b" color="#f59e0b" />
+                                                    </button>
+                                                </div>
+                                                <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+                                                    <button onClick={() => giveBoost(p.id, 'red', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Yritä uudelleen -apu">
+                                                        <ShieldCheck size={14} /> +1 Yritä uudelleen
+                                                    </button>
+                                                    <button onClick={() => giveBoost(p.id, 'yellow', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Poisto">
+                                                        <Disc size={14} /> +1 Poisto
+                                                    </button>
+                                                    <button onClick={() => giveBoost(p.id, 'green', 1)} style={{ background: '#f8fafc', color: '#475569', border: '1px dashed #cbd5e1', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.95rem' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#3b82f6'; e.currentTarget.style.color='#3b82f6'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#cbd5e1'; e.currentTarget.style.color='#475569'}} title="Anna 1 Vaihto">
+                                                        <Wrench size={14} /> +1 Vaihto
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                         </div>
                     )}
