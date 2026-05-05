@@ -1078,7 +1078,7 @@ const Roadmap = () => {
             </svg>
 
             {showMapTutorial && (
-              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
+              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
                     Seikkailu alkaa!
                 </div>
@@ -1102,7 +1102,7 @@ const Roadmap = () => {
             
             {/* Submap Tutoriaalit */}
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 0 && !closedTuition[0] && (
-              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Valitse ensimmäinen kategoria napsauttamalla vihreää pallukkaa.
                 </div>
@@ -1117,7 +1117,7 @@ const Roadmap = () => {
             )}
             
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 1 && !closedTuition[1] && (
-              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: 'var(--primary-color)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
                 </div>
@@ -1132,7 +1132,7 @@ const Roadmap = () => {
             )}
             
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 2 && !closedTuition[2] && (
-              <div className="glass-panel" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
+              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin vastaamiesi kysymysten opettavaisiin selityksiin. Lue siis perustelut aina huolella jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
                 </div>
@@ -1147,7 +1147,7 @@ const Roadmap = () => {
             )}
 
             {showMedalTutorial && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
                 <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
                     <b>Kerää osaamismitaleja!</b><br/><br/>
                     Mitä enemmän oikeita vastauksia keräät, sitä kirkkaamman mitalin ansaitset!<br/><br/>
@@ -1183,7 +1183,7 @@ const Roadmap = () => {
             )}
 
             {showWowMedal && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '25%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#d97706', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>UUSI MITALI!</h1>
                 <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
@@ -1199,7 +1199,7 @@ const Roadmap = () => {
             )}
 
             {showAllMedalsCelebration && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#1d4ed8', textAlign: 'center', textShadow: '0 4px 10px rgba(29, 78, 216, 0.3)' }}>HURRAA! KAIKKI LÄPI!</h1>
                 <img src="/trophy/medal-gold.png" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
@@ -1213,7 +1213,7 @@ const Roadmap = () => {
             )}
 
             {showAllPlatinumsCelebration && (
-              <div className="glass-panel animate-bounce" style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#b45309', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>TÄYDELLINEN SUORITUS!</h1>
                 <img src="/trophy/medal-plat.png" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 

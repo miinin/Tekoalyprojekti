@@ -764,7 +764,7 @@ export default function Quiz() {
 
       {!bossIntroSeen && sub && sub.id.endsWith('_7') && (
          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="glass-panel animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', border: '5px solid #f59e0b', padding: '3rem', borderRadius: '24px', maxWidth: '600px', width: '90%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', position: 'relative' }}>
+            <div className="glass-panel animate-bounce responsive-popup" style={{ background: 'rgba(255,255,255,0.98)', border: '5px solid #f59e0b', padding: '3rem', borderRadius: '24px', maxWidth: '600px', width: '90%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', position: 'relative' }}>
                 <h1 style={{ color: '#d97706', fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Suuri Mestarikoitos</h1>
                 <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'var(--text-main)', marginBottom: '2rem', fontWeight: 'bold' }}>
                     Olet saapunut kategorian finaaliin! Vastaa 10 tiukkaan mestarikysymykseen. Kerää vähintään <span style={{ color: '#10b981', fontSize: '1.4rem' }}>7 oikein</span> voittaaksesi tämän alueen kiiltävän mestaruuspokaalin suoraan autotalliisi!
@@ -820,7 +820,7 @@ export default function Quiz() {
         
         {notification && (
            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-              <div className="animate-fade-in" style={{ background: 'white', padding: '2rem', borderRadius: '24px', maxWidth: '450px', width: '100%', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
+              <div className="animate-fade-in responsive-popup" style={{ background: 'white', padding: '2rem', borderRadius: '24px', maxWidth: '450px', width: '100%', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
                   <AlertTriangle size={56} color="#f59e0b" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
                   <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Huomio</h3>
                   <p style={{ margin: '0 0 2rem 0', color: '#475569', fontSize: '1.15rem', lineHeight: '1.6' }}>{notification}</p>
