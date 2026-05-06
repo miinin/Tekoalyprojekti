@@ -17,7 +17,7 @@ export default function Admin() {
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState(false);
 
-  const expectedHash = '43e0a67e19a08df07e5d2e6ae5dbf2d27b87a16caee2d5c93a36b1a15e8cf415';
+  const expectedHash = 'e4f968da627e179bba7edaf7796902e90c0f78bcb89304be71adc4028a3ae98b';
 
   const handleLogin = async (e) => {
       e.preventDefault();
