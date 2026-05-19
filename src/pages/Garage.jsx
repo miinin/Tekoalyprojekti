@@ -705,41 +705,35 @@ export default function Garage() {
               )}
 
               {isTutorialActive && !hideTutorialBox && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem 2rem 2.5rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', position: 'relative' }}>
-                       <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                       <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
-                       <p style={{ margin: 0, lineHeight: 1.5 }}>Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen.<br/><br/>Sulje tämä ikkuna, osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!</p>
-                    </div>
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '1.5rem 3rem 1.5rem 2.5rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
+                   <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
+                   <p style={{ margin: 0, lineHeight: 1.5 }}>Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen.<br/><br/>Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!</p>
                 </div>
               )}
               
               {showGreenPulse && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', position: 'relative' }}>
-                       <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                       <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
-                       <p style={{ margin: 0, lineHeight: 1.5 }}>Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!</p>
-                    </div>
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
+                   <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
+                   <p style={{ margin: 0, lineHeight: 1.5 }}>Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!</p>
                 </div>
               )}
               
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', position: 'relative' }}>
-                       <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                       <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa takaisin!</h2>
-                       <p style={{ margin: 0, lineHeight: 1.5, marginBottom: '1.5rem' }}>Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!</p>
-                       <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.2rem' }} onClick={() => {
-                            localStorage.setItem('aivan_garage_tuition', 'true');
-                            setClosedGarageTuition(true);
-                       }}>Eikun hommiin!</button>
-                    </div>
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
+                   <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa takaisin!</h2>
+                   <p style={{ margin: 0, lineHeight: 1.5, marginBottom: '1.5rem' }}>Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!</p>
+                   <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.2rem' }} onClick={() => {
+                        localStorage.setItem('aivan_garage_tuition', 'true');
+                        setClosedGarageTuition(true);
+                   }}>Eikun hommiin!</button>
                 </div>
               )}
 
                {saveCode && (
-                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                      <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '600px', position: 'relative' }}>
                         <button onClick={() => setSaveCode(null)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={24} /></button>
                         <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Rekisterikilpesi on valmis!</h3>
@@ -765,7 +759,7 @@ export default function Garage() {
                )}
 
                {showTrophyCabinet && (
-                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
+                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
                     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.5rem', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}><X size={40} /></button>
                        <button onClick={(e) => { e.stopPropagation(); setShowTrophyTuition(prev => !prev); }} title="Kaapin ohje" style={{ position: 'absolute', top: '2rem', left: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>?</button>
@@ -897,7 +891,7 @@ export default function Garage() {
                      </div>
 
                      {selectedTrophyObj && (
-                        <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(10px)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
+                        <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.85)', zIndex: 10000, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }}>
                              <button onClick={(e) => { e.stopPropagation(); setSelectedTrophyObj(null); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', padding: '0.8rem', transition: 'background 0.2s', zIndex: 10001 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>
                                 <X size={40} />
                              </button>
@@ -1028,7 +1022,7 @@ export default function Garage() {
     </div>
 
     {saveError && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', backdropFilter: 'blur(10px)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
              <div className="modal-content" style={{ background: 'linear-gradient(145deg, #7f1d1d 0%, #450a0a 100%)', padding: '3rem', borderRadius: '24px', maxWidth: '500px', width: '90%', border: '2px solid #ef4444', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', textAlign: 'center' }}>
                  <div style={{ background: 'rgba(239,68,68,0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto', border: '2px solid #ef4444' }}>
                      <X size={48} color="#ef4444" />
@@ -1050,7 +1044,7 @@ export default function Garage() {
     )}
 
     {showMeterTutorial && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: '3rem', borderRadius: '32px', maxWidth: '650px', width: '90%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative', overflow: 'hidden' }}>
                 <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
                     <X size={24} />
