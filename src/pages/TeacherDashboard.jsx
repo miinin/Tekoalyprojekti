@@ -392,7 +392,7 @@ export default function TeacherDashboard() {
                             <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
                                 <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>
                                     <span>Aiemman tunnin koodi</span>
-                                    <button type="button" onClick={() => setShowRecovery(true)} style={{ background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.9rem', padding: 0 }}>Unohditko koodin?</button>
+                                    <button type="button" onClick={() => setShowRecovery(true)} style={{ background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.9rem', padding: 0, fontWeight: 'normal', textTransform: 'none' }}>Unohditko koodin?</button>
                                 </label>
                                 <input 
                                    type="text" 
