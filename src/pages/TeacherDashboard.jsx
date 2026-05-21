@@ -206,8 +206,8 @@ export default function TeacherDashboard() {
   
   const endSession = async () => {
       setConfirmModal({
-          title: 'Päätä oppitunti permanently?',
-          text: 'Haluatko varmasti päättää ja pysyvästi sulkea tämän oppitunnin? Kaikki pelaajat katkaistaan välittömästi luokasta, eivätkä he pääse enää samalla koodilla takaisin sisään.',
+          title: 'Päätä oppitunti pysyvästi?',
+          text: 'VAROITUS: Tämä sulkee oppitunnin lopullisesti, eikä sitä voi enää jatkaa!\n\nJos haluat vain poistua väliaikaisesti, käytä sen sijaan yläreunan "Päävalikkoon"-nappia (muista ottaa PIN-koodi ja luokkakoodi talteen palauttamista varten).\n\nHaluatko varmasti päättää ja pysyvästi sulkea tämän oppitunnin? Kaikki pelaajat katkaistaan välittömästi.',
           confirmText: 'Kyllä, päätä tunti',
           confirmColor: '#dc2626',
           onConfirm: async () => {
@@ -299,9 +299,6 @@ export default function TeacherDashboard() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem', flexWrap: 'wrap', gap: '1rem', background: 'rgba(255, 255, 255, 0.7)', backdropFilter: 'blur(16px)', padding: '1.5rem 2.5rem', borderRadius: '24px', border: '1px solid rgba(255, 255, 255, 0.4)', boxShadow: '0 8px 32px rgba(0,0,0,0.05)' }}>
            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
-              <div style={{ background: 'linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%)', padding: '1rem', borderRadius: '20px', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
-                  <ShieldCheck size={36} color="white" />
-              </div>
               <div>
                   <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', color: '#0f172a', letterSpacing: '-0.5px' }}>Komentokeskus</h1>
                   <p style={{ margin: '0.2rem 0 0 0', color: '#64748b', fontSize: '1.1rem', fontWeight: 500 }}>Opettajan hallintapaneeli</p>
@@ -311,7 +308,7 @@ export default function TeacherDashboard() {
            <button onClick={() => {
                  setConfirmModal({
                      title: 'Siirry Päävalikkoon',
-                     text: `Voit myöhemmin palata takaisin tähän aktiiviseen oppituntiin päävalikosta.\n\nOta sitä varten talteen luokkasi Liittymiskoodi: ${sessionCode} ja asettamasi PIN. (Peli jatkuu normaalisti oppilailla taustalla)`,
+                     text: `Voit myöhemmin palata takaisin tähän aktiiviseen oppituntiin päävalikosta.\n\nMUISTA: Tarvitset oppitunnin palauttamiseen SEKÄ luokkakoodin (${sessionCode}) ETTÄ asettamasi PIN-koodin! Ota ne molemmat nyt huolella talteen.\n\n(Peli jatkuu normaalisti oppilailla taustalla)`,
                      confirmText: 'Palaa Päävalikkoon',
                      confirmColor: '#3b82f6',
                      onConfirm: () => navigate('/lobby')
@@ -351,7 +348,10 @@ export default function TeacherDashboard() {
                                     onFocus={e => e.target.style.borderColor = '#3b82f6'}
                                     onBlur={e => e.target.style.borderColor = '#cbd5e1'}
                                 />
-                                <p style={{ margin: '0.8rem 0 0 0', fontSize: '0.85rem', color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.4rem' }}><Info size={14}/> Tarvitset koodin jos jatkat tuntia myöhemmin.</p>
+                                <div style={{ marginTop: '1rem', padding: '1rem', background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '12px', color: '#b45309', fontSize: '0.9rem', lineHeight: 1.5, display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
+                                    <AlertTriangle size={20} style={{ flexShrink: 0, marginTop: '2px' }} />
+                                    <div><strong>Tärkeää:</strong> Tallenna itsellesi tämä PIN-koodi. Oppitunnin palauttamiseen myöhemmin tarvitaan <strong>sekä</strong> luokan koodi <strong>että</strong> tämä PIN. Ilman niitä molempia et voi palauttaa keskeneräistä peliä!</div>
+                                </div>
                             </div>
 
                             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'left', cursor: 'pointer', transition: 'background 0.2s' }} onClick={() => setRequireTutorial(!requireTutorial)} onMouseOver={e=>e.currentTarget.style.background='#f1f5f9'} onMouseOut={e=>e.currentTarget.style.background='#f8fafc'}>
