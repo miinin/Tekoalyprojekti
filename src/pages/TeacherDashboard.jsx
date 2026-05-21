@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { db } from '../firebase';
-import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
 import { categories } from '../data/questions';
 
 const topicDictionary = {
@@ -98,6 +98,12 @@ export default function TeacherDashboard() {
   // Protection / Error state
   const [errorMsg, setErrorMsg] = useState('');
   
+  // Recovery state
+  const [showRecovery, setShowRecovery] = useState(false);
+  const [recoveryPin, setRecoveryPin] = useState('');
+  const [recoveryResults, setRecoveryResults] = useState(null);
+  const [recoverySearching, setRecoverySearching] = useState(false);
+  
   // PIN protection
   const [newPin, setNewPin] = useState('');
   const [resumePin, setResumePin] = useState('');
@@ -110,6 +116,29 @@ export default function TeacherDashboard() {
   
   const toggleStudent = (id) => {
     setExpandedStudents(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+  
+  const searchByPin = async () => {
+     if (recoveryPin.length < 4) return;
+     setRecoverySearching(true);
+     setRecoveryResults(null);
+     try {
+         const q = query(collection(db, "class_sessions"), where("teacherPin", "==", recoveryPin));
+         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000));
+         const querySnapshot = await Promise.race([getDocs(q), timeoutPromise]);
+         const found = [];
+         querySnapshot.forEach((doc) => {
+             const data = doc.data();
+             if (data.status !== 'ended') {
+                 found.push({ code: doc.id, date: data.createdAt ? data.createdAt.toDate().toLocaleString('fi-FI') : 'Tuntematon aika' });
+             }
+         });
+         setRecoveryResults(found);
+     } catch (e) {
+         console.error(e);
+         setRecoveryResults([]);
+     }
+     setRecoverySearching(false);
   };
   
   // Generating a readable 6-character code
@@ -361,7 +390,10 @@ export default function TeacherDashboard() {
                         
                         <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '1.2rem', justifyContent: 'center' }}>
                             <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
-                                <label style={{ display: 'block', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>Aiemman tunnin koodi</label>
+                                <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>
+                                    <span>Aiemman tunnin koodi</span>
+                                    <button type="button" onClick={() => setShowRecovery(true)} style={{ background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.9rem', padding: 0 }}>Unohditko koodin?</button>
+                                </label>
                                 <input 
                                    type="text" 
                                    placeholder="Esim. A8X1K9"
@@ -729,6 +761,50 @@ export default function TeacherDashboard() {
                 </button>
             </div>,
             document.body
+        )}
+
+        {/* Recovery Modal */}
+        {showRecovery && (
+            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 99999 }}>
+                <div className="animate-fade-in" style={{ background: 'white', padding: '2.5rem', borderRadius: '24px', width: '90%', maxWidth: '500px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: '1.5rem', position: 'relative' }}>
+                    <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
+                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Lock color="#3b82f6" size={28} /> Etsi liittymiskoodi</h3>
+                    <p style={{ margin: 0, color: '#475569', lineHeight: 1.5 }}>Syötä alle oppitunnille asettamasi PIN-koodi, niin etsimme aktiiviset luokkatilat tietokannasta.</p>
+                    
+                    <input 
+                        type="password" 
+                        placeholder="Tunnin PIN-koodi"
+                        value={recoveryPin}
+                        onChange={e => setRecoveryPin(e.target.value)}
+                        style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.2rem', textAlign: 'center', letterSpacing: '2px' }}
+                    />
+                    
+                    <button onClick={searchByPin} disabled={recoveryPin.length < 4 || recoverySearching} style={{ padding: '1rem', background: '#3b82f6', color: 'white', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.1rem', cursor: (recoveryPin.length < 4 || recoverySearching) ? 'not-allowed' : 'pointer', border: 'none' }}>
+                        {recoverySearching ? 'Etsitään...' : 'Etsi koodia'}
+                    </button>
+                    
+                    {recoveryResults !== null && (
+                        <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                            {recoveryResults.length === 0 ? (
+                                <p style={{ color: '#ef4444', margin: 0, fontWeight: 'bold' }}>Aktiivisia tunteja ei löytynyt tällä PIN-koodilla.</p>
+                            ) : (
+                                <div>
+                                    <p style={{ margin: '0 0 1rem 0', color: '#0f172a', fontWeight: 'bold' }}>Löytyneet oppitunnit:</p>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', maxHeight: '200px', overflowY: 'auto' }}>
+                                        {recoveryResults.map(r => (
+                                            <button key={r.code} onClick={() => { setResumeCode(r.code); setResumePin(recoveryPin); setShowRecovery(false); }} style={{ background: 'white', border: '2px solid #10b981', padding: '1rem', borderRadius: '12px', color: '#10b981', fontWeight: 'bold', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.background='#ecfdf5'} onMouseOut={e=>e.currentTarget.style.background='white'}>
+                                                <span style={{ letterSpacing: '2px' }}>{r.code}</span>
+                                                <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 'normal', letterSpacing: 'normal' }}>{r.date}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '1rem 0 0 0' }}>Klikkaa koodia palauttaaksesi sen lomakkeeseen.</p>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+            </div>
         )}
 
     </div>

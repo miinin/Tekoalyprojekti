@@ -165,11 +165,44 @@ export const store = {
     localStorage.setItem('aivan_node_stats', JSON.stringify(stats));
   },
 
+  _generateSparksHash: (amount) => {
+    return btoa(amount.toString() + "_aivan_salt").split('').reverse().join('');
+  },
+
+  _setSparksValue: (key, amount) => {
+    const amountNum = parseInt(amount, 10) || 0;
+    localStorage.setItem(key, amountNum.toString());
+    localStorage.setItem(key + '_hash', store._generateSparksHash(amountNum));
+    localStorage.setItem(key + '_b', btoa((amountNum ^ 42).toString()));
+  },
+
   getSparks: async () => {
     const room = store.getRoomCode();
-    // Simulate fetching from shared DB. Right now just local storage with room key
-    const val = localStorage.getItem(room ? `aivan_sparks_${room}` : 'aivan_sparks');
-    return parseInt(val || '0', 10);
+    const key = room ? `aivan_sparks_${room}` : 'aivan_sparks';
+    const valStr = localStorage.getItem(key) || '0';
+    const val = parseInt(valStr, 10);
+    
+    const savedHash = localStorage.getItem(key + '_hash');
+    const expectedHash = store._generateSparksHash(val);
+    
+    if (savedHash && savedHash !== expectedHash) {
+       let restored = 0;
+       try {
+           const backup = localStorage.getItem(key + '_b');
+           if (backup) restored = parseInt(atob(backup), 10) ^ 42;
+       } catch(e) {}
+       
+       alert("TUTKA VÄLÄHTI!\n\nYrititkö virittää kipinämittaria laittomasti? Katsastusmies huomasi peukaloinnin ja palautti alkuperäiset kipinät! Tästä hyvästä sait 5 kipinän ylinopeussakon!");
+       restored = Math.max(0, restored - 5);
+       store._setSparksValue(key, restored);
+       return restored;
+    }
+    
+    if (!savedHash) {
+       store._setSparksValue(key, val);
+    }
+    
+    return val;
   },
 
   getTutorialSkipped: () => {
@@ -215,7 +248,7 @@ export const store = {
     const room = store.getRoomCode();
     const current = await store.getSparks();
     const key = room ? `aivan_sparks_${room}` : 'aivan_sparks';
-    localStorage.setItem(key, current + amount);
+    store._setSparksValue(key, current + amount);
     store.syncClassroomProgress();
     return current + amount;
   },
@@ -264,7 +297,7 @@ export const store = {
     const current = await store.getSparks();
     if (current >= amount) {
       const key = room ? `aivan_sparks_${room}` : 'aivan_sparks';
-      localStorage.setItem(key, current - amount);
+      store._setSparksValue(key, current - amount);
       store.syncClassroomProgress();
       return true;
     }
@@ -327,7 +360,7 @@ export const store = {
   },
   
   clearSinglePlayer: () => {
-    localStorage.setItem('aivan_sparks', '0');
+    store._setSparksValue('aivan_sparks', 0);
     localStorage.removeItem('aivan_items');
     localStorage.removeItem('aivan_equipped');
     localStorage.removeItem('aivan_completions');
@@ -466,7 +499,7 @@ export const store = {
   },
 
   setRoomSparks: (room, newAmount) => {
-    localStorage.setItem(`aivan_sparks_${room}`, newAmount);
+    store._setSparksValue(`aivan_sparks_${room}`, newAmount);
   },
 
   deleteRoom: (room) => {
@@ -609,8 +642,13 @@ export const store = {
         const processedSparksId = localStorage.getItem('aivan_last_teacher_spark_id');
         if (data.teacherGift && data.teacherGift.amount && String(data.teacherGift.id) !== processedSparksId) {
           localStorage.setItem('aivan_last_teacher_spark_id', String(data.teacherGift.id));
-          const current = parseInt(localStorage.getItem('aivan_sparks') || '0', 10);
-          localStorage.setItem('aivan_sparks', current + data.teacherGift.amount);
+          const key = 'aivan_sparks';
+          const savedHash = localStorage.getItem(key + '_hash');
+          const valStr = localStorage.getItem(key) || '0';
+          const expectedHash = store._generateSparksHash(parseInt(valStr, 10));
+          let current = parseInt(valStr, 10);
+          if (savedHash && savedHash !== expectedHash) current = 0;
+          store._setSparksValue(key, current + data.teacherGift.amount);
           updated = true;
           if (callback) callback({ sparks: data.teacherGift.amount });
         }
