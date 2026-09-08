@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare, Trophy } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare, Trophy, ExternalLink } from 'lucide-react';
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -288,77 +288,58 @@ export default function Lobby() {
           </div>
         </div>
 
-        {/* Hackathon Win Banner */}
-        <a 
-            href="https://faktabaari.fi/edu/tekoalysta-tukialyksi-hackathonin-2026-tulokset-viisi-valmista-materiaalia-tekoalylukutaidon-opetukseen/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="animate-fade-in"
-            style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '1.5rem', 
-                background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 165, 0, 0.25))', 
-                backdropFilter: 'blur(10px)',
-                WebkitBackdropFilter: 'blur(10px)',
-                border: '2px solid rgba(255, 215, 0, 0.6)', 
-                padding: '1rem 2rem', 
-                borderRadius: '24px', 
-                textDecoration: 'none', 
-                boxShadow: '0 10px 30px rgba(255, 215, 0, 0.25)',
-                transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                zIndex: 10,
-                marginBottom: '1rem',
-                marginTop: '1rem',
-                width: '100%',
-                maxWidth: '650px'
-            }}
-            onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px) scale(1.02)';
-                e.currentTarget.style.boxShadow = '0 15px 40px rgba(255, 215, 0, 0.35)';
-            }}
-            onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(255, 215, 0, 0.25)';
-            }}
-        >
-            <div style={{
-                background: 'linear-gradient(135deg, #fbbf24, #f59e0b)',
-                borderRadius: '50%',
-                padding: '0.8rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                boxShadow: '0 4px 15px rgba(245, 158, 11, 0.4)'
-            }}>
-                <Trophy size={32} color="white" />
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
-                <span style={{ 
-                    fontFamily: 'var(--font-display)', 
-                    color: '#b45309', 
-                    fontSize: '1.3rem', 
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
-                }}>
-                    Hackathon Voittaja!
-                </span>
-                <span style={{ 
-                    fontFamily: 'var(--font-main)', 
-                    color: '#78350f', 
-                    fontSize: '1.05rem',
-                    lineHeight: '1.4'
-                }}>
-                    AI Van! voitti <strong>Faktabaarin</strong> Tekoälystä tukiälyksi -hackathonin 2026.
-                </span>
-            </div>
-            <img 
-                src="https://faktabaari.fi/images/fblogotitle.png" 
-                alt="Faktabaari" 
-                style={{ height: '35px', objectFit: 'contain', marginLeft: 'auto', opacity: 0.95 }} 
-            />
-        </a>
+        <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', zIndex: 15 }}>
+            {/* Hackathon Win Banner */}
+            <a 
+                href="https://faktabaari.fi/edu/tekoalysta-tukialyksi-hackathonin-2026-tulokset-viisi-valmista-materiaalia-tekoalylukutaidon-opetukseen/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="animate-fade-in"
+                style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(254, 243, 199, 0.8))', 
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(245, 158, 11, 0.3)', 
+                    borderLeft: '4px solid #d97706',
+                    padding: '0.6rem 1rem 0.6rem 0.8rem', 
+                    borderRadius: '12px', 
+                    textDecoration: 'none', 
+                    boxShadow: '0 4px 20px rgba(217, 119, 6, 0.15)',
+                    transition: 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)',
+                    color: '#451a03'
+                }}
+                onMouseOver={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(217, 119, 6, 0.25)';
+                    e.currentTarget.style.borderColor = 'rgba(245, 158, 11, 0.6)';
+                    const arrow = e.currentTarget.querySelector('.link-arrow');
+                    if(arrow) arrow.style.transform = 'translateX(4px)';
+                }}
+                onMouseOut={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(217, 119, 6, 0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(245, 158, 11, 0.3)';
+                    const arrow = e.currentTarget.querySelector('.link-arrow');
+                    if(arrow) arrow.style.transform = 'translateX(0)';
+                }}
+            >
+                <img src="https://faktabaari.fi/images/fblogotitle.png" alt="Faktabaari" style={{ height: '18px', marginRight: '0.8rem', objectFit: 'contain' }} />
+                
+                <div style={{ width: '1px', height: '24px', background: 'rgba(217, 119, 6, 0.3)', marginRight: '0.8rem' }} />
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
+                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '1rem', fontWeight: 'bold', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: '1.2' }}>
+                        Hackathon Voittaja!
+                    </span>
+                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '0.9rem', color: '#451a03', lineHeight: '1.3' }}>
+                        <span style={{ fontFamily: 'var(--font-display)', color: '#d97706', fontSize: '1.1rem', letterSpacing: '0.5px', marginRight: '4px', fontWeight: 'normal' }}>AI Van!</span> voitti Tekoälystä tukiälyksi -hackathonin 2026.
+                    </span>
+                </div>
+
+                <ArrowRight className="link-arrow" size={18} color="#d97706" style={{ marginLeft: '1rem', transition: 'transform 0.2s ease' }} />
+            </a>
+        </div>
 
         <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '130px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
         <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 2rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
