@@ -329,91 +329,42 @@ export default function Lobby() {
         <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: '130px', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
         <p className="animate-fade-in" style={{ color: '#047857', fontSize: '1.4rem', margin: '0.5rem 0 2rem 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
-        <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', width: '100%', zIndex: 10 }}>
+        <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', width: '100%', zIndex: 10 }}>
         
         {/* YKSINPELI */}
-        <div className="mode-card" style={{ borderTop: '8px solid #059669' }}>
+        <div className="mode-card" style={{ borderTop: '8px solid #059669', display: 'flex', flexDirection: 'column', height: '100%' }}>
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#059669', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
             <Play size={36} /> Yksinpeli
           </h2>
-          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin keräten Kipinöitä ja kehitä tekoälypakuasi huippuunsa.</p>
+          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin ja kehitä tekoälypakuasi.</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', flexGrow: 1, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
             <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: '#059669', borderColor: '#059669', color: 'white', boxShadow: '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
               UUSI SEIKKAILU
             </button>
           </div>
         </div>
 
-        {/* JATKA PELIÄ */}
-        <div className="mode-card" style={{ borderTop: '8px solid #0d9488' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#0d9488', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
-            <History size={36} /> Jatka peliä
-          </h2>
-          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Jatka aiemmin aloittamaasi peliä tai palauta pilvitallennus koodilla.</p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem', justifyContent: 'center' }}>
-            
-            <button className="btn-primary" disabled={!store.hasProgress()} onClick={handleContinueSinglePlayer} style={{ background: '#0d9488', padding: '1.2rem', fontSize: '1.3rem', boxShadow: store.hasProgress() ? '0 8px 20px rgba(13, 148, 136, 0.4)' : 'none', opacity: store.hasProgress() ? 1 : 0.5, cursor: store.hasProgress() ? 'pointer' : 'not-allowed' }}>
-              {store.hasProgress() ? 'JATKA PELIÄ' : 'EI KESKENERÄISTÄ PELIÄ'}
-            </button>
-
-            <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #99f6e4', marginTop: '0.5rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.6rem' }}>
-                    <label style={{ fontSize: '0.95rem', color: '#0f766e', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        Palauta peli koodilla:
-                        <button type="button" onClick={() => setModalState({ title: 'Miten lataaminen toimii?', text: 'Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!', onClose: () => setModalState(null), buttonText: 'Selvä juttu' })} style={{ background: 'none', color: '#0d9488', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0, transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><Info size={18} /></button>
-                    </label>
-                </div>
-                <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
-                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #475569', overflow: 'hidden' }}>
-                         <div style={{ background: '#1d4ed8', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
-                             <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '22px', height: '22px', gap: '2px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
-                               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '6px', height: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={6} fill="#fef08a" color="#fef08a" strokeWidth={1} />}</div>)}
-                            </div>
-                            FIN
-                         </div>
-                         <input
-                            type="text"
-                            placeholder="ABC-123"
-                            value={loadCode}
-                            onChange={(e) => {
-                                let val = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
-                                if (val.length === 3 && !val.includes('-') && loadCode.length < 3) val += '-';
-                                setLoadCode(val);
-                            }}
-                            maxLength={7}
-                            style={{ minWidth: 0, flexGrow: 1, padding: '0.8rem 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1.1rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '2px', fontWeight: '900', color: '#1e293b', background: 'transparent' }}
-                         />
-                     </div>
-                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0d9488', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
-                         {isRestoring ? '...' : <ArrowRight size={24} />}
-                     </button>
-                </form>
-            </div>
-          </div>
-        </div>
-
         {/* LUOKKATILA */}
-        <div className="mode-card" style={{ borderTop: '8px solid #15803d' }}>
+        <div className="mode-card" style={{ borderTop: '8px solid #15803d', display: 'flex', flexDirection: 'column', height: '100%' }}>
           <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#15803d', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
              <GraduationCap size={36} /> Luokkatila
           </h2>
-          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille koulussa.</p>
+          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Liity opettajan ohjaamalle oppitunnille.</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdf4', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #86efac', flexGrow: 1, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
+            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', backgroundColor: '#f0fdf4', padding: '1.2rem', borderRadius: '16px', border: '2px dashed #86efac' }}>
                 <p style={{ margin: 0, fontSize: '0.9rem', color: '#166534', fontWeight: 'bold', lineHeight: 1.4 }}>
-                   <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä tai nimikirjaimia, josta vain opettaja tunnistaa sinut! Älä käytä oikeaa nimeäsi.
+                   <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä, josta vain opettaja tunnistaa sinut!
                 </p>
-                <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                   <input 
                     type="text" 
                     placeholder="Liittymiskoodi" 
                     value={classCode}
                     maxLength={6}
                     onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
-                    style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                    style={{ padding: '0.8rem 1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                   />
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                       <input 
@@ -422,9 +373,9 @@ export default function Lobby() {
                         value={classNick}
                         maxLength={15}
                         onChange={(e) => setClassNick(e.target.value)}
-                        style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
+                        style={{ minWidth: 0, flexGrow: 1, padding: '0.8rem 1rem', borderRadius: '12px', border: '2px solid #4ade80', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
                       />
-                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2 || joinClassLoading} className="btn-primary" style={{ background: '#15803d', padding: '1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2 || joinClassLoading) ? 0.5 : 1 }}>
+                      <button type="submit" disabled={classCode.length < 6 || classNick.length < 2 || joinClassLoading} className="btn-primary" style={{ background: '#15803d', padding: '0.8rem 1rem', borderRadius: '12px', opacity: (classCode.length < 6 || classNick.length < 2 || joinClassLoading) ? 0.5 : 1 }}>
                         {joinClassLoading ? '...' : <ArrowRight size={24} />}
                       </button>
                   </div>
@@ -432,6 +383,54 @@ export default function Lobby() {
               </div>
           </div>
         </div>
+
+      </div>
+
+      {/* JATKA PELIÄ (Bottom Banner) */}
+      <div className="animate-fade-in" style={{ width: '100%', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: '1.5rem 2rem', marginTop: '1.5rem', border: '2px solid #99f6e4', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', zIndex: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+             <div style={{ background: '#0d9488', width: '50px', height: '50px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
+                 <History size={28} />
+             </div>
+             <div>
+                 <h3 style={{ margin: 0, color: '#0f766e', fontSize: '1.4rem', fontFamily: 'var(--font-display)' }}>Jatka peliä</h3>
+                 <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-main)', opacity: 0.8, fontSize: '1rem' }}>Palaa takaisin tekoälypakusi rattiin!</p>
+             </div>
+          </div>
+          
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', flexGrow: 1, justifyContent: 'flex-end' }}>
+             <button className="btn-primary" disabled={!store.hasProgress()} onClick={handleContinueSinglePlayer} style={{ background: '#0d9488', padding: '0.8rem 1.5rem', fontSize: '1.1rem', boxShadow: store.hasProgress() ? '0 4px 15px rgba(13, 148, 136, 0.4)' : 'none', opacity: store.hasProgress() ? 1 : 0.5, cursor: store.hasProgress() ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap' }}>
+               {store.hasProgress() ? 'JATKA TÄLLÄ LAITTEELLA' : 'EI KESKENERÄISTÄ PELIÄ'}
+             </button>
+             
+             <div style={{ width: '2px', height: '40px', background: '#cbd5e1', margin: '0 0.5rem', display: window.innerWidth > 600 ? 'block' : 'none' }}></div>
+
+             <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.5rem', alignItems: 'stretch' }}>
+                  <div style={{ display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #475569', overflow: 'hidden', height: '45px' }}>
+                      <div style={{ background: '#1d4ed8', width: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.65rem' }}>
+                          <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '16px', height: '16px', gap: '1px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginBottom: '2px' }}>
+                            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '4px', height: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={4} fill="#fef08a" color="#fef08a" strokeWidth={1} />}</div>)}
+                         </div>
+                         FIN
+                      </div>
+                      <input
+                         type="text"
+                         placeholder="ABC-123"
+                         value={loadCode}
+                         onChange={(e) => {
+                             let val = e.target.value.toUpperCase().replace(/[^A-Z0-9-]/g, '');
+                             if (val.length === 3 && !val.includes('-') && loadCode.length < 3) val += '-';
+                             setLoadCode(val);
+                         }}
+                         maxLength={7}
+                         style={{ width: '110px', padding: '0 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1rem', textAlign: 'center', outline: 'none', letterSpacing: '1px', fontWeight: 'bold', color: '#1e293b' }}
+                      />
+                  </div>
+                  <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0d9488', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      {isRestoring ? '...' : <ArrowRight size={20} />}
+                  </button>
+             </form>
+          </div>
       </div>
       </div>
 
