@@ -380,6 +380,7 @@ export const store = {
     localStorage.removeItem('aivan_used_map_boosts');
     localStorage.removeItem('aivan_teacher_boosts');
     localStorage.removeItem('aivan_streak_stats');
+    localStorage.removeItem('aivan_global_stats');
     store.setRoomCode(null);
   },
 
