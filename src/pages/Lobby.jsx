@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare, Trophy, ExternalLink } from 'lucide-react';
+import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare, Trophy, ExternalLink, History } from 'lucide-react';
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 
 export default function Lobby() {
   const navigate = useNavigate();
-  const [joinCode, setJoinCode] = useState('');
   
   const [testMode, setTestMode] = useState(store.getTestMode());
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
@@ -144,27 +143,6 @@ export default function Lobby() {
       });
   };
 
-  const handleCreateLobby = () => {
-    const code = store.generateRoomCode();
-    store.setRoomCode(code);
-    setModalState({
-        title: 'Yhteistyöhuone luotu!',
-        text: `Koodi on: ${code}\n\nJaa tämä koodi ystävillesi! Muut voivat liittyä peliin syöttämällä koodin Lobbyssa. Keräätte yhdessä Kipinöitä!`,
-        buttonText: 'Siirry kartalle',
-        onClose: () => {
-            setModalState(null);
-            navigate('/roadmap');
-        }
-    });
-  };
-
-  const handleJoinLobby = (e) => {
-    e.preventDefault();
-    if (joinCode.trim().length >= 4) {
-      store.setRoomCode(joinCode.trim());
-      navigate('/roadmap');
-    }
-  };
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '1rem' }}>
@@ -360,31 +338,38 @@ export default function Lobby() {
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin keräten Kipinöitä ja kehitä tekoälypakuasi huippuunsa.</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', flexGrow: 1, justifyContent: 'center' }}>
+            <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: '#059669', borderColor: '#059669', color: 'white', boxShadow: '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
+              UUSI SEIKKAILU
+            </button>
+          </div>
+        </div>
 
-
-            {store.hasProgress() && (
-              <button className="btn-primary" onClick={handleContinueSinglePlayer} style={{ background: '#10b981', padding: '1.2rem', fontSize: '1.3rem', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.4)' }}>
-                JATKA PELIÄ
-              </button>
-            )}
-
-            <button className={store.hasProgress() ? 'btn-secondary' : 'btn-primary'} onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#059669', borderColor: '#059669', color: store.hasProgress() ? '#059669' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
-              {store.hasProgress() ? 'ALOITA ALUSTA' : 'UUSI SEIKKAILU'}
+        {/* JATKA PELIÄ */}
+        <div className="mode-card" style={{ borderTop: '8px solid #0d9488' }}>
+          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#0d9488', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
+            <History size={36} /> Jatka peliä
+          </h2>
+          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Jatka aiemmin aloittamaasi peliä tai palauta pilvitallennus koodilla.</p>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem', justifyContent: 'center' }}>
+            
+            <button className="btn-primary" disabled={!store.hasProgress()} onClick={handleContinueSinglePlayer} style={{ background: '#0d9488', padding: '1.2rem', fontSize: '1.3rem', boxShadow: store.hasProgress() ? '0 8px 20px rgba(13, 148, 136, 0.4)' : 'none', opacity: store.hasProgress() ? 1 : 0.5, cursor: store.hasProgress() ? 'pointer' : 'not-allowed' }}>
+              {store.hasProgress() ? 'JATKA PELIÄ' : 'EI KESKENERÄISTÄ PELIÄ'}
             </button>
 
-            <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #cbd5e1', marginTop: '0.5rem' }}>
+            <div style={{ background: 'rgba(248, 250, 252, 0.8)', padding: '1rem', borderRadius: '12px', border: '2px dashed #99f6e4', marginTop: '0.5rem' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.6rem' }}>
-                    <label style={{ fontSize: '0.95rem', color: '#64748b', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        Jatka peliä koodilla:
-                        <button type="button" onClick={() => setModalState({ title: 'Miten lataaminen toimii?', text: 'Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!', onClose: () => setModalState(null), buttonText: 'Selvä juttu' })} style={{ background: 'none', color: '#059669', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0, transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><Info size={18} /></button>
+                    <label style={{ fontSize: '0.95rem', color: '#0f766e', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                        Palauta peli koodilla:
+                        <button type="button" onClick={() => setModalState({ title: 'Miten lataaminen toimii?', text: 'Syötä tähän Autotallista tallentamasi rekisterikilpi-koodi (esim. ABC-123), niin voit jatkaa peliä täsmälleen siitä mihin jäit, täydellä kipinäpotilla!', onClose: () => setModalState(null), buttonText: 'Selvä juttu' })} style={{ background: 'none', color: '#0d9488', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0, transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><Info size={18} /></button>
                     </label>
                 </div>
                 <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
-                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #cbd5e1', overflow: 'hidden' }}>
-                         <div style={{ background: '#1d4ed8', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
+                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #5eead4', overflow: 'hidden' }}>
+                         <div style={{ background: '#0f766e', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
                              <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '22px', height: '22px', gap: '2px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
-                               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '6px', height: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={6} fill="#fde047" color="#fde047" strokeWidth={1} />}</div>)}
+                               {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '6px', height: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={6} fill="#fef08a" color="#fef08a" strokeWidth={1} />}</div>)}
                             </div>
                             FIN
                          </div>
@@ -401,44 +386,11 @@ export default function Lobby() {
                             style={{ minWidth: 0, flexGrow: 1, padding: '0.8rem 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1.1rem', lineHeight: 1, textAlign: 'center', textTransform: 'uppercase', outline: 'none', letterSpacing: '2px', fontWeight: '900', color: '#1e293b', background: 'transparent' }}
                          />
                      </div>
-                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#10b981', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
+                     <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0d9488', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', minWidth: '50px' }}>
                          {isRestoring ? '...' : <ArrowRight size={24} />}
                      </button>
                 </form>
             </div>
-
-
-          </div>
-        </div>
-
-        {/* MONINPELI */}
-        <div className="mode-card" style={{ borderTop: '8px solid #0d9488' }}>
-          <h2 style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#0d9488', margin: 0, fontSize: '2.4rem', fontFamily: 'var(--font-display)' }}>
-            <Users size={36} /> Yhteistyötila
-          </h2>
-          <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa kavereiden kanssa samassa tallissa. Kerätkää kipinöitä yhdessä!</p>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', flexGrow: 1, marginTop: '1.5rem' }}>
-            <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', backgroundColor: '#f0fdfa', padding: '1.5rem', borderRadius: '16px', border: '2px dashed #5eead4', flexGrow: 1, justifyContent: 'center' }}>
-                <button className="btn-secondary" style={{ borderColor: '#0d9488', color: '#0d9488', padding: '1rem', background: 'white' }} onClick={handleCreateLobby}>
-                  <Plus size={20} /> LUO UUSI HUONE
-                </button>
-                <div style={{ height: '1px', background: '#5eead4', margin: '0.5rem 0' }}></div>
-                <label style={{ color: '#0f766e', fontWeight: 'bold', fontSize: '0.9rem', fontFamily: 'var(--font-main)' }}>Liity kaverin peliin koodilla:</label>
-                <form onSubmit={handleJoinLobby} style={{ display: 'flex', gap: '0.5rem' }}>
-                  <input 
-                    type="text" 
-                    placeholder="Esim. TurboKissa" 
-                    value={joinCode}
-                    onChange={(e) => setJoinCode(e.target.value)}
-                    style={{ minWidth: 0, flexGrow: 1, padding: '1rem', borderRadius: '12px', border: '2px solid #5eead4', fontFamily: 'var(--font-main)', fontSize: '1rem', outline: 'none' }}
-                  />
-                  <button type="submit" className="btn-primary" style={{ background: '#0d9488', padding: '1rem', borderRadius: '12px' }}>
-                    <ArrowRight size={24} />
-                  </button>
-                </form>
-              </div>
-
           </div>
         </div>
 
