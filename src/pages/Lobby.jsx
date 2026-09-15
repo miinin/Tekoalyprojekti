@@ -282,12 +282,14 @@ export default function Lobby() {
                 className="animate-fade-in"
                 style={{ 
                     display: 'flex', 
-                    alignItems: 'center', 
+                    flexDirection: 'column',
+                    alignItems: 'flex-start', 
+                    gap: '0.4rem',
                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(254, 243, 199, 0.8))', 
                     backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(245, 158, 11, 0.3)', 
-                    borderLeft: '4px solid #d97706',
-                    padding: '0.6rem 1rem 0.6rem 0.8rem', 
+                    borderTop: '4px solid #d97706',
+                    padding: '0.8rem 1rem', 
                     borderRadius: '12px', 
                     textDecoration: 'none', 
                     boxShadow: '0 4px 20px rgba(217, 119, 6, 0.15)',
@@ -309,20 +311,19 @@ export default function Lobby() {
                     if(arrow) arrow.style.transform = 'translateX(0)';
                 }}
             >
-                <img src="https://faktabaari.fi/images/fblogotitle.png" alt="Faktabaari" style={{ height: '18px', marginRight: '0.8rem', objectFit: 'contain' }} />
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: '0.2rem' }}>
+                   <img src="https://faktabaari.fi/images/fblogotitle.png" alt="Faktabaari" style={{ height: '18px', objectFit: 'contain' }} />
+                   <ArrowRight className="link-arrow" size={16} color="#d97706" style={{ transition: 'transform 0.2s ease' }} />
+                </div>
                 
-                <div style={{ width: '1px', height: '24px', background: 'rgba(217, 119, 6, 0.3)', marginRight: '0.8rem' }} />
-
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.1rem' }}>
-                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '1rem', fontWeight: 'bold', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: '1.2' }}>
+                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '0.9rem', fontWeight: 'bold', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: '1.2' }}>
                         Hackathon Voittaja!
                     </span>
-                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '0.9rem', color: '#451a03', lineHeight: '1.3' }}>
-                        <span style={{ fontFamily: 'var(--font-display)', color: '#d97706', fontSize: '1.1rem', letterSpacing: '0.5px', marginRight: '4px', fontWeight: 'normal' }}>AI Van!</span> voitti Tekoälystä tukiälyksi -hackathonin 2026.
+                    <span style={{ fontFamily: 'var(--font-main)', fontSize: '0.85rem', color: '#451a03', lineHeight: '1.3' }}>
+                        <span style={{ fontFamily: 'var(--font-display)', color: '#d97706', fontSize: '1rem', letterSpacing: '0.5px', marginRight: '4px', fontWeight: 'normal' }}>AI Van!</span> voitti Tekoälystä tukiälyksi -hackathonin.
                     </span>
                 </div>
-
-                <ArrowRight className="link-arrow" size={18} color="#d97706" style={{ marginLeft: '1rem', transition: 'transform 0.2s ease' }} />
             </a>
         </div>
 
@@ -400,7 +401,7 @@ export default function Lobby() {
           
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', flexGrow: 1, justifyContent: 'flex-end' }}>
              <button className="btn-primary" disabled={!store.hasProgress()} onClick={handleContinueSinglePlayer} style={{ background: '#0d9488', padding: '0.8rem 1.5rem', fontSize: '1.1rem', boxShadow: store.hasProgress() ? '0 4px 15px rgba(13, 148, 136, 0.4)' : 'none', opacity: store.hasProgress() ? 1 : 0.5, cursor: store.hasProgress() ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap' }}>
-               {store.hasProgress() ? 'JATKA TÄLLÄ LAITTEELLA' : 'EI KESKENERÄISTÄ PELIÄ'}
+               {store.hasProgress() ? 'PALAA PELIIN' : 'EI KESKENERÄISTÄ PELIÄ'}
              </button>
              
              <div style={{ width: '2px', height: '40px', background: '#cbd5e1', margin: '0 0.5rem', display: window.innerWidth > 600 ? 'block' : 'none' }}></div>
