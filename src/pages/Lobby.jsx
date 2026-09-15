@@ -366,8 +366,8 @@ export default function Lobby() {
                     </label>
                 </div>
                 <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.6rem', width: '100%', alignItems: 'stretch' }}>
-                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #5eead4', overflow: 'hidden' }}>
-                         <div style={{ background: '#0f766e', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
+                     <div style={{ flexGrow: 1, display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #475569', overflow: 'hidden' }}>
+                         <div style={{ background: '#1d4ed8', width: '38px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.75rem', paddingBottom: '0.3rem' }}>
                              <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '22px', height: '22px', gap: '2px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginTop: '6px', marginBottom: '4px' }}>
                                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '6px', height: '6px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={6} fill="#fef08a" color="#fef08a" strokeWidth={1} />}</div>)}
                             </div>
@@ -409,7 +409,7 @@ export default function Lobby() {
                 <form onSubmit={handleJoinClass} style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
                   <input 
                     type="text" 
-                    placeholder="Opettajan koodi" 
+                    placeholder="Liittymiskoodi" 
                     value={classCode}
                     maxLength={6}
                     onChange={(e) => setClassCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ''))}
