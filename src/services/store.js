@@ -355,8 +355,20 @@ export const store = {
   },
 
   hasProgress: () => {
-    // Check if user has single player progress saved
-    return localStorage.getItem('aivan_sparks') !== null;
+    // Check if user has real progress (sparks, items, completions, or answered questions)
+    const sparksStr = localStorage.getItem('aivan_sparks');
+    if (sparksStr && parseInt(sparksStr, 10) > 0) return true;
+    
+    const compsStr = localStorage.getItem('aivan_completions');
+    if (compsStr && JSON.parse(compsStr).length > 0) return true;
+    
+    const itemsStr = localStorage.getItem('aivan_items');
+    if (itemsStr && JSON.parse(itemsStr).length > 0) return true;
+    
+    const qRecords = localStorage.getItem('aivan_question_records');
+    if (qRecords && Object.keys(JSON.parse(qRecords)).length > 0) return true;
+
+    return false;
   },
   
   clearSinglePlayer: () => {

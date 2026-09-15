@@ -15,6 +15,7 @@ export default function Garage() {
   const [hideTutorialBox, setHideTutorialBox] = useState(false);
   const [showGreenPulse, setShowGreenPulse] = useState(false);
   const [flashScreen, setFlashScreen] = useState(false);
+  const [hideGreenPulseModal, setHideGreenPulseModal] = useState(false);
   const [completedLessons, setCompletedLessons] = useState([]);
   const [closedGarageTuition, setClosedGarageTuition] = useState(() => localStorage.getItem('aivan_garage_tuition') === 'true');
 
@@ -536,10 +537,10 @@ export default function Garage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                cursor: isTutorialActive ? 'not-allowed' : 'pointer',
-                opacity: isTutorialActive ? 0.3 : 1
+                cursor: 'pointer',
+                opacity: 1
             }}
-            onClick={() => { if (!isTutorialActive) navigate('/lobby') }}
+            onClick={() => navigate('/lobby')}
           >
             <ChevronLeft size={28} color="var(--primary-color)" />
             <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
@@ -718,9 +719,9 @@ export default function Garage() {
                 </div>
               )}
               
-              {showGreenPulse && (
+              {showGreenPulse && !hideGreenPulseModal && (
                 <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '600px', width: '95%', zIndex: 9999 }}>
-                   <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <button onClick={() => setHideGreenPulseModal(true)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
                    <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
                    <p style={{ margin: 0, lineHeight: 1.5 }}>Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!</p>
                 </div>
