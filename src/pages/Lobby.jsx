@@ -437,11 +437,11 @@ export default function Lobby() {
 
       {modalState && (
          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }} onClick={modalState.onClose}>
-            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '95%', maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto' }} onClick={e => e.stopPropagation()}>
+            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '95%', maxWidth: '600px' }} onClick={e => e.stopPropagation()}>
                <button onClick={modalState.onClose} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 0.8rem)', right: 'clamp(0.5rem, 1vh, 0.8rem)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
-               <h3 style={{ margin: '0 0 clamp(0.5rem, 1vh, 1rem) 0', color: '#0ea5e9', fontSize: 'clamp(1.4rem, 3vh, 1.8rem)', fontFamily: 'var(--font-display)' }}>{modalState.title}</h3>
-               <p style={{ margin: '0 0 clamp(1rem, 2vh, 2rem) 0', fontSize: 'clamp(0.95rem, 2vh, 1.1rem)', whiteSpace: 'pre-wrap' }}>{modalState.text}</p>
-               <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: 'clamp(1.1rem, 2vh, 1.2rem)', padding: 'clamp(0.8rem, 2vh, 1rem)' }} onClick={modalState.onClose}>
+               <h3 style={{ margin: '0 0 clamp(0.2rem, 1vh, 1rem) 0', color: '#0ea5e9', fontSize: 'clamp(1.2rem, 2.5vh, 1.8rem)', fontFamily: 'var(--font-display)' }}>{modalState.title}</h3>
+               <p style={{ margin: '0 0 clamp(0.5rem, 1.5vh, 2rem) 0', fontSize: 'clamp(0.9rem, 1.8vh, 1.1rem)', whiteSpace: 'pre-wrap', lineHeight: 1.4 }}>{modalState.text}</p>
+               <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: 'clamp(1rem, 2vh, 1.2rem)', padding: 'clamp(0.6rem, 1.5vh, 1rem)' }} onClick={modalState.onClose}>
                   {modalState.buttonText || 'OK'}
                </button>
             </div>

@@ -757,12 +757,12 @@ export default function TeacherDashboard() {
 
         {confirmModal && (
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
-                <div className="animate-bounce" style={{ background: 'white', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', border: `2px solid ${confirmModal.confirmColor || '#3b82f6'}`, display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2vh, 1.5rem)' }}>
-                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.3rem, 3vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><AlertTriangle color={confirmModal.confirmColor || '#3b82f6'} size={28} /> {confirmModal.title}</h3>
-                    <p style={{ margin: 0, fontSize: 'clamp(1rem, 2vh, 1.1rem)', color: '#475569', lineHeight: 1.6, whiteSpace: 'pre-wrap' }}>{confirmModal.text}</p>
-                    <div style={{ display: 'flex', gap: '1rem', marginTop: 'clamp(0.5rem, 1vh, 1rem)' }}>
-                        <button onClick={confirmModal.onConfirm} style={{ flex: 1, padding: 'clamp(0.8rem, 2vh, 1rem)', background: confirmModal.confirmColor || '#3b82f6', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', fontSize: 'clamp(1rem, 2vh, 1.1rem)', cursor: 'pointer' }}>{confirmModal.confirmText}</button>
-                        <button onClick={() => setConfirmModal(null)} style={{ padding: 'clamp(0.8rem, 2vh, 1rem) clamp(1.5rem, 3vh, 2rem)', background: 'transparent', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '12px', fontWeight: 'bold', fontSize: 'clamp(1rem, 2vh, 1.1rem)', cursor: 'pointer' }}>Peruuta</button>
+                <div className="animate-bounce" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', border: `2px solid ${confirmModal.confirmColor || '#3b82f6'}`, display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)' }}>
+                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.1rem, 2.5vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><AlertTriangle color={confirmModal.confirmColor || '#3b82f6'} size={24} /> {confirmModal.title}</h3>
+                    <p style={{ margin: 0, fontSize: 'clamp(0.9rem, 1.8vh, 1.1rem)', color: '#475569', lineHeight: 1.4, whiteSpace: 'pre-wrap' }}>{confirmModal.text}</p>
+                    <div style={{ display: 'flex', gap: '1rem', marginTop: 'clamp(0.2rem, 1vh, 0.8rem)' }}>
+                        <button onClick={confirmModal.onConfirm} style={{ flex: 1, padding: 'clamp(0.6rem, 1.5vh, 1rem)', background: confirmModal.confirmColor || '#3b82f6', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.1rem)', cursor: 'pointer' }}>{confirmModal.confirmText}</button>
+                        <button onClick={() => setConfirmModal(null)} style={{ padding: 'clamp(0.6rem, 1.5vh, 1rem) clamp(1rem, 2vh, 2rem)', background: 'transparent', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '12px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.1rem)', cursor: 'pointer' }}>Peruuta</button>
                     </div>
                 </div>
             </div>
@@ -785,10 +785,10 @@ export default function TeacherDashboard() {
         {/* Recovery Modal */}
         {showRecovery && (
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
-                <div className="animate-fade-in" style={{ background: 'white', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', maxHeight: '90vh', overflowY: 'auto', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2vh, 1.5rem)', position: 'relative' }}>
+                <div className="animate-fade-in" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)', position: 'relative' }}>
                     <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
-                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.3rem, 3vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Lock color="#3b82f6" size={28} /> Etsi liittymiskoodi</h3>
-                    <p style={{ margin: 0, color: '#475569', lineHeight: 1.5, fontSize: 'clamp(0.95rem, 2vh, 1rem)' }}>Syötä alle oppitunnille asettamasi PIN-koodi, niin etsimme aktiiviset luokkatilat tietokannasta.</p>
+                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.1rem, 2.5vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Lock color="#3b82f6" size={24} /> Etsi liittymiskoodi</h3>
+                    <p style={{ margin: 0, color: '#475569', lineHeight: 1.4, fontSize: 'clamp(0.85rem, 1.8vh, 1rem)' }}>Syötä alle oppitunnille asettamasi PIN-koodi, niin etsimme aktiiviset luokkatilat tietokannasta.</p>
                     
                     <input 
                         type="password" 
