@@ -1039,8 +1039,15 @@ export default function Garage() {
                      Virhekoodi: {saveError}
                  </div>
                  <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
-                     <button 
-                  {showMeterTutorial && (
+                     <button className="btn-primary" onClick={() => setSaveError(null)}>
+                        Selvä
+                     </button>
+                 </div>
+             </div>
+         </div>
+     )}
+
+     {showMeterTutorial && (
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: 'clamp(1.5rem, 4vh, 3rem)', borderRadius: '32px', maxWidth: '850px', width: '100%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative' }}>
                 <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1.5vh, 1.5rem)', right: 'clamp(0.5rem, 1.5vh, 1.5rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>

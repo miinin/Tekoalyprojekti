@@ -43,9 +43,11 @@ function GlobalClassroomOverlay() {
      
      checkRoom();
      const interval = setInterval(checkRoom, 5000);
+     const pingInterval = setInterval(() => { store.pingPresence(); }, 30000);
      
      return () => {
          clearInterval(interval);
+         clearInterval(pingInterval);
          if (unsubStatus) unsubStatus();
          if (unsubSparks) unsubSparks();
      };

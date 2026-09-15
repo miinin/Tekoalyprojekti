@@ -92,6 +92,24 @@ export default function TeacherDashboard() {
   const [sessionStatus, setSessionStatus] = useState('active');
   const [players, setPlayers] = useState([]);
   
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+      const timer = setInterval(() => setNow(Date.now()), 10000);
+      return () => clearInterval(timer);
+  }, []);
+
+  const isOnline = (p) => {
+      const pingTime = p.lastPing?.toMillis?.() || p.lastPing?.seconds * 1000 || p.lastUpdate?.toMillis?.() || p.lastUpdate?.seconds * 1000 || 0;
+      return (now - pingTime) < 65000;
+  };
+  
+  const sortedPlayers = [...players].sort((a, b) => {
+      const aOnline = isOnline(a);
+      const bOnline = isOnline(b);
+      if (aOnline === bOnline) return a.id.localeCompare(b.id);
+      return aOnline ? -1 : 1;
+  });
+
   const [resumeCode, setResumeCode] = useState('');
   const [showFullscreen, setShowFullscreen] = useState(false);
 
@@ -565,15 +583,16 @@ export default function TeacherDashboard() {
                             
                             {/* Oppilaat */}
                             <div style={{ display: 'grid', gap: '1.2rem' }}>
-                            {players.map(p => {
+                            {sortedPlayers.map(p => {
                                 const isExpanded = expandedStudents[p.id];
+                                const online = isOnline(p);
                                 return (
-                                <div key={p.id} className="animate-fade-in" style={{ padding: '1.5rem 2rem', border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s', cursor: 'pointer' }} onClick={() => toggleStudent(p.id)} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
+                                <div key={p.id} className="animate-fade-in" style={{ padding: '1.5rem 2rem', border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s', cursor: 'pointer', opacity: online ? 1 : 0.65, filter: online ? 'none' : 'grayscale(100%)' }} onClick={() => toggleStudent(p.id)} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
                                     
                                     {/* Summary View */}
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
                                         <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#0f172a' }}>{p.id}</h3>
+                                            <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#0f172a' }}>{p.id} {!online && <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'normal', fontStyle: 'italic', marginLeft: '0.5rem' }}>(Offline)</span>}</h3>
                                             {!isExpanded && p.location && (
                                                <span style={{ color: '#64748b', fontSize: '0.85rem' }}><Star size={12} color="#f59e0b" fill="#f59e0b" style={{ verticalAlign: 'middle', marginRight: '4px' }} />{p.location}</span>
                                             )}

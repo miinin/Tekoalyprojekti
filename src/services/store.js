@@ -613,6 +613,7 @@ export const store = {
         location: locStr,
         globalStats,
         rawData,
+        lastPing: serverTimestamp(),
         lastUpdate: serverTimestamp()
       };
       
@@ -622,6 +623,19 @@ export const store = {
     } catch (err) {
       console.error('Luokkatilan synkronointi epäonnistui:', err);
       return false;
+    }
+  },
+
+  pingPresence: async () => {
+    const code = store.getClassroomCode();
+    const nickname = store.getClassroomNickname();
+    if (!code || !nickname) return;
+    try {
+      await updateDoc(doc(db, "class_sessions", code, "players", nickname), {
+          lastPing: serverTimestamp()
+      });
+    } catch (err) {
+      console.error('Ping failed:', err);
     }
   },
 
