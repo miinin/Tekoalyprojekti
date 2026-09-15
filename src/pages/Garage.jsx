@@ -459,6 +459,12 @@ export default function Garage() {
           border: 1px solid rgba(0,0,0,0.05);
           margin-bottom: 0.5rem;
         }
+        @media (max-height: 800px) {
+          .category-header {
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.3rem;
+          }
+        }
         .category-header:hover {
           background: rgba(255,255,255,0.9);
           border-color: var(--primary-color);
@@ -705,27 +711,27 @@ export default function Garage() {
               )}
 
               {isTutorialActive && !hideTutorialBox && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '1.5rem 3rem 1.5rem 2.5rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
-                   <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '600px', width: '95%', zIndex: 9999 }}>
+                   <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
                    <p style={{ margin: 0, lineHeight: 1.5 }}>Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen.<br/><br/>Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!</p>
                 </div>
               )}
               
               {showGreenPulse && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
-                   <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '600px', width: '95%', zIndex: 9999 }}>
+                   <button onClick={() => setShowGreenPulse(false)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
                    <p style={{ margin: 0, lineHeight: 1.5 }}>Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!</p>
                 </div>
               )}
               
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%', zIndex: 9999 }}>
-                   <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: '1.6rem', color: '#10b981', marginTop: '0', marginBottom: '0.8rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa takaisin!</h2>
-                   <p style={{ margin: 0, lineHeight: 1.5, marginBottom: '1.5rem' }}>Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!</p>
-                   <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.2rem' }} onClick={() => {
+                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '650px', width: '95%', zIndex: 9999 }}>
+                   <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
+                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa takaisin!</h2>
+                   <p style={{ margin: 0, lineHeight: 1.5, marginBottom: 'clamp(0.8rem, 2vh, 1.5rem)' }}>Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!</p>
+                   <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: 'clamp(1.1rem, 2vh, 1.2rem)', padding: 'clamp(0.8rem, 2vh, 1.2rem)' }} onClick={() => {
                         localStorage.setItem('aivan_garage_tuition', 'true');
                         setClosedGarageTuition(true);
                    }}>Eikun hommiin!</button>
@@ -733,11 +739,11 @@ export default function Garage() {
               )}
 
                {saveCode && (
-                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                     <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: '1.2rem', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '600px', position: 'relative' }}>
-                        <button onClick={() => setSaveCode(null)} style={{ position: 'absolute', top: '1rem', right: '1rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={24} /></button>
-                        <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Rekisterikilpesi on valmis!</h3>
-                        <p style={{ marginTop: 0, marginBottom: '1.5rem', fontSize: '1.1rem', lineHeight: 1.5 }}>Ota tämä koodi talteen. Kun palaat pelaamaan Lobbyn kautta uudella laitteella, syötä tämä rekisterikilpi sille varattuun kenttään, ja saat kaikki kipinäsi ja varusteesi takaisin.</p>
+                 <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+                     <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '100%', maxWidth: '700px', position: 'relative' }}>
+                        <button onClick={() => setSaveCode(null)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={24} /></button>
+                        <h3 style={{ margin: '0 0 clamp(0.5rem, 1vh, 1rem) 0', color: '#0ea5e9', fontSize: 'clamp(1.4rem, 3vh, 1.8rem)', fontFamily: 'var(--font-display)' }}>Rekisterikilpesi on valmis!</h3>
+                        <p style={{ marginTop: 0, marginBottom: 'clamp(1rem, 2vh, 1.5rem)', fontSize: 'clamp(0.95rem, 2vh, 1.1rem)', lineHeight: 1.5 }}>Ota tämä koodi talteen. Kun palaat pelaamaan Lobbyn kautta uudella laitteella, syötä tämä rekisterikilpi sille varattuun kenttään, ja saat kaikki kipinäsi ja varusteesi takaisin.</p>
                         
                         <div style={{ background: 'white', border: '3px solid #cbd5e1', borderRadius: '12px', display: 'flex', alignItems: 'stretch', boxShadow: '0 8px 25px rgba(0,0,0,0.2)', position: 'relative', overflow: 'hidden', margin: '0 1rem' }}>
                            <div style={{ background: '#0ea5e9', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0.5rem 1.2rem', color: 'white', fontWeight: 'bold', fontSize: '1.2rem' }}>
@@ -766,9 +772,9 @@ export default function Garage() {
                        
                        <div style={{ position: 'relative', display: 'flex', maxHeight: '100%', maxWidth: '1400px', justifyContent: 'center', alignItems: 'center' }}>
                            {showTrophyTuition && (
-                             <div className="animate-bounce" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '2rem 3rem 2rem 2.5rem', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: '1.2rem', zIndex: 650, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '90%' }}>
+                             <div className="animate-bounce" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2rem)', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', zIndex: 650, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '95%' }}>
                                 <button onClick={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
-                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'clamp(0.5rem, 1vh, 1rem)' }}>
                                    <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
                                 </div>
                                 {earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0 ? (
@@ -1022,77 +1028,68 @@ export default function Garage() {
     </div>
 
     {saveError && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out' }}>
-             <div className="modal-content" style={{ background: 'linear-gradient(145deg, #7f1d1d 0%, #450a0a 100%)', padding: '3rem', borderRadius: '24px', maxWidth: '500px', width: '90%', border: '2px solid #ef4444', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', textAlign: 'center' }}>
-                 <div style={{ background: 'rgba(239,68,68,0.2)', width: '80px', height: '80px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 2rem auto', border: '2px solid #ef4444' }}>
-                     <X size={48} color="#ef4444" />
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.9)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', animation: 'fadeIn 0.3s ease-out', padding: '1rem' }}>
+             <div className="modal-content" style={{ background: 'linear-gradient(145deg, #7f1d1d 0%, #450a0a 100%)', padding: 'clamp(1.5rem, 4vh, 3rem)', borderRadius: '24px', maxWidth: '600px', width: '100%', border: '2px solid #ef4444', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', color: 'white', position: 'relative', textAlign: 'center' }}>
+                 <div style={{ background: 'rgba(239,68,68,0.2)', width: '60px', height: '60px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto clamp(1rem, 2vh, 2rem) auto', border: '2px solid #ef4444' }}>
+                     <X size={32} color="#ef4444" />
                  </div>
-                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: '#fca5a5' }}>Voi rähmä!</h2>
-                 <p style={{ fontSize: '1.2rem', color: '#fecaca', marginBottom: '1rem', lineHeight: '1.6' }}>Yhteys rekisterikeskukseen katkesi. Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.</p>
-                 <div style={{ background: '#7f1d1d', color: '#fca5a5', padding: '1rem', borderRadius: '8px', fontSize: '1rem', marginBottom: '2rem', fontFamily: 'monospace' }}>
+                 <h2 style={{ fontSize: 'clamp(1.5rem, 4vh, 2rem)', marginBottom: 'clamp(0.5rem, 1vh, 1rem)', color: '#fca5a5' }}>Voi rähmä!</h2>
+                 <p style={{ fontSize: 'clamp(1rem, 2vh, 1.2rem)', color: '#fecaca', marginBottom: 'clamp(0.8rem, 2vh, 1rem)', lineHeight: '1.5' }}>Yhteys rekisterikeskukseen katkesi. Tarkista nettiyhteytesi ja yritä myöhemmin uudelleen.</p>
+                 <div style={{ background: '#7f1d1d', color: '#fca5a5', padding: '0.8rem', borderRadius: '8px', fontSize: '0.9rem', marginBottom: 'clamp(1rem, 3vh, 2rem)', fontFamily: 'monospace' }}>
                      Virhekoodi: {saveError}
                  </div>
                  <div style={{ display: 'flex', gap: '1rem', flexDirection: 'column' }}>
                      <button 
-                        onClick={() => setSaveError(null)}
-                        style={{ padding: '0.8rem 2rem', fontSize: '1.2rem', borderRadius: '12px', background: 'transparent', color: '#fca5a5', fontWeight: 'bold', border: '2px solid #ef4444', cursor: 'pointer' }}>
-                        Palaa peliin
-                     </button>
-                 </div>
-             </div>
-        </div>
-    )}
-
-    {showMeterTutorial && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: '3rem', borderRadius: '32px', maxWidth: '650px', width: '90%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative', overflow: 'hidden' }}>
-                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
+                  {showMeterTutorial && (
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: 'clamp(1.5rem, 4vh, 3rem)', borderRadius: '32px', maxWidth: '850px', width: '100%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative' }}>
+                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1.5vh, 1.5rem)', right: 'clamp(0.5rem, 1.5vh, 1.5rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
                     <X size={24} />
                 </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: '1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
-                        <Zap size={36} color="white" />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: 'clamp(1rem, 2.5vh, 2rem)' }}>
+                    <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: 'clamp(0.5rem, 1.5vh, 1rem)', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
+                        <Zap size={28} color="white" />
                     </div>
-                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Kipinät ja Erikoiskyvyt</h2>
+                    <h2 style={{ fontSize: 'clamp(1.5rem, 4vh, 2.5rem)', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Kipinät ja Erikoiskyvyt</h2>
                 </div>
                 
-                <p style={{ fontSize: '1.15rem', color: '#334155', lineHeight: '1.6', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
+                <p style={{ fontSize: 'clamp(0.95rem, 2vh, 1.15rem)', color: '#334155', lineHeight: '1.5', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontFamily: 'var(--font-main)' }}>
                     Kipinöillä voit hankkia autotallista varusteita, jotka antavat sinulle <strong>karttakohtaisia apuja!</strong> Näet apuvälineet kysymysruutujen kulmassa pelatessasi.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', marginBottom: '2rem', fontFamily: 'var(--font-main)' }}>
-                    <div style={{ background: '#fef2f2', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fecaca', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <ShieldCheck size={32} color="#ef4444" style={{ flexShrink: 0 }} />
-                        <div>
-                            <strong style={{ color: '#dc2626', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Yritä uudelleen <span style={{ color: '#ef4444', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Puskurit)</span></strong>
-                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.</span>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(0.8rem, 1.5vh, 1.2rem)', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontFamily: 'var(--font-main)' }}>
+                    <div style={{ background: '#fef2f2', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #fecaca', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <ShieldCheck size={24} color="#ef4444" style={{ flexShrink: 0 }} />
+                            <strong style={{ color: '#dc2626', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Yritä uudelleen <span style={{ color: '#ef4444', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Puskurit)</span></strong>
                         </div>
+                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.</span>
                     </div>
-                    <div style={{ background: '#fffbeb', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <Disc size={32} color="#eab308" style={{ flexShrink: 0 }} />
-                        <div>
-                            <strong style={{ color: '#d97706', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Poisto <span style={{ color: '#eab308', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Renkaat)</span></strong>
-                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.</span>
+                    <div style={{ background: '#fffbeb', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Disc size={24} color="#eab308" style={{ flexShrink: 0 }} />
+                            <strong style={{ color: '#d97706', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Poisto <span style={{ color: '#eab308', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Renkaat)</span></strong>
                         </div>
+                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.</span>
                     </div>
-                    <div style={{ background: '#f0fdf4', padding: '1.2rem', borderRadius: '16px', border: '1px solid #bbf7d0', display: 'flex', gap: '1rem', alignItems: 'center', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <Wrench size={32} color="#22c55e" style={{ flexShrink: 0 }} />
-                        <div>
-                            <strong style={{ color: '#16a34a', display: 'block', marginBottom: '0.2rem', fontSize: '1.05rem', textTransform: 'uppercase' }}>Vaihto <span style={{ color: '#22c55e', fontWeight: 'normal', fontSize: '0.9rem', textTransform: 'none' }}>(Työkalut)</span></strong>
-                            <span style={{ color: '#475569', fontSize: '0.95rem' }}>Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!</span>
+                    <div style={{ background: '#f0fdf4', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #bbf7d0', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <Wrench size={24} color="#22c55e" style={{ flexShrink: 0 }} />
+                            <strong style={{ color: '#16a34a', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Vaihto <span style={{ color: '#22c55e', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Työkalut)</span></strong>
                         </div>
+                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!</span>
                     </div>
                 </div>
-
-                <p style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#64748b', fontStyle: 'italic', marginBottom: '2rem', fontSize: '0.95rem', background: '#f8fafc', padding: '1.2rem', borderRadius: '12px', border: '1px solid #f1f5f9' }}>
-                    <Lightbulb size={22} color="#eab308" style={{ flexShrink: 0 }} />
-                    <span style={{ lineHeight: '1.5' }}><strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!</span>
+ 
+                <p style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#64748b', fontStyle: 'italic', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', background: '#f8fafc', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '12px', border: '1px solid #f1f5f9' }}>
+                    <Lightbulb size={20} color="#eab308" style={{ flexShrink: 0 }} />
+                    <span style={{ lineHeight: '1.4' }}><strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!</span>
                 </p>
-
+ 
                 <button 
                     onClick={() => setShowMeterTutorial(false)}
                     className="btn-primary"
-                    style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', borderRadius: '16px', background: '#0ea5e9', color: 'white', fontWeight: 'bold' }}>
+                    style={{ width: '100%', padding: 'clamp(0.8rem, 2vh, 1.2rem)', fontSize: 'clamp(1.1rem, 2vh, 1.3rem)', borderRadius: '16px', background: '#0ea5e9', color: 'white', fontWeight: 'bold' }}>
                     Selvä homma!
                 </button>
             </div>

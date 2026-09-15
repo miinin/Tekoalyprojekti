@@ -207,6 +207,13 @@ export default function Lobby() {
             overflow: hidden;
             min-height: 440px;
         }
+        @media (max-height: 800px) {
+            .mode-card {
+                min-height: 380px;
+                padding: 1.5rem;
+                gap: 1rem;
+            }
+        }
         .mode-card:hover {
             transform: translateY(-8px) translateZ(0);
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
@@ -477,104 +484,98 @@ export default function Lobby() {
       </div>
 
       {modalState && (
-         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={modalState.onClose}>
-            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '90%', maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
-               <button onClick={modalState.onClose} style={{ position: 'absolute', top: '0.8rem', right: '0.8rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
-               <h3 style={{ margin: '0 0 1rem 0', color: '#0ea5e9', fontSize: '1.8rem', fontFamily: 'var(--font-display)' }}>{modalState.title}</h3>
-               <p style={{ margin: '0 0 2rem 0', fontSize: '1.1rem', whiteSpace: 'pre-wrap' }}>{modalState.text}</p>
-               <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: '1.2rem', padding: '1rem' }} onClick={modalState.onClose}>
-                  {modalState.buttonText || 'Selvä'}
-               </button>
-            </div>
-         </div>
-      )}
-
-      {showInfoBox && (
-         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem 1rem' }}>
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }} onClick={modalState.onClose}>
+            <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '95%', maxWidth: '600px' }} onClick={e => e.stopPropagation()}>
+               <button onClick={modalState.onClose} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 0.8rem)', right: 'clamp(0.5rem, 1vh, 0.8rem)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
+               <h3 style={{ margin: '0 0 clamp(0.5rem, 1vh, 1rem) 0', color: '#0ea5e9', fontSize: 'clamp(1.4rem, 3vh, 1.8rem)', fontFamily: 'var(--font-display)' }}>{modalState.title}</h3>
+               <p style={{ margin: '0 0 clamp(1rem, 2vh, 2rem) 0', fontSize: 'clamp(0.95rem, 2vh, 1.1rem)', whiteSpace: 'pre-wrap' }}>{modalState.text}</p>
+               <button className="btn-primary" style={{ background: '#0ea5e9', width: '100%', fontSize: 'clamp(1.1rem, 2vh, 1.2rem)', padding: 'clamp(0.8rem, 2vh, 1rem)' }} onClick={modalState.onClose}>
+                  {modalState.buttonText |      {showInfoBox && (
+         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            <div style={{ position: 'relative', padding: '4rem 2.5rem 3.5rem 2.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', minHeight: '80vh', maxHeight: '95vh', overflowY: 'auto', zIndex: 10, textAlign: 'center' }}>
+            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
                <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', zIndex: -1, pointerEvents: 'none' }} />
-               <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
+               <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: 'clamp(0.8rem, 1.5vh, 1.5rem)', right: 'clamp(0.8rem, 1.5vh, 1.5rem)', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: 'clamp(0.4rem, 1vh, 0.6rem)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
-               <h2 style={{ fontSize: '3.2rem', background: 'linear-gradient(135deg, #10b981, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-display)', margin: '0 0 2rem 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+               <h2 style={{ fontSize: 'clamp(1.8rem, 4vh, 3.2rem)', background: 'linear-gradient(135deg, #10b981, #0ea5e9)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-display)', margin: '0 0 clamp(1rem, 2vh, 2rem) 0', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
                   Kuskit ja apukuskit
                </h2>
                
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem', width: '100%', maxWidth: '1100px', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', maxWidth: '1100px', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
                   
                   {/* Kehittäjät */}
-                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2.5rem 2rem', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '2rem' }}>
+                  <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2.5rem) clamp(1rem, 2vh, 2rem)', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 2rem)' }}>
                           <Users size={24} color="#0ea5e9" /> Vastaavat Kehittäjät
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', justifyContent: 'center', gap: '1.2rem', width: '100%' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', justifyContent: 'center', gap: 'clamp(0.5rem, 1vh, 1.2rem)', width: '100%' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1rem' }}>
-                              <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: '65px', objectFit: 'contain', opacity: 0.95 }} />
+                              <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: 'clamp(40px, 6vh, 65px)', objectFit: 'contain', opacity: 0.95 }} />
                           </div>
-                          <div style={{ fontSize: '2rem', fontWeight: 'bold', color: '#cbd5e1', display: 'flex', alignItems: 'center' }}>:</div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '220px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /> <Paintbrush size={22} color="#0284c7" /></div>
+                          <div style={{ fontSize: 'clamp(1.5rem, 3vh, 2rem)', fontWeight: 'bold', color: '#cbd5e1', display: 'flex', alignItems: 'center' }}>:</div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '220px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={20} color="#0284c7" /> <BookOpen size={20} color="#0284c7" /> <Paintbrush size={20} color="#0284c7" /></div>
                               Miika Miinin
                           </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={22} color="#0284c7" /> <BookOpen size={22} color="#0284c7" /></div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={20} color="#0284c7" /> <BookOpen size={20} color="#0284c7" /></div>
                               Heikki Laivamaa
                           </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', padding: '1.2rem 1.8rem', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.3rem', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Paintbrush size={22} color="#0284c7" /></div>
+                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
+                              <div style={{ display: 'flex', gap: '0.8rem' }}><Paintbrush size={20} color="#0284c7" /></div>
                               Pauli Hirvonen
                           </div>
                       </div>
                   </div>
-
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+ 
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(1rem, 2vh, 2rem)' }}>
                       {/* Konsultit */}
-                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <GraduationCap size={24} color="#ca8a04" /> Kiitos konsultoinnista!
+                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2rem)', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.85rem, 2vh, 1.1rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 1.5rem)' }}>
+                              <GraduationCap size={20} color="#ca8a04" /> Kiitos konsultoinnista!
                           </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexGrow: 1, justifyContent: 'center' }}>
-                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                                  <ShieldCheck size={24} color="#ca8a04" /> Ville Myllys
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1.2rem)', flexGrow: 1, justifyContent: 'center' }}>
+                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <ShieldCheck size={20} color="#ca8a04" /> Ville Myllys
                               </span>
-                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                                  <Paintbrush size={24} color="#ca8a04" /> Ville Schalin
+                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <Paintbrush size={20} color="#ca8a04" /> Ville Schalin
                               </span>
-                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
-                                  <Settings size={24} color="#ca8a04" /> Matti Riikonen
+                              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <Settings size={20} color="#ca8a04" /> Matti Riikonen
                               </span>
                           </div>
                       </div>
-
+ 
                       {/* Testaajat */}
-                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <Play size={24} color="#10b981" /> Pelitestaajat
+                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2rem)', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.85rem, 2vh, 1.1rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 1.5rem)' }}>
+                              <Play size={20} color="#10b981" /> Pelitestaajat
                           </div>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem', flexGrow: 1, alignContent: 'center' }}>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 'clamp(0.4rem, 1vh, 1rem)', flexGrow: 1, alignContent: 'center' }}>
                               {['Samu', 'Saaga', 'Eemi', 'Anne Rongas', 'Lauri Ylä-Jussila', 'Kari A. Hintikka'].map(name => (
-                                  <span key={name} style={{ padding: '0.8rem 1.5rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '100px', fontWeight: 'bold', fontSize: '1.1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <span key={name} style={{ padding: 'clamp(0.4rem, 1vh, 0.8rem) clamp(0.8rem, 1.5vh, 1.5rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '100px', fontWeight: 'bold', fontSize: 'clamp(0.85rem, 2vh, 1.1rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                       {name}
                                   </span>
                               ))}
                           </div>
                       </div>
-
+ 
                       {/* AI Palvelut */}
-                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: '2rem', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: '1.1rem', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '1.5rem' }}>
-                              <Zap size={24} color="#f97316" /> Tekoälypalvelut
+                      <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2rem)', border: '2px solid #e2e8f0', boxShadow: '0 6px 20px rgba(0,0,0,0.03)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.85rem, 2vh, 1.1rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 1.5rem)' }}>
+                              <Zap size={20} color="#f97316" /> Tekoälypalvelut
                           </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', flexGrow: 1, justifyContent: 'center' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1.2rem)', flexGrow: 1, justifyContent: 'center' }}>
                               {['Google Antigravity', 'NotebookLM', 'Google Gemini'].map(name => (
-                                  <span key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1.2rem', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: '1.2rem', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
+                                  <span key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                       {name}
                                   </span>
                               ))}
                           </div>
                       </div>
                   </div>
-
+ 
                </div>
             </div>
          </div>
