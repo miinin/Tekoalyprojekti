@@ -336,6 +336,18 @@ export default function Lobby() {
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin ja kehitä tekoälypakuasi.</p>
           
+          <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', margin: '0.5rem 0 1rem 0', padding: '1.2rem', backgroundColor: '#f0fdf4', borderRadius: '16px', border: '2px dashed #86efac' }}>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
+                 <Sparkles size={20} color="#10b981" /> Ratko tekoälyhaasteita
+             </div>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
+                 <Wrench size={20} color="#10b981" /> Päivitä AIVAN-pakuasi
+             </div>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
+                 <Trophy size={20} color="#10b981" /> Kilpaile huippupisteistä
+             </div>
+          </div>
+          
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
             <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#059669', border: `2px solid ${store.hasProgress() ? '#cbd5e1' : '#059669'}`, color: store.hasProgress() ? '#64748b' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
               UUSI SEIKKAILU
