@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, GraduationCap, ShieldCheck, Upload, BookOpen, Paintbrush, Sparkles, BookText, Rocket, MessageSquare, Trophy, ExternalLink, History } from 'lucide-react';
 import { store } from '../services/store';
@@ -455,7 +456,7 @@ export default function Lobby() {
       </div>
       </div>
 
-      {modalState && (
+      {modalState && createPortal(
          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }} onClick={modalState.onClose}>
             <div className="animate-bounce" style={{ position: 'relative', background: 'rgba(255,255,255,0.95)', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '95%', maxWidth: '600px' }} onClick={e => e.stopPropagation()}>
                <button onClick={modalState.onClose} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 0.8rem)', right: 'clamp(0.5rem, 1vh, 0.8rem)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24} /></button>
@@ -465,10 +466,11 @@ export default function Lobby() {
                   {modalState.buttonText || 'OK'}
                </button>
             </div>
-         </div>
+         </div>,
+         document.body
       )}
 
-      {showInfoBox && (
+      {showInfoBox && createPortal(
          <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
             <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
@@ -556,7 +558,8 @@ export default function Lobby() {
  
                </div>
             </div>
-         </div>
+         </div>,
+         document.body
       )}
     </div>
   );

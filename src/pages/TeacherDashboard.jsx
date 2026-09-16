@@ -755,7 +755,7 @@ export default function TeacherDashboard() {
             </div>
         )}
 
-        {confirmModal && (
+        {confirmModal && createPortal(
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
                 <div className="animate-bounce" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', border: `2px solid ${confirmModal.confirmColor || '#3b82f6'}`, display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)' }}>
                     <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.1rem, 2.5vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><AlertTriangle color={confirmModal.confirmColor || '#3b82f6'} size={24} /> {confirmModal.title}</h3>
@@ -765,7 +765,8 @@ export default function TeacherDashboard() {
                         <button onClick={() => setConfirmModal(null)} style={{ padding: 'clamp(0.6rem, 1.5vh, 1rem) clamp(1rem, 2vh, 2rem)', background: 'transparent', border: '2px solid #cbd5e1', color: '#64748b', borderRadius: '12px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.1rem)', cursor: 'pointer' }}>Peruuta</button>
                     </div>
                 </div>
-            </div>
+            </div>,
+            document.body
         )}
 
         {/* Fullscreen Code Modal */}
@@ -783,7 +784,7 @@ export default function TeacherDashboard() {
         )}
 
         {/* Recovery Modal */}
-        {showRecovery && (
+        {showRecovery && createPortal(
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
                 <div className="animate-fade-in" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)', position: 'relative' }}>
                     <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
@@ -823,7 +824,8 @@ export default function TeacherDashboard() {
                         </div>
                     )}
                 </div>
-            </div>
+            </div>,
+            document.body
         )}
 
     </div>
