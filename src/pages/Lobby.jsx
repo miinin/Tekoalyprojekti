@@ -183,11 +183,9 @@ export default function Lobby() {
             padding: 2rem;
             position: relative;
             overflow: hidden;
-            min-height: 440px;
         }
         @media (max-height: 800px) {
             .mode-card {
-                min-height: 380px;
                 padding: 1.5rem;
                 gap: 1rem;
             }
@@ -212,8 +210,7 @@ export default function Lobby() {
          display: 'flex',
          flexDirection: 'column',
          justifyContent: 'center',
-         height: '90vh',
-         minHeight: '750px',
+         minHeight: 'min(90vh, 100%)',
          alignItems: 'center',
          width: '100%',
          maxWidth: '1250px',
@@ -340,7 +337,7 @@ export default function Lobby() {
           <p style={{ color: 'var(--text-main)', fontSize: '1.15rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', opacity: 0.85 }}>Pelaa omaan tahtiin ja kehitä tekoälypakuasi.</p>
           
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto', paddingTop: '1.5rem' }}>
-            <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: '#059669', borderColor: '#059669', color: 'white', boxShadow: '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
+            <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: '1.2rem', fontSize: '1.3rem', background: store.hasProgress() ? 'transparent' : '#059669', border: `2px solid ${store.hasProgress() ? '#cbd5e1' : '#059669'}`, color: store.hasProgress() ? '#64748b' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
               UUSI SEIKKAILU
             </button>
           </div>
@@ -388,26 +385,37 @@ export default function Lobby() {
       </div>
 
       {/* JATKA PELIÄ (Bottom Banner) */}
-      <div className="animate-fade-in" style={{ width: '100%', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: '1.5rem 2rem', marginTop: '1.5rem', border: '2px solid #99f6e4', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-             <div style={{ background: '#0d9488', width: '50px', height: '50px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
-                 <History size={28} />
-             </div>
-             <div>
-                 <h3 style={{ margin: 0, color: '#0f766e', fontSize: '1.4rem', fontFamily: 'var(--font-display)' }}>Jatka peliä</h3>
-                 <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-main)', opacity: 0.8, fontSize: '1rem' }}>Palaa takaisin tekoälypakusi rattiin!</p>
-             </div>
-          </div>
+      <div className="animate-fade-in" style={{ width: '100%', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: store.hasProgress() ? '1.5rem 2rem' : '0.8rem 2rem', marginTop: '1.5rem', border: store.hasProgress() ? '2px solid #f59e0b' : '1px solid #cbd5e1', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: '1.5rem', boxShadow: store.hasProgress() ? '0 10px 30px rgba(245, 158, 11, 0.15)' : 'none', zIndex: 10 }}>
+          {store.hasProgress() ? (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                 <div style={{ background: '#f59e0b', width: '50px', height: '50px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
+                     <History size={28} />
+                 </div>
+                 <div>
+                     <h3 style={{ margin: 0, color: '#b45309', fontSize: '1.4rem', fontFamily: 'var(--font-display)' }}>Jatka peliä</h3>
+                     <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-main)', opacity: 0.8, fontSize: '1rem' }}>Palaa takaisin tekoälypakusi rattiin!</p>
+                 </div>
+              </div>
+          ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                 <div style={{ color: '#94a3b8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                     <History size={20} />
+                 </div>
+                 <h3 style={{ margin: 0, color: '#64748b', fontSize: '1.1rem', fontFamily: 'var(--font-main)' }}>Palauta aiempi peli koodilla:</h3>
+              </div>
+          )}
           
           <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '1rem', flexGrow: 1, justifyContent: 'flex-end' }}>
-             <button className="btn-primary" disabled={!store.hasProgress()} onClick={handleContinueSinglePlayer} style={{ background: '#0d9488', padding: '0.8rem 1.5rem', fontSize: '1.1rem', boxShadow: store.hasProgress() ? '0 4px 15px rgba(13, 148, 136, 0.4)' : 'none', opacity: store.hasProgress() ? 1 : 0.5, cursor: store.hasProgress() ? 'pointer' : 'not-allowed', whiteSpace: 'nowrap' }}>
-               {store.hasProgress() ? 'PALAA PELIIN' : 'EI KESKENERÄISTÄ PELIÄ'}
-             </button>
+             {store.hasProgress() && (
+                 <button className="btn-primary animate-bounce" onClick={handleContinueSinglePlayer} style={{ background: '#f59e0b', padding: '0.8rem 2rem', fontSize: '1.2rem', boxShadow: '0 8px 25px rgba(245, 158, 11, 0.4)', color: 'white', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                   PALAA PELIIN
+                 </button>
+             )}
              
-             <div style={{ width: '2px', height: '40px', background: '#cbd5e1', margin: '0 0.5rem', display: window.innerWidth > 600 ? 'block' : 'none' }}></div>
+             {store.hasProgress() && <div style={{ width: '2px', height: '40px', background: '#cbd5e1', margin: '0 0.5rem', display: window.innerWidth > 600 ? 'block' : 'none' }}></div>}
 
              <form onSubmit={handleRestoreCloudSave} style={{ display: 'flex', gap: '0.5rem', alignItems: 'stretch' }}>
-                  <div style={{ display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #475569', overflow: 'hidden', height: '45px' }}>
+                  <div style={{ display: 'flex', background: 'white', borderRadius: '8px', border: '2px solid #475569', overflow: 'hidden', height: store.hasProgress() ? '45px' : '40px' }}>
                       <div style={{ background: '#1d4ed8', width: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '0.65rem' }}>
                           <div style={{ gridTemplateColumns: 'repeat(3, 1fr)', width: '16px', height: '16px', gap: '1px', display: 'grid', justifyContent: 'center', alignContent: 'center', marginBottom: '2px' }}>
                             {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((_, i) => <div key={i} style={{ width: '4px', height: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{i !== 4 && <Zap size={4} fill="#fef08a" color="#fef08a" strokeWidth={1} />}</div>)}
@@ -424,10 +432,10 @@ export default function Lobby() {
                              setLoadCode(val);
                          }}
                          maxLength={7}
-                         style={{ width: '110px', padding: '0 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: '1rem', textAlign: 'center', outline: 'none', letterSpacing: '1px', fontWeight: 'bold', color: '#1e293b' }}
+                         style={{ width: store.hasProgress() ? '110px' : '90px', padding: '0 0.5rem', border: 'none', fontFamily: 'monospace', fontSize: store.hasProgress() ? '1rem' : '0.9rem', textAlign: 'center', outline: 'none', letterSpacing: '1px', fontWeight: 'bold', color: '#1e293b' }}
                       />
                   </div>
-                  <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: '#0d9488', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <button type="submit" disabled={isRestoring || loadCode.length < 6} style={{ background: store.hasProgress() ? '#0d9488' : '#94a3b8', color: 'white', border: 'none', padding: '0 1rem', borderRadius: '8px', cursor: (isRestoring || loadCode.length < 6) ? 'not-allowed' : 'pointer', opacity: (isRestoring || loadCode.length < 6) ? 0.5 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       {isRestoring ? '...' : <ArrowRight size={20} />}
                   </button>
              </form>
