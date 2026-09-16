@@ -341,7 +341,7 @@ export default function Lobby() {
                  <Sparkles size={20} color="#10b981" /> Ratko tekoälyhaasteita
              </div>
              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
-                 <Wrench size={20} color="#10b981" /> Päivitä AIVAN-pakuasi
+                 <Wrench size={20} color="#10b981" /> Päivitä AI Van -pakuasi
              </div>
              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
                  <Trophy size={20} color="#10b981" /> Kilpaile huippupisteistä
