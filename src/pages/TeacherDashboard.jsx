@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff } from 'lucide-react';
 import { db } from '../firebase';
-import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
+import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
 
 const topicDictionary = {
@@ -91,7 +91,8 @@ export default function TeacherDashboard() {
   const [requireTutorial, setRequireTutorial] = useState(true);
   const [sessionStatus, setSessionStatus] = useState('active');
   const [players, setPlayers] = useState([]);
-  
+  const [hiddenPlayers, setHiddenPlayers] = useState({});
+
   const [now, setNow] = useState(Date.now());
   useEffect(() => {
       const timer = setInterval(() => setNow(Date.now()), 10000);
@@ -103,7 +104,18 @@ export default function TeacherDashboard() {
       return (now - pingTime) < 65000;
   };
   
-  const sortedPlayers = [...players].sort((a, b) => {
+  // Piilotettu oppilas palaa listalle, jos hän on ollut yhteydessä piilottamisen jälkeen
+  const isHidden = (p) => {
+      const hiddenAt = hiddenPlayers[p.id];
+      if (!hiddenAt) return false;
+      const hiddenMillis = hiddenAt.toMillis?.() || hiddenAt.seconds * 1000 || now;
+      const pingTime = p.lastPing?.toMillis?.() || p.lastPing?.seconds * 1000 || p.lastUpdate?.toMillis?.() || p.lastUpdate?.seconds * 1000 || 0;
+      return pingTime <= hiddenMillis;
+  };
+
+  const visiblePlayers = players.filter(p => !isHidden(p));
+
+  const sortedPlayers = [...visiblePlayers].sort((a, b) => {
       const aOnline = isOnline(a);
       const bOnline = isOnline(b);
       if (aOnline === bOnline) return a.id.localeCompare(b.id);
@@ -246,6 +258,25 @@ export default function TeacherDashboard() {
       setSessionStatus(newStatus);
   };
   
+  const hidePlayer = (nickname) => {
+      setConfirmModal({
+          title: 'Poista oppilas listalta?',
+          text: `Oppilas "${nickname}" piilotetaan luokan seurannasta.\n\nTämä on tarkoitettu ylimääräisten tai vahingossa luotujen tunnusten siivoamiseen. Oppilaan tietoja ei poisteta. Jos oppilas on yhä pelissä tai kirjautuu myöhemmin uudelleen samalla tunnuksella, hän palaa listalle automaattisesti.`,
+          confirmText: 'Poista listalta',
+          confirmColor: '#dc2626',
+          onConfirm: async () => {
+              setConfirmModal(null);
+              if (!sessionCode) return;
+              try {
+                  await updateDoc(doc(db, "class_sessions", sessionCode), new FieldPath('hiddenPlayers', nickname), serverTimestamp());
+              } catch (err) {
+                  console.error(err);
+                  alert('Oppilaan poistaminen listalta epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+              }
+          }
+      });
+  };
+
   const giveSparks = async (nickname, amount) => {
       if (!sessionCode) return;
       await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
@@ -263,7 +294,7 @@ export default function TeacherDashboard() {
   const giveSparksToAll = async (amount) => {
       if (!sessionCode) return;
       const tid = Date.now();
-      const promises = players.map(p => 
+      const promises = visiblePlayers.map(p =>
           setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
               teacherGift: { amount, id: tid + '_' + p.id }
           }, { merge: true })
@@ -274,7 +305,7 @@ export default function TeacherDashboard() {
   const giveBoostToAll = async (color, amount) => {
       if (!sessionCode) return;
       const tid = Date.now();
-      const promises = players.map(p => 
+      const promises = visiblePlayers.map(p =>
           setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
               teacherBoostsGift: { color, amount, id: tid + '_' + p.id }
           }, { merge: true })
@@ -305,6 +336,7 @@ export default function TeacherDashboard() {
       const unsubStatus = onSnapshot(doc(db, "class_sessions", sessionCode), (docSnap) => {
           if (docSnap.exists()) {
              setSessionStatus(docSnap.data().status || 'active');
+             setHiddenPlayers(docSnap.data().hiddenPlayers || {});
           }
       });
       return () => unsubStatus();
@@ -534,10 +566,10 @@ export default function TeacherDashboard() {
                 <div style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(16px)', padding: '2.5rem', borderRadius: '32px', border: '1px solid rgba(255, 255, 255, 0.6)', boxShadow: '0 20px 50px rgba(0,0,0,0.08)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                         <h2 style={{ fontSize: '2rem', margin: 0, fontFamily: 'var(--font-display)', color: '#0f172a', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Users size={32} color="#0284c7" /> Luokan seuranta</h2>
-                        <span style={{ background: '#e0f2fe', color: '#0369a1', padding: '0.6rem 1.5rem', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.1rem', border: '2px solid #bae6fd', boxShadow: '0 4px 10px rgba(3, 105, 161, 0.1)' }}>{players.length} Oppilasta mukana</span>
+                        <span style={{ background: '#e0f2fe', color: '#0369a1', padding: '0.6rem 1.5rem', borderRadius: '20px', fontWeight: 'bold', fontSize: '1.1rem', border: '2px solid #bae6fd', boxShadow: '0 4px 10px rgba(3, 105, 161, 0.1)' }}>{visiblePlayers.length} Oppilasta mukana</span>
                     </div>
 
-                    {players.length === 0 ? (
+                    {visiblePlayers.length === 0 ? (
                         <div style={{ textAlign: 'center', padding: '4rem 2rem', background: '#f8fafc', borderRadius: '16px', border: '2px dashed #cbd5e1' }}>
                             <div className="animate-pulse" style={{ display: 'inline-block', padding: '1rem', background: '#e0f2fe', borderRadius: '50%', marginBottom: '1rem' }}>
                                 <Users size={40} color="#0ea5e9" />
@@ -682,6 +714,9 @@ export default function TeacherDashboard() {
                                                         <Wrench size={14} /> +1 Vaihto
                                                     </button>
                                                 </div>
+                                                <button onClick={() => hidePlayer(p.id)} style={{ alignSelf: 'flex-end', marginTop: '0.4rem', background: 'white', color: '#dc2626', border: '1px solid #fecaca', padding: '0.5rem 0.8rem', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'all 0.2s', fontSize: '0.9rem' }} onMouseOver={e=>{e.currentTarget.style.background='#fef2f2'; e.currentTarget.style.borderColor='#f87171'}} onMouseOut={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.borderColor='#fecaca'}} title="Piilota oppilas luokan seurannasta">
+                                                    <EyeOff size={14} /> Poista listalta
+                                                </button>
                                             </div>
                                         </div>
                                     )}

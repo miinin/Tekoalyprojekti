@@ -11,6 +11,9 @@ import confetti from 'canvas-confetti';
 import { Zap, Gift } from 'lucide-react';
 
 function GlobalClassroomOverlay() {
+  const location = useLocation();
+  // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
+  const isTeacherView = location.pathname.startsWith('/teacher') || location.pathname.startsWith('/admin');
   const [isPaused, setIsPaused] = useState(false);
   const [giftPopup, setGiftPopup] = useState(null);
   
@@ -55,7 +58,7 @@ function GlobalClassroomOverlay() {
   
   return (
       <>
-        {isPaused && (
+        {isPaused && !isTeacherView && (
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
               <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>Käsijarru vedetty! 🛑</h1>
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
