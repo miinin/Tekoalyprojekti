@@ -6,6 +6,27 @@ import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, St
 import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
+import { checkRateLimit, formatWait, LIMITS } from '../services/rateLimit';
+
+// Satunnainen nelinumeroinen esimerkki-PIN, joka ei ole ilmeisen heikko
+// (ei toistuvia numeroita kuten 1111, ei nousevia/laskevia sarjoja kuten 1234 tai 9876).
+const isWeakPin = (pin) => {
+  const d = pin.split('').map(Number);
+  if (d.every(x => x === d[0])) return true;
+  const asc = d.every((x, i) => i === 0 || x === (d[i - 1] + 1) % 10);
+  const desc = d.every((x, i) => i === 0 || x === (d[i - 1] + 9) % 10);
+  return asc || desc;
+};
+
+const generateExamplePin = () => {
+  const buf = new Uint32Array(1);
+  let pin;
+  do {
+    crypto.getRandomValues(buf);
+    pin = String(buf[0] % 10000).padStart(4, '0');
+  } while (isWeakPin(pin));
+  return pin;
+};
 
 const topicDictionary = {
   // Pääkategoriat
@@ -136,6 +157,8 @@ export default function TeacherDashboard() {
   
   // PIN protection
   const [newPin, setNewPin] = useState('');
+  const [examplePin] = useState(generateExamplePin);
+  const [recoveryError, setRecoveryError] = useState('');
   const [resumePin, setResumePin] = useState('');
   
   const [confirmModal, setConfirmModal] = useState(null);
@@ -150,6 +173,12 @@ export default function TeacherDashboard() {
   
   const searchByPin = async () => {
      if (recoveryPin.length < 4) return;
+     const rl = checkRateLimit('pinRecovery', LIMITS.pinRecovery.max, LIMITS.pinRecovery.windowMs);
+     if (!rl.ok) {
+         setRecoveryError(`Liian monta hakua. Odota ${formatWait(rl.waitSeconds)} ja yritä uudelleen.`);
+         return;
+     }
+     setRecoveryError('');
      setRecoverySearching(true);
      setRecoveryResults(null);
      try {
@@ -186,6 +215,11 @@ export default function TeacherDashboard() {
           setErrorMsg('Kirjoita vähintään 4-numeroinen PIN-koodi ensin.');
           return;
       }
+      const rl = checkRateLimit('createSession', LIMITS.createSession.max, LIMITS.createSession.windowMs);
+      if (!rl.ok) {
+          setErrorMsg(`Olet luonut useita luokkia lyhyessä ajassa. Odota ${formatWait(rl.waitSeconds)} tai palauta aiempi tunti oikealta.`);
+          return;
+      }
       const code = generateCode();
       setSessionCode(code);
       setSessionStatus('active');
@@ -208,6 +242,11 @@ export default function TeacherDashboard() {
   const resumeExistingSession = async () => {
       if (resumeCode.length < 6 || resumePin.length < 4) {
           setErrorMsg('Täytä koodi ja PIN.');
+          return;
+      }
+      const rl = checkRateLimit('resumeSession', LIMITS.resumeSession.max, LIMITS.resumeSession.windowMs);
+      if (!rl.ok) {
+          setErrorMsg(`Liian monta yritystä. Odota ${formatWait(rl.waitSeconds)} ja yritä uudelleen.`);
           return;
       }
       setErrorMsg('Yhdistetään...');
@@ -390,7 +429,7 @@ export default function TeacherDashboard() {
                                 </label>
                                 <input
                                     type="password"
-                                    placeholder="Esim. 1234"
+                                    placeholder={`Esim. ${examplePin}`}
                                     value={newPin}
                                     maxLength={8}
                                     onChange={e => { setNewPin(e.target.value); setErrorMsg(''); }}
@@ -822,7 +861,7 @@ export default function TeacherDashboard() {
         {showRecovery && createPortal(
             <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
                 <div className="animate-fade-in" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)', position: 'relative' }}>
-                    <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
+                    <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); setRecoveryError(''); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
                     <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.1rem, 2.5vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Lock color="#3b82f6" size={24} /> Etsi liittymiskoodi</h3>
                     <p style={{ margin: 0, color: '#475569', lineHeight: 1.4, fontSize: 'clamp(0.85rem, 1.8vh, 1rem)' }}>Syötä alle oppitunnille asettamasi PIN-koodi, niin etsimme aktiiviset luokkatilat tietokannasta.</p>
                     
@@ -838,6 +877,10 @@ export default function TeacherDashboard() {
                         {recoverySearching ? 'Etsitään...' : 'Etsi koodia'}
                     </button>
                     
+                    {recoveryError && (
+                        <p style={{ color: '#dc2626', margin: 0, fontWeight: 'bold' }}>{recoveryError}</p>
+                    )}
+
                     {recoveryResults !== null && (
                         <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
                             {recoveryResults.length === 0 ? (

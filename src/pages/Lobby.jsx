@@ -5,6 +5,7 @@ import { Play, Users, Settings, Plus, ArrowRight, Wrench, Info, X, Zap, Graduati
 import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { checkRateLimit, formatWait, LIMITS } from '../services/rateLimit';
 
 export default function Lobby() {
   const navigate = useNavigate();
@@ -70,6 +71,17 @@ export default function Lobby() {
   const handleJoinClass = async (e) => {
       e.preventDefault();
       if (classCode.length < 6 || classNick.length < 2) return;
+
+      const rl = checkRateLimit('joinClass', LIMITS.joinClass.max, LIMITS.joinClass.windowMs);
+      if (!rl.ok) {
+          setModalState({
+              title: 'Hetkinen!',
+              text: `Liian monta liittymisyritystä lyhyessä ajassa. Odota ${formatWait(rl.waitSeconds)} ja yritä sitten uudelleen.`,
+              buttonText: 'Selvä',
+              onClose: () => setModalState(null)
+          });
+          return;
+      }
       
       setJoinClassLoading(true);
       const upperCode = classCode.toUpperCase();
