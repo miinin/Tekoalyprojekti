@@ -158,7 +158,7 @@ export default function Lobby() {
 
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: '1rem' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', padding: 'clamp(0.5rem, 1.6vh, 1rem)' }}>
       
       {/* Animated gradient background */}
       <style>{`
@@ -201,6 +201,12 @@ export default function Lobby() {
             .mode-card {
                 padding: clamp(1rem, 2vh, 1.5rem);
                 gap: clamp(0.5rem, 1vh, 1rem);
+            }
+        }
+        @media (max-height: 640px) {
+            .mode-card {
+                padding: clamp(0.75rem, 1.8vh, 1rem);
+                gap: clamp(0.4rem, 0.9vh, 0.6rem);
             }
         }
         .mode-card:hover {
@@ -337,7 +343,7 @@ export default function Lobby() {
             </a>
         </div>
 
-        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: 'clamp(60px, 15vh, 130px)', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
+        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: 'clamp(52px, 12.5vh, 130px)', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
         <p className="animate-fade-in" style={{ color: '#047857', fontSize: 'clamp(1rem, 2.5vh, 1.4rem)', margin: 'clamp(0.2rem, 0.5vh, 0.5rem) 0 clamp(0.5rem, 1.5vh, 2rem) 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
 
         <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(0.5rem, 1.5vh, 1.5rem)', width: '100%', zIndex: 10 }}>

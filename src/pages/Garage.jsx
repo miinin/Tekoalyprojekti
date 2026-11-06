@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake, Flame, RefreshCw, Eraser, Shield } from 'lucide-react';
+import { createPortal } from 'react-dom';
 import { store } from '../services/store';
 import { categories } from '../data/questions';
+import FitToHeight from '../components/FitToHeight';
+import TutorialModal from '../components/TutorialModal';
 
 export default function Garage() {
   const navigate = useNavigate();
@@ -35,6 +38,8 @@ export default function Garage() {
   const [saveError, setSaveError] = useState(null);
   const [hoverSaveBtn, setHoverSaveBtn] = useState(false);
   const [showMeterTutorial, setShowMeterTutorial] = useState(false);
+  const [meterTutorialAuto, setMeterTutorialAuto] = useState(false);
+  const [trophyTuitionAuto, setTrophyTuitionAuto] = useState(false);
 
   const handleCreateSave = async () => {
       setIsSaving(true);
@@ -289,7 +294,7 @@ export default function Garage() {
            onMouseEnter={() => { if (!isTutorialActive || item.id === 'g-clean') setHoveredItem(item.id); }}
            onMouseLeave={() => setHoveredItem(null)}>
            
-           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.6rem' }}>
+           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.25rem', width: '100%', flexGrow: 1, position: 'relative', padding: '0.45rem' }}>
               {item.buff && (
                   <>
 
@@ -312,11 +317,11 @@ export default function Garage() {
                   <div style={{ 
                       color: item.buff && !item.buff.isSpark ? (item.color || '#475569') : (item.buff?.isSpark ? '#f59e0b' : '#475569'), 
                       zIndex: 1, 
-                      marginTop: '0.5rem', 
-                      marginBottom: '0.8rem',
+                      marginTop: '0.25rem',
+                      marginBottom: '0.4rem',
                       background: 'linear-gradient(135deg, #cbd5e1 0%, #f1f5f9 100%)',
-                      width: '56px',
-                      height: '56px',
+                      width: '46px',
+                      height: '46px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -327,28 +332,28 @@ export default function Garage() {
                   }}>
                     {(() => {
                         if (item.buff) {
-                            if (item.buff.isSpark) return <Flame size={28} fill="currentColor" />;
-                            if (item.id === 'van-wheel06') return <Snowflake size={28} />;
+                            if (item.buff.isSpark) return <Flame size={24} fill="currentColor" />;
+                            if (item.id === 'van-wheel06') return <Snowflake size={24} />;
                             const t = (item.buff.title || '').toLowerCase();
-                            if (t.includes('vaihto')) return <RefreshCw size={28} />;
-                            if (t.includes('poisto')) return <Eraser size={28} />;
-                            if (t.includes('uusi yrity')) return <Shield size={28} />;
+                            if (t.includes('vaihto')) return <RefreshCw size={24} />;
+                            if (t.includes('poisto')) return <Eraser size={24} />;
+                            if (t.includes('uusi yrity')) return <Shield size={24} />;
                         }
-                        return React.cloneElement(item.icon, { size: 28 });
+                        return React.cloneElement(item.icon, { size: 24 });
                     })()}
                   </div>
               )}
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', zIndex: 1, marginTop: 'auto' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                      <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.8)' : 'none' }}>{item.name}</span>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: item.category === 'body' ? 'white' : '#1e293b', textAlign: 'center', lineHeight: '1.2', textShadow: item.category === 'body' ? '0 2px 4px rgba(0,0,0,1), 0 0 10px rgba(0,0,0,0.8)' : 'none' }}>{item.name}</span>
                   </div>
               </div>
           </div>
 
-          <div style={{ padding: '0.6rem', paddingTop: '0.4rem', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 5 }}>
+          <div style={{ padding: '0.45rem', paddingTop: '0.3rem', width: '100%', display: 'flex', justifyContent: 'center', zIndex: 5 }}>
              <button 
                 className={`btn-primary${extraBtnClass}`} 
-                style={{ padding: '0.5rem', fontSize: '0.85rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, borderRadius: '8px' }}
+                style={{ padding: '0.4rem', fontSize: '0.8rem', width: '100%', background: btnBg, color: btnColor, boxShadow: btnShadow, cursor, borderRadius: '8px' }}
                 onClick={async (e) => {
                   e.stopPropagation();
                         if (canBuy) {
@@ -362,6 +367,7 @@ export default function Garage() {
                                 if (!localStorage.getItem('aivan_meter_tutorial_seen')) {
                                     localStorage.setItem('aivan_meter_tutorial_seen', 'true');
                                     setShowMeterTutorial(true);
+                                    setMeterTutorialAuto(true);
                                 }
                             }
                             
@@ -388,6 +394,7 @@ export default function Garage() {
                                  if (!localStorage.getItem('aivan_meter_tutorial_seen')) {
                                      localStorage.setItem('aivan_meter_tutorial_seen', 'true');
                                      setShowMeterTutorial(true);
+                                    setMeterTutorialAuto(true);
                                  }
                              }
                            }
@@ -423,29 +430,54 @@ export default function Garage() {
   return (
     <>
     <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, background: 'radial-gradient(circle at 50% 0%, #fefefe 0%, #e2e8f0 70%, #cbd5e1 100%)' }} />
-    <div className="animate-fade-in" style={{ padding: '1rem 2rem', maxWidth: '2000px', margin: '0 auto', width: '100%' }}>
+    <div className="animate-fade-in garage-page" style={{ padding: 'clamp(0.5rem, 1.8vh, 1rem) clamp(1rem, 2vw, 2rem)', maxWidth: '2000px', margin: '0 auto', width: '100%' }}>
       <style>{`
+        .garage-page {
+          height: 100vh;
+          height: 100dvh;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
         .garage-grid {
           display: grid;
           grid-template-columns: 1fr;
           gap: 1.5rem;
           align-items: start;
         }
-        @media (min-width: 1100px) and (max-width: 1399px) {
+        .garage-left, .garage-center {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+        }
+        /* Kolme saraketta täyttävät ruudun korkeuden; ei vieritystä */
+        @media (min-width: 900px) {
           .garage-grid {
-            grid-template-columns: 200px 320px 1fr;
-            gap: 1rem;
+            flex: 1 1 auto;
+            min-height: 0;
+            grid-template-columns: clamp(160px, 15vw, 260px) clamp(300px, 34vw, 560px) minmax(0, 1fr);
+            grid-template-rows: minmax(0, 1fr);
+            gap: clamp(0.75rem, 1.4vw, 1.5rem);
+            align-items: stretch;
+          }
+          .garage-right {
+            container-type: size;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 0;
+          }
+          .garage-preview {
+            width: min(100cqw, calc(100cqh * 16 / 9));
           }
         }
-        @media (min-width: 1400px) {
-          .garage-grid {
-            grid-template-columns: 260px 420px 1fr;
-          }
-        }
-        @media (max-width: 1099px) {
+        /* Kapea ikkuna (harvinainen): pinotaan sarakkeet allekkain */
+        @media (max-width: 899px) {
+          .garage-page { height: auto; overflow: visible; }
           .garage-left { order: 1; }
           .garage-center { order: 2; }
           .garage-right { order: 3; }
+          .garage-preview { width: 100%; }
         }
         .category-header {
           display: flex;
@@ -466,15 +498,21 @@ export default function Garage() {
             margin-bottom: 0.3rem;
           }
         }
+        @media (max-height: 680px) {
+          .category-header {
+            padding: 0.42rem 0.7rem;
+            margin-bottom: 0.2rem;
+          }
+        }
         .category-header:hover {
           background: rgba(255,255,255,0.9);
           border-color: var(--primary-color);
         }
         .items-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-          gap: 0.8rem;
-          margin-bottom: 2rem;
+          grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+          gap: 0.6rem;
+          margin-bottom: 0.8rem;
           align-content: start;
         }
         .grid-item {
@@ -487,7 +525,7 @@ export default function Garage() {
           overflow: hidden;
           position: relative;
           padding: 0;
-          min-height: 120px;
+          min-height: 108px;
         }
         .grid-item:hover {
           transform: translateY(-4px);
@@ -524,12 +562,12 @@ export default function Garage() {
       {/* flashScreen moved to garage-right */}
       
       {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'clamp(0.4rem, 1.6vh, 1.5rem)', flexWrap: 'wrap', gap: '1rem', flex: 'none' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
           <button 
             className="btn-secondary" 
-            style={{ 
-                padding: '0.8rem 1.5rem', 
+            style={{
+                padding: 'clamp(0.5rem, 1.6vh, 0.8rem) 1.5rem',
                 borderRadius: '15px', 
                 background: 'white', 
                 border: 'none', 
@@ -546,12 +584,12 @@ export default function Garage() {
             <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
           </button>
           <div>
-            <h1 style={{ margin: 0, fontSize: '3rem' }}>Autotalli</h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>Rakennetaan yhdessä unelmien AI-paku!</p>
+            <h1 style={{ margin: 0, fontSize: 'clamp(1.8rem, 5.5vh, 3rem)', lineHeight: 1.1 }}>Autotalli</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: 'clamp(0.85rem, 2.2vh, 1.2rem)', fontFamily: 'var(--font-main)' }}>Rakennetaan yhdessä unelmien AI-paku!</p>
           </div>
         </div>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <div className="glass-panel" style={{ padding: '0.8rem 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
+          <div className="glass-panel" style={{ padding: 'clamp(0.5rem, 1.6vh, 0.8rem) 1.5rem', display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#d97706', background: '#fef3c7', border: '2px solid #fde68a', fontWeight: 'bold', fontSize: '1.2rem', fontFamily: 'var(--font-main)' }}>
             <Zap size={24} fill="#d97706" /> {sparks} Kipinää
           </div>
           {!isTutorialActive && (
@@ -560,7 +598,7 @@ export default function Garage() {
                     onClick={handleCreateSave} 
                     disabled={isSaving}
                     className="btn-secondary" 
-                    style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold' }}>
+                    style={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold', padding: 'clamp(0.5rem, 1.6vh, 0.75rem) 1.5rem' }}>
                     <Save size={24} /> {isSaving ? 'TALLENNETAAN...' : 'Luo jatkamiskoodi'}
                   </button>
                   {hoverSaveBtn && (
@@ -577,6 +615,7 @@ export default function Garage() {
              disabled={isTutorialActive}
              style={{ 
                  display: 'flex', alignItems: 'center', gap: '0.8rem', fontSize: '1.2rem', textTransform: 'uppercase', fontWeight: 'bold',
+                 padding: 'clamp(0.5rem, 1.6vh, 0.75rem) 1.5rem',
                  opacity: isTutorialActive ? 0.3 : 1, 
                  cursor: isTutorialActive ? 'not-allowed' : 'pointer',
                  background: showGreenPulse ? '#10b981' : undefined,
@@ -594,11 +633,12 @@ export default function Garage() {
         
         {/* LEFT COLUMN: Categories Menu */}
         <div className="garage-left">
-           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+           <FitToHeight fitKey={`${activeCategory}|${isTutorialActive}`}>
+           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.6rem, 2vh, 1.5rem)' }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
                   <h3 style={{ fontSize: '1.1rem', color: 'var(--text-muted)', margin: 0, fontFamily: 'var(--font-display)', letterSpacing: '1px', textTransform: 'uppercase' }}>Auton osat</h3>
-                  <button onClick={() => setShowMeterTutorial(prev => !prev)} title="Mitä Kipinöillä tehdään?" style={{ background: 'transparent', color: '#94a3b8', border: '1.5px solid #cbd5e1', borderRadius: '50%', width: '22px', height: '22px', minWidth: '22px', minHeight: '22px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', flexShrink: 0 }} onMouseOver={e => { e.currentTarget.style.color = '#3b82f6'; e.currentTarget.style.borderColor = '#3b82f6'; }} onMouseOut={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = '#cbd5e1'; }}>?</button>
+                  <button onClick={() => { setMeterTutorialAuto(false); setShowMeterTutorial(prev => !prev); }} title="Mitä Kipinöillä tehdään?" style={{ background: 'transparent', color: '#94a3b8', border: '1.5px solid #cbd5e1', borderRadius: '50%', width: '22px', height: '22px', minWidth: '22px', minHeight: '22px', padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.2s', flexShrink: 0 }} onMouseOver={e => { e.currentTarget.style.color = '#3b82f6'; e.currentTarget.style.borderColor = '#3b82f6'; }} onMouseOut={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = '#cbd5e1'; }}>?</button>
                 </div>
                 {Object.entries(categorisedCar).map(([catId, category]) => {
                   const isLocked = isTutorialActive;
@@ -660,20 +700,22 @@ export default function Garage() {
                 })}
               </div>
            </div>
+           </FitToHeight>
         </div>
 
         {/* CENTER COLUMN: Selected Category Items */}
         <div className="garage-center">
-            <h2 style={{ fontSize: '1.6rem', color: 'var(--text-main)', marginTop: 0, marginBottom: '1rem', fontFamily: 'var(--font-display)' }}>
+          <FitToHeight fitKey={`${activeCategory}|${purchased.length}`}>
+            <h2 style={{ fontSize: 'clamp(1.3rem, 3.5vh, 1.6rem)', color: 'var(--text-main)', marginTop: 0, marginBottom: 'clamp(0.4rem, 1.4vh, 1rem)', fontFamily: 'var(--font-display)' }}>
               {activeCategory ? (categorisedCar[activeCategory]?.name || categorisedGarage[activeCategory]?.name) : "Valitse kategoria"}
             </h2>
             {activeCategory === 'g_tools' ? (
               <>
-                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Seinätyökalut</h3>
-                <div className="items-grid animate-fade-in" style={{ marginBottom: '2.5rem' }}>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Seinätyökalut</h3>
+                <div className="items-grid animate-fade-in" style={{ marginBottom: '1rem' }}>
                      {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_tools').map(item => renderSquareItem(item))}
                 </div>
-                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '1rem' }}>Tunkit</h3>
+                <h3 style={{ fontSize: '1.2rem', color: 'var(--text-muted)', fontFamily: 'var(--font-display)', marginBottom: '0.5rem' }}>Tunkit</h3>
                 <div className="items-grid animate-fade-in">
                      {categorisedGarage['g_tools']?.items.filter(i => i.category === 'g_jack').map(item => renderSquareItem(item))}
                 </div>
@@ -684,16 +726,14 @@ export default function Garage() {
                    {activeCategory && categorisedCar[activeCategory]?.items.map(item => renderSquareItem(item))}
               </div>
             )}
-
+          </FitToHeight>
         </div>
 
         {/* RIGHT COLUMN: Visual Preview Graphic */}
         <div className="garage-right">
-           <div style={{ 
-            position: 'relative', 
-            width: '100%',
+           <div className="garage-preview" style={{
+            position: 'relative',
             aspectRatio: '16/9',
-            minHeight: 'clamp(250px, 40vh, 400px)',
             borderRadius: '24px', 
             overflow: 'hidden', 
             border: '4px solid rgba(76, 133, 17, 0.4)',
@@ -712,34 +752,46 @@ export default function Garage() {
               )}
 
               {isTutorialActive && !hideTutorialBox && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '600px', width: '95%', zIndex: 9999 }}>
-                   <button onClick={() => setHideTutorialBox(true)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa autotalliisi!</h2>
-                   <p style={{ margin: 0, lineHeight: 1.5 }}>Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen.<br/><br/>Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!</p>
-                </div>
+                <TutorialModal
+                  title="Tervetuloa autotalliisi!"
+                  accent="#10b981"
+                  maxWidth={600}
+                  buttonText="Selvä, siivotaan!"
+                  onConfirm={() => setHideTutorialBox(true)}
+                >
+                  Olet nyt vanhan autotallin omistaja. Romun seasta käteesi osui heti laatikollinen kipinöitä! Kuka tietää, mitä muuta tallista löytyy, kunhan tartut toimeen.<br/><br/>Osta valikosta <b>Siivous</b> ja katso, mitä aarteita romun alta paljastuu!
+                </TutorialModal>
               )}
               
               {showGreenPulse && !hideGreenPulseModal && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '600px', width: '95%', zIndex: 9999 }}>
-                   <button onClick={() => setHideGreenPulseModal(true)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tulipa siistiä!</h2>
-                   <p style={{ margin: 0, lineHeight: 1.5 }}>Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.4rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!</p>
-                </div>
+                <TutorialModal
+                  title="Tulipa siistiä!"
+                  accent="#10b981"
+                  maxWidth={600}
+                  buttonText="Selvä homma!"
+                  onConfirm={() => setHideGreenPulseModal(true)}
+                >
+                  Tallista löytyi auto... Eikä mikä tahansa auto, vaan ihkaoikea <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.3em', textTransform: 'uppercase', letterSpacing: '1px' }}>AI van!</span>, joka vie sinut tekoälyseikkailulle!<br/><br/>Kipinät loppuivat, joten klikkaapa oikeasta ylänurkasta "Tiekartta" ja käy keräämässä lisää!
+                </TutorialModal>
               )}
               
               {completedLessons.length > 0 && !closedGarageTuition && !isTutorialActive && !tutorialSkipped && (
-                <div className="animate-bounce" style={{ position: 'fixed', top: '20%', left: '50%', transform: 'translateX(-50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #10b981', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '650px', width: '95%', zIndex: 9999 }}>
-                   <button onClick={() => { localStorage.setItem('aivan_garage_tuition', 'true'); setClosedGarageTuition(true); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={20} /></button>
-                   <h2 style={{ fontSize: 'clamp(1.3rem, 3vh, 1.6rem)', color: '#10b981', marginTop: '0', marginBottom: 'clamp(0.5rem, 1vh, 0.8rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Tervetuloa takaisin!</h2>
-                   <p style={{ margin: 0, lineHeight: 1.5, marginBottom: 'clamp(0.8rem, 2vh, 1.5rem)' }}>Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.2rem', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!</p>
-                   <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: 'clamp(1.1rem, 2vh, 1.2rem)', padding: 'clamp(0.8rem, 2vh, 1.2rem)' }} onClick={() => {
-                        localStorage.setItem('aivan_garage_tuition', 'true');
-                        setClosedGarageTuition(true);
-                   }}>Eikun hommiin!</button>
-                </div>
+                <TutorialModal
+                  title="Tervetuloa takaisin!"
+                  accent="#3b82f6"
+                  titleColor="#10b981"
+                  maxWidth={650}
+                  buttonText="Eikun hommiin!"
+                  onConfirm={() => {
+                      localStorage.setItem('aivan_garage_tuition', 'true');
+                      setClosedGarageTuition(true);
+                  }}
+                >
+                  Voit käyttää tienaamiasi kipinöitä <span style={{ background: 'linear-gradient(90deg, #166534, #4ade80, #38bdf8, #4ade80)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: '900', fontSize: '1.1em', textTransform: 'uppercase', letterSpacing: '1px' }}>AI vanin</span> päivityksiin tai tehdä tallistasi entistä hienomman. Valikot toimivat tosi helposti: klikkaa haluamaasi osa-aluetta vasemmalta, niin näet kaikki päivitykset heti siinä vieressä!
+                </TutorialModal>
               )}
 
-               {saveCode && (
+               {saveCode && createPortal(
                  <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
                      <div className="animate-bounce" style={{ background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.5rem, 3vh, 2.5rem)', borderRadius: '16px', border: '4px solid #0ea5e9', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', width: '100%', maxWidth: '700px', position: 'relative' }}>
                         <button onClick={() => setSaveCode(null)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', cursor: 'pointer', color: '#94a3b8', borderRadius: '50%', padding: '0.5rem' }}><X size={24} /></button>
@@ -762,32 +814,37 @@ export default function Garage() {
                            Selvä juttu! Otan talteen
                         </button>
                      </div>
-                 </div>
+                 </div>,
+                 document.body
                )}
 
-               {showTrophyCabinet && (
+               {showTrophyCabinet && createPortal(
                  <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => setShowTrophyCabinet(false)}>
                     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={e => e.stopPropagation()}>
                        <button onClick={() => setShowTrophyCabinet(false)} title="Sulje palkintokaappi" aria-label="Sulje palkintokaappi" style={{ position: 'absolute', top: '2rem', right: '2rem', background: 'white', border: '3px solid #0f172a', cursor: 'pointer', color: '#0f172a', borderRadius: '50%', padding: '0.5rem', zIndex: 600, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 6px 20px rgba(0,0,0,0.5)', transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = '#e2e8f0'} onMouseLeave={e => e.currentTarget.style.background = 'white'}><X size={40} strokeWidth={3} /></button>
-                       <button onClick={(e) => { e.stopPropagation(); setShowTrophyTuition(prev => !prev); }} title="Kaapin ohje" style={{ position: 'absolute', top: '2rem', left: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>?</button>
+                       <button onClick={(e) => { e.stopPropagation(); setTrophyTuitionAuto(false); setShowTrophyTuition(prev => !prev); }} title="Kaapin ohje" style={{ position: 'absolute', top: '2rem', left: '2rem', background: 'rgba(255,255,255,0.2)', border: 'none', cursor: 'pointer', color: 'white', borderRadius: '50%', width: '56px', height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: 'bold', zIndex: 600, transition: 'background 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.4)'} onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.2)'}>?</button>
                        
                        <div style={{ position: 'relative', display: 'flex', maxHeight: '100%', maxWidth: '1400px', justifyContent: 'center', alignItems: 'center' }}>
                            {showTrophyTuition && (
-                             <div className="animate-bounce" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: 'clamp(1.2rem, 3vh, 2rem)', borderRadius: '24px', border: '5px solid #eab308', color: 'var(--text-main)', fontSize: 'clamp(0.95rem, 2vh, 1.2rem)', zIndex: 650, textAlign: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.3)', maxWidth: '500px', width: '95%' }}>
-                                <button onClick={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }} style={{ position: 'absolute', top: '0.5rem', right: '0.5rem', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={20} /></button>
-                                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'clamp(0.5rem, 1vh, 1rem)' }}>
-                                   <img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />
-                                </div>
+                             <TutorialModal
+                               accent="#eab308"
+                               buttonTextColor="#0f172a"
+                               maxWidth={500}
+                               requireReading={trophyTuitionAuto}
+                               onClose={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }}
+                               icon={<img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />}
+                               buttonText="Selvä juttu!"
+                               onConfirm={() => {
+                                    localStorage.setItem('aivan_trophy_tuition', 'true');
+                                    setShowTrophyTuition(false);
+                               }}
+                             >
                                 {earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0 ? (
                                     <><b>Upeaa työtä!</b><br/><br/>Suorittamalla tehtäviä kartalla olet ansainnut hienoja palkintoja. Täällä voit ihastella saavutuksiasi!</>
                                 ) : (
                                     <><b>Tervetuloa palkintokaapille!</b><br/><br/>Tällä hetkellä täällä on vielä hieman tyhjää... Suorittamalla tehtäviä kartalla voit tienata mitaleja tai jopa pokaaleja!</>
                                 )}
-                                <button className="btn-primary" style={{ width: '100%', marginTop: '1.5rem', background: '#eab308', color: '#0f172a' }} onClick={() => {
-                                     localStorage.setItem('aivan_trophy_tuition', 'true');
-                                     setShowTrophyTuition(false);
-                                }}>Selvä juttu!</button>
-                             </div>
+                             </TutorialModal>
                            )}
                            <h2 style={{ position: 'absolute', top: '3%', left: '50%', transform: 'translateX(-50%)', zIndex: 6, color: '#fef3c7', fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', whiteSpace: 'nowrap', letterSpacing: '4px', textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.8), 0 0 20px rgba(234, 179, 8, 0.5)', margin: 0, pointerEvents: 'none' }}>
                                Palkintokaappi
@@ -909,7 +966,8 @@ export default function Garage() {
                         </div>
                      )}
 
-                  </div>
+                  </div>,
+                  document.body
                )}
 
               {isTutorialActive ? (
@@ -918,7 +976,7 @@ export default function Garage() {
                 <>
                   <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
                   <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
-                  <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => { setShowTrophyCabinet(true); if (!localStorage.getItem('aivan_trophy_tuition')) { setShowTrophyTuition(true); } }} />
+                  <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => { setShowTrophyCabinet(true); if (!localStorage.getItem('aivan_trophy_tuition')) { setTrophyTuitionAuto(true); setShowTrophyTuition(true); } }} />
                 </>
               )}
 
@@ -1049,59 +1107,55 @@ export default function Garage() {
      )}
 
      {showMeterTutorial && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #0ea5e9', padding: 'clamp(1.5rem, 4vh, 3rem)', borderRadius: '32px', maxWidth: '850px', width: '100%', boxShadow: '0 30px 100px rgba(14, 165, 233, 0.3)', color: 'var(--text-main)', position: 'relative' }}>
-                <button onClick={() => setShowMeterTutorial(false)} style={{ position: 'absolute', top: 'clamp(0.5rem, 1.5vh, 1.5rem)', right: 'clamp(0.5rem, 1.5vh, 1.5rem)', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
-                    <X size={24} />
-                </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: 'clamp(1rem, 2.5vh, 2rem)' }}>
-                    <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: 'clamp(0.5rem, 1.5vh, 1rem)', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
-                        <Zap size={28} color="white" />
-                    </div>
-                    <h2 style={{ fontSize: 'clamp(1.5rem, 4vh, 2.5rem)', margin: 0, color: '#0284c7', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Kipinät ja Erikoiskyvyt</h2>
-                </div>
-                
-                <p style={{ fontSize: 'clamp(0.95rem, 2vh, 1.15rem)', color: '#334155', lineHeight: '1.5', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontFamily: 'var(--font-main)' }}>
-                    Kipinöillä voit hankkia autotallista varusteita, jotka antavat sinulle <strong>karttakohtaisia apuja!</strong> Näet apuvälineet kysymysruutujen kulmassa pelatessasi.
-                </p>
-
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(0.8rem, 1.5vh, 1.2rem)', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontFamily: 'var(--font-main)' }}>
-                    <div style={{ background: '#fef2f2', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #fecaca', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <ShieldCheck size={24} color="#ef4444" style={{ flexShrink: 0 }} />
-                            <strong style={{ color: '#dc2626', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Yritä uudelleen <span style={{ color: '#ef4444', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Puskurit)</span></strong>
-                        </div>
-                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.</span>
-                    </div>
-                    <div style={{ background: '#fffbeb', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <Disc size={24} color="#eab308" style={{ flexShrink: 0 }} />
-                            <strong style={{ color: '#d97706', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Poisto <span style={{ color: '#eab308', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Renkaat)</span></strong>
-                        </div>
-                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.</span>
-                    </div>
-                    <div style={{ background: '#f0fdf4', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '1px solid #bbf7d0', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-start', boxShadow: '0 4px 10px rgba(0,0,0,0.02)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                            <Wrench size={24} color="#22c55e" style={{ flexShrink: 0 }} />
-                            <strong style={{ color: '#16a34a', fontSize: 'clamp(0.95rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Vaihto <span style={{ color: '#22c55e', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Työkalut)</span></strong>
-                        </div>
-                        <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)' }}>Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!</span>
-                    </div>
-                </div>
- 
-                <p style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#64748b', fontStyle: 'italic', marginBottom: 'clamp(1rem, 2.5vh, 2rem)', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', background: '#f8fafc', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '12px', border: '1px solid #f1f5f9' }}>
-                    <Lightbulb size={20} color="#eab308" style={{ flexShrink: 0 }} />
-                    <span style={{ lineHeight: '1.4' }}><strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!</span>
-                </p>
- 
-                <button 
-                    onClick={() => setShowMeterTutorial(false)}
-                    className="btn-primary"
-                    style={{ width: '100%', padding: 'clamp(0.8rem, 2vh, 1.2rem)', fontSize: 'clamp(1.1rem, 2vh, 1.3rem)', borderRadius: '16px', background: '#0ea5e9', color: 'white', fontWeight: 'bold' }}>
-                    Selvä homma!
-                </button>
+        <TutorialModal
+          title="Kipinät ja Erikoiskyvyt"
+          accent="#0ea5e9"
+          titleColor="#0284c7"
+          maxWidth={850}
+          bodyAlign="left"
+          requireReading={meterTutorialAuto}
+          onClose={() => setShowMeterTutorial(false)}
+          icon={
+            <div style={{ background: 'linear-gradient(135deg, #38bdf8, #0284c7)', padding: 'clamp(0.4rem, 1.2vh, 0.8rem)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(2, 132, 199, 0.2)' }}>
+                <Zap size={26} color="white" />
             </div>
-        </div>
+          }
+          buttonText="Selvä homma!"
+          onConfirm={() => setShowMeterTutorial(false)}
+        >
+            <p style={{ fontSize: 'clamp(0.95rem, 2.4vh, 1.1rem)', color: '#334155', lineHeight: '1.5', margin: '0 0 clamp(0.6rem, 2vh, 1.2rem)', fontFamily: 'var(--font-main)', fontWeight: 500 }}>
+                Kipinöillä voit hankkia autotallista varusteita, jotka antavat sinulle <strong>karttakohtaisia apuja!</strong> Näet apuvälineet kysymysruutujen kulmassa pelatessasi.
+            </p>
+
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(0.6rem, 1.5vh, 1rem)', marginBottom: 'clamp(0.6rem, 2vh, 1.2rem)', fontFamily: 'var(--font-main)' }}>
+                <div style={{ background: '#fef2f2', padding: 'clamp(0.6rem, 1.5vh, 1rem)', borderRadius: '16px', border: '1px solid #fecaca', display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <ShieldCheck size={22} color="#ef4444" style={{ flexShrink: 0 }} />
+                        <strong style={{ color: '#dc2626', fontSize: 'clamp(0.9rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Yritä uudelleen <span style={{ color: '#ef4444', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Puskurit)</span></strong>
+                    </div>
+                    <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', fontWeight: 500 }}>Saat uuden yrityksen väärin menneeseen kysymykseen ilmaiseksi.</span>
+                </div>
+                <div style={{ background: '#fffbeb', padding: 'clamp(0.6rem, 1.5vh, 1rem)', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Disc size={22} color="#eab308" style={{ flexShrink: 0 }} />
+                        <strong style={{ color: '#d97706', fontSize: 'clamp(0.9rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Poisto <span style={{ color: '#eab308', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Renkaat)</span></strong>
+                    </div>
+                    <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', fontWeight: 500 }}>Voit käyttää monivalinnoissa poistamaan 1-2 täysin väärää vaihtoehtoa.</span>
+                </div>
+                <div style={{ background: '#f0fdf4', padding: 'clamp(0.6rem, 1.5vh, 1rem)', borderRadius: '16px', border: '1px solid #bbf7d0', display: 'flex', flexDirection: 'column', gap: '0.4rem', alignItems: 'flex-start' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <Wrench size={22} color="#22c55e" style={{ flexShrink: 0 }} />
+                        <strong style={{ color: '#16a34a', fontSize: 'clamp(0.9rem, 2vh, 1.05rem)', textTransform: 'uppercase' }}>Vaihto <span style={{ color: '#22c55e', fontWeight: 'normal', fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', textTransform: 'none' }}>(Työkalut)</span></strong>
+                    </div>
+                    <span style={{ color: '#475569', fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', fontWeight: 500 }}>Antaa luvan vaihtaa kysymyksen täysin uuteen rangaistuksetta!</span>
+                </div>
+            </div>
+
+            <p style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', color: '#64748b', fontStyle: 'italic', margin: 0, fontSize: 'clamp(0.85rem, 1.8vh, 0.95rem)', fontWeight: 500, background: '#f8fafc', padding: 'clamp(0.6rem, 1.5vh, 1rem)', borderRadius: '12px', border: '1px solid #f1f5f9' }}>
+                <Lightbulb size={20} color="#eab308" style={{ flexShrink: 0 }} />
+                <span style={{ lineHeight: '1.4' }}><strong>Vinkki:</strong> Omat apusi ovat ns. karttakohtainen potti (esim. 5 kpl Digiturva-kartalla). Voit vapaasti käyttää ne kaikki yhdessä visassa, tai säästellä niitä kartan vaikeimpiin vaiheisiin!</span>
+            </p>
+        </TutorialModal>
     )}
 
     {/* Testitilan sivupaneeli pokaalien ja mitalien jakamiseen */}

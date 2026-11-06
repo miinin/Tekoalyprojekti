@@ -196,3 +196,240 @@ button:active {
   }
 }
 
+
+/* ===== Sisällön sovitus ruutuun (FitToHeight) ===== */
+.fit-outer {
+  flex: 1 1 auto;
+  min-height: 0;
+  position: relative;
+}
+.fit-inner {
+  width: 100%;
+}
+
+/* ===== Opastusikkunat (TutorialModal): ei voi ohittaa lukematta ===== */
+.tutorial-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: tutorialFade 0.25s ease-out;
+}
+.tutorial-box {
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 2rem);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.98);
+  border: 5px solid #10b981;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  padding: clamp(1rem, 3.5vh, 2.25rem) clamp(1rem, 3vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 2vh, 1.2rem);
+  text-align: center;
+  color: var(--text-main);
+  animation: tutorialIn 0.35s ease-out;
+}
+.tutorial-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+.tutorial-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 4vh, 1.9rem);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.tutorial-body {
+  font-size: clamp(1rem, 2.6vh, 1.2rem);
+  line-height: 1.5;
+  font-weight: 600;
+  border-radius: 12px;
+  padding: 0.3rem 0.5rem;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.tutorial-body--warn {
+  background-color: #fef9c3;
+  box-shadow: 0 0 0 3px #fde047;
+}
+.tutorial-warning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #fff7ed;
+  color: #9a3412;
+  border: 2px solid #fdba74;
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+  font-weight: 800;
+  font-size: clamp(0.95rem, 2.4vh, 1.1rem);
+  animation: tutorialFade 0.2s ease-out;
+}
+.tutorial-confirm {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  color: white;
+  font-size: clamp(1.1rem, 2.8vh, 1.3rem);
+  padding: clamp(0.75rem, 2.2vh, 1.2rem);
+  border-radius: 14px;
+}
+.tutorial-confirm[aria-disabled="true"] {
+  background: #94a3b8 !important;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+.tutorial-confirm[aria-disabled="true"]:hover {
+  transform: none;
+}
+.tutorial-confirm-fill {
+  position: absolute;
+  inset: 0;
+  transform-origin: left center;
+  background: rgba(255, 255, 255, 0.35);
+  animation-name: tutorialFill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  pointer-events: none;
+}
+.tutorial-confirm-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tutorial-close {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: rgba(241, 245, 249, 0.9);
+  color: #64748b;
+  border-radius: 50%;
+  padding: 0.45rem;
+}
+@keyframes tutorialFill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes tutorialIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes tutorialFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== Kysymysnäkymä: koko tehtävä mahtuu ruutuun ilman vieritystä ===== */
+.quiz-page {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(0.5rem, 1.6vh, 1.25rem) clamp(0.75rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.quiz-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem 1rem;
+  margin-bottom: clamp(0.4rem, 1.4vh, 1rem);
+}
+.quiz-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: clamp(0.75rem, 2.4vh, 1.75rem) clamp(0.9rem, 2.2vw, 1.9rem);
+}
+.quiz-toprow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  min-height: 2.6rem;
+  margin-bottom: clamp(0.6rem, 2vh, 1.25rem);
+}
+.quiz-toprow-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.quiz-type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: white;
+  padding: 0.45rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.quiz-question {
+  margin: 0 0 clamp(0.7rem, 2.4vh, 1.5rem);
+  font-family: var(--font-main);
+  font-weight: 800;
+  font-size: clamp(1.2rem, 3.4vh, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--text-main);
+}
+.quiz-options {
+  display: grid;
+  gap: clamp(0.6rem, 1.8vh, 1rem);
+  grid-template-columns: repeat(auto-fit, minmax(max(290px, calc(50% - 0.5rem)), 1fr));
+}
+.quiz-options > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+.quiz-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(0.6rem, 1.8vh, 1.1rem);
+}
+.quiz-submit {
+  min-width: min(100%, 320px);
+  padding: clamp(0.65rem, 1.9vh, 1rem) 2rem;
+  font-size: clamp(1.05rem, 2.6vh, 1.2rem);
+  border-radius: 16px;
+}
+
+/* ===== Kartta: koko ruudun korkuinen sivu ilman vieritystä ===== */
+.roadmap-page {
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Koko ruudun näkymät häivytetään sisään ilman siirtymää: siirtymä (translateY) työntäisi
+   sisältöä hetkeksi ruudun alareunan yli ja välähdyttäisi vierityspalkkia. */
+@keyframes fadeInStatic {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.quiz-page.animate-fade-in,
+.garage-page.animate-fade-in {
+  animation-name: fadeInStatic;
+}

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
 import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
+import FitToHeight from '../components/FitToHeight';
+import TutorialModal from '../components/TutorialModal';
 
 export default function Quiz() {
   const { mainCategory, subCategory } = useParams();
@@ -588,8 +591,8 @@ export default function Quiz() {
 
     if (isScenario) {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', background: 'var(--primary-color)', color: 'white', padding: '0.4rem 1rem', borderRadius: '8px', fontSize: '1rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.4rem, 1.2vh, 0.8rem)' }}>
+                <div style={{ display: 'inline-flex', alignSelf: 'flex-start', background: 'var(--primary-color)', color: 'white', padding: '0.25rem 0.8rem', borderRadius: '8px', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '2px', fontWeight: '900', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                     Kuvittele tilanne
                 </div>
                 <div>{content}</div>
@@ -656,10 +659,42 @@ export default function Quiz() {
     return styles[type] || { text: 'Kysymys', icon: <Brain size={22} />, color: '#0072C6', bg: '#e0f2fe', border: '#bae6fd' };
   };
 
+  // Vastauksen lukitusnappi. Paikka varataan aina valmiiksi (visibility), jotta asettelu
+  // ei hyppää eikä mitään jää ruudun alle, kun nappi ilmestyy.
+  const renderSubmit = (visible, onClick, label, icon, extraStyle = {}) => (
+    <div className="quiz-actions">
+      <button
+        className="btn-primary quiz-submit"
+        data-submit="true"
+        style={{ visibility: visible ? 'visible' : 'hidden', ...extraStyle }}
+        tabIndex={visible ? 0 : -1}
+        aria-hidden={!visible}
+        onClick={() => { if (visible) onClick(); }}
+      >
+        {icon} {label}
+      </button>
+    </div>
+  );
+
+  // Muuttuu aina, kun tehtävän sisällön koko voi muuttua -> sovitus lasketaan heti uudelleen
+  const fitKey = [
+    currentQuestion.id,
+    currentIndex,
+    showExplanation ? 1 : 0,
+    removedOptions.length,
+    usedSecondChance ? 1 : 0,
+    usedToolChecks ? 1 : 0,
+    highlightedWrongItems.length,
+    shuffledOptions.length,
+    shuffledDraggables.join('|'),
+    Object.keys(dragTargets).length,
+    Object.values(dragTargets).join('|'),
+  ].join('#');
+
   return (
-    <div className="animate-fade-in" style={{ padding: '2rem', maxWidth: '950px', margin: '0 auto', width: '100%' }}>
-      
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+    <div className="quiz-page animate-fade-in">
+
+      <div className="quiz-header">
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button className="btn-secondary" style={{ padding: '0.5rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>
             <ChevronLeft size={24} /> 
@@ -762,97 +797,135 @@ export default function Quiz() {
         </div>
       </div>
 
-      {!bossIntroSeen && sub && sub.id.endsWith('_7') && (
-         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="glass-panel animate-bounce responsive-popup" style={{ background: 'rgba(255,255,255,0.98)', border: '5px solid #f59e0b', padding: '3rem', borderRadius: '24px', maxWidth: '600px', width: '90%', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', position: 'relative' }}>
-                <h1 style={{ color: '#d97706', fontSize: '2.5rem', marginBottom: '1.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Suuri Mestarikoitos</h1>
-                <p style={{ fontSize: '1.2rem', lineHeight: '1.6', color: 'var(--text-main)', marginBottom: '2rem', fontWeight: 'bold' }}>
+      {!bossIntroSeen && sub && sub.id.endsWith('_7') && createPortal(
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+            <div className="glass-panel" style={{ background: 'rgba(255,255,255,0.98)', border: '5px solid #f59e0b', padding: 'clamp(1.25rem, 4.5vh, 3rem) clamp(1.25rem, 3vw, 3rem)', borderRadius: '24px', maxWidth: '640px', width: '100%', maxHeight: 'calc(100vh - 2rem)', textAlign: 'center', boxShadow: '0 20px 60px rgba(0,0,0,0.4)', position: 'relative' }}>
+                <h1 style={{ color: '#d97706', fontSize: 'clamp(1.8rem, 5.5vh, 2.5rem)', marginBottom: 'clamp(0.6rem, 2.4vh, 1.5rem)', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Suuri Mestarikoitos</h1>
+                <p style={{ fontSize: 'clamp(1rem, 2.8vh, 1.2rem)', lineHeight: '1.6', color: 'var(--text-main)', marginBottom: 'clamp(1rem, 3.2vh, 2rem)', fontWeight: 'bold' }}>
                     Olet saapunut kategorian finaaliin! Vastaa 10 tiukkaan mestarikysymykseen. Kerää vähintään <span style={{ color: '#10b981', fontSize: '1.4rem' }}>7 oikein</span> voittaaksesi tämän alueen kiiltävän mestaruuspokaalin suoraan autotalliisi!
                 </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-                    <button className="btn-primary" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#ffffff', padding: '1rem 2rem', fontSize: '1.2rem', border: 'none', boxShadow: '0 4px 15px rgba(217, 119, 6, 0.3)' }} onClick={() => setBossIntroSeen(true)}>Olen valmis, aloita finaali!</button>
-                    <button className="btn-secondary" style={{ padding: '1rem 2rem', fontSize: '1.2rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa kartalle harjoittelemaan</button>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                    <button className="btn-primary" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', color: '#ffffff', padding: 'clamp(0.75rem, 2.2vh, 1rem) 2rem', fontSize: '1.2rem', border: 'none', boxShadow: '0 4px 15px rgba(217, 119, 6, 0.3)' }} onClick={() => setBossIntroSeen(true)}>Olen valmis, aloita finaali!</button>
+                    <button className="btn-secondary" style={{ padding: 'clamp(0.75rem, 2.2vh, 1rem) 2rem', fontSize: '1.2rem' }} onClick={() => navigate(`/roadmap?map=${mainCategory}&completed=${sub.id}`)}>Palaa kartalle harjoittelemaan</button>
                 </div>
             </div>
-         </div>
+         </div>,
+         document.body
       )}
 
-      <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem', position: 'relative' }}>
-        <div style={{ position: 'absolute', top: '1rem', right: '1.5rem', display: 'flex', gap: '1rem', alignItems: 'center', zIndex: 10 }}>
-           <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#ef4444'} onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>
-              <AlertTriangle size={16} /> Ilmoita virheestä
-           </button>
-        </div>
-        
-        {bugReportMode && (
-           <div className="animate-fade-in" style={{ marginTop: '2.5rem', marginBottom: '2rem', padding: '1.5rem', backgroundColor: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05)' }}>
-             {bugSubmitted ? (
-                <p style={{ color: '#166534', fontWeight: 'bold', margin: '1rem 0', textAlign: 'center', fontSize: '1.2rem' }}>Kiitos ilmoituksesta! Olemme vastaanottaneet sen.</p>
-             ) : (
-                <div>
-                  <p style={{ fontSize: '1rem', color: '#475569', marginBottom: '1rem', lineHeight: 1.5 }}>
-                    Tekoäly kehittyy nopeasti ja tieto voi vanhentua. Olemme myös poikkeuksellisesti vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan tällä tasolla, kerro siitä meille, jotta voimme korjata sen! Kysymyksen koodi <b>{currentQuestion.id}</b> liitetään automaattisesti ilmoitukseen.
-                  </p>
-                  <textarea 
-                    value={bugText}
-                    onChange={e => setBugText(e.target.value)}
-                    maxLength={500}
-                    placeholder="Mikä tässä kysymyksessä on mielestäsi pielessä tai vanhentunut?"
-                    style={{ width: '100%', padding: '1rem', borderRadius: '8px', border: '1px solid #cbd5e1', resize: 'vertical', minHeight: '100px', marginBottom: '1rem', fontFamily: 'inherit', fontSize: '1rem', backgroundColor: '#ffffff', color: '#1e293b' }}
-                  />
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
-                    <button className="btn-secondary" onClick={() => setBugReportMode(false)} style={{ padding: '0.5rem 1rem' }}>Peruuta</button>
-                    <button className="btn-primary" 
-                         disabled={!bugText.trim()}
-                         style={{ padding: '0.5rem 1.5rem', background: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', borderColor: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', color: bugText.trim() ? '#ffffff' : '#f8fafc' }}
-                         onClick={() => {
-                            store.saveBugReport(currentQuestion.id, bugText);
-                            setBugSubmitted(true);
-                            setTimeout(() => { setBugReportMode(false); setBugSubmitted(false); setBugText(''); }, 3000);
-                         }}>
-                       Lähetä ilmoitus
-                    </button>
-                  </div>
-                </div>
-             )}
-           </div>
-        )}
-        
-        {notification && (
-           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 2000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-              <div className="animate-fade-in responsive-popup" style={{ background: 'white', padding: '2rem', borderRadius: '24px', maxWidth: '450px', width: '100%', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
-                  <AlertTriangle size={56} color="#f59e0b" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
-                  <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Huomio</h3>
-                  <p style={{ margin: '0 0 2rem 0', color: '#475569', fontSize: '1.15rem', lineHeight: '1.6' }}>{notification}</p>
-                  <button className="btn-primary" style={{ width: '100%', padding: '1.1rem', fontSize: '1.1rem' }} onClick={() => setNotification(null)}>Okei, selvä juttu!</button>
+      <div className="glass-panel quiz-panel">
+        <FitToHeight fitKey={fitKey} maxZoom={1.2}>
+        <div className="quiz-toprow">
+          {(() => {
+            const styleInfo = getQuestionStyle(currentQuestion.type);
+            return (
+              <div className="quiz-type-badge" style={{ backgroundColor: styleInfo.color, boxShadow: `0 4px 15px ${styleInfo.color}50` }}>
+                {styleInfo.icon}
+                {styleInfo.text}
               </div>
-           </div>
-        )}
-        {(() => {
-          const styleInfo = getQuestionStyle(currentQuestion.type);
-          return (
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', backgroundColor: styleInfo.color, color: 'white', padding: '0.6rem 1.2rem', borderRadius: '12px', fontSize: '1rem', fontWeight: '900', marginBottom: '1.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', letterSpacing: '1px', boxShadow: `0 4px 15px ${styleInfo.color}50` }}>
-              {styleInfo.icon}
-              {styleInfo.text}
-            </div>
-          );
-        })()}
-        
-        <h2 style={{ fontSize: '1.7rem', marginBottom: '2.5rem', lineHeight: '1.6', color: 'var(--text-main)', fontFamily: 'var(--font-main)', fontWeight: '800' }}>
+            );
+          })()}
+
+          <div className="quiz-toprow-tools">
+            {(!showExplanation) && (() => {
+                const yrem = quizCharges.yellow - usedCharges.yellow;
+                const ytotal = (yrem > 0 ? yrem : 0) + (teacherBoosts.yellow || 0);
+
+                const grem = quizCharges.green - usedCharges.green;
+                const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
+
+                const isMultipleChoice = currentQuestion.options && currentQuestion.options.length > 2;
+                const wrongOptionsLeft = currentQuestion.options ? currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o)).length : 0;
+                const canUseYellow = isMultipleChoice && ytotal > 0 && wrongOptionsLeft > 0;
+
+                const yTitle = !isMultipleChoice
+                   ? "Poisto toimii vain tehtävissä, joissa on useita vastausvaihtoehtoja."
+                   : (wrongOptionsLeft === 0
+                      ? "Kaikki väärät vaihtoehdot on jo poistettu!"
+                      : (ytotal > 0
+                         ? "Poista väärä vastausvaihtoehto!"
+                         : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä.")));
+
+                const gTitle = gtotal > 0
+                   ? "Vaihda tämä tehtävä kokonaan toiseen rangaistuksetta!"
+                   : (quizCharges.green === 0 && (teacherBoosts.green || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää vaihtoja!" : "Ei vaihtoja jäljellä.");
+
+                const tooltipStyle = (bg, border, color) => ({ position: 'relative', background: bg, border: `2px solid ${border}`, color, padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'Roboto, sans-serif' });
+                const arrowUp = (border, bg) => (
+                  <>
+                    <div style={{ position: 'absolute', top: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderBottom: `8px solid ${border}` }}></div>
+                    <div style={{ position: 'absolute', top: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderBottom: `6px solid ${bg}` }}></div>
+                  </>
+                );
+
+                return (
+                   <>
+                      <div
+                         onMouseEnter={() => setHoveredTool('yellow')}
+                         onMouseLeave={() => setHoveredTool(null)}
+                         onClick={() => { if (canUseYellow) consumeYellowMeter(); }}
+                         style={{ position: 'relative', display: 'inline-block', cursor: canUseYellow ? 'pointer' : 'not-allowed' }}
+                      >
+                         <button
+                            disabled={!canUseYellow}
+                            style={{ position: 'relative', padding: '0.5rem 1.1rem', borderRadius: '14px', background: canUseYellow ? 'white' : '#f8fafc', border: canUseYellow ? '2px solid #eab308' : '2px solid #e2e8f0', color: canUseYellow ? '#ca8a04' : '#94a3b8', fontWeight: 'bold', fontSize: '0.95rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', pointerEvents: 'none', boxShadow: canUseYellow ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                         >
+                            <Disc size={18} /> Poisto {ytotal > 0 && `(${ytotal})`}
+                         </button>
+                         {hoveredTool === 'yellow' && (
+                            <div style={{ position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
+                               <div className="animate-fade-in" style={tooltipStyle('#fffbeb', '#fcd34d', '#b45309')}>
+                                  {arrowUp('#fcd34d', '#fffbeb')}
+                                  {yTitle}
+                               </div>
+                            </div>
+                         )}
+                      </div>
+                      <div
+                         onMouseEnter={() => setHoveredTool('green')}
+                         onMouseLeave={() => setHoveredTool(null)}
+                         onClick={() => { if (gtotal > 0) consumeGreenMeter(); }}
+                         style={{ position: 'relative', display: 'inline-block', cursor: gtotal > 0 ? 'pointer' : 'not-allowed' }}
+                      >
+                         <button
+                            disabled={gtotal === 0}
+                            style={{ position: 'relative', padding: '0.5rem 1.1rem', borderRadius: '14px', background: gtotal > 0 ? 'white' : '#f8fafc', border: gtotal > 0 ? '2px solid #22c55e' : '2px solid #e2e8f0', color: gtotal > 0 ? '#166534' : '#94a3b8', fontWeight: 'bold', fontSize: '0.95rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', pointerEvents: 'none', boxShadow: gtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
+                         >
+                            <Wrench size={18} /> Vaihto {gtotal > 0 && `(${gtotal})`}
+                         </button>
+                         {hoveredTool === 'green' && (
+                            <div style={{ position: 'absolute', top: 'calc(100% + 12px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
+                               <div className="animate-fade-in" style={tooltipStyle('#f0fdf4', '#86efac', '#166534')}>
+                                  {arrowUp('#86efac', '#f0fdf4')}
+                                  {gTitle}
+                               </div>
+                            </div>
+                         )}
+                      </div>
+                   </>
+                );
+            })()}
+            <button onClick={() => setBugReportMode(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#64748b', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem', transition: 'color 0.2s', padding: '0.4rem 0.2rem' }} onMouseEnter={e => e.currentTarget.style.color = '#ef4444'} onMouseLeave={e => e.currentTarget.style.color = '#64748b'}>
+               <AlertTriangle size={16} /> Ilmoita virheestä
+            </button>
+          </div>
+        </div>
+
+        <h2 className="quiz-question">
           {renderTextWithAivanGradient(currentQuestion.question)}
         </h2>
-        
+
         {usedToolChecks && highlightedWrongItems.length > 0 && (
-           <div style={{ color: '#b91c1c', background: '#fef2f2', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fca5a5' }}>
+           <div style={{ color: '#b91c1c', background: '#fef2f2', padding: '0.6rem 1rem', borderRadius: '12px', marginBottom: 'clamp(0.5rem, 1.6vh, 1rem)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fca5a5' }}>
               <Wrench size={20} fill="#ef4444" color="#b91c1c" /> Autotallin työkalut paljastavat, että {highlightedWrongItems.length} punaisella merkittyä palikkaa on väärässä paikassa!
            </div>
         )}
 
         {usedSecondChance && (
-           <div style={{ color: '#d97706', background: '#fef3c7', padding: '1rem', borderRadius: '12px', marginBottom: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
+           <div style={{ color: '#d97706', background: '#fef3c7', padding: '0.6rem 1rem', borderRadius: '12px', marginBottom: 'clamp(0.5rem, 1.6vh, 1rem)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', border: '2px solid #fde68a' }}>
               <Zap size={20} fill="#d97706" /> {jackSaved ? "Tunkki nosti sinut takaisin ylös! Yritä uudelleen." : (
                  <>
-                   {renderTextWithAivanGradient("AI vanin")} varuste 
+                   {renderTextWithAivanGradient("AI vanin")} varuste
                    <span style={{ fontWeight: '900', color: '#b45309', marginLeft: '2px' }}>
                      {activeBuff === 'sivuikkuna' ? 'Sivuikkuna takatilaan' : (activeBuff === 'snorkkeli' ? 'Snorkkeli' : activeBuff)}
                    </span> pelasti sinut väärältä vastaukselta! Yritä uudelleen.
@@ -862,12 +935,16 @@ export default function Quiz() {
         )}
 
         <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)' }}>
-        {showExplanation && (
-          <div className="animate-fade-in" style={{ gridArea: '1 / 1', alignSelf: 'start', padding: '2.5rem', background: isCorrect ? 'rgba(240, 253, 244, 0.95)' : 'rgba(254, 242, 242, 0.95)', backdropFilter: 'blur(8px)', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', marginBottom: '2.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.15)', position: 'relative', zIndex: 10 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        {/* Selitysruutu on aina varattuna samaan ruutuun näkymättömänä, jotta tehtävän koko ja
+            tekstin koko eivät muutu vastaamisen hetkellä. Näkyviin se tulee vastaamisen jälkeen. */}
+        {(() => {
+          const ghost = !showExplanation;
+          return (
+          <div className={ghost ? undefined : 'animate-fade-in'} aria-hidden={ghost || undefined} style={{ gridArea: '1 / 1', alignSelf: 'start', visibility: ghost ? 'hidden' : 'visible', pointerEvents: ghost ? 'none' : 'auto', padding: 'clamp(1rem, 3vh, 2.25rem) clamp(1rem, 2.6vw, 2.25rem)', background: isCorrect ? 'rgba(240, 253, 244, 0.97)' : 'rgba(254, 242, 242, 0.97)', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.15)', position: 'relative', zIndex: 10 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: 'clamp(0.6rem, 2vh, 1.5rem)', justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                {isCorrect ? <CheckCircle2 size={42} color="#16a34a" /> : <XCircle size={42} color="#dc2626" />}
-                <h2 style={{ margin: 0, fontSize: '1.8rem', color: isCorrect ? '#15803d' : '#b91c1c' }}>
+                {isCorrect ? <CheckCircle2 size={38} color="#16a34a" /> : <XCircle size={38} color="#dc2626" />}
+                <h2 style={{ margin: 0, fontSize: 'clamp(1.4rem, 4vh, 1.8rem)', color: isCorrect ? '#15803d' : '#b91c1c' }}>
                   {isCorrect ? 'Mahtavaa, aivan oikein!' : 'Ei aivan...'}
                 </h2>
               </div>
@@ -885,18 +962,18 @@ export default function Quiz() {
               </div>
             </div>
             
-            <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: '1.5rem 2.5rem', borderRadius: '20px', display: 'flex', gap: '1.8rem', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
-              <div style={{ background: 'var(--primary-color)', padding: '1.2rem', borderRadius: '20px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
-                 <Lightbulb size={36} />
+            <div style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)', padding: 'clamp(0.75rem, 2.2vh, 1.5rem) clamp(1rem, 2.4vw, 2.25rem)', borderRadius: '20px', display: 'flex', gap: 'clamp(0.9rem, 2vw, 1.6rem)', alignItems: 'flex-start', border: '2px solid rgba(0,0,0,0.05)', boxShadow: '0 8px 15px rgba(0,0,0,0.03)' }}>
+              <div style={{ background: 'var(--primary-color)', padding: 'clamp(0.6rem, 1.8vh, 1.1rem)', borderRadius: '18px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
+                 <Lightbulb size={32} />
               </div>
               <div>
-                <p style={{ margin: 0, lineHeight: '1.8', color: '#1e293b', fontSize: '1.3rem', fontWeight: '600', fontFamily: 'var(--font-main)' }}>
+                <p style={{ margin: 0, lineHeight: '1.6', color: '#1e293b', fontSize: 'clamp(1.05rem, 3vh, 1.35rem)', fontWeight: '600', fontFamily: 'var(--font-main)' }}>
                   {currentQuestion.explanation}
                 </p>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+            <div style={{ display: 'flex', gap: '1rem', marginTop: 'clamp(0.75rem, 2.4vh, 1.75rem)' }}>
                 {!isCorrect && (() => {
                     const rrem = quizCharges.red - usedCharges.red;
                     const rtotal = (rrem > 0 ? rrem : 0) + (teacherBoosts.red || 0);
@@ -914,7 +991,7 @@ export default function Quiz() {
                        >
                            <button 
                               disabled={rtotal === 0} 
-                              style={{ width: '100%', padding: '1.2rem', borderRadius: '16px', border: rtotal > 0 ? '3px solid #fca5a5' : '3px solid #e2e8f0', background: rtotal > 0 ? 'white' : '#f8fafc', color: rtotal > 0 ? '#dc2626' : '#94a3b8', fontWeight: 'bold', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', pointerEvents: 'none', boxShadow: rtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', fontFamily: 'var(--font-main)' }}
+                              style={{ width: '100%', padding: 'clamp(0.75rem, 2.2vh, 1.15rem)', borderRadius: '16px', border: rtotal > 0 ? '3px solid #fca5a5' : '3px solid #e2e8f0', background: rtotal > 0 ? 'white' : '#f8fafc', color: rtotal > 0 ? '#dc2626' : '#94a3b8', fontWeight: 'bold', fontSize: 'clamp(1.1rem, 2.8vh, 1.3rem)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', pointerEvents: 'none', boxShadow: rtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', fontFamily: 'var(--font-main)' }}
                            >
                               <ShieldCheck size={24} /> YRITÄ UUDELLEEN {rtotal > 0 && `(${rtotal})`}
                            </button>
@@ -935,7 +1012,7 @@ export default function Quiz() {
                   className={nextEnabled ? "btn-primary" : ""} 
                   disabled={!nextEnabled}
                   style={{ 
-                    flex: 1, padding: '1.2rem', fontSize: '1.3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px',
+                    flex: 1, padding: 'clamp(0.75rem, 2.2vh, 1.15rem)', fontSize: 'clamp(1.1rem, 2.8vh, 1.3rem)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px',
                     background: nextEnabled ? undefined : '#94a3b8',
                     color: nextEnabled ? undefined : 'white',
                     cursor: nextEnabled ? 'pointer' : 'not-allowed',
@@ -956,82 +1033,11 @@ export default function Quiz() {
                 </button>
             </div>
           </div>
-        )}
+          );
+        })()}
 
         <div style={{ gridArea: '1 / 1', zIndex: 1, opacity: showExplanation ? 0.3 : 1, filter: showExplanation ? 'grayscale(0.7) blur(4px)' : 'none', transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)', pointerEvents: showExplanation ? 'none' : 'auto' }}>
         
-        {(!showExplanation) && (() => {
-            const yrem = quizCharges.yellow - usedCharges.yellow;
-            const ytotal = (yrem > 0 ? yrem : 0) + (teacherBoosts.yellow || 0);
-
-            const grem = quizCharges.green - usedCharges.green;
-            const gtotal = (grem > 0 ? grem : 0) + (teacherBoosts.green || 0);
-            
-            const isMultipleChoice = currentQuestion.options && currentQuestion.options.length > 2;
-            const wrongOptionsLeft = currentQuestion.options ? currentQuestion.options.filter(o => o !== currentQuestion.correctAnswer && !removedOptions.includes(o)).length : 0;
-            const canUseYellow = isMultipleChoice && ytotal > 0 && wrongOptionsLeft > 0;
-
-            const yTitle = !isMultipleChoice 
-               ? "Poisto toimii vain tehtävissä, joissa on useita vastausvaihtoehtoja."
-               : (wrongOptionsLeft === 0 
-                  ? "Kaikki väärät vaihtoehdot on jo poistettu!"
-                  : (ytotal > 0 
-                     ? "Poista väärä vastausvaihtoehto!" 
-                     : (quizCharges.yellow === 0 && (teacherBoosts.yellow || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää poistoja!" : "Ei poistoja jäljellä.")));
-
-            const gTitle = gtotal > 0 
-               ? "Vaihda tämä tehtävä kokonaan toiseen rangaistuksetta!" 
-               : (quizCharges.green === 0 && (teacherBoosts.green || 0) === 0 ? "Osta autotallista päivityksiä saadaksesi lisää vaihtoja!" : "Ei vaihtoja jäljellä.");
-
-            return (
-               <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', justifyContent: 'center' }}>
-                  <div 
-                     onMouseEnter={() => setHoveredTool('yellow')}
-                     onMouseLeave={() => setHoveredTool(null)}
-                     onClick={() => { if (canUseYellow) consumeYellowMeter(); }}
-                     style={{ position: 'relative', display: 'inline-block', cursor: canUseYellow ? 'pointer' : 'not-allowed' }}
-                  >
-                     <button 
-                        disabled={!canUseYellow} 
-                        style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: canUseYellow ? 'white' : '#f8fafc', border: canUseYellow ? '2px solid #eab308' : '2px solid #e2e8f0', color: canUseYellow ? '#ca8a04' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', pointerEvents: 'none', boxShadow: canUseYellow ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
-                     >
-                        <Disc size={20} /> Poisto {ytotal > 0 && `(${ytotal})`}
-                     </button>
-                     {hoveredTool === 'yellow' && (
-                        <div style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
-                           <div className="animate-fade-in" style={{ position: 'relative', background: '#fffbeb', border: '2px solid #fcd34d', color: '#b45309', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}>
-                              <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #fcd34d' }}></div>
-                              <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #fffbeb' }}></div>
-                              {yTitle}
-                           </div>
-                        </div>
-                     )}
-                  </div>
-                  <div 
-                     onMouseEnter={() => setHoveredTool('green')}
-                     onMouseLeave={() => setHoveredTool(null)}
-                     onClick={() => { if (gtotal > 0) consumeGreenMeter(); }}
-                     style={{ position: 'relative', display: 'inline-block', cursor: gtotal > 0 ? 'pointer' : 'not-allowed' }}
-                  >
-                     <button 
-                        disabled={gtotal === 0} 
-                        style={{ position: 'relative', padding: '0.8rem 1.4rem', borderRadius: '16px', background: gtotal > 0 ? 'white' : '#f8fafc', border: gtotal > 0 ? '2px solid #22c55e' : '2px solid #e2e8f0', color: gtotal > 0 ? '#166534' : '#94a3b8', fontWeight: 'bold', fontSize: '1rem', fontFamily: 'var(--font-main)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem', pointerEvents: 'none', boxShadow: gtotal > 0 ? '0 4px 10px rgba(0,0,0,0.05)' : 'none', transition: 'all 0.2s' }}
-                     >
-                        <Wrench size={20} /> Vaihto {gtotal > 0 && `(${gtotal})`}
-                     </button>
-                     {hoveredTool === 'green' && (
-                        <div style={{ position: 'absolute', bottom: 'calc(100% + 15px)', left: '50%', transform: 'translateX(-50%)', zIndex: 100 }}>
-                           <div className="animate-fade-in" style={{ position: 'relative', background: '#f0fdf4', border: '2px solid #86efac', color: '#166534', padding: '0.6rem 1rem', borderRadius: '12px', fontSize: '0.9rem', width: '220px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', cursor: 'default', pointerEvents: 'none', lineHeight: '1.4', textAlign: 'center', fontFamily: 'Roboto, sans-serif' }}>
-                              <div style={{ position: 'absolute', bottom: '-8px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '8px solid transparent', borderRight: '8px solid transparent', borderTop: '8px solid #86efac' }}></div>
-                              <div style={{ position: 'absolute', bottom: '-5px', left: '50%', transform: 'translateX(-50%)', width: 0, height: 0, borderLeft: '6px solid transparent', borderRight: '6px solid transparent', borderTop: '6px solid #f0fdf4' }}></div>
-                              {gTitle}
-                           </div>
-                        </div>
-                     )}
-                  </div>
-               </div>
-            );
-        })()}
 
         {/* Visual Overrides for Specific Question Types */}
         {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (() => {
@@ -1039,8 +1045,8 @@ export default function Quiz() {
            // === TRUE FALSE ===
            if (currentQuestion.type === 'true_false') {
              return (
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginTop: '1rem' }}>
+               <div style={{ display: 'flex', flexDirection: 'column' }}>
+                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'clamp(0.75rem, 2vh, 1.5rem)' }}>
                    {shuffledOptions.map((option, idx) => {
                      const isSelected = selectedAnswer === option;
                      const isRemoved = removedOptions.includes(option);
@@ -1050,11 +1056,11 @@ export default function Quiz() {
                      const themeColor = isTrueOption ? '#22c55e' : '#ef4444';
                      
                      let btnStyle = { 
-                       padding: '2rem 1.5rem', textAlign: 'center', background: 'white', 
+                       padding: 'clamp(0.9rem, 3vh, 2rem) 1.5rem', textAlign: 'center', background: 'white', 
                        border: `4px solid ${themeColor}40`, color: 'var(--text-main)', 
                        borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
-                       transition: 'all 0.2s', fontSize: '1.5rem', fontFamily: 'var(--font-display)', 
-                       fontWeight: '900', textTransform: 'uppercase', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem',
+                       transition: 'all 0.2s', fontSize: 'clamp(1.3rem, 3.6vh, 1.7rem)', fontFamily: 'var(--font-display)',
+                       fontWeight: '900', textTransform: 'uppercase', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 'clamp(0.4rem, 1.4vh, 1rem)',
                        boxShadow: '0 8px 20px rgba(0,0,0,0.05)'
                      };
                      
@@ -1077,8 +1083,8 @@ export default function Quiz() {
 
                      return (
                        <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
-                         <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: themeColor, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            {isTrueOption ? <CheckCircle2 size={36} /> : <XCircle size={36} />}
+                         <div style={{ width: 'clamp(44px, 8.5vh, 68px)', height: 'clamp(44px, 8.5vh, 68px)', borderRadius: '50%', background: themeColor, color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            {isTrueOption ? <CheckCircle2 size={32} /> : <XCircle size={32} />}
                          </div>
                          <span style={{ textDecoration: isRemoved ? 'line-through' : 'none', letterSpacing: '2px' }}>{option}</span>
                          {isRemoved && <span style={{fontSize:'0.75rem', background:'rgba(0,0,0,0.05)', padding:'0.3rem 0.6rem', borderRadius:'8px', marginTop:'0.5rem', fontWeight:'bold'}}>{bumperSaved ? 'Törmäyksenesto suojasi' : 'Varuste poisti'}</span>}
@@ -1086,22 +1092,18 @@ export default function Quiz() {
                      );
                    })}
                  </div>
-                 {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem', alignSelf: 'center' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                     <CheckCircle2 size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Lukitse vastaus
-                   </button>
-                 )}
+                 {renderSubmit(!showExplanation && !!selectedAnswer, () => handleAnswerSubmit(selectedAnswer), 'Lukitse vastaus', <CheckCircle2 size={20} />)}
                </div>
              );
            }
 
-
-
            // === SPOT THE AI (TUNNISTUSRIVI) ===
            if (currentQuestion.type === 'spot_the_ai') {
+             // Pitkät vaihtoehdot 2x2-ruudukkoon, jotta tekstiä ei tarvitse lukea kapeista sarakkeista
+             const longOptions = shuffledOptions.some(o => o.length > 90);
              return (
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#334155', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem', alignSelf: 'center', fontWeight: 'bold' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.4rem, 1.2vh, 0.8rem)' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#334155', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', alignSelf: 'center', fontWeight: 'bold' }}>
                    <Eye size={18} /> Skannaus: Tunnista tekoälyn valinta
                  </div>
                  <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -1111,14 +1113,14 @@ export default function Quiz() {
                      const isHovered = hoveredOptionIdx === idx;
                      
                      let btnStyle = { 
-                       flex: '1 1 150px',
-                       minHeight: '120px',
-                       padding: '1.5rem 1rem', textAlign: 'center', background: 'white', 
+                       flex: longOptions ? '1 1 calc(50% - 0.5rem)' : '1 1 150px',
+                       minHeight: 'clamp(90px, 17vh, 140px)',
+                       padding: 'clamp(0.7rem, 2vh, 1.4rem) 0.9rem', textAlign: 'center', background: 'white', 
                        border: `3px solid #e2e8f0`, color: '#334155', 
                        borderRadius: '16px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
-                       transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
+                       transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', fontSize: 'clamp(0.95rem, 2.6vh, 1.12rem)', fontFamily: 'var(--font-main)',
                        lineHeight: '1.4', boxShadow: '0 4px 10px rgba(51, 65, 85, 0.05)',
-                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.5rem'
+                       display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '0.35rem'
                      };
                      
                      if (isRemoved) { btnStyle.opacity = 0.4; }
@@ -1140,18 +1142,14 @@ export default function Quiz() {
 
                      return (
                        <button key={idx} style={btnStyle} onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)} onMouseEnter={() => setHoveredOptionIdx(idx)} onMouseLeave={() => setHoveredOptionIdx(null)}>
-                         <span style={{ fontSize: '1.5rem', fontWeight: 'bold', color: isSelected && !showExplanation ? '#334155' : '#94a3b8', opacity: isSelected ? 1 : 0.6 }}>#{idx+1}</span>
+                         <span style={{ fontSize: 'clamp(1.1rem, 2.8vh, 1.5rem)', fontWeight: 'bold', color: isSelected && !showExplanation ? '#334155' : '#94a3b8', opacity: isSelected ? 1 : 0.6 }}>#{idx+1}</span>
                          <span style={{ textDecoration: isRemoved ? 'line-through' : 'none', fontWeight: isSelected ? 'bold' : 'normal' }}>{option}</span>
                          {isRemoved && <span style={{fontSize:'0.75rem', display:'block', color:'#94a3b8', marginTop:'0.5rem'}}>{bumperSaved ? 'Suojattu' : 'Poistettu'}</span>}
                        </button>
                      );
                    })}
                  </div>
-                 {!showExplanation && selectedAnswer && (
-                   <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem 3rem', alignSelf: 'center', background: '#334155', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(51,65,85,0.4)', transition: 'all 0.2s', fontSize: '1.1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                     <Eye size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} /> Vahvista tunnistus
-                   </button>
-                 )}
+                 {renderSubmit(!showExplanation && !!selectedAnswer, () => handleAnswerSubmit(selectedAnswer), 'Vahvista tunnistus', <Eye size={20} />, { background: '#334155', border: 'none', borderRadius: '30px', boxShadow: '0 10px 20px rgba(51,65,85,0.4)' })}
                </div>
              );
            }
@@ -1159,22 +1157,23 @@ export default function Quiz() {
            // === REVERSE PROMPT ===
            if (currentQuestion.type === 'reverse_prompt') {
              return (
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', background: '#f8fafc', padding: '1.5rem', borderRadius: '24px', border: '1px solid #e2e8f0', marginTop: '1.5rem' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.5rem' }}>
+               <div style={{ display: 'flex', flexDirection: 'column' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.4vh, 0.9rem)', background: '#f8fafc', padding: 'clamp(0.7rem, 2vh, 1.3rem)', borderRadius: '24px', border: '1px solid #e2e8f0' }}>
+                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#64748b', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
                    <Terminal size={16} /> Valitse oikea kehote (prompti):
                  </div>
-                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                 <div className="quiz-options">
                    {shuffledOptions.map((option, idx) => {
                      const isSelected = selectedAnswer === option;
                      const isRemoved = removedOptions.includes(option);
                      const isHovered = hoveredOptionIdx === idx;
                      
                      let btnStyle = { 
-                       padding: '1.2rem 1.5rem', textAlign: 'left', background: 'white', 
+                       padding: 'clamp(0.65rem, 2vh, 1.2rem) 1.2rem', textAlign: 'left', background: 'white', 
                        border: `2px solid transparent`, color: '#334155', 
-                       borderRadius: '24px', cursor: isRemoved ? 'not-allowed' : 'pointer', 
-                       transition: 'all 0.3s ease-in-out', fontSize: '1.05rem', fontFamily: 'var(--font-main)', 
-                       lineHeight: '1.5', boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+                       borderRadius: '18px', cursor: isRemoved ? 'not-allowed' : 'pointer',
+                       transition: 'all 0.3s ease-in-out', fontSize: 'clamp(0.95rem, 2.6vh, 1.12rem)', fontFamily: 'var(--font-main)',
+                       lineHeight: '1.45', boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
                        width: '100%'
                      };
                      
@@ -1203,18 +1202,16 @@ export default function Quiz() {
                      );
                    })}
                  </div>
-                 {!showExplanation && (
-                   <button className="btn-primary" disabled={!selectedAnswer} style={{ marginTop: '1rem', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, alignSelf: 'center', background: selectedAnswer ? '#10b981' : '#e2e8f0', color: selectedAnswer ? 'white' : '#94a3b8', border: 'none', borderRadius: '50%', boxShadow: selectedAnswer ? '0 10px 20px rgba(16,185,129,0.4)' : 'none', transition: 'all 0.2s', transform: selectedAnswer ? 'scale(1.05)' : 'scale(1)', cursor: selectedAnswer ? 'pointer' : 'not-allowed' }} onClick={() => selectedAnswer && handleAnswerSubmit(selectedAnswer)}>
-                     <ArrowRight size={28} />
-                   </button>
-                 )}
+               </div>
+               {renderSubmit(!showExplanation && !!selectedAnswer, () => handleAnswerSubmit(selectedAnswer), 'Lukitse vastaus', <ArrowRight size={20} />, { background: '#10b981', border: 'none', boxShadow: '0 10px 20px rgba(16,185,129,0.35)' })}
                </div>
              );
            }
 
            // === REGULAR MULTIPLE CHOICE ===
            return (
-             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+             <div style={{ display: 'flex', flexDirection: 'column' }}>
+               <div className="quiz-options">
                {shuffledOptions.map((option, idx) => {
                  const isSelected = selectedAnswer === option;
                  const isRemoved = removedOptions.includes(option);
@@ -1225,7 +1222,7 @@ export default function Quiz() {
                  ];
                  let borderColor = colorPalette[idx % colorPalette.length];
                  
-                 let btnStyle = { padding: '1.2rem 1.8rem', textAlign: 'center', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '30px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: '1.1rem', lineHeight: '1.5', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
+                 let btnStyle = { padding: 'clamp(0.75rem, 2.4vh, 1.35rem) 1.4rem', textAlign: 'center', background: 'white', border: `3px solid ${borderColor}40`, color: 'var(--text-main)', borderRadius: '22px', cursor: isRemoved ? 'not-allowed' : 'pointer', transition: 'all 0.2s ease-out', fontSize: 'clamp(1rem, 2.9vh, 1.2rem)', lineHeight: '1.4', fontFamily: 'var(--font-main)', fontWeight: '600', boxShadow: '0 4px 15px rgba(0,0,0,0.03)' };
                  
                  if (isRemoved) {
                     btnStyle.opacity = 0.5;
@@ -1274,13 +1271,8 @@ export default function Quiz() {
                    </button>
                  );
                })}
-               
-               {!showExplanation && selectedAnswer && (
-                 <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem' }} onClick={() => handleAnswerSubmit(selectedAnswer)}>
-                   <CheckCircle2 size={20} style={{ display: 'inline', marginRight: '8px', verticalAlign: 'middle' }} />
-                   Lukitse vastaus
-                 </button>
-               )}
+               </div>
+               {renderSubmit(!showExplanation && !!selectedAnswer, () => handleAnswerSubmit(selectedAnswer), 'Lukitse vastaus', <CheckCircle2 size={20} />)}
              </div>
            );
 
@@ -1290,7 +1282,7 @@ export default function Quiz() {
         {currentQuestion.type === 'ordering' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             {orderedItems.map((item, idx) => (
-              <div key={idx} style={{ padding: '0.8rem 1.2rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 4px 15px rgba(0,0,0,0.06)', fontSize: '1.05rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
+              <div key={idx} style={{ padding: '0.55rem 1rem', background: showExplanation && isCorrect ? 'linear-gradient(135deg, rgba(220, 252, 231, 0.6) 0%, rgba(240, 253, 244, 0.9) 100%)' : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation && isCorrect ? '3px solid rgba(134, 239, 172, 0.4)' : showExplanation ? '3px solid rgba(252, 165, 165, 0.4)' : highlightedWrongItems.includes(item) ? '3px solid rgba(252, 165, 165, 0.8)' : '1px solid rgba(0,0,0,0.05)', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', boxShadow: '0 4px 15px rgba(0,0,0,0.06)', fontSize: '1.05rem', fontFamily: 'var(--font-main)', fontWeight: '700' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
                   <span style={{ width: '28px', height: '28px', flexShrink: 0, background: 'var(--primary-color)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', fontWeight: 'bold' }}>{idx + 1}</span>
                   {item}
@@ -1303,11 +1295,7 @@ export default function Quiz() {
                 )}
               </div>
             ))}
-            {!showExplanation && (
-              <button className="btn-primary" style={{ marginTop: '1rem', padding: '1rem' }} onClick={() => handleAnswerSubmit(orderedItems)}>
-                Tarkista järjestys
-              </button>
-            )}
+            {renderSubmit(!showExplanation, () => handleAnswerSubmit(orderedItems), 'Tarkista järjestys', <CheckCircle2 size={20} />)}
             {showExplanation && !isCorrect && (
               <div style={{ marginTop: '1rem', padding: '1rem', background: '#ffebee', borderRadius: '8px' }}>
                 <h4 style={{ margin: '0 0 0.5rem 0', color: '#c62828' }}>Oikea järjestys:</h4>
@@ -1322,14 +1310,15 @@ export default function Quiz() {
         {/* Drag and Drop / Järjestely Logic */}
         {currentQuestion.type === 'drag_drop' && (() => {
           const isSequenceTask = currentQuestion.dropZones && currentQuestion.dropZones.some(z => /vaihe/i.test(z) || /^\d+\./.test(z));
-          
+          const allPlaced = shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]);
+
           if (isSequenceTask) {
             return (
               <div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '1.5rem', alignItems: 'flex-start' }}>
-                  
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(0.75rem, 2vw, 1.5rem)', alignItems: 'start' }}>
+
                   {/* Vasen puoli: Vaihtoehdot */}
-                  <div 
+                  <div
                     onDragOver={handleDragOver}
                     onDrop={(e) => {
                       e.preventDefault();
@@ -1337,30 +1326,31 @@ export default function Quiz() {
                         handleRemoveFromDropZone(e, selectedDragItem);
                       }
                     }}
-                    style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', background: 'rgba(255,255,255,0.4)', padding: '0.8rem', borderRadius: '24px', border: '2px dashed #cbd5e1', minHeight: '200px' }}
+                    style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', background: 'rgba(255,255,255,0.4)', padding: '0.7rem', borderRadius: '20px', border: '2px dashed #cbd5e1' }}
                   >
-                    <h4 style={{ margin: '0 0 0.2rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
+                    <h4 style={{ margin: '0 0 0.1rem 0', color: 'var(--primary-color)', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '1px' }}>Valittavat vaihtoehdot</h4>
                     {shuffledDraggables.map((item, idx) => {
                       const isPlaced = !!dragTargets[item];
                       const isSelected = selectedDragItem === item;
                       return (
-                        <div 
-                          key={idx} 
+                        <div
+                          key={idx}
                           draggable={!isPlaced && !showExplanation}
                           onDragStart={!isPlaced ? (e) => handleDragStart(e, item) : undefined}
                           onClick={!isPlaced ? () => handleClickDragItem(item) : undefined}
-                          style={{ 
-                            padding: '0.6rem 1rem', 
-                            background: isPlaced ? 'transparent' : (isSelected ? '#059669' : '#10b981'), 
-                            color: isPlaced ? 'transparent' : 'white', 
-                            borderRadius: '16px', 
-                            cursor: isPlaced ? 'default' : (showExplanation ? 'default' : 'pointer'), 
-                            fontSize: '0.95rem', 
-                            fontWeight: 'bold', 
-                            fontFamily: 'var(--font-main)', 
-                            boxShadow: isPlaced ? 'none' : '0 4px 10px rgba(0,0,0,0.15)', 
-                            transform: isSelected ? 'scale(1.02)' : 'scale(1)', 
-                            transition: 'all 0.2s', 
+                          style={{
+                            padding: '0.5rem 0.9rem',
+                            background: isPlaced ? 'transparent' : (isSelected ? '#059669' : '#10b981'),
+                            color: isPlaced ? 'transparent' : 'white',
+                            borderRadius: '14px',
+                            cursor: isPlaced ? 'default' : (showExplanation ? 'default' : 'pointer'),
+                            fontSize: 'clamp(0.88rem, 2.3vh, 0.95rem)',
+                            lineHeight: 1.35,
+                            fontWeight: 'bold',
+                            fontFamily: 'var(--font-main)',
+                            boxShadow: isPlaced ? 'none' : '0 4px 10px rgba(0,0,0,0.15)',
+                            transform: isSelected ? 'scale(1.02)' : 'scale(1)',
+                            transition: 'all 0.2s',
                             border: isPlaced ? '2px dashed #cbd5e1' : (isSelected ? '2px solid white' : '2px solid transparent'),
                             userSelect: isPlaced ? 'none' : 'auto'
                           }}
@@ -1369,63 +1359,55 @@ export default function Quiz() {
                         </div>
                       );
                     })}
-                    {shuffledDraggables.every(item => dragTargets[item]) && (
-                      <div style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic', textAlign: 'center', marginTop: '1rem' }}>Kaikki sijoitettu!</div>
-                    )}
+                    <div style={{ color: '#64748b', fontSize: '0.9rem', fontStyle: 'italic', textAlign: 'center', visibility: allPlaced ? 'visible' : 'hidden' }}>Kaikki sijoitettu!</div>
                   </div>
 
                   {/* Oikea puoli: Sijoitusalueet (1. vaihe, 2. vaihe jne.) */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', paddingTop: '0' }}>
-                    {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
-                      <div key={target} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                        {/* Drop zone box with integrated header */}
-                        <div 
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem' }}>
+                    {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => {
+                      const placedHere = shuffledDraggables.filter(item => dragTargets[item] === target);
+                      return (
+                        <div
+                          key={target}
                           onDrop={(e) => !showExplanation && handleDrop(e, target)}
                           onDragOver={handleDragOver}
                           onClick={() => handleClickDropZone(target)}
-                          style={{ width: '100%', minHeight: '65px', border: selectedDragItem ? '3px dashed #bae6fd' : '2px solid #cbd5e1', borderRadius: '16px', display: 'flex', flexDirection: 'column', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
+                          style={{ display: 'flex', alignItems: 'stretch', minHeight: '48px', border: selectedDragItem ? '3px dashed #bae6fd' : '2px solid #cbd5e1', borderRadius: '14px', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s', position: 'relative', zIndex: 1, overflow: 'hidden' }}
                         >
-                          {/* Integrated Tab Header */}
-                          <div style={{ background: '#e2e8f0', borderBottom: '2px solid #cbd5e1', padding: '0.4rem 1rem', display: 'flex', alignItems: 'center' }}>
-                            <h4 style={{ margin: 0, color: '#475569', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{target}</h4>
+                          {/* Vaiheen nimi vasemmalla */}
+                          <div style={{ background: '#e2e8f0', borderRight: '2px solid #cbd5e1', padding: '0.4rem 0.7rem', display: 'flex', alignItems: 'center', width: 'clamp(88px, 9vw, 124px)', flexShrink: 0 }}>
+                            <h4 style={{ margin: 0, color: '#475569', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px', lineHeight: 1.2 }}>{target}</h4>
                           </div>
 
-                          <div style={{ padding: '0.8rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                          {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
-                            <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.85rem', border: '2px dashed #cbd5e1', borderRadius: '12px' }}>
-                              Pudota tähän
-                            </div>
-                          )}
-
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
-                            {shuffledDraggables.filter(item => dragTargets[item] === target).map((item, idx) => {
-                            const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
-                            const isItemCorrect = expected === target;
-                            return (
-                              <div 
-                                key={idx} 
-                                draggable={!showExplanation}
-                                onDragStart={(e) => handleDragStart(e, item)}
-                                onClick={(e) => handleRemoveFromDropZone(e, item)}
-                                style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '12px', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
-                              >
-                                {item}
+                          <div style={{ padding: '0.4rem', flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '0.4rem', justifyContent: 'center', minWidth: 0 }}>
+                            {placedHere.length === 0 && (
+                              <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '34px', fontSize: '0.85rem', border: '2px dashed #cbd5e1', borderRadius: '10px' }}>
+                                Pudota tähän
                               </div>
-                            );
-                          })}
+                            )}
+                            {placedHere.map((item, idx) => {
+                              const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
+                              const isItemCorrect = expected === target;
+                              return (
+                                <div
+                                  key={idx}
+                                  draggable={!showExplanation}
+                                  onDragStart={(e) => handleDragStart(e, item)}
+                                  onClick={(e) => handleRemoveFromDropZone(e, item)}
+                                  style={{ padding: '0.45rem 0.7rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '10px', fontSize: 'clamp(0.88rem, 2.3vh, 0.95rem)', lineHeight: 1.35, fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                                >
+                                  {item}
+                                </div>
+                              );
+                            })}
+                          </div>
                         </div>
-                        </div>
-                      </div>
-                    </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
-                
-                {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
-                   <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
-                     Tarkista vastaukset
-                   </button>
-                )}
+
+                {renderSubmit(!showExplanation && allPlaced, () => handleAnswerSubmit(dragTargets), 'Tarkista vastaukset', <CheckCircle2 size={20} />)}
               </div>
             );
           }
@@ -1433,17 +1415,17 @@ export default function Quiz() {
           // Vanha layout luokittelutehtäville (AIvanin kyytiin / Jätä tien sivuun)
           return (
             <div>
-              <div style={{ display: 'flex', gap: '0.7rem', marginBottom: '1.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <div style={{ display: 'flex', gap: '0.6rem', marginBottom: 'clamp(0.6rem, 1.8vh, 1.2rem)', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {shuffledDraggables.map((item, idx) => {
                   if (dragTargets[item]) return null;
                   const isSelected = selectedDragItem === item;
                   return (
-                    <div 
-                      key={idx} 
+                    <div
+                      key={idx}
                       draggable={!showExplanation}
                       onDragStart={(e) => handleDragStart(e, item)}
                       onClick={() => handleClickDragItem(item)}
-                      style={{ padding: '0.6rem 1rem', background: isSelected ? '#059669' : '#10b981', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: '0.95rem', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
+                      style={{ padding: '0.5rem 1rem', background: isSelected ? '#059669' : '#10b981', color: 'white', borderRadius: '20px', cursor: showExplanation ? 'default' : 'pointer', fontSize: 'clamp(0.88rem, 2.3vh, 0.95rem)', lineHeight: 1.35, fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transform: isSelected ? 'scale(1.05)' : 'scale(1)', transition: 'all 0.2s', border: isSelected ? '2px solid white' : '2px solid transparent' }}
                     >
                       {item}
                     </div>
@@ -1451,17 +1433,17 @@ export default function Quiz() {
                 })}
               </div>
 
-              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: 'clamp(0.6rem, 1.6vw, 1rem)', flexWrap: 'wrap' }}>
                 {(currentQuestion.dropZones || ['AIvanin kyytiin', 'Jätä tien sivuun']).map(target => (
-                  <div 
+                  <div
                     key={target}
                     onDrop={(e) => !showExplanation && handleDrop(e, target)}
                     onDragOver={handleDragOver}
                     onClick={() => handleClickDropZone(target)}
-                    style={{ flex: '1 1 200px', minHeight: '140px', border: selectedDragItem ? '3px dashed #bae6fd' : '3px dashed #cbd5e1', borderRadius: '24px', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
+                    style={{ flex: '1 1 200px', minHeight: 'clamp(96px, 18vh, 140px)', border: selectedDragItem ? '3px dashed #bae6fd' : '3px dashed #cbd5e1', borderRadius: '22px', padding: 'clamp(0.6rem, 1.6vh, 1rem)', display: 'flex', flexDirection: 'column', gap: '0.5rem', background: selectedDragItem ? '#f1f5f9' : '#f8fafc', cursor: selectedDragItem && !showExplanation ? 'pointer' : 'default', transition: 'all 0.3s' }}
                   >
                     <h3 style={{ textAlign: 'center', margin: 0, color: 'var(--text-main)', fontSize: '1.1rem', fontFamily: 'var(--font-display)', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>{target}</h3>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flexGrow: 1 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', flexGrow: 1 }}>
                       {shuffledDraggables.filter(item => dragTargets[item] === target).length === 0 && (
                         <div style={{ color: '#94a3b8', fontStyle: 'italic', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', flexGrow: 1, minHeight: '30px', fontSize: '0.9rem', border: '2px dashed #cbd5e1', borderRadius: '12px' }}>
                           Pudota tähän
@@ -1471,12 +1453,12 @@ export default function Quiz() {
                         const expected = currentQuestion.correctAnswer ? currentQuestion.correctAnswer[item] : (currentQuestion.options.find(o => o.item === item)?.target);
                         const isItemCorrect = expected === target;
                         return (
-                          <div 
-                            key={idx} 
+                          <div
+                            key={idx}
                             draggable={!showExplanation}
                             onDragStart={(e) => handleDragStart(e, item)}
                             onClick={(e) => handleRemoveFromDropZone(e, item)}
-                            style={{ padding: '0.6rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '16px', fontSize: '0.95rem', textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
+                            style={{ padding: '0.5rem 0.8rem', background: showExplanation ? (isItemCorrect ? 'linear-gradient(135deg, rgba(220,252,231,0.8), rgba(240,253,244,0.9))' : 'linear-gradient(135deg, rgba(254,226,226,0.8), rgba(254,242,242,0.9))') : 'linear-gradient(180deg, #ffffff 0%, #f8fafc 100%)', border: showExplanation ? (isItemCorrect ? '2px solid rgba(134,239,172,0.6)' : '2px solid rgba(252,165,165,0.6)') : highlightedWrongItems.includes(item) ? '2px solid #ef4444' : '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', fontSize: 'clamp(0.88rem, 2.3vh, 0.95rem)', lineHeight: 1.35, textAlign: 'center', fontWeight: 'bold', fontFamily: 'var(--font-main)', boxShadow: '0 2px 10px rgba(0,0,0,0.05)', cursor: showExplanation ? 'default' : 'move' }}
                           >
                             {item}
                           </div>
@@ -1486,51 +1468,89 @@ export default function Quiz() {
                   </div>
                 ))}
               </div>
-              
-              {!showExplanation && shuffledDraggables.length > 0 && shuffledDraggables.every(item => dragTargets[item]) && (
-                 <button className="btn-primary" style={{ marginTop: '2rem', width: '100%', padding: '1rem' }} onClick={() => handleAnswerSubmit(dragTargets)}>
-                   Tarkista vastaukset
-                 </button>
-              )}
+
+              {renderSubmit(!showExplanation && allPlaced, () => handleAnswerSubmit(dragTargets), 'Tarkista vastaukset', <CheckCircle2 size={20} />)}
             </div>
           );
         })()}
         </div>
         </div>
-      </div>
-      
-      {showStreakTutorial && (
-        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.6)', backdropFilter: 'blur(5px)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="animate-bounce" style={{ background: 'rgba(255, 255, 255, 0.98)', border: '6px solid #f59e0b', padding: '3rem', borderRadius: '32px', maxWidth: '650px', width: '90%', boxShadow: '0 30px 100px rgba(245, 158, 11, 0.3)', color: 'var(--text-main)', position: 'relative', overflow: 'hidden' }}>
-                <button onClick={() => setShowStreakTutorial(false)} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'rgba(241, 245, 249, 0.8)', border: 'none', color: '#64748b', cursor: 'pointer', padding: '0.6rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: '0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}>
-                    <XCircle size={24} />
-                </button>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', marginBottom: '2rem' }}>
-                    <div style={{ background: 'linear-gradient(135deg, #fef08a, #f59e0b)', padding: '1rem', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(245, 158, 11, 0.2)' }}>
-                        <Flame size={44} fill="#f97316" color="#9a3412" />
-                    </div>
-                    <h2 style={{ fontSize: '2.5rem', margin: 0, color: '#d97706', fontFamily: 'var(--font-display)', textTransform: 'uppercase' }}>Olet liekeissä!</h2>
-                </div>
-                
-                <p style={{ fontSize: '1.15rem', color: '#334155', lineHeight: '1.6', marginBottom: '1.5rem', fontFamily: 'var(--font-main)' }}>
-                    Sait juuri <strong style={{color: '#d97706'}}>5. kysymyksen oikein putkeen</strong>, mikä tarkoittaa että <strong>Kipinäketjusi</strong> on nyt käynnissä! 
-                </p>
-                
-                <div style={{ background: '#fffbeb', padding: '1.2rem', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '2rem' }}>
-                    <Zap size={32} color="#d97706" style={{ flexShrink: 0 }} />
-                    <span style={{ color: '#78350f', fontSize: '1.05rem', lineHeight: '1.5' }}>
-                        Jatkossa Kipinäketju palkitsee sinut lisäkipinöillä! Yli 5 putki antaa <strong>+5% kipinöitä</strong> ja yli 10 putki jopa <strong>+10% kipinöitä</strong>. Pidä putki yllä, ja voit ihailla uutta Kipinäketju-ennätystäsi myöhemmin Palkintokaapissasi!
-                    </span>
-                </div>
+        </FitToHeight>
 
-                <button 
-                    onClick={() => setShowStreakTutorial(false)}
-                    className="btn-primary"
-                    style={{ width: '100%', padding: '1.2rem', fontSize: '1.3rem', borderRadius: '16px', background: '#f59e0b', color: 'white', fontWeight: 'bold' }}>
-                    Liekeissä ollaan!
-                </button>
+        {/* Virheilmoitus avautuu tehtävän päälle, jotta tehtävän asettelu ei muutu */}
+        {bugReportMode && (
+           <div className="animate-fade-in" style={{ position: 'absolute', inset: 0, zIndex: 60, background: 'rgba(248, 250, 252, 0.97)', borderRadius: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(0.75rem, 2.4vh, 1.75rem)' }}>
+             <div style={{ width: '100%', maxWidth: '760px', maxHeight: '100%', overflow: 'hidden', padding: 'clamp(1rem, 2.4vh, 1.5rem)', backgroundColor: '#ffffff', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)' }}>
+             {bugSubmitted ? (
+                <p style={{ color: '#166534', fontWeight: 'bold', margin: '1rem 0', textAlign: 'center', fontSize: '1.2rem' }}>Kiitos ilmoituksesta! Olemme vastaanottaneet sen.</p>
+             ) : (
+                <div>
+                  <p style={{ fontSize: 'clamp(0.9rem, 2.4vh, 1rem)', color: '#475569', marginBottom: 'clamp(0.6rem, 1.8vh, 1rem)', lineHeight: 1.5 }}>
+                    Tekoäly kehittyy nopeasti ja tieto voi vanhentua. Olemme myös poikkeuksellisesti vain ihmisiä (ja tekoälyjä!), jotka tekevät virheitä. Jos huomasit epäkohdan tällä tasolla, kerro siitä meille, jotta voimme korjata sen! Kysymyksen koodi <b>{currentQuestion.id}</b> liitetään automaattisesti ilmoitukseen.
+                  </p>
+                  <textarea
+                    value={bugText}
+                    onChange={e => setBugText(e.target.value)}
+                    maxLength={500}
+                    placeholder="Mikä tässä kysymyksessä on mielestäsi pielessä tai vanhentunut?"
+                    style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '8px', border: '1px solid #cbd5e1', resize: 'none', height: 'clamp(80px, 16vh, 120px)', marginBottom: 'clamp(0.6rem, 1.8vh, 1rem)', fontFamily: 'inherit', fontSize: '1rem', backgroundColor: '#ffffff', color: '#1e293b' }}
+                  />
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '1rem' }}>
+                    <button className="btn-secondary" onClick={() => setBugReportMode(false)} style={{ padding: '0.5rem 1rem' }}>Peruuta</button>
+                    <button className="btn-primary"
+                         disabled={!bugText.trim()}
+                         style={{ padding: '0.5rem 1.5rem', background: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', borderColor: bugText.trim() ? 'var(--primary-color)' : '#cbd5e1', color: bugText.trim() ? '#ffffff' : '#f8fafc' }}
+                         onClick={() => {
+                            store.saveBugReport(currentQuestion.id, bugText);
+                            setBugSubmitted(true);
+                            setTimeout(() => { setBugReportMode(false); setBugSubmitted(false); setBugText(''); }, 3000);
+                         }}>
+                       Lähetä ilmoitus
+                    </button>
+                  </div>
+                </div>
+             )}
+             </div>
+           </div>
+        )}
+      </div>
+
+      {notification && createPortal(
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.6)', zIndex: 10000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+            <div className="animate-fade-in responsive-popup" style={{ background: 'white', padding: '2rem', borderRadius: '24px', maxWidth: '450px', width: '100%', textAlign: 'center', boxShadow: '0 20px 40px rgba(0,0,0,0.25)' }}>
+                <AlertTriangle size={56} color="#f59e0b" style={{ margin: '0 auto 1rem', display: 'block' }} />
+                <h3 style={{ margin: '0 0 1rem 0', color: 'var(--text-main)', fontSize: '1.6rem', fontFamily: 'var(--font-display)' }}>Huomio</h3>
+                <p style={{ margin: '0 0 1.5rem 0', color: '#475569', fontSize: '1.15rem', lineHeight: '1.6' }}>{notification}</p>
+                <button className="btn-primary" style={{ width: '100%', padding: '1.1rem', fontSize: '1.1rem' }} onClick={() => setNotification(null)}>Okei, selvä juttu!</button>
             </div>
-        </div>
+         </div>,
+         document.body
+      )}
+
+      {showStreakTutorial && (
+        <TutorialModal
+          title="Olet liekeissä!"
+          accent="#f59e0b"
+          titleColor="#d97706"
+          maxWidth={650}
+          icon={
+            <div style={{ background: 'linear-gradient(135deg, #fef08a, #f59e0b)', padding: '0.7rem', borderRadius: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 10px 20px rgba(245, 158, 11, 0.2)' }}>
+              <Flame size={36} fill="#f97316" color="#9a3412" />
+            </div>
+          }
+          buttonText="Liekeissä ollaan!"
+          onConfirm={() => setShowStreakTutorial(false)}
+        >
+          <p style={{ margin: '0 0 clamp(0.6rem, 2vh, 1.2rem)', color: '#334155', fontWeight: 500 }}>
+              Sait juuri <strong style={{color: '#d97706'}}>5. kysymyksen oikein putkeen</strong>, mikä tarkoittaa että <strong>Kipinäketjusi</strong> on nyt käynnissä!
+          </p>
+          <div style={{ background: '#fffbeb', padding: 'clamp(0.7rem, 2vh, 1.2rem)', borderRadius: '16px', border: '1px solid #fde68a', display: 'flex', gap: '1rem', alignItems: 'center', textAlign: 'left' }}>
+              <Zap size={32} color="#d97706" style={{ flexShrink: 0 }} />
+              <span style={{ color: '#78350f', fontSize: '0.95em', lineHeight: '1.5', fontWeight: 500 }}>
+                  Jatkossa Kipinäketju palkitsee sinut lisäkipinöillä! Yli 5 putki antaa <strong>+5% kipinöitä</strong> ja yli 10 putki jopa <strong>+10% kipinöitä</strong>. Pidä putki yllä, ja voit ihailla uutta Kipinäketju-ennätystäsi myöhemmin Palkintokaapissasi!
+              </span>
+          </div>
+        </TutorialModal>
       )}
 
     </div>

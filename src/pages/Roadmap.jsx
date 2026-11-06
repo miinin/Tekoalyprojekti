@@ -13,8 +13,10 @@ import {
   XCircle,
   Lightbulb
 } from 'lucide-react';
+import { createPortal } from 'react-dom';
 import { AI_ROADMAP_DATA } from '../data/roadmapPaths';
 import confetti from 'canvas-confetti';
+import TutorialModal from '../components/TutorialModal';
 
 import { categories } from '../data/questions';
 import { store } from '../services/store';
@@ -702,13 +704,15 @@ const Roadmap = () => {
       else if (labelPos === 'left') { labelStyle = { top: '50%', right: '100%', transform: 'translate(-0.66rem, -50%)' }; }
       else if (labelPos === 'right') { labelStyle = { top: '50%', left: '100%', transform: 'translate(0.66rem, -50%)' }; }
 
+      const nodeSize = currentMap === 'main' ? '4.5rem' : '3.6rem';
+
       return (
-        <div 
-          key={node.id} 
-          style={{ 
-              position: 'absolute', 
-              top: node.top, 
-              left: node.left, 
+        <React.Fragment key={node.id}>
+        <div
+          style={{
+              position: 'absolute',
+              top: node.top,
+              left: node.left,
               transform: 'translate(-50%, -50%)',
               zIndex: 40
           }}
@@ -791,13 +795,28 @@ const Roadmap = () => {
                })()}
              </div>}
           </button>
-          
-          <div 
-            className="glass-panel" 
-            style={{ 
+        </div>
+
+        {/* Nimilappu omassa kerroksessaan auton yläpuolella, jotta pysäköity auto ei peitä sitä */}
+        <div
+          style={{
+              position: 'absolute',
+              top: node.top,
+              left: node.left,
+              width: nodeSize,
+              height: nodeSize,
+              transform: 'translate(-50%, -50%)',
+              zIndex: 55,
+              pointerEvents: 'none'
+          }}
+        >
+          <div
+            className="glass-panel"
+            data-label-for={node.id}
+            style={{
                 position: 'absolute',
                 ...labelStyle,
-                padding: '0.4rem 1rem', 
+                padding: 'clamp(0.25rem, 0.9vh, 0.4rem) clamp(0.6rem, 1.6vh, 1rem)', 
                 borderRadius: '10px', 
                 backgroundColor: 'white', 
                 border: '1px solid rgba(0,0,0,0.1)',
@@ -805,7 +824,7 @@ const Roadmap = () => {
                 pointerEvents: 'none'
             }}
           >
-              <div style={{ fontSize: currentMap === 'main' ? '0.9rem' : '0.8rem', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)', textAlign: 'center', lineHeight: '1.2' }}>
+              <div style={{ fontSize: currentMap === 'main' ? 'clamp(0.8rem, 2.1vh, 0.9rem)' : 'clamp(0.7rem, 1.9vh, 0.8rem)', fontWeight: 900, color: 'var(--text-main)', whiteSpace: 'nowrap', fontFamily: 'var(--font-main)', textAlign: 'center', lineHeight: '1.2' }}>
                   {labelText.includes('(') ? (
                       <>
                           <div>{labelText.substring(0, labelText.indexOf('(')).trim()}</div>
@@ -819,6 +838,7 @@ const Roadmap = () => {
               </div>
           </div>
         </div>
+        </React.Fragment>
       );
     });
   };
@@ -862,11 +882,9 @@ const Roadmap = () => {
   };
 
   const headerStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    padding: '2rem',
+    position: 'relative',
+    flex: 'none',
+    padding: 'clamp(0.6rem, 2.2vh, 1.5rem) clamp(1rem, 2.3vw, 2rem)',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -875,8 +893,11 @@ const Roadmap = () => {
   };
 
   const mapContainerStyle = {
-    position: 'absolute',
-    inset: '100px 30px 40px 30px',
+    position: 'relative',
+    flex: '1 1 auto',
+    minHeight: 0,
+    margin: `0 clamp(0.75rem, 2.2vw, 30px) ${currentMap === 'main' ? 'clamp(0.75rem, 3vh, 2.5rem)' : '0'}`,
+    containerType: 'size',
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
     borderRadius: '30px',
     border: '8px solid rgba(255, 255, 255, 0.4)',
@@ -889,8 +910,8 @@ const Roadmap = () => {
 
   const mapInnerStyle = {
     position: 'relative',
-    width: '100%',
-    maxWidth: 'calc((100vh - 140px) * 16 / 9)',
+    // Suurin 16:9-alue, joka mahtuu säiliöön kokonaan (ei leikkaannu ylä- eikä alareunasta)
+    width: 'min(100cqw, calc(100cqh * 16 / 9))',
     aspectRatio: '16/9',
     backgroundImage: `url('${getMapAsset(currentMap)}')`,
     backgroundSize: '100% 100%', // Fixed scaling for full visibility natively without stretching
@@ -912,7 +933,7 @@ const Roadmap = () => {
   };
 
   return (
-    <div className="roadmap-container" style={{ position: 'relative', minHeight: '100vh', width: '100%', overflow: 'hidden' }}>
+    <div className="roadmap-container roadmap-page" style={{ position: 'relative', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
       <style>{`
         @keyframes vanIdle {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -951,11 +972,11 @@ const Roadmap = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', pointerEvents: 'auto' }}>
           <button 
             className="btn-secondary" 
-            style={{ 
-                padding: '0.8rem 1.5rem', 
-                borderRadius: '15px', 
-                background: 'white', 
-                border: 'none', 
+            style={{
+                padding: 'clamp(0.5rem, 1.6vh, 0.8rem) 1.5rem',
+                borderRadius: '15px',
+                background: 'white',
+                border: 'none',
                 boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                 display: 'flex',
                 alignItems: 'center',
@@ -983,8 +1004,8 @@ const Roadmap = () => {
             className={!store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.length === 1 ? "animate-wiggle-glow-soft-alt" : ""}
             style={{ 
                 backgroundColor: 'white', 
-                border: 'none', 
-                padding: '0.8rem 1.2rem', 
+                border: 'none',
+                padding: 'clamp(0.5rem, 1.6vh, 0.8rem) 1.2rem',
                 borderRadius: '20px', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -1008,7 +1029,7 @@ const Roadmap = () => {
             <span style={{ fontWeight: 900, fontSize: '0.9rem', color: 'var(--primary-color)', fontFamily: 'var(--font-main)' }}>AUTOTALLI</span>
           </button>
 
-          <div style={{ backgroundColor: '#fef3c7', padding: '0.8rem 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid #fde68a', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <div style={{ backgroundColor: '#fef3c7', padding: 'clamp(0.5rem, 1.6vh, 0.8rem) 1.5rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '0.8rem', borderTop: '5px solid #fde68a', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
             <Zap size={24} fill="#d97706" color="#d97706" />
             <span style={{ fontWeight: 900, fontSize: '1.3rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{sparks}</span>
           </div>
@@ -1025,7 +1046,7 @@ const Roadmap = () => {
               }
             });
             return (
-              <div style={{ backgroundColor: 'white', padding: '0.6rem 1.2rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '1.2rem', borderTop: '5px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <div style={{ backgroundColor: 'white', padding: 'clamp(0.4rem, 1.3vh, 0.6rem) 1.2rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '1.2rem', borderTop: '5px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <img src="/trophy/medal-bronze.png" alt="bronze" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#78350f', fontFamily: 'var(--font-display)' }}>{counts.bronze}</span>
@@ -1078,112 +1099,112 @@ const Roadmap = () => {
             </svg>
 
             {showMapTutorial && (
-              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '550px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#10b981', fontWeight: 'bold', fontSize: '1.8rem' }}>
-                    Seikkailu alkaa!
-                </div>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Kartalla liikutaan painamalla vihreitä pallukoita. Seikkailusi ensimmäinen etappi on tekoälyn perusteet!
-                </div>
-                <button 
-                   className="btn-primary" 
-                   style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} 
-                   onClick={async () => {
-                       store.completeMapTutorial();
-                       setShowMapTutorial(false);
-                       await store.addSparks(10);
-                       setSparks(await store.getSparks());
-                   }}
-                >
-                   Selvä homma! (+10⚡)
-                </button>
-              </div>
+              <TutorialModal
+                title="Seikkailu alkaa!"
+                accent="#10b981"
+                maxWidth={550}
+                buttonText="Selvä homma! (+10⚡)"
+                onConfirm={async () => {
+                    store.completeMapTutorial();
+                    setShowMapTutorial(false);
+                    await store.addSparks(10);
+                    setSparks(await store.getSparks());
+                }}
+              >
+                Kartalla liikutaan painamalla vihreitä pallukoita. Seikkailusi ensimmäinen etappi on tekoälyn perusteet!
+              </TutorialModal>
             )}
             
             {/* Submap Tutoriaalit */}
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 0 && !closedTuition[0] && (
-              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #3b82f6', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Valitse ensimmäinen kategoria napsauttamalla vihreää pallukkaa.
-                </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#3b82f6', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+              <TutorialModal
+                accent="#3b82f6"
+                maxWidth={500}
+                buttonText="Ymmärretty! (+10⚡)"
+                onConfirm={async () => {
                     setClosedTuition(prev => ({...prev, 0: true}));
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
-                }}>
-                   Ymmärretty! (+10⚡)
-                </button>
-              </div>
+                }}
+              >
+                Valitse ensimmäinen kategoria napsauttamalla vihreää pallukkaa.
+              </TutorialModal>
             )}
             
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 1 && !closedTuition[1] && (
-              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #10b981', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: 'var(--primary-color)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
-                </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#10b981', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+              <TutorialModal
+                accent="#10b981"
+                maxWidth={500}
+                buttonText="Selvä homma! (+10⚡)"
+                onConfirm={async () => {
                     setClosedTuition(prev => ({...prev, 1: true}));
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
-                }}>
-                   Selvä homma! (+10⚡)
-                </button>
-              </div>
+                }}
+              >
+                Hienoa! Kun olet ansainnut kipinöitä, pääset takaisin <span style={{ color: 'var(--primary-color)', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '1px' }}>autotalliin</span> oikean ylänurkan painikkeesta. Tai voit jatkaa kipinöiden keräämistä seuraavasta kategoriasta!
+              </TutorialModal>
             )}
             
             {!showWowMedal && !showAllMedalsCelebration && !showAllPlatinumsCelebration && !store.getTutorialSkipped() && currentMap === 'perusteet' && completedLessons.filter(id => id.startsWith('perusteet')).length === 2 && !closedTuition[2] && (
-              <div className="glass-panel responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid #f59e0b', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '600px' }}>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin vastaamiesi kysymysten opettavaisiin selityksiin. Lue siis perustelut aina huolella jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
-                </div>
-                <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={async () => {
+              <TutorialModal
+                accent="#f59e0b"
+                maxWidth={600}
+                buttonText="Olen valmis jatkamaan seikkailua itse! (+10⚡)"
+                onConfirm={async () => {
                     setClosedTuition(prev => ({...prev, 2: true}));
                     await store.addSparks(10);
                     setSparks(await store.getSparks());
-                }}>
-                   Olen valmis jatkamaan seikkailua itse! (+10⚡)
-                </button>
-              </div>
+                }}
+              >
+                Kuuden osion suorittamisen jälkeen aukeaa vielä viimeinen, keltareunainen finaaliosio! Sen kysymykset pohjautuvat aiemmin vastaamiesi kysymysten opettavaisiin selityksiin. Lue siis perustelut aina huolella jokaisen kysymyksen jälkeen, sillä viimeisestä kategoriasta voit tienata valtavan määrän kipinöitä!
+              </TutorialModal>
             )}
 
             {showMedalTutorial && (
-              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.95)', padding: '2.5rem', borderRadius: '24px', border: '5px solid var(--primary-color)', zIndex: 1000, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 15px 50px rgba(0,0,0,0.4)', width: '90%', maxWidth: '500px' }}>
-                <div style={{ textAlign: 'center', color: 'var(--text-main)', fontSize: '1.2rem', lineHeight: '1.5', fontWeight: 'bold' }}>
-                    <b>Kerää osaamismitaleja!</b><br/><br/>
-                    Mitä enemmän oikeita vastauksia keräät, sitä kirkkaamman mitalin ansaitset!<br/><br/>
-                    <div style={{ fontSize: '1rem', color: '#0369a1', background: '#e0f2fe', padding: '0.6rem 0.8rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', marginBottom: '1rem' }}>
+              <TutorialModal
+                title="Kerää osaamismitaleja!"
+                accent="#4C8511"
+                maxWidth={500}
+                requireReading={false}
+                onClose={() => setShowMedalTutorial(false)}
+                buttonText="Selvä juttu!"
+                onConfirm={() => setShowMedalTutorial(false)}
+              >
+                <div>
+                    <div style={{ marginBottom: 'clamp(0.5rem, 1.6vh, 1rem)' }}>Mitä enemmän oikeita vastauksia keräät, sitä kirkkaamman mitalin ansaitset!</div>
+                    <div style={{ fontSize: '0.85em', color: '#0369a1', background: '#e0f2fe', padding: '0.6rem 0.8rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', justifyContent: 'center', marginBottom: 'clamp(0.5rem, 1.6vh, 1rem)' }}>
                         <Lightbulb size={20} color="#0284c7" style={{ flexShrink: 0 }} />
                         <div style={{ textAlign: 'left' }}><b>Vinkki:</b> Pelaa taso läpi useammin saadaksesi uusia kysymyksiä!</div>
                     </div>
-                    <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0 }}>
-                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <ul style={{ textAlign: 'left', listStyle: 'none', padding: 0, margin: '0 auto', display: 'inline-block' }}>
+                       <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <div style={{ width: '28px', display: 'flex', justifyContent: 'center' }}><XCircle size={28} color="#ef4444" /></div> 
                          Ei mitalia... yritä uudelleen!
                        </li>
-                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                       <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-bronze.png" alt="pronssi" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Pronssi: Tiedät alkeet!
                        </li>
-                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                       <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-silver.png" alt="hopea" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Hopea: Hyvä suoritus!
                        </li>
-                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                       <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-gold.png" alt="kulta" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Kulta: Huipputietäjä!
                        </li>
-                       <li style={{ marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                       <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                          <img src="/trophy/medal-plat.png" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Platina: Kaikki oikein!
                        </li>
                     </ul>
                 </div>
-                <button className="btn-primary" style={{ width: '100%', background: 'var(--primary-color)', fontSize: '1.3rem', padding: '1.2rem', marginTop: '0.5rem' }} onClick={() => setShowMedalTutorial(false)}>Selvä juttu!</button>
-              </div>
+              </TutorialModal>
             )}
 
-            {showWowMedal && (
-              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
+            {showWowMedal && createPortal(
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#d97706', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>UUSI MITALI!</h1>
                 <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
@@ -1195,11 +1216,12 @@ const Roadmap = () => {
                 </p>
 
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.5rem', padding: '1.5rem' }} onClick={() => setShowWowMedal(null)}>Upeaa, jatka matkaa!</button>
-              </div>
+              </div>,
+              document.body
             )}
 
-            {showAllMedalsCelebration && (
-              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
+            {showAllMedalsCelebration && createPortal(
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#1d4ed8', textAlign: 'center', textShadow: '0 4px 10px rgba(29, 78, 216, 0.3)' }}>HURRAA! KAIKKI LÄPI!</h1>
                 <img src="/trophy/medal-gold.png" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
@@ -1209,11 +1231,12 @@ const Roadmap = () => {
                 </p>
 
                 <button className="btn-primary" style={{ width: '100%', background: '#2563eb', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowAllMedalsCelebration(false)}>Haaste vastaanotettu!</button>
-              </div>
+              </div>,
+              document.body
             )}
 
-            {showAllPlatinumsCelebration && (
-              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
+            {showAllPlatinumsCelebration && createPortal(
+              <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#b45309', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>TÄYDELLINEN SUORITUS!</h1>
                 <img src="/trophy/medal-plat.png" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
@@ -1223,7 +1246,8 @@ const Roadmap = () => {
                 </p>
 
                 <button className="btn-primary" style={{ width: '100%', background: '#f59e0b', fontSize: '1.4rem', padding: '1.2rem' }} onClick={() => setShowAllPlatinumsCelebration(false)}>Olen mestari!</button>
-              </div>
+              </div>,
+              document.body
             )}
         <div style={mapInnerStyle} onClick={handleMapClick}>
             {/* Grid Overlay */}
@@ -1274,12 +1298,12 @@ const Roadmap = () => {
           </div>
       )}
 
-      {/* Back to Main Navigation Shortcut */}
+      {/* Back to Main Navigation Shortcut: oma rivi kartan alla, jotta nappi ei peitä pysäkkejä */}
       {currentMap !== 'main' && (
-          <div style={{ position: 'absolute', bottom: '60px', left: '50%', transform: 'translateX(-50%)', zIndex: 110 }}>
-              <button 
-                className="btn-primary" 
-                style={{ borderRadius: '50px', padding: '1.2rem 3rem', boxShadow: '0 15px 30px rgba(76, 133, 17, 0.4)', fontSize: '1.2rem' }}
+          <div style={{ flex: 'none', display: 'flex', justifyContent: 'center', padding: 'clamp(0.5rem, 1.8vh, 1rem) 0 clamp(0.6rem, 2.2vh, 1.4rem)', position: 'relative', zIndex: 110 }}>
+              <button
+                className="btn-primary"
+                style={{ borderRadius: '50px', padding: 'clamp(0.6rem, 1.9vh, 1.1rem) 3rem', boxShadow: '0 10px 24px rgba(76, 133, 17, 0.35)', fontSize: '1.2rem' }}
                 onClick={handleBackToMain}
               >
                 <MapIcon size={24} />

@@ -60,13 +60,13 @@ export const AI_ROADMAP_DATA = {
       entry: [{top:"54.0%",left:"4.8%"},{top:"56.8%",left:"7.4%"},{top:"58.8%",left:"9.9%"},{top:"59.8%",left:"13.0%"},{top:"62.1%",left:"16.2%"},{top:"62.1%",left:"18.8%"},{top:"62.1%",left:"23.2%"},{top:"60.8%",left:"26.7%"},{top:"64.5%",left:"29.3%"},{top:"69.9%",left:"32.1%"},{top:"73.3%",left:"35.7%"},{top:"80.0%",left:"35.9%"},{top:"86.5%",left:"33.3%"},{top:"88.9%",left:"30.6%"},{top:"88.0%",left:"26.2%"}],
       exit: [{top:"88.0%",left:"26.2%"},{top:"88.9%",left:"30.6%"},{top:"86.5%",left:"33.3%"},{top:"80.0%",left:"35.9%"},{top:"73.3%",left:"35.7%"},{top:"69.9%",left:"32.1%"},{top:"64.5%",left:"29.3%"},{top:"60.8%",left:"26.7%"},{top:"62.1%",left:"23.2%"},{top:"62.1%",left:"18.8%"},{top:"62.1%",left:"16.2%"},{top:"59.8%",left:"13.0%"},{top:"58.8%",left:"9.9%"},{top:"56.8%",left:"7.4%"},{top:"54.0%",left:"4.8%"}],
       nodes: [
-        { id: 'arjessa_1', top: '88.0%', left: '26.2%' },
+        { id: 'arjessa_1', top: '88.0%', left: '26.2%', labelPos: 'top' },
         { id: 'arjessa_2', top: '55.6%', left: '44.9%' },
         { id: 'arjessa_3', top: '38.6%', left: '34.4%' },
         { id: 'arjessa_4', top: '45.9%', left: '59.5%' },
         { id: 'arjessa_5', top: '66.6%', left: '61.1%' },
         { id: 'arjessa_6', top: '34.1%', left: '75.6%' },
-        { id: 'arjessa_7', top: '19.4%', left: '89.8%' }
+        { id: 'arjessa_7', top: '19.4%', left: '89.8%', labelPos: 'left' }
       ],
       paths: {
         'arjessa_1-arjessa_2': [{top: '88.0%', left: '26.2%'}, {top:"88.9%",left:"30.6%"},{top:"86.5%",left:"33.3%"},{top:"80.0%",left:"35.9%"},{top:"73.3%",left:"35.7%"},{top:"69.9%",left:"32.1%"},{top:"64.5%",left:"29.3%"},{top:"60.8%",left:"26.7%"}, {top:"57.4%",left:"28.4%"},{top:"54.0%",left:"30.4%"},{top:"51.0%",left:"33.2%"},{top:"47.6%",left:"35.6%"},{top:"46.0%",left:"39.4%"}, {top:"43.0%",left:"41.8%"},{top:"45.9%",left:"41.7%"},{top:"49.2%",left:"43.8%"},{top:"51.8%",left:"45.7%"},{top:"55.6%",left:"44.9%"}],
@@ -83,12 +83,12 @@ export const AI_ROADMAP_DATA = {
       entry: [{top:"93.7%",left:"14.0%"},{top:"88.6%",left:"15.7%"}],
       exit: [{top:"44.1%",left:"54.7%"},{top:"50.6%",left:"52.6%"},{top:"53.3%",left:"50.4%"},{top:"55.6%",left:"48.4%"},{top:"59.5%",left:"45.0%"},{top:"62.7%",left:"42.8%"},{top:"67.4%",left:"43.7%"},{top:"68.9%",left:"45.8%"},{top:"71.0%",left:"48.1%"},{top:"76.7%",left:"44.7%"},{top:"76.6%",left:"41.4%"},{top:"74.6%",left:"37.5%"},{top:"75.1%",left:"34.0%"},{top:"76.2%",left:"31.7%"},{top:"79.0%",left:"29.5%"},{top:"80.1%",left:"28.2%"},{top:"81.7%",left:"25.6%"},{top:"84.9%",left:"20.8%"},{top:"86.7%",left:"17.5%"},{top:"88.6%",left:"15.7%"},{top:"93.7%",left:"14.0%"}],
       nodes: [
-        { id: 'kayttotaidot_1', top: '71.7%', left: '14.2%' },
+        { id: 'kayttotaidot_1', top: '71.7%', left: '14.2%', labelPos: 'top' },
         { id: 'kayttotaidot_2', top: '81.7%', left: '25.6%' },
         { id: 'kayttotaidot_3', top: '76.7%', left: '44.7%' },
         { id: 'kayttotaidot_6', top: '71.7%', left: '69.2%' },
         { id: 'kayttotaidot_4', top: '62.9%', left: '37.7%' },
-        { id: 'kayttotaidot_5', top: '46.3%', left: '41.7%' },
+        { id: 'kayttotaidot_5', top: '46.3%', left: '41.7%', labelPos: 'left' },
         { id: 'kayttotaidot_7', top: '44.1%', left: '54.7%' },
         { id: 'kayttotaidot_jun_1', top: '88.6%', left: '15.7%', isJunction: true },
         { id: 'kayttotaidot_jun_6', top: '71.0%', left: '48.1%', isJunction: true },
@@ -114,7 +114,7 @@ export const AI_ROADMAP_DATA = {
         nodes: [
           { id: 'konepellin_1', top: '75.9%', left: '77.2%' },
           { id: 'konepellin_2', top: '64.1%', left: '58.8%' },
-          { id: 'konepellin_3', top: '46.1%', left: '60.1%' },
+          { id: 'konepellin_3', top: '46.1%', left: '60.1%', labelPos: 'right' },
           { id: 'konepellin_4', top: '46.1%', left: '44.5%' },
           { id: 'konepellin_5', top: '67.4%', left: '36.9%' },
           { id: 'konepellin_6', top: '25.1%', left: '26.6%' },
@@ -137,7 +137,7 @@ export const AI_ROADMAP_DATA = {
         { id: 'reilu_peli_2', top: '41.1%', left: '82.2%' },
         { id: 'reilu_peli_3', top: '33.4%', left: '63.1%' },
         { id: 'reilu_peli_4', top: '43.6%', left: '49.7%', labelPos: 'top' },
-        { id: 'reilu_peli_5', top: '67.8%', left: '64.6%', labelPos: 'left' },
+        { id: 'reilu_peli_5', top: '67.8%', left: '64.6%', labelPos: 'right' },
         { id: 'reilu_peli_6', top: '71.0%', left: '51.5%', labelPos: 'bottom' },
         { id: 'reilu_peli_7', top: '64.5%', left: '36.3%' }
       ],
@@ -157,9 +157,9 @@ export const AI_ROADMAP_DATA = {
         { id: 'jun_0', top: '93.1%', left: '67.8%', isJunction: true },
         { id: 'aivoterveys_1', top: '82.0%', left: '60.3%' },
         { id: 'aivoterveys_2', top: '52.6%', left: '42.2%' },
-        { id: 'aivoterveys_3', top: '39.6%', left: '49.0%' },
+        { id: 'aivoterveys_3', top: '39.6%', left: '49.0%', labelPos: 'top' },
         { id: 'aivoterveys_4', top: '54.4%', left: '66.4%' },
-        { id: 'aivoterveys_5', top: '62.5%', left: '81.0%' },
+        { id: 'aivoterveys_5', top: '62.5%', left: '81.0%', labelPos: 'top' },
         { id: 'aivoterveys_6', top: '79.0%', left: '77.9%' },
         { id: 'aivoterveys_7', top: '77.0%', left: '43.8%' },
         { id: 'jun_1', top: '81.2%', left: '74.0%', isJunction: true },
@@ -186,9 +186,9 @@ export const AI_ROADMAP_DATA = {
         exit: [{top:"67.5%",left:"20.7%"},{top:"70.6%",left:"23.2%"},{top:"73.3%",left:"27.3%"},{top:"77.2%",left:"28.7%"},{top:"81.3%",left:"27.2%"},{top:"87.1%",left:"23.0%"},{top:"91.0%",left:"20.0%"},{top:"97.0%",left:"15.7%"}],
         nodes: [
           { id: 'digiturva_1', top: '67.5%', left: '20.7%' },
-          { id: 'digiturva_2', top: '50.5%', left: '66.7%' },
+          { id: 'digiturva_2', top: '50.5%', left: '66.7%', labelPos: 'left' },
           { id: 'digiturva_3', top: '48.2%', left: '34.8%' },
-          { id: 'digiturva_4', top: '31.6%', left: '53.1%' },
+          { id: 'digiturva_4', top: '31.6%', left: '53.1%', labelPos: 'top' },
           { id: 'digiturva_5', top: '69.7%', left: '85.6%' },
           { id: 'digiturva_6', top: '41.8%', left: '86.7%' },
           { id: 'digiturva_7', top: '66.2%', left: '59.8%' }
