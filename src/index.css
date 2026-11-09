@@ -202,6 +202,10 @@ button:active {
   flex: 1 1 auto;
   min-height: 0;
   position: relative;
+  /* Sovitettu sisältö ei saa valua alareunan yli: ylivuoto toisi vierityspalkin, joka kaventaisi
+     tilaa, rivittäisi tekstin uudelleen ja käynnistäisi uuden sovituksen (tärinä). */
+  overflow-y: clip;
+  overflow-clip-margin: 12px;
 }
 .fit-inner {
   width: 100%;
@@ -292,11 +296,15 @@ button:active {
 .tutorial-confirm[aria-disabled="true"]:hover {
   transform: none;
 }
+/* Hillitty edistymisviiva napin alareunassa: kertoo odotuksesta viemättä huomiota tekstiltä */
 .tutorial-confirm-fill {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
   transform-origin: left center;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.45);
   animation-name: tutorialFill;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -334,6 +342,7 @@ button:active {
 .quiz-page {
   height: 100vh;
   height: 100dvh;
+  overflow-y: clip;
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
@@ -421,6 +430,7 @@ button:active {
 .roadmap-page {
   height: 100vh;
   height: 100dvh;
+  overflow-y: clip;
 }
 
 /* Koko ruudun näkymät häivytetään sisään ilman siirtymää: siirtymä (translateY) työntäisi
@@ -432,4 +442,33 @@ button:active {
 .quiz-page.animate-fade-in,
 .garage-page.animate-fade-in {
   animation-name: fadeInStatic;
+}
+
+/* Kysymyksen selitys: Seuraava-nappi odottaa lukuajan (samaan tapaan kuin opastusikkunat) */
+.quiz-explanation-text {
+  border-radius: 14px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+.quiz-explanation-text--warn {
+  background-color: #fef9c3;
+  box-shadow: 0 0 0 6px #fef9c3, 0 0 0 9px #fde047;
+}
+.quiz-next {
+  position: relative;
+  overflow: hidden;
+}
+.quiz-next[aria-disabled="true"] {
+  background: #94a3b8 !important;
+  color: white !important;
+  box-shadow: none !important;
+  cursor: not-allowed;
+}
+.quiz-next[aria-disabled="true"]:hover {
+  transform: none;
+}
+.quiz-next--warn[aria-disabled="true"] {
+  background: #f59e0b !important;
+}
+.quiz-next .tutorial-confirm-label {
+  white-space: nowrap;
 }

@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
-import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
+import { readingTimeMs } from '../components/readingTime';
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, Hand, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
 import FitToHeight from '../components/FitToHeight';
 import TutorialModal from '../components/TutorialModal';
 
@@ -187,6 +188,11 @@ export default function Quiz() {
   const [earnedSparks, setEarnedSparks] = useState(0);
   const [currentQuestionSparks, setCurrentQuestionSparks] = useState(0);
   const [nextEnabled, setNextEnabled] = useState(true);
+  // Lukuaika selitykselle (ensimmäiset kategoriat) ja muistutus, jos Seuraava-nappia painetaan liian aikaisin
+  const [nextReadMs, setNextReadMs] = useState(0);
+  const [nextWarned, setNextWarned] = useState(false);
+  const explanationBoxRef = useRef(null);
+  const explanationTextRef = useRef(null);
 
   // States for special types
   const [orderedItems, setOrderedItems] = useState([]);
@@ -237,10 +243,13 @@ export default function Quiz() {
       // First two categories: if the user hasn't successfully completed 2 separate categories yet, 
       // OR if they have completed exactly 2 but this is one of them (replaying).
       if (uniqueComps.length < 2 || (uniqueComps.length === 2 && uniqueComps.includes(sub?.id))) {
+        const ms = readingTimeMs(questions[currentIndex]?.explanation);
+        setNextReadMs(ms);
+        setNextWarned(false);
         setNextEnabled(false);
         const timer = setTimeout(() => {
           setNextEnabled(true);
-        }, 3000);
+        }, ms);
         return () => clearTimeout(timer);
       } else {
         setNextEnabled(true);
@@ -248,7 +257,30 @@ export default function Quiz() {
     } else {
       setNextEnabled(true);
     }
-  }, [showExplanation, sub?.id]);
+  }, [showExplanation, sub?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Liian aikainen Seuraava-klikkaus: selitys tärähtää ja korostuu, nappi muistuttaa lukemaan
+  const nudgeRead = () => {
+    setNextWarned(true);
+    const box = explanationBoxRef.current;
+    if (box && box.animate) {
+      box.animate(
+        [
+          { transform: 'translateX(0)' },
+          { transform: 'translateX(-12px)' },
+          { transform: 'translateX(10px)' },
+          { transform: 'translateX(-7px)' },
+          { transform: 'translateX(4px)' },
+          { transform: 'translateX(0)' },
+        ],
+        { duration: 450, easing: 'ease-out' }
+      );
+    }
+    const txt = explanationTextRef.current;
+    if (txt && txt.animate) {
+      txt.animate([{ backgroundColor: '#fde047' }, { backgroundColor: '#fef9c3' }], { duration: 700, easing: 'ease-out' });
+    }
+  };
 
   if (!category || !sub) {
     return (
@@ -940,7 +972,7 @@ export default function Quiz() {
         {(() => {
           const ghost = !showExplanation;
           return (
-          <div className={ghost ? undefined : 'animate-fade-in'} aria-hidden={ghost || undefined} style={{ gridArea: '1 / 1', alignSelf: 'start', visibility: ghost ? 'hidden' : 'visible', pointerEvents: ghost ? 'none' : 'auto', padding: 'clamp(1rem, 3vh, 2.25rem) clamp(1rem, 2.6vw, 2.25rem)', background: isCorrect ? 'rgba(240, 253, 244, 0.97)' : 'rgba(254, 242, 242, 0.97)', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.15)', position: 'relative', zIndex: 10 }}>
+          <div ref={ghost ? undefined : explanationBoxRef} className={ghost ? undefined : 'animate-fade-in'} aria-hidden={ghost || undefined} style={{ gridArea: '1 / 1', alignSelf: 'start', visibility: ghost ? 'hidden' : 'visible', pointerEvents: ghost ? 'none' : 'auto', padding: 'clamp(1rem, 3vh, 2.25rem) clamp(1rem, 2.6vw, 2.25rem)', background: isCorrect ? 'rgba(240, 253, 244, 0.97)' : 'rgba(254, 242, 242, 0.97)', border: isCorrect ? '3px solid #22c55e' : '3px solid #ef4444', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.15)', position: 'relative', zIndex: 10 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: 'clamp(0.6rem, 2vh, 1.5rem)', justifyContent: 'space-between', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                 {isCorrect ? <CheckCircle2 size={38} color="#16a34a" /> : <XCircle size={38} color="#dc2626" />}
@@ -966,7 +998,7 @@ export default function Quiz() {
               <div style={{ background: 'var(--primary-color)', padding: 'clamp(0.6rem, 1.8vh, 1.1rem)', borderRadius: '18px', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 10px 25px rgba(76, 133, 17, 0.4)' }}>
                  <Lightbulb size={32} />
               </div>
-              <div>
+              <div ref={ghost ? undefined : explanationTextRef} className={`quiz-explanation-text${!ghost && nextWarned && !nextEnabled ? ' quiz-explanation-text--warn' : ''}`}>
                 <p style={{ margin: 0, lineHeight: '1.6', color: '#1e293b', fontSize: 'clamp(1.05rem, 3vh, 1.35rem)', fontWeight: '600', fontFamily: 'var(--font-main)' }}>
                   {currentQuestion.explanation}
                 </p>
@@ -1009,27 +1041,29 @@ export default function Quiz() {
                 })()}
 
                 <button 
-                  className={nextEnabled ? "btn-primary" : ""} 
-                  disabled={!nextEnabled}
+                  type="button"
+                  className={`btn-primary quiz-next${nextWarned && !nextEnabled ? ' quiz-next--warn' : ''}`}
+                  aria-disabled={!nextEnabled}
                   style={{ 
                     flex: 1, padding: 'clamp(0.75rem, 2.2vh, 1.15rem)', fontSize: 'clamp(1.1rem, 2.8vh, 1.3rem)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', borderRadius: '16px',
-                    background: nextEnabled ? undefined : '#94a3b8',
-                    color: nextEnabled ? undefined : 'white',
-                    cursor: nextEnabled ? 'pointer' : 'not-allowed',
-                    border: nextEnabled ? undefined : 'none',
                     fontFamily: 'var(--font-main)',
                     fontWeight: 'bold',
                     transition: 'all 0.3s ease'
                   }} 
-                  onClick={handleNext}
+                  onClick={() => { if (nextEnabled) handleNext(); else nudgeRead(); }}
                 >
+                  {!nextEnabled && showExplanation && <span key={`fill-${currentIndex}`} className="tutorial-confirm-fill" style={{ animationDuration: `${nextReadMs}ms` }} />}
+                  <span className="tutorial-confirm-label" style={{ gap: '0.8rem' }}>
                   {!nextEnabled ? (
-                    <>Lue <ArrowUp size={24} /></>
+                    nextWarned
+                      ? <><Hand size={22} /> Lue selitys ensin!</>
+                      : <><Eye size={22} /> Lue selitys ensin…</>
                   ) : currentIndex < questions.length - 1 ? (
                     <>Seuraava Kysymys <ArrowRight size={24} /></>
                   ) : (
                     <>Suoritettu! Jatka tästä <ArrowRight size={24} /></>
                   )}
+                  </span>
                 </button>
             </div>
           </div>
