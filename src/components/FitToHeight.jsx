@@ -13,21 +13,41 @@ import React, { useCallback, useLayoutEffect, useRef } from 'react';
  * fitKey: arvo, jonka muuttuessa sovitus lasketaan heti uudelleen ennen piirtoa
  * (esim. kysymyksen vaihtuminen). Muut koonmuutokset huomataan ResizeObserverilla.
  *
+ * Siirtymäanimaatiot (transition) kytketään pois sovituksen ajaksi. Chrome tulkitsee zoomin muutoksen
+ * elementtien koon muutokseksi ja käynnistäisi muuten esim. nappien `transition: all` -animaatiot;
+ * animaatio muuttaa kokoa, mikä käynnistää uuden sovituksen ja taas uudet animaatiot (tärinä,
+ * joka näkyi erityisesti selaimen zoomaustasoilla 110 %, 125 % jne.).
+ *
  * Värähtelyn esto: zoomin muutos rivittää tekstin uudelleen, mikä voi joissain ympäristöissä
  * (esim. Windowsin vierityspalkit, näytön skaalaus) muuttaa tilaa takaisin ja käynnistää
  * uuden sovituksen loputtomasti. Siksi
- *  - sisältö ei valu ulkorajan yli (CSS: overflow-y: clip), eikä se voi tuoda vierityspalkkia,
+ *  - korkeus mitataan zoomaamattomasta kääreestä (zoomatun elementin mitat voivat poiketa selaimittain),
  *  - sovitukseen jätetään pieni marginaali puolikkaiden pikseleiden varalle ja
  *  - jos zoom alkaa heilua edestakaisin (suunta vaihtuu toistuvasti lyhyessä ajassa), zoomia
  *    saa sen jälkeen vain pienentää. Sisältö mahtuu silti aina, ja heilunta loppuu varmasti.
  *    Rajoitus poistuu, kun fitKey tai ikkunan koko muuttuu.
+ * Varmistus: sovitus tarkistetaan lisäksi sekunnin välein. Sisältöä ei koskaan leikata piiloon:
+ * jos se ei jostain syystä mahdu, sivua voi vierittää (pelin napit eivät jää piiloon).
+ *
+ * Vianetsintä: osoitteen perään ?fitdebug (tai localStorage.aivan_fitdebug = '1') näyttää
+ * jokaisen sovitusalueen tilan ruudun kulmassa.
  */
+const isDebug = () => {
+  try {
+    return /fitdebug/.test(window.location.search + window.location.hash) || window.localStorage.getItem('aivan_fitdebug') === '1';
+  } catch {
+    return false;
+  }
+};
 const SAFETY_PX = 2;
 const OSC_WINDOW_MS = 2000;
 const OSC_REVERSALS = 2;
 export default function FitToHeight({ children, fitKey, minZoom = 0.6, maxZoom = 1, className = '', style }) {
   const outerRef = useRef(null);
   const innerRef = useRef(null);
+  const measureRef = useRef(null);
+  const debugRef = useRef(null);
+  const statsRef = useRef({ fits: 0, checks: 0, why: '' });
   // Viimeisimmän sovituksen tulos: tunnistetaan omat zoom-muutokset, ettei niistä lasketa turhaan uudelleen
   const lastRef = useRef(null);
   // Värähtelyn tunnistus: viimeaikaiset sovitustulokset ja tieto siitä, saako zoom enää kasvaa
@@ -35,14 +55,17 @@ export default function FitToHeight({ children, fitKey, minZoom = 0.6, maxZoom =
   const shrinkOnlyRef = useRef(false);
   const appliedRef = useRef(null);
 
-  const fit = useCallback(() => {
+  const fit = useCallback((why = '') => {
     const outer = outerRef.current;
     const inner = innerRef.current;
-    if (!outer || !inner) return;
+    const measure = measureRef.current;
+    if (!outer || !inner || !measure) return;
     const avail = outer.clientHeight;
     if (!avail) return;
+    // Ei siirtymäanimaatioita zoomia vaihdettaessa (ks. yllä)
+    outer.classList.add('fit-measuring');
     const apply = (z) => { inner.style.zoom = z === 1 ? '' : String(Math.floor(z * 1000) / 1000); };
-    const fits = (z) => { apply(z); return inner.getBoundingClientRect().height <= avail - SAFETY_PX; };
+    const fits = (z) => { apply(z); return measure.getBoundingClientRect().height <= avail - SAFETY_PX; };
     // Suurin zoom väliltä [lo, hi], jolla sisältö mahtuu. Korkeus kasvaa zoomin mukana, joten puolitushaku toimii.
     const search = (lo, hi) => {
       for (let i = 0; i < 9; i++) {
@@ -82,8 +105,15 @@ export default function FitToHeight({ children, fitKey, minZoom = 0.6, maxZoom =
     }
     apply(best);
     appliedRef.current = best;
-    const r = inner.getBoundingClientRect();
+    const r = measure.getBoundingClientRect(); // pakottaa tyylit lopulliseen zoomiin ennen animaatioiden palautusta
+    outer.classList.remove('fit-measuring');
     lastRef.current = { avail, w: r.width, h: r.height };
+    const st = statsRef.current;
+    st.fits++;
+    st.why = typeof why === 'string' ? why : 'raf';
+    if (debugRef.current) {
+      debugRef.current.textContent = `zoom ${best.toFixed(3)} | sisältö ${r.height.toFixed(1)} / tila ${avail} | sovituksia ${st.fits} (${st.why})${shrinkOnlyRef.current ? ' | HEILUNTA-ESTO' : ''}`;
+    }
   }, [minZoom, maxZoom]);
 
   // Ulkoinen muutos (uusi sisältö tai ikkunan koko): rajoitus ja historia nollataan
@@ -94,31 +124,34 @@ export default function FitToHeight({ children, fitKey, minZoom = 0.6, maxZoom =
 
   useLayoutEffect(() => {
     reset();
-    fit();
+    fit('fitKey');
   }, [fit, reset, fitKey]);
 
   useLayoutEffect(() => {
     let raf = 0;
-    const schedule = () => {
+    const schedule = (why) => {
       const outer = outerRef.current;
-      const inner = innerRef.current;
+      const measure = measureRef.current;
       const last = lastRef.current;
-      if (outer && inner && last) {
-        const r = inner.getBoundingClientRect();
+      if (outer && measure && last) {
+        const r = measure.getBoundingClientRect();
         // Ei muutosta viime sovituksen jälkeen (esim. oma zoom-muutos) -> ei uutta laskentaa
         if (outer.clientHeight === last.avail && Math.abs(r.height - last.h) < 0.5 && Math.abs(r.width - last.w) < 0.5) return;
       }
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(fit);
+      raf = requestAnimationFrame(() => fit(why));
     };
-    const onWindowResize = () => { reset(); schedule(); };
-    const ro = new ResizeObserver(schedule);
+    const onWindowResize = () => { reset(); schedule('ikkuna'); };
+    const ro = new ResizeObserver(() => schedule('koko'));
     if (outerRef.current) ro.observe(outerRef.current);
-    if (innerRef.current) ro.observe(innerRef.current);
+    if (measureRef.current) ro.observe(measureRef.current);
     window.addEventListener('resize', onWindowResize);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => schedule('fontit'));
+    // Varmistus: jos jokin muutos jäi huomaamatta, sovitus korjataan viimeistään sekunnissa
+    const interval = setInterval(() => { statsRef.current.checks++; schedule('tarkistus'); }, 1000);
     return () => {
       cancelAnimationFrame(raf);
+      clearInterval(interval);
       ro.disconnect();
       window.removeEventListener('resize', onWindowResize);
     };
@@ -126,9 +159,12 @@ export default function FitToHeight({ children, fitKey, minZoom = 0.6, maxZoom =
 
   return (
     <div ref={outerRef} className={`fit-outer ${className}`} style={style}>
-      <div ref={innerRef} className="fit-inner">
-        {children}
+      <div ref={measureRef} className="fit-measure">
+        <div ref={innerRef} className="fit-inner">
+          {children}
+        </div>
       </div>
+      {isDebug() && <div ref={debugRef} className="fit-debug" />}
     </div>
   );
 }
