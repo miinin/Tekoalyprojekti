@@ -6,6 +6,10 @@ import { store } from '../services/store';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { checkRateLimit, formatWait, LIMITS } from '../services/rateLimit';
+import TutorialModal from '../components/TutorialModal';
+import FitToHeight from '../components/FitToHeight';
+import UpdateNotes from '../components/UpdateNews';
+import { LATEST_UPDATE } from '../data/latestUpdate';
 
 export default function Lobby() {
   const navigate = useNavigate();
@@ -14,6 +18,7 @@ export default function Lobby() {
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
   const [showSettings, setShowSettings] = useState(false);
   const [showInfoBox, setShowInfoBox] = useState(false);
+  const [showUpdate, setShowUpdate] = useState(false);
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
   const [modalState, setModalState] = useState(null);
@@ -249,7 +254,8 @@ export default function Lobby() {
            pointerEvents: 'none'
         }} />
 
-        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', gap: '0.8rem', zIndex: 15, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.55rem', zIndex: 15 }}>
+        <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
           <a href="https://eduks.fi/aivan" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textDecoration: 'none', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
               <MessageSquare size={20} color="#15803d" /> Anna palautetta
           </a>
@@ -287,6 +293,13 @@ export default function Lobby() {
                  </div>
             )}
           </div>
+        </div>
+        {/* Uutinen tuoreimmasta päivityksestä */}
+        <button type="button" className="update-news-banner animate-fade-in" onClick={() => setShowUpdate(true)}>
+            <span className="update-news-kicker"><Sparkles size={16} /> Uutta {LATEST_UPDATE.date}</span>
+            <span className="update-news-title">{LATEST_UPDATE.short}</span>
+            <ArrowRight size={16} color="#059669" />
+        </button>
         </div>
 
         <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', zIndex: 15 }}>
@@ -342,6 +355,22 @@ export default function Lobby() {
                 </div>
             </a>
         </div>
+
+        {showUpdate && (
+            <TutorialModal
+                title="Mitä uutta?"
+                icon={<Sparkles size={36} color="#059669" />}
+                requireReading={false}
+                onClose={() => setShowUpdate(false)}
+                onConfirm={() => setShowUpdate(false)}
+                buttonText="Selvä, pelaamaan!"
+                maxWidth={620}
+                bodyAlign="left"
+            >
+                <p style={{ margin: '0 0 0.8rem', fontWeight: 700, color: '#047857' }}>{LATEST_UPDATE.date}: {LATEST_UPDATE.title}</p>
+                <UpdateNotes />
+            </TutorialModal>
+        )}
 
         <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: 'clamp(52px, 12.5vh, 130px)', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
         <p className="animate-fade-in" style={{ color: '#047857', fontSize: 'clamp(1rem, 2.5vh, 1.4rem)', margin: 'clamp(0.2rem, 0.5vh, 0.5rem) 0 clamp(0.5rem, 1.5vh, 2rem) 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
@@ -491,7 +520,7 @@ export default function Lobby() {
       {showInfoBox && createPortal(
          <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', zIndex: 10, textAlign: 'center' }}>
+            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', maxHeight: 'calc(100dvh - 2rem)', zIndex: 10, textAlign: 'center' }}>
                <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', zIndex: -1, pointerEvents: 'none' }} />
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: 'clamp(0.8rem, 1.5vh, 1.5rem)', right: 'clamp(0.8rem, 1.5vh, 1.5rem)', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: 'clamp(0.4rem, 1vh, 0.6rem)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
@@ -499,7 +528,13 @@ export default function Lobby() {
                   Kuskit ja apukuskit
                </h2>
                
-               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', maxWidth: '1100px', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
+               <FitToHeight className="info-fit" style={{ width: '100%', maxWidth: '1100px' }}>
+               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
+                  {/* Tuorein päivitys */}
+                  <div className="info-update">
+                      <div className="info-update-head"><Sparkles size={22} color="#059669" /> Tuorein päivitys {LATEST_UPDATE.date}</div>
+                      <UpdateNotes compact />
+                  </div>
                   
                   {/* Kehittäjät */}
                   <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2.5rem) clamp(1rem, 2vh, 2rem)', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
@@ -575,6 +610,7 @@ export default function Lobby() {
                   </div>
  
                </div>
+               </FitToHeight>
             </div>
          </div>,
          document.body

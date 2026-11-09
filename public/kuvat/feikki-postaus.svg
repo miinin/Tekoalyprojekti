@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" font-family="Segoe UI, Arial, sans-serif">
+  <rect width="800" height="600" fill="#e2e8f0"/>
+  <rect x="90" y="18" width="620" height="564" rx="22" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <circle cx="138" cy="62" r="24" fill="#f97316"/>
+  <text x="138" y="70" font-size="22" font-weight="800" fill="#fff" text-anchor="middle">H</text>
+  <text x="174" y="58" font-size="22" font-weight="700" fill="#0f172a">Hurjat_Uutiset_Nyt</text>
+  <text x="174" y="82" font-size="17" fill="#64748b">12 min sitten</text>
+  <!-- kuva -->
+  <defs><linearGradient id="night" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f172a"/><stop offset="1" stop-color="#334155"/></linearGradient></defs>
+  <rect x="110" y="102" width="580" height="300" fill="url(#night)"/>
+  <circle cx="190" cy="140" r="2.5" fill="#fff"/><circle cx="260" cy="190" r="2" fill="#fff"/><circle cx="610" cy="135" r="2.5" fill="#fff"/><circle cx="520" cy="170" r="2" fill="#fff"/><circle cx="420" cy="128" r="2" fill="#fff"/><circle cx="650" cy="210" r="2" fill="#fff"/>
+  <polygon points="350,262 450,262 520,402 280,402" fill="#a3e635" opacity="0.35"/>
+  <rect x="110" y="360" width="580" height="42" fill="#3f6212"/>
+  <ellipse cx="400" cy="240" rx="110" ry="26" fill="#94a3b8"/>
+  <ellipse cx="400" cy="226" rx="52" ry="30" fill="#cbd5e1"/>
+  <circle cx="345" cy="246" r="6" fill="#fde047"/><circle cx="400" cy="252" r="6" fill="#fde047"/><circle cx="455" cy="246" r="6" fill="#fde047"/>
+  <!-- teksti -->
+  <text x="112" y="446" font-size="26" font-weight="800" fill="#dc2626">100 % AITO KUVA!!!</text>
+  <text x="112" y="480" font-size="21" fill="#0f172a">Lentävä lautanen nähtiin pellon yllä tänä yönä!</text>
+  <text x="112" y="510" font-size="21" font-weight="700" fill="#0f172a">Jaa ennen kuin tämä poistetaan!!!</text>
+  <text x="112" y="558" font-size="19" fill="#64748b">♥ 12 400     Jaettu 3 800 kertaa</text>
+</svg>

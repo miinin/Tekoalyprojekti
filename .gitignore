@@ -34,3 +34,6 @@ dist-ssr
 !kieliasu_havainnot.md
 test*.js
 sim_click.js
+
+# Alkuperäiset valokuvat ennen pakkausta (pakatut versiot ovat public/kuvat-kansiossa)
+kuvat_raaka/

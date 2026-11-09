@@ -489,3 +489,253 @@ button:active {
 .quiz-next .tutorial-confirm-label {
   white-space: nowrap;
 }
+
+/* ===== Kuvalliset kysymykset ===== */
+/* Kysymyksen kuva vasemmalla, kysymys ja vaihtoehdot oikealla (leveä ja matala Chromebook-näyttö) */
+.quiz-body--figure {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(0.8rem, 2vw, 1.6rem);
+  align-items: start;
+}
+.quiz-body--figure .quiz-options {
+  grid-template-columns: minmax(0, 1fr);
+}
+.quiz-body--figure .quiz-options > :last-child:nth-child(odd) {
+  grid-column: auto;
+}
+@media (max-width: 760px) {
+  .quiz-body--figure { grid-template-columns: minmax(0, 1fr); }
+}
+.quiz-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.quiz-figure img,
+.quiz-expl-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #f1f5f9;
+  border-radius: 18px;
+  border: 2px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+.quiz-figure figcaption,
+.quiz-expl-figure figcaption {
+  font-size: 0.8rem;
+  color: #64748b;
+  text-align: center;
+  line-height: 1.3;
+}
+.quiz-expl-figure {
+  margin: 0;
+  flex: 0 0 auto;
+  width: clamp(140px, 30%, 320px);
+  display: grid;
+  gap: 0.3rem;
+}
+/* Valitse kuva: vaihtoehdot rivissä */
+.quiz-image-options {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.6vw, 1rem);
+}
+@media (max-width: 760px) {
+  .quiz-image-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.quiz-image-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 6px;
+  background: white;
+  border: 3px solid #e2e8f0;
+  border-radius: 18px;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: transform 0.15s ease-out, border-color 0.15s, box-shadow 0.15s;
+}
+.quiz-image-option img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f1f5f9;
+}
+.quiz-image-option-label {
+  padding: 0.4rem 0.2rem 0.15rem;
+  font-weight: 700;
+  font-size: clamp(0.9rem, 2.4vh, 1.05rem);
+  line-height: 1.3;
+  color: var(--text-main);
+}
+.quiz-image-option:hover:not(:disabled):not(.is-correct):not(.is-wrong):not(.is-dim) {
+  border-color: #a78bfa;
+  transform: translateY(-2px);
+}
+.quiz-image-option.is-selected {
+  border-color: #7c3aed;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.28);
+  transform: translateY(-2px);
+}
+.quiz-image-option.is-correct {
+  border-color: #22c55e;
+  background: #f0fdf4;
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.25);
+}
+.quiz-image-option.is-wrong {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+.quiz-image-option.is-dim {
+  opacity: 0.5;
+}
+.quiz-image-option.is-removed img {
+  filter: grayscale(1);
+  opacity: 0.45;
+}
+.quiz-image-option:disabled {
+  cursor: not-allowed;
+}
+.quiz-image-option-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0f172a;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ===== Päivitystiedote (etusivun uutinen ja Tietoa pelistä -ikkuna) ===== */
+.update-notes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(0.5rem, 1.4vh, 0.9rem);
+  text-align: left;
+  font-family: var(--font-main);
+  font-size: clamp(1rem, 2.5vh, 1.15rem);
+  line-height: 1.45;
+  color: #1e293b;
+}
+.update-notes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.update-notes-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1em;
+  height: 2.1em;
+  border-radius: 10px;
+  background: #dcfce7;
+  color: #15803d;
+}
+.update-notes--compact {
+  font-size: clamp(0.85rem, 2vh, 1rem);
+  gap: 0.45rem;
+}
+.update-news-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  margin-top: 0.6rem;
+  max-width: 290px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(220, 252, 231, 0.85));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-top: 4px solid #059669;
+  padding: clamp(0.4rem, 1vh, 0.8rem) clamp(0.6rem, 1vw, 1rem);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.15);
+  color: #064e3b;
+  font-family: var(--font-main);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.update-news-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.25);
+}
+.update-news-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: clamp(0.7rem, 1.5vh, 0.9rem);
+  font-weight: 800;
+  color: #047857;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.update-news-title {
+  font-size: clamp(0.75rem, 1.4vh, 0.9rem);
+  line-height: 1.3;
+}
+.info-update {
+  background: #f0fdf4;
+  border: 3px solid #bbf7d0;
+  border-radius: 24px;
+  padding: clamp(0.8rem, 2vh, 1.6rem) clamp(1rem, 2vh, 2rem);
+  display: grid;
+  gap: clamp(0.5rem, 1.4vh, 1rem);
+  width: 100%;
+}
+.info-update-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  color: #047857;
+  font-weight: 900;
+  font-size: clamp(0.9rem, 2vh, 1.2rem);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+/* Etusivun uutinen: yksi rivi oikean yläkulman painikkeiden alla */
+.update-news-banner {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0;
+  max-width: none;
+  border-top: 1px solid rgba(16, 185, 129, 0.3);
+  border-left: 4px solid #059669;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+}
+.update-news-banner:hover svg:last-child {
+  transform: translateX(3px);
+}
+.update-news-banner svg:last-child {
+  transition: transform 0.2s;
+}
+.update-news-title {
+  font-weight: 700;
+  font-size: clamp(0.78rem, 1.6vh, 0.92rem);
+  white-space: nowrap;
+}
+/* Tietoa pelistä: päivitykset kahteen sarakkeeseen, sisältö sovitetaan ruutuun */
+.update-notes--compact {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  column-gap: 1.5rem;
+}
+.info-fit {
+  flex: 1 1 auto;
+  min-height: 0;
+}

@@ -529,7 +529,19 @@ export const store = {
 
   getQuestions: () => {
     // Deep clone default to avoid reference mutations
-    return JSON.parse(JSON.stringify(defaultCategories));
+    const cats = JSON.parse(JSON.stringify(defaultCategories));
+    // Luonnoskysymykset (draft: true, esim. kuva vielä tulossa) näytetään vain, kun
+    // localStorage.aivan_show_drafts = '1' tai osoitteessa on ?luonnokset
+    let showDrafts = false;
+    try {
+      showDrafts = localStorage.getItem('aivan_show_drafts') === '1' || /luonnokset/.test(window.location.search + window.location.hash);
+    } catch {
+      showDrafts = false;
+    }
+    if (!showDrafts) {
+      cats.forEach((c) => c.subcategories.forEach((sub) => { sub.questions = sub.questions.filter((q) => !q.draft); }));
+    }
+    return cats;
   },
 
   // --- TEST MODE ---

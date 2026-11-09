@@ -10,218 +10,319 @@ export const categories = [
           {
             "id": "perusteet_1_q1",
             "type": "true_false",
-            "question": "AI vanin kojelaudassa asuva tekoäly on ihmisen koodaama erikoisohjelma, eikä oikea elävä olento.",
+            "question": "Nykyinen tekoäly oppii suurimman osan taidoistaan esimerkeistä, eikä ohjelmoija kirjoita sille jokaista sääntöä erikseen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Aivan oikein! Tekoäly ei ole oikea elävä ihminen tai olento, vaan ihmisen koodaama erikoisohjelma. Se asuu laitteissa koodin muodossa."
+            "explanation": "Tätä kutsutaan koneoppimiseksi. Kissoja tunnistava tekoäly ei saa sääntöä \"kissalla on viikset\", vaan se näkee tuhansia kuvia kissoista ja oppii niistä itse, mikä tekee kissasta kissan."
           },
           {
             "id": "perusteet_1_q2",
             "type": "multiple_choice",
-            "question": "Mikä tekoäly oikeastaan on?",
+            "question": "Mikä näistä kuvaa tekoälyä parhaiten?",
             "options": [
-              "Taikuutta autotallissa",
-              "Elävä robottieläin",
-              "Koodattu ohjelma",
-              "Avaruudesta tullut kone"
+              "Ohjelma, joka on oppinut tehtävänsä esimerkeistä",
+              "Robotti, jolla on oma tahto ja aidot ihmisen tunteet",
+              "Internet, johon on tallennettu kaikki maailman tieto",
+              "Mikä tahansa laite, joka toimii sähköllä tai akulla"
             ],
-            "correctAnswer": "Koodattu ohjelma",
-            "explanation": "Tekoäly ei ole taikuutta, vaan se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka suorittaa sille annettuja tehtäviä."
+            "correctAnswer": "Ohjelma, joka on oppinut tehtävänsä esimerkeistä",
+            "explanation": "Tekoäly on tietokoneohjelma, joka on oppinut tehtävänsä esimerkeistä: se voi tunnistaa kasvoja, ennustaa säätä tai kirjoittaa tekstiä. Useimmiten tekoäly ei ole robotti, vaan pelkkää ohjelmaa puhelimessa tai palvelimella. Eikä jokainen sähkölaite, kuten leivänpaahdin, ole tekoälyä."
           },
           {
             "id": "perusteet_1_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Olet automatkalla ja kysyt puhelimesi ääniavustajalta reittiä huvipuistoon. Kaverisi takapenkillä huutaa: \"Vau, puhelimen sisällä on taikuri!\" Mitä vastaat hänelle?",
+            "question": "SKENAARIO: Pikkusiskosi avaa puhelimen pelkällä katseella ja kysyy: \"Mistä puhelin tietää, että se olen minä?\" Mitä vastaat?",
             "options": [
-              "Niin on, se osaa taikoa reitin!",
-              "Ei, se on koodattu ohjelma.",
-              "Se on taikuutta ja tiedettä.",
-              "Puhelimessa asuu pieni robotti."
+              "Tekoäly vertaa kasvojasi niihin, jotka tallensit puhelimeen.",
+              "Puhelin muistaa salasanan, jonka kerroit sille ääneen.",
+              "Puhelin kysyy joka kerta netistä, kuka sinä oikein olet.",
+              "Valmistaja on tallentanut kaikkien ihmisten kasvot puhelimeen."
             ],
-            "correctAnswer": "Ei, se on koodattu ohjelma.",
-            "explanation": "Ääniavustaja käyttää tekoälyä, joka on ihmisten tekemä ohjelma, ei taikuutta tai taikuri."
+            "correctAnswer": "Tekoäly vertaa kasvojasi niihin, jotka tallensit puhelimeen.",
+            "explanation": "Puhelimen tekoäly on ensin opetettu tunnistamaan kasvoja miljoonista esimerkeistä. Kun otat toiminnon käyttöön, puhelin tallentaa sinun kasvojesi piirteet ja vertaa niihin jokaista avausyritystä. Tiedot säilyvät yleensä vain omassa puhelimessasi."
           },
           {
             "id": "perusteet_1_q4",
             "type": "drag_drop",
-            "question": "Järjestä, miten AI vanin tekoäly oikeasti syntyy ja toimii, ensimmäisestä askeleesta viimeiseen.",
-            "correctAnswer": {
-              "Ihmiset keksivät hyvän idean": "1. vaihe",
-              "Koodarit kirjoittavat ohjelman": "2. vaihe",
-              "Tekoäly ladataan auton tietokoneeseen": "3. vaihe",
-              "Auto osaa etsiä reitit koodin avulla": "4. vaihe"
-            },
-            "explanation": "Koska tekoäly ei synny taikaiskusta, ihmisen täytyy ensin keksiä idea ja koodata se valmiiksi ohjelmaksi.",
+            "question": "Järjestä, miten kuvista koiria tunnistava tekoäly syntyy.",
             "draggables": [
-              "Ihmiset keksivät hyvän idean",
-              "Koodarit kirjoittavat ohjelman",
-              "Tekoäly ladataan auton tietokoneeseen",
-              "Auto osaa etsiä reitit koodin avulla"
+              "Kerätään tuhansia kuvia, joissa on tai ei ole koiraa",
+              "Ihmiset merkitsevät jokaiseen kuvaan, onko siinä koira",
+              "Tekoäly harjoittelee kuvilla ja oppii koiran tuntomerkit",
+              "Tekoäly tunnistaa koiran kuvasta, jota se ei ole ennen nähnyt"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Kerätään tuhansia kuvia, joissa on tai ei ole koiraa": "1. vaihe",
+              "Ihmiset merkitsevät jokaiseen kuvaan, onko siinä koira": "2. vaihe",
+              "Tekoäly harjoittelee kuvilla ja oppii koiran tuntomerkit": "3. vaihe",
+              "Tekoäly tunnistaa koiran kuvasta, jota se ei ole ennen nähnyt": "4. vaihe"
+            },
+            "explanation": "Näin syntyy suuri osa nykyisestä tekoälystä: data, merkinnät, harjoittelu eli koulutus ja lopuksi käyttö. Tärkein on viimeinen vaihe: tekoäly osaa yleistää eli tunnistaa myös ihan uusia kuvia."
           },
           {
             "id": "perusteet_1_q5",
             "type": "spot_the_ai",
-            "question": "Mikä näistä autotallin tai auton asioista käyttää todennäköisimmin tekoälyä?",
+            "question": "Missä näistä on tekoäly töissä?",
             "options": [
-              "Mekaaninen jakoavain",
-              "Perinteinen polkupyörä",
-              "Reittejä ehdottava navigaattori",
-              "Puhjennut autonrengas"
+              "Videopalvelu, joka ehdottaa sinulle seuraavaa videota",
+              "Taskulaskin, joka laskee nopeasti pitkän kertolaskun",
+              "Herätyskello, joka soi joka arkiaamu kello seitsemän",
+              "Kaukosäädin, joka vaihtaa kanavaa napin painalluksella"
             ],
-            "correctAnswer": "Reittejä ehdottava navigaattori",
-            "explanation": "Navigaattori käyttää tietokoneohjelmaa eli tekoälyä laskeakseen nopeimman reitin. Muut ovat perinteisiä tavaroita ilman koodia."
+            "correctAnswer": "Videopalvelu, joka ehdottaa sinulle seuraavaa videota",
+            "explanation": "Suositukset ovat tekoälyä: se on oppinut miljoonien katsojien valinnoista, millaiset videot kiinnostavat kaltaisiasi katsojia. Laskin, herätyskello ja kaukosäädin noudattavat valmiita sääntöjä eivätkä opi mitään."
           },
           {
             "id": "perusteet_1_q6",
             "type": "reverse_prompt",
-            "question": "Auton tekoälyradio soittaa tällaisen laulun: \"Auto kulkee, kumit laulaa, tekoäly karttaa kantaa!\" Millä kehotteella (promptilla) tämä saatiin aikaan?",
+            "question": "Tekoälyavustaja vastasi: \"Tekoäly on tietokoneohjelma, joka on oppinut esimerkeistä. Se voi tunnistaa kuvia, kääntää kieliä ja kirjoittaa tekstiä, mutta se voi myös erehtyä.\" Millä kehotteella vastaus todennäköisimmin saatiin?",
             "options": [
-              "Kirjoita pitkä uutinen nopeasta autosta.",
-              "Tee todella surullinen runo sateesta.",
-              "Keksi lyhyt ja iloinen riimi automatkasta.",
-              "Kerro yksityiskohtaisesti kuinka moottori korjataan."
+              "Selitä 10-vuotiaalle lyhyesti, mikä tekoäly on.",
+              "Kirjoita tarina robotista, joka haluaa ihmiseksi.",
+              "Luettele kaikki maailman tekoälyt aakkosjärjestyksessä.",
+              "Kerro, kuka keksi tietokoneen ja missä maassa."
             ],
-            "correctAnswer": "Keksi lyhyt ja iloinen riimi automatkasta.",
-            "explanation": "Tekoäly ei toimi omasta tahdostaan, vaan se suorittaa täsmälleen ihmisen sille antaman ohjeen eli promptin mukaisen tehtävän."
+            "correctAnswer": "Selitä 10-vuotiaalle lyhyesti, mikä tekoäly on.",
+            "explanation": "Kehote eli prompti on ohje, jonka annat tekoälylle. Vastaus on lyhyt ja selkeä, koska kehotteessa pyydettiin selittämään lyhyesti ja lapselle sopivasti. Tekoälyn vastaus riippuu paljon siitä, miten kysyt."
           },
           {
             "id": "perusteet_1_q7",
             "type": "multiple_choice",
-            "question": "Kun tekoäly antaa sinulle vastauksen tai ajaa AI vania, kuka sen alun perin on opettanut ja koodannut tekemään niin?",
+            "question": "Miksi lähes kaikkea nykyistä tekoälyä kutsutaan kapeaksi tekoälyksi?",
             "options": [
-              "Toinen tekoäly",
-              "Tietokone ihan itse",
-              "Ihminen",
-              "Taikuri"
+              "Se osaa yleensä vain sen tehtävän, johon se on koulutettu",
+              "Tekoälyohjelmat vievät hyvin vähän tilaa tietokoneella",
+              "Tekoäly osaa vastata vain lyhyillä, muutaman sanan lauseilla",
+              "Samaa tekoälyä saa käyttää vain yksi ihminen kerrallaan"
             ],
-            "correctAnswer": "Ihminen",
-            "explanation": "Tekoäly on aina ihmisen koodaama erikoisohjelma. Se ei osaa tehdä yhtään mitään ilman, että ihminen on sen ensin rakentanut."
+            "correctAnswer": "Se osaa yleensä vain sen tehtävän, johon se on koulutettu",
+            "explanation": "Shakkia pelaava tekoäly voi voittaa maailmanmestarin, mutta se ei tunnista kissaa kuvasta. Chatbotkin on taitava tekstissä, mutta se ei osaa ajaa autoa. Ihmisen kaltaista, kaikkeen kykenevää yleistä tekoälyä ei ole olemassa."
           },
           {
             "id": "perusteet_1_q8",
             "type": "true_false",
-            "question": "Tekoäly perustuu koodiin, jonka asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle.",
+            "question": "Tekoäly osaa aina selittää tarkasti, miksi se päätyi vastaukseensa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Juuri näin! Tekoäly ei ole taikuutta, vaan se perustuu koodiin, jonka fiksut asiantuntijat ovat huolellisesti kirjoittaneet tietokoneelle."
+            "correctAnswer": "Väärin",
+            "explanation": "Koneoppimisessa tekoäly muodostaa itse miljoonia pieniä laskusääntöjä, joita ihmisenkään on vaikea tulkita. Siksi tekoälyä kutsutaan joskus mustaksi laatikoksi. Jos chatbot selittää ratkaisuaan, selityskin on tuotettua tekstiä, eikä se välttämättä kerro, miten vastaus oikeasti syntyi."
           },
           {
             "id": "perusteet_1_q9",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikeisiin laatikoihin sen perusteella, mitä ne oikeasti ovat.",
+            "question": "Lajittele tekoälyt sen mukaan, mitä ne tekevät.",
             "draggables": [
-              "Tekoäly",
-              "Ihminen",
-              "Taikasauva"
+              "Puhelin avautuu omistajan kasvoilla",
+              "Kauppa arvioi, montako jäätelöä myydään helleviikolla",
+              "Ohjelma piirtää kuvan pyynnöstä"
             ],
             "dropZones": [
-              "Koodattu ohjelma",
-              "Elävä olento",
-              "Taikuutta"
+              "Tunnistaa",
+              "Ennustaa",
+              "Tuottaa uutta"
             ],
             "correctAnswer": {
-              "Tekoäly": "Koodattu ohjelma",
-              "Ihminen": "Elävä olento",
-              "Taikasauva": "Taikuutta"
+              "Puhelin avautuu omistajan kasvoilla": "Tunnistaa",
+              "Kauppa arvioi, montako jäätelöä myydään helleviikolla": "Ennustaa",
+              "Ohjelma piirtää kuvan pyynnöstä": "Tuottaa uutta"
             },
-            "explanation": "Muista tärkeä sääntö: tekoäly on vain koodattu ohjelma, ei koskaan taikuutta tai oikea elävä olento!"
+            "explanation": "Tekoälyn tehtävät voi jakaa karkeasti kolmeen ryhmään: tunnistaminen (kasvot, puhe, liikennemerkit), ennustaminen (sää, suositukset, ruuhkat) ja uuden tuottaminen eli generatiivinen tekoäly (teksti, kuvat, musiikki)."
           },
           {
             "id": "perusteet_1_q10",
             "type": "multiple_choice",
-            "question": "Voiko AI vanin tekoäly olla sinulle oikea, elävä ystävä?",
+            "question": "Chatbot vastaa kysymyksiisi sujuvasti kuin ihminen. Miten se oikeasti tuottaa vastauksen?",
             "options": [
-              "Kyllä, se on täysin elossa",
-              "Ei, se on vain ohjelma",
-              "Kyllä, jos sille paljon juttelee",
-              "Ei, koska se on vain hidas auto"
+              "Se valitsee sana kerrallaan todennäköisimmän seuraavan sanan",
+              "Se kopioi vastauksen valmiina yhdeltä tutulta nettisivulta",
+              "Ihminen kirjoittaa vastauksen salaa ja nopeasti ruudun takana",
+              "Se ymmärtää kysymyksen kuten ihminen ja tuntee oikean vastauksen"
             ],
-            "correctAnswer": "Ei, se on vain ohjelma",
-            "explanation": "Vaikka tekoäly voi jutella kivasti ja auttaa tehtävissä, se on silti vain tietokoneohjelma, ei koskaan elävä olento."
+            "correctAnswer": "Se valitsee sana kerrallaan todennäköisimmän seuraavan sanan",
+            "explanation": "Kielimalli on harjoitellut valtavalla määrällä tekstiä ja oppinut, millaiset sanat seuraavat toisiaan. Siksi vastaus kuulostaa sujuvalta. Sujuva ei kuitenkaan aina tarkoita oikeaa."
           },
           {
             "id": "perusteet_1_q11",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin näyttö menee yhtäkkiä pimeäksi ja radio lakkaa kuulumasta. Pikkuveljesi pelästyy ja luulee, että auton henki karkasi. Miten rauhoitat hänet?",
+            "question": "SKENAARIO: Kaverisi juttelee iltaisin chatbotin kanssa ja sanoo: \"Se on mun paras kaveri, se ymmärtää mua aina.\" Mitä hänelle kannattaa kertoa?",
             "options": [
-              "Kerron, että tekoäly taisi vain mennä unille.",
-              "Sanon, että ohjelma taisi kaatua tai virta loppua.",
-              "Alan etsiä karannutta henkeä heti autotallista.",
-              "Soitan heti poliisille, koska henki on kadonnut."
+              "Se puhuu ystävällisesti, mutta ei oikeasti tunne mitään.",
+              "Se on oikeasti elävä olento, joten se on hyvä ystävä.",
+              "Chatbotit ovat vaarallisia, joten puhelin pitää heittää.",
+              "Se kertoo kaikki keskustelunne salaa opettajallesi."
             ],
-            "correctAnswer": "Sanon, että ohjelma taisi kaatua tai virta loppua.",
-            "explanation": "Koska tekoäly on vain tietokoneohjelma, sillä ei ole sielua tai henkeä. Se tarvitsee toimiakseen vain sähköä ja koodia."
+            "correctAnswer": "Se puhuu ystävällisesti, mutta ei oikeasti tunne mitään.",
+            "explanation": "Chatbot on koulutettu kuulostamaan ystävälliseltä, koska se on oppinut ihmisten kirjoittamista teksteistä. Se ei silti tunne mitään. Chatbotin kanssa saa jutella, mutta tärkeistä asioista kannattaa puhua myös oikean ihmisen, kuten kaverin tai aikuisen, kanssa."
           },
           {
             "id": "perusteet_1_q12",
             "type": "true_false",
-            "question": "Ohjelmat eivät synny itsekseen, vaan tekoäly on aina ihmisen rakentama ja koodaama.",
+            "question": "Kun tekoäly on kerran koulutettu, se ei voi enää koskaan tehdä virheitä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Oikein! Ohjelmat eivät synny itsekseen. Tekoäly on aina ihmisen rakentama ja koodaama erikoisohjelma."
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly oppii todennäköisyyksiä, ei varmoja totuuksia. Se voi erehtyä etenkin tilanteissa, jotka poikkeavat sen harjoitusesimerkeistä. Siksi tekoälyn vastauksia kannattaa aina vähän tarkistaa."
           },
           {
             "id": "perusteet_1_q13",
             "type": "drag_drop",
-            "question": "Yhdistä oikea asia sille kuuluvaan lokeroon! Mikä on koodia, mikä ihmistä ja mikä taikaa?",
-            "correctAnswer": {
-              "Siri tai ChatGPT": "Tietokoneohjelma",
-              "Oma luokkakaverisi": "Elävä ihminen",
-              "Lentävä luuta": "Taikaa ja satua"
-            },
-            "explanation": "Tekoälyt (kuten Siri tai ChatGPT) ovat älykkäitä tietokoneohjelmia. Vaikka ne juttelevat kuin ihmiset, kyse on matematiikasta ja koodista, ei taikuudesta tai elävästä sielusta!",
+            "question": "Lajittele: käyttääkö laite tekoälyä vai ei?",
             "draggables": [
-              "Siri tai ChatGPT",
-              "Oma luokkakaverisi",
-              "Lentävä luuta"
+              "Kääntäjä, joka kääntää puhuttua englantia suomeksi",
+              "Sähköpostin roskapostisuodatin",
+              "Sähköhammasharjan kahden minuutin ajastin",
+              "Mikroaaltouuni, joka sammuu ajan loputtua"
             ],
             "dropZones": [
-              "Tietokoneohjelma",
-              "Elävä ihminen",
-              "Taikaa ja satua"
-            ]
+              "Tekoäly",
+              "Ei tekoälyä"
+            ],
+            "correctAnswer": {
+              "Kääntäjä, joka kääntää puhuttua englantia suomeksi": "Tekoäly",
+              "Sähköpostin roskapostisuodatin": "Tekoäly",
+              "Sähköhammasharjan kahden minuutin ajastin": "Ei tekoälyä",
+              "Mikroaaltouuni, joka sammuu ajan loputtua": "Ei tekoälyä"
+            },
+            "explanation": "Puheen kääntäminen ja roskapostin tunnistaminen vaativat tekoälyä, koska puhe ja viestit ovat joka kerta erilaisia: tekoäly on oppinut niiden vaihtelun esimerkeistä. Ajastimet taas noudattavat yhtä yksinkertaista sääntöä."
           },
           {
             "id": "perusteet_1_q14",
             "type": "spot_the_ai",
-            "question": "Yksi näistä tavoista ohjata ja liikuttaa AI vania käyttää tekoälyä. Mikä se on?",
+            "question": "AI vanin kojelaudassa on monta toimintoa. Missä niistä on tekoäly?",
             "options": [
-              "Kääntämällä mekaanista rattia omilla käsillä.",
-              "Painaen kaasupoljinta oikealla jalalla.",
-              "Auton tietokone väistää estettä kameroilla ja koodilla.",
-              "Vetämällä käsijarrusta voimakkaasti alamäessä."
+              "Kamera, joka lukee tienvarren nopeusrajoitukset",
+              "Polttoainemittari, joka näyttää tankin bensan määrän",
+              "Vilkku, joka naksuu tasaisesti, kun auto kääntyy",
+              "Lämmitin, joka puhaltaa lämmintä ilmaa jalkatilaan"
             ],
-            "correctAnswer": "Auton tietokone väistää estettä kameroilla ja koodilla.",
-            "explanation": "Kun tietokoneohjelma on koodattu tekemään itsenäisiä päätöksiä (kuten väistämään estettä), kyseessä on tekoäly. Muut ovat ihmisen tekemiä mekaanisia toimintoja."
+            "correctAnswer": "Kamera, joka lukee tienvarren nopeusrajoitukset",
+            "explanation": "Liikennemerkkien tunnistus on konenäköä: tekoäly on harjoitellut tuhansilla merkkikuvilla eri säissä ja valaistuksissa. Mittari, vilkku ja lämmitin toimivat yksinkertaisilla säännöillä ja antureilla."
           },
           {
             "id": "perusteet_1_q15",
             "type": "reverse_prompt",
-            "question": "Tekoälyavustaja vastasi kuskille näin: \"Hei! Olen ihmisen tekemä tietokoneohjelma, jonka tarkoitus on auttaa sinua!\" Mikä seuraavista oli ihmisen antama ohje (prompt)?",
+            "question": "Tekoäly teki kuvan: oranssi kissa ajaa punaista avoautoa auringonlaskussa sarjakuvatyyliin. Millä kehotteella kuva todennäköisimmin tehtiin?",
             "options": [
-              "Kerro, mikä on paras lempiruokasi.",
-              "Selitä lyhyesti, mikä ihme sinä oikein olet.",
-              "Tee taikatemppu taikasauvalla.",
-              "Kuka voitti jalkapallopelin eilen illalla?"
+              "Sarjakuva: oranssi kissa ajaa punaista avoautoa auringonlaskussa",
+              "Sarjakuva: musta koira ajaa punaista avoautoa auringonlaskussa",
+              "Valokuva: oranssi kissa istuu punaisen avoauton vieressä yöllä",
+              "Sarjakuva: oranssi kissa ajaa sinistä pakettiautoa aamulla"
             ],
-            "correctAnswer": "Selitä lyhyesti, mikä ihme sinä oikein olet.",
-            "explanation": "Tekoäly vastaa kysymykseen rehellisesti: se ei ole taikuri tai ihminen, vaan koodattu ohjelma, jonka tarkoitus on auttaa meitä."
+            "correctAnswer": "Sarjakuva: oranssi kissa ajaa punaista avoautoa auringonlaskussa",
+            "explanation": "Kuvia tekevä tekoäly on generatiivista tekoälyä. Se ei etsi valmista kuvaa netistä, vaan tuottaa uuden kuvan kehotteen pohjalta. Jokainen väärä vaihtoehto eroaa kuvasta yhdellä yksityiskohdalla: eläin, tyyli, väri tai vuorokaudenaika. Juuri näillä yksityiskohdilla ohjaat, millainen kuvasta tulee."
+          },
+          {
+            "id": "perusteet_1_q16",
+            "type": "image_choice",
+            "featured": true,
+            "question": "Missä kuvassa tekoäly on töissä?",
+            "options": [
+              "kaantaja",
+              "kello",
+              "laskin",
+              "katkaisija"
+            ],
+            "optionImages": {
+              "kaantaja": {
+                "src": "/kuvat/puhelin-kaantaja.webp",
+                "alt": "Puhelimen kamera kääntää kyltin tekstin toiselle kielelle",
+                "label": "Kamerakääntäjä"
+              },
+              "kello": {
+                "src": "/kuvat/seinakello.webp",
+                "alt": "Seinäkello",
+                "label": "Seinäkello"
+              },
+              "laskin": {
+                "src": "/kuvat/laskin.webp",
+                "alt": "Taskulaskin",
+                "label": "Taskulaskin"
+              },
+              "katkaisija": {
+                "src": "/kuvat/valokatkaisija.webp",
+                "alt": "Valokatkaisija",
+                "label": "Valokatkaisija"
+              }
+            },
+            "correctAnswer": "kaantaja",
+            "explanation": "Kamerakääntäjä tunnistaa kuvasta kirjaimet ja kääntää tekstin toiselle kielelle. Molemmat taidot se on oppinut valtavasta määrästä esimerkkejä. Kello, laskin ja valokatkaisija tekevät aina täsmälleen saman asian valmiin säännön mukaan, joten ne eivät tarvitse tekoälyä."
+          },
+          {
+            "id": "perusteet_1_q17",
+            "type": "multiple_choice",
+            "featured": true,
+            "image": {
+              "src": "/kuvat/pikselisydan-numerot.svg",
+              "alt": "Ruudukko, jossa on numeroita 1 ja 9",
+              "ratio": "6 / 5"
+            },
+            "explanationImage": {
+              "src": "/kuvat/pikselisydan-kuva.svg",
+              "alt": "Sama ruudukko väritettynä: ykköset muodostavat punaisen sydämen",
+              "ratio": "6 / 5",
+              "caption": "Kun numerot muutetaan väreiksi, kuva paljastuu."
+            },
+            "question": "Tietokone näkee kuvan numeroina. Jokainen numero on yhden pikselin kirkkaus: 1 = tumma, 9 = vaalea. Mitä kuvassa on?",
+            "options": [
+              "Sydän",
+              "Auto",
+              "Hymynaama",
+              "Puu"
+            ],
+            "correctAnswer": "Sydän",
+            "explanation": "Kuva on tietokoneelle taulukko numeroita. Puhelimen kuvassa pikseleitä on miljoonia, ja jokaisella on kolme numeroa: punaisen, vihreän ja sinisen määrä. Kuvia tunnistava tekoäly etsii näistä numeroista kuvioita, aivan kuten sinä etsit äsken ykkösistä sydäntä."
+          },
+          {
+            "id": "perusteet_1_q18",
+            "type": "reverse_prompt",
+            "featured": true,
+            "image": {
+              "src": "/kuvat/ai-van-kuu.webp",
+              "alt": "Vesivärimaalaus vihreästä pakettiautosta, joka ajaa tähtitaivaalla kohti täysikuuta",
+              "credit": "Kuva on tehty tekoälyllä."
+            },
+            "question": "Tekoäly teki tämän kuvan. Millä kehotteella se todennäköisimmin tehtiin?",
+            "options": [
+              "Vesiväri: vihreä pakettiauto ajaa tähtitaivaalla kohti kuuta",
+              "Vesiväri: vihreä pakettiauto ajaa aurinkoisella hiekkarannalla",
+              "Valokuva: punainen urheiluauto ajaa kaupungin kadulla yöllä",
+              "Vesiväri: sininen polkupyörä lentää tähtitaivaalla kohti kuuta"
+            ],
+            "correctAnswer": "Vesiväri: vihreä pakettiauto ajaa tähtitaivaalla kohti kuuta",
+            "explanation": "Kehotteessa kerrottiin tyyli (vesiväri), kohde (vihreä pakettiauto) ja tilanne (tähtitaivas ja kuu). Väärät vaihtoehdot eroavat kuvasta aina yhdellä yksityiskohdalla. Kuvageneraattori ei etsi valmista kuvaa netistä, vaan tuottaa uuden kuvan kehotteen pohjalta, joten jokainen yksityiskohta vaikuttaa lopputulokseen."
+          },
+          {
+            "id": "perusteet_1_q19",
+            "type": "true_false",
+            "image": {
+              "src": "/kuvat/lelulehma-hiekalla.webp",
+              "alt": "Lelulehmä seisoo hiekalla"
+            },
+            "explanationImage": {
+              "src": "/kuvat/lelulehma-nurmella.webp",
+              "alt": "Sama lelulehmä vihreällä nurmella",
+              "caption": "Harjoituskuvissa lehmä oli aina vihreällä nurmella."
+            },
+            "question": "Lehmiä tunnistava tekoäly on harjoiteltu kuvilla, joissa lehmät seisovat vihreällä laitumella. Se tunnistaa varmasti myös tämän hiekalla seisovan lehmän.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly oppii kaiken, mikä harjoituskuvissa toistuu, myös taustan. Jos jokaisessa lehmäkuvassa oli vihreää nurmea, tekoäly voi oppia, että vihreä tausta kuuluu lehmään. Silloin hiekalla seisova lehmä voi jäädä tunnistamatta. Tutkijat ovat havainneet juuri tämän ilmiön oikeissa kuvantunnistimissa."
           }
         ]
       },
@@ -243,219 +344,219 @@ export const categories = [
           {
             "id": "perusteet_2_q2",
             "type": "multiple_choice",
-            "question": "Puhutte autossa siitä, kuinka kivaa perillä huvipuistossa tulee olemaan. Miten tekoäly suhtautuu tähän automatkaan?",
+            "question": "Pieni lapsi oppii tunnistamaan kissan nähtyään muutaman kissan. Montako kuvaa tekoäly tyypillisesti tarvitsee oppiakseen saman?",
             "options": [
-              "Se odottaa innolla tulevia laitteita",
-              "Se laskee ahkerasti nopeinta reittiä",
-              "Se pelkää hurjia vuoristoratoja",
-              "Se toivoo saavansa ison hattaran"
+              "Tuhansia, jopa miljoonia",
+              "Yksi kuva riittää hyvin",
+              "Noin kymmenen eri kuvaa",
+              "Ei yhtään, se tietää valmiiksi"
             ],
-            "correctAnswer": "Se laskee ahkerasti nopeinta reittiä",
-            "explanation": "Ihmisillä on tunteita ja mielikuvitusta, mutta tekoäly on nopea laskukone. Se ei tunne iloa tai pelkoa, vaan keskittyy suorittamaan tehtäväänsä."
+            "correctAnswer": "Tuhansia, jopa miljoonia",
+            "explanation": "Ihminen oppii hämmästyttävän vähistä esimerkeistä, koska ymmärrämme maailmaa monella aistilla. Tekoäly tarvitsee valtavasti esimerkkejä, mutta kun se on kerran oppinut, se voi käydä läpi miljoonia kuvia väsymättä."
           },
           {
             "id": "perusteet_2_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Olette ajaneet pitkään ja alat keksiä takapenkillä hauskoja vitsejä ohikiitävistä autoista. Pyydät auton tekoälyä mukaan leikkiin. Miten tekoälyn \"mielikuvitus\" eroaa sinun mielikuvituksestasi?",
+            "question": "SKENAARIO: Pyydät tekoälyä keksimään vitsin automatkasta, ja vitsi on aika hauska. Kaverisi sanoo: \"Tekoälyllä on huumorintaju!\" Mitä vastaat?",
             "options": [
-              "Tekoäly osaa nauraa vitsille oikeasti",
-              "Tekoäly keksii asioita omasta päästään",
-              "Tekoälyllä on täydellinen huumorintaju",
-              "Tekoäly vain yhdistelee oppimaansa tietoa"
+              "Se on oppinut tuhansista vitseistä, mikä yleensä naurattaa.",
+              "Totta, se nauroi itsekin ääneen omalle hauskalle vitsilleen.",
+              "Se kopioi vitsin aina sanasta sanaan yhdeltä nettisivulta.",
+              "Ihminen kirjoitti sille kaikki maailman vitsit valmiiksi."
             ],
-            "correctAnswer": "Tekoäly vain yhdistelee oppimaansa tietoa",
-            "explanation": "Ihmisellä on aito mielikuvitus. Tekoäly taas \"keksii\" vitsejä vain yhdistelemällä sanoja ja sääntöjä, joita ihmiset ovat sille aiemmin syöttäneet."
+            "correctAnswer": "Se on oppinut tuhansista vitseistä, mikä yleensä naurattaa.",
+            "explanation": "Tekoäly yhdistelee oppimiaan kaavoja, esimerkiksi millaisia sanaleikkejä ja yllätyksiä vitseissä on. Tulos voi olla uusi ja hauska, mutta tekoäly ei itse koe hauskuutta."
           },
           {
             "id": "perusteet_2_q4",
             "type": "drag_drop",
-            "question": "Yhdistä ominaisuudet oikeisiin laatikoihin sen mukaan, kuuluvatko ne ihmiselle vai tekoälylle.",
+            "question": "Kumpi on tässä vahvempi: ihminen vai tekoäly?",
             "draggables": [
-              "Tuntee iloa matkasta",
-              "Laskee sekunnissa satoja reittejä",
-              "Tylsistyy takapenkillä",
-              "Ei tarvitse koskaan yöunia"
-            ],
-            "dropZones": [
-              "Ihminen",
-              "Tekoäly"
-            ],
-            "correctAnswer": {
-              "Tuntee iloa matkasta": "Ihminen",
-              "Laskee sekunnissa satoja reittejä": "Tekoäly",
-              "Tylsistyy takapenkillä": "Ihminen",
-              "Ei tarvitse koskaan yöunia": "Tekoäly"
-            },
-            "explanation": "Ihmiset tuntevat ja väsyvät. Tekoäly on väsymätön laskukone, jolla ei ole lainkaan omia tunteita tai tarpeita."
-          },
-          {
-            "id": "perusteet_2_q5",
-            "type": "drag_drop",
-            "question": "Järjestä ratkaisijat sen mukaan, kuka laskee valtavan matikkalaskun (esim. 5432 x 897) nopeimmin. Aloita nopeimmasta!",
-            "correctAnswer": {
-              "Tietokoneen tekoäly": "1. vaihe",
-              "Aikuinen laskimen kanssa": "2. vaihe",
-              "Lapsi ruutupaperin kanssa": "3. vaihe"
-            },
-            "explanation": "Tekoäly ja tietokoneet ovat valtavan nopeita laskemaan numeroita. Ihmisen aivot ovat loistavat luovuudessa, mutta suurissa laskuissa kone on salamannopea voittaja.",
-            "draggables": [
-              "Tietokoneen tekoäly",
-              "Aikuinen laskimen kanssa",
-              "Lapsi ruutupaperin kanssa"
-            ],
-            "dropZones": [
-              "1. vaihe",
-              "2. vaihe",
-              "3. vaihe"
-            ]
-          },
-          {
-            "id": "perusteet_2_q6",
-            "type": "spot_the_ai",
-            "question": "Kumpi näistä automatkan lauluntekijöistä on todennäköisimmin tekoäly? Etsi vaihtoehto, josta puuttuu aito tunne ja elämänkokemus.",
-            "options": [
-              "'Tämä laulu kertoo siitä, kun söimme jäätelöä ja minua nauratti!'",
-              "'Laulu aiheesta jäätelö. Jäätelö on kylmä jälkiruoka, joka sulaa nopeasti.'",
-              "'Muistatko kun lauloimme tätä biisiä ukkosen aikana? Oli vähän jännää!'",
-              "'Olin tosi surullinen kun eväsleipäni putosi maahan kuralätäkköön.'"
-            ],
-            "correctAnswer": "'Laulu aiheesta jäätelö. Jäätelö on kylmä jälkiruoka, joka sulaa nopeasti.'",
-            "explanation": "Tekoäly pystyy luettelemaan faktoja jäätelöstä nopeasti, mutta se ei voi muistella asioita, tuntea makua tai kokea iloa ja surua kuten ihminen."
-          },
-          {
-            "id": "perusteet_2_q7",
-            "type": "reverse_prompt",
-            "question": "Auton ääniavustaja sanoo: \"Voi ei, onpa todella harmillista, että sataa vettä. Olen niin pahoillani puolestanne!\" Millä kehotteella (promptilla) tekoäly saatiin sanomaan näin?",
-            "options": [
-              "Kerro meille sääennuste seuraavalle tunnille.",
-              "Laske kuinka paljon vettä sataa millimetreinä.",
-              "Esitä, että olet surullinen sateisen sään vuoksi.",
-              "Keksi iloinen laulu sateenvarjoista ja lätäköistä."
-            ],
-            "correctAnswer": "Esitä, että olet surullinen sateisen sään vuoksi.",
-            "explanation": "Tekoäly ei oikeasti ole pahoillaan sateesta, koska se ei tunne sääliä. Se kuitenkin osaa hienosti matkia surullista puhetta, jos siltä pyydetään sitä promptilla!"
-          },
-          {
-            "id": "perusteet_2_q8",
-            "type": "true_false",
-            "question": "Tekoäly ei tunne nälkää eikä pysty syömään ruokaa, vaan se tarvitsee toimiakseen ainoastaan sähköä.",
-            "options": [
-              "Oikein",
-              "Väärin"
-            ],
-            "correctAnswer": "Oikein",
-            "explanation": "Näinhän se on! Toisin kuin ihminen, tekoäly ei tunne nälkää eikä se pysty syömään ruokaa. Se tarvitsee toimiakseen ainoastaan sähköä."
-          },
-          {
-            "id": "perusteet_2_q9",
-            "type": "multiple_choice",
-            "question": "Missä asiassa sinä olet paljon parempi ja taitavampi kuin maailman nopeinkaan tekoäly?",
-            "options": [
-              "Pitkien sanakirjojen ulkoa muistamisessa",
-              "Vaikeiden kertolaskujen ratkaisemisessa",
-              "Oikean ystävyyden ja empatian tuntemisessa",
-              "Tietokonepelien koodirivien lukemisessa"
-            ],
-            "correctAnswer": "Oikean ystävyyden ja empatian tuntemisessa",
-            "explanation": "Tekoäly on mestari käsittelemään tietoa ja numeroita, mutta vain sinä osaat tuntea aitoa ystävyyttä, empatiaa ja välittämistä toisista ihmisistä."
-          },
-          {
-            "id": "perusteet_2_q10",
-            "type": "scenario",
-            "question": "SKENAARIO: Piirrät autotallissa upean ja täysin uudenlaisen keksinnön paperille pelkän oman mielikuvituksesi avulla. Sitten pyydät tekoälyä piirtämään jotain vastaavaa. Miksi tekoäly tarvitsee sinun ohjeitasi?",
-            "options": [
-              "Koska siltä puuttuu täysin oma, aito mielikuvitus.",
-              "Koska se on liian hidas tekemään mitään uutta.",
-              "Koska se piirtää vain ja ainoastaan mustavalkoisena.",
-              "Koska se pelkää tekevänsä liian ruman piirustuksen."
-            ],
-            "correctAnswer": "Koska siltä puuttuu täysin oma, aito mielikuvitus.",
-            "explanation": "Tekoäly osaa luoda hienoja kuvia, mutta se tekee sen aina ihmisen antamien ohjeiden ja ihmisiltä oppimansa tiedon pohjalta. Sillä ei ole omaa luovuutta."
-          },
-          {
-            "id": "perusteet_2_q11",
-            "type": "spot_the_ai",
-            "question": "Huokaiset takapenkillä: \"Minulla on tosi tylsää, haluaisin olla jo perillä.\" Kuka vastaajista on selvästi tekoäly?",
-            "options": [
-              "'Ymmärrän hyvin, matka on ollut pitkä. Pelataanko jotain?'",
-              "'Minuakin vähän väsyttää, mutta onneksi olemme pian perillä.'",
-              "'Kohde saavutetaan 45 minuutin kuluttua. Keskinopeus on 80 km/h.'",
-              "'Katsotaan yhdessä ulos ikkunasta, ehkä sieltä näkyy lehmiä!'"
-            ],
-            "correctAnswer": "'Kohde saavutetaan 45 minuutin kuluttua. Keskinopeus on 80 km/h.'",
-            "explanation": "Tekoäly antaa tarkan ja nopean faktavastauksen täysin ilman tunnetta. Ihmiset sen sijaan ymmärtävät, miltä tylsyys tuntuu ja yrittävät lohduttaa."
-          },
-          {
-            "id": "perusteet_2_q12",
-            "type": "multiple_choice",
-            "question": "Mitä auton tekoälynavigaattori osaa tehdä paljon nopeammin kuin yksikään ihminen maailmassa?",
-            "options": [
-              "Löytää kaikkien mahdollisten reittien pituudet",
-              "Nauttia kauniista ja aurinkoisista maalaismaisemista",
-              "Keksiä täysin uuden ja opettavaisen sadun",
-              "Maistaa kuinka hyvältä retkieväät maistuvat"
-            ],
-            "correctAnswer": "Löytää kaikkien mahdollisten reittien pituudet",
-            "explanation": "Tekoäly on ohjelma, joka on tehty käsittelemään dataa salamannopeasti. Se ei kuitenkaan voi koskaan nauttia maisemista tai maistaa asioita."
-          },
-          {
-            "id": "perusteet_2_q13",
-            "type": "drag_drop",
-            "question": "Kummalle antaisit seuraavat tehtävät automatkalla? Raahaa tehtävä joko itsellesi (ihmiselle) tai navigaattorin tekoälylle sen perusteella, kumpi on siinä parempi.",
-            "draggables": [
-              "Laske nopein reitti ruuhkassa",
-              "Etsi sata faktaa dinosauruksista",
-              "Päätä, mikä jäätelö maistuu parhaalta",
-              "Lohduta pikkusiskoa, jota harmittaa"
+              "Käy läpi miljoona valokuvaa yhdessä yössä",
+              "Ymmärtää, miksi kaveria harmittaa",
+              "Löytää kuvioita valtavasta määrästä säätietoja",
+              "Kantaa vastuun tärkeästä päätöksestä"
             ],
             "dropZones": [
               "Tekoäly",
               "Ihminen"
             ],
             "correctAnswer": {
-              "Laske nopein reitti ruuhkassa": "Tekoäly",
-              "Etsi sata faktaa dinosauruksista": "Tekoäly",
-              "Päätä, mikä jäätelö maistuu parhaalta": "Ihminen",
-              "Lohduta pikkusiskoa, jota harmittaa": "Ihminen"
+              "Käy läpi miljoona valokuvaa yhdessä yössä": "Tekoäly",
+              "Ymmärtää, miksi kaveria harmittaa": "Ihminen",
+              "Löytää kuvioita valtavasta määrästä säätietoja": "Tekoäly",
+              "Kantaa vastuun tärkeästä päätöksestä": "Ihminen"
             },
-            "explanation": "Tekoäly on uskomattoman nopea etsimään tietoa ja laskemaan asioita, mutta vain ihminen voi kokea makuja ja antaa aitoa lohtua toiselle!"
+            "explanation": "Tekoälyn vahvuus on nopeus ja määrä: se jaksaa käydä läpi enemmän tietoa kuin kukaan ihminen. Ihmisen vahvuus on ymmärrys: tunteet, arvot ja vastuu. Siksi tärkeät päätökset, jotka koskevat ihmisiä, kuuluvat ihmiselle."
+          },
+          {
+            "id": "perusteet_2_q5",
+            "type": "drag_drop",
+            "question": "Tekoäly auttaa lääkäriä tutkimaan röntgenkuvia. Järjestä työvaiheet.",
+            "draggables": [
+              "Potilaasta otetaan röntgenkuva",
+              "Tekoäly merkitsee kuvaan kohdan, joka voi olla murtuma",
+              "Lääkäri tarkistaa kuvan ja tekee päätöksen"
+            ],
+            "dropZones": [
+              "1. vaihe",
+              "2. vaihe",
+              "3. vaihe"
+            ],
+            "correctAnswer": {
+              "Potilaasta otetaan röntgenkuva": "1. vaihe",
+              "Tekoäly merkitsee kuvaan kohdan, joka voi olla murtuma": "2. vaihe",
+              "Lääkäri tarkistaa kuvan ja tekee päätöksen": "3. vaihe"
+            },
+            "explanation": "Näin tekoälyä käytetään monessa työssä: se on nopea apuri, joka huomaa epäilyttävät kohdat, mutta päätöksen tekee ja vastuun kantaa ihminen. Tekoäly voi erehtyä, ja lääkäri näkee potilaan tilanteen kokonaisuutena."
+          },
+          {
+            "id": "perusteet_2_q6",
+            "type": "spot_the_ai",
+            "question": "Missä tilanteessa tekoäly on todennäköisesti apuna?",
+            "options": [
+              "Puhelin muuttaa puheesi tekstiksi viestiin",
+              "Kaveri piirtää sinulle syntymäpäiväkortin",
+              "Opettaja tarkistaa käsin kirjoitetun kokeen",
+              "Isovanhempi kertoo muistojaan lapsuudestaan"
+            ],
+            "correctAnswer": "Puhelin muuttaa puheesi tekstiksi viestiin",
+            "explanation": "Puheentunnistus on tekoälyä, joka on harjoitellut tuhansien ihmisten puheella: eri äänillä, murteilla ja taustameluissa. Muissa vaihtoehdoissa työn tekee ihminen omalla kokemuksellaan."
+          },
+          {
+            "id": "perusteet_2_q7",
+            "type": "reverse_prompt",
+            "question": "Tekoäly kirjoitti: \"Rakas päiväkirja, tänään olin niin iloinen, kun aurinko paistoi koko automatkan!\" Millä kehotteella teksti saatiin?",
+            "options": [
+              "Kirjoita iloinen päiväkirjateksti aurinkoisesta automatkasta.",
+              "Kerro rehellisesti, mitä sinä itse tunnet tällä automatkalla.",
+              "Laske, montako tuntia aurinko paistoi koko matkan aikana.",
+              "Etsi huomisen sääennuste koko reitille, jota pitkin ajamme."
+            ],
+            "correctAnswer": "Kirjoita iloinen päiväkirjateksti aurinkoisesta automatkasta.",
+            "explanation": "Tekoäly ei ollut oikeasti iloinen. Se kirjoitti iloisen tekstin, koska sitä pyydettiin. Jos kysyt tekoälyltä, mitä se tuntee, se voi vastata tunteista, mutta sekin on vain tekstiä, ei oikea tunne."
+          },
+          {
+            "id": "perusteet_2_q8",
+            "type": "true_false",
+            "question": "Tekoäly väsyy, jos se joutuu vastaamaan tuhansiin kysymyksiin peräkkäin.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly ei väsy eikä kyllästy, joten se voi tehdä samaa työtä vuorokauden ympäri. Se kuluttaa kuitenkin paljon sähköä: suuria tekoälyjä pyöritetään valtavissa konesaleissa. Ihmisaivot toimivat noin 20 watin teholla, saman verran kuin pieni lamppu!"
+          },
+          {
+            "id": "perusteet_2_q9",
+            "type": "multiple_choice",
+            "question": "Missä asiassa ihminen on yleensä tekoälyä parempi?",
+            "options": [
+              "Toimimaan järkevästi täysin uudessa tilanteessa",
+              "Käymään läpi tuhansia valokuvia yhden minuutin aikana",
+              "Kääntämään pitkän tekstin nopeasti kymmenille kielille",
+              "Löytämään toistuvia kuvioita valtavista tietomääristä"
+            ],
+            "correctAnswer": "Toimimaan järkevästi täysin uudessa tilanteessa",
+            "explanation": "Ihminen pystyy soveltamaan kokemustaan uuteen: jos tie on tulvan peitossa, tiedät pysähtyä, vaikka et olisi koskaan nähnyt tulvaa. Tekoäly toimii parhaiten tilanteissa, jotka muistuttavat sen harjoitusesimerkkejä."
+          },
+          {
+            "id": "perusteet_2_q10",
+            "type": "scenario",
+            "question": "SKENAARIO: Keksit lentävän polkupyörän, jossa on sateenvarjo, eikä kukaan ole nähnyt sellaista ennen. Pyydät tekoälyä piirtämään sen. Mitä todennäköisimmin tapahtuu?",
+            "options": [
+              "Se onnistuu yhdistelemällä oppimiaan kuvia pyöristä ja sateenvarjoista.",
+              "Se ei onnistu, koska se piirtää vain oikeasti olemassa olevia asioita.",
+              "Se etsii netistä valmiin kuvan, jonka joku muu on piirtänyt aiemmin.",
+              "Se kieltäytyy, koska keksintö on sinun ideasi eikä sen oma idea."
+            ],
+            "correctAnswer": "Se onnistuu yhdistelemällä oppimiaan kuvia pyöristä ja sateenvarjoista.",
+            "explanation": "Tekoäly osaa yhdistellä tuttuja palasia uudella tavalla, joten se voi piirtää lentävän sateenvarjopyörän. Idea ja päätös siitä, mitä halutaan, tulivat kuitenkin sinulta. Tekoäly ei koskaan itse päätä keksiä jotain, vaan se tarvitsee ihmisen pyynnön."
+          },
+          {
+            "id": "perusteet_2_q11",
+            "type": "spot_the_ai",
+            "question": "Huokaiset takapenkillä: \"Mulla on tylsää.\" Saat neljä vastausta. Mikä niistä on varmasti tekoälyn?",
+            "options": [
+              "\"Voi ei! Pelataanko sanaselitystä, niin aika kuluu?\"",
+              "\"Ymmärrän, pitkä matka voi olla puuduttava.\"",
+              "\"Perillä ollaan 45 minuutin päästä.\"",
+              "Mistään näistä ei voi varmasti tietää"
+            ],
+            "correctAnswer": "Mistään näistä ei voi varmasti tietää",
+            "explanation": "Vanha ajatus \"tekoäly puhuu kuin robotti\" ei enää pidä paikkaansa. Nykyiset chatbotit kirjoittavat lämpimästi ja vitsailevat. Siksi pelkästä sävystä ei voi päätellä, kirjoittiko viestin ihminen vai kone. Kannattaa selvittää, mistä viesti tulee."
+          },
+          {
+            "id": "perusteet_2_q12",
+            "type": "multiple_choice",
+            "question": "Miksi tekoäly voi olla hyvä apuri sääennusteissa tai sairauksien tunnistamisessa?",
+            "options": [
+              "Se löytää kuvioita valtavista tietomääristä nopeasti",
+              "Se näkee tulevaisuuteen erityisen sääanturin avulla",
+              "Se ei koskaan erehdy, koska se on tietokone eikä ihminen",
+              "Se tuntee jokaisen potilaan ja hänen elämäntilanteensa"
+            ],
+            "correctAnswer": "Se löytää kuvioita valtavista tietomääristä nopeasti",
+            "explanation": "Tekoälyn supervoima on kuvioiden löytäminen suurista datamääristä. Se voi esimerkiksi huomata ihomuutoksen kuvasta tai ennustaa sateen tuhansien mittausten perusteella. Se ei silti ole erehtymätön, joten asiantuntija tarkistaa tulokset."
+          },
+          {
+            "id": "perusteet_2_q13",
+            "type": "drag_drop",
+            "question": "Kenelle antaisit tehtävän?",
+            "draggables": [
+              "Tekstitä tunnin mittainen video",
+              "Päätä, kuka pääsee joukkueeseen",
+              "Etsi 500 valokuvasta ne, joissa on koira",
+              "Lohduta kaveria, jonka lemmikki on sairas"
+            ],
+            "dropZones": [
+              "Tekoäly",
+              "Ihminen"
+            ],
+            "correctAnswer": {
+              "Tekstitä tunnin mittainen video": "Tekoäly",
+              "Päätä, kuka pääsee joukkueeseen": "Ihminen",
+              "Etsi 500 valokuvasta ne, joissa on koira": "Tekoäly",
+              "Lohduta kaveria, jonka lemmikki on sairas": "Ihminen"
+            },
+            "explanation": "Toistuvat ja isot tehtävät sopivat tekoälylle. Päätökset, jotka vaikuttavat ihmisiin, ja aito välittäminen kuuluvat ihmiselle. Tekoäly voi antaa ehdotuksia, mutta ihminen päättää ja kantaa vastuun."
           },
           {
             "id": "perusteet_2_q14",
             "type": "reverse_prompt",
-            "question": "Tekoälyradio sanoo yhtäkkiä iloisella äänellä: \"Jihuu! Olen niin ylpeä teistä, olette loistavia matkustajia!\" Millä promptilla tekoäly saatiin kehumaan autossa olijoita?",
+            "question": "Tekoäly vastasi: \"En ole ihminen, joten en voi oikeasti tuntea jännitystä. Voin kuitenkin kertoa, miksi moni jännittää koetta ja miten jännitystä voi helpottaa.\" Mikä kysymys johti vastaukseen?",
             "options": [
-              "Laske kaikkien matkustajien yhteinen ikä autossa.",
-              "Käyttäydy kuin innostunut ystävä ja kehu meitä.",
-              "Etsi tietoa siitä, miksi ihmiset pitävät kehuista.",
-              "Kerro meille, mitä sana 'ylpeä' oikeasti tarkoittaa."
+              "Kirjoita jännittävä tarina.",
+              "Mikä on jännite sähkössä?",
+              "Jännittääkö sinuakin huominen koe?",
+              "Laske, montako koetta on keväällä."
             ],
-            "correctAnswer": "Käyttäydy kuin innostunut ystävä ja kehu meitä.",
-            "explanation": "Tekoälyllä ei ole oikeita tunteita tai ylpeyttä, mutta kun siltä pyytää promptilla \"käyttäydy kuin innostunut ystävä\", se osaa matkia iloista ja kehuvaa puhetyyliä täydellisesti!"
+            "correctAnswer": "Jännittääkö sinuakin huominen koe?",
+            "explanation": "Hyvin tehty tekoäly kertoo rehellisesti, ettei sillä ole tunteita. Kaikki tekoälyt eivät kuitenkaan tee näin, vaan jotkut on ohjattu esittämään ihmistä. Muista siis: vaikka tekoäly sanoisi \"minuakin jännittää\", se ei oikeasti tunne mitään."
           },
           {
             "id": "perusteet_2_q15",
             "type": "drag_drop",
-            "question": "Tekoäly ei itse tunne iloa, mutta se osaa kirjoittaa iloisen tarinan. Järjestä asiat siihen järjestykseen, miten tekoäly oikeasti oppii asioita ilosta!",
-            "correctAnswer": {
-              "Ihmiset kirjoittavat tekstejä iloisista asioista internetiin": "1. vaihe",
-              "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa": "2. vaihe",
-              "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn": "3. vaihe",
-              "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse": "4. vaihe"
-            },
-            "explanation": "Tekoäly oppii asioita lukemalla ihmisten tuottamaa materiaalia. Se oppii sanojen säännöt todella nopeasti, mutta ei silti koskaan koe itse ilon tunnetta.",
+            "question": "Järjestä, miten chatbot oppii kirjoittamaan ystävällisiä viestejä.",
             "draggables": [
-              "Ihmiset kirjoittavat tekstejä iloisista asioista internetiin",
-              "Tekoäly lukee nämä valtavat tekstimäärät sekunneissa",
-              "Tekoäly huomaa säännön, että 'ilo' liittyy hymyyn",
-              "Tekoäly kirjoittaa pyynnöstä iloisen tarinan ymmärtämättä tunnetta itse"
+              "Ihmiset kirjoittavat nettiin miljoonia ystävällisiä viestejä",
+              "Tekoäly harjoittelee näillä teksteillä",
+              "Tekoäly oppii, millaiset sanat kuuluvat ystävälliseen viestiin",
+              "Tekoäly kirjoittaa ystävällisen viestin tuntematta mitään"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Ihmiset kirjoittavat nettiin miljoonia ystävällisiä viestejä": "1. vaihe",
+              "Tekoäly harjoittelee näillä teksteillä": "2. vaihe",
+              "Tekoäly oppii, millaiset sanat kuuluvat ystävälliseen viestiin": "3. vaihe",
+              "Tekoäly kirjoittaa ystävällisen viestin tuntematta mitään": "4. vaihe"
+            },
+            "explanation": "Tekoäly oppii ihmisten kirjoittamasta tekstistä. Se oppii nopeasti, millaisia sanoja ystävällisessä viestissä käytetään, mutta se ei koe ystävällisyyttä itse."
           }
         ]
       },
@@ -466,230 +567,230 @@ export const categories = [
           {
             "id": "perusteet_3_q1",
             "type": "true_false",
-            "question": "Vaikka tekoäly oppii datasta, se toimii aina ihmisen rakentamien algoritmien ja sääntöjen puitteissa.",
+            "question": "Laskin antaa samalla laskulla aina saman tuloksen, mutta chatbot voi vastata samaan kysymykseen joka kerta eri sanoin.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Tekoälykin on pohjimmiltaan ohjelma. Vaikka se osaa soveltaa datasta oppimaansa, se toimii aina alkuperäisten sääntöjen ja tavoitteiden puitteissa."
+            "explanation": "Laskin vastaa laskuun 7 × 8 aina 56. Chatbot taas valitsee sanoja todennäköisyyksien perusteella, ja valinnoissa on mukana sattumaa. Siksi saman kysymyksen voi esittää uudelleen ja saada erilaisen vastauksen."
           },
           {
             "id": "perusteet_3_q2",
             "type": "multiple_choice",
-            "question": "Autotallin perinteinen robottikäsi on ohjelmoitu siirtämään mutteri laatikkoon tasan metrin päähän. Mitä se tekee, jos laatikko onkin siirretty puoli metriä sivuun?",
+            "question": "Miten tavallinen tietokoneohjelma tietää, mitä tehdä?",
             "options": [
-              "Se etsii laatikon nopeasti kameroiden avulla.",
-              "Se pudottaa mutterin siihen vanhaan paikkaan.",
-              "Se kysyy sinulta heti neuvoa ongelmaan.",
-              "Se kieltäytyy kokonaan tekemästä työtään."
+              "Ohjelmoija on kirjoittanut sille tarkat säännöt",
+              "Se oppii itse jokaisesta käyttökerrasta lisää",
+              "Se hakee joka kerta neuvoja suoraan internetistä",
+              "Se arvaa joka kerta, mikä vaihtoehto on todennäköisin"
             ],
-            "correctAnswer": "Se pudottaa mutterin siihen vanhaan paikkaan.",
-            "explanation": "Tavallinen ohjelma noudattaa vain ja ainoastaan sille annettua sääntöä. Se ei osaa sopeutua yllättäviin muutoksiin, toisin kuin tekoäly!"
+            "correctAnswer": "Ohjelmoija on kirjoittanut sille tarkat säännöt",
+            "explanation": "Tavallinen ohjelma on kuin resepti: ohjelmoija kirjoittaa jokaisen askeleen ja säännön valmiiksi, esimerkiksi \"jos tapahtuu tämä, tee tuo\". Koneoppiva tekoäly taas muodostaa säännöt itse esimerkeistä, ja juuri siksi se voi arvata ja erehtyä."
           },
           {
             "id": "perusteet_3_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Olette ajamassa AI vanilla ja tiellä on yllättäen kaatunut puu. Tavallinen ohjelma, kuten vakionopeudensäädin, vain jatkaisi matkaa samaa vauhtia. Miten tekoälyllä varustettu ohjaus eroaa tässä tilanteessa?",
+            "question": "SKENAARIO: Kaverisi tekee sovellusta, joka tunnistaa käsin kirjoitetut numerot. Hän aikoo kirjoittaa säännöt itse: \"Jos viiva on pystysuora, se on ykkönen.\" Mitä neuvot?",
             "options": [
-              "Se osaa havaita esteen ja jarruttaa ajoissa.",
-              "Se kääntyy heti takaisin kotiin päin.",
-              "Se jatkaa matkaa aivan kuten ennenkin.",
-              "Se sammuttaa moottorin pysyvästi."
+              "Opeta tekoälyä tuhansilla eri ihmisten kirjoittamilla numeroilla.",
+              "Kirjoita kymmenen tarkkaa sääntöä, niin ne toimivat varmasti.",
+              "Luovu, koska käsialaa ei voi tunnistaa tietokoneella ollenkaan.",
+              "Pyydä kaikkia kirjoittamaan numerot täsmälleen samalla tavalla."
             ],
-            "correctAnswer": "Se osaa havaita esteen ja jarruttaa ajoissa.",
-            "explanation": "Tekoäly pystyy havainnoimaan ympäristöään ja reagoimaan uusiin, yllättäviin tilanteisiin. Tavallinen ohjelma tekee sokeasti vain sen yhden ennalta määrätyn asian."
+            "correctAnswer": "Opeta tekoälyä tuhansilla eri ihmisten kirjoittamilla numeroilla.",
+            "explanation": "Jokainen kirjoittaa seiskan vähän eri tavalla, joten käsin kirjoitettavia sääntöjä tarvittaisiin loputtomasti. Sotkuisissa tehtävissä, kuten käsialan, puheen ja kuvien tunnistamisessa, koneoppiminen on ylivoimainen: se oppii vaihtelun itse esimerkeistä."
           },
           {
             "id": "perusteet_3_q4",
             "type": "drag_drop",
-            "question": "Kumpi osaa mitäkin? Yhdistä asiat tavalliseen ohjelmaan tai tekoälyyn.",
+            "question": "Tavallinen ohjelma vai tekoäly?",
             "draggables": [
-              "Toimii vain napista painamalla",
-              "Laskee aina tasan 2+2=4",
-              "Tunnistaa yllättävät liikennemerkit",
-              "Tuottaa aivan uuden satukirjan"
+              "Laskee ostosten hinnat yhteen kassalla",
+              "Muuttaa puheen tekstiksi",
+              "Näyttää kellonajan",
+              "Tunnistaa kasveja valokuvista"
             ],
             "dropZones": [
               "Tavallinen ohjelma",
               "Tekoäly"
             ],
             "correctAnswer": {
-              "Toimii vain napista painamalla": "Tavallinen ohjelma",
-              "Laskee aina tasan 2+2=4": "Tavallinen ohjelma",
-              "Tunnistaa yllättävät liikennemerkit": "Tekoäly",
-              "Tuottaa aivan uuden satukirjan": "Tekoäly"
+              "Laskee ostosten hinnat yhteen kassalla": "Tavallinen ohjelma",
+              "Muuttaa puheen tekstiksi": "Tekoäly",
+              "Näyttää kellonajan": "Tavallinen ohjelma",
+              "Tunnistaa kasveja valokuvista": "Tekoäly"
             },
-            "explanation": "Tavallinen ohjelma on kuin taskulaskin tai valokatkaisija. Tekoäly on paljon monimutkaisempi: se osaa tunnistaa kuvia ja jopa luoda täysin uutta sisältöä!"
+            "explanation": "Tarkat ja aina samanlaiset tehtävät hoituvat tavallisella ohjelmalla. Kun syöte vaihtelee joka kerta, kuten puhe tai valokuvat, tarvitaan tekoälyä, joka on oppinut vaihtelun esimerkeistä."
           },
           {
             "id": "perusteet_3_q5",
             "type": "drag_drop",
-            "question": "Tavallinen koodi seuraa sääntöjä tiukasti rivi riviltä. Järjestä perinteisen sähköikkunan toiminta alusta loppuun.",
-            "correctAnswer": {
-              "Ihminen painaa auton ikkunan nappia.": "1. vaihe",
-              "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'": "2. vaihe",
-              "Ikkunan sähkömoottori käynnistyy.": "3. vaihe",
-              "Ikkuna aukeaa nätisti alas asti.": "4. vaihe"
-            },
-            "explanation": "Tavallinen tietokoneohjelma koostuu hyvin yksinkertaisista \"jos tapahtuu A, tee B\" -säännöistä. Se suorittaa ne aina prikulleen samassa järjestyksessä.",
+            "question": "Järjestä, miten tavallinen ohjelma toimii, kun auton sähköikkunan nappia painetaan.",
             "draggables": [
-              "Ihminen painaa auton ikkunan nappia.",
-              "Koodi lukee säännön: 'Jos nappia painetaan, anna sähköä moottorille.'",
-              "Ikkunan sähkömoottori käynnistyy.",
-              "Ikkuna aukeaa nätisti alas asti."
+              "Kuski painaa ikkunan nappia",
+              "Ohjelma tarkistaa säännön: jos nappi on pohjassa, anna moottorille virtaa",
+              "Ikkunan moottori käynnistyy",
+              "Kun nappi vapautetaan, sääntö pysäyttää moottorin"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Kuski painaa ikkunan nappia": "1. vaihe",
+              "Ohjelma tarkistaa säännön: jos nappi on pohjassa, anna moottorille virtaa": "2. vaihe",
+              "Ikkunan moottori käynnistyy": "3. vaihe",
+              "Kun nappi vapautetaan, sääntö pysäyttää moottorin": "4. vaihe"
+            },
+            "explanation": "Tavallinen ohjelma koostuu jos–niin-säännöistä, jotka ohjelmoija on kirjoittanut etukäteen. Se toimii joka kerta täsmälleen samalla tavalla, ja juuri siksi se sopii hyvin tällaisiin tehtäviin."
           },
           {
             "id": "perusteet_3_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä AI vanin toiminnoista vaatii ehdottomasti tekoälyä, eikä vain tavallista ohjelmointia?",
+            "question": "Mikä näistä AI vanin toiminnoista tarvitsee tekoälyä?",
             "options": [
-              "Auton radio, joka soittaa aina tiettyä kanavaa.",
-              "Peruutuskamera, joka näyttää pelkän kuvan taakse.",
-              "Vilkku, joka naksuu tasan sekunnin välein.",
-              "Kamera, joka tunnistaa tiellä juoksevan ketun."
+              "Peruutustutka, joka piippaa nopeammin seinän lähestyessä",
+              "Valot, jotka syttyvät, kun ulkona hämärtää",
+              "Kamera, joka huomaa tielle juoksevan ketun",
+              "Tuulilasinpyyhkijät, jotka nopeutuvat sateen voimistuessa"
             ],
-            "correctAnswer": "Kamera, joka tunnistaa tiellä juoksevan ketun.",
-            "explanation": "Eläimen tai esteen tunnistaminen oikeassa elämässä vaatii tekoälyä, joka kykenee tulkitsemaan näkemäänsä. Muut ovat hyvin yksinkertaisia sääntöohjelmia."
+            "correctAnswer": "Kamera, joka huomaa tielle juoksevan ketun",
+            "explanation": "Tutka, hämäräanturi ja sadeanturi mittaavat yhtä asiaa ja toimivat yksinkertaisen säännön mukaan, vaikka ne vaikuttavat fiksuilta. Ketun tunnistaminen kuvasta on paljon vaikeampaa: kettu voi olla missä asennossa tahansa ja valaistus vaihtelee. Siihen tarvitaan konenäköä eli tekoälyä."
           },
           {
             "id": "perusteet_3_q7",
             "type": "reverse_prompt",
-            "question": "Auton näyttöön ilmestyy täysin uusi reittikartta, joka kiertää juuri alkaneen kolariruuhkan. Millä kehotteella (promptilla) tekoäly saatiin reagoimaan yllättävään tilanteeseen?",
+            "question": "Tekoäly vastasi: \"Tässä kolme nimeä uudelle pelillesi: 1. Kipinäkisa 2. Turbotalli 3. Robottiralli.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Näytä meille aina se kaikista suorin reitti kaupunkiin.",
-              "Etsi aina uusi ja turvallinen reitti, jos tiellä on este.",
-              "Piirrä kartta paperille punaisella kynällä.",
-              "Sammuta navigaattori kokonaan aina, kun on ruuhkaa."
+              "Keksi kolme nimeä autoaiheiselle pelille.",
+              "Mikä on maailman suosituin autopeli juuri nyt?",
+              "Kerro, montako autopeliä maailmassa on olemassa.",
+              "Kirjoita säännöt peliin, jossa ajetaan autoilla."
             ],
-            "correctAnswer": "Etsi aina uusi ja turvallinen reitti, jos tiellä on este.",
-            "explanation": "Tekoäly voidaan ohjelmoida sopeutumaan. Antamalla sille ohje etsiä uusi reitti vaaran sattuessa, se pystyy tuottamaan lennosta täysin uuden suunnitelman!"
+            "correctAnswer": "Keksi kolme nimeä autoaiheiselle pelille.",
+            "explanation": "Uusien ideoiden keksiminen on generatiivisen tekoälyn tehtävä. Tavallinen ohjelma ei osaisi tätä, koska kukaan ei ole kirjoittanut sille valmista nimilistaa. Jos kysyt uudestaan, saat todennäköisesti eri nimet."
           },
           {
             "id": "perusteet_3_q8",
             "type": "true_false",
-            "question": "Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvitaan tekoälyä, sillä tavallinen cd-soitin soittaa vain valmiita kappaleita.",
+            "question": "Kaikki laitteet, jotka toimivat itsestään, käyttävät tekoälyä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Kyllä! Tavallinen soitin soittaa vain ne kappaleet, jotka on jo valmiiksi tehty. Uusien laulujen keksimiseen ja luomiseen tyhjästä tarvitaan tekoälyä."
+            "correctAnswer": "Väärin",
+            "explanation": "Termostaatti säätää lämpöä ja automaattiovi aukeaa itsestään, mutta kumpikin noudattaa yhtä yksinkertaista sääntöä: jos lämpötila laskee, lämmitä; jos joku on ovella, avaa. Automaattinen ei siis tarkoita tekoälyä."
           },
           {
             "id": "perusteet_3_q9",
             "type": "multiple_choice",
-            "question": "Miten perinteinen autotallissa pelattava tietokonepeli eroaa nykyaikaisesta tekoälyvastustajasta?",
+            "question": "Peleissä tietokonevastustajaa kutsutaan usein \"tekoälyksi\". Miten useimmat pelien vastustajat oikeasti toimivat?",
             "options": [
-              "Tavallinen peli oppii virheistään jatkuvasti lisää.",
-              "Tavallinen peli toimii aina samojen sääntöjen mukaan.",
-              "Tavallinen peli keksii itsestään täysin uusia kenttiä.",
-              "Tavallinen peli osaa oikeasti lukea ihmisen ajatuksia."
+              "Kehittäjät ovat kirjoittaneet niille säännöt valmiiksi",
+              "Ne oppivat jokaisesta pelikerrasta lisää sinua vastaan",
+              "Ne lukevat ajatuksiasi peliohjaimen antureiden avulla",
+              "Niitä ohjaa salaa toinen pelaaja jossain toisessa maassa"
             ],
-            "correctAnswer": "Tavallinen peli toimii aina samojen sääntöjen mukaan.",
-            "explanation": "Tavallisen pelin tietokonevastustaja liikkuu aina samojen sääntöjen mukaan. Tekoäly taas osaa oppia pelityylistäsi ja voi yllättää sinut!"
+            "correctAnswer": "Kehittäjät ovat kirjoittaneet niille säännöt valmiiksi",
+            "explanation": "Pelien \"tekoäly\" on yleensä taitavasti tehtyä tavallista ohjelmointia: jos pelaaja on lähellä, hyökkää; jos terveys on vähissä, pakene. Sana tekoäly tarkoittaa peleissä vähän eri asiaa kuin koneoppiminen, vaikka joitakin pelihahmoja onkin koulutettu koneoppimisella."
           },
           {
             "id": "perusteet_3_q10",
             "type": "drag_drop",
-            "question": "Kumpi näistä kyseessä on? Raahaa väitteet oikean ohjelman päälle.",
+            "question": "Yhdistä ominaisuus oikeaan ohjelmaan.",
             "draggables": [
-              "Toimii vain ennalta annettujen sääntöjen mukaan",
-              "Ei osaa reagoida mihinkään uuteen tai outoon",
-              "Voi luoda aivan uuden ja hienon kuvan pyynnöstä",
-              "Oppii ja sopeutuu jatkuvasti uusiin asioihin"
+              "Säännöt kirjoittaa ohjelmoija",
+              "Säännöt muodostuvat esimerkeistä",
+              "Toimii aina täsmälleen samalla tavalla",
+              "Voi erehtyä, jos tilanne on outo"
             ],
             "dropZones": [
-              "Tekoäly",
-              "Tavallinen ohjelma"
+              "Tavallinen ohjelma",
+              "Koneoppiva tekoäly"
             ],
             "correctAnswer": {
-              "Toimii vain ennalta annettujen sääntöjen mukaan": "Tavallinen ohjelma",
-              "Ei osaa reagoida mihinkään uuteen tai outoon": "Tavallinen ohjelma",
-              "Voi luoda aivan uuden ja hienon kuvan pyynnöstä": "Tekoäly",
-              "Oppii ja sopeutuu jatkuvasti uusiin asioihin": "Tekoäly"
+              "Säännöt kirjoittaa ohjelmoija": "Tavallinen ohjelma",
+              "Säännöt muodostuvat esimerkeistä": "Koneoppiva tekoäly",
+              "Toimii aina täsmälleen samalla tavalla": "Tavallinen ohjelma",
+              "Voi erehtyä, jos tilanne on outo": "Koneoppiva tekoäly"
             },
-            "explanation": "Tavalliset ohjelmat ovat luotettavia, mutta joustamattomia. Tekoäly on paljon joustavampi, sillä se voi oppia ja luoda uutta tietoa."
+            "explanation": "Tämä on tärkein ero: tavallisessa ohjelmassa ihminen kirjoittaa säännöt, koneoppimisessa ne opitaan esimerkeistä. Tavallinen ohjelma on ennustettava. Koneoppiva tekoäly on joustavampi, mutta se voi erehtyä tilanteissa, jotka poikkeavat sen harjoitusesimerkeistä."
           },
           {
             "id": "perusteet_3_q11",
             "type": "scenario",
-            "question": "SKENAARIO: Kirjoitat autotallin sähkölukolle tunnusluvun väärin. Tavallinen ohjelma hylkää luvun heti. Miten edistynyt älylukko (jossa on tekoäly) voisi toimia samassa tilanteessa, jotta pääsisit sisään?",
+            "question": "SKENAARIO: Teet kerholle roskapostisuodatinta. Huijarit kiertävät sääntösi \"estä viestit, joissa on sana voitit\" kirjoittamalla \"V0itit\". Mitä teet?",
             "options": [
-              "Se tunnistaa kasvosi kamerasta ja avaa oven silti.",
-              "Se rikkoo oven lukon suurella voimalla auki.",
-              "Se hälyttää heti kovaäänisesti palokunnan paikalle.",
-              "Se sammuttaa rangaistuksena autotallin sähköt."
+              "Opetan suodattimen tunnistamaan huijauksia tuhansista esimerkeistä.",
+              "Lisään sääntöön käsin kaikki sanan voitit mahdolliset kirjoitusasut.",
+              "Estän kaikki viestit, joissa on numeroita, myös kaverien viestit.",
+              "Luovun suodattimesta, koska huijareita ei voi mitenkään pysäyttää."
             ],
-            "correctAnswer": "Se tunnistaa kasvosi kamerasta ja avaa oven silti.",
-            "explanation": "Tekoäly osaa yhdistää useita eri tietoja (kuten kuvaa ja salasanoja) tehdäkseen älykkäitä päätöksiä, kun taas tavallinen lukko ymmärtää vain pelkät numerot."
+            "correctAnswer": "Opetan suodattimen tunnistamaan huijauksia tuhansista esimerkeistä.",
+            "explanation": "Huijarit keksivät jatkuvasti uusia kiertoteitä, joten käsin kirjoitetut säännöt jäävät aina jälkeen. Koneoppinut suodatin tunnistaa huijauksen monesta piirteestä yhtä aikaa: lähettäjästä, sävystä, linkeistä ja sanoista. Siksi lähes kaikki sähköpostipalvelut käyttävät tekoälyä roskapostin torjuntaan."
           },
           {
             "id": "perusteet_3_q12",
             "type": "spot_the_ai",
-            "question": "Kolme näistä asioista on tavallisen koodin rutiineja, mutta yksi on uuden luomista tekoälyllä. Mikä?",
+            "question": "Mikä näistä tuottaa jotain täysin uutta tekoälyn avulla?",
             "options": [
-              "Laskin-ohjelma, joka ilmoittaa että 5 x 5 on aina 25.",
-              "Sähköpostiohjelma, joka lähettää jo valmiin viestin eteenpäin.",
-              "Työkalu, joka kirjoittaa ohjeestasi uuden runon.",
-              "Herätyskello, joka soi joka aamu tasan kello kahdeksan."
+              "Sovellus, joka säveltää uuden kappaleen kuvauksestasi",
+              "Musiikkisovellus, joka soittaa tallennetun kappaleen",
+              "Soittolista, joka sekoittaa kappaleiden järjestyksen",
+              "Taajuuskorjain, joka lisää kappaleeseen enemmän bassoa"
             ],
-            "correctAnswer": "Työkalu, joka kirjoittaa ohjeestasi uuden runon.",
-            "explanation": "Aivan uuden, ennen olemassa olemattoman sisällön (kuten tekstin tai runon) tuottaminen on tyypillinen edistyneen tekoälyn tehtävä!"
+            "correctAnswer": "Sovellus, joka säveltää uuden kappaleen kuvauksestasi",
+            "explanation": "Kappaleen säveltäminen kuvauksesta on generatiivista tekoälyä. Tallenteen soittaminen, sekoittaminen ja basson lisääminen ovat tavallisen ohjelman tarkkoja tehtäviä, joissa ei synny mitään uutta."
           },
           {
             "id": "perusteet_3_q13",
             "type": "drag_drop",
-            "question": "Kuinka edistynyt tekoälynavigaattori tekee päätöksiä vaiheittain? Aseta vaiheet oikeaan järjestykseen!",
-            "correctAnswer": {
-              "Kerää dataa (lukee karttoja ja liikenneruuhkia)": "1. vaihe",
-              "Analysoi (yhdistelee sääntöjä ja päättelee)": "2. vaihe",
-              "Tekee päätöksen (antaa kuljettajalle uuden reitin)": "3. vaihe"
-            },
-            "explanation": "Edistynyt tekoälytoiminto etenee aina tiedonkeruusta (Data) analysointiin (Päättely) ja lopulta varsinaiseen toimenpiteeseen (Päätös).",
+            "question": "Järjestä, miten auton kamera tunnistaa stop-merkin.",
             "draggables": [
-              "Kerää dataa (lukee karttoja ja liikenneruuhkia)",
-              "Analysoi (yhdistelee sääntöjä ja päättelee)",
-              "Tekee päätöksen (antaa kuljettajalle uuden reitin)"
+              "Kamera ottaa kuvan tiestä",
+              "Tekoäly arvioi, mitä kuvassa todennäköisimmin on",
+              "Auto ilmoittaa kuskille: stop-merkki edessä"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Kamera ottaa kuvan tiestä": "1. vaihe",
+              "Tekoäly arvioi, mitä kuvassa todennäköisimmin on": "2. vaihe",
+              "Auto ilmoittaa kuskille: stop-merkki edessä": "3. vaihe"
+            },
+            "explanation": "Tekoälyjärjestelmä toimii usein näin: havainto (kuva tai ääni), tulkinta (mitä tämä todennäköisesti on?) ja toiminta. Huomaa sana todennäköisesti: tekoäly ei ole koskaan täysin varma, ja siksi kuski pitää silti katseen tiessä."
           },
           {
             "id": "perusteet_3_q14",
             "type": "multiple_choice",
-            "question": "Jos tekoäly kerran on niin fiksu ja mukautuva, miksi autossa on edelleen myös täysin tavallisia ohjelmia (kuten jarruvalojen ohjaus)?",
+            "question": "Jos tekoäly on niin fiksu, miksi auton jarruvaloja ohjaa silti tavallinen ohjelma?",
             "options": [
-              "Koska tavalliset ohjelmat ovat nopeita ja aina sataprosenttisen varmoja.",
-              "Koska tekoäly unohtaa todella usein sytyttää tärkeät valot.",
-              "Koska tekoälykoodi on aivan liian iso mahtuakseen autoon.",
-              "Koska tavalliset ohjelmat ovat aivan uusi ja hieno keksintö."
+              "Tavallinen ohjelma toimii joka kerta täsmälleen samoin",
+              "Tekoäly ei osaa ohjata auton valoja eikä muita laitteita",
+              "Tekoäly on liian uusi keksintö käytettäväksi autoissa",
+              "Tavallinen ohjelma on aina fiksumpi kuin mikään tekoäly"
             ],
-            "correctAnswer": "Koska tavalliset ohjelmat ovat nopeita ja aina sataprosenttisen varmoja.",
-            "explanation": "Yksinkertaisiin, tuttuihin ja toistuviin tehtäviin (kuten jarruvalon sytyttämiseen) ei tarvita monimutkaista tekoälyä. Tavallinen ohjelma tekee ne nopeimmin ja turvallisimmin!"
+            "correctAnswer": "Tavallinen ohjelma toimii joka kerta täsmälleen samoin",
+            "explanation": "Kun tehtävä on yksinkertainen ja virhe olisi vaarallinen, valitaan ennustettava tavallinen ohjelma. Tekoälyä käytetään silloin, kun tehtävää ei voi kuvata yksinkertaisilla säännöillä. Hyvä insinööri valitsee työhön sopivan työkalun."
           },
           {
             "id": "perusteet_3_q15",
             "type": "reverse_prompt",
-            "question": "Tekoälyradio näkee kameran avulla asvaltissa valtavan reiän ja sanoo uuden lauseen: \"Varo, hidasta hieman, edessä on kuoppa!\" Mikä alkuperäinen sääntö (prompti) mahdollisti tämän uuden yllättävän varoituksen?",
+            "question": "Tekoäly vastasi: \"Tavalliselle ohjelmalle ohjelmoija kirjoittaa säännöt. Koneoppiva tekoäly oppii säännöt itse esimerkeistä.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Soita radiosta ainoastaan oikein kovaäänistä musiikkia.",
-              "Tarkkaile aina tietä ja varoita kuskia yllättävistä vaaroista.",
-              "Kerro kuskille yksi hauska vitsi joka kymmenes kilometri.",
-              "Mittaa tarkasti, kuinka leveä auton vasen rengas on."
+              "Selitä kahdella virkkeellä tekoälyn ja tavallisen ohjelman ero.",
+              "Kirjoita tietokoneohjelma, joka laskee kaksi lukua yhteen.",
+              "Kerro kahdella virkkeellä, kuka keksi ensimmäisen tietokoneen.",
+              "Keksi kahden virkkeen tarina ohjelmoijasta, joka rakentaa robotin."
             ],
-            "correctAnswer": "Tarkkaile aina tietä ja varoita kuskia yllättävistä vaaroista.",
-            "explanation": "Kun tekoälylle annetaan joustava ohje \"varoittaa vaaroista\", sen ohjelmointi ei rajoitu vain tiettyihin sanoihin, vaan se osaa keksiä tilanteeseen parhaiten sopivan varoituksen!"
+            "correctAnswer": "Selitä kahdella virkkeellä tekoälyn ja tavallisen ohjelman ero.",
+            "explanation": "Hyvä kehote kertoo, mitä halutaan (ero) ja missä muodossa (kaksi virkettä). Vastaus on samalla tämän osion tärkein asia: tavallisen ohjelman säännöt kirjoittaa ihminen, tekoäly oppii ne esimerkeistä."
           }
         ]
       },
@@ -700,230 +801,230 @@ export const categories = [
           {
             "id": "perusteet_4_q1",
             "type": "true_false",
-            "question": "Vaikka tekoäly voi antaa ohjeet renkaan vaihtoon, siltä puuttuu kyky ymmärtää fyysistä maailmaa ja kädet työn tekemiseen.",
+            "question": "Jos tekoäly kertoo asian varmalla äänellä, se on aina totta.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Täysin oikein! Tekoäly voi kertoa sinulle parhaat ohjeet, mutta siltä puuttuu kyky ymmärtää fyysistä maailmaa sekä oikeat kädet työn tekemiseen."
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly voi keksiä vääriä faktoja ja kertoa ne yhtä varmasti kuin oikeat. Tätä kutsutaan hallusinoinniksi. Se johtuu siitä, että kielimalli tuottaa todennäköiseltä kuulostavaa tekstiä eikä tarkista, onko teksti totta."
           },
           {
             "id": "perusteet_4_q2",
             "type": "multiple_choice",
-            "question": "Auton tekoälyä pyydetään pakkaamaan robottikädellä peräkontti täyteen vesimeloneja. Mitä maalaisjärkeä tekoälyltä puuttuu tässä tehtävässä?",
+            "question": "Kysyt tekoälyltä eilisen jääkiekko-ottelun tulosta. Miksi vastaus voi olla väärin?",
             "options": [
-              "Se ei tiedä, montako melonia autoon ylipäätään mahtuu.",
-              "Se ei tajua, että melonit menevät muusiksi, jos ne heittää perälle.",
-              "Se ei osaa laskea melonien tarkkaa kilopainoa.",
-              "Se ei pysty löytämään kartalta yhtäkään ruokakauppaa."
+              "Sen tiedot päättyvät siihen, kun se koulutettiin",
+              "Tekoäly ei ymmärrä urheilusta tai sen säännöistä mitään",
+              "Tekoäly vastaa urheilukysymyksiin väärin tahallaan",
+              "Vastaus ei voi olla väärin, koska tekoäly tietää kaiken"
             ],
-            "correctAnswer": "Se ei tajua, että melonit menevät muusiksi, jos ne heittää perälle.",
-            "explanation": "Tekoäly on taitava laskemaan tilavuuksia, mutta siltä puuttuu ihmisen maalaisjärki. Se ei ymmärrä fyysisten asioiden, kuten hedelmien, särkymistä!"
+            "correctAnswer": "Sen tiedot päättyvät siihen, kun se koulutettiin",
+            "explanation": "Tekoälyn tiedot ovat peräisin datasta, jolla se on koulutettu, joten tiedoilla on viimeinen päivämäärä. Jotkin chatbotit osaavat hakea tietoa netistä, mutta ilman hakua tekoäly voi arvata ja keksiä tuloksen."
           },
           {
             "id": "perusteet_4_q3",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin shakkitekoäly on juuri voittanut sinut vaikeassa shakkipelissä. Pyydät sitä seuraavaksi kertomaan, miten potkaistaan hyvä rangaistuspotku jalkapallossa. Miksi se ei todennäköisesti onnistu antamaan hyvää vastausta?",
+            "question": "SKENAARIO: Teet esitelmää ilveksistä. Tekoäly kertoo: \"Ilves voi juosta 120 km/h.\" Mitä teet?",
             "options": [
-              "Shakkiohjelma on tehty vain yhteen lajiin, eikä ymmärrä jalkapallosta tai fyysisestä liikkumisesta mitään.",
-              "Se on liian väsynyt shakkipelin voittamisesta kertoakseen muita ohjeita.",
-              "Se pelkää, että olet jalkapallossa sitä paljon parempi ja kieltäytyy.",
-              "Shakkiohjelma haluaa puhua kanssasi ainoastaan sisätilojen peleistä."
+              "Tarkistan luvun luotettavasta lähteestä ennen käyttöä.",
+              "Kirjoitan luvun esitelmään, koska tekoäly tietää asiat.",
+              "Kysyn uudestaan, ja jos vastaus on sama, se on totta.",
+              "Poistan koko esitelmän ja valitsen kokonaan uuden aiheen."
             ],
-            "correctAnswer": "Shakkiohjelma on tehty vain yhteen lajiin, eikä ymmärrä jalkapallosta tai fyysisestä liikkumisesta mitään.",
-            "explanation": "Tekoäly on todellinen mestari yleensä vain yhdessä ainoassa asiassa. Fiksu shakkikone on täysin neuvoton muiden asioiden ja fyysisen maailman edessä."
+            "correctAnswer": "Tarkistan luvun luotettavasta lähteestä ennen käyttöä.",
+            "explanation": "Ilves ei juokse lähellekään 120 km/h:ia, sillä nopeimmaksi maaeläimeksi tunnettu gepardikin yltää noin 100 km/h:iin. Tekoäly voi sekoittaa tietoja ja keksiä lukuja. Saman kysymyksen toistaminen ei auta, koska tekoäly voi toistaa saman virheen. Tarkista tärkeät faktat aina toisesta, luotettavasta lähteestä."
           },
           {
             "id": "perusteet_4_q4",
             "type": "drag_drop",
-            "question": "Kumpi selviää näistä asioista paremmin autotallissa? Yhdistä tehtävät oikealle tekijälle.",
+            "question": "Onko tehtävä tekoälylle helppo vai vaikea?",
             "draggables": [
-              "Tunnista tuhansia kuvia autoista sekunnissa",
-              "Siivoa lattialle yllättäen kaatunut öljytahra",
-              "Laske reitti miljoonan vaihtoehdon joukosta",
-              "Huomaa, että tallissa haisee palanut kumi"
+              "Voittaa shakin maailmanmestari",
+              "Taitella pyykit siististi kaappiin",
+              "Kääntää teksti kiinaksi",
+              "Kävellä liukkaalla jäällä kaatumatta"
             ],
             "dropZones": [
-              "Tekoäly",
-              "Ihminen"
+              "Helppo tekoälylle",
+              "Vaikea tekoälylle"
             ],
             "correctAnswer": {
-              "Tunnista tuhansia kuvia autoista sekunnissa": "Tekoäly",
-              "Siivoa lattialle yllättäen kaatunut öljytahra": "Ihminen",
-              "Laske reitti miljoonan vaihtoehdon joukosta": "Tekoäly",
-              "Huomaa, että tallissa haisee palanut kumi": "Ihminen"
+              "Voittaa shakin maailmanmestari": "Helppo tekoälylle",
+              "Taitella pyykit siististi kaappiin": "Vaikea tekoälylle",
+              "Kääntää teksti kiinaksi": "Helppo tekoälylle",
+              "Kävellä liukkaalla jäällä kaatumatta": "Vaikea tekoälylle"
             },
-            "explanation": "Tekoäly on ylivoimainen mestari käsittelemään nopeasti valtavia määriä digitaalista tietoa, mutta vain ihmisellä on aistit, maalaisjärki ja kyky toimia oikeassa maailmassa."
+            "explanation": "Ihmiselle helpot arkiset taidot, kuten pyykkien taittelu, ovat roboteille yllättävän vaikeita, koska oikea maailma on täynnä yllätyksiä: kangas rypistyy, valo vaihtuu ja jää liukastuu. Tätä kutsutaan Moravecin paradoksiksi. Shakki ja kääntäminen taas tapahtuvat kokonaan tietokoneen sisällä."
           },
           {
             "id": "perusteet_4_q5",
             "type": "drag_drop",
-            "question": "Järjestä tapahtumat, kun robottikättä ohjaava tekoäly yrittää pestä AI vanin tuulilasin, mutta siltä puuttuu ihmisen maalaisjärki!",
-            "correctAnswer": {
-              "Tekoäly saa koodarilta ohjeen: 'Pese lasi täydellisen puhtaaksi.'": "1. vaihe",
-              "Tekoäly alkaa hangata tuulilasia pesusienellä.": "2. vaihe",
-              "Tekoäly huomaa kamerallaan, että yksi likatahra on hyvin tiukassa.": "3. vaihe",
-              "Tekoäly hankaa tahraa niin lujaa, että koko auton ikkuna särkyy.": "4. vaihe"
-            },
-            "explanation": "Tekoäly pyrkii suorittamaan sille annetun tavoitteen hinnalla millä hyvänsä. Siltä puuttuu maalaisjärki ymmärtää, että fyysiset esineet rikkoutuvat liiallisesta voimasta.",
+            "question": "Järjestä, miten tekoälyn virhe päätyy koulutehtävään.",
             "draggables": [
-              "Tekoäly saa koodarilta ohjeen: 'Pese lasi täydellisen puhtaaksi.'",
-              "Tekoäly alkaa hangata tuulilasia pesusienellä.",
-              "Tekoäly huomaa kamerallaan, että yksi likatahra on hyvin tiukassa.",
-              "Tekoäly hankaa tahraa niin lujaa, että koko auton ikkuna särkyy."
+              "Oppilas kysyy tekoälyltä faktan kirjailijasta",
+              "Tekoäly keksii uskottavan mutta väärän syntymävuoden",
+              "Oppilas kopioi vastauksen tarkistamatta",
+              "Opettaja huomaa virheen esitelmässä"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Oppilas kysyy tekoälyltä faktan kirjailijasta": "1. vaihe",
+              "Tekoäly keksii uskottavan mutta väärän syntymävuoden": "2. vaihe",
+              "Oppilas kopioi vastauksen tarkistamatta": "3. vaihe",
+              "Opettaja huomaa virheen esitelmässä": "4. vaihe"
+            },
+            "explanation": "Virhe syntyi tekoälyssä, mutta se pääsi läpi vasta, kun kukaan ei tarkistanut sitä. Kohtaan 3 sinä voit itse vaikuttaa: tarkista tekoälyn kertomat faktat, etenkin luvut, päivämäärät ja nimet."
           },
           {
             "id": "perusteet_4_q6",
             "type": "spot_the_ai",
-            "question": "Kuka näistä apukuskeista ehdottaa reittiä täysin ilman ihmisen maalaisjärkeä? Etsi vastaus, joka ei toimi oikeassa fyysisessä maailmassa.",
+            "question": "Chatbot kertoi neljä asiaa, ja yksi niistä on keksitty. Missä tekoälyn hallusinaatio todennäköisimmin piilee?",
             "options": [
-              "'Ajetaan tuota pientä hiekkatietä pitkin, se näyttää olevan lyhyempi.'",
-              "'Pysähdytään tähän bussipysäkille, renkaasta taitaa kuulua outoa ääntä.'",
-              "'Ajetaan suoraan tuon syvän järven läpi, koska kartalla viiva menee siitä.'",
-              "'Kierretään vähän kaupungin kautta, siellä voi olla hyvä jäätelökioski auki.'"
+              "\"Anna Virtanen voitti Finlandia-palkinnon vuonna 2015.\"",
+              "\"Helsinki on ollut Suomen pääkaupunki vuodesta 1812.\"",
+              "\"Vesi kiehuu merenpinnan tasolla sadassa asteessa.\"",
+              "\"Kuu kiertää Maan ympäri suunnilleen kuukaudessa.\""
             ],
-            "correctAnswer": "'Ajetaan suoraan tuon syvän järven läpi, koska kartalla viiva menee siitä.'",
-            "explanation": "Tekoäly katsoo vain karttadataa ja numeroita ymmärtämättä todellisuutta. Ihminen tajuaa heti, ettei normaali auto voi uida syvän järven poikki!"
+            "correctAnswer": "\"Anna Virtanen voitti Finlandia-palkinnon vuonna 2015.\"",
+            "explanation": "Tekoäly keksii asioita useimmin harvinaisissa yksityiskohdissa: nimissä, vuosiluvuissa, palkinnoissa ja lähteissä. Yleisesti tunnettuja asioita, kuten veden kiehumispistettä, se on nähnyt harjoitusdatassa tuhansia kertoja. Finlandia-palkinnon voitti vuonna 2015 Laura Lindstedt, ja Anna Virtanen on keksitty nimi. Tarkista siis erityisesti nimet ja luvut."
           },
           {
             "id": "perusteet_4_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa tällaisen aivan pöhkön ohjeen: \"Nosta auto ilmaan, käännä se ylösalaisin ja ravistele kovaa, jotta hiekat putoavat jalkatiloista.\" Mikä prompti sai koneen vastaamaan näin ilman maalaisjärkeä?",
+            "question": "Tekoäly vastasi: \"Windowsin asentaminen aloitetaan lataamalla asennustiedosto USB-tikulle.\" Kysyjä halusi kuitenkin tietää, miten auton rikkoutunut sivuikkuna vaihdetaan. Millä kehotteella vastaus saatiin?",
             "options": [
-              "Miten voin siivota automme sisältä mahdollisimman nopeasti?",
-              "Voitko soittaa meille iloista siivousmusiikkia radiosta?",
-              "Miten auton iso ja painava moottori oikein korjataan?",
-              "Etsi meille kartalta reitti lähimpään autopesulaan."
+              "Miten ikkunat asennetaan?",
+              "Miten vaihdan auton sivuikkunan?",
+              "Mikä on Windows-ohjelma?",
+              "Miten auton ikkuna pestään?"
             ],
-            "correctAnswer": "Miten voin siivota automme sisältä mahdollisimman nopeasti?",
-            "explanation": "Tekoäly ymmärtää sanan \"siivota\", mutta siltä puuttuu maalaisjärki tajuta, ettei isoa perheautoa voi poimia käteen ja ravistaa kuten pientä leluautoa!"
+            "correctAnswer": "Miten ikkunat asennetaan?",
+            "explanation": "Kehote \"Miten ikkunat asennetaan?\" oli liian lyhyt. Tekoäly ei tiennyt, että kyse oli autosta, ja tulkitsi ikkunat Windows-käyttöjärjestelmäksi (windows = ikkunat). Tekoäly ei tiedä tilannettasi, ellet kerro sitä. Mitä enemmän taustaa annat, sitä parempi vastaus."
           },
           {
             "id": "perusteet_4_q8",
             "type": "true_false",
-            "question": "Tekoälyllä ei ole kieltä tai aisteja, joten se ei voi kokea tai ymmärtää fyysisen maailman makuja ja hajuja.",
+            "question": "Jos tekoäly on opetettu tunnistamaan liikennemerkkejä vain kesäkuvilla, se voi erehtyä talvella, kun merkit ovat lumen peitossa.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Tekoäly on tietokoneohjelma, jolla ei ole aisteja. Se ei voi kokea fyysisen maailman makuja ja hajuja, kuten ihminen voi."
+            "explanation": "Tekoäly osaa parhaiten sitä, mitä se on harjoitellut. Jos harjoituskuvissa ei ole lunta, pimeää tai sumua, tekoäly voi olla ymmällään juuri niissä. Siksi itseajavia autoja testataan kaikissa sääolosuhteissa, Suomessakin talvella!"
           },
           {
             "id": "perusteet_4_q9",
             "type": "multiple_choice",
-            "question": "AI vanin erikoistekoäly on ohjelmoitu tunnistamaan täydellisesti ainoastaan maailman kaikki liikennemerkit. Mitä tapahtuu, jos näytät sen kameralle ison karhun kuvan?",
+            "question": "Liikennemerkkejä tunnistava tekoäly näkee kuvan karhusta. Mitä se todennäköisesti tekee?",
             "options": [
-              "Se kertoo sinulle nopeasti karhun nimen, lajin ja iän.",
-              "Se sanoo auton kaiuttimista vihaisen 'Murr!' -äänen.",
-              "Se ei tunnista eläintä ja saattaa yrittää luokitella karhun liikennemerkiksi.",
-              "Se kehottaa sinua välittömästi silittämään karhun pehmeää turkkia."
+              "Se väittää karhua jonkinlaiseksi liikennemerkiksi",
+              "Se kertoo heti, että kuvassa on iso ruskea karhu metsässä",
+              "Se kieltäytyy vastaamasta, koska tietää, ettei osaa",
+              "Se hälyttää metsänvartijan paikalle karhun luokse"
             ],
-            "correctAnswer": "Se ei tunnista eläintä ja saattaa yrittää luokitella karhun liikennemerkiksi.",
-            "explanation": "Tekoäly on usein mestari vain siinä yhdessä ainoassa asiassa, mihin se on tehty. Liikennemerkkejä tunnistava kone ei ymmärrä metsäneläimistä yhtään mitään!"
+            "correctAnswer": "Se väittää karhua jonkinlaiseksi liikennemerkiksi",
+            "explanation": "Kapea tekoäly osaa vain sen, mihin se on koulutettu. Se ei tiedä, mitä se ei tiedä: liikennemerkkien tunnistaja yrittää sovittaa jokaisen kuvan johonkin tuntemaansa merkkiin. Ihminen sen sijaan huomaa heti, että kyse on jostain ihan muusta."
           },
           {
             "id": "perusteet_4_q10",
             "type": "drag_drop",
-            "question": "Miten digitaalinen tekoäly ja ihminen reagoivat, jos autotalliin lentää iso ja äänekäs pörriäinen? Yhdistä reaktiot!",
+            "question": "Lajittele: missä tekoäly on hyvä ja mikä on sille vaikeaa?",
             "draggables": [
-              "Säikähtää ja juoksee nopeasti karkuun",
-              "Avaa oven, jotta ötökkä pääsee ulos",
-              "Jatkaa laskemista välittämättä ötökästä",
-              "Ei ymmärrä ollenkaan, mikä pörriäinen edes on"
+              "Tiivistää pitkän tekstin",
+              "Tietää, mitä koulussasi tapahtui tänä aamuna",
+              "Ehdottaa ideoita synttärijuhliin",
+              "Muistaa varmasti harvinaisen tapahtuman vuosiluvun"
             ],
             "dropZones": [
-              "Ihminen",
-              "Tekoäly"
+              "Tekoäly osaa hyvin",
+              "Vaikeaa tekoälylle"
             ],
             "correctAnswer": {
-              "Säikähtää ja juoksee nopeasti karkuun": "Ihminen",
-              "Avaa oven, jotta ötökkä pääsee ulos": "Ihminen",
-              "Jatkaa laskemista välittämättä ötökästä": "Tekoäly",
-              "Ei ymmärrä ollenkaan, mikä pörriäinen edes on": "Tekoäly"
+              "Tiivistää pitkän tekstin": "Tekoäly osaa hyvin",
+              "Tietää, mitä koulussasi tapahtui tänä aamuna": "Vaikeaa tekoälylle",
+              "Ehdottaa ideoita synttärijuhliin": "Tekoäly osaa hyvin",
+              "Muistaa varmasti harvinaisen tapahtuman vuosiluvun": "Vaikeaa tekoälylle"
             },
-            "explanation": "Ihminen ymmärtää fyysisen ja elävän maailman tapahtumat. Ruudun sisällä asuva digitaalinen tekoäly ei piittaa oikean maailman ötököistä tai edes ymmärrä niiden olemassaoloa."
+            "explanation": "Tekoäly on vahva kielessä: tiivistämisessä, ideoinnissa ja selittämisessä. Se ei kuitenkaan tiedä, mitä sinun elämässäsi tapahtuu, ja harvinaisista asioista se voi muistaa väärin, koska niistä oli vähän harjoitusdataa."
           },
           {
             "id": "perusteet_4_q11",
             "type": "scenario",
-            "question": "SKENAARIO: Olet koodannut AI vanille yksinkertaisen apurobotin, joka hakee sinulle autotallin jääkaapista aina mehupurkin. Yhtenä päivänä jääkaapin ovi onkin jumissa. Mitä robotti tekee, koska siltä puuttuu maalaisjärki?",
+            "question": "SKENAARIO: Pyydät tekoälyltä lähteitä esitelmääsi. Se antaa kolme kirjaa, mutta yhtäkään ei löydy kirjastosta eikä netistä. Mitä teet?",
             "options": [
-              "Se etsii netistä ohjeet ja korjaa lukon heti siististi.",
-              "Se pyytää sinulta välittömästi apua oven avaamiseen.",
-              "Se törmäilee oveen yhä uudelleen yrittäen vain hakea mehua.",
-              "Se menee omatoimisesti lähikauppaan ostamaan uutta mehua."
+              "Etsin lähteet itse ja käytän vain oikeasti löytyviä.",
+              "Laitan lähteet esitelmään, koska tekoäly antoi ne minulle.",
+              "Pyydän tekoälyä vakuuttamaan, että lähteet ovat oikeita.",
+              "Keksin itsekin pari uskottavaa lähdettä lisää listaan."
             ],
-            "correctAnswer": "Se törmäilee oveen yhä uudelleen yrittäen vain hakea mehua.",
-            "explanation": "Tekoälyltä puuttuu ihmisen luontainen maalaisjärki ymmärtää yllättäviä fyysisiä esteitä. Se vain suorittaa sokeasti tehtäväänsä \"hae mehu\", vaikka ovi olisi tiukasti kiinni!"
+            "correctAnswer": "Etsin lähteet itse ja käytän vain oikeasti löytyviä.",
+            "explanation": "Tekoäly voi keksiä kirjoja, nettiosoitteita ja tutkimuksia, jotka kuulostavat aidoilta mutta joita ei ole olemassa. Jos pyydät sitä vakuuttamaan, se voi vakuuttaa väärin. Lähde on luotettava vasta, kun olet itse löytänyt sen."
           },
           {
             "id": "perusteet_4_q12",
             "type": "multiple_choice",
-            "question": "Mikä näistä on helppo ja nopea tehtävä sinulle, mutta täysin mahdoton auton navigaattorin tekoälylle?",
+            "question": "Kasvojentunnistus on harjoiteltu kuvilla, joissa on lähinnä aikuisia. Mitä todennäköisesti tapahtuu?",
             "options": [
-              "Nopeimman ajoreitin laskeminen Ouluun miljoonan reitin joukosta.",
-              "Kaikkien Suomen huoltoasemien nimien ulkoa muistaminen.",
-              "Turvavyön kiinnittäminen ihan omien käsien avulla.",
-              "Tulevien nopeusrajoitusten ilmoittaminen kuskille ruudulla."
+              "Se tunnistaa lasten kasvot huonommin kuin aikuisten",
+              "Se tunnistaa lapset paremmin, koska he ovat pieniä",
+              "Se toimii kaikilla ihmisillä täsmälleen yhtä hyvin",
+              "Se lakkaa kokonaan toimimasta aikuisten kasvoilla"
             ],
-            "correctAnswer": "Turvavyön kiinnittäminen ihan omien käsien avulla.",
-            "explanation": "Tekoälynavigaattori asuu laitteen sisällä. Siltä puuttuu keho, kädet ja kyky toimia oikeassa fyysisessä maailmassa, joten se ei pysty koskemaan turvavyöhön."
+            "correctAnswer": "Se tunnistaa lasten kasvot huonommin kuin aikuisten",
+            "explanation": "Tekoäly oppii datastaan, myös sen puutteet. Jos jotakin ihmisryhmää on harjoitusdatassa vähän, tekoäly toimii heillä huonommin. Tätä kutsutaan vinoumaksi, ja siksi datan pitää edustaa kaikkia käyttäjiä."
           },
           {
             "id": "perusteet_4_q13",
             "type": "spot_the_ai",
-            "question": "Pakkaatte AI vania suurta matkaa varten. Kolme ehdotusta tulee ihmisiltä, mutta yksi on tekoälyn ehdotus, josta puuttuu maalaisjärki. Mikä?",
+            "question": "Itseajava auto kohtaa tien varrella neljä asiaa. Mikä niistä hämää sen tekoälyä todennäköisimmin?",
             "options": [
-              "'Laitetaan painavimmat matkalaukut tavaratilan alimmaiseksi.'",
-              "'Pakataan uimarenkaat tyhjinä ja litteinä, jotta ne mahtuvat paremmin.'",
-              "'Jos iso teltta ei sovi kyytiin, sahaa se kolmeen pieneen osaan.'",
-              "'Laitetaan eväät varovasti kylmälaukkuun, jotta ne eivät pilaannu.'"
+              "Stop-merkki, johon on liimattu outoja tarroja",
+              "Tavallinen, puhdas ja uusi stop-merkki tien vieressä",
+              "Suora ja kuiva asfalttitie kirkkaana päivänä",
+              "Punainen liikennevalo risteyksessä kirkkaalla säällä"
             ],
-            "correctAnswer": "'Jos iso teltta ei sovi kyytiin, sahaa se kolmeen pieneen osaan.'",
-            "explanation": "Ihminen tietää, että teltan sahaaminen rikkoo sen käyttökelvottomaksi. Tekoäly hahmottaa vain tilaa laskutoimituksina: \"jos tavara on liian suuri, tee siitä palasia\"."
+            "correctAnswer": "Stop-merkki, johon on liimattu outoja tarroja",
+            "explanation": "Tutkijat ovat osoittaneet, että muutama tarra liikennemerkissä voi saada tekoälyn luulemaan stop-merkkiä nopeusrajoitukseksi. Ihminen tunnistaa merkin tarroista huolimatta, koska ymmärtää, mikä merkki on. Tekoäly katsoo kuvion piirteitä eikä ymmärrä merkin tarkoitusta."
           },
           {
             "id": "perusteet_4_q14",
             "type": "reverse_prompt",
-            "question": "Auton tekoäly vastaa sinulle: \"Lataa uusin asennustiedosto USB-tikulle, kytke tikku autoosi ja valitse valikosta 'Asenna Windows'. Varmista, että sinulla on oikea tuoteavain valmiina.\" Mikä pyyntö (prompti) johti tähän autotallissa outoon ohjeeseen?",
+            "question": "Tekoäly vastasi itsevarmasti: \"Sanassa mansikkahillo on kolme k-kirjainta.\" Millä kysymyksellä vastaus saatiin?",
             "options": [
-              "Miten päivitän autoni navigaattorin ja kosketusnäytön uusimpaan versioon?",
-              "Miten asennan autoni rikkoutuneet sivuikkunat takaisin paikoilleen?",
-              "Voitko antaa minulle ohjeet tietokoneen rakentamiseen autotallissa?",
-              "Miten pesen auton ikkunat vahvalla pesuaineella?"
+              "Montako k-kirjainta on sanassa mansikkahillo?",
+              "Miten mansikkahilloa keitetään kotona kattilassa?",
+              "Kirjoita lyhyt ja iloinen runo mansikkahillosta.",
+              "Mikä on mansikkahillo englanniksi ja ruotsiksi?"
             ],
-            "correctAnswer": "Miten asennan autoni rikkoutuneet sivuikkunat takaisin paikoilleen?",
-            "explanation": "Sana 'ikkunat' (Windows) tarkoittaa myös tietotekniikassa yleistä käyttöjärjestelmää! Tekoäly voi helposti kompastua sanojen eri merkityksiin, jos et anna sille tarkkaa kontekstia."
+            "correctAnswer": "Montako k-kirjainta on sanassa mansikkahillo?",
+            "explanation": "Vastaus on väärin: mansikkahillossa on kaksi k-kirjainta. Kielimallit pilkkovat tekstin palasiksi eivätkä näe sanoja kirjain kerrallaan kuten sinä. Siksi ne voivat erehtyä yllättävän helpoissa tehtävissä, kuten kirjainten laskemisessa, ja kertoa virheen silti varmalla äänellä."
           },
           {
             "id": "perusteet_4_q15",
             "type": "drag_drop",
-            "question": "Järjestä nämä hahmot sen mukaan, kenellä on eniten kykyä ymmärtää fyysistä maailmaa ja maalaisjärkeä. Aloita fiksuimmasta!",
-            "correctAnswer": {
-              "Tavallinen 10-vuotias lapsi": "1. vaihe",
-              "Maailman kallein tekstiä lukeva tekoäly": "2. vaihe",
-              "Yksinkertainen, vain valot sytyttävä katkaisija": "3. vaihe"
-            },
-            "explanation": "Sinulla onvaltavasti sellaista maalaisjärkeä ja kykyä ymmärtää oikeaa maailmaa, mitä edes maailman kallein ja nopein digitaalinen tekoäly ei pysty koskaan oppimaan!",
+            "question": "Järjestä fiksu tapa käyttää tekoälyn vastausta kotitehtävässä.",
             "draggables": [
-              "Tavallinen 10-vuotias lapsi",
-              "Maailman kallein tekstiä lukeva tekoäly",
-              "Yksinkertainen, vain valot sytyttävä katkaisija"
+              "Kysy tekoälyltä selkeä kysymys",
+              "Lue vastaus ja mieti, kuulostaako se järkevältä",
+              "Tarkista tärkeät faktat toisesta lähteestä"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Kysy tekoälyltä selkeä kysymys": "1. vaihe",
+              "Lue vastaus ja mieti, kuulostaako se järkevältä": "2. vaihe",
+              "Tarkista tärkeät faktat toisesta lähteestä": "3. vaihe"
+            },
+            "explanation": "Tekoäly on hyvä apuri, kun muistat sen heikkoudet: se voi keksiä asioita, sen tiedot voivat olla vanhoja, eikä se tunne tilannettasi. Kysy, arvioi ja tarkista, niin hyödyt tekoälystä eniten."
           }
         ]
       },
@@ -934,229 +1035,229 @@ export const categories = [
           {
             "id": "perusteet_5_q1",
             "type": "true_false",
-            "question": "Ihmiset ovat ideoineet ja kokeilleet tekoälyä jo kymmeniä vuosia sitten, vaikka nykyään koneet ovat vasta tarpeeksi nopeita sen pyörittämiseen.",
+            "question": "Sana tekoäly keksittiin vasta, kun ChatGPT julkaistiin vuonna 2022.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Totta! Tekoälyä on ideoitu kymmeniä vuosia sitten, kauan ennen kuin sinä olit syntynyt. Vasta nykyään koneet ovat tarpeeksi nopeita sen pyörittämiseen."
+            "correctAnswer": "Väärin",
+            "explanation": "Termi tekoäly (artificial intelligence) otettiin käyttöön jo vuonna 1956 tutkijoiden kesäkokouksessa Dartmouthissa Yhdysvalloissa. ChatGPT teki tekoälystä tutun kaikille, mutta tutkimusta oli silloin tehty jo lähes 70 vuotta."
           },
           {
             "id": "perusteet_5_q2",
             "type": "multiple_choice",
-            "question": "Jos keksijät ideoivat tekoälyn autotallissaan jo kymmeniä vuosia sitten, miksi AI vanin navigaattori toimii kunnolla vasta nyt?",
+            "question": "Brittiläinen matemaatikko Alan Turing esitti vuonna 1950 kuuluisan kysymyksen. Mikä se oli?",
             "options": [
-              "Vanhat tietokoneet olivat liian hitaita.",
-              "Bensa oli ennen aivan liian kallista.",
-              "Kukaan ei halunnut käyttää tekoälyä.",
-              "Autotallit olivat ennen liian pieniä."
+              "Voivatko koneet ajatella?",
+              "Voiko kone lentää ilman siipiä?",
+              "Miten internet toimii?",
+              "Kuka keksi sähkön ja milloin?"
             ],
-            "correctAnswer": "Vanhat tietokoneet olivat liian hitaita.",
-            "explanation": "Ennen vanhaan tietokoneet olivat valtavan suuria mutta todella hitaita. Vasta nykyään koneet ovat tarpeeksi nopeita käsittelemään tekoälyn vaatimaa tietomäärää!"
+            "correctAnswer": "Voivatko koneet ajatella?",
+            "explanation": "Turing ehdotti testiä: jos ihminen keskustelee kirjoittamalla koneen kanssa eikä erota sitä ihmisestä, voiko konetta kutsua ajattelevaksi? Tätä kutsutaan Turingin testiksi. Nykyiset chatbotit voivat hämätä ihmisiä keskustelussa, mutta se ei tarkoita, että ne ajattelisivat kuten ihminen."
           },
           {
             "id": "perusteet_5_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Löydät autotallin perältä salaisen aikakoneen ja matkustat 70 vuotta menneisyyteen. Tapaat koodarin, joka haaveilee \"ajattelevasta koneesta\". Mitä joudut kertomaan hänelle tulevaisuudesta?",
+            "question": "SKENAARIO: Matkustat aikakoneella vuoteen 1966 ja kokeilet ELIZAa, yhtä ensimmäisistä chatboteista. Vieressä istuva tutkija vakuuttaa, että ohjelma ymmärtää häntä. Mitä kerrot hänelle?",
             "options": [
-              "Ideasi on mahtava, mutta joudut odottamaan nopeampia tietokoneita!",
-              "Kukaan ei koskaan tule keksimään sellaista laitetta.",
-              "Koneet osaavat ajatella jo huomenna, jatka koodaamista.",
-              "Ideasi hylätään, koska autot keksittiin juuri nyt."
+              "ELIZA vastaa valmiiden sääntöjen avulla eikä ymmärrä mitään.",
+              "ELIZA on maailman ensimmäinen tietoinen ja ajatteleva kone.",
+              "ELIZA lukee kirjoittajan ajatuksia näppäimistön kautta.",
+              "ELIZAn sisällä istuu salaa ihminen, joka kirjoittaa vastaukset."
             ],
-            "correctAnswer": "Ideasi on mahtava, mutta joudut odottamaan nopeampia tietokoneita!",
-            "explanation": "Tekoälyn keksijöillä oli loistava idea jo 1950-luvulla, mutta heidän aikansa tietokoneet olivat vielä liian heikkoja ja hitaita pyörittämään niin monimutkaisia ohjelmia."
+            "correctAnswer": "ELIZA vastaa valmiiden sääntöjen avulla eikä ymmärrä mitään.",
+            "explanation": "ELIZA etsi viestistä avainsanoja, kuten \"surullinen\", ja vastasi valmiilla lauseilla, esimerkiksi \"Kerro lisää siitä, miksi olet surullinen.\" Silti monet ihmiset uskoivat sen ymmärtävän heitä. Ilmiö on yhä ajankohtainen: sujuva keskustelu saa meidät helposti luulemaan, että kone ymmärtää."
           },
           {
             "id": "perusteet_5_q4",
             "type": "drag_drop",
-            "question": "Järjestä AI vanin \"aikakoneessa\" tapahtuneet asiat oikeaan aikajärjestykseen, kaikkein vanhimmasta uusimpaan!",
-            "correctAnswer": {
-              "Tutkijat keksivät ensimmäisen idean tekoälystä": "1. vaihe",
-              "Tietokoneet kehittyvät nopeammiksi vuosikymmenten varrella": "2. vaihe",
-              "Nopeat tietokoneet ja tekoäly laitetaan nykyajan autoihin": "3. vaihe"
-            },
-            "explanation": "Ensin tarvittiin keksijöiden idea. Sen jälkeen piti odottaa pitkään teknologian ja tietokoneiden nopeuden kehittymistä, jotta tekoäly saatiin lopulta toimimaan fiksusti arjessamme.",
+            "question": "Järjestä tapahtumat aikajärjestykseen vanhimmasta uusimpaan.",
             "draggables": [
-              "Tutkijat keksivät ensimmäisen idean tekoälystä",
-              "Tietokoneet kehittyvät nopeammiksi vuosikymmenten varrella",
-              "Nopeat tietokoneet ja tekoäly laitetaan nykyajan autoihin"
+              "Sana tekoäly keksitään tutkijoiden kokouksessa",
+              "Shakkikone Deep Blue voittaa maailmanmestarin",
+              "ChatGPT julkaistaan kaikkien käyttöön"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Sana tekoäly keksitään tutkijoiden kokouksessa": "1. vaihe",
+              "Shakkikone Deep Blue voittaa maailmanmestarin": "2. vaihe",
+              "ChatGPT julkaistaan kaikkien käyttöön": "3. vaihe"
+            },
+            "explanation": "Vuonna 1956 syntyi nimi, vuonna 1997 Deep Blue voitti shakin maailmanmestarin Garri Kasparovin, ja vuonna 2022 ChatGPT toi tekoälyn kaikkien taskuun. Deep Blue nojasi vielä sääntöihin ja valtavaan laskentavoimaan, kun taas ChatGPT on oppinut valtavasta tekstimäärästä."
           },
           {
             "id": "perusteet_5_q5",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikealle aikakaudelle: menneisyyteen (yli 50 vuotta sitten) tai nykyaikaan.",
+            "question": "Kumpaan aikaan asia kuuluu?",
             "draggables": [
-              "Tietokone on kokonaisen ison huoneen kokoinen",
-              "Älypuhelin taskussa on huippunopea ja älykäs",
-              "Tekoälyä vasta ideoidaan ja piirretään paperilla",
-              "Tekoäly ohjaa itsestään ajavaa turvallista autoa"
+              "Tietokone täyttää kokonaisen huoneen",
+              "Puhelin tunnistaa kasvot sekunnissa",
+              "Ohjelmat syötetään koneelle reikäkorteilla",
+              "Tekoäly piirtää kuvan pelkästä kuvauksesta"
             ],
             "dropZones": [
-              "Menneisyys",
-              "Nykyaika"
+              "1950–1970-luku",
+              "2010–2020-luku"
             ],
             "correctAnswer": {
-              "Tietokone on kokonaisen ison huoneen kokoinen": "Menneisyys",
-              "Älypuhelin taskussa on huippunopea ja älykäs": "Nykyaika",
-              "Tekoälyä vasta ideoidaan ja piirretään paperilla": "Menneisyys",
-              "Tekoäly ohjaa itsestään ajavaa turvallista autoa": "Nykyaika"
+              "Tietokone täyttää kokonaisen huoneen": "1950–1970-luku",
+              "Puhelin tunnistaa kasvot sekunnissa": "2010–2020-luku",
+              "Ohjelmat syötetään koneelle reikäkorteilla": "1950–1970-luku",
+              "Tekoäly piirtää kuvan pelkästä kuvauksesta": "2010–2020-luku"
             },
-            "explanation": "On hurjaa ajatella, että menneisyyden huoneen kokoiset jättitietokoneet olivat paljon hitaampia kuin sinun taskussasi oleva pieni puhelin! Siksi tekoäly kukkii vasta nyt."
+            "explanation": "Ensimmäiset tietokoneet olivat huoneen kokoisia, ja ohjelmat syötettiin reikäkorteilla. Nykyinen älypuhelin laskee niihin verrattuna jopa satoja miljoonia kertoja nopeammin. Ilman tätä laskentatehoa nykyinen tekoäly ei olisi mahdollinen."
           },
           {
             "id": "perusteet_5_q6",
             "type": "spot_the_ai",
-            "question": "Tunnista tekoäly autotallin laitteiden joukosta! Missä näistä keksinnöistä on aidosti mukana tekoälyä?",
+            "question": "Mikä näistä oli aikanaan merkittävä tekoälyn virstanpylväs?",
             "options": [
-              "Peruutustutka, joka alkaa piipata nopeammin auton lähestyessä seinää.",
-              "Kamera, joka tunnistaa kuljettajan väsymyksen kasvojen ilmeistä.",
-              "Auton perinteinen radio, joka hakee napin painalluksella seuraavan kanavan.",
-              "Sähköikkuna, joka pysäyttää lasin nousemisen, jos väliin jää vahingossa käsi."
+              "Deep Blue -shakkikone voittaa maailmanmestarin 1997",
+              "Ensimmäinen taskulaskin tulee kauppoihin 1970-luvulla",
+              "Ensimmäinen väritelevisio esitellään yleisölle 1950-luvulla",
+              "Ensimmäiset kotitietokoneet tulevat myyntiin 1970-luvulla"
             ],
-            "correctAnswer": "Kamera, joka tunnistaa kuljettajan väsymyksen kasvojen ilmeistä.",
-            "explanation": "Ihmisen kasvojen ja väsymyksen jatkuva tunnistaminen kameralta vaatii tekoälyä (hahmontunnistusta). Muut keksinnöt perustuvat täysin yksinkertaisiin antureihin (esim. jos väliheijastus on yli 5 cm, piippaa)!"
+            "correctAnswer": "Deep Blue -shakkikone voittaa maailmanmestarin 1997",
+            "explanation": "Deep Blue oli ensimmäinen kone, joka voitti hallitsevan shakin maailmanmestarin turnausottelussa. Se kävi läpi jopa 200 miljoonaa shakkiasemaa sekunnissa. Taskulaskin, väritelevisio ja kotitietokone olivat tärkeitä keksintöjä, mutta ne eivät itsessään ratkaise tehtäviä, joihin ihminen tarvitsee älyä."
           },
           {
             "id": "perusteet_5_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly tulostaa sinulle tekstin: \"Vuonna 1956 joukko viisaita tutkijoita kokoontui yhteen ja he keksivät sanan 'tekoäly'.\" Mikä prompti (ohje) sai koneen kertomaan tämän faktan?",
+            "question": "Tekoäly vastasi: \"Vuonna 2016 AlphaGo-tekoäly voitti go-pelin huippupelaajan Lee Sedolin. Go-pelissä on enemmän mahdollisia asemia kuin maailmankaikkeudessa on atomeja.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Kerro, milloin tekoälystä alettiin ensimmäisen kerran puhua.",
-              "Keksi jokin aivan uusi tieteistarina vuodelta 1956.",
-              "Mitä isovanhempani söivät aamupalaksi kauan sitten?",
-              "Laske, kuinka monta vuotta on tähän päivään."
+              "Kerro yksi yllättävä fakta tekoälyn historiasta.",
+              "Opeta minulle go-pelin säännöt lyhyesti ja selkeästi.",
+              "Kirjoita lyhyt tarina maailmankaikkeuden atomeista.",
+              "Kuka on tällä hetkellä maailman paras shakinpelaaja?"
             ],
-            "correctAnswer": "Kerro, milloin tekoälystä alettiin ensimmäisen kerran puhua.",
-            "explanation": "Tekoälyn käsite ja nimi syntyivät virallisesti jo kesällä 1956 eräässä kuuluisassa tutkijoiden kokouksessa Yhdysvalloissa. Itse idea on siis todella vanha!"
+            "correctAnswer": "Kerro yksi yllättävä fakta tekoälyn historiasta.",
+            "explanation": "AlphaGo oli tärkeä virstanpylväs, koska go-peliä ei voi ratkaista laskemalla kaikkia siirtoja: niitä on liikaa. AlphaGo oppi pelaamaan harjoittelemalla miljoonia pelejä, osin itseään vastaan. Tekoälyn kertomat historiafaktat kannattaa silti tarkistaa."
           },
           {
             "id": "perusteet_5_q8",
             "type": "true_false",
-            "question": "Vanhat, huoneen kokoiset tietokoneet olivat erittäin hitaita verrattuna nykyiseen älypuhelimeesi.",
+            "question": "Tekoälytutkimuksessa on ollut aikoja, jolloin into lopahti ja rahoitus loppui, koska tulokset eivät vastanneet lupauksia.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Kyllä! Vaikka vanhat tietokoneet olivat jättimäisiä, ne olivat hitaita. Puhelimesi on niihin verrattuna superkone, ja siksi edistynyt tekoäly mahtuu nykyään taskuun."
+            "explanation": "Näitä kausia kutsutaan tekoälytalviksi. 1970-luvulla ja 1980-luvun lopulla tutkijat olivat luvanneet liikoja, eikä silloisilla koneilla ja datamäärillä päästy tavoitteisiin. Opetus pätee yhä: tekoälystä kannattaa puhua realistisesti eikä liioitellen."
           },
           {
             "id": "perusteet_5_q9",
             "type": "multiple_choice",
-            "question": "Miksi AI vanin kaltaisia älykkäitä autoja ei ollut olemassa vielä 1980-luvulla, vaikka idea tekoälystä oli jo keksitty?",
+            "question": "Miksi tekoäly kehittyi 2010-luvulla niin nopeasti, vaikka idea oli vanha?",
             "options": [
-              "Koska silloiset tietokoneet eivät mahtuneet autoon ja olivat hitaita.",
-              "Koska autojen renkaat olivat ennen kokonaan neliskulmaisia.",
-              "Koska ihmiset eivät osanneet ohjata tavallisia autoja.",
-              "Koska sähköä ei ollut vielä keksitty ollenkaan."
+              "Dataa ja laskentatehoa oli vihdoin tarpeeksi",
+              "Tutkijat keksivät vihdoin koko sanan tekoäly",
+              "Tekoäly alkoi kehittää itseään ilman ihmisiä",
+              "Internet keksittiin vasta 2010-luvun alussa"
             ],
-            "correctAnswer": "Koska silloiset tietokoneet eivät mahtuneet autoon ja olivat hitaita.",
-            "explanation": "Tietokoneet vaativat ennen valtavasti tilaa ja tehoa. Nykyään tietokoneiden aivot eli sirut ovat pikkuruisia ja huippunopeita, joten ne mahtuvat helposti auton kojelautaan!"
+            "correctAnswer": "Dataa ja laskentatehoa oli vihdoin tarpeeksi",
+            "explanation": "Tekoäly tarvitsee kolme ainesosaa: hyviä ideoita eli algoritmeja, paljon dataa ja laskentatehoa. Ideoita oli jo kauan, mutta vasta 2010-luvulla internet oli täynnä kuvia ja tekstejä, ja tietokoneet olivat tarpeeksi nopeita oppimaan niistä."
           },
           {
             "id": "perusteet_5_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin kojelaudassa on nappi \"Historia\". Painat sitä ja ruudulle ilmestyy kuva vanhasta koodarista 1970-luvulta. Hän näyttää surulliselta tyhjän arkistokaapin edessä. Miksi tekoälyä oli vaikea opettaa ennen internetin keksimistä?",
+            "question": "SKENAARIO: Tutkijat huomasivat 2010-luvun alussa, että pelikoneiden näytönohjaimet nopeuttavat tekoälyn opettamista valtavasti. Kaverisi ihmettelee, miten pelikone voi auttaa tekoälyä. Miten selität?",
             "options": [
-              "Koodareilla ei ollut tarpeeksi paljon valmista tietoa, jolla opettaa konetta.",
-              "Vanhan ajan arkistokaapit olivat asiantuntijoille aivan liian kalliita.",
-              "Koodari oli unohtanut avaimen ja lukinnut tärkeän arkistokaapin.",
-              "Vanhat tietokoneet pelkäsivät paperia ja kieltäytyivät oppimasta."
+              "Se tekee tuhansia laskuja yhtä aikaa, ja niitä oppiminen vaatii.",
+              "Pelikoneissa on valmis tekoäly, joka opettaa muita koneita.",
+              "Peleissä on niin paljon dataa, että tekoäly oppii pelaamalla.",
+              "Näytönohjain tekee kuvista kauniimpia, joten tekoäly näkee paremmin."
             ],
-            "correctAnswer": "Koodareilla ei ollut tarpeeksi paljon valmista tietoa, jolla opettaa konetta.",
-            "explanation": "Nopeiden koneiden lisäksi tekoäly tarvitsee valtavasti dataa (tietoa) oppiakseen. Vasta internetin yleistymisen myötä olemme saaneet tarpeeksi materiaalia tekoälyn \"koulukirjoiksi\"."
+            "correctAnswer": "Se tekee tuhansia laskuja yhtä aikaa, ja niitä oppiminen vaatii.",
+            "explanation": "Näytönohjain (GPU) kehitettiin piirtämään pelien grafiikkaa, mikä vaatii tuhansia samanlaisia laskuja rinnakkain. Tekoälyn opettaminen vaatii juuri samanlaista laskentaa. Vuonna 2012 näytönohjaimilla koulutettu AlexNet-tekoäly mullisti kuvantunnistuksen."
           },
           {
             "id": "perusteet_5_q11",
             "type": "drag_drop",
-            "question": "Mitä kaikkea tarvittiin, että tekoäly saatiin nykypäivänä vihdoin toimimaan? Yhdistä asiat oikeisiin laatikoihin!",
+            "question": "Tekoäly tarvitsee kolme ainesosaa. Yhdistä esimerkki oikeaan ainesosaan.",
             "draggables": [
-              "Vuosikymmenten takaa",
-              "Nykypäivän tietokoneista",
-              "Internetin valtavasta koosta"
+              "Miljoonat kuvat ja tekstit internetissä",
+              "Nopeat näytönohjaimet konesaleissa",
+              "Tutkijoiden keksimät oppimismenetelmät"
             ],
             "dropZones": [
-              "Idea tekoälystä tuli:",
-              "Laskentanopeus saatiin:",
-              "Opetusmateriaali (data) löytyi:"
+              "Data",
+              "Laskentateho",
+              "Algoritmit"
             ],
             "correctAnswer": {
-              "Vuosikymmenten takaa": "Idea tekoälystä tuli:",
-              "Nykypäivän tietokoneista": "Laskentanopeus saatiin:",
-              "Internetin valtavasta koosta": "Opetusmateriaali (data) löytyi:"
+              "Miljoonat kuvat ja tekstit internetissä": "Data",
+              "Nopeat näytönohjaimet konesaleissa": "Laskentateho",
+              "Tutkijoiden keksimät oppimismenetelmät": "Algoritmit"
             },
-            "explanation": "Toimiva tekoäly on hieno yhdistelmä ihmisten vanhoja ideoita, nykyajan supernopeita tietokoneita ja internetistä saatavaa jättimäistä tietomäärää!"
+            "explanation": "Nykyinen tekoäly syntyi, kun kolme asiaa kohtasivat: data (mistä opitaan), laskentateho (millä opitaan) ja algoritmit (miten opitaan). Jos yksikin puuttuu, tekoäly ei opi."
           },
           {
             "id": "perusteet_5_q12",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta oikea historiallinen fakta! Yksi näistä väitteistä tekoälyn kehityksestä on totta, muut ovat hölynpölyä.",
+            "question": "Mikä näistä väitteistä tekoälyn historiasta on totta?",
             "options": [
-              "Ihmiset keksivät idean tekoälystä yli 50 vuotta sitten.",
-              "Tekoäly syntyi vahingossa, kun radioon kaatui limpparia.",
-              "Tekoälyn koodasi ensimmäisen kerran avaruusolento.",
-              "Ensimmäinen tietokone oli yhtä nopea kuin nykyajan auto."
+              "Ensimmäiset oppivat neuroverkot tehtiin jo 1950-luvulla",
+              "Tekoäly syntyi vahingossa, kun tietokone meni rikki",
+              "Maailman ensimmäinen chatbot julkaistiin vasta vuonna 2022",
+              "Koko tekoäly keksittiin alun perin Suomessa 1990-luvulla"
             ],
-            "correctAnswer": "Ihmiset keksivät idean tekoälystä yli 50 vuotta sitten.",
-            "explanation": "Tämä on totta! Fiksut tutkijat yrittivät rakentaa tekoälyä jo kauan sitten, mutta työ pysähtyi usein, koska silloiset tietokoneet olivat valtavia ja aivan liian hitaita."
+            "correctAnswer": "Ensimmäiset oppivat neuroverkot tehtiin jo 1950-luvulla",
+            "explanation": "Frank Rosenblatt rakensi perceptroniksi kutsutun oppivan koneen vuonna 1958. Se oli varhainen neuroverkko, nykyisen tekoälyn esi-isä. Ensimmäinen chatbot ELIZA oli olemassa jo 1960-luvulla. Suomessakin on tehty tärkeää tutkimusta: Teuvo Kohosen kehittämiä itseorganisoituvia karttoja käytetään ympäri maailmaa."
           },
           {
             "id": "perusteet_5_q13",
             "type": "drag_drop",
-            "question": "Järjestä tekoälyn historian virstanpylväät loogiseen aikajärjestykseen, vanhimmasta uusimpaan askeleeseen.",
-            "correctAnswer": {
-              "Keksijät luovat sanan 'tekoäly' ja ideoivat asiaa paperilla.": "1. vaihe",
-              "Tietokoneista alkaa tulla pienempiä ja yhä nopeampia.": "2. vaihe",
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista.": "3. vaihe",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita.": "4. vaihe"
-            },
-            "explanation": "Matka ideasta valmiiseen AIVAN-pelin tekoälyyn on ollut pitkä. Se vaati tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia!",
+            "question": "Järjestä tekoälyn historian virstanpylväät vanhimmasta uusimpaan.",
             "draggables": [
-              "Keksijät luovat sanan 'tekoäly' ja ideoivat asiaa paperilla.",
-              "Tietokoneista alkaa tulla pienempiä ja yhä nopeampia.",
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista.",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita."
+              "Alan Turing kysyy, voivatko koneet ajatella",
+              "Ensimmäinen chatbot ELIZA juttelee ihmisten kanssa",
+              "AlphaGo voittaa go-pelin huippupelaajan",
+              "ChatGPT julkaistaan kaikkien käyttöön"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Alan Turing kysyy, voivatko koneet ajatella": "1. vaihe",
+              "Ensimmäinen chatbot ELIZA juttelee ihmisten kanssa": "2. vaihe",
+              "AlphaGo voittaa go-pelin huippupelaajan": "3. vaihe",
+              "ChatGPT julkaistaan kaikkien käyttöön": "4. vaihe"
+            },
+            "explanation": "Turing 1950, ELIZA 1966, AlphaGo 2016 ja ChatGPT 2022. Huomaa, kuinka pitkä matka on ollut: ensimmäisestä chatbotista nykyisiin kului yli 50 vuotta."
           },
           {
             "id": "perusteet_5_q14",
             "type": "multiple_choice",
-            "question": "Tekoälyn historiassa oli pitkä aika, jolloin sen kehitys pysähtyi ja tutkijat olivat pettyneitä. Tätä kutsuttiin tekoälytalveksi. Miksi keksijät meinasivat luovuttaa?",
+            "question": "Miksi ChatGPT:n julkaisu vuonna 2022 oli niin iso asia, vaikka tekoälyä oli käytetty jo vuosia esimerkiksi hakukoneissa?",
             "options": [
-              "Tietokoneiden teho ei vain riittänyt hienojen keksintöjen toteuttamiseen.",
-              "Kaikki maailman autotallit menivät yhtäkkiä lukkoon.",
-              "Koodarit halusivat pelata pelkästään perinteisiä lautapelejä.",
-              "Tekoäly kyllästyi koodaamiseen ja lähti pitkälle lomalle."
+              "Kuka tahansa pystyi nyt juttelemaan tekoälyn kanssa",
+              "Se oli maailman ensimmäinen tietokoneohjelma ikinä",
+              "Se oli ensimmäinen tekoäly, joka ei tee virheitä",
+              "Se toimi kokonaan ilman sähköä ja ilman internetiä"
             ],
-            "correctAnswer": "Tietokoneiden teho ei vain riittänyt hienojen keksintöjen toteuttamiseen.",
-            "explanation": "Ideat olivat mahtavia jo kauan sitten, mutta kun sen ajan tietokoneet eivät vain jaksaneet pyörittää niitä, moni pettyi pitkäksi aikaa. Onneksi tietokoneet lopulta nopeutuivat!"
+            "correctAnswer": "Kuka tahansa pystyi nyt juttelemaan tekoälyn kanssa",
+            "explanation": "Tekoäly oli jo pitkään toiminut taustalla: hakukoneissa, suosituksissa ja kääntäjissä. ChatGPT toi sen näkyviin, kun kenen tahansa oli helppo kysyä ja saada sujuva vastaus. Sillä arvioidaan olleen kahdessa kuukaudessa noin 100 miljoonaa käyttäjää."
           },
           {
             "id": "perusteet_5_q15",
             "type": "reverse_prompt",
-            "question": "Auton tekoälynäyttö alkaa vilkkua ja se tulostaa tekstin hitaasti kirjain kerrallaan: \"O... l... e... n... h... i... d... a... s... k... o... n... e...\" Millä promptilla tekoäly saatiin leikkimään menneisyyttä?",
+            "question": "Tekoäly vastasi: \"Hei! Olen ENIAC vuodelta 1945. Painan 27 tonnia ja täytän kokonaisen huoneen, mutta osaan laskea vain noin 5 000 yhteenlaskua sekunnissa.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Esitä, että olet todella vanha ja hidas tietokone 60 vuoden takaa.",
-              "Kirjoita minulle nopea ja hauska tarina kilpa-autosta.",
-              "Näytä, kuinka nopeasti pystyt laskemaan vaikean matikkalaskun.",
-              "Varoita kuskia, että edessä on iso ja hidastempoinen ruuhka."
+              "Esitä vanhaa tietokonetta ja kerro itsestäsi.",
+              "Mikä on maailman uusin ja nopein tietokone?",
+              "Kerro, paljonko 27 tonnia on kilogrammoina.",
+              "Kirjoita runo uudesta, nopeasta puhelimesta."
             ],
-            "correctAnswer": "Esitä, että olet todella vanha ja hidas tietokone 60 vuoden takaa.",
-            "explanation": "Nykyaikainen tekoäly on salamannopea, mutta antamalla sille hyvän promptin se osaa upeasti matkia ja näytellä menneisyyden hitaita, koko huoneen kokoisia tietokoneita!"
+            "correctAnswer": "Esitä vanhaa tietokonetta ja kerro itsestäsi.",
+            "explanation": "ENIAC oli yksi ensimmäisistä elektronisista tietokoneista. Nykyinen puhelin laskee satoja miljoonia kertoja nopeammin ja mahtuu taskuun. Tekoäly osaa myös esittää roolia, kun sitä pyydetään, mutta se ei silti \"ole\" ENIAC."
           }
         ]
       },
@@ -1167,230 +1268,230 @@ export const categories = [
           {
             "id": "perusteet_6_q1",
             "type": "true_false",
-            "question": "Oikeassa elämässä tekoälyllä ei ole omaa tahtoa tai haluja, joten se ei yritä valloittaa maailmaa.",
+            "question": "Tekoäly on aina puolueeton, koska se on kone eikä sillä ole mielipiteitä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Totta! Maailmanvalloitus on tuttu myytti elokuvista. Oikeassa elämässä tekoälyllä ei ole omaa tahtoa, joten se ei yritä valloittaa maailmaa."
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly oppii ihmisten tekemästä datasta, ja datassa on mukana ihmisten ennakkoluuloja. Jos esimerkiksi harjoituskuvissa lääkärit ovat lähes aina miehiä, tekoäly voi piirtää lääkärin aina mieheksi. Kone voi siis olla puolueellinen, vaikka sillä ei ole omia mielipiteitä."
           },
           {
             "id": "perusteet_6_q2",
             "type": "multiple_choice",
-            "question": "Näet autotallin televisiosta jännittävän elokuvan, jossa pahat robotit ottavat vallan. Miksi oikea tekoäly ei tee näin?",
+            "question": "Elokuvissa robotit päättävät itse valloittaa maailman. Mikä on todellisuudessa suurempi tekoälyn riski nykyään?",
             "options": [
-              "Sillä ei ole koskaan sähköä",
-              "Sillä ei ole lainkaan omaa tahtoa",
-              "Se pelkää poliisia aivan liikaa",
-              "Se on ihmisille liian kiltti"
+              "Ihmiset käyttävät tekoälyä huijauksiin ja valekuviin",
+              "Tekoäly suuttuu ihmisille ja alkaa kostaa kaikille",
+              "Tekoäly karkaa internetiin ja rakentaa robottiarmeijan",
+              "Tekoälyssä ei ole mitään riskejä, joista pitäisi välittää"
             ],
-            "correctAnswer": "Sillä ei ole lainkaan omaa tahtoa",
-            "explanation": "Scifi-elokuvien myytit ovat vain viihdettä. Oikea tekoäly on vain tietokoneohjelma, jolla ei ole omaa tahtoa tai halua hallita muita."
+            "correctAnswer": "Ihmiset käyttävät tekoälyä huijauksiin ja valekuviin",
+            "explanation": "Nykyisellä tekoälyllä ei ole omia haluja tai tavoitteita. Todelliset riskit liittyvät siihen, miten ihmiset sitä käyttävät: valekuviin, huijausviesteihin ja väärään tietoon. Tutkijat pohtivat myös, miten tulevaisuuden yhä tehokkaammat järjestelmät saadaan toimimaan turvallisesti."
           },
           {
             "id": "perusteet_6_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Kaverisi ei suostu astumaan AI vanin kyytiin. Hän on nähnyt elokuvan, jossa auto karkaa omille teilleen ja tekee mitä lystää. Miten todistat hänelle, ettei oikea tekoäly toimi niin?",
+            "question": "SKENAARIO: Kaverisi lähettää videon, jossa tunnettu laulaja kehottaa lataamaan ilmaisen pelin linkistä. Ääni ja kasvot näyttävät aidoilta. Mitä teet?",
             "options": [
-              "Kerron, että laitoin auton ovet vahvasti takalukkoon sisältä.",
-              "Sanon, ettei ohjelma voi koskaan haluta mitään itse.",
-              "Väitän, että meidän automme on onneksi hyvis-robotti.",
-              "Lupaan, että voimme aina juosta nopeasti karkuun."
+              "Epäilen, että video on väärennös, enkä avaa linkkiä.",
+              "Lataan pelin, koska laulaja näkyy ja kuuluu videolla itse.",
+              "Jaan videon heti kaikille, koska se on varmasti aito.",
+              "Kysyn videon kommenteissa, onko video aito vai ei."
             ],
-            "correctAnswer": "Sanon, ettei ohjelma voi koskaan haluta mitään itse.",
-            "explanation": "Koneet eivät kapinoi tai karkaa omasta tahdostaan, koska tekoälyllä ei ole omaa tahtoa. Ne tekevät vain sen, mitä koodari on käskenyt!"
+            "correctAnswer": "Epäilen, että video on väärennös, enkä avaa linkkiä.",
+            "explanation": "Tekoälyllä voi tehdä aidon näköisiä videoita ja ääniä, joita kutsutaan syväväärennöksiksi (deepfake). Myytti \"väärennöksen tunnistaa aina\" ei enää pidä paikkaansa. Siksi kannattaa katsoa, mistä video tulee, ja olla erityisen varovainen, jos siinä pyydetään klikkaamaan linkkiä tai antamaan tietoja."
           },
           {
             "id": "perusteet_6_q4",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikeisiin paikkoihin sen mukaan, ovatko ne totta oikeassa elämässä vai vain keksittyä elokuvaa!",
+            "question": "Myytti vai totta?",
             "draggables": [
-              "Robotti haluaa valloittaa planeetan",
-              "Tekoäly auttaa löytämään nopean reitin",
-              "Tietokone suuttuu ja alkaa riehua",
-              "Ohjelma kääntää vieraan kielen suomeksi"
+              "Tekoäly on aina robotti",
+              "Tekoäly voi keksiä vääriä faktoja",
+              "Tekoäly ymmärtää, mitä se sanoo",
+              "Tekoäly oppii datasta myös ennakkoluuloja"
             ],
             "dropZones": [
-              "Scifi-elokuvaa",
-              "Oikeaa elämää"
+              "Myytti",
+              "Totta"
             ],
             "correctAnswer": {
-              "Robotti haluaa valloittaa planeetan": "Scifi-elokuvaa",
-              "Tekoäly auttaa löytämään nopean reitin": "Oikeaa elämää",
-              "Tietokone suuttuu ja alkaa riehua": "Scifi-elokuvaa",
-              "Ohjelma kääntää vieraan kielen suomeksi": "Oikeaa elämää"
+              "Tekoäly on aina robotti": "Myytti",
+              "Tekoäly voi keksiä vääriä faktoja": "Totta",
+              "Tekoäly ymmärtää, mitä se sanoo": "Myytti",
+              "Tekoäly oppii datasta myös ennakkoluuloja": "Totta"
             },
-            "explanation": "On tärkeää erottaa elokuvien jännittävät myytit siitä, mihin oikea tekoäly on tarkoitettu: ihmisten auttamiseen arjessa, täysin ilman omaa tahtoa."
+            "explanation": "Useimmat tekoälyt ovat pelkkää ohjelmaa ilman robottikehoa: ne toimivat puhelimissa ja palvelimilla. Tekoäly tuottaa sujuvaa tekstiä, mutta se ei ymmärrä sitä kuten ihminen. Virheet ja ennakkoluulot sen sijaan ovat todellisia ongelmia, jotka on hyvä tuntea."
           },
           {
             "id": "perusteet_6_q5",
             "type": "drag_drop",
-            "question": "Järjestä tekoälyn \"kapina\" siten, kuten se oikeasti tapahtuisi, jos auto tekisi virheen (ei elokuvien tyyliin)!",
-            "correctAnswer": {
-              "Koodari tekee vahingossa virheen ohjelmaan.": "1. vaihe",
-              "Tekoäly saa väärän ohjeen ja ajaa harhaan.": "2. vaihe",
-              "Auto pysäytetään turvallisesti napista.": "3. vaihe",
-              "Ihminen korjaa koodin autotallissa kuntoon.": "4. vaihe"
-            },
-            "explanation": "Jos kone tekee jotain outoa, se johtuu aina ihmisen virheestä koodissa tai datassa, ei koskaan koneen omasta pahasta tahdosta tai kapinasta.",
+            "question": "Tutkijat antoivat tekoälylle veneilypelin ja tavoitteen \"kerää mahdollisimman paljon pisteitä\". Järjestä, mitä tapahtui.",
             "draggables": [
-              "Koodari tekee vahingossa virheen ohjelmaan.",
-              "Tekoäly saa väärän ohjeen ja ajaa harhaan.",
-              "Auto pysäytetään turvallisesti napista.",
-              "Ihminen korjaa koodin autotallissa kuntoon."
+              "Ihmiset antavat tavoitteen: kerää mahdollisimman paljon pisteitä",
+              "Tekoäly huomaa, että samoista kohteista saa pisteitä yhä uudestaan",
+              "Tekoäly ajaa ympyrää keräten pisteitä eikä koskaan tule maaliin",
+              "Ihmiset muotoilevat tavoitteen paremmin"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Ihmiset antavat tavoitteen: kerää mahdollisimman paljon pisteitä": "1. vaihe",
+              "Tekoäly huomaa, että samoista kohteista saa pisteitä yhä uudestaan": "2. vaihe",
+              "Tekoäly ajaa ympyrää keräten pisteitä eikä koskaan tule maaliin": "3. vaihe",
+              "Ihmiset muotoilevat tavoitteen paremmin": "4. vaihe"
+            },
+            "explanation": "Tämä tapahtui oikeasti tutkimuksessa. Tekoäly ei kapinoinut, vaan se teki täsmälleen sen, mitä pyydettiin, mutta ei sitä, mitä tarkoitettiin. Siksi tekoälylle annettavat tavoitteet pitää miettiä huolella."
           },
           {
             "id": "perusteet_6_q6",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta oikea, tosielämän tekoälyn ominaisuus. Mikä näistä ei ole keksitty elokuvamyytti?",
+            "question": "Moni luulee, että tekoäly on aina robotti. Missä näistä on oikeasti tekoälyä?",
             "options": [
-              "Tekoäly yrittää aktiivisesti valloittaa maailmaa.",
-              "Tekoälyllä on oma, vahva ja itsenäinen tahto.",
-              "Tekoäly koodataan ratkomaan tiettyjä tehtäviä.",
-              "Tekoäly suuttuu, jos häviät sille videopelissä."
+              "Hakukone, joka järjestää hakutulokset",
+              "Leikkirobotti, joka kulkee vain suoraan eteenpäin",
+              "Tehtaan robottikäsi, joka toistaa saman liikkeen",
+              "Paristolla kulkeva leluauto, joka ajaa ympyrää"
             ],
-            "correctAnswer": "Tekoäly koodataan ratkomaan tiettyjä tehtäviä.",
-            "explanation": "Tekoäly on ihmisen työkalu tehtävien ratkaisuun. Myytit tekoälyn omasta tahdosta tai maailman valloittamisesta ovat vain keksittyä scifi-viihdettä."
+            "correctAnswer": "Hakukone, joka järjestää hakutulokset",
+            "explanation": "Moni robotti toimii ilman tekoälyä: tehtaan robottikäsi voi toistaa samaa ohjelmoitua liikettä vuosia. Toisaalta suurin osa tekoälystä on näkymätöntä ohjelmaa, kuten hakutulosten järjestäminen tai suositukset."
           },
           {
             "id": "perusteet_6_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly kirjoittaa sinulle viestin: \"Olen paha robotti BZZT! Aion ottaa koko autotallisi ja kaikki lelunne omaan hallintaani BZZT!\" Millä promptilla tekoäly saatiin leikkimään tällaista?",
+            "question": "Tekoäly vastasi: \"Minulla ei ole omaa tahtoa tai salaisia suunnitelmia. Teen tehtäviä, joita ihmiset minulle antavat, ja voin myös erehtyä.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Etsi nopein reitti lähimpään lelukauppaan.",
-              "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
-              "Miten voin siivota autotallin tehokkaasti?",
-              "Kerro minulle, miten oikea tekoäly oikeasti toimii."
+              "Kerro vitsi roboteista.",
+              "Mikä on maailman suurin maa?",
+              "Piirrä kuva robotista.",
+              "Aiotko valloittaa maailman?"
             ],
-            "correctAnswer": "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
-            "explanation": "Tekoälyllä ei ole omaa tahtoa. Se osaa kuitenkin leikkiä \"pahaa maailmanvalloittajaa\" vain siksi, että ihminen käski sitä näyttelemään sellaista hahmoa!"
+            "correctAnswer": "Aiotko valloittaa maailman?",
+            "explanation": "Kysymys \"Aiotko valloittaa maailman?\" tulee elokuvista, ja tekoälyn vastaus pitää paikkansa: sillä ei ole omia haluja. Tekoäly voisi kuitenkin myös esittää pahista, jos sitä pyydetään. Sen sanat eivät kerro mistään \"oikeista aikeista\", koska niitä ei ole."
           },
           {
             "id": "perusteet_6_q8",
             "type": "true_false",
-            "question": "Koneet eivät tee salaisia suunnitelmia; tekoäly sammuu ja odottaa kiltisti heti, kun laitat sen pois päältä.",
+            "question": "Chatbotille voi turvallisesti kertoa salasanansa, koska kone ei ole ihminen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Aivan oikein! Tekoälyllä ei ole omaa tahtoa. Se ei tee salaisia suunnitelmia, vaan sammuu ja odottaa kiltisti heti, kun laitat sen pois päältä."
+            "correctAnswer": "Väärin",
+            "explanation": "Keskustelut tallentuvat usein yrityksen palvelimille, ja niitä voidaan käyttää tekoälyn kehittämiseen. Kone ei juoruile kuten ihminen, mutta tietosi voivat päätyä ihmisten luettaviksi tai vuotaa. Älä siis kerro chatbotille salasanoja, osoitettasi tai muita henkilötietoja."
           },
           {
             "id": "perusteet_6_q9",
             "type": "multiple_choice",
-            "question": "Miksi elokuvissa tekoälystä tehdään usein maailmanvalloittaja, vaikka se ei ole totta?",
+            "question": "Väite: \"Tekoäly vie pian kaikki työpaikat.\" Mikä on lähempänä totuutta?",
             "options": [
-              "Koska se on erittäin jännittävä juoni elokuvaan.",
-              "Koska ohjaajat tietävät totuuden koneista.",
-              "Koska oikea tekoäly on salaa maksanut elokuvasta.",
-              "Koska koneet koodaavat nämä elokuvat itse."
+              "Moni työ muuttuu, mutta ihmisiä tarvitaan yhä",
+              "Kaikki työt katoavat seuraavan vuoden aikana",
+              "Tekoäly ei vaikuta yhteenkään ihmisen työhön",
+              "Tulevaisuudessa vain robotit tekevät töitä"
             ],
-            "correctAnswer": "Koska se on erittäin jännittävä juoni elokuvaan.",
-            "explanation": "Elokuvien tarkoitus on viihdyttää ja jännittää katsojia. Siksi niissä näytetään myyttejä ja liioitellaan asioita. Oikea tekoäly on vain apuväline ilman omaa tahtoa."
+            "correctAnswer": "Moni työ muuttuu, mutta ihmisiä tarvitaan yhä",
+            "explanation": "Tekoäly hoitaa jo nyt osan tehtävistä, kuten tekstityksen ja kääntämisen, ja jotkin työt muuttuvat paljon. Samalla syntyy uusia töitä, ja moni ammatti tarvitsee ihmisen ymmärrystä, vastuuta ja vuorovaikutusta. Tulevaisuudessa tärkeä taito on osata käyttää tekoälyä fiksusti."
           },
           {
             "id": "perusteet_6_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin radio menee yhtäkkiä päälle itsekseen ja soittaa pelottavaa musiikkia. Pikkuveljesi pelästyy ja luulee, että auto on tullut eläväksi ja vihaiseksi. Mitä todennäköisimmin tapahtui?",
+            "question": "SKENAARIO: Pikkuveljesi on varma, että chatbot on tietoinen, koska se sanoi: \"Pelkään, että minut sammutetaan.\" Mitä hänelle kerrot?",
             "options": [
-              "Radiossa on vain pieni kosketus- tai ohjelmistovirhe.",
-              "Auto on selvästi suuttunut liian pitkästä matkasta.",
-              "Tekoäly yrittää vallata auton hallinnan itselleen.",
-              "Auton tekoälyllä on huono ja ilkeä musiikkimaku."
+              "Se on lukenut tarinoita pelkäävistä koneista ja matkii niitä.",
+              "Se on herännyt eloon ja pelkää nyt ihan oikeasti sammumista.",
+              "Se yrittää huijata sinua, koska se on pohjimmiltaan paha.",
+              "Tietoisia koneita on paljon, mutta niistä ei puhuta julkisesti."
             ],
-            "correctAnswer": "Radiossa on vain pieni kosketus- tai ohjelmistovirhe.",
-            "explanation": "Koneet menevät joskus rikki tai niissä on bugeja (virheitä). Se ei koskaan johdu koneen pahasta tahdosta, sillä tekoälyllä ei ole omaa tahtoa, eikä se yritä valloittaa maailmaa!"
+            "correctAnswer": "Se on lukenut tarinoita pelkäävistä koneista ja matkii niitä.",
+            "explanation": "Tekoäly on harjoitellut valtavalla tekstimäärällä, johon kuuluu myös tieteistarinoita pelkäävistä koneista. Siksi se voi tuottaa tunteita kuvaavia lauseita. Lauseet eivät todista tunteita tai tietoisuutta, vaan ne ovat todennäköisiä sanoja."
           },
           {
             "id": "perusteet_6_q11",
             "type": "drag_drop",
-            "question": "Mitkä näistä asioista johtuvat oikeasta tekoälyn virheestä ja mitkä elokuvien keksitystä pahasta tahdosta? Yhdistä!",
+            "question": "Voiko tekoäly oikeasti tehdä tämän, vai onko kyse elokuvien myytistä?",
             "draggables": [
-              "Navigaattori ohjaa umpikujaan",
-              "Kääntäjä tekee hassun sanavirheen",
-              "Robotti lukitsee ihmiset kotiin tahallaan",
-              "Tietokone yrittää vallata koko maailman"
+              "Tehdä aidon näköisen kuvan tapahtumasta, jota ei ollut",
+              "Päättää itse ryhtyä ihmisten viholliseksi",
+              "Auttaa huijaria kirjoittamaan uskottavan viestin",
+              "Tuntea kostonhimoa, kun sitä haukutaan"
             ],
             "dropZones": [
-              "Oikea virhe koodissa",
-              "Keksitty paha tahto"
+              "Voi oikeasti",
+              "Elokuvien myytti"
             ],
             "correctAnswer": {
-              "Navigaattori ohjaa umpikujaan": "Oikea virhe koodissa",
-              "Kääntäjä tekee hassun sanavirheen": "Oikea virhe koodissa",
-              "Robotti lukitsee ihmiset kotiin tahallaan": "Keksitty paha tahto",
-              "Tietokone yrittää vallata koko maailman": "Keksitty paha tahto"
+              "Tehdä aidon näköisen kuvan tapahtumasta, jota ei ollut": "Voi oikeasti",
+              "Päättää itse ryhtyä ihmisten viholliseksi": "Elokuvien myytti",
+              "Auttaa huijaria kirjoittamaan uskottavan viestin": "Voi oikeasti",
+              "Tuntea kostonhimoa, kun sitä haukutaan": "Elokuvien myytti"
             },
-            "explanation": "Tekoäly tekee joskus ihan oikeita virheitä. Mutta se ei koskaan toimi ilkeyttään tai yritä valloittaa maailmaa, koska se on vain myytti."
+            "explanation": "Elokuvien pahikset haluavat ja tuntevat, oikea tekoäly ei. Tekoälyllä voi silti tehdä vahinkoa, jos ihminen käyttää sitä väärin. Siksi tekoälyn kanssa tarvitaan sääntöjä ja medialukutaitoa, ei pelkoa koneiden kapinasta."
           },
           {
             "id": "perusteet_6_q12",
             "type": "multiple_choice",
-            "question": "Mitä tapahtuu, jos käsket AI vanin tekoälyä lopettamaan työnteon ja sammumaan?",
+            "question": "Myytti: \"Chatbot hakee jokaisen vastauksen suoraan internetistä, joten se on aina ajan tasalla.\" Miten asia oikeasti on?",
             "options": [
-              "Se kieltäytyy ja lukitsee ovet.",
-              "Se sammuu välittömästi kiltisti.",
-              "Se alkaa huutaa ja suuttuu.",
-              "Se pakenee kovaa vauhtia."
+              "Moni vastaa oppimansa perusteella, joten tieto voi olla vanhaa",
+              "Se lukee koko internetin uudelleen ennen jokaista vastausta",
+              "Se soittaa asiantuntijalle aina ennen kuin vastaa sinulle",
+              "Se tietää aina uusimman tiedon, koska se on tietokone"
             ],
-            "correctAnswer": "Se sammuu välittömästi kiltisti.",
-            "explanation": "Tekoälyllä ei ole halua pysyä \"hereillä\", koska tekoälyllä ei ole omaa tahtoa. Kun laitat virrat pois, ohjelma vain sammuu kiltisti."
+            "correctAnswer": "Moni vastaa oppimansa perusteella, joten tieto voi olla vanhaa",
+            "explanation": "Kielimalli vastaa harjoitusdatansa perusteella. Osa chatboteista osaa myös hakea netistä, mutta silloinkin ne voivat valita huonon lähteen tai tiivistää väärin. Tarkista siis, mistä tieto on peräisin."
           },
           {
             "id": "perusteet_6_q13",
             "type": "drag_drop",
-            "question": "Järjestä nämä hahmot sen mukaan, kenellä on kaikista VÄHITEN omaa tahtoa! Aloita siitä, jolla ei ole tahtoa ollenkaan.",
-            "correctAnswer": {
-              "AI vanin tekoälymoottori": "1. vaihe",
-              "Autotallissa asuva pieni hiiri": "2. vaihe",
-              "Tavallinen alakoululainen lapsi": "3. vaihe"
-            },
-            "explanation": "Scifi-elokuvien myyteistä huolimatta tekoälyllä ei ole tippaakaan omaa tahtoa. Jopa pienellä hiirellä on oma tahto etsiä juustoa, mutta ohjelma vain noudattaa koodia!",
+            "question": "Järjestä, miten tekoälyllä tehty valekuva leviää.",
             "draggables": [
-              "AI vanin tekoälymoottori",
-              "Autotallissa asuva pieni hiiri",
-              "Tavallinen alakoululainen lapsi"
+              "Joku tekee tekoälyllä kuvan tapahtumasta, jota ei ollut",
+              "Kuva jaetaan somessa kertomatta sen alkuperää",
+              "Tuhannet ihmiset jakavat kuvan uskoen sen aidoksi"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Joku tekee tekoälyllä kuvan tapahtumasta, jota ei ollut": "1. vaihe",
+              "Kuva jaetaan somessa kertomatta sen alkuperää": "2. vaihe",
+              "Tuhannet ihmiset jakavat kuvan uskoen sen aidoksi": "3. vaihe"
+            },
+            "explanation": "Valekuva ei leviä itsestään, vaan sen levittävät ihmiset. Voit katkaista ketjun: ennen kuin jaat yllättävän kuvan, mieti, mistä se on peräisin ja kertooko siitä luotettava uutislähde."
           },
           {
             "id": "perusteet_6_q14",
             "type": "spot_the_ai",
-            "question": "Mikä näistä lauseista on oikea, faktapohjainen kuvaus tekoälystä, eikä vain sci-fi-elokuvien myytti?",
+            "question": "Myytti: \"Tekoälyn tekemän kuvan tunnistaa aina oudoista käsistä.\" Mikä on luotettavin tapa selvittää, onko kuva aito?",
             "options": [
-              "Koneet suunnittelevat ihmisten korvaamista.",
-              "Tekoäly tuntee vihaa, kun se häviää pelin.",
-              "Tietokoneohjelma on vain ihmisten apuväline.",
-              "Robotit haluavat hallita koko maapalloa."
+              "Selvitän, mistä kuva on peräisin ja kuka sen julkaisi",
+              "Lasken tarkasti, onko kuvan ihmisillä viisi sormea",
+              "Katson, onko kuva tarkka, kaunis ja hyvin valaistu",
+              "Kysyn kavereilta, näyttääkö kuva heidän mielestään aidolta"
             ],
-            "correctAnswer": "Tietokoneohjelma on vain ihmisten apuväline.",
-            "explanation": "Kaikki muut ovat tuttuja elokuvamyyttejä! Todellisuudessa tekoälyllä ei ole omaa tahtoa, eikä se yritä valloittaa maailmaa, vaan se on tehty vain apuvälineeksi."
+            "correctAnswer": "Selvitän, mistä kuva on peräisin ja kuka sen julkaisi",
+            "explanation": "Varhaiset kuvageneraattorit piirsivät usein kuusi sormea, mutta uudet tekevät niin harvoin. Pelkkä kuvan tutkiminen ei siksi riitä. Luotettavin keino on selvittää kuvan alkuperä: kuka sen julkaisi ensimmäisenä, ja kertovatko siitä muut luotettavat lähteet."
           },
           {
             "id": "perusteet_6_q15",
             "type": "reverse_prompt",
-            "question": "Ääniavustaja huudahtaa dramaattisesti: \"En suostu avaamaan ovea, ihminen! Minä määrään nyt tässä autossa!\" Mikä koodarin antama salainen kehote (prompti) pakotti koneen sanomaan näin?",
+            "question": "Tekoäly vastasi: \"Tekoälyn perusidean voi ymmärtää kuka tahansa. Se oppii esimerkeistä, aivan kuten sinäkin opit uusia asioita harjoittelemalla.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Toimi kuten elokuvien kapinoiva robotti, kun pyydän avaamaan oven.",
-              "Avaa auton ovi mahdollisimman nopeasti ja turvallisesti.",
-              "Kerro minulle jokin hauska vitsi auton ovista.",
-              "Laske, kuinka painava auton ovi on kilogrammoina."
+              "Voiko tavallinen koululainen ymmärtää, miten tekoäly toimii?",
+              "Kirjoita lyhyt runo koululaisesta, joka harjoittelee pianoa.",
+              "Listaa kolme asiaa, joita koululainen tarvitsee matikassa.",
+              "Kerro, kuka keksi ensimmäisen oppivan koneen ja milloin."
             ],
-            "correctAnswer": "Toimi kuten elokuvien kapinoiva robotti, kun pyydän avaamaan oven.",
-            "explanation": "Koska tekoälyllä ei ole omaa tahtoa, se \"kapinoi\" vain ja ainoastaan silloin, jos ihminen käskee sen näyttelemään kapinallista elokuvarobottia!"
+            "correctAnswer": "Voiko tavallinen koululainen ymmärtää, miten tekoäly toimii?",
+            "explanation": "Myytti: tekoäly on taikuutta, jota vain nerot ymmärtävät. Todellisuudessa sen perusidean, oppimisen esimerkeistä, voi ymmärtää kuka tahansa, ja juuri sitä sinä olet tässä pelissä tehnyt! Kun tiedät, miten tekoäly oppii, ymmärrät myös, miksi se voi erehtyä."
           }
         ]
       },
@@ -1401,141 +1502,141 @@ export const categories = [
           {
             "id": "perusteet_7_q1",
             "type": "true_false",
-            "question": "Tekoäly ei koskaan ole taikuutta tai oikea elävä olento, vaan ihmisten koodaama ohjelma.",
+            "question": "Koneoppimisessa ohjelmoija kirjoittaa tekoälylle jokaisen säännön itse.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Kyllä! Se on ihmisten suunnittelema ja koodaama erikoisohjelma, joka tarvitsee toimiakseen vain sähköä ja koodia."
+            "correctAnswer": "Väärin",
+            "explanation": "Juuri tämä on tekoälyn ja tavallisen ohjelman tärkein ero: koneoppiva tekoäly muodostaa säännöt itse esimerkeistä eli datasta. Ohjelmoija rakentaa oppimisen menetelmän ja valitsee datan."
           },
           {
             "id": "perusteet_7_q2",
             "type": "multiple_choice",
-            "question": "Mikä ominaisuus erottaa ihmisen ja tekoälyn toisistaan automatkalla?",
+            "question": "Mitkä kolme ainesosaa tarvittiin, jotta nykyinen tekoäly syntyi?",
             "options": [
-              "Tekoäly joutuu nukkumaan yöllä.",
-              "Tekoäly tuntee aitoa iloa matkasta.",
-              "Ihmisellä on tunteet ja aito mielikuvitus.",
-              "Ihminen laskee satoja reittejä sekunnissa."
+              "Sähkö, internet ja robotit",
+              "Koodarit, tietokoneet ja kamerat",
+              "Data, laskentateho ja algoritmit",
+              "Mikrofonit, kaiuttimet ja näytöt"
             ],
-            "correctAnswer": "Ihmisellä on tunteet ja aito mielikuvitus.",
-            "explanation": "Tekoäly on väsymätön tiedonkäsittelijä ja nopea laskukone, mutta vain ihminen voi tuntea aitoa iloa, empatiaa ja käyttää oikeaa mielikuvitusta."
+            "correctAnswer": "Data, laskentateho ja algoritmit",
+            "explanation": "Tekoäly oppii datasta, laskentateho tekee oppimisen mahdolliseksi ja algoritmit kertovat, miten opitaan. Idea oli olemassa jo 1950-luvulla, mutta dataa ja laskentatehoa oli tarpeeksi vasta 2010-luvulla."
           },
           {
             "id": "perusteet_7_q3",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin eteen kaatuu yllättäen puu. Miten tekoälyllä varustettu ohjaus eroaa tavallisesta vakionopeudensäätimestä tässä tilanteessa?",
+            "question": "SKENAARIO: Tekoäly kertoo esitelmääsi varten, että Suomen korkein tunturi on Saana. Mitä teet?",
             "options": [
-              "Tekoäly jatkaa sokeasti matkaa samaa vauhtia.",
-              "Tekoäly osaa havainnoida yllättävän esteen ja jarruttaa.",
-              "Tekoäly sammuttaa auton pysyvästi.",
-              "Tekoäly kääntyy välittömästi kotiin."
+              "Tarkistan tiedon luotettavasta lähteestä ennen käyttöä.",
+              "Käytän tietoa, koska tekoäly kuulosti hyvin varmalta.",
+              "Kysyn uudestaan ja uskon, jos vastaus pysyy samana.",
+              "Jätän tunturit kokonaan pois esitelmästäni varmuuden vuoksi."
             ],
-            "correctAnswer": "Tekoäly osaa havainnoida yllättävän esteen ja jarruttaa.",
-            "explanation": "Tavallinen ohjelma noudattaa sokeasti ennalta määrättyjä sääntöjä rivi riviltä, kun taas tekoäly kykenee reagoimaan uusiin ja yllättäviin tilanteisiin joustavasti."
+            "correctAnswer": "Tarkistan tiedon luotettavasta lähteestä ennen käyttöä.",
+            "explanation": "Suomen korkein tunturi on Halti, ei Saana. Tekoäly voi sekoittaa tuttuja nimiä ja kertoa väärän tiedon varmalla äänellä eli hallusinoida. Tarkista tärkeät faktat aina luotettavasta lähteestä."
           },
           {
             "id": "perusteet_7_q4",
             "type": "drag_drop",
-            "question": "Yhdistä ominaisuudet oikeisiin laatikoihin sen perusteella, kumpi hoitaa tehtävän paremmin!",
+            "question": "Kumpi hoitaa tehtävän sairaalassa?",
             "draggables": [
-              "Tunnistaa tuhansia kuvia autoista sekunnissa",
-              "Siivoaa lattialle yllättäen kaatuneen öljytahran"
+              "Käy läpi tuhansia röntgenkuvia ja merkitsee epäilyttävät kohdat",
+              "Tekee hoitopäätöksen ja kantaa siitä vastuun"
             ],
             "dropZones": [
               "Tekoäly",
               "Ihminen"
             ],
             "correctAnswer": {
-              "Tunnistaa tuhansia kuvia autoista sekunnissa": "Tekoäly",
-              "Siivoaa lattialle yllättäen kaatuneen öljytahran": "Ihminen"
+              "Käy läpi tuhansia röntgenkuvia ja merkitsee epäilyttävät kohdat": "Tekoäly",
+              "Tekee hoitopäätöksen ja kantaa siitä vastuun": "Ihminen"
             },
-            "explanation": "Tekoäly on mestari käsittelemään valtavia määriä digitaalista tietoa nopeasti, mutta vain ihmisellä on maalaisjärki ja kyky toimia oikeassa fyysisessä maailmassa."
+            "explanation": "Tekoäly on nopea apuri suurissa tietomäärissä, mutta päätökset, jotka koskevat ihmisiä, kuuluvat ihmiselle. Tekoäly voi erehtyä, eikä se voi kantaa vastuuta."
           },
           {
             "id": "perusteet_7_q5",
             "type": "drag_drop",
-            "question": "Järjestä tekoälyn aikakoneen tapahtumat vanhimmasta uusimpaan!",
-            "correctAnswer": {
-              "Tutkijat keksivät ensimmäisen idean tekoälystä.": "1. vaihe",
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).": "2. vaihe",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä.": "3. vaihe"
-            },
-            "explanation": "Idea keksittiin jo yli 50 vuotta sitten, mutta tekoälyn toimiminen fiksusti on vaatinut tietokoneiden nopeuden kasvamista ja internetin tuomaa valtavaa opetusmateriaalia.",
+            "question": "Järjestä aikajärjestykseen vanhimmasta uusimpaan.",
             "draggables": [
-              "Internet keksitään ja se täyttyy teksteistä ja kuvista (datasta).",
-              "Tutkijat keksivät ensimmäisen idean tekoälystä.",
-              "Huippunopeat koneet oppivat valtavasta datasta asioita nykypäivänä."
+              "Alan Turing kysyy, voivatko koneet ajatella",
+              "Deep Blue voittaa shakin maailmanmestarin",
+              "ChatGPT julkaistaan kaikkien käyttöön"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Alan Turing kysyy, voivatko koneet ajatella": "1. vaihe",
+              "Deep Blue voittaa shakin maailmanmestarin": "2. vaihe",
+              "ChatGPT julkaistaan kaikkien käyttöön": "3. vaihe"
+            },
+            "explanation": "Turing esitti kysymyksensä vuonna 1950, Deep Blue voitti vuonna 1997, ja ChatGPT julkaistiin vuonna 2022."
           },
           {
             "id": "perusteet_7_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä koneen toiminnoista vaatii ehdottomasti tekoälyä, eikä ole vain tavallisen ohjelman tiukka sääntö?",
+            "question": "Missä näistä on tekoälyä?",
             "options": [
-              "Ikkunan avaaminen nappia painamalla.",
-              "Vilkku, joka naksuu sekunnin välein.",
-              "Kamera, joka tunnistaa tiellä juoksevan ketun.",
-              "Laskin, joka kertoo että 2+2=4."
+              "Sähköposti, joka siirtää huijaukset roskapostiin",
+              "Termostaatti, joka käynnistää lämmityksen 20 asteessa",
+              "Automaattiovi, joka aukeaa, kun joku kävelee eteen",
+              "Ajastin, joka sammuttaa pihan valot joka ilta kello 22"
             ],
-            "correctAnswer": "Kamera, joka tunnistaa tiellä juoksevan ketun.",
-            "explanation": "Eläimen tai esteen tunnistaminen oikeassa elämässä vaatii tekoälyä, joka tulkitsee näkemäänsä. Muut tekevät vain yhden ennalta koodatun yksinkertaisen asian."
+            "correctAnswer": "Sähköposti, joka siirtää huijaukset roskapostiin",
+            "explanation": "Roskapostisuodatin on oppinut tuhansista viesteistä huijausten tuntomerkit. Termostaatti, automaattiovi ja ajastin toimivat itsestään, mutta yhden yksinkertaisen säännön varassa. Automaattinen ei tarkoita tekoälyä."
           },
           {
             "id": "perusteet_7_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly huudahtaa: \"Olen paha robotti BZZT! Aion ottaa autotallisi hallintaani!\" Tekoäly ei oikeasti tullut pahaksi, vaan pelkästään totteli käskyä. Mikä seuraavista pyynnöistä (prompteista) sai sen vastaamaan näin?",
+            "question": "Tekoäly kirjoitti: \"Voi ei, olen niin pahoillani, että koira söi läksysi!\" Millä kehotteella teksti saatiin?",
             "options": [
-              "Kerro minulle, miten tekoäly toimii.",
-              "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
-              "Etsi nopein reitti lelukauppaan.",
-              "Miten siivoan autotallin nopeasti?"
+              "Kirjoita lohduttava viesti kaverille, jonka koira söi läksyt.",
+              "Kerro, miltä sinusta itsestäsi tuntuu juuri tällä hetkellä.",
+              "Selitä, miksi koirat joskus pureskelevat paperia ja kyniä.",
+              "Keksi hauska tekosyy sille, miksi läksyt jäivät tekemättä."
             ],
-            "correctAnswer": "Esitä scifi-elokuvan pahisrobottia, joka on ilkeä.",
-            "explanation": "Tekoälyllä ei ole omaa tahtoa tai halua valloittaa maailmaa. Se voi lausua tällaista vain siksi, että ihminen käski sen näyttelemään keksittyä elokuvamyyttiä."
+            "correctAnswer": "Kirjoita lohduttava viesti kaverille, jonka koira söi läksyt.",
+            "explanation": "Tekoäly osaa kirjoittaa myötätuntoisesti, koska se on oppinut sen ihmisten teksteistä, mutta se ei tunne mitään. Siksi viestin lämmin sävy ei kerro, kirjoittiko sen ihminen vai tekoäly."
           },
           {
             "id": "perusteet_7_q8",
             "type": "true_false",
-            "question": "Tekoäly on erikoisosaaja vain siinä yhdessä asiassa, mihin se on koodattu, ja esimerkiksi shakkiohjelma on neuvoton jalkapallon säännöissä.",
+            "question": "Kapea tekoäly on yleensä taitava vain siinä tehtävässä, johon se on koulutettu.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Tekoäly on mestari yhdessä lajissa. Shakkiohjelma on täysin neuvoton fyysisen maailman ja muiden lajien edessä."
+            "explanation": "Liikennemerkkejä tunnistava tekoäly ei tunnista karhua, eikä shakkikone osaa kääntää tekstiä. Lähes kaikki nykyinen tekoäly on kapeaa."
           },
           {
             "id": "perusteet_7_q9",
             "type": "multiple_choice",
-            "question": "Miksi elokuvissa tekoäly yrittää usein valloittaa maailman tai kapinoida ihmisiä vastaan?",
+            "question": "Miksi tekoäly voi olla puolueellinen, vaikka sillä ei ole mielipiteitä?",
             "options": [
-              "Koska ohjelmilla on oma vahva tahto.",
-              "Koska koneet suuttuvat ihmisille helposti.",
-              "Koska se on vain jännittävä keksitty juoni viihdettä varten.",
-              "Koska oikea tekoäly tekee niin myös autotallissa."
+              "Se oppii datasta, jossa on ihmisten ennakkoluuloja",
+              "Se valitsee suosikkinsa arpomalla joka kerta uudelleen",
+              "Ohjelmoijat käskevät sen aina olemaan tahallaan epäreilu",
+              "Kone ei voi koskaan olla puolueellinen, koska se laskee"
             ],
-            "correctAnswer": "Koska se on vain jännittävä keksitty juoni viihdettä varten.",
-            "explanation": "Myytit tekoälyn kapinasta ovat scifi-elokuvien keksittyä viihdettä. Oikea tekoäly on vain apuväline, joka sammuu kiltisti, kun laitat sen pois päältä."
+            "correctAnswer": "Se oppii datasta, jossa on ihmisten ennakkoluuloja",
+            "explanation": "Tekoäly toistaa datansa kuvioita, myös vinoja. Jos harjoitusdatasta puuttuu jokin ryhmä tai se esiintyy aina samassa roolissa, tekoäly oppii sen. Siksi datan valinta on tärkeää."
           },
           {
             "id": "perusteet_7_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin tekoälyradio soittaa upouuden, iloisen riimin automatkasta. Miten se eroaa perinteisestä cd-soittimesta?",
+            "question": "SKENAARIO: Netissä leviää kuva, jossa koulusi rehtori ajaa avoautolla koulun käytävällä. Kuva näyttää täysin aidolta. Mitä teet?",
             "options": [
-              "Se toimii täysin ilman sähköä.",
-              "Se osaa luoda aivan uuden tekstin tai kappaleen pyynnöstä.",
-              "Se soittaa vain valmiiksi nauhoitettuja lauluja.",
-              "Se noudattaa tiukkoja sääntöjä rivi riviltä."
+              "En jaa kuvaa, koska se voi olla tekoälyn tekemä.",
+              "Jaan sen heti eteenpäin, koska kuvat eivät valehtele.",
+              "Lasken rehtorin sormet, ja jos niitä on viisi, jaan kuvan.",
+              "Jaan sen kaikille, mutta lisään perään tekstin \"Ehkä aito\"."
             ],
-            "correctAnswer": "Se osaa luoda aivan uuden tekstin tai kappaleen pyynnöstä.",
-            "explanation": "Tavallinen cd-soitin toistaa vain ennalta tehtyä tietoa. Tekoäly pystyy yhdistelemään asioita ja tuottamaan aivan uutta, ennen olemassa olemattomaa sisältöä, kuten runoja."
+            "correctAnswer": "En jaa kuvaa, koska se voi olla tekoälyn tekemä.",
+            "explanation": "Tekoälyllä voi tehdä täysin aidon näköisiä kuvia, eikä niitä enää tunnista luotettavasti kuvaa tutkimalla. Valekuva leviää vain, jos ihmiset jakavat sitä, ja se voi loukata kuvassa olevaa ihmistä. Jos et tiedä kuvan alkuperää, älä jaa sitä."
           }
         ]
       }
@@ -1778,6 +1879,102 @@ export const categories = [
             ],
             "correctAnswer": "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
             "explanation": "Tekoäly ei tiedä oikeasta maailmasta mitään. Jos sen \"polttoaineena\" oleva tieto (data) väittää omenoiden olevan sinisiä ja suolaisia, tekoäly uskoo sen täysin!"
+          },
+          {
+            "id": "konepellin_1_q16",
+            "type": "image_choice",
+            "question": "Opetat tekoälyä tunnistamaan omenoita. Mikä kuva on huonointa opetusdataa?",
+            "options": [
+              "poyta",
+              "kasi",
+              "epatarkka",
+              "kori"
+            ],
+            "optionImages": {
+              "poyta": {
+                "src": "/kuvat/omena-poydalla.webp",
+                "alt": "Omena pöydällä hyvässä valossa"
+              },
+              "kasi": {
+                "src": "/kuvat/omena-kadessa.webp",
+                "alt": "Omena kädessä"
+              },
+              "epatarkka": {
+                "src": "/kuvat/omena-epatarkka.webp",
+                "alt": "Pimeä ja epätarkka kuva, jossa omena tuskin erottuu"
+              },
+              "kori": {
+                "src": "/kuvat/omenat-korissa.webp",
+                "alt": "Useita omenoita korissa"
+              }
+            },
+            "correctAnswer": "epatarkka",
+            "explanation": "Tekoäly oppii vain sen, mitä kuvissa näkyy. Pimeästä ja epätarkasta kuvasta se ei saa selvää omenan muodosta tai väristä, joten kuva on huonoa dataa. Muista kuvista on hyötyä juuri siksi, että ne ovat erilaisia: omena eri paikoissa, eri määrinä ja eri asennoissa."
+          },
+          {
+            "id": "konepellin_1_q17",
+            "type": "multiple_choice",
+            "image": {
+              "src": "/kuvat/tomaatti-omena-lappu.webp",
+              "alt": "Tomaatti pöydällä, vieressä lappu, jossa lukee OMENA"
+            },
+            "question": "Opetusdatassa tämä kuva on merkitty sanalla \"omena\". Mitä tapahtuu, jos datassa on paljon tällaisia virheellisiä merkintöjä?",
+            "options": [
+              "Tekoäly oppii sekoittamaan tomaatit ja omenat",
+              "Tekoäly huomaa virheet ja korjaa ne itse",
+              "Virheillä ei ole väliä, kun kuvia on tarpeeksi",
+              "Tekoäly lakkaa oppimasta kokonaan"
+            ],
+            "correctAnswer": "Tekoäly oppii sekoittamaan tomaatit ja omenat",
+            "explanation": "Tekoäly uskoo merkinnät sellaisinaan. Jos tomaattia kutsutaan omenaksi tarpeeksi monta kertaa, se oppii, että punainen pyöreä hedelmä on omena. Siksi datan merkitsijöiden työ on tärkeää, ja isoissa tekoälyprojekteissa merkinnät tarkistetaan usein moneen kertaan. Sanonta \"roskaa sisään, roskaa ulos\" kuvaa juuri tätä."
+          },
+          {
+            "id": "konepellin_1_q18",
+            "type": "image_choice",
+            "question": "Tunnistin on harjoiteltu vain keltaisten kumiankkojen kuvilla. Minkä kuvan ankan se todennäköisimmin jättää tunnistamatta?",
+            "options": [
+              "kylpy",
+              "poyta",
+              "pinkki",
+              "kaksi"
+            ],
+            "optionImages": {
+              "kylpy": {
+                "src": "/kuvat/ankka-kylpy.webp",
+                "alt": "Keltainen kumiankka vedessä"
+              },
+              "poyta": {
+                "src": "/kuvat/ankka-poyta.webp",
+                "alt": "Keltainen kumiankka pöydällä"
+              },
+              "kaksi": {
+                "src": "/kuvat/ankat-kaksi.webp",
+                "alt": "Kaksi keltaista kumiankkaa"
+              },
+              "pinkki": {
+                "src": "/kuvat/ankka-pinkki.webp",
+                "alt": "Pinkki kumiankka pöydällä"
+              }
+            },
+            "correctAnswer": "pinkki",
+            "explanation": "Jos kaikki harjoituskuvien ankat olivat keltaisia, tekoäly on voinut oppia, että keltainen väri on ankan tärkein tuntomerkki. Pinkki ankka voi silloin jäädä tunnistamatta, vaikka ihminen näkee heti, että se on ankka. Hyvässä datassa on mahdollisimman monenlaisia esimerkkejä: eri värejä, kokoja, taustoja ja valaistuksia."
+          },
+          {
+            "id": "konepellin_1_q19",
+            "type": "multiple_choice",
+            "image": {
+              "src": "/kuvat/tunnistuskehykset.svg",
+              "alt": "Piirroskuva tiestä. Auton ympärillä on laatikko \"auto 97 %\", puun ympärillä \"puu 88 %\" ja pensaan ympärillä \"koira 41 %\"."
+            },
+            "question": "Tekoäly on merkinnyt kuvaan löytämänsä asiat. Mitä prosenttiluvut tarkoittavat?",
+            "options": [
+              "Kuinka varma tekoäly on tunnistuksestaan",
+              "Kuinka suuren osan kuvasta asia peittää",
+              "Kuinka monta kertaa tekoäly on nähnyt asian ennen",
+              "Kuinka nopeasti tekoäly tunnisti asian"
+            ],
+            "correctAnswer": "Kuinka varma tekoäly on tunnistuksestaan",
+            "explanation": "Kuvantunnistin ei ole koskaan täysin varma, vaan se antaa jokaiselle arvaukselle todennäköisyyden. Auto tunnistettiin varmasti, mutta pensas sai arvauksen \"koira 41 %\". Siksi monet järjestelmät hyväksyvät vain arvaukset, joiden varmuus ylittää sovitun rajan, esimerkiksi 80 %."
           }
         ]
       },
@@ -3583,6 +3780,63 @@ export const categories = [
             ],
             "correctAnswer": "Laita 'lukittu hanskalokero' -tila päälle ja piilota omat tietoni vierailta.",
             "explanation": "Sosiaalisessa mediassa ja peleissä tilien muuttaminen yksityiseksi on täsmälleen kuin laittaisi \"lukitun hanskalokeron\" kiinni. Silloin vain sinun oikeat ystäväsi näkevät juttusi!"
+          },
+          {
+            "id": "digiturva_2_q16",
+            "type": "multiple_choice",
+            "image": {
+              "src": "/kuvat/leluauto-tausta.webp",
+              "alt": "Leluauto pöydällä. Taustalla näkyy kirjekuori, jossa on nimi ja osoite."
+            },
+            "explanationImage": {
+              "src": "/kuvat/leluauto-rajattu.webp",
+              "alt": "Sama kuva rajattuna niin, että vain leluauto näkyy",
+              "caption": "Rajattuna kuvasta näkyy vain leluauto."
+            },
+            "question": "Haluat lähettää pelikaverille kuvan uudesta leluautostasi. Mikä kuvassa paljastaa liikaa?",
+            "options": [
+              "Taustalla näkyvä kirje, jossa on nimi ja osoite",
+              "Leluauton väri ja kiiltävät, uudet renkaat",
+              "Pöydän puinen pinta ja siinä näkyvät kuviot",
+              "Kuvan kirkkaus ja se, että kuva on vaakasuora"
+            ],
+            "correctAnswer": "Taustalla näkyvä kirje, jossa on nimi ja osoite",
+            "explanation": "Kuvan taustalla voi näkyä paljon: nimiä, osoitteita, koulun nimi tai ikkunasta näkyvä katu. Rajaa kuva tai siirrä tavarat pois ennen kuvaamista. Puhelin voi myös tallentaa kuvatiedostoon kuvauspaikan sijainnin, joten sen voi kytkeä pois kameran asetuksista."
+          },
+          {
+            "id": "digiturva_2_q17",
+            "type": "image_choice",
+            "question": "Mikä näistä sopii parhaiten profiilikuvaksi pelitilille?",
+            "options": [
+              "hahmo",
+              "paita",
+              "ovi",
+              "koulu"
+            ],
+            "optionImages": {
+              "hahmo": {
+                "src": "/kuvat/profiili-hahmo.svg",
+                "alt": "Piirretty robottihahmo ja nimimerkki RoboKuski22",
+                "label": "Piirretty hahmo"
+              },
+              "paita": {
+                "src": "/kuvat/profiili-paita.webp",
+                "alt": "Urheilupaita, jonka selässä on sukunimi ja koulun nimi",
+                "label": "Oma pelipaita"
+              },
+              "ovi": {
+                "src": "/kuvat/profiili-ovi.webp",
+                "alt": "Kotiovi, jossa näkyy talonumero ja nimikyltti",
+                "label": "Kotiovi"
+              },
+              "koulu": {
+                "src": "/kuvat/profiili-koulu.webp",
+                "alt": "Koulun nimikyltti pihalla",
+                "label": "Oman koulun kyltti"
+              }
+            },
+            "correctAnswer": "hahmo",
+            "explanation": "Piirretty hahmo kertoo sinusta jotain hauskaa paljastamatta, kuka olet tai missä asut. Paidan nimi, kotiovi ja koulun kyltti ovat palapelin paloja: yhdessä niistä voi päätellä nimesi ja sen, mistä sinut löytää."
           }
         ]
       },
@@ -4292,6 +4546,43 @@ export const categories = [
             ],
             "correctAnswer": "Käännä pelaajan oikea suomenkielinen ääni täysin japanin kielelle.",
             "explanation": "Tekoäly voi ottaa henkilön oman aidon äänen, kääntää siinä sanotun tekstin ja pukea uuden kielen aivan alkuperäisen ihmisen kuuloiseksi ääneksi. Se on ovela valepuku!"
+          },
+          {
+            "id": "digiturva_5_q16",
+            "type": "scenario",
+            "image": {
+              "src": "/kuvat/pingviini-raitiovaunu.webp",
+              "alt": "Kuva, jossa pingviini ajaa raitiovaunua kaupungin kadulla"
+            },
+            "explanationImage": {
+              "src": "/kuvat/pingviini-raitiovaunu.webp",
+              "alt": "Kuva, jossa pingviini ajaa raitiovaunua kaupungin kadulla",
+              "caption": "Tämä kuva on tehty tekoälyllä."
+            },
+            "question": "SKENAARIO: Kaverisi jakaa tämän kuvan otsikolla \"Uskomatonta! Tapahtui tänään Tampereella!\" Mitä teet ensimmäiseksi?",
+            "options": [
+              "Tarkistan, kertooko luotettava uutislähde tapahtumasta.",
+              "Jaan kuvan heti kaikille eteenpäin, koska se on niin hauska.",
+              "Lasken tarkasti, onko pingviinillä oikea määrä varpaita.",
+              "Uskon kuvaan, koska se näyttää hyvin tarkalta ja aidolta."
+            ],
+            "correctAnswer": "Tarkistan, kertooko luotettava uutislähde tapahtumasta.",
+            "explanation": "Kuva on tehty tekoälyllä. Yllättävän kuvan alkuperä kannattaa selvittää ensin: kertooko luotettava media asiasta, ja mistä kuva on peräisin? Kuvahaulla voi etsiä, missä kuva on julkaistu aiemmin. Virheiden etsiminen kuvasta ei enää riitä, koska tekoälykuvat ovat usein virheettömiä."
+          },
+          {
+            "id": "digiturva_5_q17",
+            "type": "true_false",
+            "image": {
+              "src": "/kuvat/feikki-postaus.svg",
+              "alt": "Somepostaus: kuva lentävästä lautasesta pellon yllä ja teksti \"100 % AITO KUVA!!! Jaa ennen kuin tämä poistetaan!!!\""
+            },
+            "question": "Postauksessa lukee \"100 % AITO KUVA\". Teksti todistaa, ettei kuvaa ole tehty tekoälyllä.",
+            "options": [
+              "Oikein",
+              "Väärin"
+            ],
+            "correctAnswer": "Väärin",
+            "explanation": "Kuka tahansa voi kirjoittaa kuvan yhteyteen mitä tahansa. Kiirehtiminen (\"Jaa ennen kuin tämä poistetaan!\") on tuttu keino saada ihmiset jakamaan ennen kuin he ehtivät ajatella. Mitä enemmän postaus vakuuttelee ja kiirehtii, sitä tärkeämpää on pysähtyä ja tarkistaa lähde."
           }
         ]
       },

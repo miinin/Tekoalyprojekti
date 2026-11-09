@@ -3,7 +3,19 @@ import { createPortal } from 'react-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { store } from '../services/store';
 import { readingTimeMs } from '../components/readingTime';
-import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, Hand, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
+
+// Kysymyksen kaikki kuvat (kysymyskuva, selityskuva, kuvavaihtoehdot)
+const questionImageSrcs = (q) => [
+  q.image && q.image.src,
+  q.explanationImage && q.explanationImage.src,
+  ...Object.values(q.optionImages || {}).map((o) => o && o.src),
+].filter(Boolean);
+
+// Ladataan kierroksen kuvat valmiiksi, ettei koulun verkossa tarvitse odottaa kuvia kysymysten välissä
+const preloadQuestionImages = (list) => {
+  list.forEach((q) => questionImageSrcs(q).forEach((src) => { const img = new window.Image(); img.src = src; }));
+};
+import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, Hand, Image as ImageIcon, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
 import FitToHeight from '../components/FitToHeight';
 import TutorialModal from '../components/TutorialModal';
 
@@ -144,7 +156,9 @@ export default function Quiz() {
          if (subCategory && subCategory.endsWith('_7')) {
             // Keltainen finaali: kaikki 10 (tai maksimi) kerralla
             const shuffled = [...s.questions].sort(() => Math.random() - 0.5);
-            setQuestions(shuffled.slice(0, 10));
+            const finalSet = shuffled.slice(0, 10);
+            preloadQuestionImages(finalSet);
+            setQuestions(finalSet);
          } else {
             const correctness = store.getQuestionCorrectness()[s.id] || {};
             const unasked = [];
@@ -158,6 +172,8 @@ export default function Quiz() {
             });
             
             unasked.sort(() => Math.random() - 0.5);
+            // Esiin nostetut (featured) kysymykset ensin: esim. kuvakysymykset ensimmäiselle kierrokselle
+            unasked.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
             wrong.sort(() => Math.random() - 0.5);
             correct.sort(() => Math.random() - 0.5);
             
@@ -172,6 +188,7 @@ export default function Quiz() {
                selected = correct.slice(0, 5);
             }
             selected.sort(() => Math.random() - 0.5);
+            preloadQuestionImages(selected);
             setQuestions(selected);
          }
        }
@@ -222,7 +239,7 @@ export default function Quiz() {
     
     const currentQuestion = questions[currentIndex];
     
-    if (['multiple_choice', 'scenario', 'spot_the_ai', 'reverse_prompt'].includes(currentQuestion.type)) {
+    if (['multiple_choice', 'scenario', 'spot_the_ai', 'reverse_prompt', 'image_choice'].includes(currentQuestion.type)) {
         setShuffledOptions([...currentQuestion.options].sort(() => Math.random() - 0.5));
     } else {
         setShuffledOptions(currentQuestion.options ? [...currentQuestion.options] : []);
@@ -330,7 +347,7 @@ export default function Quiz() {
     
     // Uudet peliteorian mukaiset max-arvot
     if (currentQuestion.type === 'true_false') max = 20;
-    else if (currentQuestion.type === 'multiple_choice') max = 50;
+    else if (currentQuestion.type === 'multiple_choice' || currentQuestion.type === 'image_choice') max = 50;
     else if (currentQuestion.type === 'scenario' || currentQuestion.type === 'spot_the_ai' || currentQuestion.type === 'reverse_prompt') max = 80;
     else if (currentQuestion.type === 'ordering' || currentQuestion.type === 'drag_drop') max = 150;
     
@@ -685,6 +702,7 @@ export default function Quiz() {
       'ordering': { text: 'Järjestä oikein', icon: <ArrowUpDown size={22} />, color: '#16a34a', bg: '#dcfce7', border: '#bbf7d0' },
       'spot_the_ai': { text: 'Tunnista Tekoäly', icon: <Eye size={22} />, color: '#334155', bg: '#f1f5f9', border: '#cbd5e1' },
       'reverse_prompt': { text: 'Käänteinen Kehote', icon: <Terminal size={22} />, color: '#be185d', bg: '#fce7f3', border: '#fbcfe8' },
+      'image_choice': { text: 'Valitse kuva', icon: <ImageIcon size={22} />, color: '#7c3aed', bg: '#ede9fe', border: '#ddd6fe' },
       'spot_the_lie': { text: 'Hallusinaation Metsästys', icon: <Search size={22} />, color: '#b91c1c', bg: '#fee2e2', border: '#fecaca' },
       'jailbreak': { text: 'Jailbreak -hakkerointi', icon: <Unlock size={22} />, color: '#0f766e', bg: '#ccfbf1', border: '#99f6e4' }
     };
@@ -943,6 +961,18 @@ export default function Quiz() {
           </div>
         </div>
 
+        <div className={currentQuestion.image ? 'quiz-body quiz-body--figure' : 'quiz-body'}>
+        {currentQuestion.image && (() => {
+          // Vastaamisen jälkeen näytetään selityskuva (jos on), muuten kysymyksen kuva
+          const shown = showExplanation && currentQuestion.explanationImage ? currentQuestion.explanationImage : currentQuestion.image;
+          return (
+            <figure className="quiz-figure" key={shown.src}>
+              <img src={shown.src} alt={shown.alt || ''} style={{ aspectRatio: shown.ratio || '4 / 3' }} />
+              {(shown.caption || shown.credit) && <figcaption>{shown.caption || shown.credit}</figcaption>}
+            </figure>
+          );
+        })()}
+        <div className="quiz-main">
         <h2 className="quiz-question">
           {renderTextWithAivanGradient(currentQuestion.question)}
         </h2>
@@ -1003,6 +1033,22 @@ export default function Quiz() {
                   {currentQuestion.explanation}
                 </p>
               </div>
+              {!currentQuestion.image && (() => {
+                // Selityskuva. Valitse kuva -tehtävässä oletuksena oikean vastauksen kuva,
+                // koska selitysruutu peittää kuvavaihtoehdot.
+                let fig = currentQuestion.explanationImage;
+                if (!fig && currentQuestion.type === 'image_choice') {
+                  const meta = (currentQuestion.optionImages || {})[currentQuestion.correctAnswer];
+                  if (meta) fig = { src: meta.src, alt: meta.alt, caption: `Oikea vastaus${meta.label ? `: ${meta.label}` : ''}` };
+                }
+                if (!fig) return null;
+                return (
+                  <figure className="quiz-expl-figure">
+                    <img src={fig.src} alt={fig.alt || ''} style={{ aspectRatio: fig.ratio || '4 / 3' }} />
+                    {fig.caption && <figcaption>{fig.caption}</figcaption>}
+                  </figure>
+                );
+              })()}
             </div>
 
             <div style={{ display: 'flex', gap: '1rem', marginTop: 'clamp(0.75rem, 2.4vh, 1.75rem)' }}>
@@ -1076,6 +1122,41 @@ export default function Quiz() {
         {/* Visual Overrides for Specific Question Types */}
         {!['drag_drop', 'ordering'].includes(currentQuestion.type) && (() => {
            
+           // === VALITSE KUVA ===
+           if (currentQuestion.type === 'image_choice') {
+             const cols = Math.min(Math.max(shuffledOptions.length, 2), 4);
+             return (
+               <div style={{ display: 'flex', flexDirection: 'column' }}>
+                 <div className="quiz-image-options" style={{ '--cols': cols }}>
+                   {shuffledOptions.map((option) => {
+                     const meta = (currentQuestion.optionImages || {})[option] || {};
+                     const isSelected = selectedAnswer === option;
+                     const isRemoved = removedOptions.includes(option);
+                     let stateClass = '';
+                     if (showExplanation) stateClass = option === currentQuestion.correctAnswer ? ' is-correct' : (isSelected ? ' is-wrong' : ' is-dim');
+                     else if (isSelected) stateClass = ' is-selected';
+                     return (
+                       <button
+                         key={option}
+                         type="button"
+                         className={`quiz-image-option${stateClass}${isRemoved ? ' is-removed' : ''}`}
+                         aria-pressed={isSelected}
+                         aria-label={meta.label || meta.alt || option}
+                         disabled={isRemoved && !showExplanation}
+                         onClick={() => !showExplanation && !isRemoved && setSelectedAnswer(option)}
+                       >
+                         <img src={meta.src} alt={meta.alt || ''} />
+                         {meta.label && <span className="quiz-image-option-label">{meta.label}</span>}
+                         {isRemoved && <span className="quiz-image-option-badge">{bumperSaved ? 'Törmäyksenesto suojasi' : 'Varuste poisti'}</span>}
+                       </button>
+                     );
+                   })}
+                 </div>
+                 {renderSubmit(!showExplanation && !!selectedAnswer, () => handleAnswerSubmit(selectedAnswer), 'Lukitse vastaus', <CheckCircle2 size={20} />)}
+               </div>
+             );
+           }
+
            // === TRUE FALSE ===
            if (currentQuestion.type === 'true_false') {
              return (
@@ -1507,6 +1588,8 @@ export default function Quiz() {
             </div>
           );
         })()}
+        </div>
+        </div>
         </div>
         </div>
         </FitToHeight>
