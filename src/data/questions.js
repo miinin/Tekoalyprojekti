@@ -263,7 +263,6 @@ export const categories = [
           {
             "id": "perusteet_1_q17",
             "type": "multiple_choice",
-            "featured": true,
             "image": {
               "src": "/kuvat/pikselisydan-numerot.svg",
               "alt": "Ruudukko, jossa on numeroita 1 ja 9",
@@ -288,7 +287,6 @@ export const categories = [
           {
             "id": "perusteet_1_q18",
             "type": "reverse_prompt",
-            "featured": true,
             "image": {
               "src": "/kuvat/ai-van-kuu.webp",
               "alt": "Vesivärimaalaus vihreästä pakettiautosta, joka ajaa tähtitaivaalla kohti täysikuuta",

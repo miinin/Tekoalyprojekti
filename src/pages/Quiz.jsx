@@ -15,6 +15,28 @@ const questionImageSrcs = (q) => [
 const preloadQuestionImages = (list) => {
   list.forEach((q) => questionImageSrcs(q).forEach((src) => { const img = new window.Image(); img.src = src; }));
 };
+
+// Kuvakysymyksiä enintään tämän verran yhdellä kierroksella, jotta ne jakautuvat koko osiolle
+const MAX_IMAGE_QUESTIONS_PER_SET = 2;
+const isImageQuestion = (q) => Boolean(q.image) || q.type === 'image_choice';
+
+// Valitaan listan järjestyksessä n kysymystä. Kuvakysymykset jaetaan tasaisesti jäljellä
+// oleville kierroksille (enintään max per kierros), etteivät ne kasaannu alkuun tai loppuun.
+// Jos tekstikysymyksiä ei riitä, loput paikat täytetään kuvakysymyksillä.
+const pickWithImageCap = (list, n, max = MAX_IMAGE_QUESTIONS_PER_SET) => {
+  const imageQs = list.filter(isImageQuestion);
+  const textQs = list.filter((q) => !isImageQuestion(q));
+  const roundsLeft = Math.max(1, Math.ceil(list.length / n));
+  // Keskimäärin kuvia / kierroksia; murto-osa arvotaan, jotta kuvat osuvat eri kierroksille eri pelikerroilla
+  const share = imageQs.length / roundsLeft;
+  const quota = Math.min(max, n, Math.floor(share) + (Math.random() < share - Math.floor(share) ? 1 : 0));
+  const picked = [...imageQs.slice(0, quota), ...textQs.slice(0, n - quota)];
+  for (const q of imageQs.slice(quota)) {
+    if (picked.length >= n) break;
+    picked.push(q);
+  }
+  return picked;
+};
 import { CheckCircle2, XCircle, ArrowRight, ChevronLeft, Lightbulb, Scale, List, Compass, Move, ArrowUpDown, Eye, Terminal, Search, Unlock, Brain, Zap, ArrowUp, ArrowDown, AlertTriangle, Hand, Image as ImageIcon, ShieldCheck, Disc, Wrench, Flame } from 'lucide-react';
 import FitToHeight from '../components/FitToHeight';
 import TutorialModal from '../components/TutorialModal';
@@ -156,7 +178,7 @@ export default function Quiz() {
          if (subCategory && subCategory.endsWith('_7')) {
             // Keltainen finaali: kaikki 10 (tai maksimi) kerralla
             const shuffled = [...s.questions].sort(() => Math.random() - 0.5);
-            const finalSet = shuffled.slice(0, 10);
+            const finalSet = pickWithImageCap(shuffled, 10, MAX_IMAGE_QUESTIONS_PER_SET * 2);
             preloadQuestionImages(finalSet);
             setQuestions(finalSet);
          } else {
@@ -182,10 +204,10 @@ export default function Quiz() {
             
             if (pool.length > 0) {
                // Jos jäljellä on alle 5 vastaamatonta tai väärää, näytetään vain ne.
-               selected = pool.slice(0, 5);
+               selected = pickWithImageCap(pool, 5);
             } else {
                // Jos kaikki on jo tehty (kategoriapalkin uudelleenpeluu), näytetään satunnaiset vanhat 5
-               selected = correct.slice(0, 5);
+               selected = pickWithImageCap(correct, 5);
             }
             selected.sort(() => Math.random() - 0.5);
             preloadQuestionImages(selected);
