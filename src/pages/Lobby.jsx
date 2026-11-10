@@ -514,9 +514,10 @@ export default function Lobby() {
       )}
 
       {showInfoBox && createPortal(
-         <div className="animate-fade-in" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', maxHeight: 'calc(100dvh - 2rem)', zIndex: 10, textAlign: 'center' }}>
+            {/* Kiinteä korkeus: sisällön sovitus ei saa muuttaa laatikon kokoa, muuten laatikko "valuu" auetessa */}
+            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', height: 'calc(100dvh - 2rem)', zIndex: 10, textAlign: 'center' }}>
                <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', zIndex: -1, pointerEvents: 'none' }} />
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: 'clamp(0.8rem, 1.5vh, 1.5rem)', right: 'clamp(0.8rem, 1.5vh, 1.5rem)', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: 'clamp(0.4rem, 1vh, 0.6rem)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
@@ -524,14 +525,9 @@ export default function Lobby() {
                   Kuskit ja apukuskit
                </h2>
                
-               <FitToHeight className="info-fit" style={{ width: '100%', maxWidth: '1100px' }}>
-               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', fontFamily: 'var(--font-main)', flexGrow: 1, justifyContent: 'center' }}>
-                  {/* Tuorein päivitys */}
-                  <div className="info-update">
-                      <div className="info-update-head"><Sparkles size={22} color="#059669" /> Tuorein päivitys {LATEST_UPDATE.date}</div>
-                      <UpdateNotes compact />
-                  </div>
-                  
+               <FitToHeight className="info-fit" style={{ width: '100%' }}>
+               <div className="info-layout">
+               <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', minWidth: 0, fontFamily: 'var(--font-main)', justifyContent: 'center' }}>
                   {/* Kehittäjät */}
                   <div style={{ background: '#f8fafc', borderRadius: '24px', padding: 'clamp(1rem, 2vh, 2.5rem) clamp(1rem, 2vh, 2rem)', border: '3px solid #e2e8f0', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', display: 'flex', flexDirection: 'column', justifyContent: 'center', width: '100%' }}>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 2rem)' }}>
@@ -596,7 +592,7 @@ export default function Lobby() {
                               <Zap size={20} color="#f97316" /> Tekoälypalvelut
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1.2rem)', flexGrow: 1, justifyContent: 'center' }}>
-                              {['Google Antigravity', 'Claude Code', 'NotebookLM', 'Google Gemini'].map(name => (
+                              {['Google Antigravity (Gemini)', 'Claude Code', 'NotebookLM'].map(name => (
                                   <span key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                       {name}
                                   </span>
@@ -604,7 +600,14 @@ export default function Lobby() {
                           </div>
                       </div>
                   </div>
- 
+
+               </div>
+
+               {/* Tuorein päivitys: sivupalkkina pääsisällön vieressä */}
+               <aside className="info-update">
+                   <div className="info-update-head"><Sparkles size={22} color="#059669" /> Tuorein päivitys {LATEST_UPDATE.date}</div>
+                   <UpdateNotes compact />
+               </aside>
                </div>
                </FitToHeight>
             </div>
