@@ -516,8 +516,10 @@ export default function Lobby() {
       {showInfoBox && createPortal(
          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(3px)' }} onClick={() => setShowInfoBox(false)} />
-            {/* Kiinteä korkeus: sisällön sovitus ei saa muuttaa laatikon kokoa, muuten laatikko "valuu" auetessa */}
-            <div style={{ position: 'relative', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '1250px', height: 'calc(100dvh - 2rem)', zIndex: 10, textAlign: 'center' }}>
+            {/* Sovitusalue on kiinteän korkuinen ja näkymätön, joten sovitus ei muuta omaa tilaansa (muuten laatikko "valuu" auetessa).
+                Näkyvä kortti on sovitettavan sisällön sisällä: se on vain sisältönsä korkuinen ja keskellä. */}
+            <FitToHeight className="info-fit" style={{ position: 'relative', zIndex: 10, flex: '0 1 1250px', width: '100%', maxWidth: '1250px', height: 'calc(100dvh - 2rem)', pointerEvents: 'none' }}>
+            <div style={{ position: 'relative', isolation: 'isolate', pointerEvents: 'auto', padding: 'clamp(1rem, 2vh, 2rem) clamp(1rem, 2vh, 1.5rem)', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', textAlign: 'center' }}>
                <div style={{ position: 'absolute', inset: 0, background: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(25px)', WebkitBackdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.8)', boxShadow: '0 25px 60px rgba(0,0,0,0.25)', borderRadius: '36px', zIndex: -1, pointerEvents: 'none' }} />
                <button onClick={() => setShowInfoBox(false)} style={{ position: 'absolute', top: 'clamp(0.8rem, 1.5vh, 1.5rem)', right: 'clamp(0.8rem, 1.5vh, 1.5rem)', background: 'rgba(255,255,255,0.8)', border: 'none', cursor: 'pointer', color: '#64748b', padding: 'clamp(0.4rem, 1vh, 0.6rem)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform='scale(1.1)'} onMouseOut={(e) => e.currentTarget.style.transform='scale(1)'}><X size={26} /></button>
                
@@ -525,7 +527,6 @@ export default function Lobby() {
                   Kuskit ja apukuskit
                </h2>
                
-               <FitToHeight className="info-fit" style={{ width: '100%' }}>
                <div className="info-layout">
                <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.8rem, 2vh, 2.5rem)', width: '100%', minWidth: 0, fontFamily: 'var(--font-main)', justifyContent: 'center' }}>
                   {/* Kehittäjät */}
@@ -605,12 +606,12 @@ export default function Lobby() {
 
                {/* Tuorein päivitys: sivupalkkina pääsisällön vieressä */}
                <aside className="info-update">
-                   <div className="info-update-head"><Sparkles size={22} color="#059669" /> Tuorein päivitys {LATEST_UPDATE.date}</div>
+                   <div className="info-update-head">Tuorein päivitys {LATEST_UPDATE.date}</div>
                    <UpdateNotes compact />
                </aside>
                </div>
-               </FitToHeight>
             </div>
+            </FitToHeight>
          </div>,
          document.body
       )}

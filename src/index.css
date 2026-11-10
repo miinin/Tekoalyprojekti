@@ -743,7 +743,9 @@ button:active {
   align-items: stretch;
   width: 100%;
 }
+/* Päivityslaatikko vain sisältönsä korkuinen (ei venytetä pääsisällön korkuiseksi) */
 .info-layout .info-update {
+  align-self: center;
   align-content: start;
 }
 .info-layout .update-notes--compact {
