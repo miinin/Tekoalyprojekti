@@ -534,23 +534,22 @@ export default function Lobby() {
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', color: '#64748b', fontWeight: '900', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: 'clamp(1rem, 2vh, 2rem)' }}>
                           <Users size={24} color="#0ea5e9" /> Vastaavat Kehittäjät
                       </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'stretch', justifyContent: 'center', gap: 'clamp(0.5rem, 1vh, 1.2rem)', width: '100%' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 1rem' }}>
+                      {/* Kaikki Eduksin tekijät samankokoisina laatikoina samalla rivillä */}
+                      <div style={{ display: 'grid', gridTemplateColumns: 'auto auto repeat(3, minmax(0, 1fr))', alignItems: 'stretch', gap: 'clamp(0.5rem, 1vh, 1.2rem)', width: '100%' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0.5rem' }}>
                               <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: 'clamp(40px, 6vh, 65px)', objectFit: 'contain', opacity: 0.95 }} />
                           </div>
                           <div style={{ fontSize: 'clamp(1.5rem, 3vh, 2rem)', fontWeight: 'bold', color: '#cbd5e1', display: 'flex', alignItems: 'center' }}>:</div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '220px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={20} color="#0284c7" /> <BookOpen size={20} color="#0284c7" /> <Paintbrush size={20} color="#0284c7" /></div>
-                              Miika Miinin
-                          </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Settings size={20} color="#0284c7" /> <BookOpen size={20} color="#0284c7" /></div>
-                              Heikki Laivamaa
-                          </div>
-                          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.8rem, 2vh, 1.8rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', flex: 1, minWidth: '200px' }}>
-                              <div style={{ display: 'flex', gap: '0.8rem' }}><Paintbrush size={20} color="#0284c7" /></div>
-                              Pauli Hirvonen
-                          </div>
+                          {[
+                              { name: 'Miika Miinin', icons: [Settings, BookOpen, Paintbrush] },
+                              { name: 'Heikki Laivamaa', icons: [Settings, BookOpen] },
+                              { name: 'Pauli Hirvonen', icons: [Paintbrush] },
+                          ].map(({ name, icons }) => (
+                              <div key={name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 'clamp(0.3rem, 1vh, 0.8rem)', padding: 'clamp(0.6rem, 1.5vh, 1.2rem) clamp(0.5rem, 1.5vh, 1rem)', background: '#ffffff', color: '#1e293b', border: '2px solid #cbd5e1', borderRadius: '20px', fontWeight: 'bold', fontSize: 'clamp(0.95rem, 2vh, 1.3rem)', boxShadow: '0 4px 15px rgba(0,0,0,0.04)', minWidth: 0 }}>
+                                  <div style={{ display: 'flex', gap: '0.8rem' }}>{icons.map((Icon, i) => <Icon key={i} size={20} color="#0284c7" />)}</div>
+                                  {name}
+                              </div>
+                          ))}
                       </div>
                   </div>
  
