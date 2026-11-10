@@ -104,13 +104,8 @@ function GlobalLogo() {
   const location = useLocation();
   const isLobby = location.pathname.startsWith('/lobby') || location.pathname === '/';
   
-  if (isLobby) {
-     return (
-        <div className="animate-fade-in" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 10, pointerEvents: 'none' }}>
-           <img src="/edukslogo.png" alt="Eduks" style={{ width: '160px', opacity: 0.9, filter: 'drop-shadow(0 4px 10px rgba(0,0,0,0.2))' }} />
-        </div>
-     );
-  }
+  // Etusivulla Eduks-logo on sivun alapalkissa
+  if (isLobby) return null;
 
   return (
      <div className="animate-fade-in" style={{ position: 'fixed', bottom: '1.2rem', right: '1.2rem', zIndex: 9000, pointerEvents: 'none' }}>

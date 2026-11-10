@@ -18,7 +18,17 @@ export default function Lobby() {
   const [skipTutorial, setSkipTutorial] = useState(store.getTutorialSkipped());
   const [showSettings, setShowSettings] = useState(false);
   const [showInfoBox, setShowInfoBox] = useState(false);
-  const [showUpdate, setShowUpdate] = useState(false);
+  // Huomiomerkki (i)-painikkeessa, kunnes tuorein päivitys on nähty
+  const [hasUnseenUpdate, setHasUnseenUpdate] = useState(() => {
+    try { return localStorage.getItem('aivan_seen_update') !== LATEST_UPDATE.date; } catch { return false; }
+  });
+  const openInfoBox = () => {
+    setShowInfoBox(true);
+    if (hasUnseenUpdate) {
+      setHasUnseenUpdate(false);
+      try { localStorage.setItem('aivan_seen_update', LATEST_UPDATE.date); } catch { /* yksityinen selaus */ }
+    }
+  };
   const [loadCode, setLoadCode] = useState('');
   const [isRestoring, setIsRestoring] = useState(false);
   const [modalState, setModalState] = useState(null);
@@ -254,61 +264,17 @@ export default function Lobby() {
            pointerEvents: 'none'
         }} />
 
-        <div style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.55rem', zIndex: 15 }}>
-        <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-          <a href="https://eduks.fi/aivan" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', textDecoration: 'none', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-              <MessageSquare size={20} color="#15803d" /> Anna palautetta
-          </a>
-          <button onClick={() => navigate('/teacher')} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem 1.2rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', fontFamily: 'var(--font-main)', fontWeight: 'bold', boxShadow: '0 4px 15px rgba(0,0,0,0.05)', transition: 'transform 0.2s' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-              <GraduationCap size={20} color="#15803d" /> Opettajalle
-          </button>
-          <button onClick={() => setShowInfoBox(true)} title="Tietoa pelistä" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-              <Info size={22} color="#15803d" />
-          </button>
-          <div style={{ position: 'relative' }}>
-            <button onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,1)', padding: '0.6rem', borderRadius: '24px', color: '#166534', cursor: 'pointer', transition: 'transform 0.2s', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }} onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'} onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}>
-                <Settings size={22} color="#15803d" />
-            </button>
-            {showSettings && (
-                 <div className="animate-fade-in" style={{ position: 'absolute', top: '120%', right: 0, width: '300px', backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem', border: '2px solid #cbd5e1', boxShadow: '0 15px 40px rgba(0,0,0,0.5)', zIndex: 100, textAlign: 'left' }}>
-                    <h3 style={{ margin: 0, borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', color: '#334155', fontFamily: 'var(--font-main)' }}>Asetukset</h3>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                       <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Ohita opastus</span>
-                       <div 
-                         className="toggle-track"
-                         onClick={() => { const v = !skipTutorial; setSkipTutorial(v); store.setTutorialSkipped(v); }}
-                         style={{ background: skipTutorial ? '#10b981' : '#cbd5e1' }}>
-                         <div className="toggle-thumb" style={{ left: skipTutorial ? '23px' : '3px' }} />
-                       </div>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                       <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Testitila</span>
-                       <div 
-                         className="toggle-track"
-                         onClick={() => { const v = !testMode; setTestMode(v); store.setTestMode(v); }}
-                         style={{ background: testMode ? '#10b981' : '#cbd5e1' }}>
-                         <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
-                       </div>
-                    </div>
-                 </div>
-            )}
-          </div>
-        </div>
-        {/* Uutinen tuoreimmasta päivityksestä */}
-        <button type="button" className="update-news-banner animate-fade-in" onClick={() => setShowUpdate(true)}>
-            <span className="update-news-kicker"><Sparkles size={16} /> Uutta {LATEST_UPDATE.date}</span>
-            <span className="update-news-title">{LATEST_UPDATE.short}</span>
-            <ArrowRight size={16} color="#059669" />
-        </button>
-        </div>
 
-        <div style={{ position: 'absolute', top: '1.5rem', left: '1.5rem', zIndex: 15 }}>
-            {/* Hackathon Win Banner */}
+
+        {/* Yläpalkki: hackathon-voitto vasemmalla, logo keskellä, toiminnot oikealla */}
+        <header className="lobby-header animate-fade-in">
+            <div className="lobby-header-left">
             <a 
                 href="https://faktabaari.fi/edu/tekoalysta-tukialyksi-hackathonin-2026-tulokset-viisi-valmista-materiaalia-tekoalylukutaidon-opetukseen/" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="animate-fade-in"
+                className="lobby-hackathon"
+                data-lobby="hackathon"
                 style={{ 
                     display: 'flex', 
                     flexDirection: 'column',
@@ -354,28 +320,54 @@ export default function Lobby() {
                     </span>
                 </div>
             </a>
-        </div>
+            </div>
+            <div className="lobby-brand" data-lobby="brand">
+                <img src="/logo.png" alt="AIVAN Logo" className="lobby-logo" />
+                <p className="lobby-tagline">Hyppää kyytiin oppimaan tekoälystä!</p>
+            </div>
+            <nav className="lobby-tools" data-lobby="tools" aria-label="Lisätoiminnot">
+                <button type="button" onClick={() => navigate('/teacher')} className="lobby-tool lobby-tool--label">
+                    <GraduationCap size={20} /> Opettajalle
+                </button>
+                <a href="https://eduks.fi/aivan" target="_blank" rel="noopener noreferrer" title="Anna palautetta" aria-label="Anna palautetta" className="lobby-tool">
+                    <MessageSquare size={20} />
+                </a>
+                <button type="button" onClick={openInfoBox} title={hasUnseenUpdate ? 'Tietoa pelistä – uusi päivitys!' : 'Tietoa pelistä'} aria-label={hasUnseenUpdate ? 'Tietoa pelistä, uusi päivitys' : 'Tietoa pelistä'} className={`lobby-tool${hasUnseenUpdate ? ' lobby-tool--alert' : ''}`}>
+                    <Info size={20} />
+                    {hasUnseenUpdate && <span className="lobby-tool-badge" aria-hidden="true">!</span>}
+                </button>
+                <div style={{ position: 'relative' }}>
+                    <button type="button" onClick={() => setShowSettings(!showSettings)} title="Pelin asetukset" aria-label="Pelin asetukset" className="lobby-tool">
+                        <Settings size={20} />
+                    </button>
+                    {showSettings && (
+                         <div className="animate-fade-in" style={{ position: 'absolute', top: '120%', right: 0, width: '300px', backgroundColor: '#f8fafc', borderRadius: '16px', padding: '1.2rem', display: 'flex', flexDirection: 'column', gap: '1.2rem', border: '2px solid #cbd5e1', boxShadow: '0 15px 40px rgba(0,0,0,0.5)', zIndex: 100, textAlign: 'left' }}>
+                            <h3 style={{ margin: 0, borderBottom: '2px solid #e2e8f0', paddingBottom: '0.5rem', color: '#334155', fontFamily: 'var(--font-main)' }}>Asetukset</h3>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                               <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Ohita opastus</span>
+                               <div 
+                                 className="toggle-track"
+                                 onClick={() => { const v = !skipTutorial; setSkipTutorial(v); store.setTutorialSkipped(v); }}
+                                 style={{ background: skipTutorial ? '#10b981' : '#cbd5e1' }}>
+                                 <div className="toggle-thumb" style={{ left: skipTutorial ? '23px' : '3px' }} />
+                               </div>
+                            </div>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                               <span style={{ fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: 'bold', fontFamily: 'var(--font-main)' }}>Testitila</span>
+                               <div 
+                                 className="toggle-track"
+                                 onClick={() => { const v = !testMode; setTestMode(v); store.setTestMode(v); }}
+                                 style={{ background: testMode ? '#10b981' : '#cbd5e1' }}>
+                                 <div className="toggle-thumb" style={{ left: testMode ? '23px' : '3px' }} />
+                               </div>
+                            </div>
+                         </div>
+                    )}
+                </div>
+            </nav>
+        </header>
 
-        {showUpdate && (
-            <TutorialModal
-                title="Mitä uutta?"
-                icon={<Sparkles size={36} color="#059669" />}
-                requireReading={false}
-                onClose={() => setShowUpdate(false)}
-                onConfirm={() => setShowUpdate(false)}
-                buttonText="Selvä, pelaamaan!"
-                maxWidth={620}
-                bodyAlign="left"
-            >
-                <p style={{ margin: '0 0 0.8rem', fontWeight: 700, color: '#047857' }}>{LATEST_UPDATE.date}: {LATEST_UPDATE.title}</p>
-                <UpdateNotes />
-            </TutorialModal>
-        )}
-
-        <img className="animate-fade-in" src="/logo.png" alt="AIVAN Logo" style={{ height: 'clamp(52px, 12.5vh, 130px)', objectFit: 'contain', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))', zIndex: 10 }} />
-        <p className="animate-fade-in" style={{ color: '#047857', fontSize: 'clamp(1rem, 2.5vh, 1.4rem)', margin: 'clamp(0.2rem, 0.5vh, 0.5rem) 0 clamp(0.5rem, 1.5vh, 2rem) 0', fontFamily: 'var(--font-main)', fontWeight: 'bold', zIndex: 10 }}>Hyppää kyytiin oppimaan tekoälystä!</p>
-
-        <div className="animate-fade-in" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(0.5rem, 1.5vh, 1.5rem)', width: '100%', zIndex: 10 }}>
+        <div className="animate-fade-in" data-lobby="cards" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(0.5rem, 1.5vh, 1.5rem)', width: '100%', zIndex: 10 }}>
         
         {/* YKSINPELI */}
         <div className="mode-card" style={{ borderTop: '8px solid #059669', display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -384,7 +376,7 @@ export default function Lobby() {
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: 'clamp(1rem, 2vh, 1.15rem)', lineHeight: '1.4', fontFamily: 'var(--font-main)', opacity: 0.85, marginBottom: '0' }}>Pelaa omaan tahtiin ja kehitä tekoälypakuasi.</p>
           
-          <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', margin: 'clamp(0.5rem, 1vh, 1rem) 0 clamp(0.5rem, 1vh, 1rem) 0', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', backgroundColor: '#f0fdf4', borderRadius: '16px', border: '2px dashed #86efac' }}>
+          <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', margin: 0, padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', backgroundColor: '#f0fdf4', borderRadius: '16px', border: '2px dashed #86efac' }}>
              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', color: '#166534', fontSize: '1rem', fontWeight: 'bold' }}>
                  <Sparkles size={20} color="#10b981" /> Ratko tekoälyhaasteita
              </div>
@@ -396,7 +388,7 @@ export default function Lobby() {
              </div>
           </div>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', marginTop: 'auto', paddingTop: 'clamp(0.5rem, 1.5vh, 1.5rem)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', marginTop: 'auto' }}>
             <button className="btn-primary" onClick={handleNewSinglePlayer} style={{ padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', fontSize: 'clamp(1.1rem, 2vh, 1.3rem)', background: store.hasProgress() ? 'transparent' : '#059669', border: `2px solid ${store.hasProgress() ? '#cbd5e1' : '#059669'}`, color: store.hasProgress() ? '#64748b' : 'white', boxShadow: store.hasProgress() ? 'none' : '0 8px 20px rgba(5, 150, 105, 0.4)' }}>
               UUSI SEIKKAILU
             </button>
@@ -410,7 +402,7 @@ export default function Lobby() {
           </h2>
           <p style={{ color: 'var(--text-main)', fontSize: 'clamp(1rem, 2vh, 1.15rem)', lineHeight: '1.4', fontFamily: 'var(--font-main)', opacity: 0.85, marginBottom: '0' }}>Liity opettajan ohjaamalle oppitunnille.</p>
           
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', marginTop: 'auto', paddingTop: 'clamp(0.5rem, 1.5vh, 1.5rem)' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', marginTop: 'auto' }}>
             <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1rem)', backgroundColor: '#f0fdf4', padding: 'clamp(0.8rem, 1.5vh, 1.2rem)', borderRadius: '16px', border: '2px dashed #86efac' }}>
                 <p style={{ margin: 0, fontSize: 'clamp(0.8rem, 1.5vh, 0.9rem)', color: '#166534', fontWeight: 'bold', lineHeight: 1.3 }}>
                    <ShieldCheck size={16} style={{ display: 'inline', verticalAlign: 'text-bottom', marginRight: '4px' }} />Käytä itsestäsi lempinimeä, josta vain opettaja tunnistaa sinut!
@@ -445,7 +437,7 @@ export default function Lobby() {
       </div>
 
       {/* JATKA PELIÄ (Bottom Banner) */}
-      <div className="animate-fade-in" style={{ width: '100%', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: store.hasProgress() ? 'clamp(1rem, 2vh, 1.5rem) clamp(1rem, 2vw, 2rem)' : 'clamp(0.5rem, 1vh, 0.8rem) clamp(1rem, 2vw, 2rem)', marginTop: 'clamp(0.5rem, 1.5vh, 1.5rem)', border: store.hasProgress() ? '2px solid #f59e0b' : '1px solid #cbd5e1', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(0.5rem, 1vh, 1.5rem)', boxShadow: store.hasProgress() ? '0 10px 30px rgba(245, 158, 11, 0.15)' : 'none', zIndex: 10 }}>
+      <div className="animate-fade-in" data-lobby="continue" style={{ width: '100%', background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(10px)', borderRadius: '24px', padding: store.hasProgress() ? 'clamp(1rem, 2vh, 1.5rem) clamp(1rem, 2vw, 2rem)' : 'clamp(0.5rem, 1vh, 0.8rem) clamp(1rem, 2vw, 2rem)', marginTop: 'clamp(0.5rem, 1.5vh, 1.5rem)', border: store.hasProgress() ? '2px solid #f59e0b' : '1px solid #cbd5e1', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 'clamp(0.5rem, 1vh, 1.5rem)', boxShadow: store.hasProgress() ? '0 10px 30px rgba(245, 158, 11, 0.15)' : 'none', zIndex: 10 }}>
           {store.hasProgress() ? (
               <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                  <div style={{ background: '#f59e0b', width: 'clamp(40px, 8vh, 50px)', height: 'clamp(40px, 8vh, 50px)', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', flexShrink: 0 }}>
@@ -501,6 +493,10 @@ export default function Lobby() {
              </form>
           </div>
       </div>
+      {/* Alapalkki: julkaisija */}
+      <footer className="lobby-footer animate-fade-in" data-lobby="footer">
+          <img src="/edukslogo.png" alt="Eduks" className="lobby-footer-eduks" />
+      </footer>
       </div>
 
       {modalState && createPortal(
@@ -600,7 +596,7 @@ export default function Lobby() {
                               <Zap size={20} color="#f97316" /> Tekoälypalvelut
                           </div>
                           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vh, 1.2rem)', flexGrow: 1, justifyContent: 'center' }}>
-                              {['Google Antigravity', 'NotebookLM', 'Google Gemini'].map(name => (
+                              {['Google Antigravity', 'Claude Code', 'NotebookLM', 'Google Gemini'].map(name => (
                                   <span key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'clamp(0.6rem, 1.5vh, 1.2rem)', background: '#ffffff', color: '#334155', border: '2px solid #cbd5e1', borderRadius: '16px', fontWeight: 'bold', fontSize: 'clamp(0.9rem, 2vh, 1.2rem)', boxShadow: '0 2px 8px rgba(0,0,0,0.02)' }}>
                                       {name}
                                   </span>
