@@ -664,11 +664,26 @@ export const store = {
     }
   },
 
+  // Käsijarru vapautuu itsestään, jos opettaja unohtaa sen päälle. Muuten unohdettu
+  // käsijarru estäisi oppilaiden pelaamisen seuraavalla tunnilla, kunnes opettaja
+  // ehtii kirjautua paneeliin. Oppilaan ruutu ja opettajan paneeli käyttävät samaa sääntöä.
+  PAUSE_MAX_MS: 3 * 60 * 60 * 1000,
+
+  isClassPaused: (session) => {
+    if (!session || session.status !== 'paused') return false;
+    const pausedAt = session.pausedAt?.toMillis?.() ?? (session.pausedAt?.seconds ? session.pausedAt.seconds * 1000 : null);
+    // Vanhoissa tauoissa ei ole aikaleimaa. Ne tulkitaan vanhentuneiksi.
+    if (!pausedAt) return false;
+    return Date.now() - pausedAt < store.PAUSE_MAX_MS;
+  },
+
+  // Kutsuu callbackia luokan koko tilalla (tai nullilla, jos luokkaa ei ole).
   listenToClassroomStatus: (code, callback) => {
     return onSnapshot(doc(db, "class_sessions", code), (docSnap) => {
-      if (docSnap.exists()) {
-        callback(docSnap.data().status);
-      }
+      callback(docSnap.exists() ? docSnap.data() : null);
+    }, (err) => {
+      console.error('Luokan tilan kuuntelu epäonnistui:', err);
+      callback(null);
     });
   },
 

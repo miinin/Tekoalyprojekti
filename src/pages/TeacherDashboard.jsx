@@ -111,7 +111,8 @@ export default function TeacherDashboard() {
   const navigate = useNavigate();
   const [sessionCode, setSessionCode] = useState('');
   const [requireTutorial, setRequireTutorial] = useState(true);
-  const [sessionStatus, setSessionStatus] = useState('active');
+  const [sessionData, setSessionData] = useState(null);
+  const [pauseBusy, setPauseBusy] = useState(false);
   const [players, setPlayers] = useState([]);
   const [hiddenPlayers, setHiddenPlayers] = useState({});
 
@@ -120,6 +121,9 @@ export default function TeacherDashboard() {
       const timer = setInterval(() => setNow(Date.now()), 10000);
       return () => clearInterval(timer);
   }, []);
+
+  // Sama sääntö kuin oppilaiden ruuduilla: vanhentunut tauko näkyy vapautettuna. `now` päivittyy 10 s välein.
+  const sessionStatus = sessionData && store.isClassPaused(sessionData) ? 'paused' : 'active';
 
   const isOnline = (p) => {
       const pingTime = p.lastPing?.toMillis?.() || p.lastPing?.seconds * 1000 || p.lastUpdate?.toMillis?.() || p.lastUpdate?.seconds * 1000 || 0;
@@ -223,7 +227,7 @@ export default function TeacherDashboard() {
       }
       const code = generateCode();
       setSessionCode(code);
-      setSessionStatus('active');
+      setSessionData(null);
       setErrorMsg('');
       
       try {
@@ -266,6 +270,10 @@ export default function TeacherDashboard() {
               setErrorMsg('Väärä PIN-koodi.');
               return;
           }
+          if (data.status === 'ended') {
+              setErrorMsg('Tämä oppitunti on päätetty pysyvästi, eikä sitä voi enää jatkaa. Luo uusi oppitunti.');
+              return;
+          }
           setErrorMsg('');
           // Jos tällä laitteella on kokeiltu samaa luokkaa oppilaana, poistetaan oppilastunnus,
           // jottei käsijarru peitä opettajan omaa näkymää, kun hän palaa päävalikkoon.
@@ -295,10 +303,17 @@ export default function TeacherDashboard() {
   };
 
   const togglePause = async () => {
-      if (!sessionCode) return;
+      if (!sessionCode || pauseBusy) return;
       const newStatus = sessionStatus === 'active' ? 'paused' : 'active';
-      await updateDoc(doc(db, "class_sessions", sessionCode), { status: newStatus });
-      setSessionStatus(newStatus);
+      setPauseBusy(true);
+      try {
+          // pausedAt kertoo oppilaiden ruuduille, milloin tauko alkoi. Unohdettu tauko vanhenee itsestään.
+          await updateDoc(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'paused' ? serverTimestamp() : null });
+      } catch (err) {
+          console.error(err);
+          alert('Käsijarrun vaihtaminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+      }
+      setPauseBusy(false);
   };
   
   const hidePlayer = (nickname) => {
@@ -378,8 +393,10 @@ export default function TeacherDashboard() {
       
       const unsubStatus = onSnapshot(doc(db, "class_sessions", sessionCode), (docSnap) => {
           if (docSnap.exists()) {
-             setSessionStatus(docSnap.data().status || 'active');
+             setSessionData(docSnap.data());
              setHiddenPlayers(docSnap.data().hiddenPlayers || {});
+          } else {
+             setSessionData(null);
           }
       });
       return () => unsubStatus();
@@ -576,7 +593,7 @@ export default function TeacherDashboard() {
                           )}
                       </button>
                       <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>
-                          Aseta oppilaiden peliruudut väliaikaisesti tauolle saadaksesi heidän huomionsa ohjeistukseen.
+                          Aseta oppilaiden peliruudut väliaikaisesti tauolle saadaksesi heidän huomionsa ohjeistukseen. Jos tauko unohtuu päälle, se vapautuu itsestään 3 tunnin kuluttua.
                       </p>
                     </div>
 

@@ -102,6 +102,7 @@ export default function Lobby() {
       const upperCode = classCode.toUpperCase();
       
       let sessionExists = false;
+      let sessionEnded = false;
       let reqTut = null;
 
       try {
@@ -109,6 +110,7 @@ export default function Lobby() {
              const sessionDoc = await Promise.race([getDoc(doc(db, "class_sessions", upperCode)), timeoutPromise]);
              if (sessionDoc.exists()) {
                  sessionExists = true;
+                 sessionEnded = sessionDoc.data().status === 'ended';
                  const rt = sessionDoc.data().requireTutorial;
                  if (typeof rt === 'boolean') {
                      reqTut = rt;
@@ -130,6 +132,17 @@ export default function Lobby() {
           setModalState({
               title: 'Luokkaa ei löydy',
               text: 'Tarkista opettajan koodi uudelleen, sellaista luokkaa ei tällä hetkellä ole avoinna!',
+              buttonText: 'Takaisin',
+              onClose: () => setModalState(null)
+          });
+          return;
+      }
+
+      if (sessionEnded) {
+          setJoinClassLoading(false);
+          setModalState({
+              title: 'Oppitunti on päättynyt',
+              text: 'Opettaja on päättänyt tämän oppitunnin, joten siihen ei voi enää liittyä. Pyydä opettajalta uusi liittymiskoodi.',
               buttonText: 'Takaisin',
               onClose: () => setModalState(null)
           });

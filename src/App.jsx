@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { HashRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Lobby from './pages/Lobby';
 import Roadmap from './pages/Roadmap';
@@ -16,8 +17,20 @@ function GlobalClassroomOverlay() {
   // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
   const isTeacherView = location.pathname.startsWith('/teacher') || location.pathname.startsWith('/admin');
   const [isPaused, setIsPaused] = useState(false);
+  const [endedNotice, setEndedNotice] = useState(false);
   const [giftPopup, setGiftPopup] = useState(null);
-  
+  const overlayRef = useRef(null);
+  const showOverlay = isPaused && !isTeacherView;
+
+  // Käsijarru estää myös näppäimistön käytön: kaikki muu sivulla merkitään inertiksi,
+  // jolloin sen alla olevia nappeja ei voi painaa sarkaimella ja Enterillä.
+  useEffect(() => {
+     if (!showOverlay) return;
+     const others = [...document.body.children].filter(el => el !== overlayRef.current && !el.inert);
+     others.forEach(el => { el.inert = true; });
+     return () => { others.forEach(el => { el.inert = false; }); };
+  }, [showOverlay]);
+
   useEffect(() => {
      let unsubSparks = null;
      let unsubStatus = null;
@@ -25,19 +38,30 @@ function GlobalClassroomOverlay() {
      // kuuntelijat avattiin 5 sekunnin välein vanhoja sulkematta, jolloin niitä kertyi
      // satoja ja pitkään auki ollut sivu hidastui tai jumittui.
      let activeKey = null;
+     let lastSession = null;
+     // Lasketaan tauon tila uudelleen myös ilman uutta tietokantaviestiä, jotta vanhentunut tauko vapautuu.
+     const applyStatus = () => setIsPaused(store.isClassPaused(lastSession));
 
      const checkRoom = () => {
          const code = store.getClassroomCode();
          const nick = store.getClassroomNickname();
          const key = code && nick ? `${code}|${nick}` : null;
-         if (key === activeKey) return;
+         if (key === activeKey) { applyStatus(); return; }
          activeKey = key;
+         lastSession = null;
          if (unsubStatus) { unsubStatus(); unsubStatus = null; }
          if (unsubSparks) { unsubSparks(); unsubSparks = null; }
-         if (!key) { setIsPaused(false); return; }
+         if (!key) { applyStatus(); return; }
          {
-            unsubStatus = store.listenToClassroomStatus(code, (status) => {
-               setIsPaused(status === 'paused');
+            unsubStatus = store.listenToClassroomStatus(code, (session) => {
+               lastSession = session;
+               if (session && session.status === 'ended') {
+                   // Opettaja päätti tunnin: laite irrotetaan luokasta. Edistyminen säilyy laitteella.
+                   lastSession = null;
+                   store.setClassroomCode(null);
+                   setEndedNotice(true);
+               }
+               applyStatus();
             });
             unsubSparks = store.listenToTeacherGifts(code, nick, (payload) => {
                if (payload && payload.sparks && payload.sparks > 0) {
@@ -69,8 +93,18 @@ function GlobalClassroomOverlay() {
   
   return (
       <>
-        {isPaused && !isTeacherView && (
-          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
+        {endedNotice && !isTeacherView && (
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+              <div style={{ background: 'white', borderRadius: '24px', padding: '2rem', maxWidth: '520px', width: '95%', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }}>
+                  <h2 style={{ margin: 0, color: '#0f172a' }}>Oppitunti päättyi</h2>
+                  <p style={{ margin: 0, color: '#475569', lineHeight: 1.5 }}>Opettaja päätti oppitunnin. Voit jatkaa pelaamista yksin, ja edistymisesi on tallessa tällä laitteella.</p>
+                  <button type="button" onClick={() => setEndedNotice(false)} style={{ padding: '0.9rem', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.05rem', cursor: 'pointer' }}>Selvä</button>
+              </div>
+          </div>
+        )}
+
+        {showOverlay && createPortal(
+          <div ref={overlayRef} role="dialog" aria-modal="true" aria-label="Käsijarru vedetty" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
               <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>Käsijarru vedetty! 🛑</h1>
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
                  Opettaja on asettanut pelin väliaikaisesti tauolle.<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong>
@@ -80,7 +114,8 @@ function GlobalClassroomOverlay() {
               <button type="button" onClick={() => navigate('/teacher')} style={{ position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)', background: 'transparent', border: '1px solid rgba(255,255,255,0.35)', color: 'rgba(255,255,255,0.75)', padding: '0.6rem 1.2rem', borderRadius: '10px', fontSize: '0.95rem', cursor: 'pointer' }}>
                  Opettaja? Avaa hallintapaneeli
               </button>
-          </div>
+          </div>,
+          document.body
         )}
         
         {giftPopup && giftPopup.type === 'sparks' && (
