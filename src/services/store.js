@@ -1,5 +1,5 @@
 import { categories as defaultCategories } from '../data/questions';
-import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs, addDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs, addDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // A simple abstraction over local storage that simulates an async backend like Firebase
@@ -663,6 +663,21 @@ export const store = {
       console.error('Ping failed:', err);
     }
   },
+
+  // --- OPETTAJAN KIRJOITUKSET ---
+  // Tietokannan säännöt vaativat, että jokaisessa opettajan kirjoituserässä on mukana
+  // class_sessions/{code}/private/auth -dokumentin kirjoitus oikealla PIN-koodilla.
+  // Säännöt vertaavat PIN-koodia tallennettuun, eikä dokumenttia voi lukea selaimesta.
+  // Väärällä PIN-koodilla koko erä hylätään (permission-denied).
+  teacherBatch: async (code, pin, build) => {
+    const batch = writeBatch(db);
+    batch.set(doc(db, 'class_sessions', code, 'private', 'auth'), { pin, lastAuthAt: serverTimestamp() });
+    if (build) build(batch);
+    const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 8000));
+    await Promise.race([batch.commit(), timeoutPromise]);
+  },
+
+  isPermissionDenied: (err) => err?.code === 'permission-denied',
 
   // Käsijarru vapautuu itsestään, jos opettaja unohtaa sen päälle. Muuten unohdettu
   // käsijarru estäisi oppilaiden pelaamisen seuraavalla tunnilla, kunnes opettaja

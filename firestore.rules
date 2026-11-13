@@ -1,0 +1,87 @@
+rules_version = '2';
+
+// AI Van! -pelin Firestore-säännöt. Julkaisu: firebase deploy --only firestore:rules
+//
+// Pelissä ei ole kirjautumista, joten opettaja todistaa oikeutensa PIN-koodilla:
+// jokaisessa opettajan kirjoituserässä (writeBatch) on mukana dokumentin
+// class_sessions/{code}/private/auth kirjoitus, jossa on PIN ja lastAuthAt = request.time.
+// Sen kirjoitus onnistuu vain, jos PIN on sama kuin tallennettu. Muiden dokumenttien
+// säännöt tarkistavat getAfter()-kutsulla, että sama erä sisälsi onnistuneen PIN-kirjoituksen.
+// private/auth-dokumenttia ei voi lukea selaimesta, joten PIN ei vuoda.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function authPath(code) {
+      return /databases/$(database)/documents/class_sessions/$(code)/private/auth;
+    }
+
+    // Tosi vain, jos tämä sama erä kirjoitti private/auth-dokumentin (ja se hyväksyttiin).
+    function teacherAuthed(code) {
+      return getAfter(authPath(code)).data.lastAuthAt == request.time;
+    }
+
+    function sessionKeys() {
+      return ['status', 'requireTutorial', 'createdAt', 'pausedAt', 'hiddenPlayers'];
+    }
+
+    // Palkintokentät ovat tyhjät (puuttuvat tai null).
+    function giftsClear(data) {
+      return data.get('teacherGift', null) == null && data.get('teacherBoostsGift', null) == null;
+    }
+
+    match /class_sessions/{code} {
+      // Oppilaat lukevat luokan tilan (käsijarru, opastusvaatimus). Listaus estetty.
+      allow get: if true;
+      allow list: if false;
+      allow create: if teacherAuthed(code)
+        && request.resource.data.keys().hasOnly(sessionKeys())
+        && request.resource.data.status in ['active', 'paused'];
+      allow update: if teacherAuthed(code)
+        && request.resource.data.keys().hasOnly(sessionKeys())
+        && request.resource.data.status in ['active', 'paused', 'ended'];
+      allow delete: if false;
+
+      match /private/auth {
+        allow read: if false;
+        allow create: if request.resource.data.keys().hasOnly(['pin', 'lastAuthAt'])
+          && request.resource.data.pin is string
+          && request.resource.data.pin.size() >= 4
+          && request.resource.data.pin.size() <= 32
+          && request.resource.data.lastAuthAt == request.time;
+        // PIN:n voi "kirjoittaa uudelleen" vain samana: tämä on PIN-tarkistus.
+        allow update: if request.resource.data.keys().hasOnly(['pin', 'lastAuthAt'])
+          && request.resource.data.pin == resource.data.pin
+          && request.resource.data.lastAuthAt == request.time;
+        allow delete: if false;
+      }
+
+      match /players/{nickname} {
+        // Opettaja seuraa koko luokkaa, oppilas kuuntelee omaa dokumenttiaan.
+        allow read: if true;
+        // Oppilas kirjoittaa oman edistymisensä. Palkinnot (teacherGift, teacherBoostsGift)
+        // saa asettaa vain opettaja; oppilas saa ainoastaan tyhjentää ne lunastettuaan.
+        allow create: if giftsClear(request.resource.data) || teacherAuthed(code);
+        allow update: if !request.resource.data.diff(resource.data).affectedKeys().hasAny(['teacherGift', 'teacherBoostsGift'])
+          || giftsClear(request.resource.data)
+          || teacherAuthed(code);
+        allow delete: if false;
+      }
+    }
+
+    // Rekisterikilvellä (esim. ABC-123) tallennetut yksinpelit.
+    match /saves/{code} {
+      allow get: if true;
+      allow list: if false;
+      allow create, update: if request.resource.data.size() <= 60;
+      allow delete: if false;
+    }
+
+    // Pelaajien virheilmoitukset. Luku ja poisto vaativat ylläpitoa, jota ei vielä ole.
+    match /bug_reports/{id} {
+      allow read, delete: if false;
+      allow create: if request.resource.data.keys().hasOnly(['questionId', 'text', 'date'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 5000;
+    }
+  }
+}

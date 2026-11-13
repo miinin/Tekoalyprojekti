@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff } from 'lucide-react';
 import { db } from '../firebase';
-import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where, FieldPath } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot, collection, serverTimestamp, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
 import { checkRateLimit, formatWait, LIMITS } from '../services/rateLimit';
 import { store } from '../services/store';
@@ -154,17 +154,12 @@ export default function TeacherDashboard() {
   // Protection / Error state
   const [errorMsg, setErrorMsg] = useState('');
   
-  // Recovery state
-  const [showRecovery, setShowRecovery] = useState(false);
-  const [recoveryPin, setRecoveryPin] = useState('');
-  const [recoveryResults, setRecoveryResults] = useState(null);
-  const [recoverySearching, setRecoverySearching] = useState(false);
-  
   // PIN protection
   const [newPin, setNewPin] = useState('');
   const [examplePin] = useState(generateExamplePin);
-  const [recoveryError, setRecoveryError] = useState('');
   const [resumePin, setResumePin] = useState('');
+  // Avoimen oppitunnin PIN. Jokainen opettajan kirjoitus tietokantaan todistetaan sillä (store.teacherBatch).
+  const [sessionPin, setSessionPin] = useState('');
   
   const [confirmModal, setConfirmModal] = useState(null);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
@@ -174,35 +169,6 @@ export default function TeacherDashboard() {
   
   const toggleStudent = (id) => {
     setExpandedStudents(prev => ({ ...prev, [id]: !prev[id] }));
-  };
-  
-  const searchByPin = async () => {
-     if (recoveryPin.length < 4) return;
-     const rl = checkRateLimit('pinRecovery', LIMITS.pinRecovery.max, LIMITS.pinRecovery.windowMs);
-     if (!rl.ok) {
-         setRecoveryError(`Liian monta hakua. Odota ${formatWait(rl.waitSeconds)} ja yritä uudelleen.`);
-         return;
-     }
-     setRecoveryError('');
-     setRecoverySearching(true);
-     setRecoveryResults(null);
-     try {
-         const q = query(collection(db, "class_sessions"), where("teacherPin", "==", recoveryPin));
-         const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000));
-         const querySnapshot = await Promise.race([getDocs(q), timeoutPromise]);
-         const found = [];
-         querySnapshot.forEach((doc) => {
-             const data = doc.data();
-             if (data.status !== 'ended') {
-                 found.push({ code: doc.id, date: data.createdAt ? data.createdAt.toDate().toLocaleString('fi-FI') : 'Tuntematon aika' });
-             }
-         });
-         setRecoveryResults(found);
-     } catch (e) {
-         console.error(e);
-         setRecoveryResults([]);
-     }
-     setRecoverySearching(false);
   };
   
   // Generating a readable 6-character code
@@ -226,21 +192,24 @@ export default function TeacherDashboard() {
           return;
       }
       const code = generateCode();
-      setSessionCode(code);
-      setSessionData(null);
-      setErrorMsg('');
-      
+      setErrorMsg('Luodaan luokkaa...');
+
       try {
-          const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 5000));
-          await Promise.race([setDoc(doc(db, "class_sessions", code), {
-              status: 'active',
-              requireTutorial: requireTutorial,
-              teacherPin: newPin,
-              createdAt: serverTimestamp()
-          }), timeoutPromise]);
+          // PIN tallentuu piilotettuun private/auth-dokumenttiin, jota selain ei voi lukea.
+          await store.teacherBatch(code, newPin, (batch) => {
+              batch.set(doc(db, "class_sessions", code), {
+                  status: 'active',
+                  requireTutorial: requireTutorial,
+                  createdAt: serverTimestamp()
+              });
+          });
+          setSessionPin(newPin);
+          setSessionData(null);
+          setErrorMsg('');
+          setSessionCode(code);
       } catch (err) {
           console.error(err);
-          setErrorMsg('Yhteys opettajan paneeliin estetty verkkosi puolelta (Firebase timeout).');
+          setErrorMsg('Luokan luominen epäonnistui. Verkko estää yhteyden tietokantaan (Firebase timeout).');
       }
   };
 
@@ -266,14 +235,18 @@ export default function TeacherDashboard() {
               return;
           }
           const data = docSnap.data();
-          if (data.teacherPin && data.teacherPin !== resumePin) {
-              setErrorMsg('Väärä PIN-koodi.');
-              return;
-          }
           if (data.status === 'ended') {
               setErrorMsg('Tämä oppitunti on päätetty pysyvästi, eikä sitä voi enää jatkaa. Luo uusi oppitunti.');
               return;
           }
+          // PIN tarkistetaan tietokannan säännöissä: kirjoitus onnistuu vain oikealla PIN-koodilla.
+          try {
+              await store.teacherBatch(code, resumePin);
+          } catch (err) {
+              if (store.isPermissionDenied(err)) { setErrorMsg('Väärä PIN-koodi.'); return; }
+              throw err;
+          }
+          setSessionPin(resumePin);
           setErrorMsg('');
           // Jos tällä laitteella on kokeiltu samaa luokkaa oppilaana, poistetaan oppilastunnus,
           // jottei käsijarru peitä opettajan omaa näkymää, kun hän palaa päävalikkoon.
@@ -293,7 +266,16 @@ export default function TeacherDashboard() {
           confirmColor: '#dc2626',
           onConfirm: async () => {
               if (sessionCode) {
-                  await updateDoc(doc(db, "class_sessions", sessionCode), { status: 'ended' });
+                  try {
+                      await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+                          batch.update(doc(db, "class_sessions", sessionCode), { status: 'ended', pausedAt: null });
+                      });
+                  } catch (err) {
+                      console.error(err);
+                      alert('Oppitunnin päättäminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+                      setConfirmModal(null);
+                      return;
+                  }
               }
               setSessionCode('');
               setPlayers([]);
@@ -308,7 +290,9 @@ export default function TeacherDashboard() {
       setPauseBusy(true);
       try {
           // pausedAt kertoo oppilaiden ruuduille, milloin tauko alkoi. Unohdettu tauko vanhenee itsestään.
-          await updateDoc(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'paused' ? serverTimestamp() : null });
+          await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+              batch.update(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'paused' ? serverTimestamp() : null });
+          });
       } catch (err) {
           console.error(err);
           alert('Käsijarrun vaihtaminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
@@ -326,7 +310,9 @@ export default function TeacherDashboard() {
               setConfirmModal(null);
               if (!sessionCode) return;
               try {
-                  await updateDoc(doc(db, "class_sessions", sessionCode), new FieldPath('hiddenPlayers', nickname), serverTimestamp());
+                  await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+                      batch.update(doc(db, "class_sessions", sessionCode), new FieldPath('hiddenPlayers', nickname), serverTimestamp());
+                  });
               } catch (err) {
                   console.error(err);
                   alert('Oppilaan poistaminen listalta epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
@@ -335,41 +321,27 @@ export default function TeacherDashboard() {
       });
   };
 
-  const giveSparks = async (nickname, amount) => {
-      if (!sessionCode) return;
-      await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
-          teacherGift: { amount, id: Date.now() }
-      }, { merge: true });
-  };
-
-  const giveBoost = async (nickname, color, amount) => {
-      if (!sessionCode) return;
-      await setDoc(doc(db, "class_sessions", sessionCode, "players", nickname), {
-          teacherBoostsGift: { color, amount, id: Date.now() }
-      }, { merge: true });
-  };
-
-  const giveSparksToAll = async (amount) => {
+  // Palkinnot kirjoitetaan opettajan erässä. Säännöt sallivat erää kohti enintään 20 dokumenttitarkistusta,
+  // joten koko luokan palkinnot lähetetään 15 oppilaan erissä.
+  const giveGifts = async (nicknames, field, makeGift) => {
       if (!sessionCode) return;
       const tid = Date.now();
-      const promises = visiblePlayers.map(p =>
-          setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
-              teacherGift: { amount, id: tid + '_' + p.id }
-          }, { merge: true })
-      );
-      await Promise.all(promises);
+      try {
+          for (let i = 0; i < nicknames.length; i += 15) {
+              const chunk = nicknames.slice(i, i + 15);
+              await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+                  chunk.forEach(nick => batch.set(doc(db, "class_sessions", sessionCode, "players", nick), { [field]: makeGift(tid + '_' + nick) }, { merge: true }));
+              });
+          }
+      } catch (err) {
+          console.error(err);
+          alert('Palkinnon lähettäminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+      }
   };
-
-  const giveBoostToAll = async (color, amount) => {
-      if (!sessionCode) return;
-      const tid = Date.now();
-      const promises = visiblePlayers.map(p =>
-          setDoc(doc(db, "class_sessions", sessionCode, "players", p.id), {
-              teacherBoostsGift: { color, amount, id: tid + '_' + p.id }
-          }, { merge: true })
-      );
-      await Promise.all(promises);
-  };
+  const giveSparks = (nickname, amount) => giveGifts([nickname], 'teacherGift', (id) => ({ amount, id }));
+  const giveBoost = (nickname, color, amount) => giveGifts([nickname], 'teacherBoostsGift', (id) => ({ color, amount, id }));
+  const giveSparksToAll = (amount) => giveGifts(visiblePlayers.map(p => p.id), 'teacherGift', (id) => ({ amount, id }));
+  const giveBoostToAll = (color, amount) => giveGifts(visiblePlayers.map(p => p.id), 'teacherBoostsGift', (id) => ({ color, amount, id }));
 
   useEffect(() => {
       if (!sessionCode) return;
@@ -502,7 +474,6 @@ export default function TeacherDashboard() {
                             <div style={{ textAlign: 'left', background: 'white', padding: '1.5rem', borderRadius: '20px', border: '1px solid #e2e8f0', boxShadow: '0 5px 15px rgba(0,0,0,0.02)' }}>
                                 <label style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: 'bold', color: '#0f172a', marginBottom: '0.8rem', fontSize: '1rem' }}>
                                     <span>Aiemman tunnin koodi</span>
-                                    <button type="button" onClick={() => setShowRecovery(true)} style={{ background: 'none', border: 'none', color: '#3b82f6', textDecoration: 'underline', cursor: 'pointer', fontSize: '0.9rem', padding: 0, fontWeight: 'normal', textTransform: 'none' }}>Unohditko koodin?</button>
                                 </label>
                                 <input 
                                    type="text" 
@@ -878,54 +849,6 @@ export default function TeacherDashboard() {
             document.body
         )}
 
-        {/* Recovery Modal */}
-        {showRecovery && createPortal(
-            <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(5px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem', zIndex: 99999 }}>
-                <div className="animate-fade-in" style={{ background: 'white', padding: 'clamp(1rem, 2vh, 2rem)', borderRadius: '24px', width: '95%', maxWidth: '600px', boxShadow: '0 25px 50px rgba(0,0,0,0.5)', display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1.5vh, 1.2rem)', position: 'relative' }}>
-                    <button onClick={() => { setShowRecovery(false); setRecoveryResults(null); setRecoveryPin(''); setRecoveryError(''); }} style={{ position: 'absolute', top: 'clamp(0.5rem, 1vh, 1rem)', right: 'clamp(0.5rem, 1vh, 1rem)', background: 'transparent', border: 'none', cursor: 'pointer', color: '#94a3b8' }}><X size={24}/></button>
-                    <h3 style={{ margin: 0, color: '#0f172a', fontSize: 'clamp(1.1rem, 2.5vh, 1.5rem)', display: 'flex', alignItems: 'center', gap: '0.8rem' }}><Lock color="#3b82f6" size={24} /> Etsi liittymiskoodi</h3>
-                    <p style={{ margin: 0, color: '#475569', lineHeight: 1.4, fontSize: 'clamp(0.85rem, 1.8vh, 1rem)' }}>Syötä alle oppitunnille asettamasi PIN-koodi, niin etsimme aktiiviset luokkatilat tietokannasta.</p>
-                    
-                    <input 
-                        type="password" 
-                        placeholder="Tunnin PIN-koodi"
-                        value={recoveryPin}
-                        onChange={e => setRecoveryPin(e.target.value)}
-                        style={{ padding: '1rem', borderRadius: '12px', border: '2px solid #cbd5e1', fontSize: '1.2rem', textAlign: 'center', letterSpacing: '2px' }}
-                    />
-                    
-                    <button onClick={searchByPin} disabled={recoveryPin.length < 4 || recoverySearching} style={{ padding: '1rem', background: '#3b82f6', color: 'white', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.1rem', cursor: (recoveryPin.length < 4 || recoverySearching) ? 'not-allowed' : 'pointer', border: 'none' }}>
-                        {recoverySearching ? 'Etsitään...' : 'Etsi koodia'}
-                    </button>
-                    
-                    {recoveryError && (
-                        <p style={{ color: '#dc2626', margin: 0, fontWeight: 'bold' }}>{recoveryError}</p>
-                    )}
-
-                    {recoveryResults !== null && (
-                        <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
-                            {recoveryResults.length === 0 ? (
-                                <p style={{ color: '#ef4444', margin: 0, fontWeight: 'bold' }}>Aktiivisia tunteja ei löytynyt tällä PIN-koodilla.</p>
-                            ) : (
-                                <div>
-                                    <p style={{ margin: '0 0 1rem 0', color: '#0f172a', fontWeight: 'bold' }}>Löytyneet oppitunnit:</p>
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', maxHeight: '200px', overflowY: 'auto' }}>
-                                        {recoveryResults.map(r => (
-                                            <button key={r.code} onClick={() => { setResumeCode(r.code); setResumePin(recoveryPin); setShowRecovery(false); }} style={{ background: 'white', border: '2px solid #10b981', padding: '1rem', borderRadius: '12px', color: '#10b981', fontWeight: 'bold', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center', transition: 'all 0.2s' }} onMouseOver={e=>e.currentTarget.style.background='#ecfdf5'} onMouseOut={e=>e.currentTarget.style.background='white'}>
-                                                <span style={{ letterSpacing: '2px' }}>{r.code}</span>
-                                                <span style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: 'normal', letterSpacing: 'normal' }}>{r.date}</span>
-                                            </button>
-                                        ))}
-                                    </div>
-                                    <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '1rem 0 0 0' }}>Klikkaa koodia palauttaaksesi sen lomakkeeseen.</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-            </div>,
-            document.body
-        )}
 
     </div>
     </div>
