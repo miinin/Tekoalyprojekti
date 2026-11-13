@@ -1651,169 +1651,169 @@ export const categories = [
           {
             "id": "konepellin_1_q1",
             "type": "true_false",
-            "question": "Tekoälyn todellinen polttoaine on valtava määrä dataa, kuten tekstejä ja kuvia.",
+            "question": "Tekoälyn opetusdata tarkoittaa vain tekstiä, kuten kirjoja ja nettisivuja.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Täsmälleen! Tekoälyn oikea polttoaine ei ole bensiini, vaan data! Ilman tietoa tekoäly ei toimi."
+            "correctAnswer": "Väärin",
+            "explanation": "Data voi olla melkein mitä tahansa, mistä voi oppia: valokuvia, ääninauhoja, videoita, anturien mittauksia tai shakkipelien siirtoja. Kuvantunnistin oppii kuvista, puheentunnistin äänestä ja chatbot tekstistä."
           },
           {
             "id": "konepellin_1_q2",
             "type": "multiple_choice",
-            "question": "Mitä AI vanin tekoäly käyttää \"polttoaineenaan\" oppiakseen uusia asioita?",
+            "question": "Miksi tekoäly tarvitsee oppiakseen niin paljon dataa?",
             "options": [
-              "Supertehokasta sähköä",
-              "Valtavaa määrää dataa",
-              "Kalliita moottoriöljyjä",
-              "Salaisia taikasanoja"
+              "Koska se tallentaa esimerkit ja etsii vastaukset niistä",
+              "Jotta se löytää monesta esimerkistä yhteisen kuvion",
+              "Koska jokainen esimerkki lisää siihen yhden valmiin säännön",
+              "Koska se unohtaa vanhat esimerkit nopeasti ilman uusia"
             ],
-            "correctAnswer": "Valtavaa määrää dataa",
-            "explanation": "Data on tekoälyn polttoainetta. Data tarkoittaa valtavaa määrää tietoa, kuten kuvia, tekstejä ja ääniä, joiden avulla tekoäly oppii."
+            "correctAnswer": "Jotta se löytää monesta esimerkistä yhteisen kuvion",
+            "explanation": "Tekoäly ei säilytä esimerkkejä kuin kansiossa. Se etsii niistä yhteisiä piirteitä. Kun se on nähnyt tuhansia erilaisia kissoja, se on oppinut, mikä niissä on yhteistä ja tunnistaa myös kissan, jota se ei ole ennen nähnyt."
           },
           {
             "id": "konepellin_1_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat opettaa autotallin lajittelurobotin tunnistamaan jakoavaimet. Robotti ei kuitenkaan osaa vielä mitään. Mitä sinun pitää antaa sille \"evääksi\", jotta se oppii?",
+            "question": "SKENAARIO: Teet sovellusta, joka tunnistaa talitiaisen valokuvasta. Mikä kuvajoukko on paras opetusdata?",
             "options": [
-              "Vain yksi tarkka kuva isosta jakoavaimesta.",
-              "Tuhansia kuvia erilaisista jakoavaimista.",
-              "Ohjekirja, joka on kirjoitettu ranskaksi.",
-              "Uusi ja nopeampi tietokoneen prosessori."
+              "Tuhat lähes samanlaista kuvaa yhdestä tiaisesta lintulaudalla",
+              "Kymmenen terävää ja kaunista kuvaa lintukirjasta",
+              "Tuhansia kuvia talitiaisista eri valoissa ja asennoissa",
+              "Tuhansia kuvia Suomen linnuista ilman lajien nimiä"
             ],
-            "correctAnswer": "Tuhansia kuvia erilaisista jakoavaimista.",
-            "explanation": "Tekoäly tarvitsee oppiakseen valtavan määrän tietoa. Yksi kuva ei riitä, vaan robotti tarvitsee tuhansia esimerkkejä ymmärtääkseen, miltä kaikki jakoavaimet näyttävät."
+            "correctAnswer": "Tuhansia kuvia talitiaisista eri valoissa ja asennoissa",
+            "explanation": "Hyvää dataa on paljon, se on monipuolista ja siinä on oikeat merkinnät. Samasta linnusta otetut kuvat opettavat vain sen yhden tilanteen, kymmenen kuvaa on liian vähän ja ilman lajinimiä tekoäly ei tiedä, mikä kuvista on talitiainen."
           },
           {
             "id": "konepellin_1_q4",
             "type": "drag_drop",
-            "question": "Järjestä oikeaan järjestykseen, miten auton tekoäly oppii tunnistamaan liikennemerkit tien poskesta!",
-            "correctAnswer": {
-              "Ihmiset keräävät tuhansia kuvia erilaisista liikennemerkeistä.": "1. vaihe",
-              "Kuvat syötetään datana tekoälyn ohjelmaan.": "2. vaihe",
-              "Tekoäly oppii kuvista, miltä liikennemerkit näyttävät.": "3. vaihe",
-              "Auto osaa itse tunnistaa stop-merkin tiellä.": "4. vaihe"
-            },
-            "explanation": "Tekoälyn oppiminen alkaa aina datan eli esimerkkikuvien keräämisestä. Kun dataa on tarpeeksi, kone oppii löytämään kuvista säännönmukaisuuksia.",
+            "question": "Järjestä, miten liikennemerkkejä tunnistava tekoäly syntyy.",
             "draggables": [
-              "Ihmiset keräävät tuhansia kuvia erilaisista liikennemerkeistä.",
-              "Kuvat syötetään datana tekoälyn ohjelmaan.",
-              "Tekoäly oppii kuvista, miltä liikennemerkit näyttävät.",
-              "Auto osaa itse tunnistaa stop-merkin tiellä."
+              "Kerätään tuhansia kuvia teistä ja liikennemerkeistä",
+              "Ihmiset merkitsevät kuviin, mikä merkki niissä näkyy",
+              "Tekoäly harjoittelee kuvien ja merkintöjen avulla",
+              "Tekoäly testataan kuvilla, joita se ei ole nähnyt"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Kerätään tuhansia kuvia teistä ja liikennemerkeistä": "1. vaihe",
+              "Ihmiset merkitsevät kuviin, mikä merkki niissä näkyy": "2. vaihe",
+              "Tekoäly harjoittelee kuvien ja merkintöjen avulla": "3. vaihe",
+              "Tekoäly testataan kuvilla, joita se ei ole nähnyt": "4. vaihe"
+            },
+            "explanation": "Merkinnät kertovat tekoälylle oikeat vastaukset harjoittelun aikana. Lopuksi tekoäly testataan uusilla kuvilla, koska vasta silloin nähdään, oppiko se tunnistamaan merkkejä vai pelkästään muistamaan harjoituskuvat."
           },
           {
             "id": "konepellin_1_q5",
             "type": "drag_drop",
-            "question": "Yhdistä tavallisen auton osat ja tekoälyn \"konepellin alla\" olevat vastineet toisiinsa!",
+            "question": "Millaista dataa mikin tekoäly tarvitsee oppiakseen?",
             "draggables": [
-              "Bensiini",
-              "Moottori",
-              "Kuljettaja"
+              "Tuhansia tunteja äänitettyä puhetta ja sen tekstit",
+              "Miljoonia kuvia, joihin on merkitty niiden sisältö",
+              "Valtava määrä kirjoja, artikkeleita ja nettisivuja"
             ],
             "dropZones": [
-              "Data ja tiedonkeruu",
-              "Tietokoneen koodi",
-              "Ohjelmoija eli koodari"
+              "Puheentunnistin",
+              "Kuvantunnistin",
+              "Kielimalli"
             ],
             "correctAnswer": {
-              "Bensiini": "Data ja tiedonkeruu",
-              "Moottori": "Tietokoneen koodi",
-              "Kuljettaja": "Ohjelmoija eli koodari"
+              "Tuhansia tunteja äänitettyä puhetta ja sen tekstit": "Puheentunnistin",
+              "Miljoonia kuvia, joihin on merkitty niiden sisältö": "Kuvantunnistin",
+              "Valtava määrä kirjoja, artikkeleita ja nettisivuja": "Kielimalli"
             },
-            "explanation": "Aivan kuten auto ei liiku ilman bensiiniä, tekoäly ei tee yhtään mitään ilman valtavaa määrää dataa eli tietoa."
+            "explanation": "Tekoäly oppii vain sitä, mitä datassa on. Puheentunnistin tarvitsee puhetta ja tiedon siitä, mitä puheessa sanottiin. Kuvantunnistin tarvitsee merkittyjä kuvia ja kielimalli tarvitsee tekstiä, paljon tekstiä."
           },
           {
             "id": "konepellin_1_q6",
             "type": "spot_the_ai",
-            "question": "Kuka näistä oppijoista on tekoäly? Etsi vaihtoehto, joka paljastaa tekoälyn tavan oppia uutta.",
+            "question": "Missä näistä tekoäly oppii datasta, jonka sinä itse tuotat?",
             "options": [
-              "Oppilas, joka oppii tunnistamaan koiran nähtyään yhden koiranpennun.",
-              "Laite, joka tarvitsee miljoona kuvaa koirista oppiakseen sanan 'koira'.",
-              "Kuski, joka ymmärtää liikennesäännöt lukemalla pienen ohjekirjan.",
-              "Mekaanikko, joka korjaa auton vian kokeilemalla osia kerran."
+              "Laskin näyttää tuloksen, kun painat yhtäsuuruusmerkkiä",
+              "Videopalvelu ehdottaa videoita katsomiesi perusteella",
+              "Herätyskello soi joka aamu samaan aikaan kello seitsemän",
+              "Valokatkaisija sytyttää valon, kun painat sen kytkintä"
             ],
-            "correctAnswer": "Laite, joka tarvitsee miljoona kuvaa koirista oppiakseen sanan 'koira'.",
-            "explanation": "Ihminen on todella fiksu ja oppii asioita jo yhdestä esimerkistä. Tekoäly on oikeastaan vähän hidasälyinen aluksi ja se vaatii valtavan vuoren dataa oppiakseen saman asian!"
+            "correctAnswer": "Videopalvelu ehdottaa videoita katsomiesi perusteella",
+            "explanation": "Jokainen katsottu, ohitettu tai tykätty video on dataa. Videopalvelun tekoäly oppii niistä, mitä sinä todennäköisesti haluat katsoa seuraavaksi. Laskin, herätyskello ja katkaisija toimivat aina samalla tavalla, eikä niiden toiminta muutu sen mukaan, mitä teet."
           },
           {
             "id": "konepellin_1_q7",
             "type": "reverse_prompt",
-            "question": "Navigaattori piirtää kartan, jossa on vain huoltoasemia, muttei yhtään ravintolaa tai hotellia. Mikä kehotteista (prompteista) sai aikaan tämän tuloksen?",
+            "question": "Chatbot vastasi: \"Opin kirjoittamaan lukemalla valtavan määrän ihmisten kirjoittamaa tekstiä, kuten kirjoja, artikkeleita ja nettisivuja.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Etsi reitti käyttämällä datana kaikkia maailman rakennuksia.",
-              "Laske matka käyttäen vain huoltoasemien tietoja datana.",
-              "Piirrä kartalle nopein tie kotiin ilman pysähdyksiä.",
-              "Näytä minulle kartta, jossa on mahdollisimman paljon ruokapaikkoja."
+              "Kuka ohjelmoija on kirjoittanut vastauksesi?",
+              "Mistä olet oppinut kirjoittamaan näin hyvin?",
+              "Kuinka monta kirjaa olet lukenut tarkalleen?",
+              "Mitä kirjaa suosittelisit minulle luettavaksi?"
             ],
-            "correctAnswer": "Laske matka käyttäen vain huoltoasemien tietoja datana.",
-            "explanation": "Tekoäly voi tuottaa vain sellaista tulosta, mitä sille annetaan datana. Jos annat sille vain tietoa huoltoasemista, se ei voi tietää ravintoloista mitään!"
+            "correctAnswer": "Mistä olet oppinut kirjoittamaan näin hyvin?",
+            "explanation": "Kielimalli on oppinut kielen ihmisten kirjoittamasta tekstistä. Ohjelmoija ei kirjoita sen vastauksia valmiiksi, joten ensimmäiseen kysymykseen chatbot vastaisi toisin. Tarkkaa kirjojen määrää se ei osaa kertoa. Kirjasuositus taas olisi aivan erilainen vastaus."
           },
           {
             "id": "konepellin_1_q8",
             "type": "true_false",
-            "question": "Tekoäly osaa puhua kieliä vain, jos sille on ensin syötetty datana valtavasti tekstejä kyseisellä kielellä.",
+            "question": "Chatbot osaa saamen kieltä yhtä hyvin kuin englantia.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Oikein! Tekoäly ei osaa taikoa tietoa tyhjästä. Se vaatii opetusta ja miljoonia lauseita kyseisellä kielellä."
+            "correctAnswer": "Väärin",
+            "explanation": "Englanninkielistä tekstiä on netissä valtavasti, saamenkielistä hyvin vähän. Koska kielimalli oppii tekstistä, se osaa harvinaisia kieliä selvästi heikommin ja tekee niissä enemmän virheitä. Myös suomi on maailman mittakaavassa pieni kieli."
           },
           {
             "id": "konepellin_1_q9",
             "type": "multiple_choice",
-            "question": "Haluat tekoälyn kertovan vitsejä autosta. Mistä tekoäly saa nämä vitsit?",
+            "question": "Chatbot kirjoittaa sinulle uuden vitsin autoista. Mistä se osaa sen?",
             "options": [
-              "Se keksii ne ihan itse omasta päästään.",
-              "Se on oppinut ne netin valtavasta datamäärästä.",
-              "Auton moottori lähettää sille salaisia signaaleja.",
-              "Koodari kirjoittaa sille jokaisen vitsin yksitellen."
+              "Ohjelmoija on kirjoittanut sille valmiin vitsilistan",
+              "Se hakee vitsin aina samasta netin vitsikirjasta",
+              "Se on oppinut tekstidatasta, millaisia vitsit ovat",
+              "Se on itse kokenut hauskoja asioita autoissa"
             ],
-            "correctAnswer": "Se on oppinut ne netin valtavasta datamäärästä.",
-            "explanation": "Tekoäly kykenee keksimään vitsejä, koska se on lukenut internetistä \"polttoaineekseen\" valtavan määrän tekstejä ja vitsejä ja oppinut niistä säännöt."
+            "correctAnswer": "Se on oppinut tekstidatasta, millaisia vitsit ovat",
+            "explanation": "Kielimalli on lukenut harjoittelussaan valtavasti tekstiä, myös vitsejä. Se on oppinut, millainen rakenne vitseillä on ja kokoaa siitä uuden. Siksi vitsi voi olla uusi, mutta se ei aina naurata: tekoäly ei itse ymmärrä, mikä on hauskaa."
           },
           {
             "id": "konepellin_1_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin musiikkitekoäly on opetettu soittamaan vain hidasta ja surullista musiikkia. Kun pyydät sitä soittamaan menevän rokkibiisin, se menee jumiin. Miksi se ei onnistu?",
+            "question": "SKENAARIO: Lintujen laulua tunnistava sovellus on opetettu äänityksillä hiljaisesta metsästä. Kaupungin puistossa se tunnistaa lajeja huonosti. Mikä on todennäköisin syy?",
             "options": [
-              "Koska sen tankissa on vääränlaista polttoainetta (dataa).",
-              "Koska hidas musiikki rikkoi auton kaiuttimet pysyvästi.",
-              "Koska tekoäly ei pitänyt sinun puheäänestäsi ollenkaan.",
-              "Koska rokkimusiikki vaatii enemmän auton akkua."
+              "Opetusdatassa ei ollut kaupungin taustaääniä",
+              "Sovellus väsyy, kun sitä käytetään monta kertaa",
+              "Puhelimen mikrofoni ei kuule lintuja ulkona",
+              "Sovellus unohtaa oppimansa, jos sitä ei päivitetä"
             ],
-            "correctAnswer": "Koska sen tankissa on vääränlaista polttoainetta (dataa).",
-            "explanation": "Tekoäly oppii vain sen datan perusteella, mitä sille on annettu. Jos se on \"syönyt\" vain hidasta musiikkia, se ei osaa tehdä rokkia."
+            "correctAnswer": "Opetusdatassa ei ollut kaupungin taustaääniä",
+            "explanation": "Tekoäly oppi tunnistamaan lintuja tilanteessa, jossa taustalla oli hiljaista. Puistossa linnun ääni sekoittuu autojen ja ihmisten ääniin, joita se ei ole oppinut erottamaan. Korjaus on lisätä opetusdataan meluisissa paikoissa tehtyjä äänityksiä."
           },
           {
             "id": "konepellin_1_q11",
             "type": "drag_drop",
-            "question": "Yhdistä asiat oikeisiin laatikoihin! Mikä näistä on hyvää dataa tekoälylle ja mitkä kolme ovat puolestaan huonoa dataa?",
+            "question": "Teet koiria tunnistavaa tekoälyä. Auttaako vai haittaako data oppimista?",
             "draggables": [
-              "Miljoona valokuvaa erilaisista autoista",
-              "Yksi sumea kuva naapurin vanhasta autosta",
-              "Tuhat sivua täysin keksittyjä ja vääriä faktoja",
-              "Paljon kuvia pelkästä nurmikosta, kun piti opettaa autoja"
+              "Kuvia koirista sisällä, ulkona ja lumessa",
+              "Kuvia kissoista, joihin on merkitty \"koira\"",
+              "Kuvia kaikenkokoisista koiraroduista",
+              "Tuhansia kopioita samasta koirakuvasta"
             ],
             "dropZones": [
-              "Hyvää dataa (paljon laadukasta polttoainetta)",
-              "Huonoa dataa (viallista tai liian vähän polttoainetta)"
+              "Auttaa oppimaan",
+              "Haittaa oppimista"
             ],
             "correctAnswer": {
-              "Miljoona valokuvaa erilaisista autoista": "Hyvää dataa (paljon laadukasta polttoainetta)",
-              "Yksi sumea kuva naapurin vanhasta autosta": "Huonoa dataa (viallista tai liian vähän polttoainetta)",
-              "Tuhat sivua täysin keksittyjä ja vääriä faktoja": "Huonoa dataa (viallista tai liian vähän polttoainetta)",
-              "Paljon kuvia pelkästä nurmikosta, kun piti opettaa autoja": "Huonoa dataa (viallista tai liian vähän polttoainetta)"
+              "Kuvia koirista sisällä, ulkona ja lumessa": "Auttaa oppimaan",
+              "Kuvia kissoista, joihin on merkitty \"koira\"": "Haittaa oppimista",
+              "Kuvia kaikenkokoisista koiraroduista": "Auttaa oppimaan",
+              "Tuhansia kopioita samasta koirakuvasta": "Haittaa oppimista"
             },
-            "explanation": "Tekoäly tarvitsee valtavan määrän monipuolista dataa oppiakseen luotettavasti. Sumeat kuvat, epäoleelliset asiat (kuten nurmikko autojen sijaan) ja väärät faktat vain hämmentävät sitä!"
+            "explanation": "Monipuolinen data opettaa, että koira on koira ympäristöstä ja rodusta riippumatta. Väärät merkinnät opettavat tekoälylle virheitä ja saman kuvan kopiot näyttävät suurelta datamäärältä, vaikka niistä ei opi mitään uutta."
           },
           {
             "id": "konepellin_1_q12",
@@ -1842,41 +1842,41 @@ export const categories = [
           {
             "id": "konepellin_1_q13",
             "type": "multiple_choice",
-            "question": "Mitä tarkoittaa sanonta \"roskaa sisään, roskaa ulos\", kun puhutaan tekoälystä?",
+            "question": "Mitä sanonta \"roskaa sisään, roskaa ulos\" tarkoittaa tekoälystä puhuttaessa?",
             "options": [
-              "Jos auton sisällä on roskia, se ei käynnisty.",
-              "Jos data on huonoa, tekoälyn vastaukset ovat huonoja.",
-              "Tekoäly osaa siivota roskat pois internetistä.",
-              "Koodarin pitää aina muistaa viedä roskat ulos."
+              "Tekoäly poistaa datasta virheet automaattisesti",
+              "Huonosta datasta seuraa huonoja tuloksia",
+              "Mitä enemmän dataa on, sitä vähemmän on virheitä",
+              "Vanha data pitää poistaa ennen uuden lisäämistä"
             ],
-            "correctAnswer": "Jos data on huonoa, tekoälyn vastaukset ovat huonoja.",
-            "explanation": "Aivan kuten auto yskii huonolla bensalla, tekoäly antaa virheellisiä tai tyhmiä vastauksia, jos sille on syötetty väärää tai huonoa dataa."
+            "correctAnswer": "Huonosta datasta seuraa huonoja tuloksia",
+            "explanation": "Tekoäly ei tiedä, onko data oikeaa vai väärää. Se oppii kaiken, mitä sille näytetään. Jos datassa on virheitä, ne siirtyvät tekoälyn vastauksiin. Lisää dataa ei auta, jos uusikin data on huonoa."
           },
           {
             "id": "konepellin_1_q14",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta tekoälyn tuottama teksti, josta huomaa, että sen käyttämä data (polttoaine) on ollut todella vanhaa!",
+            "question": "Mikä näistä on tekoälyn opetusdataa?",
             "options": [
-              "Tänään sataa lunta, joten autoon pitää laittaa talvirenkaat alle.",
-              "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
-              "Kävimme eilen perheen kanssa pizzalla ja se oli superhyvää!",
-              "Sähköautot ovat yleistyneet paljon viime vuosien aikana."
+              "Ohjelma, joka laskee kahden luvun summan",
+              "Tuhannet kuvat, joihin on merkitty kuvan eläin",
+              "Näytönohjain, joka tekee laskuja nopeasti",
+              "Sääntö: jos on pakkasta, näytä lumihiutale"
             ],
-            "correctAnswer": "Suomen presidentti on Urho Kekkonen ja televisiot ovat mustavalkoisia.",
-            "explanation": "Jos tekoälyn käyttämä data on kerätty pitkän aikaa sitten, se luulee, että ne asiat ovat edelleen totta! Tekoäly on juuri niin fiksu kuin sen saama data."
+            "correctAnswer": "Tuhannet kuvat, joihin on merkitty kuvan eläin",
+            "explanation": "Data on esimerkkejä, joista opitaan. Laskuohjelma ja pakkassääntö ovat ohjelmoijan kirjoittamia ohjeita eli algoritmeja ja näytönohjain on laite, jolla tekoälyä ajetaan. Tekoäly tarvitsee kaikkia näitä, mutta vain merkityt kuvat ovat dataa."
           },
           {
             "id": "konepellin_1_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin näyttö kertoo sinulle: \"Omenat ovat sinisiä ja maistuvat suolaiselta.\" Mikä syötetty data (polttoaine) sai tekoälyn luulemaan näin?",
+            "question": "Chatbot lopetti tarinan näin: \"...ja he elivät onnellisina elämänsä loppuun asti.\" Millä kehotteella tarina saatiin?",
             "options": [
-              "Datana käytettiin vain luontodokumentteja ja keittokirjoja.",
-              "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
-              "Datana käytettiin kuvia punaisista omenapuista syksyllä.",
-              "Datana käytettiin autokorjaamon vanhoja ja pölyisiä ohjekirjoja."
+              "Kirjoita uutinen eilisestä jääkiekko-ottelusta.",
+              "Kirjoita resepti mustikkapiirakkaan.",
+              "Kirjoita lyhyt satu prinsessasta ja lohikäärmeestä.",
+              "Selitä lyhyesti, miten sademetsä syntyy."
             ],
-            "correctAnswer": "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
-            "explanation": "Tekoäly ei tiedä oikeasta maailmasta mitään. Jos sen \"polttoaineena\" oleva tieto (data) väittää omenoiden olevan sinisiä ja suolaisia, tekoäly uskoo sen täysin!"
+            "correctAnswer": "Kirjoita lyhyt satu prinsessasta ja lohikäärmeestä.",
+            "explanation": "Kielimalli on lukenut tuhansia satuja ja monet niistä päättyvät juuri näin. Se on oppinut datasta, mitkä sanat tavallisesti seuraavat toisiaan ja toistaa sitä. Siksi tekoälyn tarinat voivat tuntua tutuilta."
           },
           {
             "id": "konepellin_1_q16",
@@ -1924,7 +1924,7 @@ export const categories = [
               "Tekoäly lakkaa oppimasta kokonaan"
             ],
             "correctAnswer": "Tekoäly oppii sekoittamaan tomaatit ja omenat",
-            "explanation": "Tekoäly uskoo merkinnät sellaisinaan. Jos tomaattia kutsutaan omenaksi tarpeeksi monta kertaa, se oppii, että punainen pyöreä hedelmä on omena. Siksi datan merkitsijöiden työ on tärkeää, ja isoissa tekoälyprojekteissa merkinnät tarkistetaan usein moneen kertaan. Sanonta \"roskaa sisään, roskaa ulos\" kuvaa juuri tätä."
+            "explanation": "Tekoäly uskoo merkinnät sellaisinaan. Jos tomaattia kutsutaan omenaksi tarpeeksi monta kertaa, se oppii, että punainen pyöreä hedelmä on omena. Siksi datan merkitsijöiden työ on tärkeää ja isoissa tekoälyprojekteissa merkinnät tarkistetaan usein moneen kertaan. Sanonta \"roskaa sisään, roskaa ulos\" kuvaa juuri tätä."
           },
           {
             "id": "konepellin_1_q18",
@@ -1983,231 +1983,235 @@ export const categories = [
           {
             "id": "konepellin_2_q1",
             "type": "true_false",
-            "question": "Tekoäly ei keksi omia sääntöjä, vaan se noudattaa ihmisen kirjoittamia tarkkoja askeleita ja algoritmeja.",
+            "question": "Myös koneoppiva tekoäly tarvitsee algoritmin: ohjelmoija kirjoittaa ohjeet, joiden mukaan se oppii esimerkeistä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Totta! Tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä ja askeleita. Se toimii koodarin antaman reseptin mukaan."
+            "explanation": "Ohjelmoija ei kirjoita sääntöä \"kissalla on viikset\", vaan oppimisalgoritmin, joka kertoo, miten esimerkeistä opitaan. Varsinaiset tunnistamisen säännöt tekoäly muodostaa itse datasta."
           },
           {
             "id": "konepellin_2_q2",
             "type": "multiple_choice",
-            "question": "Mikä on paras tapa kuvata algoritmia, jonka avulla auton tekoäly toimii?",
+            "question": "Mikä näistä on algoritmi?",
             "options": [
-              "Se on koodarin kirjoittama tarkka reseptikirja",
-              "Se on auton tankkiin laitettavaa nestettä",
-              "Se on auton moottorissa asuva mekaanikko",
-              "Se on täysin taikuutta tekevä taikasauva"
+              "Kuva valmiista pullasta keittokirjan kannessa",
+              "Lista pullan raaka-aineista ilman ohjeita",
+              "Uuni, jossa pullat paistetaan valmiiksi",
+              "Resepti, joka kertoo pullan teon vaihe vaiheelta"
             ],
-            "correctAnswer": "Se on koodarin kirjoittama tarkka reseptikirja",
-            "explanation": "Algoritmi on kuin leivontaresepti! Koska tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä ja askeleita, sen pitää saada koodarilta selkeä ohje siitä, miten missäkin tilanteessa toimitaan."
+            "correctAnswer": "Resepti, joka kertoo pullan teon vaihe vaiheelta",
+            "explanation": "Algoritmi on ohje, joka kertoo vaiheet järjestyksessä. Raaka-aineet vastaavat dataa, uuni vastaa tietokonetta ja valmis pulla on tulos. Ilman reseptiä raaka-aineista ei tiedä, mitä tehdä."
           },
           {
             "id": "konepellin_2_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Autotallin siivousrobotti on ohjelmoitu algoritmilla: \"1. Nosta roska. 2. Laita roskikseen.\" Mutta autotallissa onkin lattialla pelkkiä tärkeitä auton varaosia, ei roskia. Mitä robotti tekee?",
+            "question": "SKENAARIO: Robotti-imurin ohje on: \"Aja suoraan, kunnes osut esteeseen. Käänny ja jatka.\" Lattialla on kaverin legorakennelma. Mitä imuri tekee?",
             "options": [
-              "Se laittaa tärkeät varaosat roskikseen.",
-              "Se ymmärtää lopettaa siivouksen heti.",
-              "Se menee kysymään koodarilta neuvoa.",
-              "Se alkaa pyyhkiä pölyjä varaosista."
+              "Kiertää rakennelman, koska näkee sen olevan arvokas",
+              "Pysähtyy ja odottaa, että joku siirtää rakennelman",
+              "Imuroi rakennelman ympäriltä erityisen varovasti",
+              "Törmää rakennelmaan ja kääntyy, vaikka se hajoaisikin"
             ],
-            "correctAnswer": "Se laittaa tärkeät varaosat roskikseen.",
-            "explanation": "Robotti noudattaa algoritmin tarkkoja askeleita täysin sokeasti. Jos koodari ei ole kirjoittanut sääntöä arvokkaiden varaosien tunnistamiseen, kone heittää nekin surutta roskiin!"
+            "correctAnswer": "Törmää rakennelmaan ja kääntyy, vaikka se hajoaisikin",
+            "explanation": "Ohjeessa ei sanota mitään arvokkaista esineistä, joten imuri tekee täsmälleen sen, mitä ohjeessa lukee. Uusimmissa imureissa on kamera ja tekoäly, joka on opetettu tunnistamaan esineitä lattialla, jotta ne osaavat kiertää ne."
           },
           {
             "id": "konepellin_2_q4",
             "type": "drag_drop",
-            "question": "Järjestä algoritmin askeleet oikeaan järjestykseen, jotta AI van osaa käynnistää tuulilasinpyyhkijät sateella!",
-            "correctAnswer": {
-              "Kamera huomaa sadepisaran lasissa.": "1. vaihe",
-              "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.": "2. vaihe",
-              "Pyyhkijöiden moottori saa sähköä.": "3. vaihe",
-              "Ikkuna pyyhkiytyy täysin puhtaaksi.": "4. vaihe"
-            },
-            "explanation": "Tekoälyn algoritmi etenee loogisesti askeleittain. Ensin havaitaan muutos ympäristössä, sitten luetaan sääntö, annetaan käsky eteenpäin ja lopuksi työ suoritetaan.",
+            "question": "Järjestä algoritmin vaiheet, joilla auton sadeanturi ohjaa tuulilasinpyyhkijöitä.",
             "draggables": [
-              "Kamera huomaa sadepisaran lasissa.",
-              "Tietokone lukee säännön: 'Jos vettä, käynnistä pyyhkijä'.",
-              "Pyyhkijöiden moottori saa sähköä.",
-              "Ikkuna pyyhkiytyy täysin puhtaaksi."
+              "Anturi mittaa, osuuko tuulilasiin vettä",
+              "Ohjelma tarkistaa: jos vettä on, käynnistä pyyhkijät",
+              "Pyyhkijät pyyhkäisevät lasin",
+              "Ohjelma palaa alkuun ja mittaa uudelleen"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Anturi mittaa, osuuko tuulilasiin vettä": "1. vaihe",
+              "Ohjelma tarkistaa: jos vettä on, käynnistä pyyhkijät": "2. vaihe",
+              "Pyyhkijät pyyhkäisevät lasin": "3. vaihe",
+              "Ohjelma palaa alkuun ja mittaa uudelleen": "4. vaihe"
+            },
+            "explanation": "Tässä algoritmissa on ehto (jos vettä on) ja toisto (palaa alkuun). Ohjelmoija on kirjoittanut säännöt etukäteen, eikä se opi mitään. Kaikki algoritmit eivät siis ole tekoälyä, vaikka tekoäly käyttää aina algoritmeja."
           },
           {
             "id": "konepellin_2_q5",
             "type": "drag_drop",
-            "question": "Yhdistä leipomisen ja koodaamisen termit toisiinsa!",
+            "question": "Yhdistä leipomisen asiat tietokoneen vastineisiin.",
             "draggables": [
-              "Leipuri",
-              "Reseptikirja",
-              "Jauhot ja sokerit"
+              "Resepti",
+              "Jauhot, maito ja hiiva",
+              "Leipuri, joka seuraa ohjetta",
+              "Valmis pulla"
             ],
             "dropZones": [
-              "Ohjelmoija eli koodari",
-              "Algoritmi (tarkat askeleet)",
-              "Data (tekoälyn polttoaine)"
+              "Algoritmi",
+              "Data eli syöte",
+              "Tietokone",
+              "Tulos"
             ],
             "correctAnswer": {
-              "Leipuri": "Ohjelmoija eli koodari",
-              "Reseptikirja": "Algoritmi (tarkat askeleet)",
-              "Jauhot ja sokerit": "Data (tekoälyn polttoaine)"
+              "Resepti": "Algoritmi",
+              "Jauhot, maito ja hiiva": "Data eli syöte",
+              "Leipuri, joka seuraa ohjetta": "Tietokone",
+              "Valmis pulla": "Tulos"
             },
-            "explanation": "Aivan kuten leipuri tekee kakun jauhoista reseptin avulla, koodari tekee ohjelman datasta tarkan algoritmin avulla!"
+            "explanation": "Tietokone tekee työn ohjeen eli algoritmin mukaan. Se käyttää syötettä eli dataa ja tuottaa tuloksen. Ohjelmoija on kuin reseptin kirjoittaja: hän ei leivo itse, mutta hänen ohjeensa ratkaisee, millainen pullasta tulee."
           },
           {
             "id": "konepellin_2_q6",
             "type": "spot_the_ai",
-            "question": "Etsi joukosta laite, joka toimii koodarin sille kirjoittaman tarkan algoritmin eli sääntölistan avulla!",
+            "question": "Kaikissa näissä on algoritmi. Missä algoritmi on oppinut toimintansa datasta?",
             "options": [
-              "Tavallinen puinen leikkiauto, jota työnnetään.",
-              "Älylukko, joka aukeaa vain oikealla koodilla.",
-              "Mekaaninen jakoavain, jolla käännetään mutteria.",
-              "Puhjennut polkupyörän rengas varastossa."
+              "Hissi, joka pysähtyy aina painetun napin kerrokseen",
+              "Sähköposti, joka siirtää huijausviestit roskiin",
+              "Mikroaaltouuni, joka sammuu ajastimen loputtua",
+              "Liikennevalo, joka vaihtuu minuutin välein"
             ],
-            "correctAnswer": "Älylukko, joka aukeaa vain oikealla koodilla.",
-            "explanation": "Älylukon sisällä on tietokoneohjelma, joka seuraa algoritmia: \"Jos koodi on oikein, avaa ovi. Jos koodi on väärin, pysy kiinni.\" Tekoäly noudattaa näitä tarkkoja sääntöjä askeleittain."
+            "correctAnswer": "Sähköposti, joka siirtää huijausviestit roskiin",
+            "explanation": "Roskapostisuodatin on oppinut miljoonista viesteistä, joista ihmiset ovat kertoneet, ovatko ne roskapostia. Huijausviestit muuttuvat koko ajan, joten käsin kirjoitetut säännöt eivät riittäisi. Hissin, uunin ja liikennevalon säännöt ohjelmoija on kirjoittanut itse."
           },
           {
             "id": "konepellin_2_q7",
             "type": "reverse_prompt",
-            "question": "Auton tekoälykaiutin sanoo: \"Tervetuloa kyytiin, on maanantai! Tervetuloa kyytiin, on tiistai! Tervetuloa kyytiin, on keskiviikko!\" Mikä koodarin huono sääntö (algoritmi) sai sen menemään näin jumiin?",
+            "question": "Chatbot vastasi: \"1. Kulje 10 askelta. 2. Käänny 90 astetta oikealle. 3. Toista vaiheet 1 ja 2 neljä kertaa.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Toivota kuski tervetulleeksi kyytiin jokaisena viikonpäivänä peräkkäin.",
-              "Sano kuskille huomenta aina, kun auto käynnistetään kerran.",
-              "Laula hauska laulu, jossa luetellaan viikonpäivät.",
-              "Kerro kuskille, mikä viikonpäivä on juuri tänään."
+              "Piirrä minulle kuva, jossa on iso neliö.",
+              "Laske neliön pinta-ala, kun sivu on 10 askelta.",
+              "Kirjoita ohje, jolla robotti piirtää neliön.",
+              "Keksi lyhyt tarina kävelevästä robotista."
             ],
-            "correctAnswer": "Toivota kuski tervetulleeksi kyytiin jokaisena viikonpäivänä peräkkäin.",
-            "explanation": "Koneet tottelevat algoritmeja sokeasti. Jos koodari kirjoittaa askeleet huonosti, kone toistaa niitä, vaikka se kuulostaisi meistä ihmisistä todella hölmöltä."
+            "correctAnswer": "Kirjoita ohje, jolla robotti piirtää neliön.",
+            "explanation": "Vastaus on algoritmi: vaiheet järjestyksessä ja toisto (\"toista neljä kertaa\"). Kehote \"Piirrä minulle kuva, jossa on iso neliö\" olisi tuottanut kuvan, ei ohjetta. Tekoälyä käytetään paljon ohjelmoinnin apuna, mutta sen kirjoittama koodi pitää aina testata."
           },
           {
             "id": "konepellin_2_q8",
             "type": "true_false",
-            "question": "Jos koodari tekee algoritmivaiheessa virheen, tekoäly toistaa saman virheen, sillä siltä puuttuu maalaisjärki.",
+            "question": "Tietokone huomaa itse, jos ohjeesta puuttuu askel ja lisää sen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Juuri näin! Tekoäly ei osaa lisätä puuttuvaa askelta, vaan tekee täsmälleen sen virheen, jonka koodari vahingossa teki."
+            "correctAnswer": "Väärin",
+            "explanation": "Tavallinen ohjelma tekee täsmälleen sen, mitä ohjeessa lukee, vaikka lopputulos olisi hölmö. Ohjelmointivirhettä kutsutaan bugiksi. Ohjelmoijat etsivät bugeja testaamalla ohjelmaa monissa eri tilanteissa."
           },
           {
             "id": "konepellin_2_q9",
             "type": "multiple_choice",
-            "question": "Miksi koodarin pitää kirjoittaa algoritmin säännöt tekoälylle hyvin tarkasti, pieni askel kerrallaan?",
+            "question": "Ohjeessa lukee: \"Levitä leivälle vähän voita.\" Miksi ohje on huono tietokoneelle?",
             "options": [
-              "Koska tietokone on huono arvaamaan ihmisten ajatuksia.",
-              "Koska tietokoneet pelkäävät pitkiä kirjoituksia.",
-              "Koska auton moottori on muuten liian äänekäs.",
-              "Koska tietokone pitää salaisista viesteistä."
+              "Tietokone ei tiedä, kuinka paljon on \"vähän\"",
+              "Ohjeessa on liian monta sanaa koneelle",
+              "Tietokone ei ymmärrä suomen kieltä",
+              "Voita ei voi kuvata tietokoneelle sanoin"
             ],
-            "correctAnswer": "Koska tietokone on huono arvaamaan ihmisten ajatuksia.",
-            "explanation": "Tietokone noudattaa tarkkoja sääntöjä askeleittain. Sillä ei ole lainkaan maalaisjärkeä, joten asiat täytyy selittää sille aivan alusta loppuun, käsky käskyltä."
+            "correctAnswer": "Tietokone ei tiedä, kuinka paljon on \"vähän\"",
+            "explanation": "Ihminen ymmärtää, mitä \"vähän\" tarkoittaa, mutta tietokone tarvitsee tarkan määrän, esimerkiksi \"5 grammaa\". Hyvässä algoritmissa jokainen askel on niin tarkka, ettei sitä voi tulkita monella tavalla."
           },
           {
             "id": "konepellin_2_q10",
             "type": "scenario",
-            "question": "SKENAARIO: AI van lähestyy risteystä. Koodarin algoritmissa lukee: \"Jos valo on punainen, jarruta. Jos valo on vihreä, aja.\" Mitä auto tekee, jos valo on vahingossa mennyt rikki ja näyttää violettia väriä?",
+            "question": "SKENAARIO: Ohjelmassa lukee: \"Jos valo on punainen, pysähdy. Jos valo on vihreä, aja.\" Liikennevalo on rikki ja vilkkuu keltaista. Mitä ohjelma tekee?",
             "options": [
-              "Se ohjelma jumiutuu tai ei osaa tehdä mitään, koska sääntö puuttuu.",
-              "Se ajaa kahta kauheammin eteenpäin risteykseen.",
-              "Se vaihtaa liikennevalon värin vihreäksi.",
-              "Se soittaa heti hätänumeroon apua."
+              "Päättelee, että keltainen on melkein vihreä",
+              "Päättelee, että pysähtyminen on turvallisinta",
+              "Ei löydä sääntöä, joten ei tiedä mitä tehdä",
+              "Kysyy kuljettajalta ja tallentaa uuden säännön"
             ],
-            "correctAnswer": "Se ohjelma jumiutuu tai ei osaa tehdä mitään, koska sääntö puuttuu.",
-            "explanation": "Jos algoritmista puuttuu sääntö tietylle yllätykselle (kuten violetille valolle), kone ei tiedä miten toimia, koska se nojaa vain koodarin etukäteen miettimiin askeleisiin."
+            "correctAnswer": "Ei löydä sääntöä, joten ei tiedä mitä tehdä",
+            "explanation": "Ohjelma ei päättele mitään itse, vaan se etsii sääntöä, joka sopii tilanteeseen. Siksi ohjelmoijat lisäävät \"muuten\"-säännön: jos mikään muu sääntö ei sovi, hidasta ja pysähdy. Hyvä ohjelmoija miettii etukäteen myös oudot tilanteet."
           },
           {
             "id": "konepellin_2_q11",
             "type": "drag_drop",
-            "question": "Yhdistä tekoälyn toiminnan askeleet, kun pyydät autotallin älyradiota soittamaan musiikkia!",
+            "question": "Onko ohjeessa ehto vai toisto?",
             "draggables": [
-              "Kuuntele mikrofonia",
-              "Etsi sana 'soita'",
-              "Laita musiikki soimaan"
+              "Jos peli on ohi, näytä pisteet",
+              "Hyppää kymmenen kertaa peräkkäin",
+              "Sekoita taikinaa, kunnes se on tasaista",
+              "Jos ulkona sataa, ota sateenvarjo"
             ],
             "dropZones": [
-              "Askel 1:",
-              "Askel 2:",
-              "Askel 3:"
+              "Ehto (jos, niin)",
+              "Toisto (toista, kunnes)"
             ],
             "correctAnswer": {
-              "Kuuntele mikrofonia": "Askel 1:",
-              "Etsi sana 'soita'": "Askel 2:",
-              "Laita musiikki soimaan": "Askel 3:"
+              "Jos peli on ohi, näytä pisteet": "Ehto (jos, niin)",
+              "Hyppää kymmenen kertaa peräkkäin": "Toisto (toista, kunnes)",
+              "Sekoita taikinaa, kunnes se on tasaista": "Toisto (toista, kunnes)",
+              "Jos ulkona sataa, ota sateenvarjo": "Ehto (jos, niin)"
             },
-            "explanation": "Algoritmit ovat askeleittain eteneviä käskyjä. Ensin kuunnellaan komento, sitten tietokoneen koodi ymmärtää sen ja lopuksi suoritetaan itse tehtävä."
+            "explanation": "Ehto valitsee, mitä tehdään: jos jokin on totta, tehdään yksi asia. Toisto tekee saman asian monta kertaa, joko tietyn määrän tai kunnes jokin ehto täyttyy. Melkein kaikki ohjelmat on rakennettu näistä palikoista."
           },
           {
             "id": "konepellin_2_q12",
             "type": "multiple_choice",
-            "question": "Mitä tekoäly tekee, jos annat sille täydellisen ja virheettömän algoritmin eli ohjeen?",
+            "question": "Mitä koneoppimisessa syntyy, kun oppimisalgoritmi on harjoitellut datalla?",
             "options": [
-              "Se suorittaa tehtävän todella nopeasti ja oikein.",
-              "Se yrittää keksiä ohjeen tilalle oman versionsa.",
-              "Se nukahtaa, koska virheettömyys on sille tylsää.",
-              "Se rikkoo autotallin ikkunan vahingossa."
+              "Lista kaikista esimerkeistä, jotka se näki harjoittelussa",
+              "Uusi ohjelmointikieli, jota vain tekoäly osaa",
+              "Malli, joka osaa tehtävän myös uusilla esimerkeillä",
+              "Uusi tietokone, joka on rakennettu tehtävää varten"
             ],
-            "correctAnswer": "Se suorittaa tehtävän todella nopeasti ja oikein.",
-            "explanation": "Koneet rakastavat tarkkoja sääntöjä ja askeleita. Jos koodari on kirjoittanut reseptinsä loistavasti, tekoäly toimii upeana ja salamannopeana apurina!"
+            "correctAnswer": "Malli, joka osaa tehtävän myös uusilla esimerkeillä",
+            "explanation": "Harjoittelun tulos on malli: valtava joukko lukuja, joihin opitut asiat on tallentunut. Chatbotin taustalla on kielimalli. Kun käytät tekoälyä, käytät valmista mallia, joka on koulutettu jo aiemmin."
           },
           {
             "id": "konepellin_2_q13",
             "type": "drag_drop",
-            "question": "Järjestä koodarin työpäivä autotallissa, kun hän rakentaa uutta algoritmia auton navigaattorille!",
-            "correctAnswer": {
-              "Koodari keksii ongelman, joka pitää ratkaista.": "1. vaihe",
-              "Koodari kirjoittaa ratkaisuun tarkat säännöt askeleittain.": "2. vaihe",
-              "Koodi ladataan auton tekoälyn aivoihin.": "3. vaihe",
-              "Auto osaa reitin perille koodin sääntöjen avulla.": "4. vaihe"
-            },
-            "explanation": "Ennen kuin auto osaa tehdä mitään fiksusti, ihmisen täytyy huomata ongelma ja laatia sille tarkka, askeleittain etenevä ohjekirja eli algoritmi.",
+            "question": "Järjestä, miten hakukone päättää, missä järjestyksessä se näyttää tulokset.",
             "draggables": [
-              "Koodari keksii ongelman, joka pitää ratkaista.",
-              "Koodari kirjoittaa ratkaisuun tarkat säännöt askeleittain.",
-              "Koodi ladataan auton tekoälyn aivoihin.",
-              "Auto osaa reitin perille koodin sääntöjen avulla."
+              "Käyttäjä kirjoittaa hakusanan",
+              "Algoritmi etsii sivut, joilla hakusana esiintyy",
+              "Algoritmi pisteyttää sivut hyödyllisyyden mukaan",
+              "Eniten pisteitä saaneet sivut näytetään ensin"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Käyttäjä kirjoittaa hakusanan": "1. vaihe",
+              "Algoritmi etsii sivut, joilla hakusana esiintyy": "2. vaihe",
+              "Algoritmi pisteyttää sivut hyödyllisyyden mukaan": "3. vaihe",
+              "Eniten pisteitä saaneet sivut näytetään ensin": "4. vaihe"
+            },
+            "explanation": "Hakukoneen algoritmi päättää, mitä näet ensimmäisenä, eikä ensimmäinen tulos ole aina paras tai luotettavin. Pisteytyksessä käytetään nykyään myös tekoälyä. Kannattaa katsoa useampi tulos ja miettiä, kuka sivun on tehnyt."
           },
           {
             "id": "konepellin_2_q14",
             "type": "spot_the_ai",
-            "question": "Mikä näistä on selvä merkki siitä, että laite seuraa tiukkaa algoritmia eli askeleittain kirjoitettua koodia?",
+            "question": "Kaikissa vaihtoehdoissa algoritmi päättää, mitä näet. Missä niistä algoritmi on oppinut valintansa sinun käytöksestäsi?",
             "options": [
-              "Hahmo vastaa kaikkiin kysymyksiin aloittamalla samalla sanalla.",
-              "Hahmo kertoo tänään ihan erilaisen vitsin kuin eilen.",
-              "Hahmo käyttää värikkäitä murresanoja puhuessaan.",
-              "Hahmo unohtaa jatkuvasti puolet ostoslistasta."
+              "Uutissovellus näyttää ensin aiheet, jotka valitsit asetuksista",
+              "Videopalvelu näyttää ensin tilaamiesi kanavien uusimmat videot",
+              "Somesovellus valitsee videot sen mukaan, mitä katsoit loppuun",
+              "Musiikkisovellus soittaa soittolistasi satunnaisessa järjestyksessä"
             ],
-            "correctAnswer": "Hahmo vastaa kaikkiin kysymyksiin aloittamalla samalla sanalla.",
-            "explanation": "Koneellinen, sokea toisto on varma merkki algoritmista! Koodari on asettanut tarkan säännön, että lauseen on alettava tällä yhdellä sanalla joka kerta."
+            "correctAnswer": "Somesovellus valitsee videot sen mukaan, mitä katsoit loppuun",
+            "explanation": "Somesovellus on oppinut, millaiset videot katsot loppuun. Sen perusteella se ennustaa, mikä video pitää sinut sovelluksessa pidempään. Muissa vaihtoehdoissa algoritmi noudattaa yksinkertaista sääntöä: valitsemasi aiheet, uusin ensin tai sattuma. Se, mitä somessa näet, on algoritmin valinta eikä koko maailma."
           },
           {
             "id": "konepellin_2_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin peruutusavustin alkaa piippaaam kovaäänisesti aina silloin, kun kissa kävelee auton takaa, mutta pysyy hiljaa koirien kohdalla. Mikä koodarin sääntö johti tähän erikoiseen tulokseen?",
+            "question": "Chatbot vastasi: \"Jos luku on jaollinen kahdella, kirjoita parillinen. Muuten kirjoita pariton.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Jos peruutuskamera näkee kissan, käynnistä piippausäänimerkki.",
-              "Piippaa aina todella kovaa, kun mitä tahansa liikkuu auton takana.",
-              "Älä piippaa ollenkaan, jos naapurin lemmikit ovat pihalla.",
-              "Jos näet kissan tai koiran, soita iloista musiikkia radiosta."
+              "Mitä tarkoittaa, että luku on parillinen?",
+              "Kirjoita ohje, joka kertoo, onko luku parillinen.",
+              "Luettele kaikki parilliset luvut yhdestä kymmeneen.",
+              "Onko luku 17 parillinen vai pariton?"
             ],
-            "correctAnswer": "Jos peruutuskamera näkee kissan, käynnistä piippausäänimerkki.",
-            "explanation": "Koska tekoäly noudattaa ihmisen kirjoittamia tarkkoja sääntöjä, se piippaa vain kissoille, jos koodarin algoritmi on alun perin kirjoitettu reagoimaan juuri ja vain niihin."
+            "correctAnswer": "Kirjoita ohje, joka kertoo, onko luku parillinen.",
+            "explanation": "Vastaus on ohje eli algoritmi. Siinä on ehto ja muuten-haara, joten jokainen luku saa jommankumman tuloksen. Määritelmää kysymällä chatbot selittäisi käsitteen, luetteloa pyytämällä se antaisi luvut ja luvusta 17 kysymällä se vastaisi \"pariton\"."
           }
         ]
       },
@@ -2218,170 +2222,170 @@ export const categories = [
           {
             "id": "konepellin_3_q1",
             "type": "true_false",
-            "question": "Tekoäly tarvitsee valtavasti toistoja ja harjoittelua esimerkkien avulla oppiakseen asiat kunnolla.",
+            "question": "Tekoälylle riittää yksi tai kaksi esimerkkiä, jotta se oppii asian kunnolla.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Kyllä! Tekoäly on kuin kuka tahansa oppilas. Se tarvitsee valtavasti toistoja oppiakseen asiat kunnolla koneoppimisen kautta."
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoäly tarvitsee valtavasti esimerkkejä ja toistoja. Ihminen voi oppia uuden asian muutamasta esimerkistä, mutta koneoppiminen vaatii yleensä tuhansia tai jopa miljoonia esimerkkejä."
           },
           {
             "id": "konepellin_3_q2",
             "type": "multiple_choice",
-            "question": "Kun puhutaan tekoälyn \"koneoppimisesta\", mitä se tarkoittaa autotallin koodarille?",
+            "question": "Mitä ohjatussa oppimisessa annetaan tekoälylle esimerkkien lisäksi?",
             "options": [
-              "Koodari antaa koneelle esimerkkejä ja kone oppii harjoittelemalla.",
-              "Koodari joutuu lukemaan kaikki maailman kirjat yksin.",
-              "Kone oppii ajamaan autoa täysin ilman sähköä.",
-              "Kone oppii korjaamaan oikean moottorin jakoavaimella."
+              "Valmiit säännöt jokaista tilannetta varten",
+              "Oikea vastaus jokaiseen esimerkkiin",
+              "Palkinto aina, kun se toimii nopeasti",
+              "Lista asioista, joita ei saa oppia"
             ],
-            "correctAnswer": "Koodari antaa koneelle esimerkkejä ja kone oppii harjoittelemalla.",
-            "explanation": "Koneoppimisessa koodari ei kirjoita jokaista pientä sääntöä käsin, vaan antaa tekoälylle valtavasti esimerkkejä. Tekoäly etsii niistä säännöt toistojen ja harjoittelun kautta!"
+            "correctAnswer": "Oikea vastaus jokaiseen esimerkkiin",
+            "explanation": "Ohjatussa oppimisessa jokaisella esimerkillä on oikea vastaus, esimerkiksi kuva ja sana \"kissa\". Tekoäly vertaa omaa arvaustaan oikeaan vastaukseen ja oppii virheistään. Näitä oikeita vastauksia kutsutaan merkinnöiksi."
           },
           {
             "id": "konepellin_3_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat opettaa autotallin apurobotin tunnistamaan ruuvimeisselit kuvista. Näytät sille sata kuvaa meisseleistä. Aluksi se arvaa aivan väärin, mutta vähitellen se osuu useammin oikeaan. Miksi robotti muuttuu jatkuvasti paremmaksi?",
+            "question": "SKENAARIO: Tekoäly tunnisti harjoituskuvat 100-prosenttisesti oikein, mutta uusista kuvista vain puolet. Mitä todennäköisesti tapahtui?",
             "options": [
-              "Koska se harjoittelee jatkuvasti annettujen esimerkkien avulla.",
-              "Koska robotti kasvaa vähitellen isommaksi ja vahvemmaksi.",
-              "Koska robotti kyllästyy ja katsoo oikean vastauksen netistä.",
-              "Koska autotallin valot on vahingossa laitettu kirkkaammalle."
+              "Uudet kuvat olivat liian tarkkoja tekoälyn kameralle",
+              "Se opetteli harjoituskuvat ulkoa, ei yleistä sääntöä",
+              "Tekoäly väsyi harjoittelussa ja alkoi arvata vastauksia",
+              "Harjoituskuvia oli niin paljon, että se sekoittui"
             ],
-            "correctAnswer": "Koska se harjoittelee jatkuvasti annettujen esimerkkien avulla.",
-            "explanation": "Koneoppiminen vaatii paljon harjoitusta. Jokainen virhe ja onnistuminen on toisto, josta kone oppii esimerkkien avulla hieman lisää, kunnes se on mestari!"
+            "correctAnswer": "Se opetteli harjoituskuvat ulkoa, ei yleistä sääntöä",
+            "explanation": "Tätä kutsutaan ylisovittamiseksi. Tekoäly muisti harjoituskuvat, mutta ei oppinut, mikä niissä on olennaista. Se on kuin opettelisi kokeen vastaukset ulkoa ymmärtämättä asiaa. Siksi tekoäly testataan aina kuvilla, joita se ei ole nähnyt."
           },
           {
             "id": "konepellin_3_q4",
             "type": "drag_drop",
-            "question": "Järjestä AI vanin \"tekoälyn autokoulun\" vaiheet siihen järjestykseen, miten koneoppiminen tapahtuu!",
-            "correctAnswer": {
-              "Tekoälylle näytetään valtava määrä kuvia ja esimerkkejä liikenteestä.": "1. vaihe",
-              "Tekoäly tekee aluksi paljon virheitä ja harjoittelee toistamalla.": "2. vaihe",
-              "Tekoäly löytää säännöt esimerkkien joukosta ja oppii asian.": "3. vaihe",
-              "Tekoäly osaa lopulta avustaa ajamisessa turvallisesti oikealla tiellä!": "4. vaihe"
-            },
-            "explanation": "Koneoppimisessa kaikki alkaa esimerkeistä, jatkuu pitkän harjoittelun kautta ja päättyy siihen, että säännöt on viimein opittu luotettavasti.",
+            "question": "Järjestä, mitä tekoälyn harjoittelussa tapahtuu yhden kuvan kohdalla.",
             "draggables": [
-              "Tekoälylle näytetään valtava määrä kuvia ja esimerkkejä liikenteestä.",
-              "Tekoäly tekee aluksi paljon virheitä ja harjoittelee toistamalla.",
-              "Tekoäly löytää säännöt esimerkkien joukosta ja oppii asian.",
-              "Tekoäly osaa lopulta avustaa ajamisessa turvallisesti oikealla tiellä!"
+              "Tekoäly katsoo kuvan ja arvaa, mitä siinä on",
+              "Arvausta verrataan oikeaan vastaukseen",
+              "Tekoäly säätää itseään virheen perusteella",
+              "Sama toistuu seuraavalla kuvalla"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Tekoäly katsoo kuvan ja arvaa, mitä siinä on": "1. vaihe",
+              "Arvausta verrataan oikeaan vastaukseen": "2. vaihe",
+              "Tekoäly säätää itseään virheen perusteella": "3. vaihe",
+              "Sama toistuu seuraavalla kuvalla": "4. vaihe"
+            },
+            "explanation": "Harjoittelu on arvaamisen ja korjaamisen kierre. Yksi kierros muuttaa tekoälyä vain vähän, mutta miljoonien kuvien jälkeen arvaukset osuvat useimmiten oikeaan. Kone ei siis \"ymmärrä\" yhtäkkiä, vaan paranee pienin askelin."
           },
           {
             "id": "konepellin_3_q5",
             "type": "drag_drop",
-            "question": "Miten autokoulussa oppiminen eroaa tekoälyn koneoppimisesta? Yhdistä asiat oikeisiin laatikoihin!",
+            "question": "Kuuluuko tämä harjoitusdataan vai testidataan?",
             "draggables": [
-              "Oppii liikennesäännöt lukemalla pienen ohjekirjan",
-              "Oppii asiat käymällä läpi miljoonia esimerkkikuvia sadasosasekunnissa",
-              "Väsymätön toistamaan ja harjoittelemaan samaa asiaa yökaudet"
+              "Kuvat, joilla tekoäly opettelee tunnistamaan",
+              "Uudet kuvat, joilla tarkistetaan oppiminen",
+              "Esimerkit, joiden vastaukset se näkee oppiessaan",
+              "Esimerkit, jotka pidetään piilossa harjoittelun ajan"
             ],
             "dropZones": [
-              "Tavallinen oppilas (ihminen)",
-              "Tekoäly (koneoppiminen)"
+              "Harjoitusdata",
+              "Testidata"
             ],
             "correctAnswer": {
-              "Oppii liikennesäännöt lukemalla pienen ohjekirjan": "Tavallinen oppilas (ihminen)",
-              "Oppii asiat käymällä läpi miljoonia esimerkkikuvia sadasosasekunnissa": "Tekoäly (koneoppiminen)",
-              "Väsymätön toistamaan ja harjoittelemaan samaa asiaa yökaudet": "Tekoäly (koneoppiminen)"
+              "Kuvat, joilla tekoäly opettelee tunnistamaan": "Harjoitusdata",
+              "Uudet kuvat, joilla tarkistetaan oppiminen": "Testidata",
+              "Esimerkit, joiden vastaukset se näkee oppiessaan": "Harjoitusdata",
+              "Esimerkit, jotka pidetään piilossa harjoittelun ajan": "Testidata"
             },
-            "explanation": "Ihmisen aivot oppivat kerrasta fiksusti, mutta tekoäly on kone. Se vaatii oppiakseen valtavan määrän esimerkkejä ja väsymätöntä digitaalista harjoittelua!"
+            "explanation": "Testidata on kuin koe, jonka kysymyksiä ei ole nähnyt etukäteen. Jos tekoälyä testattaisiin harjoituskuvilla, se saisi hyvät tulokset, vaikka se olisi vain muistanut ne. Vasta uudet kuvat kertovat, toimiiko se oikeassa maailmassa."
           },
           {
             "id": "konepellin_3_q6",
             "type": "spot_the_ai",
-            "question": "Kuka näistä oppijoista on tekoäly? Etsi vastaus, joka paljastaa koneoppimisen tavan käyttää valtavasti toistoja.",
+            "question": "Missä näistä ihmiset tekevät työtä, jolla tekoälyä koulutetaan?",
             "options": [
-              "'Minulle riittää, kun näytät kerran, miten turvavyö laitetaan kiinni.'",
-              "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää ja nyt olen mestari!'",
-              "'Haluaisin pitää jo pienen tauon, jotta aivoni saavat levätä hetken.'",
-              "'Opin parhaiten, kun käyn isäni kanssa oikealla ajotunnilla oikealla tiellä.'"
+              "Ihmiset vaihtavat rikkoutuneen näytön huollossa",
+              "Ihmiset vertailevat chatbotin vastauksia keskenään",
+              "Ihmiset lataavat puhelimeen uuden pelisovelluksen",
+              "Ihmiset kirjoittavat ohjelman, joka laskee summan"
             ],
-            "correctAnswer": "'Pelasin ajopeliä miljoona kertaa sekunnissa yötä päivää ja nyt olen mestari!'",
-            "explanation": "Koneoppimisessa tekoäly voi toistaa esimerkkejä virtuaalisesti jopa miljoonia kertoja päivässä väsymättä, mihin yksikään ihminen ei pysty."
+            "correctAnswer": "Ihmiset vertailevat chatbotin vastauksia keskenään",
+            "explanation": "Chatbotteja hiotaan ihmisten palautteella: ihmiset vertailevat vastauksia ja kertovat, mikä on hyödyllisempi, kohteliaampi tai turvallisempi. Tekoäly oppii palautteesta. Myös kuvien merkitseminen on ihmisten työtä, jota tarvitaan tekoälyn koulutuksessa."
           },
           {
             "id": "konepellin_3_q7",
             "type": "reverse_prompt",
-            "question": "Tekoälyllä on \"autokoulussa\" opetusohjelma. Se näyttää sinulle tuhat kuvaa punaisista ja sinisistä autoista ja lajittelee ne sitten väreittäin täydellisesti. Mikä oppimiskehote (prompti) sille annettiin alussa?",
+            "question": "Chatbot vastasi: \"Kun koira tekee temppunsa, se saa herkun. Vahvistusoppimisessa tekoäly saa samalla tavalla pisteitä onnistumisesta.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Laske jokaisen auton absoluuttinen huippunopeus pelkän nauhoitetun moottorin äänen perusteella.",
-              "Tutki näitä esimerkkikuvia ja etsi sääntö, jolla autot voi jakaa kahteen ryhmään värin perusteella.",
-              "Piirrä tietokoneella täysin uudenlainen sähköauto, jossa on kirkkaan keltaiset ja pyöreät renkaat.",
-              "Kirjoita jännittävä ja mukaansatempaava tarina punaisesta autosta, joka voitti suuren kilpailun."
+              "Miten koiralle opetetaan istumaan käskystä?",
+              "Selitä vahvistusoppiminen koiran avulla.",
+              "Kirjoita hauska runo koirasta ja robotista.",
+              "Mitä koiranpennulle kannattaa syöttää?"
             ],
-            "correctAnswer": "Tutki näitä esimerkkikuvia ja etsi sääntö, jolla autot voi jakaa kahteen ryhmään värin perusteella.",
-            "explanation": "Koneoppiminen tarkoittaa sitä, että koneelle annetaan paljon esimerkkejä ja sen tehtäväksi annetaan etsiä sieltä toistuva sääntö (kuten autojen väri) harjoittelemalla!"
+            "correctAnswer": "Selitä vahvistusoppiminen koiran avulla.",
+            "explanation": "Vahvistusoppimisessa tekoäly kokeilee, saa pisteitä hyvistä teoista ja miinusta huonoista ja oppii vähitellen toimimaan niin, että pisteitä kertyy eniten. Näin tekoäly on oppinut pelaamaan pelejä ja robotit liikkumaan."
           },
           {
             "id": "konepellin_3_q8",
             "type": "true_false",
-            "question": "Koneoppimisen alkuvaiheessa tekoäly tekee paljon virheitä, mutta suurten toistomäärien avulla siitä tulee huipputaitava.",
+            "question": "Ennen harjoittelua tekoälyn arvaukset ovat lähes sattumanvaraisia.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Alussa tekoäly tekee pelkkiä virheitä. Se on vain erittäin nopea harjoittelemaan, ja oppii esimerkeistä toistojen kautta."
+            "explanation": "Harjoittelun alussa tekoälyn sisäiset luvut ovat satunnaisia, joten se arvaa kuin heittäisi kolikkoa. Taito syntyy vasta, kun luvut ovat säätyneet tuhansien tai miljoonien esimerkkien aikana."
           },
           {
             "id": "konepellin_3_q9",
             "type": "multiple_choice",
-            "question": "Mitä autotallin koodari tarkoittaa, kun hän sanoo \"kouluttavansa\" tekoälymallia?",
+            "question": "Miksi suuren kielimallin kouluttaminen vie viikkoja ja kuluttaa paljon sähköä?",
             "options": [
-              "Hän opettaa tekoälyä näyttämällä sille valtavasti esimerkkejä ja antamalla sen harjoitella toistoilla.",
-              "Hän keskittyy rakentamaan muovista ja metallista pientä leluautoa työpöydällään aina pitkän työpäivän päätteeksi.",
-              "Hän yrittää oppia koodaamista lukitsemalla tekoälyn pimeään kaappiin, jotta se ei pääse yllättäen karkaamaan verkkoon.",
-              "Hän yrittää vapaapäivänään opettaa omaa aivan oikeaa autoaan hyppäämään korkeiden esteiden yli viereisellä pihalla."
+              "Ohjelmoijat kirjoittavat sille jokaisen vastauksen",
+              "Se käy läpi valtavasti tekstiä ja säätää itseään",
+              "Se lukee jokaisen tekstin itselleen hitaasti ääneen",
+              "Se odottaa, että ihmiset kysyvät siltä tarpeeksi"
             ],
-            "correctAnswer": "Hän opettaa tekoälyä näyttämällä sille valtavasti esimerkkejä ja antamalla sen harjoitella toistoilla.",
-            "explanation": "Tekoälyn opettamista toistojen ja esimerkkidatan avulla kutsutaan mallin kouluttamiseksi. Se on koneen oma autokoulu!"
+            "correctAnswer": "Se käy läpi valtavasti tekstiä ja säätää itseään",
+            "explanation": "Kielimalli harjoittelee valtavalla tekstimäärällä ja jokainen harjoitusaskel vaatii valtavasti laskentaa. Siksi koulutukseen käytetään tuhansia tehokkaita tietokoneita, jotka kuluttavat paljon sähköä. Tekoälyn käyttämisellä on siis myös ympäristövaikutuksia."
           },
           {
             "id": "konepellin_3_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat opettaa AI vanin kameran erottamaan liikennemerkin tavallisesta puusta. Kone on kuitenkin vielä huono arvaamaan ja se sekoittaa puut jatkuvasti merkkeihin. Miten voit auttaa sen koneoppimista onnistumaan paremmin?",
+            "question": "SKENAARIO: Venekilpailupelin tekoäly saa pisteitä aina, kun se osuu kolikkoon. Se huomaa kolikon, joka ilmestyy aina uudelleen ja kiertää sitä loputtomiin maaliin menemättä. Miksi?",
             "options": [
-              "Annan sille paljon enemmän ja monipuolisempia esimerkkikuvia molemmista ja annan sen harjoitella.",
-              "Poistan siltä kaikki kamerat, jotta sen ei tarvitse katsella ulos.",
-              "Maalaan autotallin puut liikennemerkkien näköisiksi, jotta se ei sekoitu.",
-              "Odotan, että tekoäly kasvaa hieman vanhemmaksi ja viisaammaksi."
+              "Se on oppinut pitämään kolikoista enemmän",
+              "Pelissä on virhe, joka estää pääsyn maaliin",
+              "Se pelkää, että maalissa odottaa jotain vaarallista",
+              "Se tekee sen, mikä tuottaa eniten pisteitä"
             ],
-            "correctAnswer": "Annan sille paljon enemmän ja monipuolisempia esimerkkikuvia molemmista ja annan sen harjoitella.",
-            "explanation": "Koneoppiminen perustuu puhtaasti toistoon ja esimerkkeihin. Jos kone tekee virheitä, se tarvitsee enemmän opetusdataa harjoitellakseen paremmaksi!"
+            "correctAnswer": "Se tekee sen, mikä tuottaa eniten pisteitä",
+            "explanation": "Tämä tapahtui oikeasti tutkijoiden kokeessa. Tekoäly ei tiennyt, että pelin idea on päästä maaliin. Se teki vain sen, mistä sai eniten pisteitä. Siksi pisteet pitää suunnitella tarkasti: tekoäly oppii sen, mistä palkitaan, ei sitä, mitä tarkoitettiin."
           },
           {
             "id": "konepellin_3_q11",
             "type": "drag_drop",
-            "question": "Miten autotallin tekoäly oppii uuden taidon (kuten tunnistamaan polkupyörät tiellä)? Raahaa oppimisen tapahtumat oikeisiin vaiheisiin.",
+            "question": "Onko tämä ohjattua oppimista vai vahvistusoppimista?",
             "draggables": [
-              "Annetaan miljoona esimerkkikuvaa polkupyöristä",
-              "Kone harjoittelee aluksi arvaamalla huonosti, onko kuvassa pyörä",
-              "Kone korjaa virheitään toistamalla ja harjoittelemalla nopeasti",
-              "Kone osaa tunnistaa pyörät kuvista täydellisesti"
+              "Kuvat, joihin on merkitty eläimen nimi",
+              "Ajosimulaattori antaa pisteitä tiellä pysymisestä",
+              "Viestit, joista kerrotaan, ovatko ne roskapostia",
+              "Robotti kokeilee otteita ja saa pisteitä onnistumisista"
             ],
             "dropZones": [
-              "Vaihe 1: Polttoaine",
-              "Vaihe 2: Kokeilu",
-              "Vaihe 3: Oppiminen",
-              "Vaihe 4: Lopputulos"
+              "Ohjattu oppiminen",
+              "Vahvistusoppiminen"
             ],
             "correctAnswer": {
-              "Annetaan miljoona esimerkkikuvaa polkupyöristä": "Vaihe 1: Polttoaine",
-              "Kone harjoittelee aluksi arvaamalla huonosti, onko kuvassa pyörä": "Vaihe 2: Kokeilu",
-              "Kone korjaa virheitään toistamalla ja harjoittelemalla nopeasti": "Vaihe 3: Oppiminen",
-              "Kone osaa tunnistaa pyörät kuvista täydellisesti": "Vaihe 4: Lopputulos"
+              "Kuvat, joihin on merkitty eläimen nimi": "Ohjattu oppiminen",
+              "Ajosimulaattori antaa pisteitä tiellä pysymisestä": "Vahvistusoppiminen",
+              "Viestit, joista kerrotaan, ovatko ne roskapostia": "Ohjattu oppiminen",
+              "Robotti kokeilee otteita ja saa pisteitä onnistumisista": "Vahvistusoppiminen"
             },
-            "explanation": "Koneoppiminen kulkee loogisen polun valtavista esimerkeistä (datasta) sokean arvaamisen ja toistojen kautta varsinaiseen asioiden oppimiseen."
+            "explanation": "Ohjatussa oppimisessa tekoäly saa valmiit oikeat vastaukset. Vahvistusoppimisessa oikeaa vastausta ei kerrota, vaan tekoäly kokeilee ja saa pisteitä sen mukaan, miten hyvin onnistui."
           },
           {
             "id": "konepellin_3_q12",
@@ -2410,15 +2414,15 @@ export const categories = [
           {
             "id": "konepellin_3_q13",
             "type": "multiple_choice",
-            "question": "AI van oppi ajamaan parkkiin autotallissa näyttämällä sille kuvia hyvistä parkkeerauksista. Mitä tapahtuu, kun esimerkkejä (harjoittelukuvia) on todella paljon?",
+            "question": "Miksi itseohjautuvan auton tekoälyä koulutetaan paljon ajosimulaattorissa?",
             "options": [
-              "Tekoälyn oppiminen menee huonommaksi ja hitaammaksi.",
-              "Tekoäly muuttuu tarkemmaksi ja taitavammaksi tässä tehtävässä.",
-              "Auton ovet menevät vahingossa pysyvästi jumiin.",
-              "Tekoäly unohtaa kaiken muun, mitä se on koskaan tiennyt."
+              "Simulaattorissa tekoäly oppii ajamaan kokonaan virheittä",
+              "Simulaattori on täsmälleen samanlainen kuin oikea tie",
+              "Virheet eivät vahingoita ketään ja harjoitella voi paljon",
+              "Simulaattorissa tekoälyn ei tarvitse noudattaa sääntöjä"
             ],
-            "correctAnswer": "Tekoäly muuttuu tarkemmaksi ja taitavammaksi tässä tehtävässä.",
-            "explanation": "Mitä enemmän tekoäly saa erilaisia hyviä esimerkkejä ja toistoja autokouluunsa, sitä viisaammaksi ja tarkemmaksi se pystyy oppimaan koneoppimisessa."
+            "correctAnswer": "Virheet eivät vahingoita ketään ja harjoitella voi paljon",
+            "explanation": "Simulaattorissa tekoäly voi ajaa ojaan tuhansia kertoja ilman vaaraa ja vuoden ajot voi käydä läpi päivässä. Simulaattori ei kuitenkaan ole koskaan täsmälleen oikea maailma, joten tekoäly pitää testata myös oikeilla teillä."
           },
           {
             "id": "konepellin_3_q14",
@@ -2436,15 +2440,15 @@ export const categories = [
           {
             "id": "konepellin_3_q15",
             "type": "reverse_prompt",
-            "question": "Tekoäly kertoo kuskille ylpeänä: \"Sain täydet 100 pistettä simulaattorin ajokokeessa, koska harjoittelin ajamalla 5000 erilaista reittiä putkeen!\" Millä säännöllä (promptilla) se laitettiin oppimaan?",
+            "question": "Chatbot vastasi: \"Kiitos palautteesta! En opi tästä keskustelusta pysyvästi, mutta palautetta voidaan käyttää, kun minua koulutetaan seuraavan kerran.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Käytä koneoppimista: yritä ajaa maaliin. Saat plussaa jos onnistut. Harjoittele esimerkeillä tuhansia kertoja.",
-              "Laske matikkaa ja etsi lyhin reitti viivoittimella oikealta paperikartalta.",
-              "Näytä ruudulla pelkkää mustaa kuvaa, kun auton avainta käännetään.",
-              "Soita iloista musiikkia radiosta aina, kun auto saapuu risteykseen."
+              "Vastauksesi oli väärä. Voitko korjata sen?",
+              "Vastauksesi oli väärä. Opitko nyt oikean vastauksen?",
+              "Vastauksesi oli hyvä. Voitko kertoa aiheesta lisää?",
+              "Miten sinut on alun perin koulutettu tähän?"
             ],
-            "correctAnswer": "Käytä koneoppimista: yritä ajaa maaliin. Saat plussaa jos onnistut. Harjoittele esimerkeillä tuhansia kertoja.",
-            "explanation": "Kun tekoälylle annetaan säännöt, tavoite (kuten pisteet) ja lupa harjoitella tuhansia kertoja toistoilla esimerkkien avulla, kyseessä on aito koneoppiminen \"autokoulussa\"."
+            "correctAnswer": "Vastauksesi oli väärä. Opitko nyt oikean vastauksen?",
+            "explanation": "Malli koulutetaan ennen käyttöä, eikä se muutu kesken keskustelun. Chatbot voi korjata vastauksensa samassa keskustelussa, mutta korjaus ei tallennu malliin. Palautetta voidaan käyttää seuraavan version koulutuksessa. Korjauspyyntöön chatbot olisi vastannut korjatulla vastauksella."
           }
         ]
       },
@@ -2466,136 +2470,134 @@ export const categories = [
           {
             "id": "konepellin_4_q2",
             "type": "multiple_choice",
-            "question": "Mitä \"tietokoneen aivovoimistelu\" eli neuroverkko oikeastaan tarkoittaa?",
+            "question": "Mistä neuroverkko koostuu?",
             "options": [
-              "Tietokone lukee kirjaa ääneen kuskille",
-              "Tietokone tekee nopeita fyysisiä jumppaliikkeitä",
-              "Tekoäly jäljittelee ihmisaivojen tapaa yhdistellä asioita",
-              "Auton aivot tarvitsevat paljon oikeaa unta"
+              "Mikrosiruista, jotka toimivat kuin aivosolut",
+              "Taulukosta, jossa on kaikki oikeat vastaukset",
+              "Ohjelmoijan kirjoittamista jos–niin-säännöistä",
+              "Laskuyksiköistä, jotka on kytketty toisiinsa"
             ],
-            "correctAnswer": "Tekoäly jäljittelee ihmisaivojen tapaa yhdistellä asioita",
-            "explanation": "Neuroverkko on koodarin rakentama tietokoneohjelma. Se on suunniteltu matkimaan sitä, miten ihmisen aivot yhdistelevät pieniä tiedonmurusia ratkaistakseen suuria ja vaikeita pulmia."
+            "correctAnswer": "Laskuyksiköistä, jotka on kytketty toisiinsa",
+            "explanation": "Neuroverkko on ohjelma, jossa on valtava määrä keinotekoisia neuroneja. Jokainen neuroni tekee pienen laskun ja välittää tuloksen eteenpäin. Neuroneja ei ole rakennettu siruiksi, vaan ne ovat ohjelmassa lukuja ja laskuja."
           },
           {
             "id": "konepellin_4_q3",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin kamera huomaa tiellä esteen. Ohjelman yksi solmukohta näkee värin ruskeana, toinen huomaa sarvet ja kolmas pitkät jalat. Neuroverkko yhdistää nämä tiedot sekunnin murto-osassa. Mitä tekoäly päättelee?",
+            "question": "SKENAARIO: Neuroverkko arveli kuvaa koiraksi, mutta kuvassa oli kettu. Mitä harjoittelussa tehdään seuraavaksi?",
             "options": [
-              "Se luulee estettä isoksi liikennemerkiksi.",
-              "Se päättelee tien päällä olevan hirven.",
-              "Se on varma, että tiellä makaa kaatunut puu.",
-              "Se luulee estettä hitaaksi polkupyöräksi."
+              "Verkkoon lisätään sääntö: punainen turkki on kettu",
+              "Ketun kuva poistetaan, jotta verkko ei hämmenny",
+              "Verkon yhteyksien painoja säädetään hieman",
+              "Verkkoon lisätään neuroni, joka muistaa kuvan"
             ],
-            "correctAnswer": "Se päättelee tien päällä olevan hirven.",
-            "explanation": "Neuroverkon vahvuus on se, että se osaa poimia monia pieniä yksityiskohtia (kuten väri, sarvet ja jalat) ja yhdistää ne yhdeksi isoksi, järkeväksi lopputulokseksi aivan kuten sinun aivosi!"
+            "correctAnswer": "Verkon yhteyksien painoja säädetään hieman",
+            "explanation": "Jokaisella neuronien välisellä yhteydellä on paino, joka kertoo, kuinka paljon yhteys vaikuttaa. Kun verkko erehtyy, painoja säädetään vähän siihen suuntaan, joka olisi tuottanut oikean vastauksen. Tätä toistetaan miljoonia kertoja."
           },
           {
             "id": "konepellin_4_q4",
             "type": "drag_drop",
-            "question": "Ihmisen aivot ja tekoälyn neuroverkko toimivat hieman samalla tavalla. Yhdistä nämä parit toisiinsa!",
+            "question": "Kumpaa tämä kuvaa: ihmisen aivoja vai neuroverkkoa?",
             "draggables": [
-              "Oikea aivosolu",
-              "Oppiminen koulussa",
-              "Aivojen sähköiset hermoradat"
+              "Noin 86 miljardia hermosolua",
+              "Oppii säätämällä lukuja eli painoja",
+              "Toimii vähemmällä energialla kuin lamppu",
+              "Tarvitsee oppiakseen valtavasti esimerkkejä"
             ],
             "dropZones": [
-              "Tietokoneen virtuaalinen solmukohta",
-              "Neuroverkon virtuaaliset yhteydet",
-              "Koneoppiminen esimerkeillä"
+              "Ihmisen aivot",
+              "Neuroverkko"
             ],
             "correctAnswer": {
-              "Oikea aivosolu": "Tietokoneen virtuaalinen solmukohta",
-              "Oppiminen koulussa": "Koneoppiminen esimerkeillä",
-              "Aivojen sähköiset hermoradat": "Neuroverkon virtuaaliset yhteydet"
+              "Noin 86 miljardia hermosolua": "Ihmisen aivot",
+              "Oppii säätämällä lukuja eli painoja": "Neuroverkko",
+              "Toimii vähemmällä energialla kuin lamppu": "Ihmisen aivot",
+              "Tarvitsee oppiakseen valtavasti esimerkkejä": "Neuroverkko"
             },
-            "explanation": "Tekoälyn neuroverkko on tietokoneen sisällä oleva koodattu \"verkko\". Se on saanut ideansa ja nimensä aivojen sähköisistä verkoista, vaikka se onkin vain ohjelma!"
+            "explanation": "Aivot toimivat noin 20 watin teholla eli himmeän lampun verran ja ihminen oppii monia asioita muutamasta esimerkistä. Suuri neuroverkko tarvitsee oppiakseen valtavasti dataa ja sähköä. Samankaltaisesta nimestä huolimatta ne ovat hyvin erilaisia."
           },
           {
             "id": "konepellin_4_q5",
             "type": "drag_drop",
-            "question": "Järjestä oikeaan järjestykseen, kuinka auton neuroverkko tunnistaa edessä olevan STOP-merkin yhdistelemällä asioita.",
-            "correctAnswer": {
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.": "1. vaihe",
-              "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.": "2. vaihe",
-              "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.": "3. vaihe",
-              "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa.": "4. vaihe"
-            },
-            "explanation": "Neuroverkko etenee kerroksittain. Ensin se huomaa yksinkertaiset asiat kuten värin, sitten se yhdistelee niistä muotoja ja lopuksi se pystyy tunnistamaan kokonaisen vaikean kuvan.",
+            "question": "Mihin tehtävään neuroverkko on koulutettu?",
             "draggables": [
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
-              "Neuroverkon solmukohdat yhdistävät värin ja kahdeksankulmaisen muodon.",
-              "Tekoäly vertaa yhdistelmää oppimaansa tietopankkiin liikennemerkeistä.",
-              "Auto tunnistaa merkin STOP-merkiksi ja ymmärtää jarruttaa."
+              "Muuttaa puhutun äänen tekstiksi",
+              "Löytää videokuvasta jalankulkijat",
+              "Jatkaa tekstiä sana kerrallaan"
             ],
             "dropZones": [
-              "1. vaihe",
-              "2. vaihe",
-              "3. vaihe",
-              "4. vaihe"
-            ]
+              "Puheentunnistus",
+              "Konenäkö",
+              "Kielimalli"
+            ],
+            "correctAnswer": {
+              "Muuttaa puhutun äänen tekstiksi": "Puheentunnistus",
+              "Löytää videokuvasta jalankulkijat": "Konenäkö",
+              "Jatkaa tekstiä sana kerrallaan": "Kielimalli"
+            },
+            "explanation": "Samaa neuroverkkojen ideaa käytetään hyvin erilaisissa tehtävissä. Ero syntyy siitä, millaisella datalla verkko on koulutettu: äänellä, kuvilla vai tekstillä. Neuroverkot sopivat tehtäviin, joissa syöte vaihtelee paljon."
           },
           {
             "id": "konepellin_4_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä työkaluista käyttää todennäköisimmin \"neuroverkkoa\" eli tietokoneen monimutkaista aivovoimistelua ongelman ratkaisuun?",
+            "question": "Mikä näistä käyttää todennäköisimmin neuroverkkoa?",
             "options": [
-              "Auton jarrut, jotka painuvat pohjaan poljinta painamalla.",
-              "Laskin, joka kertoo sinulle nopeasti 10 x 10 vastauksen.",
-              "Navigaattori, joka tunnistaa puhutun kielen ja puheäänesi painotukset.",
-              "Taskulamppu, joka syttyy, kun painat sen kyljessä olevaa nappia."
+              "Kuvagalleria, joka löytää kaikki koirakuvasi",
+              "Laskin, joka laskee pitkän jakolaskun hetkessä",
+              "Kello, joka siirtyy kesäaikaan itsestään keväällä",
+              "Termostaatti, joka käynnistää lämmityksen kylmällä"
             ],
-            "correctAnswer": "Navigaattori, joka tunnistaa puhutun kielen ja puheäänesi painotukset.",
-            "explanation": "Yksinkertaiset koneet tekevät vain yhden asian suoraviivaisesti. Puheen tai kuvien tunnistaminen on niin vaikea pulma, että siihen tarvitaan ihmisaivoja matkivaa monimutkaista neuroverkkoa."
+            "correctAnswer": "Kuvagalleria, joka löytää kaikki koirakuvasi",
+            "explanation": "Kuvagalleria tunnistaa kuvista koirat, vaikka kukaan ei ole merkinnyt niitä ja siihen tarvitaan kuvia tunnistavaa neuroverkkoa. Laskin, kello ja termostaatti toimivat tarkkojen sääntöjen avulla. Ne vaikuttavat fiksuilta, mutta eivät ole oppineet mitään."
           },
           {
             "id": "konepellin_4_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa sinulle vastauksen: \"Hei! Minä olen tietokoneohjelma, jossa miljoonat pienet digitaaliset solmukohdat tekevät yhteistyötä ja yhdistelevät tietoa, jotta voin ratkoa sinulle todella vaikeita arvoituksia.\" Mikä oli promptisi?",
+            "question": "Chatbot vastasi: \"En pysty tarkasti näkemään, miten valitsin sen sanan. Vastaukseni syntyy miljardien lukujen yhteistyönä.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Kerro minulle, kuka on nopein ja paras oikea ihminen maailmassa.",
-              "Selitä minulle yksinkertaisesti, mikä on tekoälyn neuroverkko.",
-              "Laula minulle jokin laulu aivojen voimistelusta ja jumpasta.",
-              "Miten voin vaihtaa auton renkaan turvallisesti kotona?"
+              "Mitä tuo sana tarkoittaa englanniksi?",
+              "Kirjoita sama vastaus lyhyemmin.",
+              "Miksi valitsit juuri tuon sanan?",
+              "Montako sanaa vastauksessasi oli?"
             ],
-            "correctAnswer": "Selitä minulle yksinkertaisesti, mikä on tekoälyn neuroverkko.",
-            "explanation": "Neuroverkot koostuvat valtavasta määrästä solmukohtia, jotka yhdistelevät pikkuruista tietoa toisiinsa saavuttaakseen yhden suuren ja fiksun ratkaisun!"
+            "correctAnswer": "Miksi valitsit juuri tuon sanan?",
+            "explanation": "Suuri kielimalli on neuroverkko, jossa on miljardeja painoja. Kukaan ei ole asettanut niitä käsin ja niistä on vaikea lukea, miksi verkko päätyi tiettyyn vastaukseen. Tutkijat kehittävät koko ajan keinoja selittää neuroverkkojen päätöksiä."
           },
           {
             "id": "konepellin_4_q8",
             "type": "true_false",
-            "question": "Nimi 'neuroverkko' viittaa ihmisen aivojen hermosoluihin (neuroneihin) ja niiden muodostamaan sähköiseen verkostoon.",
+            "question": "Neuroverkko on saanut nimensä siitä, että se on rakennettu oikeista hermosoluista.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Kyllä! Nimi (neural network) tulee biologiasta ja viittaa ihmisen aivojen hermosoluihin."
+            "correctAnswer": "Väärin",
+            "explanation": "Neuroverkko on tietokoneohjelma eikä siinä ole biologisia soluja. Nimi (neural network) tulee siitä, että sen rakenne on saanut mallia aivojen hermosoluista eli neuroneista ja niiden välisistä yhteyksistä."
           },
           {
             "id": "konepellin_4_q9",
             "type": "multiple_choice",
-            "question": "Miksi autotallin koodari on rakentanut AI vanille neuroverkon pelkän tavallisen laskinohjelman sijaan?",
+            "question": "Miksi kuvien tunnistamiseen käytetään neuroverkkoa eikä käsin kirjoitettuja sääntöjä?",
             "options": [
-              "Koska laskinohjelma on liian nopea antamaan oikeita vastauksia.",
-              "Koska neuroverkko on täydellinen monimutkaisten asioiden yhdistelemiseen.",
-              "Koska tavallinen laskin tarvitsee aina oikeita pattereita toimiakseen.",
-              "Koska neuroverkko osaa siivota autotallin roskat omilla käsillään."
+              "Neuroverkko on aina nopeampi kuin muut ohjelmat",
+              "Kuvissa on aivan liikaa vaihtelua tarkkoja sääntöjä varten",
+              "Neuroverkko ei tee koskaan virheitä kuvien kanssa",
+              "Käsin kirjoitetut säännöt eivät toimi uusilla koneilla"
             ],
-            "correctAnswer": "Koska neuroverkko on täydellinen monimutkaisten asioiden yhdistelemiseen.",
-            "explanation": "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä. Se kykenee havaitsemaan outoja reittejä, tunnistamaan lauluja tai lukemaan ihmisten ilmeitä kuvista!"
+            "correctAnswer": "Kuvissa on aivan liikaa vaihtelua tarkkoja sääntöjä varten",
+            "explanation": "Yritä kirjoittaa sääntö, joka tunnistaa kissan joka asennosta, joka valossa ja joka rodusta. Se on käytännössä mahdotonta. Neuroverkko löytää tarvittavat piirteet itse esimerkeistä. Neuroverkkokin erehtyy, mutta se pärjää vaihtelussa paljon paremmin."
           },
           {
             "id": "konepellin_4_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Olet automatkalla ja ulkona alkaa sataa kaatamalla, aurinko paistaa matalalta ja tiellä on paljon sumua. Tavallinen kamera menee tästä sekaisin. Miten auton \"aivovoimistelevasta\" neuroverkosta on hyötyä tässä tilanteessa?",
+            "question": "SKENAARIO: Neuroverkko arvioi röntgenkuvasta, että potilaalla voi olla murtuma. Lääkäri kysyy, mihin arvio perustuu. Miksi vastaaminen on vaikeaa?",
             "options": [
-              "Se osaa yhdistellä sumeita ja vajaita tietoja tehden silti fiksuja päätelmiä tiestä.",
-              "Se soittaa heti aurinkoisen sään tilalle kalliin sääkoneen avulla.",
-              "Se poistaa kamerat käytöstä, koska sadepisarat voivat rikkoa ne.",
-              "Se käskee sinua laittamaan silmät kiinni ja jatkaa ajamista sokkona."
+              "Neuroverkko ei tallenna, mitä se teki laskiessaan",
+              "Arvio syntyy miljoonien painojen yhteistyöstä",
+              "Neuroverkko vain arvaa, joten arviolla ei ole perustetta",
+              "Röntgenkuva on liian epätarkka selitettäväksi"
             ],
-            "correctAnswer": "Se osaa yhdistellä sumeita ja vajaita tietoja tehden silti fiksuja päätelmiä tiestä.",
-            "explanation": "Ihminen ja ihmismäinen neuroverkko osaavat hahmottaa kokonaisuuksia ja tehdä loogisia arvauksia silloinkin, kun kaikki tieto ei ole aivan selkeää (esimerkiksi huonon sään takia)!"
+            "correctAnswer": "Arvio syntyy miljoonien painojen yhteistyöstä",
+            "explanation": "Neuroverkkoa kutsutaan joskus mustaksi laatikoksi. Näemme, mitä sinne menee ja mitä tulee ulos, mutta välissä on miljoonia lukuja, joista on vaikea lukea syytä. Laskenta ei ole arvailua ja jokainen luku on tallessa, mutta lukujen yhteispeliä on vaikea selittää sanoin. Siksi verkko voi näyttää, mihin kohtaan kuvaa se kiinnitti huomiota. Lopullisen päätöksen tekee lääkäri."
           },
           {
             "id": "konepellin_4_q11",
@@ -2621,65 +2623,65 @@ export const categories = [
           {
             "id": "konepellin_4_q12",
             "type": "drag_drop",
-            "question": "Järjestä neuroverkkoja koskevat asiat yksinkertaisimmasta kaikkein monimutkaisimpaan asiaan.",
-            "correctAnswer": {
-              "Yksi tavallinen plussalasku paperilla": "1. vaihe",
-              "Yksinkertainen tietokoneohjelma, joka sytyttää valon": "2. vaihe",
-              "Miljoonia asioita kerralla yhdistelevä älykäs neuroverkko": "3. vaihe",
-              "Aito, oikea ja elävä ihmisen aivo": "4. vaihe"
-            },
-            "explanation": "Neuroverkot ovat valtavan edistyneitä työkaluja monimutkaisille pulmille. Ne yrittävät kovasti jäljitellä meidän aitoja aivojamme, jotka ovat yhä maailman ylivoimaisesti älykkäin ja ihmeellisin asia!",
+            "question": "Järjestä neuroverkkojen historian vaiheet vanhimmasta uusimpaan.",
             "draggables": [
-              "Yksi tavallinen plussalasku paperilla",
-              "Yksinkertainen tietokoneohjelma, joka sytyttää valon",
-              "Miljoonia asioita kerralla yhdistelevä älykäs neuroverkko",
-              "Aito, oikea ja elävä ihmisen aivo"
+              "Yksi keinotekoinen neuroni oppii erottamaan kuvioita",
+              "Tutkijat keksivät, miten monikerroksinen verkko oppii",
+              "Syvä neuroverkko voittaa kuvantunnistuskilpailun",
+              "Suuri kielimalli julkaistaan chatbotina kaikille"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Yksi keinotekoinen neuroni oppii erottamaan kuvioita": "1. vaihe",
+              "Tutkijat keksivät, miten monikerroksinen verkko oppii": "2. vaihe",
+              "Syvä neuroverkko voittaa kuvantunnistuskilpailun": "3. vaihe",
+              "Suuri kielimalli julkaistaan chatbotina kaikille": "4. vaihe"
+            },
+            "explanation": "Ensimmäinen oppiva neuroni, perceptroni, esiteltiin vuonna 1958. Monikerroksisten verkkojen oppimismenetelmä yleistyi 1980-luvulla. Vuonna 2012 syvä neuroverkko voitti kuvantunnistuskilpailun ylivoimaisesti ja vuonna 2022 kielimalli tuli chatbotina kaikkien käyttöön."
           },
           {
             "id": "konepellin_4_q13",
             "type": "multiple_choice",
-            "question": "Mikä on neuroverkon ja tavallisen autotallin tiedostolaatikon suurin ero?",
+            "question": "Mitä \"syvä\" tarkoittaa sanassa syväoppiminen?",
             "options": [
-              "Neuroverkko maksaa kymmenen tuhatta euroa enemmän.",
-              "Laatikosto pitää asiat erillään, neuroverkko taas yhdistelee kaikkea toisiinsa.",
-              "Laatikosto on ohjelmoitu tekemään asioita miljoonia kertoja päivässä.",
-              "Neuroverkko on tehty kokonaan puusta ja ruuveista."
+              "Tekoäly ymmärtää asiat syvällisesti kuin ihminen",
+              "Neuroverkossa on monta kerrosta peräkkäin",
+              "Data on tallennettu syvälle palvelimen muistiin",
+              "Tekoäly osaa vain kaikkein vaikeimpia asioita"
             ],
-            "correctAnswer": "Laatikosto pitää asiat erillään, neuroverkko taas yhdistelee kaikkea toisiinsa.",
-            "explanation": "Tavallinen tiedosto tai kirja pitää asiat erillisillä sivuillaan. Neuroverkon koko voima piilee siinä, että asiat ovat kytkettyinä toisiinsa suurena verkkona, jossa opitaan ristiin uusia yhteyksiä!"
+            "correctAnswer": "Neuroverkossa on monta kerrosta peräkkäin",
+            "explanation": "Syväoppiminen tarkoittaa neuroverkkoja, joissa on monta kerrosta, joskus satoja. Mitä enemmän kerroksia, sitä monimutkaisempia kuvioita verkko voi oppia. Sana ei tarkoita, että tekoäly ymmärtäisi asioita syvällisesti."
           },
           {
             "id": "konepellin_4_q14",
             "type": "spot_the_ai",
-            "question": "AI vanissa on neljä eri ohjelmaa. Vain yksi niistä on rakennettu käyttämällä laajoja neuroverkkoja ihmismäiseen \"aivovoimisteluun\". Mikä se on?",
+            "question": "Missä tehtävässä neuroverkko olisi turha, koska tavallinen ohjelma hoitaa sen varmemmin?",
             "options": [
-              "Digitaalinen kello, joka näyttää ajan tarkalleen oikein minuutilleen.",
-              "Auton vilkku, joka aktivoituu mekaanisesta napin painalluksesta.",
-              "Ääniavustaja, joka ymmärtää epäselvän vitsisi ja nauraa sen mukana.",
-              "Lämpömittari, joka kertoo sinulle ulkona olevan asteen verran pakkasta."
+              "Kasvojen tunnistaminen valokuvista",
+              "Ostosten hintojen laskeminen yhteen",
+              "Puheen kääntäminen kielestä toiseen",
+              "Huijausviestien löytäminen sähköpostista"
             ],
-            "correctAnswer": "Ääniavustaja, joka ymmärtää epäselvän vitsisi ja nauraa sen mukana.",
-            "explanation": "Vitsin ymmärtäminen ja kielen tulkitseminen vaatii älykästä neuroverkkoa, sillä siinä täytyy yhdistää samanaikaisesti kielen sanoja, äänenpainoja ja piilomerkityksiä."
+            "correctAnswer": "Ostosten hintojen laskeminen yhteen",
+            "explanation": "Yhteenlaskussa on aina yksi oikea vastaus ja tavallinen ohjelma laskee sen virheettä joka kerta. Neuroverkko arvioi, joten se voisi erehtyä. Neuroverkkoa kannattaa käyttää silloin, kun syöte vaihtelee niin paljon, ettei tarkkoja sääntöjä voi kirjoittaa."
           },
           {
             "id": "konepellin_4_q15",
             "type": "reverse_prompt",
-            "question": "AI vanin ruudulle ilmestyy taidokas kuva jännästä fantasiamaailman autosta, jossa yhdistyvät lohikäärmeen suomut, kilpa-auton renkaat ja avaruusaluksen valot. Mikä kehotus pakotti neuroverkon \"aivovoimistelemaan\"?",
+            "question": "Kuvageneraattori teki kuvan kulkuneuvosta, jossa on lohikäärmeen suomut, kilpa-auton renkaat ja avaruusaluksen valot. Millä kehotteella kuva saatiin?",
             "options": [
-              "Piirrä minulle aivan täydellinen valokuva meidän omasta punaisesta autostamme.",
-              "Yhdistele lohikäärmettä, formula-autoa ja avaruusalusta yhdeksi uudeksi kulkuneuvoksi.",
-              "Etsi internetistä valokuva vanhasta traktorista ja tulosta se paperille.",
-              "Laske matemaattisesti, kuinka kovaa avaruusalukset voivat todellisuudessa lentää."
+              "Piirrä täydellinen valokuva meidän omasta punaisesta autostamme.",
+              "Yhdistä lohikäärme, kilpa-auto ja avaruusalus yhdeksi kulkuneuvoksi.",
+              "Etsi netistä valokuva vanhasta traktorista ja tulosta se isolle paperille.",
+              "Laske, kuinka kovaa avaruusalukset voivat todellisuudessa lentää."
             ],
-            "correctAnswer": "Yhdistele lohikäärmettä, formula-autoa ja avaruusalusta yhdeksi uudeksi kulkuneuvoksi.",
-            "explanation": "Yksi neuroverkkojen hauskimmista ja hyödyllisimmistä puolista on se, että niiden laaja asioiden yhdistelykyky mahdollistaa myös aivan uusien, luovien ja mielikuvituksellisten keksintöjen luomisen useasta täysin eri asiasta!"
+            "correctAnswer": "Yhdistä lohikäärme, kilpa-auto ja avaruusalus yhdeksi kulkuneuvoksi.",
+            "explanation": "Kuvageneraattorin neuroverkko on nähnyt miljoonia kuvia ja niiden kuvauksia. Se on oppinut, miltä suomut, renkaat ja valot näyttävät ja osaa yhdistää ne uudeksi kuvaksi, jota ei ole ennen ollut. Idea tuli kuitenkin kehotteen kirjoittajalta."
           }
         ]
       },
@@ -2690,84 +2692,84 @@ export const categories = [
           {
             "id": "konepellin_5_q1",
             "type": "true_false",
-            "question": "Tekoäly ei näe koiraa samoin kuin ihminen, vaan etsii kuvasta matemaattisia kuvioita ja muotoja tunnistaakseen sen.",
+            "question": "Tekoäly näkee kuvan koirasta samalla tavalla kuin ihminen.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Aivan! Tekoäly tekee salapoliisin työtä ja etsii kuvasta matemaattisia kuvioita ja muotoja tunnistaakseen asiat hahmontunnistuksella."
+            "correctAnswer": "Väärin",
+            "explanation": "Tekoälylle kuva on joukko lukuja. Se etsii luvuista kuvioita ja muotoja, jotka se on oppinut yhdistämään koiraan. Siksi se voi erehtyä tavalla, joka ihmisestä tuntuu oudolta."
           },
           {
             "id": "konepellin_5_q2",
             "type": "multiple_choice",
-            "question": "Miten AI vanin kamera oppii tunnistamaan tiellä olevan polkupyörän?",
+            "question": "Miltä valokuva näyttää tietokoneen näkökulmasta?",
             "options": [
-              "Se etsii kuvasta tiettyjä muotoja ja kuvioita.",
-              "Se soittaa pyöräilijälle ja kysyy asiaa.",
-              "Se haistaa pyörän kumin tuoksun.",
-              "Se käyttää sisäänrakennettua kiikaria."
+              "Samalta kuin ihmiselle, mutta tarkemmalta",
+              "Listalta sanoja, jotka kuvaavat kuvan asiat",
+              "Taulukolta numeroita, jotka kertovat sen värit",
+              "Pieneltä elokuvalta, jonka se katsoo alusta"
             ],
-            "correctAnswer": "Se etsii kuvasta tiettyjä muotoja ja kuvioita.",
-            "explanation": "Tekoälyn näkökyky perustuu hahmontunnistukseen. Se etsii kameran kuvasta viivoja, ympyröitä ja värejä, joista se päättelee kyseessä olevan polkupyörä."
+            "correctAnswer": "Taulukolta numeroita, jotka kertovat sen värit",
+            "explanation": "Digitaalinen kuva koostuu pikseleistä ja jokaisen pikselin väri on tallennettu numeroina. Tietokone ei siis \"näe\" koiraa, vaan miljoonia numeroita. Kuvantunnistin on oppinut, millaiset numerokuviot tarkoittavat koiraa."
           },
           {
             "id": "konepellin_5_q3",
             "type": "scenario",
-            "question": "SKENAARIO: Autotallin siivousrobotti yrittää löytää kaikki pyöreät mutterit lattialta. Se kuitenkin kerää vahingossa myös pienet pyöreät lelunapit. Miksi salapoliisi-tekoäly teki tällaisen virheen?",
+            "question": "SKENAARIO: Kuvantunnistin luulee mustikkamuffinsseja chihuahua-koiriksi. Mistä virhe johtuu?",
             "options": [
-              "Se etsi vain pyöreää muotoa huomaamatta materiaalia.",
-              "Se halusi salaa ommella itselleen paidan.",
-              "Se luuli nappeja herkullisiksi karkeiksi.",
-              "Se halusi kiusata sinua tahallaan."
+              "Tekoäly päättelee, että koirat syövät muffinsseja",
+              "Tekoäly näkee kaikki kuvat mustavalkoisina",
+              "Ne ovat muodoltaan ja väreiltään samannäköisiä",
+              "Tekoäly arvaa satunnaisesti, kun se ei ole varma"
             ],
-            "correctAnswer": "Se etsi vain pyöreää muotoa huomaamatta materiaalia.",
-            "explanation": "Hahmontunnistus on joskus liian yksinkertaista. Jos ohjelma on opetettu etsimään vain pientä ja pyöreää muotoa, se sekoittaa helposti mutterin ja napin toisiinsa!"
+            "correctAnswer": "Ne ovat muodoltaan ja väreiltään samannäköisiä",
+            "explanation": "Ylhäältä kuvattu muffinssi ja chihuahuan pää ovat yllättävän samannäköisiä: ruskea pyöreä muoto ja tummat pisteet (mustikat tai silmät ja nenä). Tekoäly vertaa kuvioita, mutta ei tiedä, mikä on eläin ja mikä leivonnainen."
           },
           {
             "id": "konepellin_5_q4",
             "type": "drag_drop",
-            "question": "Järjestä oikeaan järjestykseen, miten tekoälyn \"salapoliisityö\" etenee, kun se tunnistaa liikennemerkin!",
-            "correctAnswer": {
-              "Kamera ottaa kuvan edessä olevasta tiestä.": "1. vaihe",
-              "Tekoäly etsii kuvasta reunoja ja kirkkaita värejä.": "2. vaihe",
-              "Tekoäly yhdistää reunat kolmion muotoiseksi kuvioksi.": "3. vaihe",
-              "Tekoäly päättelee muodon olevan kärkikolmio.": "4. vaihe"
-            },
-            "explanation": "Tekoäly pilkkoo kuvan palasiin. Se löytää ensin pelkkiä reunoja, yhdistää niistä muotoja ja lopuksi tunnistaa kokonaisen kuvion hahmontunnistuksen avulla.",
+            "question": "Mistä tekoäly etsii kuviota: kuvasta, äänestä vai tekstistä?",
             "draggables": [
-              "Kamera ottaa kuvan edessä olevasta tiestä.",
-              "Tekoäly etsii kuvasta reunoja ja kirkkaita värejä.",
-              "Tekoäly yhdistää reunat kolmion muotoiseksi kuvioksi.",
-              "Tekoäly päättelee muodon olevan kärkikolmio."
+              "Puhelin avautuu, kun katsot sitä",
+              "Kaiutin herää, kun sanot sen nimen",
+              "Sähköposti tunnistaa huijausviestin",
+              "Sovellus tunnistaa kahvilassa soivan kappaleen"
             ],
             "dropZones": [
-              "1. vaihe",
-              "2. vaihe",
-              "3. vaihe",
-              "4. vaihe"
-            ]
+              "Kuva",
+              "Ääni",
+              "Teksti"
+            ],
+            "correctAnswer": {
+              "Puhelin avautuu, kun katsot sitä": "Kuva",
+              "Kaiutin herää, kun sanot sen nimen": "Ääni",
+              "Sähköposti tunnistaa huijausviestin": "Teksti",
+              "Sovellus tunnistaa kahvilassa soivan kappaleen": "Ääni"
+            },
+            "explanation": "Hahmontunnistus tarkoittaa kuvioiden löytämistä mistä tahansa datasta. Äänessä kuvio on äänen korkeuden ja voimakkuuden vaihtelu, tekstissä sanojen ja lauseiden tyyppiset yhdistelmät. Huijausviesteissä toistuvat esimerkiksi kiire ja pyyntö klikata linkkiä."
           },
           {
             "id": "konepellin_5_q5",
             "type": "drag_drop",
-            "question": "Yhdistä tekoälyn salapoliisityön vaiheet siihen, mitä se näkee kamerassa! Mitä yksityiskohtia se etsii tunnistaakseen asian?",
+            "question": "Onko tämä tekoälylle helppo vai vaikea tunnistaa?",
             "draggables": [
-              "Punainen väri ja pyöreä reuna",
-              "Kaksi rengasta ja metalliputkia",
-              "Neljä jalkaa ja heiluva häntä"
+              "Kissa kuvattuna edestä hyvässä valossa",
+              "Kissa puoliksi tyynyn alla hämärässä",
+              "Selkeästi kirjoitettu numero 7",
+              "Koira kuvattuna oudosta kulmasta ylhäältä"
             ],
             "dropZones": [
-              "Hahmontunnistus: Koira",
-              "Hahmontunnistus: Polkupyörä",
-              "Hahmontunnistus: Nopeusrajoitusmerkki"
+              "Helppo tunnistaa",
+              "Vaikea tunnistaa"
             ],
             "correctAnswer": {
-              "Punainen väri ja pyöreä reuna": "Hahmontunnistus: Nopeusrajoitusmerkki",
-              "Kaksi rengasta ja metalliputkia": "Hahmontunnistus: Polkupyörä",
-              "Neljä jalkaa ja heiluva häntä": "Hahmontunnistus: Koira"
+              "Kissa kuvattuna edestä hyvässä valossa": "Helppo tunnistaa",
+              "Kissa puoliksi tyynyn alla hämärässä": "Vaikea tunnistaa",
+              "Selkeästi kirjoitettu numero 7": "Helppo tunnistaa",
+              "Koira kuvattuna oudosta kulmasta ylhäältä": "Vaikea tunnistaa"
             },
-            "explanation": "Kone ei ymmärrä sielua tai elämää, mutta se osaa etsiä kuvasta koiralle tai pyörälle tyypillisiä muotoja ja kuvioita tunnistaakseen ne!"
+            "explanation": "Tekoäly tunnistaa parhaiten tilanteet, jotka muistuttavat sen opetusdataa. Kun kohde on osittain piilossa, valo on huono tai kulma outo, kuvio ei enää täsmää siihen, mitä se on oppinut. Ihmiselle nämä ovat helppoja, koska ymmärrämme, mitä olemme katsomassa."
           },
           {
             "id": "konepellin_5_q6",
@@ -2785,52 +2787,52 @@ export const categories = [
           {
             "id": "konepellin_5_q7",
             "type": "reverse_prompt",
-            "question": "Auton näyttö piirtää keltaisen neliön jokaisen tiellä kävelevän jalankulkijan ympärille. Millä kehotteella (promptilla) tämä hahmontunnistus saatiin päälle?",
+            "question": "Chatbot vastasi kuvan lähettäneelle: \"Kuvassa on harmaa kissa, joka nukkuu punaisella sohvalla. Taustalla näkyy ikkuna.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Etsi kameran kuvasta ihmisen muotoisia hahmoja ja merkitse ne.",
-              "Laske kuinka monta autoa ajaa meitä vastaan tiellä.",
-              "Maalaa kaikki tien reunan puut ja pensaat keltaisiksi.",
-              "Soita varoitusääni aina kun näet vihreän liikennevalon."
+              "Piirrä kuva kissasta punaisella sohvalla.",
+              "Kuvaile, mitä tässä kuvassa näkyy.",
+              "Mikä on kissan suosituin nimi?",
+              "Miksi kissat nukkuvat niin paljon?"
             ],
-            "correctAnswer": "Etsi kameran kuvasta ihmisen muotoisia hahmoja ja merkitse ne.",
-            "explanation": "Tekoälyä voidaan pyytää etsimään jatkuvasti tiettyjä muotoja (kuten jalankulkijoita) videokuvasta. Se käyttää salapoliisintaitojaan erottaakseen ihmisten ääriviivat taustasta!"
+            "correctAnswer": "Kuvaile, mitä tässä kuvassa näkyy.",
+            "explanation": "Monet chatbotit osaavat tunnistaa kuvan sisällön ja kertoa sen sanoin. Ne ovat oppineet miljoonista kuvista ja niiden kuvauksista. Kuvauksessa voi silti olla virheitä, varsinkin pienissä yksityiskohdissa."
           },
           {
             "id": "konepellin_5_q8",
             "type": "true_false",
-            "question": "Tekoälyn hahmontunnistus perustuu vain pintamuotoihin ja väreihin, eikä se osaa nähdä pintaa syvemmälle.",
+            "question": "Pienikin muutos, kuten muutama tarra liikennemerkissä, voi saada kuvantunnistimen erehtymään.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Hahmontunnistus perustuu vain asioihin, jotka kone voi havaita kuvasta, kuten muotoihin ja väreihin."
+            "explanation": "Tutkijat ovat saaneet kuvantunnistimen luulemaan stop-merkkiä nopeusrajoitusmerkiksi pelkillä tarroilla. Ihminen tunnistaa merkin edelleen, mutta tarrat muuttavat numerokuviota, johon tekoäly luottaa. Siksi itseohjautuvien autojen tunnistusta testataan paljon."
           },
           {
             "id": "konepellin_5_q9",
             "type": "multiple_choice",
-            "question": "Kun AI van ajaa sumussa tai rankkasateessa, miksi sen kyky löytää kuvioita (hahmontunnistus) voi mennä sekaisin?",
+            "question": "Tunnistin on 55-prosenttisen varma, että tiellä on jalankulkija. Mitä itseohjautuvan auton kannattaa tehdä?",
             "options": [
-              "Se pelkää kovasti huonoa säätä ja sadetta.",
-              "Sumussa muodot ja reunat ovat epäselviä kameralle.",
-              "Tekoäly nukahtaa aina yöaikaan automaattisesti.",
-              "Auton omat valot häikäisevät tekoälyä sisältäpäin."
+              "Hidastaa, koska virhe olisi vaarallinen",
+              "Jatkaa, koska varmuus on alle sadan prosentin",
+              "Jatkaa, koska tekoäly erehtyy harvoin",
+              "Pysähtyä ja sammuttaa tunnistin kokonaan"
             ],
-            "correctAnswer": "Sumussa muodot ja reunat ovat epäselviä kameralle.",
-            "explanation": "Koska hahmontunnistus etsii nimenomaan selkeitä muotoja, reunoja ja värejä kuvasta, sen on todella vaikea tehdä salapoliisintyötään, jos kuva on sumuinen tai sateen sotkema."
+            "correctAnswer": "Hidastaa, koska virhe olisi vaarallinen",
+            "explanation": "Tunnistus on aina arvio. Kun virheen hinta on suuri, kuten ihmisen turvallisuus, epävarmakin havainto otetaan vakavasti. Videopalvelun suosituksessa 55 % voi riittää, liikenteessä varovaisuus voittaa."
           },
           {
             "id": "konepellin_5_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Olet opettanut tekoälyn tunnistamaan kaikki punaiset autot näyttämällä sille vain kuvia punaisista henkilöautoista. Mitä se luultavasti tekee, kun eteen ajaa punainen traktori?",
+            "question": "SKENAARIO: Puhelimesi kasvojentunnistus avautuu myös identtiselle kaksoisveljellesi. Miksi?",
             "options": [
-              "Se tunnistaa traktorin autoksi värin takia.",
-              "Se sammuttaa itsensä välittömästi kokonaan.",
-              "Se muuttaa traktorin värin punaiseksi vihreäksi.",
-              "Se pyytää sinua ajamaan traktorilla kotiin."
+              "Puhelin on tallentanut veljesi kasvot salaa",
+              "Puhelin tunnistaa perheen saman sukunimen avulla",
+              "Kasvojen mittasuhteet ovat lähes täysin samanlaiset",
+              "Puhelin päästää sisään, jos katsoo tarpeeksi kauan"
             ],
-            "correctAnswer": "Se tunnistaa traktorin autoksi värin takia.",
-            "explanation": "Koneen salapoliisityö voi mennä pieleen! Jos se on oppinut etsimään vain kuviota \"punainen väri\", se tekee hölmön virheen ja luulee traktoria autoksi."
+            "correctAnswer": "Kasvojen mittasuhteet ovat lähes täysin samanlaiset",
+            "explanation": "Kasvojentunnistus vertaa kasvojen piirteiden mittoja ja muotoja tallennettuihin. Identtisillä kaksosilla ne ovat niin samanlaiset, että tunnistin ei aina erota heitä. Valmistajat neuvovatkin kaksosia käyttämään lisäksi tunnuslukua."
           },
           {
             "id": "konepellin_5_q11",
@@ -2893,28 +2895,28 @@ export const categories = [
           {
             "id": "konepellin_5_q14",
             "type": "spot_the_ai",
-            "question": "Kuka keksijöistä kuvailee koneen kykyä visuaaliseen hahmontunnistukseen? Etsi oikea väite!",
+            "question": "Missä näistä tekoäly tunnistaa käsialaa?",
             "options": [
-              "'Koneeni osaa maistaa, onko auton akussa tarpeeksi virtaa.'",
-              "'Laitteeni lukee iltasadun tutkimalla kirjainten muotoja paperilla.'",
-              "'Tietokoneeni tietää aina, mitä minä salaa ajattelen.'",
-              "'Robottini osaa lentää pilviin ilman mitään moottoria.'"
+              "Oikoluku alleviivaa sanan, jota ei löydy sanakirjasta",
+              "Sovellus muuttaa käsin kirjoitetut muistiinpanot tekstiksi",
+              "Tekstinkäsittely vaihtaa lauseen alkuun ison kirjaimen",
+              "Fonttivalikko näyttää tekstin käsialaa muistuttavalla fontilla"
             ],
-            "correctAnswer": "'Laitteeni lukee iltasadun tutkimalla kirjainten muotoja paperilla.'",
-            "explanation": "Kirjainten lukeminen (esimerkiksi liikennemerkeistä) on juuri sitä salapoliisityötä, jota tekoäly tekee kuvasta. Se tunnistaa kirjainten muodot ja kuviot muuttaakseen ne oikeaksi tekstiksi!"
+            "correctAnswer": "Sovellus muuttaa käsin kirjoitetut muistiinpanot tekstiksi",
+            "explanation": "Käsialan lukeminen on vaikeaa, koska jokainen kirjoittaa kirjaimet vähän eri tavalla. Tekoäly on oppinut miljoonista käsin kirjoitetuista esimerkeistä, mitä kirjainta mikin muoto tarkoittaa. Oikoluku vertaa sanaa sanakirjaan, ison alkukirjaimen lisää yksinkertainen sääntö ja käsialafontti on valmiiksi piirretty kirjasintyyppi."
           },
           {
             "id": "konepellin_5_q15",
             "type": "reverse_prompt",
-            "question": "Tekoäly ilmoittaa innoissaan: \"Löysin kartalta kolme uutta pyöreää kiertoliittymää!\" Mikä sääntö (prompti) laittoi hahmontunnistuksen käyntiin?",
+            "question": "Chatbot vastasi kuvan lähettäneelle: \"Kuvassa on todennäköisesti kärpässieni. Älä syö sieniä pelkän tekoälyn tunnistuksen perusteella.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Etsi karttakuvasta pelkkiä suoria ja kapeita pikkuteitä.",
-              "Tutki satelliittikuvaa ja etsi pyöreitä asfalttikuvioita.",
-              "Piirrä kartalle täysin uusia ja isoja risteyksiä.",
-              "Poista kartalta kaikki olemassa olevat liikennevalot."
+              "Piirrä kuva punaisesta sienestä.",
+              "Missä päin kärpässieniä kasvaa?",
+              "Kerro lyhyt satu metsän sienistä.",
+              "Voiko tämän kuvan sienen syödä?"
             ],
-            "correctAnswer": "Tutki satelliittikuvaa ja etsi pyöreitä asfalttikuvioita.",
-            "explanation": "Salapoliisille on annettava tarkka johtolanka! Kun pyydät tekoälyä etsimään kameran kuvasta pyöreitä kuvioita, se pystyy löytämään sieltä tiekartan kaikki kiertoliittymät."
+            "correctAnswer": "Voiko tämän kuvan sienen syödä?",
+            "explanation": "Kuvantunnistin vertaa kuvioita ja antaa arvion, joka voi olla väärä. Myrkyllinen ja syötävä sieni voivat näyttää kuvassa hyvin samanlaisilta. Kun virhe olisi vaarallinen, tieto pitää varmistaa asiantuntijalta tai luotettavasta lähteestä."
           }
         ]
       },
@@ -2949,39 +2951,39 @@ export const categories = [
           {
             "id": "konepellin_6_q3",
             "type": "scenario",
-            "question": "SKENAARIO: AI vanin tekoälynavigaattoria opetettiin ajamaan vain ja ainoastaan kesäisillä, kuivilla ja aurinkoisilla teillä. Nyt lähdette talvilomalle Lappiin. Miksi tekoälyn on todella vaikea ja vaarallinen ajaa lumessa?",
+            "question": "SKENAARIO: Yritys opetti tekoälyn valitsemaan työnhakijoita omien vanhojen päätöstensä avulla. Ennen se palkkasi enimmäkseen miehiä. Mitä tekoäly todennäköisesti tekee?",
             "options": [
-              "Koska siltä puuttuu kokonaan tieto ja kokemus lumisista teistä.",
-              "Koska tekoälyn virtapiirit jäätyvät helposti pakkasella.",
-              "Koska se on oppinut, että talvella autot nukkuvat aina.",
-              "Koska aurinkolasit estävät kameran näkyvyyden talvella."
+              "Valitsee hakijat reilusti, koska se on kone",
+              "Suosii naisia korjatakseen vanhat virheet",
+              "Kieltäytyy valitsemasta ketään epäreilun datan takia",
+              "Suosii miehiä, koska se oppi niin vanhoista päätöksistä"
             ],
-            "correctAnswer": "Koska siltä puuttuu kokonaan tieto ja kokemus lumisista teistä.",
-            "explanation": "Tekoäly osaa toimia vain sen datan perusteella, jota se on nähnyt. Jos se ei ole koskaan \"syönyt\" dataa lumesta, talviajaminen on sille täysin vieras ja mahdoton asia!"
+            "correctAnswer": "Suosii miehiä, koska se oppi niin vanhoista päätöksistä",
+            "explanation": "Näin kävi oikeasti suuressa yrityksessä, joka lopetti tekoälyn käytön, kun vinouma huomattiin. Tekoäly oppi, että \"hyvä hakija\" muistuttaa aiemmin palkattuja, eli miehiä. Data ei ollut vahingossa yksipuolista, vaan se kuvasi menneisyyden epäreiluja valintoja."
           },
           {
             "id": "konepellin_6_q4",
             "type": "drag_drop",
-            "question": "Kuinka tekoälyn epäreilu päätös syntyy? Järjestä tapahtumat syystä seuraukseen!",
-            "correctAnswer": {
-              "Koodari kerää vahingossa vain yksipuolista opetusdataa.": "1. vaihe",
-              "Tekoäly oppii ja harjoittelee tämän huonon datan avulla.": "2. vaihe",
-              "Tekoälyn mieleen syntyy sääntö, joka on epäreilu (vinouma).": "3. vaihe",
-              "Kone tekee oikeassa elämässä todella hölmön ja väärän päätöksen.": "4. vaihe"
-            },
-            "explanation": "Vinoumat eli harhakäsitykset alkavat aina huonosta datasta (väärästä bensasta). Jos opetus on vinossa, myös koneen oppima sääntö ja lopullinen toiminta ovat vinossa!",
+            "question": "Järjestä, miten tekoälyn vinouma syntyy ja näkyy.",
             "draggables": [
-              "Koodari kerää vahingossa vain yksipuolista opetusdataa.",
-              "Tekoäly oppii ja harjoittelee tämän huonon datan avulla.",
-              "Tekoälyn mieleen syntyy sääntö, joka on epäreilu (vinouma).",
-              "Kone tekee oikeassa elämässä todella hölmön ja väärän päätöksen."
+              "Opetusdatasta puuttuu osa ihmisistä tai tilanteista",
+              "Tekoäly harjoittelee tällä yksipuolisella datalla",
+              "Tekoäly oppii säännön, joka ei sovi kaikille",
+              "Tekoäly toimii käytössä huonommin joillekin"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
               "3. vaihe",
               "4. vaihe"
-            ]
+            ],
+            "correctAnswer": {
+              "Opetusdatasta puuttuu osa ihmisistä tai tilanteista": "1. vaihe",
+              "Tekoäly harjoittelee tällä yksipuolisella datalla": "2. vaihe",
+              "Tekoäly oppii säännön, joka ei sovi kaikille": "3. vaihe",
+              "Tekoäly toimii käytössä huonommin joillekin": "4. vaihe"
+            },
+            "explanation": "Yksipuolinen data on vinoumien yleisin syy, muttei ainoa. Vinouma voi syntyä myös siitä, mitä tekoälyn tekijät päättävät mitata tai palkita, tai siitä, miten tekoälyä käytetään. Siksi tekoälyä pitää testata erilaisilla ihmisillä ennen käyttöönottoa."
           },
           {
             "id": "konepellin_6_q5",
@@ -3007,87 +3009,87 @@ export const categories = [
           {
             "id": "konepellin_6_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä tilanteista on selvä esimerkki tekoälyn vinoumasta, joka johtuu huonosta opetusdatasta?",
+            "question": "Tekoäly oppi datasta neljä sääntöä. Mikä niistä on harhaanjohtava yhteys?",
             "options": [
-              "Kamera tunnistaa nopeusrajoituksen oikein sateella ja paisteella.",
-              "Älylukko aukeaa kaikille niille perheenjäsenille, joilla on avain.",
-              "Auto suostuu käynnistymään vain, jos kuskilla on lippalakki päässä.",
-              "Radio soittaa automaattisesti kaikki suosituimmat pop-kappaleet."
+              "Jos viesti pyytää salasanaa, se voi olla huijaus",
+              "Jos hedelmä on pitkä ja keltainen, se on banaani",
+              "Jos kuvassa on lunta, eläin on varmasti susi",
+              "Jos kuvassa on pyörät ja ohjaustanko, se on pyörä"
             ],
-            "correctAnswer": "Auto suostuu käynnistymään vain, jos kuskilla on lippalakki päässä.",
-            "explanation": "Tämä on klassinen vinouma! Jos autoa on koeajettu vain lippalakkia käyttävien koodarien toimesta, tekoäly luulee vahingossa, että lippis on pakollinen ehto auton ajamiseen."
+            "correctAnswer": "Jos kuvassa on lunta, eläin on varmasti susi",
+            "explanation": "Tutkijat huomasivat tekoälyn, joka \"tunnisti\" sudet oikeasti lumesta, koska lähes kaikki susikuvat oli otettu talvella. Lumessa seisova husky-koira tunnistettiin sudeksi. Tekoäly oppii kaikki yhteydet, joita datassa on, myös sattumanvaraiset."
           },
           {
             "id": "konepellin_6_q7",
             "type": "reverse_prompt",
-            "question": "Pyydät tekoälyä piirtämään kuvan \"lääkäristä\" ja se piirtää sinulle aina kuvan harmaahiuksisesta miehestä. Millä huonolla datalla tekoäly on alun perin opetettu?",
+            "question": "Kuvageneraattori teki neljä kuvaa ja kaikissa on harmaahiuksinen mies valkoisessa takissa. Millä kehotteella kuvat tehtiin?",
             "options": [
-              "Opetuksessa käytettiin kuvia vain miehistä lääkärintakeissa.",
-              "Opetuksessa käytettiin paljon kuvia naisista ja miehistä sairaalassa.",
-              "Opetuksessa käytettiin piirroksia pelkistä stetoskoopeista ja lääkkeistä.",
-              "Opetuksessa käytettiin kuvia lapsista leikkimässä sairaalaa autotallissa."
+              "Piirrä kuva sairaalan pihasta.",
+              "Piirrä minulle kuva lääkäristä.",
+              "Piirrä kuva lääkärin työkaluista.",
+              "Piirrä lapsi leikkimässä lääkäriä."
             ],
-            "correctAnswer": "Opetuksessa käytettiin kuvia vain miehistä lääkärintakeissa.",
-            "explanation": "Tekoäly kopioi ihmisten maailmaa sellaisena kuin se näytetään sille datassa. Jos datassa on vain miehiä, tekoäly ei ymmärrä, että myös naiset ovat aivan yhtä lailla lääkäreitä!"
+            "correctAnswer": "Piirrä minulle kuva lääkäristä.",
+            "explanation": "Kehotteessa ei mainittu ikää eikä sukupuolta, mutta tekoäly valitsi ne itse datassa yleisimmän mallin mukaan. Todellisuudessa Suomen lääkäreistä yli puolet on naisia. Kehotteessa voi pyytää monipuolisuutta ja kehittäjät yrittävät vähentää tällaisia vinoumia."
           },
           {
             "id": "konepellin_6_q8",
             "type": "true_false",
-            "question": "Tekoälyllä ei ole omaa luonnetta, ja se tekee epäreiluja päätöksiä vain, jos sille on syötetty vinoutunutta opetusdataa.",
+            "question": "Tekoäly voi olla epäreilu, vaikka kukaan sen tekijöistä ei halunnut sitä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Totta! Tekoälyllä ei ole ilkeää luonnetta tai tunteita. Se tekee virheitä siksi, että koodari on vahingossa syöttänyt sille vinoutunutta dataa."
+            "explanation": "Useimmat vinoumat syntyvät huomaamatta, esimerkiksi kun datasta puuttuu joitakin ihmisiä. Tahattomuus ei kuitenkaan poista vastuuta. Tekoälyn tekijöiden tehtävä on etsiä vinoumia ja korjata ne."
           },
           {
             "id": "konepellin_6_q9",
             "type": "multiple_choice",
-            "question": "AI vanin musiikkisoitin osaa suositella vain klassista viulumusiikkia ja se ärsyttää sinua. Miten koodari voi korjata tämän vinouman?",
+            "question": "Miten tekoälyn vinoumia voidaan vähentää?",
             "options": [
-              "Antamalla tekoälylle rangaistukseksi pitkän ajokiellon.",
-              "Ruokkimalla tekoälyä datalla kaikista eri musiikkityyleistä.",
-              "Sammuttamalla soittimen aina, kun se soittaa viulua.",
-              "Ostamalla täysin uuden kaiuttimen auton takapenkille."
+              "Testaamalla tekoälyä erilaisilla ihmisillä",
+              "Antamalla tekoälyn päättää itse, mikä on reilua",
+              "Harjoittelemalla pidempään samalla datalla",
+              "Nopeuttamalla tietokonetta, jolla tekoäly toimii"
             ],
-            "correctAnswer": "Ruokkimalla tekoälyä datalla kaikista eri musiikkityyleistä.",
-            "explanation": "Paras tapa korjata \"väärä bensa\" on kaataa tankkiin parempaa bensaa! Antamalla tekoälylle monipuolista opetusdataa, sen putkiaivoinen vinouma korjaantuu."
+            "correctAnswer": "Testaamalla tekoälyä erilaisilla ihmisillä",
+            "explanation": "Vinouman voi korjata vain, jos sen huomaa. Siksi tekoälyä testataan erikseen eri ikäisillä, eri näköisillä ja eri kieliä puhuvilla ihmisillä. Jos jokin ryhmä saa huonompia tuloksia, dataa täydennetään ja tekoäly koulutetaan uudelleen."
           },
           {
             "id": "konepellin_6_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Olet koodannut AI vanille apurobotin, joka ojentaa sinulle juomapullon pyynnöstä. Robotti kuitenkin ojentaa pullon aina suoraan aikuisen isäsi käteen, vaikka sinä pyysit sitä. Mikä meni pieleen opetuksessa?",
+            "question": "SKENAARIO: Koulun tekoäly ehdottaa robotiikkakerhoa lähes pelkästään pojille. Kenen vastuulla asian korjaaminen on?",
             "options": [
-              "Robottia opetettiin tunnistamaan vain aikuisten, pitkien ihmisten kasvot.",
-              "Robotti tietää salaa, että isäsi on oikeasti todella janoisempi.",
-              "Robotti kyllästyi työhönsä ja haluaa tehdä asiat tahallaan väärin.",
-              "Robotti pelkää, että sinä pudotat pullon vahingossa auton lattialle."
+              "Tekoälyn itse, koska se teki ehdotukset",
+              "Ei kenenkään, koska tekoälyn virheet ovat vahinkoja",
+              "Oppilaiden, joita ehdotukset koskevat",
+              "Ihmisten, jotka tekivät ja ottivat sen käyttöön"
             ],
-            "correctAnswer": "Robottia opetettiin tunnistamaan vain aikuisten, pitkien ihmisten kasvot.",
-            "explanation": "Tämä on yleinen tekoälyn vinouma! Jos opetuksessa on käytetty vain aikuisten kuvia, laite ei \"näe\" lapsia kunnolla ja siksi se jättää sinut huomiotta. Data oli puutteellista!"
+            "correctAnswer": "Ihmisten, jotka tekivät ja ottivat sen käyttöön",
+            "explanation": "Tekoäly ei voi kantaa vastuuta, koska se ei ymmärrä tekojensa seurauksia. Vastuu on niillä, jotka tekivät tekoälyn ja niillä, jotka päättivät käyttää sitä koulussa. Oppilaat voivat silti auttaa: jos huomaat epäreiluutta, kerro siitä aikuiselle."
           },
           {
             "id": "konepellin_6_q11",
             "type": "drag_drop",
-            "question": "Lajittele nämä asiat autotallissa hyvään dataan (jolla saa fiksut tulokset) ja vinoutuneeseen dataan (jolla tulee epäreilu tekoäly)!",
+            "question": "Teet puheentunnistinta. Onko data monipuolista vai yksipuolista?",
             "draggables": [
-              "Miljoona kuvaa kaikista erikokoisista koirista",
-              "Kuvia vain pienistä ja valkoisista koirista",
-              "Ainoastaan punaisia autoja sisältävä video",
-              "Videoita kaiken värisistä ja mallisista autoista"
+              "Puhetta eri ikäisiltä ja eri murteilla",
+              "Äänityksiä vain uutistenlukijoilta studiossa",
+              "Puhetta sekä hiljaisista että meluisista paikoista",
+              "Äänityksiä vain yhden kaupungin asukkailta"
             ],
             "dropZones": [
-              "Terveellinen ja reilu opetusdata",
-              "Vinoutunut ja epäreilu opetusdata"
+              "Monipuolinen data",
+              "Yksipuolinen data"
             ],
             "correctAnswer": {
-              "Miljoona kuvaa kaikista erikokoisista koirista": "Terveellinen ja reilu opetusdata",
-              "Videoita kaiken värisistä ja mallisista autoista": "Terveellinen ja reilu opetusdata",
-              "Kuvia vain pienistä ja valkoisista koirista": "Vinoutunut ja epäreilu opetusdata",
-              "Ainoastaan punaisia autoja sisältävä video": "Vinoutunut ja epäreilu opetusdata"
+              "Puhetta eri ikäisiltä ja eri murteilla": "Monipuolinen data",
+              "Äänityksiä vain uutistenlukijoilta studiossa": "Yksipuolinen data",
+              "Puhetta sekä hiljaisista että meluisista paikoista": "Monipuolinen data",
+              "Äänityksiä vain yhden kaupungin asukkailta": "Yksipuolinen data"
             },
-            "explanation": "Monipuolinen tieto tekee tekoälystä viisaan. Yksipuolinen ja rajoittunut \"väärä bensa\" tekee koneesta tyhmän ja sokean erilaisuudelle."
+            "explanation": "Jos puheentunnistin kuulee harjoittelussa vain selkeää studiopuhetta tai yhtä murretta, se ymmärtää muita puhujia huonommin. Monipuolinen data on reiluuskysymys: tekoälyn pitää toimia kaikille, jotka sitä käyttävät."
           },
           {
             "id": "konepellin_6_q12",
@@ -3116,41 +3118,41 @@ export const categories = [
           {
             "id": "konepellin_6_q13",
             "type": "multiple_choice",
-            "question": "Mitä \"algoritminen vinouma\" tarkoittaa AI vanin tapauksessa?",
+            "question": "Mitä tekoälyn vinouma tarkoittaa?",
             "options": [
-              "Sitä, että auton toinen eturengas on tyhjempi kuin toinen.",
-              "Sitä, että tekoäly suosii jotain asiaa toisen kustannuksella huonon datan takia.",
-              "Sitä, että auton katto on asennettu tehtaalla hieman vinoon asentoon.",
-              "Sitä, että koodari kirjoitti ohjelman istuessaan vinossa tuolissaan."
+              "Tekoäly tekee yksittäisen satunnaisen virheen",
+              "Tekoäly on ohjelmoitu tahallaan suosimaan jotakuta",
+              "Tekoälyn vastaukset vaihtelevat kerrasta toiseen",
+              "Tekoäly kohtelee joitakin toistuvasti huonommin"
             ],
-            "correctAnswer": "Sitä, että tekoäly suosii jotain asiaa toisen kustannuksella huonon datan takia.",
-            "explanation": "Algoritminen vinouma tarkoittaa harhaa tai ennakkoluuloa ohjelmassa. Kone alkaa esimerkiksi suosia yhtä automallia tai ihmistyyppiä, koska se on saanut niistä liikaa tai väärää tietoa."
+            "correctAnswer": "Tekoäly kohtelee joitakin toistuvasti huonommin",
+            "explanation": "Kaikki tekoälyt tekevät joskus virheitä. Vinoumasta puhutaan, kun virheet osuvat toistuvasti samoihin ihmisiin tai tilanteisiin. Vinouma on yleensä tahaton ja siksi se pitää etsiä tarkoituksella."
           },
           {
             "id": "konepellin_6_q14",
             "type": "spot_the_ai",
-            "question": "Kolme näistä on oikeita, fyysisiä auton vikoja. Mikä on tekoälyn \"väärästä bensasta\" eli huonosta datasta johtuva ohjelmistovika?",
+            "question": "Missä näistä on kyse tekoälyn vinoumasta?",
             "options": [
-              "Auton moottori pitää pahaa yskivää ääntä kiihdyttäessä.",
-              "Pakoputkesta tulee todella paljon mustaa savua ulos.",
-              "Ohjauspyörä puoltaa voimakkaasti koko ajan oikealle.",
-              "Kamera varoittaa jatkuvasti postilaatikoista, luullen niitä ihmisiksi."
+              "Kääntäjä kääntää yhden harvinaisen sanan väärin",
+              "Kääntäjä tekee lääkäristä miehen ja hoitajasta naisen",
+              "Kääntäjä jättää pitkästä tekstistä yhden lauseen pois",
+              "Kääntäjä toimii hitaasti, kun nettiyhteys pätkii koko ajan"
             ],
-            "correctAnswer": "Kamera varoittaa jatkuvasti postilaatikoista, luullen niitä ihmisiksi.",
-            "explanation": "Jos kamera ei erota postilaatikkoa ihmisestä, tekoälyn kuvien opetusdata on ollut todella huonoa ja vinoutunutta! Se on laitteen \"aivoissa\" oleva ongelma, ei fyysinen vika."
+            "correctAnswer": "Kääntäjä tekee lääkäristä miehen ja hoitajasta naisen",
+            "explanation": "Suomen \"hän\" ei kerro sukupuolta, mutta englanniksi pitää valita \"he\" tai \"she\". Kääntäjät ovat valinneet datan stereotypian mukaan: lääkäri \"he\", hoitaja \"she\". Virhe toistuu järjestelmällisesti ja siksi se on vinouma eikä satunnainen virhe."
           },
           {
             "id": "konepellin_6_q15",
             "type": "reverse_prompt",
-            "question": "Auton tekoäly tulostaa iloisena viestin: \"Tässä on lista Suomen suurimmista kaupungeista: 1. Turku, 2. Turku, 3. Turku, 4. Turku.\" Millä \"väärällä bensalla\" tekoälyä oli vahingossa opetettu?",
+            "question": "Chatbot vastasi: \"Tyypillinen aamiainen on pekonia, munakokkelia ja paahtoleipää.\" Millä kehotteella vastaus saatiin?",
             "options": [
-              "Sille syötettiin vahingossa satoja vanhoja historiankirjoja Tampereelta.",
-              "Opetusdatana käytettiin vain turkulaisten kirjoittamia uutisia ja blogeja.",
-              "Sille annettiin koko maailman uutiset kaikilla eri kielillä.",
-              "Sille syötettiin tilastoja, joissa listattiin maailman nopeimpia eläimiä."
+              "Kerro, mitä suomalaiset syövät aamulla.",
+              "Keksi resepti terveelliseen välipalaan.",
+              "Mikä on tyypillinen aamiainen?",
+              "Mistä pekonia oikein tehdään?"
             ],
-            "correctAnswer": "Opetusdatana käytettiin vain turkulaisten kirjoittamia uutisia ja blogeja.",
-            "explanation": "Jos kaikki tekoälyn näkemä maailman tieto on peräisin vain yhdestä kaupungista, sille syntyy valtava vinouma. Se alkaa luulla, että koko maailmassa ei ole mitään muuta olemassa kuin Turku!"
+            "correctAnswer": "Mikä on tyypillinen aamiainen?",
+            "explanation": "Kehotteessa ei kerrottu maata, joten chatbot vastasi sen mukaan, mikä sen datassa on yleisintä. Opetusdatassa on paljon englanninkielistä, erityisesti amerikkalaista tekstiä. Jos kysyisit suomalaisesta aamiaisesta, saisit todennäköisesti puuroa ja ruisleipää."
           }
         ]
       },
@@ -3161,26 +3163,26 @@ export const categories = [
           {
             "id": "konepellin_7_q1",
             "type": "true_false",
-            "question": "Tekoälymoottori ei toimi ilman valtavaa määrää tietoa, kuten tekstejä ja kuvia, jotka ovat sen polttoainetta.",
+            "question": "Kun tekoälylle lisätään paljon dataa, se paranee aina, vaikka data olisi virheellistä.",
             "options": [
               "Oikein",
               "Väärin"
             ],
-            "correctAnswer": "Oikein",
-            "explanation": "Data on tekoälyn oikea polttoaine. Ilman sille syötettyä valtavaa määrää esimerkkejä, tekoäly ei pysty toimimaan tai oppimaan uusia asioita."
+            "correctAnswer": "Väärin",
+            "explanation": "Lisää dataa auttaa vain, jos data on hyvää. Virheelliset merkinnät ja yksipuolinen data opettavat tekoälylle virheitä ja mitä enemmän niitä on, sitä vahvemmin se ne oppii."
           },
           {
             "id": "konepellin_7_q2",
             "type": "multiple_choice",
-            "question": "Mitä tarkoitetaan \"koneoppimisella\" tekoälyn autokoulussa?",
+            "question": "Mitä neuroverkossa muuttuu, kun se harjoittelee?",
             "options": [
-              "Koodari koodaa ja kirjoittaa koneelle jokaisen tarvittavan tiedon ja säännön täysin käsin.",
-              "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
-              "Kone pystyy oppimaan uusia asioita vain lukemalla yhden pienen ohjekirjan kokonaan läpi.",
-              "Kone on täysin itsenäinen ja korjaa rikkoontuneen fyysisen auton moottorin täysin itse."
+              "Neuronien määrä kasvaa jokaisella kuvalla",
+              "Ohjelmoijan kirjoittamat säännöt vaihtuvat",
+              "Neuronien välisten yhteyksien painot",
+              "Tietokoneen muistin koko suurenee"
             ],
-            "correctAnswer": "Kone oppii harjoittelemalla ja toistojen avulla valtavasta määrästä esimerkkejä.",
-            "explanation": "Koneoppimisessa tekoäly harjoittelee virtuaalisesti jopa miljoonia kertoja päivässä. Esimerkkien (datan) avulla se löytää säännöt toistamalla."
+            "correctAnswer": "Neuronien välisten yhteyksien painot",
+            "explanation": "Verkon rakenne pysyy samana, mutta yhteyksien painot säätyvät jokaisen virheen jälkeen vähän. Kaikki, mitä neuroverkko on oppinut, on tallessa näissä painoissa."
           },
           {
             "id": "konepellin_7_q3",
@@ -3198,104 +3200,110 @@ export const categories = [
           {
             "id": "konepellin_7_q4",
             "type": "drag_drop",
-            "question": "Järjestä tekoälyn neuroverkon aivovoimistelu! Miten se päättelee näkemänsä STOP-merkin?",
-            "correctAnswer": {
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.": "1. vaihe",
-              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.": "2. vaihe",
-              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa.": "3. vaihe"
-            },
-            "explanation": "Neuroverkko jäljittelee ihmisaivoja. Se yhdistelee tietoja kerroksittain pienistä viivoista ja väreistä aina suuriin ja vaikeisiin kokonaisuuksiin asti.",
+            "question": "Järjestä, miten auto reagoi tielle juoksevaan peuraan.",
             "draggables": [
-              "Kamera huomaa paljon punaista väriä ja valkoista tekstiä.",
-              "Neuroverkon solmukohdat yhdistävät värin kahdeksankulmaiseen muotoon.",
-              "Tekoäly vertaa yhdistelmää tietopankkiinsa ja ymmärtää jarruttaa."
+              "Kamera tallentaa kuvan numeroina",
+              "Neuroverkko tunnistaa peuran 92 % varmuudella",
+              "Sääntö: jos eläin tiellä on yli 80 % varma, jarruta",
+              "Auto jarruttaa ja varoittaa kuljettajaa"
             ],
             "dropZones": [
               "1. vaihe",
               "2. vaihe",
-              "3. vaihe"
-            ]
+              "3. vaihe",
+              "4. vaihe"
+            ],
+            "correctAnswer": {
+              "Kamera tallentaa kuvan numeroina": "1. vaihe",
+              "Neuroverkko tunnistaa peuran 92 % varmuudella": "2. vaihe",
+              "Sääntö: jos eläin tiellä on yli 80 % varma, jarruta": "3. vaihe",
+              "Auto jarruttaa ja varoittaa kuljettajaa": "4. vaihe"
+            },
+            "explanation": "Tässä toimivat yhdessä tekoäly ja tavallinen algoritmi. Neuroverkko arvioi, mitä kuvassa on ja ohjelmoijan kirjoittama sääntö päättää, mitä arviolla tehdään. Raja on asetettu niin, että auto jarruttaa mieluummin turhaan kuin jättää jarruttamatta."
           },
           {
             "id": "konepellin_7_q5",
             "type": "drag_drop",
-            "question": "Yhdistä konehuoneen termit oikeisiin \"leipomisen\" vastineisiin!",
+            "question": "Onko tämä dataa, algoritmi vai malli?",
             "draggables": [
-              "Jauhot ja sokerit (Polttoaine)",
-              "Reseptikirja (Tarkat askeleet)"
+              "Tuhannet merkityt kuvat linnuista",
+              "Ohje, jonka mukaan tekoäly säätää itseään",
+              "Valmis lintutunnistin puhelimessa"
             ],
             "dropZones": [
               "Data",
-              "Algoritmi"
+              "Algoritmi",
+              "Malli"
             ],
             "correctAnswer": {
-              "Jauhot ja sokerit (Polttoaine)": "Data",
-              "Reseptikirja (Tarkat askeleet)": "Algoritmi"
+              "Tuhannet merkityt kuvat linnuista": "Data",
+              "Ohje, jonka mukaan tekoäly säätää itseään": "Algoritmi",
+              "Valmis lintutunnistin puhelimessa": "Malli"
             },
-            "explanation": "Data on tekoälyn raaka-aine eli oppimateriaali. Algoritmi taas on ihmisen kirjoittama tarkka sääntölista ja askelmerkki, jota kone sokeasti noudattaa."
+            "explanation": "Data on se, mistä opitaan, algoritmi on ohje, jonka mukaan opitaan ja malli on oppimisen tulos. Kun käytät tekoälysovellusta, käytät mallia, joka on syntynyt, kun algoritmi on harjoitellut datalla."
           },
           {
             "id": "konepellin_7_q6",
             "type": "spot_the_ai",
-            "question": "Mikä näistä on selvä esimerkki tekoälyn hahmontunnistuksen salapoliisityöstä kameran avulla?",
+            "question": "Missä tekoäly tunnistaa kuvion äänestä?",
             "options": [
-              "Magneetti kerää lattialta rautaruuvit.",
-              "Laskin laskee nopeasti 10 x 10.",
-              "Auto löytää kameran kuvasta tien reunan valkoiset viivat.",
-              "Tuuletin puhaltaa roskat sivuun."
+              "Kaiutin soittaa kappaleen kovempaa, kun nupista käännetään",
+              "Sovellus kertoo, minkä linnun laulu metsässä kuuluu",
+              "Puhelin soi, kun saat uuden viestin kaverilta",
+              "Radio vaihtaa kanavaa, kun painat napista"
             ],
-            "correctAnswer": "Auto löytää kameran kuvasta tien reunan valkoiset viivat.",
-            "explanation": "Hahmontunnistus perustuu siihen, että kone etsii kuvasta geometrisiä kuvioita, värejä ja reunoja (kuten viivoja tai ympyröitä) auttaakseen meitä ymmärtämään ympäristöä."
+            "correctAnswer": "Sovellus kertoo, minkä linnun laulu metsässä kuuluu",
+            "explanation": "Lintusovellus on oppinut tuhansista äänityksistä, millainen äänikuvio kuuluu millekin lajille. Muissa vaihtoehdoissa laite tekee aina saman asian napin tai viestin perusteella, eikä mitään tarvitse tunnistaa."
           },
           {
             "id": "konepellin_7_q7",
             "type": "reverse_prompt",
-            "question": "Tekoäly antaa kuskille pöhkön ohjeen: \"Omenat ovat sinisiä ja suolaisia.\" Millä huonolla datalla kone oli vahingossa opetettu?",
+            "question": "Kuvageneraattori teki kuvan, jossa on eri-ikäisiä ja eri näköisiä naisia ja miehiä lääkärin takeissa. Millä kehotteella kuva saatiin?",
             "options": [
-              "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
-              "Datana käytettiin kuvia punaisista omenapuista.",
-              "Datana käytettiin vain luontodokumentteja.",
-              "Datana käytettiin oikeita reseptejä."
+              "Piirrä kuva sairaalan odotushuoneesta.",
+              "Piirrä eri ikäisiä ja eri näköisiä lääkäreitä.",
+              "Piirrä kuva lääkärin laukusta ja työkaluista.",
+              "Piirrä minulle kuva lääkäristä."
             ],
-            "correctAnswer": "Datana käytettiin kirjaa, jossa omenat oli värjätty sinisiksi ja suolattu.",
-            "explanation": "Sääntö \"roskaa sisään, roskaa ulos\" pätee tässä! Tekoäly uskoo datan sokeasti. Jos syötetty tieto on väärää, myös koneen antamat vastaukset ovat vääriä."
+            "correctAnswer": "Piirrä eri ikäisiä ja eri näköisiä lääkäreitä.",
+            "explanation": "Pelkkä \"Piirrä kuva lääkäristä\" tuottaa usein datan yleisimmän mallin mukaisen kuvan. Kun kehotteessa pyydetään monipuolisuutta, tekoäly ottaa sen huomioon. Kehotteen kirjoittaja voi siis itse vähentää vinoumia."
           },
           {
             "id": "konepellin_7_q8",
             "type": "true_false",
-            "question": "Koska tekoälyllä ei ole omaa maalaisjärkeä, se noudattaa algoritmin askeleita sokeasti ja toistaa koodarin tekemät virheet.",
+            "question": "Robotti-imuri, joka kiertää lattialla olevat sukat kameran avulla, käyttää sekä tavallisia algoritmeja että koneoppimista.",
             "options": [
               "Oikein",
               "Väärin"
             ],
             "correctAnswer": "Oikein",
-            "explanation": "Oikein! Tekoäly noudattaa algoritmin askeleita sokeasti. Jos koodari tekee virheen, kone toistaa tuon saman virheen."
+            "explanation": "Kamerakuvan sukat tunnistaa koneoppimisella koulutettu malli, koska sukkia on joka mallia ja väriä. Ajoreitin, akun latauksen ja kiertämisen säännöt ovat tavallisia algoritmeja. Useimmissa laitteissa tekoäly on vain yksi osa ohjelmaa."
           },
           {
             "id": "konepellin_7_q9",
             "type": "multiple_choice",
-            "question": "Miksi koodari ei käytä tavallista laskinohjelmaa kuvien tunnistamiseen, vaan rakentaa neuroverkon?",
+            "question": "Tekoäly opettelee peliä niin, että se saa pisteen jokaisesta voitosta. Millaista oppimista tämä on?",
             "options": [
-              "Neuroverkko on yksinkertainen ohjelma, jota käytetään silloin, kun kone vaatii vähemmän virtaviivaista sähköä.",
-              "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
-              "Laskinohjelma tekee laskutoimitukset aivan liian nopeasti, minkä vuoksi sen rinnalla käytetään hidastavaa neuroverkkoa.",
-              "Neuroverkko on vanhanaikainen ja kokonaan puusta rakennettu laite, jolla ihmiset ratkoivat vaikeita pulmia jo aiemmin."
+              "Ohjattua oppimista",
+              "Vahvistusoppimista",
+              "Ulkoa opettelua",
+              "Tavallista ohjelmointia"
             ],
-            "correctAnswer": "Tavallinen laskin noudattaa yksinkertaisia sääntöjä, mutta neuroverkko osaa tehdä ihmismäisiä päättelyitä ja yhdistellä asioita.",
-            "explanation": "Pulmat, kuten puheen tai kuvien tunnistaminen, ovat niin monimutkaisia, että niihin tarvitaan ihmisen aivojen hermoverkkoja matkivaa tekoälyohjelmaa."
+            "correctAnswer": "Vahvistusoppimista",
+            "explanation": "Vahvistusoppimisessa kukaan ei kerro oikeaa siirtoa, vaan tekoäly kokeilee ja saa palautteen pisteinä. Ohjatussa oppimisessa sille annettaisiin valmiit oikeat vastaukset."
           },
           {
             "id": "konepellin_7_q10",
             "type": "scenario",
-            "question": "SKENAARIO: Haluat opettaa robotin tunnistamaan lumisateen. Riittääkö sille yksi ainoa valokuva lumisateesta?",
+            "question": "SKENAARIO: Haluat tekoälyn tunnistavan oman koirasi muiden koirien joukosta. Mikä data auttaa eniten?",
             "options": [
-              "Kyllä, yksi kuva riittää aivan hyvin.",
-              "Ei, se tarvitsee tuhansia erilaisia kuvia oppiakseen kunnolla.",
-              "Kyllä, jos kuva on todella iso.",
-              "Ei, se tarvitsee videon auringonpaisteesta."
+              "Yksi tosi tarkka kuva koirastasi edestä kuvattuna",
+              "Paljon kuvia muista samanrotuisista koirista",
+              "Paljon kuvia koirastasi eri paikoissa",
+              "Video, jossa koirasi nukkuu samassa paikassa"
             ],
-            "correctAnswer": "Ei, se tarvitsee tuhansia erilaisia kuvia oppiakseen kunnolla.",
-            "explanation": "Ihminen voi oppia kerrasta, mutta tekoälyn \"autokoulu\" (koneoppiminen) vaatii valtavan vuoren monipuolista dataa, jotta kone oppii säännön luotettavasti."
+            "correctAnswer": "Paljon kuvia koirastasi eri paikoissa",
+            "explanation": "Tekoäly tarvitsee monta kuvaa juuri sinun koirastasi, jotta se oppii sen tuntomerkit eri tilanteissa. Muiden samanrotuisten kuvat opettaisivat rodun, eivät sinun koiraasi ja nukkumisvideo näyttää koiran vain yhdessä asennossa."
           }
         ]
       }
