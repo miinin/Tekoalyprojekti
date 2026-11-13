@@ -7,6 +7,7 @@ import { db } from '../firebase';
 import { doc, setDoc, getDoc, onSnapshot, collection, updateDoc, serverTimestamp, getDocs, query, where, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
 import { checkRateLimit, formatWait, LIMITS } from '../services/rateLimit';
+import { store } from '../services/store';
 
 // Satunnainen nelinumeroinen esimerkki-PIN, joka ei ole ilmeisen heikko
 // (ei toistuvia numeroita kuten 1111, ei nousevia/laskevia sarjoja kuten 1234 tai 9876).
@@ -266,6 +267,9 @@ export default function TeacherDashboard() {
               return;
           }
           setErrorMsg('');
+          // Jos tällä laitteella on kokeiltu samaa luokkaa oppilaana, poistetaan oppilastunnus,
+          // jottei käsijarru peitä opettajan omaa näkymää, kun hän palaa päävalikkoon.
+          if (store.getClassroomCode() === code) store.setClassroomCode(null);
           setSessionCode(code);
       } catch (err) {
           console.error(err);

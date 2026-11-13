@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Lobby from './pages/Lobby';
 import Roadmap from './pages/Roadmap';
 import Garage from './pages/Garage';
@@ -12,6 +12,7 @@ import { Zap, Gift } from 'lucide-react';
 
 function GlobalClassroomOverlay() {
   const location = useLocation();
+  const navigate = useNavigate();
   // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
   const isTeacherView = location.pathname.startsWith('/teacher') || location.pathname.startsWith('/admin');
   const [isPaused, setIsPaused] = useState(false);
@@ -20,11 +21,21 @@ function GlobalClassroomOverlay() {
   useEffect(() => {
      let unsubSparks = null;
      let unsubStatus = null;
-     
+     // Kuuntelijat avataan vain, kun luokkakoodi tai nimimerkki vaihtuu. Aiemmin uudet
+     // kuuntelijat avattiin 5 sekunnin välein vanhoja sulkematta, jolloin niitä kertyi
+     // satoja ja pitkään auki ollut sivu hidastui tai jumittui.
+     let activeKey = null;
+
      const checkRoom = () => {
          const code = store.getClassroomCode();
          const nick = store.getClassroomNickname();
-         if (code && nick) {
+         const key = code && nick ? `${code}|${nick}` : null;
+         if (key === activeKey) return;
+         activeKey = key;
+         if (unsubStatus) { unsubStatus(); unsubStatus = null; }
+         if (unsubSparks) { unsubSparks(); unsubSparks = null; }
+         if (!key) { setIsPaused(false); return; }
+         {
             unsubStatus = store.listenToClassroomStatus(code, (status) => {
                setIsPaused(status === 'paused');
             });
@@ -64,6 +75,11 @@ function GlobalClassroomOverlay() {
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
                  Opettaja on asettanut pelin väliaikaisesti tauolle.<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong>
               </p>
+              {/* Jos opettaja on kokeillut peliä oppilaana samalla laitteella, käsijarru peittäisi
+                  muuten myös opettajan sisäänkäynnin. Hallintapaneeli vaatii silti luokkakoodin ja PIN-koodin. */}
+              <button type="button" onClick={() => navigate('/teacher')} style={{ position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)', background: 'transparent', border: '1px solid rgba(255,255,255,0.35)', color: 'rgba(255,255,255,0.75)', padding: '0.6rem 1.2rem', borderRadius: '10px', fontSize: '0.95rem', cursor: 'pointer' }}>
+                 Opettaja? Avaa hallintapaneeli
+              </button>
           </div>
         )}
         
