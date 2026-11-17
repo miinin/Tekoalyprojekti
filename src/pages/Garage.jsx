@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Map, Zap, PaintBucket, ShieldCheck, Radio, Sparkles, Wrench, Grid, Disc, Aperture, ChevronDown, Layers, ChevronLeft, X, Trophy, Save, Download, Lightbulb, Snowflake, Flame, RefreshCw, Eraser, Shield } from 'lucide-react';
 import { createPortal } from 'react-dom';
@@ -80,6 +80,9 @@ export default function Garage() {
     { id: 'trophy7', mapId: 'digiturva', name: 'Digiturva' }
   ];
 
+  // Testitilan palkintonapit päivittävät näkymän heti tämän viittauksen kautta.
+  const refreshRef = useRef(null);
+
   useEffect(() => {
     const fetchData = async () => {
       setSparks(await store.getSparks());
@@ -119,8 +122,9 @@ export default function Garage() {
       });
       setEarnedMedals(mCounts);
     };
+    refreshRef.current = fetchData;
     fetchData();
-    
+
     const interval = setInterval(fetchData, 3000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -226,22 +230,16 @@ export default function Garage() {
     const isEquipped = isCarItem ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : (isEquippableGarage ? (equipped[slot] === item.id || (!equipped[slot] && item.isDefault)) : isOwned);
     
     let meetsPrereq = true;
-    let prereqText = '';
     if (item.id === 'g-floor2' && !purchased.includes('g-floor-base')) {
         meetsPrereq = false;
-        prereqText = 'VAATII EDELLISEN';
     } else if (item.id === 'g-floor3' && !purchased.includes('g-floor2')) {
         meetsPrereq = false;
-        prereqText = 'VAATII EDELLISEN';
     } else if (item.id === 'g-walls2' && !purchased.includes('g-walls-base')) {
         meetsPrereq = false;
-        prereqText = 'VAATII EDELLISEN';
     } else if (item.id === 'g-walls3' && !purchased.includes('g-walls2')) {
         meetsPrereq = false;
-        prereqText = 'VAATII EDELLISEN';
     } else if (item.id === 'g-walls4' && !purchased.includes('g-walls3')) {
         meetsPrereq = false;
-        prereqText = 'VAATII EDELLISEN';
     }
 
     let btnText = item.price === 0 && !isOwned ? 'OTA KÄYTTÖÖN' : `OSTA ⚡ ${item.price}`;
@@ -1175,13 +1173,13 @@ export default function Garage() {
                           const cat = categories.find(c => c.id === unearnedTrophy.mapId);
                           const finalSub = cat.subcategories.find(sub => sub.id.endsWith('_7'));
                           store.saveNodeStats(finalSub.id, 10, 10);
-                          fetchData();
+                          refreshRef.current?.();
                       } else {
                           categories.forEach(c => {
                              const finalSub = c.subcategories.find(s => s.id.endsWith('_7'));
                              if (finalSub) store.saveNodeStats(finalSub.id, 0, 10);
                           });
-                          fetchData();
+                          refreshRef.current?.();
                       }
                   }} 
                   style={{ background: 'rgba(255,255,255,0.1)', color: '#fcd34d', border: 'none', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'normal', fontSize: '0.7rem' }}>
@@ -1194,10 +1192,10 @@ export default function Garage() {
                       const sub = categories.flatMap(c => c.subcategories).find(s => !s.id.endsWith('_7') && (!stats[s.id] || stats[s.id].correct < 10));
                       if (sub) {
                            store.saveNodeStats(sub.id, 10, 10);
-                           fetchData();
+                           refreshRef.current?.();
                       } else {
                            localStorage.removeItem('aivan_node_stats');
-                           fetchData();
+                           refreshRef.current?.();
                       }
                   }}
                   style={{ background: 'rgba(255,255,255,0.1)', color: '#93c5fd', border: 'none', padding: '0.4rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 'normal', fontSize: '0.7rem' }}>

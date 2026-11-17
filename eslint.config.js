@@ -5,7 +5,13 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // Juuren vanhat kertakäyttöiset apuskriptit eivät ole osa peliä.
+  globalIgnores(['dist', '*_payload*.js', 'mapTest.js', 'transform.js', 'sim_click.js', 'test_bfs*.js']),
+  {
+    // Tuotantopalvelin ajetaan Nodella.
+    files: ['server.js'],
+    languageOptions: { globals: globals.node },
+  },
   {
     files: ['**/*.{js,jsx}'],
     extends: [

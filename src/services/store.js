@@ -119,7 +119,7 @@ export const store = {
   getStreakStats: () => {
     try {
         return JSON.parse(localStorage.getItem('aivan_streak_stats') || '{"current":0, "best":0}');
-    } catch (e) {
+    } catch {
         return { current: 0, best: 0 };
     }
   },
@@ -190,7 +190,9 @@ export const store = {
        try {
            const backup = localStorage.getItem(key + '_b');
            if (backup) restored = parseInt(atob(backup), 10) ^ 42;
-       } catch(e) {}
+       } catch {
+           // Varmuuskopio puuttuu tai on rikki: käytetään oletusarvoa.
+       }
        
        alert("TUTKA VÄLÄHTI!\n\nYrititkö virittää kipinämittaria laittomasti? Katsastusmies huomasi peukaloinnin ja palautti alkuperäiset kipinät! Tästä hyvästä sait 5 kipinän ylinopeussakon!");
        restored = Math.max(0, restored - 5);

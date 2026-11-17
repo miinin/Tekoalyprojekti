@@ -169,7 +169,6 @@ export default function Lobby() {
       }
       
       const reqTutFixed = typeof reqTut === 'boolean' ? reqTut : false;
-      const willShowGarage = (joinResult === true) ? false : reqTutFixed; // If resumed, don't force Garage unless needed. Let's just follow reqTut if new player.
 
       setModalState({
           title: 'Liitytty onnistuneesti!',
