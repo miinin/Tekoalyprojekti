@@ -45,38 +45,21 @@ service cloud.firestore {
         && request.resource.data.lastAuthAt == request.time;
     }
 
-    // SIIRTYMÄVAIHE: vanha, PIN-koodilla todistettu kirjoitus. Sallitaan vain niin kauan,
-    // että ennen päivitystä avatut opettajan sivut on suljettu. Poistetaan sen jälkeen.
-    function legacyPinWrite() {
-      return request.resource.data.keys().hasOnly(['pin', 'lastAuthAt'])
-        && request.resource.data.pin == resource.data.pin
-        && request.resource.data.lastAuthAt == request.time;
-    }
-
     match /class_sessions/{code} {
       // Oppilaat lukevat luokan tilan (käsijarru, opastusvaatimus). Listaus estetty.
       allow get: if true;
       allow list: if false;
-      // Uudet luokat luo palvelin. SIIRTYMÄVAIHE: vanha sivu voi vielä luoda luokan itse.
-      allow create: if teacherAuthed(code)
-        && request.resource.data.keys().hasOnly(sessionKeys())
-        && request.resource.data.status in ['active', 'paused'];
+      // Uudet luokat luo pelin palvelin (server/teacherApi.js).
+      allow create: if false;
       allow update: if teacherAuthed(code)
         && request.resource.data.keys().hasOnly(sessionKeys())
         && request.resource.data.status in ['active', 'paused', 'ended'];
       allow delete: if false;
 
       match /private/auth {
-        allow read: if false;
-        // SIIRTYMÄVAIHE: vanha sivu luo luokan PIN-koodilla. Uudet luokat luo palvelin.
-        allow create: if request.resource.data.keys().hasOnly(['pin', 'lastAuthAt'])
-          && request.resource.data.pin is string
-          && request.resource.data.pin.size() >= 4
-          && request.resource.data.pin.size() <= 32
-          && request.resource.data.lastAuthAt == request.time;
-        // Avaimen voi "kirjoittaa uudelleen" vain samana: tämä on opettajan tarkistus.
-        allow update: if tokenWrite() || legacyPinWrite();
-        allow delete: if false;
+        // Palvelin luo dokumentin. Avaimen voi "kirjoittaa uudelleen" vain samana: tämä on opettajan tarkistus.
+        allow read, create, delete: if false;
+        allow update: if tokenWrite();
       }
       // private/secret (PIN-koodi ja väärien yritysten laskuri): ei sääntöä, joten selain ei pääse siihen.
 
