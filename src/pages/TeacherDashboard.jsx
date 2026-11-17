@@ -158,8 +158,9 @@ export default function TeacherDashboard() {
   const [newPin, setNewPin] = useState('');
   const [examplePin] = useState(generateExamplePin);
   const [resumePin, setResumePin] = useState('');
-  // Avoimen oppitunnin PIN. Jokainen opettajan kirjoitus tietokantaan todistetaan sillä (store.teacherBatch).
-  const [sessionPin, setSessionPin] = useState('');
+  // Avoimen oppitunnin avain, jonka palvelin antaa oikealla PIN-koodilla.
+  // Jokainen opettajan kirjoitus tietokantaan todistetaan sillä (store.teacherBatch).
+  const [sessionToken, setSessionToken] = useState('');
   
   const [confirmModal, setConfirmModal] = useState(null);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
@@ -171,16 +172,6 @@ export default function TeacherDashboard() {
     setExpandedStudents(prev => ({ ...prev, [id]: !prev[id] }));
   };
   
-  // Generating a readable 6-character code
-  const generateCode = () => {
-     const chars = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
-     let result = '';
-     for (let i = 0; i < 6; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-     }
-     return result;
-  };
-
   const createSession = async () => {
       if (newPin.length < 4) {
           setErrorMsg('Kirjoita vähintään 4-numeroinen PIN-koodi ensin.');
@@ -191,25 +182,21 @@ export default function TeacherDashboard() {
           setErrorMsg(`Olet luonut useita luokkia lyhyessä ajassa. Odota ${formatWait(rl.waitSeconds)} tai palauta aiempi tunti oikealta.`);
           return;
       }
-      const code = generateCode();
       setErrorMsg('Luodaan luokkaa...');
 
-      try {
-          // PIN tallentuu piilotettuun private/auth-dokumenttiin, jota selain ei voi lukea.
-          await store.teacherBatch(code, newPin, (batch) => {
-              batch.set(doc(db, "class_sessions", code), {
-                  status: 'active',
-                  requireTutorial: requireTutorial,
-                  createdAt: serverTimestamp()
-              });
-          });
-          setSessionPin(newPin);
+      // Palvelin arpoo luokkakoodin, tallentaa PIN-koodin piiloon ja palauttaa luokan avaimen.
+      const { status, data } = await store.teacherApi('create', { pin: newPin, requireTutorial });
+      if (status === 200 && data.code && data.token) {
+          setSessionToken(data.token);
           setSessionData(null);
           setErrorMsg('');
-          setSessionCode(code);
-      } catch (err) {
-          console.error(err);
-          setErrorMsg('Luokan luominen epäonnistui. Verkko estää yhteyden tietokantaan (Firebase timeout).');
+          setSessionCode(data.code);
+      } else if (status === 429) {
+          setErrorMsg(`Palvelussa on juuri nyt ruuhkaa. Odota ${formatWait(data.waitSeconds || 60)} ja yritä uudelleen.`);
+      } else if (status === 400) {
+          setErrorMsg('PIN-koodissa pitää olla 4–32 merkkiä.');
+      } else {
+          setErrorMsg('Luokan luominen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
       }
   };
 
@@ -239,14 +226,13 @@ export default function TeacherDashboard() {
               setErrorMsg('Tämä oppitunti on päätetty pysyvästi, eikä sitä voi enää jatkaa. Luo uusi oppitunti.');
               return;
           }
-          // PIN tarkistetaan tietokannan säännöissä: kirjoitus onnistuu vain oikealla PIN-koodilla.
-          try {
-              await store.teacherBatch(code, resumePin);
-          } catch (err) {
-              if (store.isPermissionDenied(err)) { setErrorMsg('Väärä PIN-koodi.'); return; }
-              throw err;
-          }
-          setSessionPin(resumePin);
+          // PIN tarkistetaan palvelimella. Liian monen väärän yrityksen jälkeen luokka lukitaan hetkeksi.
+          const { status, data: auth } = await store.teacherApi('login', { code, pin: resumePin });
+          if (status === 403) { setErrorMsg('Väärä PIN-koodi.'); return; }
+          if (status === 404) { setErrorMsg('Huonekoodia ei löydy. Tarkista koodi.'); return; }
+          if (status === 429) { setErrorMsg(`Tähän luokkaan on syötetty liian monta väärää PIN-koodia. Odota ${formatWait(auth.waitSeconds || 900)} ja yritä uudelleen.`); return; }
+          if (status !== 200 || !auth.token) { setErrorMsg('Yhteys epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.'); return; }
+          setSessionToken(auth.token);
           setErrorMsg('');
           // Jos tällä laitteella on kokeiltu samaa luokkaa oppilaana, poistetaan oppilastunnus,
           // jottei käsijarru peitä opettajan omaa näkymää, kun hän palaa päävalikkoon.
@@ -267,7 +253,7 @@ export default function TeacherDashboard() {
           onConfirm: async () => {
               if (sessionCode) {
                   try {
-                      await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+                      await store.teacherBatch(sessionCode, sessionToken, (batch) => {
                           batch.update(doc(db, "class_sessions", sessionCode), { status: 'ended', pausedAt: null });
                       });
                   } catch (err) {
@@ -290,7 +276,7 @@ export default function TeacherDashboard() {
       setPauseBusy(true);
       try {
           // pausedAt kertoo oppilaiden ruuduille, milloin tauko alkoi. Unohdettu tauko vanhenee itsestään.
-          await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+          await store.teacherBatch(sessionCode, sessionToken, (batch) => {
               batch.update(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'paused' ? serverTimestamp() : null });
           });
       } catch (err) {
@@ -310,7 +296,7 @@ export default function TeacherDashboard() {
               setConfirmModal(null);
               if (!sessionCode) return;
               try {
-                  await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+                  await store.teacherBatch(sessionCode, sessionToken, (batch) => {
                       batch.update(doc(db, "class_sessions", sessionCode), new FieldPath('hiddenPlayers', nickname), serverTimestamp());
                   });
               } catch (err) {
@@ -329,7 +315,7 @@ export default function TeacherDashboard() {
       try {
           for (let i = 0; i < nicknames.length; i += 15) {
               const chunk = nicknames.slice(i, i + 15);
-              await store.teacherBatch(sessionCode, sessionPin, (batch) => {
+              await store.teacherBatch(sessionCode, sessionToken, (batch) => {
                   chunk.forEach(nick => batch.set(doc(db, "class_sessions", sessionCode, "players", nick), { [field]: makeGift(tid + '_' + nick) }, { merge: true }));
               });
           }

@@ -626,12 +626,12 @@ export const store = {
 
   // --- OPETTAJAN KIRJOITUKSET ---
   // Tietokannan säännöt vaativat, että jokaisessa opettajan kirjoituserässä on mukana
-  // class_sessions/{code}/private/auth -dokumentin kirjoitus oikealla PIN-koodilla.
-  // Säännöt vertaavat PIN-koodia tallennettuun, eikä dokumenttia voi lukea selaimesta.
-  // Väärällä PIN-koodilla koko erä hylätään (permission-denied).
-  teacherBatch: async (code, pin, build) => {
+  // class_sessions/{code}/private/auth -dokumentin kirjoitus luokan avaimella (token).
+  // Avaimen antaa pelin palvelin oikealla PIN-koodilla (store.teacherApi: create / login).
+  // Väärällä avaimella koko erä hylätään (permission-denied).
+  teacherBatch: async (code, token, build) => {
     const batch = writeBatch(db);
-    batch.set(doc(db, 'class_sessions', code, 'private', 'auth'), { pin, lastAuthAt: serverTimestamp() });
+    batch.set(doc(db, 'class_sessions', code, 'private', 'auth'), { token, lastAuthAt: serverTimestamp() });
     if (build) build(batch);
     const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('Firebase timeout')), 8000));
     await Promise.race([batch.commit(), timeoutPromise]);
