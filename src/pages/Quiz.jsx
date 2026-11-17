@@ -856,10 +856,10 @@ export default function Quiz() {
                   width: '55px', height: '40px', 
                   transition: 'left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)', zIndex: 10 
                }}>
-                  <img src="/carparts/van1-base.png" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))' }} alt="van" />
+                  <img src="/carparts/van1-base.webp" style={{ position: 'absolute', width: '100%', height: '100%', objectFit: 'contain', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.2))' }} alt="van" />
                   {Object.values(equippedItems || {}).map(itemId => {
                      if (itemId && itemId.startsWith('van-')) {
-                         return <img key={itemId} src={`/carparts/${itemId}.png`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} alt="part" />;
+                         return <img key={itemId} src={`/carparts/${itemId}.webp`} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} alt="part" />;
                      }
                      return null;
                   })}

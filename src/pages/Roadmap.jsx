@@ -534,16 +534,16 @@ const Roadmap = () => {
 
   const getMapAsset = (mapId) => {
     const assets = {
-      'main': '/map-bg.jpg',
-      'perusteet': '/map-metsa.png',
-      'arjessa': '/map-aavikko.png',
-      'kayttotaidot': '/map-jaa.png',
-      'reilu_peli': '/map-satama.png',
-      'konepellin': '/map-viidakko.png',
-      'aivoterveys': '/map-linna.png',
-      'digiturva': '/map-meri.png'
+      'main': '/map-bg.webp',
+      'perusteet': '/map-metsa.webp',
+      'arjessa': '/map-aavikko.webp',
+      'kayttotaidot': '/map-jaa.webp',
+      'reilu_peli': '/map-satama.webp',
+      'konepellin': '/map-viidakko.webp',
+      'aivoterveys': '/map-linna.webp',
+      'digiturva': '/map-meri.webp'
     };
-    return assets[mapId] || '/map-bg.jpg';
+    return assets[mapId] || '/map-bg.webp';
   };
 
   const renderVan = () => (
@@ -596,7 +596,7 @@ const Roadmap = () => {
             )}
             {/* Base Van */}
             <img 
-              src="/carparts/van1-base.png" 
+              src="/carparts/van1-base.webp" 
               alt="Van" 
               className={!isMoving ? "van-idle" : ""}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
@@ -608,7 +608,7 @@ const Roadmap = () => {
                  return (
                    <img 
                       key={itemId} 
-                      src={`/carparts/${itemId}.png`} 
+                      src={`/carparts/${itemId}.webp`} 
                       alt="Part" 
                       className={!isMoving ? "van-idle" : ""}
                       style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'contain' }} 
@@ -750,7 +750,7 @@ const Roadmap = () => {
              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                {activeMedal ? (
                    <img 
-                     src={`/trophy/medal-${activeMedal === 'platinum' ? 'plat' : activeMedal}.png`}
+                     src={`/trophy/medal-${activeMedal === 'platinum' ? 'plat' : activeMedal}.webp`}
                      alt={activeMedal}
                      style={{ 
                        position: 'absolute',
@@ -988,8 +988,9 @@ const Roadmap = () => {
             <span style={{ fontWeight: 900, color: 'var(--primary-color)', fontSize: '0.9rem' }}>PÄÄVALIKKO</span>
           </button>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+              {/* Pääkartan logo: valmiiksi oikean kokoiset versiot, koska selain pienentäisi 1524 px leveän logon 40 px korkeaksi karkeasti (sahalaitaiseksi). */}
               {currentMap === 'main' ? (
-                  <img src="/logo.png" alt="AIvan Logo" style={{ height: '40px', objectFit: 'contain' }} />
+                  <img src="/logo-h40.webp" srcSet="/logo-h40.webp 1x, /logo-h80.webp 2x, /logo-h120.webp 3x" alt="AIvan Logo" style={{ height: '40px', objectFit: 'contain' }} />
               ) : (
                   <h1 style={{ margin: 0, fontSize: '2rem', lineHeight: '1.2', textTransform: 'uppercase', color: 'var(--primary-color)' }}>
                       {categories.find(c => c.id === currentMap)?.name}
@@ -1048,19 +1049,19 @@ const Roadmap = () => {
             return (
               <div style={{ backgroundColor: 'white', padding: 'clamp(0.4rem, 1.3vh, 0.6rem) 1.2rem', borderRadius: '20px', display: 'flex', alignItems: 'center', gap: '1.2rem', borderTop: '5px solid #cbd5e1', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <img src="/trophy/medal-bronze.png" alt="bronze" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+                  <img src="/trophy/medal-bronze.webp" alt="bronze" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#78350f', fontFamily: 'var(--font-display)' }}>{counts.bronze}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <img src="/trophy/medal-silver.png" alt="silver" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+                  <img src="/trophy/medal-silver.webp" alt="silver" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#475569', fontFamily: 'var(--font-display)' }}>{counts.silver}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <img src="/trophy/medal-gold.png" alt="gold" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+                  <img src="/trophy/medal-gold.webp" alt="gold" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#d97706', fontFamily: 'var(--font-display)' }}>{counts.gold}</span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <img src="/trophy/medal-plat.png" alt="platinum" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+                  <img src="/trophy/medal-plat.webp" alt="platinum" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                   <span style={{ fontWeight: 900, fontSize: '1.2rem', color: '#1e293b', fontFamily: 'var(--font-display)' }}>{counts.platinum}</span>
                 </div>
                 <button onClick={() => setShowMedalTutorial(true)} style={{ background: 'transparent', color: 'var(--primary-color)', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', padding: 0, opacity: 0.8, transition: 'all 0.2s', transform: 'scale(1.1)' }}>
@@ -1183,19 +1184,19 @@ const Roadmap = () => {
                          Ei mitalia... yritä uudelleen!
                        </li>
                        <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                         <img src="/trophy/medal-bronze.png" alt="pronssi" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         <img src="/trophy/medal-bronze.webp" alt="pronssi" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Pronssi: Tiedät alkeet!
                        </li>
                        <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                         <img src="/trophy/medal-silver.png" alt="hopea" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         <img src="/trophy/medal-silver.webp" alt="hopea" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Hopea: Hyvä suoritus!
                        </li>
                        <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                         <img src="/trophy/medal-gold.png" alt="kulta" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         <img src="/trophy/medal-gold.webp" alt="kulta" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Kulta: Huipputietäjä!
                        </li>
                        <li style={{ marginBottom: 'clamp(0.2rem, 1vh, 0.6rem)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                         <img src="/trophy/medal-plat.png" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
+                         <img src="/trophy/medal-plat.webp" alt="platina" style={{ width: '28px', height: '28px', objectFit: 'contain' }} /> 
                          Platina: Kaikki oikein!
                        </li>
                     </ul>
@@ -1206,7 +1207,7 @@ const Roadmap = () => {
             {showWowMedal && createPortal(
               <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10001, display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(0,0,0,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '3rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#d97706', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>UUSI MITALI!</h1>
-                <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.png`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                <img src={`/trophy/medal-${showWowMedal === 'platinum' ? 'plat' : showWowMedal}.webp`} alt={showWowMedal} style={{ width: '150px', height: '150px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
                 <p style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
                   {showWowMedal === 'bronze' && "Tiesitkö, että pelaamalla tason myöhemmin uudelleen saat eri kysymyksiä ja voit nousta hopealle, kullalle tai jopa platinalle!"}
@@ -1223,7 +1224,7 @@ const Roadmap = () => {
             {showAllMedalsCelebration && createPortal(
               <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #3b82f6', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(59,130,246,0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#1d4ed8', textAlign: 'center', textShadow: '0 4px 10px rgba(29, 78, 216, 0.3)' }}>HURRAA! KAIKKI LÄPI!</h1>
-                <img src="/trophy/medal-gold.png" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                <img src="/trophy/medal-gold.webp" alt="all medals" style={{ width: '130px', height: '130px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
                 <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#eff6ff', padding: '1rem', borderRadius: '12px' }}>
                   Mahtavaa työtä, olet todellinen virtuoosi! Olet kerännyt mitalin aivan jokaisesta kartan tehtävästä.<br/><br/>
@@ -1238,7 +1239,7 @@ const Roadmap = () => {
             {showAllPlatinumsCelebration && createPortal(
               <div className="glass-panel animate-bounce responsive-popup" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', background: 'rgba(255,255,255,0.98)', padding: '3rem', borderRadius: '32px', border: '8px solid #fbbf24', zIndex: 10002, display: 'flex', flexDirection: 'column', gap: '1.5rem', alignItems: 'center', boxShadow: '0 30px 100px rgba(251, 191, 36, 0.6)', width: '90%', maxWidth: '600px' }}>
                 <h1 style={{ margin: 0, fontSize: '2.5rem', fontFamily: 'var(--font-display)', textTransform: 'uppercase', color: '#b45309', textAlign: 'center', textShadow: '0 4px 10px rgba(217, 119, 6, 0.3)' }}>TÄYDELLINEN SUORITUS!</h1>
-                <img src="/trophy/medal-plat.png" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
+                <img src="/trophy/medal-plat.webp" alt="all platinums" style={{ width: '160px', height: '160px', objectFit: 'contain', animation: 'fadeIn 0.5s ease-out' }} />
                 
                 <p style={{ margin: 0, fontSize: '1.2rem', color: 'var(--text-main)', textAlign: 'center', fontWeight: 'bold', lineHeight: '1.5', background: '#fef3c7', padding: '1rem', borderRadius: '12px' }}>
                   AIVAN USKOMATONTA! Olet saavuttanut legendaarisen platinamitalin aivan jokaisessa pelin osiossa!<br/><br/>

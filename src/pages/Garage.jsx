@@ -310,7 +310,7 @@ export default function Garage() {
               )}
               {item.category === 'body' ? (
                   <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, borderRadius: '10px 10px 0 0' }}>
-                    <img src={`/carparts/${item.id}.png`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '30% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
+                    <img src={`/carparts/${item.id}.webp`} style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(3.5)', transformOrigin: '30% 65%', opacity: 1, filter: 'saturate(1.2)' }} alt={item.name} />
                     <div style={{ position: 'absolute', bottom: 0, width: '100%', height: '60%', background: 'linear-gradient(transparent, rgba(0,0,0,0.9))' }}></div>
                   </div>
               ) : (
@@ -832,7 +832,7 @@ export default function Garage() {
                                maxWidth={500}
                                requireReading={trophyTuitionAuto}
                                onClose={() => { localStorage.setItem('aivan_trophy_tuition', 'true'); setShowTrophyTuition(false); }}
-                               icon={<img src="/trophy/trophy1.png" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />}
+                               icon={<img src="/trophy/trophy1.webp" style={{ width: '60px', height: '60px', objectFit: 'contain' }} alt="Pokaali" />}
                                buttonText="Selvä juttu!"
                                onConfirm={() => {
                                     localStorage.setItem('aivan_trophy_tuition', 'true');
@@ -849,7 +849,7 @@ export default function Garage() {
                            <h2 style={{ position: 'absolute', top: '3%', left: '50%', transform: 'translateX(-50%)', zIndex: 6, color: '#fef3c7', fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', whiteSpace: 'nowrap', letterSpacing: '4px', textTransform: 'uppercase', textShadow: '0 4px 10px rgba(0,0,0,0.8), 0 0 20px rgba(234, 179, 8, 0.5)', margin: 0, pointerEvents: 'none' }}>
                                Palkintokaappi
                            </h2>
-                           <img src="/talli/cabinet2.png" alt="Palkintokaappi" style={{ maxHeight: '90vh', maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
+                           <img src="/talli/cabinet2.webp" alt="Palkintokaappi" style={{ maxHeight: '90vh', maxWidth: '100%', width: 'auto', height: 'auto', display: 'block', objectFit: 'contain', zIndex: 4, pointerEvents: 'none' }} />
                        
                            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 50, cursor: isEditMode ? 'crosshair' : 'default', pointerEvents: isEditMode ? 'auto' : 'none' }}
                             onClick={(e) => {
@@ -886,7 +886,7 @@ export default function Garage() {
                                       key={t.id} 
                                       onClick={() => { if (isEarned) setSelectedTrophyObj(t); }}
                                       style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', height: '100%', filter: isEarned ? 'drop-shadow(0 0 10px rgba(250,204,21,0.6))' : 'brightness(0) opacity(0.2)', transition: 'all 0.3s', cursor: isEarned ? 'zoom-in' : 'default' }}>
-                                       <img src={`/trophy/${t.id}.png`} style={{ maxHeight: '82%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom', transition: 'transform 0.2s' }} onMouseEnter={e => { if(isEarned) e.currentTarget.style.transform='scale(1.05)' }} onMouseOut={e => { if(isEarned) e.currentTarget.style.transform='scale(1)' }} alt={t.name} />
+                                       <img src={`/trophy/${t.id}.webp`} style={{ maxHeight: '82%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom', transition: 'transform 0.2s' }} onMouseEnter={e => { if(isEarned) e.currentTarget.style.transform='scale(1.05)' }} onMouseOut={e => { if(isEarned) e.currentTarget.style.transform='scale(1)' }} alt={t.name} />
                                    </div>
                                );
                            })}
@@ -928,7 +928,7 @@ export default function Garage() {
                                       // Show placeholder if no medals
                                       return (
                                            <div key={type} style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', opacity: 0.15, filter: 'brightness(0)', height: '100%' }}>
-                                               <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ maxHeight: '55%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom' }} />
+                                               <img src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.webp`} alt={type} style={{ maxHeight: '55%', width: 'auto', objectFit: 'contain', objectPosition: 'bottom' }} />
                                            </div>
                                       );
                                   }
@@ -939,7 +939,7 @@ export default function Garage() {
                                       <div key={type} style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
                                           <div style={{ position: 'relative', height: '55%', aspectRatio: '1/1' }}>
                                               {Array.from({ length: maxShow }).map((_, i) => (
-                                                   <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.png`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
+                                                   <img key={i} src={`/trophy/medal-${type === 'platinum' ? 'plat' : type}.webp`} alt={type} style={{ position: 'absolute', bottom: `${i * 10}%`, left: `calc(50% - ${i * 1.5}px)`, transform: 'translateX(-50%)', width: '100%', height: '100%', objectFit: 'contain', zIndex: i }} />
                                               ))}
                                           </div>
                                           <div style={{ position: 'absolute', bottom: '0', right: '-15%', background: '#eab308', color: '#0f172a', fontWeight: 'bold', fontSize: '0.9rem', width: '24px', height: '24px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', border: '2px solid white', zIndex: 20, boxShadow: '0 4px 6px rgba(0,0,0,0.5)' }}>
@@ -961,7 +961,7 @@ export default function Garage() {
                              </button>
                              <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', width: '80%', height: '80%', boxSizing: 'border-box' }}>
                                  {/* Mikäli PNG on jo valmiiksi läpinäkyvä, mitään kikkailuja tai varjoja ei tarvita. */}
-                                 <img src={`/trophy/${selectedTrophyObj.id}.png`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain' }} />
+                                 <img src={`/trophy/${selectedTrophyObj.id}.webp`} alt={selectedTrophyObj.name} style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto', objectFit: 'contain' }} />
                              </div>
                         </div>
                      )}
@@ -971,11 +971,11 @@ export default function Garage() {
                )}
 
               {isTutorialActive ? (
-                <img src="/tutorial1.png" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+                <img src="/tutorial1.webp" alt="Likainen Autotalli tutoriaali" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
               ) : (
                 <>
-                  <img src="/talli/autotalli-base.png" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
-                  <img src="/talli/cabinet.png" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
+                  <img src="/talli/autotalli-base.webp" alt="Autotallin tausta" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 0, pointerEvents: 'none' }} />
+                  <img src="/talli/cabinet.webp" alt="Palkintokaappi" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 2, pointerEvents: 'none', filter: hoverCabinet && (earnedTrophies.length > 0 || Object.values(earnedMedals).reduce((a, b) => a + b, 0) > 0) ? 'drop-shadow(0 0 15px rgba(253, 224, 71, 0.8)) brightness(1.15)' : 'none', transition: 'all 0.2s' }} />
                   <div style={{ position: 'absolute', top: '38.44%', left: '72.85%', width: '10.51%', height: '14.42%', zIndex: 10, cursor: 'pointer' }} onMouseEnter={() => setHoverCabinet(true)} onMouseLeave={() => setHoverCabinet(false)} onClick={() => { setShowTrophyCabinet(true); if (!localStorage.getItem('aivan_trophy_tuition')) { setTrophyTuitionAuto(true); setShowTrophyTuition(true); } }} />
                 </>
               )}
@@ -1010,15 +1010,15 @@ export default function Garage() {
                    if (item.id === 'g-clean') return null; 
                    const fileName = item.id.replace('g-', '');
                    const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
-                   return <img key={item.id} src={`/talli/${fileName}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
+                   return <img key={item.id} src={`/talli/${fileName}.webp`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 1, pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
                 }
                 return null;
               })}
 
               {isTutorialActive ? (
-                  <img src="/tutorial-van.png" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
+                  <img src="/tutorial-van.webp" alt="Auto Peitetty" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
               ) : (
-                  <img src="/carparts/van1-base.png" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
+                  <img src="/carparts/van1-base.webp" alt="Auto" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3, padding: '2rem', pointerEvents: 'none' }} />
               )}
               
               {!isTutorialActive && [...carUpgrades]
@@ -1049,7 +1049,7 @@ export default function Garage() {
                   if (shouldShow) {
                      const order = { body: 1, wheel: 2, bumper: 3, extra: 4 };
                      const filterStyle = isPreview ? 'drop-shadow(0 0 15px rgba(255,255,255,0.7)) brightness(1.1)' : 'none';
-                     return <img key={item.id} src={`/carparts/${item.id}.png`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
+                     return <img key={item.id} src={`/carparts/${item.id}.webp`} alt={item.name} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'contain', zIndex: 3 + (order[item.category] || 1), padding: '2rem', pointerEvents: 'none', filter: filterStyle, transition: 'all 0.2s' }} />;
                   }
                   return null;
                 })}

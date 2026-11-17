@@ -160,7 +160,7 @@ function GlobalLogo() {
 
   return (
      <div className="animate-fade-in" style={{ position: 'fixed', bottom: '1.2rem', right: '1.2rem', zIndex: 9000, pointerEvents: 'none' }}>
-        <img src="/edukslogo.png" alt="Eduks" style={{ width: '80px', opacity: 0.5, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
+        <img src="/edukslogo.webp" alt="Eduks" style={{ width: '80px', opacity: 0.5, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
      </div>
   );
 }

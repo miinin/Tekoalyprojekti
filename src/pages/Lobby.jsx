@@ -335,7 +335,7 @@ export default function Lobby() {
             </a>
             </div>
             <div className="lobby-brand" data-lobby="brand">
-                <img src="/logo.png" alt="AIVAN Logo" className="lobby-logo" />
+                <img src="/logo.webp" alt="AIVAN Logo" className="lobby-logo" />
                 <p className="lobby-tagline">Hyppää kyytiin oppimaan tekoälystä!</p>
             </div>
             <nav className="lobby-tools" data-lobby="tools" aria-label="Lisätoiminnot">
@@ -508,7 +508,7 @@ export default function Lobby() {
       </div>
       {/* Alapalkki: julkaisija */}
       <footer className="lobby-footer animate-fade-in" data-lobby="footer">
-          <img src="/edukslogo.png" alt="Eduks" className="lobby-footer-eduks" />
+          <img src="/edukslogo.webp" alt="Eduks" className="lobby-footer-eduks" />
       </footer>
       </div>
 
@@ -550,7 +550,7 @@ export default function Lobby() {
                       {/* Kaikki Eduksin tekijät samankokoisina laatikoina samalla rivillä */}
                       <div style={{ display: 'grid', gridTemplateColumns: 'auto auto repeat(3, minmax(0, 1fr))', alignItems: 'stretch', gap: 'clamp(0.5rem, 1vh, 1.2rem)', width: '100%' }}>
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 0.5rem' }}>
-                              <img src="/edukslogo.png" alt="Eduksi logo" style={{ height: 'clamp(40px, 6vh, 65px)', objectFit: 'contain', opacity: 0.95 }} />
+                              <img src="/edukslogo.webp" alt="Eduksi logo" style={{ height: 'clamp(40px, 6vh, 65px)', objectFit: 'contain', opacity: 0.95 }} />
                           </div>
                           <div style={{ fontSize: 'clamp(1.5rem, 3vh, 2rem)', fontWeight: 'bold', color: '#cbd5e1', display: 'flex', alignItems: 'center' }}>:</div>
                           {[
