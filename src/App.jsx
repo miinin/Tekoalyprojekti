@@ -5,7 +5,6 @@ import Lobby from './pages/Lobby';
 import Roadmap from './pages/Roadmap';
 import Garage from './pages/Garage';
 import Quiz from './pages/Quiz';
-import Admin from './pages/Admin';
 import TeacherDashboard from './pages/TeacherDashboard';
 import { store } from './services/store';
 import confetti from 'canvas-confetti';
@@ -15,7 +14,7 @@ function GlobalClassroomOverlay() {
   const location = useLocation();
   const navigate = useNavigate();
   // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
-  const isTeacherView = location.pathname.startsWith('/teacher') || location.pathname.startsWith('/admin');
+  const isTeacherView = location.pathname.startsWith('/teacher');
   const [isPaused, setIsPaused] = useState(false);
   const [endedNotice, setEndedNotice] = useState(false);
   const [giftPopup, setGiftPopup] = useState(null);
@@ -176,9 +175,10 @@ function App() {
         <Route path="/roadmap/:mainCategory" element={<Roadmap />} />
         <Route path="/garage" element={<Garage />} />
         <Route path="/quiz/:mainCategory/:subCategory" element={<Quiz />} />
-        <Route path="/admin" element={<Admin />} />
         <Route path="/teacher" element={<TeacherDashboard />} />
         <Route path="/" element={<Navigate to="/lobby" replace />} />
+        {/* Tuntemattomat osoitteet (esim. vanha /admin) ohjataan aulaan tyhjän sivun sijaan. */}
+        <Route path="*" element={<Navigate to="/lobby" replace />} />
       </Routes>
     </Router>
   );

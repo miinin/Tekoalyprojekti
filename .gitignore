@@ -37,3 +37,10 @@ sim_click.js
 
 # Alkuperäiset valokuvat ennen pakkausta (pakatut versiot ovat public/kuvat-kansiossa)
 kuvat_raaka/
+
+# Vanhat kertakäyttöiset apuskriptit ja lähdetiedostot (säilyvät omalla koneella, eivät ole osa peliä)
+*_payload*.js
+mapTest.js
+transform.js
+test_bfs*.js
+*.csv

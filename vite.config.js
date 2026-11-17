@@ -5,4 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: './',
+  // Opettajan kirjautuminen kulkee pelin palvelimen kautta (server.js, portti 8080: npm start).
+  server: { proxy: { '/api': 'http://localhost:8080' } },
+  preview: { proxy: { '/api': 'http://localhost:8080' } },
 })

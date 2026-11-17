@@ -9,7 +9,7 @@ export default defineConfig([
   globalIgnores(['dist', '*_payload*.js', 'mapTest.js', 'transform.js', 'sim_click.js', 'test_bfs*.js']),
   {
     // Tuotantopalvelin ajetaan Nodella.
-    files: ['server.js'],
+    files: ['server.js', 'server/**/*.js'],
     languageOptions: { globals: globals.node },
   },
   {

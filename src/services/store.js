@@ -1,5 +1,5 @@
 import { categories as defaultCategories } from '../data/questions';
-import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, deleteDoc, getDocs, addDoc, writeBatch } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, onSnapshot, collection, serverTimestamp, addDoc, writeBatch } from 'firebase/firestore';
 import { db } from '../firebase';
 
 // A simple abstraction over local storage that simulates an async backend like Firebase
@@ -401,13 +401,11 @@ export const store = {
   // --- CLOUD SAVE SYSTEM ---
   exportProgressToCloud: async () => {
     try {
+      // Rekisterikilpi ABC-123 turvallisilla satunnaisluvuilla.
+      const randomInt = (n) => { const buf = new Uint32Array(1); crypto.getRandomValues(buf); return buf[0] % n; };
       const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      const l1 = letters.charAt(Math.floor(Math.random() * letters.length));
-      const l2 = letters.charAt(Math.floor(Math.random() * letters.length));
-      const l3 = letters.charAt(Math.floor(Math.random() * letters.length));
-      const nums = Math.floor(100 + Math.random() * 900); // 100-999
-      const code = `${l1}${l2}${l3}-${nums}`;
-      
+      const makeCode = () => `${letters[randomInt(26)]}${letters[randomInt(26)]}${letters[randomInt(26)]}-${100 + randomInt(900)}`;
+
       const payload = { timestamp: new Date().toISOString() };
       
       for (let i = 0; i < localStorage.length; i++) {
@@ -420,8 +418,18 @@ export const store = {
       const timeoutPromise = new Promise((_, reject) => {
           setTimeout(() => reject(new Error('Firebase timeout')), 10000);
       });
-      await Promise.race([setDoc(doc(db, "saves", code), payload), timeoutPromise]);
-      return code;
+      // Säännöt sallivat vain uuden tallennuksen luonnin. Jos koodi on jo käytössä,
+      // kirjoitus hylätään ja arvotaan uusi koodi, joten kenenkään tallennus ei katoa.
+      for (let attempt = 0; attempt < 5; attempt++) {
+        const code = makeCode();
+        try {
+          await Promise.race([setDoc(doc(db, "saves", code), payload), timeoutPromise]);
+          return code;
+        } catch (err) {
+          if (err?.code !== 'permission-denied') throw err;
+        }
+      }
+      throw new Error('Vapaata tallennuskoodia ei löytynyt. Yritä uudelleen.');
     } catch (err) {
       console.error("Save error:", err);
       return { _error: true, message: err.message || "Tuntematon virhe." };
@@ -501,34 +509,6 @@ export const store = {
     return true;
   },
 
-  // --- ADMIN METHODS ---
-  getAllRooms: () => {
-    const rooms = new Set();
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith('aivan_sparks_')) {
-        rooms.add(key.replace('aivan_sparks_', ''));
-      }
-    }
-    return Array.from(rooms);
-  },
-
-  setRoomSparks: (room, newAmount) => {
-    store._setSparksValue(`aivan_sparks_${room}`, newAmount);
-  },
-
-  deleteRoom: (room) => {
-    localStorage.removeItem(`aivan_sparks_${room}`);
-    localStorage.removeItem(`aivan_items_${room}`);
-    localStorage.removeItem(`aivan_equipped_${room}`);
-    localStorage.removeItem('aivan_completions');
-    localStorage.removeItem('aivan_node_records');
-    localStorage.removeItem('aivan_question_records');
-    localStorage.removeItem('aivan_question_correctness');
-    // If we're deleting our current room, clear it
-    if (store.getRoomCode() === room) store.setRoomCode(null);
-  },
-
   getQuestions: () => {
     // Deep clone default to avoid reference mutations
     const cats = JSON.parse(JSON.stringify(defaultCategories));
@@ -553,20 +533,6 @@ export const store = {
   
 
   // --- BUG REPORTS ---
-  getBugReports: async () => {
-    try {
-      const snapshot = await getDocs(collection(db, 'bug_reports'));
-      const reports = [];
-      snapshot.forEach(d => reports.push({ id: d.id, ...d.data() }));
-      // Sortaa uusimmat ensin
-      reports.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-      return reports;
-    } catch (e) {
-      console.error('getBugReports error:', e);
-      return [];
-    }
-  },
-
   saveBugReport: async (questionId, text) => {
     try {
       await addDoc(collection(db, 'bug_reports'), {
@@ -576,14 +542,6 @@ export const store = {
       });
     } catch (e) {
       console.error('saveBugReport error:', e);
-    }
-  },
-
-  deleteBugReport: async (reportId) => {
-    try {
-      await deleteDoc(doc(db, 'bug_reports', reportId));
-    } catch (e) {
-      console.error('deleteBugReport error:', e);
     }
   },
 
@@ -680,6 +638,28 @@ export const store = {
   },
 
   isPermissionDenied: (err) => err?.code === 'permission-denied',
+
+  // Opettajan kirjautumisrajapinta pelin omalla palvelimella (server/teacherApi.js).
+  // Palauttaa { status, data }. status 0 = palvelimeen ei saatu yhteyttä.
+  teacherApi: async (action, body) => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      const res = await fetch(`/api/teacher/${action}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: controller.signal,
+      });
+      let data = {};
+      try { data = await res.json(); } catch { /* ei JSON-vastausta */ }
+      return { status: res.status, data };
+    } catch {
+      return { status: 0, data: {} };
+    } finally {
+      clearTimeout(timer);
+    }
+  },
 
   // Käsijarru vapautuu itsestään, jos opettaja unohtaa sen päälle. Muuten unohdettu
   // käsijarru estäisi oppilaiden pelaamisen seuraavalla tunnilla, kunnes opettaja
