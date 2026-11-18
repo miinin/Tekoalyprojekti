@@ -16,10 +16,13 @@ function GlobalClassroomOverlay() {
   // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
   const isTeacherView = location.pathname.startsWith('/teacher');
   const [isPaused, setIsPaused] = useState(false);
+  // Oppilaskohtainen käsijarru ja opettajan merkintä (keltainen reunus, josta opettaja löytää oppilaan luokassa).
+  const [isPlayerPaused, setIsPlayerPaused] = useState(false);
+  const [isMarked, setIsMarked] = useState(false);
   const [endedNotice, setEndedNotice] = useState(false);
   const [giftPopup, setGiftPopup] = useState(null);
   const overlayRef = useRef(null);
-  const showOverlay = isPaused && !isTeacherView;
+  const showOverlay = (isPaused || isPlayerPaused) && !isTeacherView;
 
   // Käsijarru estää myös näppäimistön käytön: kaikki muu sivulla merkitään inertiksi,
   // jolloin sen alla olevia nappeja ei voi painaa sarkaimella ja Enterillä.
@@ -38,8 +41,13 @@ function GlobalClassroomOverlay() {
      // satoja ja pitkään auki ollut sivu hidastui tai jumittui.
      let activeKey = null;
      let lastSession = null;
+     let lastPlayer = null;
      // Lasketaan tauon tila uudelleen myös ilman uutta tietokantaviestiä, jotta vanhentunut tauko vapautuu.
-     const applyStatus = () => setIsPaused(store.isClassPaused(lastSession));
+     const applyStatus = () => {
+         setIsPaused(store.isClassPaused(lastSession));
+         setIsPlayerPaused(store.isPlayerPaused(lastPlayer));
+         setIsMarked(!!lastPlayer?.teacherMarked);
+     };
 
      const checkRoom = () => {
          const code = store.getClassroomCode();
@@ -48,6 +56,7 @@ function GlobalClassroomOverlay() {
          if (key === activeKey) { applyStatus(); return; }
          activeKey = key;
          lastSession = null;
+         lastPlayer = null;
          if (unsubStatus) { unsubStatus(); unsubStatus = null; }
          if (unsubSparks) { unsubSparks(); unsubSparks = null; }
          if (!key) { applyStatus(); return; }
@@ -57,6 +66,7 @@ function GlobalClassroomOverlay() {
                if (session && session.status === 'ended') {
                    // Opettaja päätti tunnin: laite irrotetaan luokasta. Edistyminen säilyy laitteella.
                    lastSession = null;
+                   lastPlayer = null;
                    store.setClassroomCode(null);
                    setEndedNotice(true);
                }
@@ -74,6 +84,9 @@ function GlobalClassroomOverlay() {
                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.8, x: 0.9 }, colors: ['#6366f1', '#818cf8', '#c7d2fe'] });
                    setTimeout(() => setGiftPopup(null), 5000);
                }
+            }, (player) => {
+               lastPlayer = player;
+               applyStatus();
             });
          }
      };
@@ -106,7 +119,9 @@ function GlobalClassroomOverlay() {
           <div ref={overlayRef} role="dialog" aria-modal="true" aria-label="Käsijarru vedetty" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
               <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>Käsijarru vedetty! 🛑</h1>
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
-                 Opettaja on asettanut pelin väliaikaisesti tauolle.<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong>
+                 {isPaused
+                   ? 'Opettaja on asettanut pelin väliaikaisesti tauolle.'
+                   : 'Opettaja on asettanut pelisi väliaikaisesti tauolle.'}<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong>
               </p>
               {/* Jos opettaja on kokeillut peliä oppilaana samalla laitteella, käsijarru peittäisi
                   muuten myös opettajan sisäänkäynnin. Hallintapaneeli vaatii silti luokkakoodin ja PIN-koodin. */}
@@ -117,6 +132,12 @@ function GlobalClassroomOverlay() {
           document.body
         )}
         
+        {isMarked && !isTeacherView && createPortal(
+          // Huomaamaton merkki: keltainen reunus ruudun ympärillä. Ei estä klikkauksia.
+          <div aria-hidden="true" style={{ position: 'fixed', inset: 0, border: '8px solid #facc15', pointerEvents: 'none', zIndex: 100000 }} />,
+          document.body
+        )}
+
         {giftPopup && giftPopup.type === 'sparks' && (
           <div className="animate-bounce" style={{ position: 'fixed', bottom: '2rem', right: '2rem', zIndex: 99998, background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', border: '3px solid #f59e0b', padding: '1.5rem 2rem', borderRadius: '24px', boxShadow: '0 20px 40px rgba(245,158,11,0.3)', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
               <div style={{ background: '#f59e0b', padding: '1rem', borderRadius: '50%' }}>

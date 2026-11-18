@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff, Flag } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, getDoc, onSnapshot, collection, serverTimestamp, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
@@ -286,6 +286,28 @@ export default function TeacherDashboard() {
       setPauseBusy(false);
   };
   
+  // Oppilaskohtainen käsijarru ja merkintä (keltainen reunus oppilaan ruudulla, josta opettaja löytää hänet luokassa).
+  const [playerBusy, setPlayerBusy] = useState({});
+  const updatePlayer = async (nickname, fields, errorText) => {
+      if (!sessionCode || playerBusy[nickname]) return;
+      setPlayerBusy(b => ({ ...b, [nickname]: true }));
+      try {
+          await store.teacherBatch(sessionCode, sessionToken, (batch) => {
+              batch.update(doc(db, "class_sessions", sessionCode, "players", nickname), fields);
+          });
+      } catch (err) {
+          console.error(err);
+          alert(errorText);
+      }
+      setPlayerBusy(b => ({ ...b, [nickname]: false }));
+  };
+  const togglePlayerPause = (p) => updatePlayer(p.id,
+      { teacherPausedAt: store.isPlayerPaused(p) ? null : serverTimestamp() },
+      'Oppilaan käsijarrun vaihtaminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+  const togglePlayerMark = (p) => updatePlayer(p.id,
+      { teacherMarked: !p.teacherMarked },
+      'Oppilaan merkitseminen epäonnistui. Tarkista verkkoyhteys ja yritä uudelleen.');
+
   const hidePlayer = (nickname) => {
       setConfirmModal({
           title: 'Poista oppilas listalta?',
@@ -616,12 +638,20 @@ export default function TeacherDashboard() {
                                 const isExpanded = expandedStudents[p.id];
                                 const online = isOnline(p);
                                 return (
-                                <div key={p.id} className="animate-fade-in" style={{ padding: '1.5rem 2rem', border: '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s', cursor: 'pointer', opacity: online ? 1 : 0.65, filter: online ? 'none' : 'grayscale(100%)' }} onClick={() => toggleStudent(p.id)} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
+                                <div key={p.id} className="animate-fade-in" style={{ padding: '1.5rem 2rem', border: p.teacherMarked ? '3px solid #facc15' : '1px solid rgba(255,255,255,0.8)', borderRadius: '24px', background: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.03)', transition: 'all 0.2s', cursor: 'pointer', opacity: online ? 1 : 0.65, filter: online ? 'none' : 'grayscale(100%)' }} onClick={() => toggleStudent(p.id)} onMouseOver={e=>{e.currentTarget.style.transform='translateY(-4px)'; e.currentTarget.style.boxShadow='0 12px 30px rgba(0,0,0,0.08)'}} onMouseOut={e=>{e.currentTarget.style.transform='translateY(0)'; e.currentTarget.style.boxShadow='0 4px 15px rgba(0,0,0,0.03)'}}>
                                     
                                     {/* Summary View */}
                                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
                                         <div style={{ flex: '1 1 200px', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#0f172a' }}>{p.id} {!online && <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'normal', fontStyle: 'italic', marginLeft: '0.5rem' }}>(Offline)</span>}</h3>
+                                            <div style={{ display: 'flex', gap: '0.4rem' }} onClick={e => e.stopPropagation()}>
+                                                <button type="button" onClick={() => togglePlayerPause(p)} disabled={!!playerBusy[p.id]} aria-pressed={store.isPlayerPaused(p)} title={store.isPlayerPaused(p) ? 'Vapauta tämän oppilaan peli' : 'Vedä käsijarru vain tälle oppilaalle'} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: '0.35rem 0.7rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', whiteSpace: 'nowrap', border: store.isPlayerPaused(p) ? '1px solid #d97706' : '1px solid #cbd5e1', background: store.isPlayerPaused(p) ? '#f59e0b' : '#f8fafc', color: store.isPlayerPaused(p) ? 'white' : '#475569' }}>
+                                                    {store.isPlayerPaused(p) ? <><Play size={14} /> Vapauta</> : <><Pause size={14} /> Käsijarru</>}
+                                                </button>
+                                                <button type="button" onClick={() => togglePlayerMark(p)} disabled={!!playerBusy[p.id]} aria-pressed={!!p.teacherMarked} title={p.teacherMarked ? 'Poista keltainen reunus oppilaan ruudulta' : 'Näytä oppilaan ruudun reunassa keltainen reunus, jotta löydät hänet luokassa'} style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', padding: '0.35rem 0.7rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '0.85rem', cursor: 'pointer', whiteSpace: 'nowrap', border: p.teacherMarked ? '1px solid #eab308' : '1px solid #cbd5e1', background: p.teacherMarked ? '#facc15' : '#f8fafc', color: p.teacherMarked ? '#422006' : '#475569' }}>
+                                                    <Flag size={14} /> {p.teacherMarked ? 'Poista merkki' : 'Merkitse'}
+                                                </button>
+                                            </div>
                                             {!isExpanded && p.location && (
                                                <span style={{ color: '#64748b', fontSize: '0.85rem' }}><Star size={12} color="#f59e0b" fill="#f59e0b" style={{ verticalAlign: 'middle', marginRight: '4px' }} />{p.location}</span>
                                             )}

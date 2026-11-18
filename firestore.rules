@@ -25,6 +25,10 @@ service cloud.firestore {
       return ['status', 'requireTutorial', 'createdAt', 'pausedAt', 'hiddenPlayers'];
     }
 
+    function teacherOnlyKeys() {
+      return ['teacherPausedAt', 'teacherMarked'];
+    }
+
     // Palkintokentät ovat tyhjät (puuttuvat tai null).
     function giftsClear(data) {
       return data.get('teacherGift', null) == null && data.get('teacherBoostsGift', null) == null;
@@ -69,12 +73,15 @@ service cloud.firestore {
         // Oppilas kirjoittaa oman edistymisensä. Palkinnot (teacherGift, teacherBoostsGift)
         // saa asettaa vain opettaja; oppilas saa ainoastaan tyhjentää ne lunastettuaan.
         // Oppilaan voi lisätä vain olemassa olevaan luokkaan, joka ei ole päättynyt.
-        allow create: if (giftsClear(request.resource.data) || teacherAuthed(code))
+        // Oppilaskohtaisen käsijarrun (teacherPausedAt) ja merkinnän (teacherMarked) saa muuttaa vain opettaja.
+        allow create: if (teacherAuthed(code)
+            || (giftsClear(request.resource.data) && !request.resource.data.keys().hasAny(teacherOnlyKeys())))
           && nickname.size() <= 40
           && sessionOpen(code);
-        allow update: if !request.resource.data.diff(resource.data).affectedKeys().hasAny(['teacherGift', 'teacherBoostsGift'])
-          || giftsClear(request.resource.data)
-          || teacherAuthed(code);
+        allow update: if teacherAuthed(code)
+          || (!request.resource.data.diff(resource.data).affectedKeys().hasAny(teacherOnlyKeys())
+            && (!request.resource.data.diff(resource.data).affectedKeys().hasAny(['teacherGift', 'teacherBoostsGift'])
+              || giftsClear(request.resource.data)));
         allow delete: if false;
       }
     }

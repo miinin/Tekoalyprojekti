@@ -674,6 +674,14 @@ export const store = {
     return Date.now() - pausedAt < store.PAUSE_MAX_MS;
   },
 
+  // Oppilaskohtainen käsijarru (pelaajadokumentin teacherPausedAt). Vanhenee samoin kuin luokan käsijarru.
+  isPlayerPaused: (player) => {
+    const t = player?.teacherPausedAt;
+    const pausedAt = t?.toMillis?.() ?? (t?.seconds ? t.seconds * 1000 : null);
+    if (!pausedAt) return false;
+    return Date.now() - pausedAt < store.PAUSE_MAX_MS;
+  },
+
   // Kutsuu callbackia luokan koko tilalla (tai nullilla, jos luokkaa ei ole).
   listenToClassroomStatus: (code, callback) => {
     return onSnapshot(doc(db, "class_sessions", code), (docSnap) => {
@@ -684,8 +692,10 @@ export const store = {
     });
   },
 
-  listenToTeacherGifts: (code, nickname, callback) => {
+  // onPlayer saa joka muutoksella oman pelaajadokumentin (tai nullin): oppilaskohtainen käsijarru ja merkintä.
+  listenToTeacherGifts: (code, nickname, callback, onPlayer) => {
     return onSnapshot(doc(db, "class_sessions", code, "players", nickname), (docSnap) => {
+      if (onPlayer) onPlayer(docSnap.exists() ? docSnap.data() : null);
       if (docSnap.exists()) {
         const data = docSnap.data();
         let updated = false;
