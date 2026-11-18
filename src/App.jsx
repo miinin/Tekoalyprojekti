@@ -171,6 +171,13 @@ function GlobalClassroomOverlay() {
   );
 }
 
+// Luokkatilan oppilas, jonka opastus on kesken, ohjataan kartalta ja tehtävistä Autotalliin.
+// Näin peli alkaa opastuksesta, reitti kartalle (esim. aulan PALAA PELIIN tai uudelleen liittyminen) riippumatta.
+function ClassTutorialGate({ children }) {
+  if (store.needsClassTutorial()) return <Navigate to="/garage" replace />;
+  return children;
+}
+
 function GlobalLogo() {
   const location = useLocation();
   const isLobby = location.pathname.startsWith('/lobby') || location.pathname === '/';
@@ -192,10 +199,10 @@ function App() {
       <GlobalLogo />
       <Routes>
         <Route path="/lobby" element={<Lobby />} />
-        <Route path="/roadmap" element={<Roadmap />} />
-        <Route path="/roadmap/:mainCategory" element={<Roadmap />} />
+        <Route path="/roadmap" element={<ClassTutorialGate><Roadmap /></ClassTutorialGate>} />
+        <Route path="/roadmap/:mainCategory" element={<ClassTutorialGate><Roadmap /></ClassTutorialGate>} />
         <Route path="/garage" element={<Garage />} />
-        <Route path="/quiz/:mainCategory/:subCategory" element={<Quiz />} />
+        <Route path="/quiz/:mainCategory/:subCategory" element={<ClassTutorialGate><Quiz /></ClassTutorialGate>} />
         <Route path="/teacher" element={<TeacherDashboard />} />
         <Route path="/" element={<Navigate to="/lobby" replace />} />
         {/* Tuntemattomat osoitteet (esim. vanha /admin) ohjataan aulaan tyhjän sivun sijaan. */}

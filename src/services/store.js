@@ -238,6 +238,23 @@ export const store = {
     localStorage.setItem('aivan_tutorial_completed', 'true');
   },
 
+  // Luokkatilassa opastus on pakollinen, jos opettaja on sen valinnut (aivan_tutorial_skipped = false).
+  // Tosi, kun oppilas ei ole vielä käynyt Autotallin opastusta läpi: silloin peli ohjataan Autotalliin.
+  // Jos oppilaalla on jo opastuksen työkalu (g-clean), opastusta ei voi enää suorittaa, joten sitä ei vaadita.
+  needsClassTutorial: () => {
+    if (!store.getClassroomCode()) return false;
+    if (store.getTutorialSkipped() || store.getTutorialCompleted()) return false;
+    const room = store.getRoomCode();
+    let items = [];
+    try { items = JSON.parse(localStorage.getItem(room ? `aivan_items_${room}` : 'aivan_items')) || []; } catch { items = []; }
+    if (items.includes('g-clean')) return false;
+    // Jo tehtäviä tehnyttä oppilasta ei palauteta opastukseen: hän on voinut käyttää kipinänsä,
+    // eikä opastuksen ostosta voisi silloin tehdä.
+    let records = {};
+    try { records = JSON.parse(localStorage.getItem('aivan_question_records')) || {}; } catch { records = {}; }
+    return Object.keys(records).length === 0;
+  },
+
   getMapTutorialCompleted: () => {
     return localStorage.getItem('aivan_map_tutorial_completed') === 'true';
   },

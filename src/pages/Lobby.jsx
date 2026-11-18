@@ -155,6 +155,10 @@ export default function Lobby() {
           return;
       }
 
+      // Opettajan opastusvalinta tallennetaan heti, ettei laitteen aiempi asetus (esim. "Ohita opastus") jää voimaan,
+      // jos joinClassroomin oma luokan haku epäonnistuu.
+      if (typeof reqTut === 'boolean') store.setTutorialSkipped(!reqTut);
+
       // Start actual session logic using the robust joinClassroom method
       const joinResult = await store.joinClassroom(upperCode, classNick);
       setJoinClassLoading(false);
@@ -183,7 +187,8 @@ export default function Lobby() {
               : `Olet nyt mukana luokkatilassa nimimerkillä ${classNick}. Odota opettajan ohjeita ja aloita peli!`,
           buttonText: 'Siirry peliin',
           onClose: () => {
-              if (reqTutFixed && joinResult !== true) navigate('/garage');
+              // Opastus kesken (myös palaavalla oppilaalla) -> Autotalliin opastukseen.
+              if (reqTutFixed && store.needsClassTutorial()) navigate('/garage');
               else navigate('/roadmap');
           }
       });
