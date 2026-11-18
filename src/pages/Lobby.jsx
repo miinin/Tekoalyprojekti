@@ -41,6 +41,9 @@ export default function Lobby() {
       const success = await store.importProgressFromCloud(loadCode);
       setIsRestoring(false);
       if (success) {
+          // Rekisterikilpi palauttaa yksinpelin. Tallennukseen on voinut jäädä luokan tunnus,
+          // jota ei saa ottaa käyttöön, ettei tallennus kirjoitu jonkun luokkatietojen päälle.
+          store.setClassroomCode(null);
           setModalState({
               title: 'Tervetuloa takaisin!',
               text: `Peli ladattiin onnistuneesti rekisterikilvellä ${loadCode.toUpperCase()}. Kaikki kipinäsi ja aiempien pelikertojen eteneminen on palautettu.`,
@@ -58,6 +61,9 @@ export default function Lobby() {
   };
 
   const handleNewSinglePlayer = async () => {
+    // Uusi yksinpeli irrottaa laitteen luokasta. Muuten tyhjä peli synkronoituisi luokkaan
+    // samalla nimimerkillä ja pyyhkisi oppilaan luokkaedistymisen pilvestä.
+    store.setClassroomCode(null);
     store.clearSinglePlayer();
     store.setTutorialSkipped(skipTutorial);
     if (skipTutorial) store.grantSkipTutorialRewards();
@@ -457,7 +463,11 @@ export default function Lobby() {
                  </div>
                  <div>
                      <h3 style={{ margin: 0, color: '#b45309', fontSize: 'clamp(1.1rem, 2vh, 1.4rem)', fontFamily: 'var(--font-display)' }}>Jatka peliä</h3>
-                     <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-main)', opacity: 0.8, fontSize: 'clamp(0.85rem, 1.5vh, 1rem)' }}>Palaa takaisin tekoälypakusi rattiin!</p>
+                     <p style={{ margin: '0.2rem 0 0 0', color: 'var(--text-main)', opacity: 0.8, fontSize: 'clamp(0.85rem, 1.5vh, 1rem)' }}>
+                       {store.getClassroomCode() && store.getClassroomNickname()
+                           ? `Jatka luokassa ${store.getClassroomCode()} nimimerkillä ${store.getClassroomNickname()}.`
+                           : 'Palaa takaisin tekoälypakusi rattiin!'}
+                     </p>
                  </div>
               </div>
           ) : (
