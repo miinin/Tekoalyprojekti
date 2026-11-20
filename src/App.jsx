@@ -110,8 +110,8 @@ function GlobalClassroomOverlay() {
         {endedNotice && !isTeacherView && (
           <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', zIndex: 99998, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
               <div style={{ background: 'white', borderRadius: '24px', padding: '2rem', maxWidth: '520px', width: '95%', display: 'flex', flexDirection: 'column', gap: '1rem', boxShadow: '0 25px 50px rgba(0,0,0,0.5)' }}>
-                  <h2 style={{ margin: 0, color: '#0f172a' }}>Oppitunti päättyi</h2>
-                  <p style={{ margin: 0, color: '#475569', lineHeight: 1.5 }}>Opettaja päätti oppitunnin. Voit jatkaa pelaamista yksin, ja edistymisesi on tallessa tällä laitteella.</p>
+                  <h2 style={{ margin: 0, color: '#0f172a' }}>Luokka suljettu</h2>
+                  <p style={{ margin: 0, color: '#475569', lineHeight: 1.5 }}>Opettaja sulki luokan. Voit jatkaa pelaamista yksin, ja edistymisesi on tallessa tällä laitteella.</p>
                   <button type="button" onClick={() => setEndedNotice(false)} style={{ padding: '0.9rem', background: '#3b82f6', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 'bold', fontSize: '1.05rem', cursor: 'pointer' }}>Selvä</button>
               </div>
           </div>

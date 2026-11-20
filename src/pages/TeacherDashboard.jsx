@@ -249,9 +249,9 @@ export default function TeacherDashboard() {
   
   const endSession = async () => {
       setConfirmModal({
-          title: 'Päätä oppitunti pysyvästi?',
-          text: 'VAROITUS: Tämä sulkee oppitunnin lopullisesti, eikä sitä voi enää jatkaa!\n\nJos haluat vain poistua väliaikaisesti, käytä sen sijaan yläreunan "Päävalikkoon"-nappia (muista ottaa PIN-koodi ja luokkakoodi talteen palauttamista varten).\n\nHaluatko varmasti päättää ja pysyvästi sulkea tämän oppitunnin? Kaikki pelaajat katkaistaan välittömästi.',
-          confirmText: 'Kyllä, päätä tunti',
+          title: 'Suljetaanko luokka pysyvästi?',
+          text: 'VAROITUS: Tätä ei voi perua!\n\n• Luokka suljetaan lopullisesti, eikä sitä voi enää avata.\n• Kaikki oppilaat poistetaan luokasta heti, etkä näe enää heidän edistymistään.\n• Luokan peliä ei voi jatkaa: kun oppilaat liittyvät uudelle oppitunnille, he aloittavat pelin täysin alusta.\n\nJos haluat vain lopettaa tämän tunnin ja jatkaa myöhemmin, älä sulje luokkaa. Paina sen sijaan Parkkeeraa auto ja poistu yläreunan Päävalikkoon-napista.',
+          confirmText: 'Sulje luokka pysyvästi',
           confirmColor: '#dc2626',
           onConfirm: async () => {
               if (sessionCode) {
@@ -280,9 +280,9 @@ export default function TeacherDashboard() {
   const pauseTitle = sessionStatus === 'active'
       ? 'Käsijarru: pysäyttää kaikkien oppilaiden pelit lyhyeksi ajaksi, esimerkiksi ohjeiden ajaksi. Vapautuu itsestään 3 tunnin kuluttua, jos unohtuu päälle. Jos pelin pitää pysyä pysähdyksissä pidempään, käytä Parkkeeraa auto -nappia.'
       : sessionStatus === 'parked'
-          ? 'Käynnistä auto: oppilaiden pelit jatkuvat. Parkkeeraus ei vapaudu itsestään, vaan vain tästä napista tai päättämällä oppitunnin.'
+          ? 'Käynnistä auto: oppilaiden pelit jatkuvat. Parkkeeraus ei vapaudu itsestään, vaan vain tästä napista tai sulkemalla luokan pysyvästi.'
           : 'Vapauta pelit: oppilaiden pelit jatkuvat. Käsijarru vapautuisi muuten itsestään 3 tunnin kuluttua.';
-  const parkingTitle = 'Parkkeeraa auto: pysäyttää kaikkien oppilaiden pelit, kunnes painat Käynnistä auto tai päätät oppitunnin. Toisin kuin käsijarru, parkkeeraus ei vapaudu itsestään 3 tunnin kuluttua.';
+  const parkingTitle = 'Parkkeeraa auto: pysäyttää kaikkien oppilaiden pelit, kunnes painat Käynnistä auto. Sopii tunnin lopetukseen: oppilaat eivät voi jatkaa ennen seuraavaa tuntia. Toisin kuin käsijarru, parkkeeraus ei vapaudu itsestään 3 tunnin kuluttua.';
   const setClassStatus = async (newStatus) => {
       if (!sessionCode || pauseBusy) return;
       setPauseBusy(true);
@@ -410,7 +410,11 @@ export default function TeacherDashboard() {
            <button onClick={() => {
                  setConfirmModal({
                      title: 'Siirry Päävalikkoon',
-                     text: `Voit myöhemmin palata takaisin tähän aktiiviseen oppituntiin päävalikosta.\n\nMUISTA: Tarvitset oppitunnin palauttamiseen SEKÄ luokkakoodin (${sessionCode}) ETTÄ asettamasi PIN-koodin! Ota ne molemmat nyt huolella talteen.\n\n(Peli jatkuu normaalisti oppilailla taustalla)`,
+                     text: `Voit myöhemmin palata takaisin tähän oppituntiin päävalikosta.\n\nMUISTA: Tarvitset oppitunnin palauttamiseen SEKÄ luokkakoodin (${sessionCode}) ETTÄ asettamasi PIN-koodin! Ota ne molemmat nyt huolella talteen.\n\n${sessionStatus === 'parked'
+                         ? 'Auto on parkissa: oppilaiden pelit pysyvät pysähdyksissä, kunnes palaat ja painat Käynnistä auto.'
+                         : sessionStatus === 'paused'
+                             ? 'Käsijarru on päällä: oppilaiden pelit pysyvät pysähdyksissä, kunnes vapautat ne tai 3 tuntia on kulunut. Jos oppilaat eivät saa jatkaa ennen seuraavaa tuntia, parkkeeraa auto ennen poistumista.'
+                             : 'Oppilaiden peli jatkuu taustalla. Jos oppilaat eivät saa jatkaa ennen seuraavaa tuntia, parkkeeraa auto ennen poistumista.'}`,
                      confirmText: 'Palaa Päävalikkoon',
                      confirmColor: '#3b82f6',
                      onConfirm: () => navigate('/lobby')
@@ -559,32 +563,53 @@ export default function TeacherDashboard() {
                          onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}
                       >
                           {sessionStatus === 'active' ? (
-                              <><Pause size={24} color="white" strokeWidth={2.5} /> Keskeytä peli luokkatilassa</>
+                              <><Pause size={24} color="white" strokeWidth={2.5} /> Vedä käsijarru</>
                           ) : sessionStatus === 'parked' ? (
                               <><Play size={24} color="white" strokeWidth={2.5} /> Käynnistä auto</>
                           ) : (
                               <><Play size={24} color="white" strokeWidth={2.5} /> Vapauta pelit</>
                           )}
                       </button>
+                      <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '0.5rem 0 0 0', lineHeight: 1.4 }}>
+                          {sessionStatus === 'active'
+                              ? 'Lyhyt tauko, esim. ohjeiden ajaksi. Vapautuu itsestään 3 tunnin kuluttua.'
+                              : sessionStatus === 'parked'
+                                  ? 'Auto on parkissa. Oppilaat jatkavat vasta, kun painat tätä.'
+                                  : 'Käsijarru on päällä. Vapautuu itsestään 3 tunnin kuluttua.'}
+                      </p>
                       {sessionStatus !== 'parked' && (
+                          <>
                           <button
                              onClick={toggleParking}
                              title={parkingTitle}
-                             style={{ marginTop: '0.8rem', background: '#f8fafc', border: '2px solid #cbd5e1', color: '#1e3a8a', padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 'bold', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+                             style={{ marginTop: '1rem', background: '#f8fafc', border: '2px solid #cbd5e1', color: '#1e3a8a', padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 'bold', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
                           >
                               <SquareParking size={22} strokeWidth={2.5} /> Parkkeeraa auto
                           </button>
+                          <p style={{ fontSize: '0.85rem', color: '#64748b', margin: '0.5rem 0 0 0', lineHeight: 1.4 }}>
+                              Pysäyttää pelit, kunnes käynnistät auton. Ei vapaudu itsestään.
+                          </p>
+                          </>
                       )}
-                      <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>
-                          Aseta oppilaiden peliruudut väliaikaisesti tauolle saadaksesi heidän huomionsa ohjeistukseen. Jos tauko unohtuu päälle, se vapautuu itsestään 3 tunnin kuluttua.
-                          {' '}<strong>Parkkeeraus</strong> ei vapaudu itsestään: peli jatkuu vasta, kun painat <em>Käynnistä auto</em> tai päätät oppitunnin.
-                      </p>
                     </div>
 
-                    <div style={{ marginTop: 'auto', paddingTop: '3rem' }}>
-                      <button onClick={endSession} style={{ background: '#f8fafc', border: '2px solid #e2e8f0', color: '#dc2626', padding: '1rem', width: '100%', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='#fef2f2'; e.currentTarget.style.borderColor='#fecaca'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'; e.currentTarget.style.borderColor='#e2e8f0'}}>
-                          <LogOut size={18} /> Päätä oppitunti
+                    <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '16px', padding: '1rem 1.1rem', color: '#0c4a6e', fontSize: '0.9rem', lineHeight: 1.5 }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 'bold', marginBottom: '0.4rem' }}><Info size={18} /> Näin lopetat tunnin</div>
+                      <ol style={{ margin: 0, paddingLeft: '1.2rem' }}>
+                          <li>Paina <strong>Parkkeeraa auto</strong>, jos oppilaat eivät saa jatkaa ennen seuraavaa tuntia.</li>
+                          <li>Ota talteen luokkakoodi <strong>{sessionCode}</strong> ja PIN-koodisi.</li>
+                          <li>Poistu yläreunan <strong>Päävalikkoon</strong>-napista.</li>
+                      </ol>
+                      <div style={{ marginTop: '0.4rem' }}>Seuraavalla tunnilla palaa samalla koodilla ja PIN-koodilla ja paina <strong>Käynnistä auto</strong>. Oppilaat jatkavat siitä, mihin jäivät.</div>
+                    </div>
+
+                    <div style={{ marginTop: 'auto', paddingTop: '2rem' }}>
+                      <button onClick={endSession} title="Sulkee luokan lopullisesti. Luokkaa ei voi avata uudelleen, ja oppilaat aloittavat uudella oppitunnilla alusta." style={{ background: '#f8fafc', border: '2px solid #fecaca', color: '#dc2626', padding: '0.8rem', width: '100%', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='#fef2f2'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'}}>
+                          <AlertTriangle size={18} /> Sulje luokka pysyvästi
                       </button>
+                      <p style={{ fontSize: '0.8rem', color: '#b91c1c', margin: '0.5rem 0 0 0', lineHeight: 1.4 }}>
+                          Vain kun koko kurssi on ohi. Luokkaa ei voi enää avata, ja oppilaat aloittavat uudella oppitunnilla alusta.
+                      </p>
                     </div>
                         </>
                     ) : (

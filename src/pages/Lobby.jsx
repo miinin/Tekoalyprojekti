@@ -147,8 +147,8 @@ export default function Lobby() {
       if (sessionEnded) {
           setJoinClassLoading(false);
           setModalState({
-              title: 'Oppitunti on päättynyt',
-              text: 'Opettaja on päättänyt tämän oppitunnin, joten siihen ei voi enää liittyä. Pyydä opettajalta uusi liittymiskoodi.',
+              title: 'Luokka on suljettu',
+              text: 'Opettaja on sulkenut tämän luokan, joten siihen ei voi enää liittyä. Pyydä opettajalta uusi liittymiskoodi.',
               buttonText: 'Takaisin',
               onClose: () => setModalState(null)
           });
