@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff, Flag } from 'lucide-react';
+import { ShieldCheck, Lock, LogOut, Users, Settings, Play, Pause, Zap, Medal, Star, Maximize, X, AlertTriangle, Disc, Wrench, Info, ChevronDown, BookOpen, ChevronLeft, ChevronRight, CheckCircle2, EyeOff, Flag, SquareParking } from 'lucide-react';
 import { db } from '../firebase';
 import { doc, getDoc, onSnapshot, collection, serverTimestamp, FieldPath } from 'firebase/firestore';
 import { categories } from '../data/questions';
@@ -563,7 +563,7 @@ export default function TeacherDashboard() {
                              onClick={toggleParking}
                              style={{ marginTop: '0.8rem', background: '#f8fafc', border: '2px solid #cbd5e1', color: '#1e3a8a', padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 'bold', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
                           >
-                              <span aria-hidden="true" style={{ fontSize: '1.2rem' }}>🅿️</span> Parkkeeraa auto
+                              <SquareParking size={22} strokeWidth={2.5} /> Parkkeeraa auto
                           </button>
                       )}
                       <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>

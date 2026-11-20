@@ -8,7 +8,7 @@ import Quiz from './pages/Quiz';
 import TeacherDashboard from './pages/TeacherDashboard';
 import { store } from './services/store';
 import confetti from 'canvas-confetti';
-import { Zap, Gift } from 'lucide-react';
+import { Zap, Gift, SquareParking } from 'lucide-react';
 
 function GlobalClassroomOverlay() {
   const location = useLocation();
@@ -119,7 +119,9 @@ function GlobalClassroomOverlay() {
 
         {showOverlay && createPortal(
           <div ref={overlayRef} role="dialog" aria-modal="true" aria-label={isParked ? 'Auto parkkeerattu' : 'Käsijarru vedetty'} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
-              <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>{isParked ? 'Auto parkkeerattu! 🅿️' : 'Käsijarru vedetty! 🛑'}</h1>
+              <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>{isParked
+                ? <span style={{ display: 'inline-flex', alignItems: 'center', gap: '1rem' }}>Auto parkkeerattu! <SquareParking size={64} strokeWidth={2.5} aria-hidden="true" /></span>
+                : 'Käsijarru vedetty! 🛑'}</h1>
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
                  {isParked
                    ? <>Opettaja on parkkeerannut auton. Peli jatkuu, kun opettaja käynnistää auton uudelleen.</>
