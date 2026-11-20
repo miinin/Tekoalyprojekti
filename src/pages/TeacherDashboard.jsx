@@ -107,9 +107,16 @@ const getTopic = (id) => topicDictionary[id] || "";
 
 
 
+const TEACHER_SESSION_KEY = 'aivan_teacher_session';
+
 export default function TeacherDashboard() {
   const navigate = useNavigate();
-  const [sessionCode, setSessionCode] = useState('');
+  // Avoin oppitunti säilyy sivun päivityksen yli, mutta vain tässä välilehdessä (sessionStorage).
+  // Välilehden sulkeminen tai Päävalikkoon poistuminen unohtaa sen, jolloin paluu vaatii PIN-koodin.
+  const [savedTeacherSession] = useState(() => {
+      try { return JSON.parse(sessionStorage.getItem(TEACHER_SESSION_KEY)) || {}; } catch { return {}; }
+  });
+  const [sessionCode, setSessionCode] = useState(savedTeacherSession.code || '');
   const [requireTutorial, setRequireTutorial] = useState(true);
   const [sessionData, setSessionData] = useState(null);
   const [pauseBusy, setPauseBusy] = useState(false);
@@ -163,7 +170,15 @@ export default function TeacherDashboard() {
   const [resumePin, setResumePin] = useState('');
   // Avoimen oppitunnin avain, jonka palvelin antaa oikealla PIN-koodilla.
   // Jokainen opettajan kirjoitus tietokantaan todistetaan sillä (store.teacherBatch).
-  const [sessionToken, setSessionToken] = useState('');
+  const [sessionToken, setSessionToken] = useState(savedTeacherSession.token || '');
+
+  useEffect(() => {
+      if (sessionCode && sessionToken) {
+          sessionStorage.setItem(TEACHER_SESSION_KEY, JSON.stringify({ code: sessionCode, token: sessionToken }));
+      } else {
+          sessionStorage.removeItem(TEACHER_SESSION_KEY);
+      }
+  }, [sessionCode, sessionToken]);
   
   const [confirmModal, setConfirmModal] = useState(null);
   const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
@@ -226,7 +241,7 @@ export default function TeacherDashboard() {
           }
           const data = docSnap.data();
           if (data.status === 'ended') {
-              setErrorMsg('Tämä oppitunti on päätetty pysyvästi, eikä sitä voi enää jatkaa. Luo uusi oppitunti.');
+              setErrorMsg('Tämä luokka on suljettu pysyvästi, eikä sitä voi enää jatkaa. Luo uusi oppitunti.');
               return;
           }
           // PIN tarkistetaan palvelimella. Liian monen väärän yrityksen jälkeen luokka lukitaan hetkeksi.
@@ -384,11 +399,14 @@ export default function TeacherDashboard() {
       if (!sessionCode) return;
       
       const unsubStatus = onSnapshot(doc(db, "class_sessions", sessionCode), (docSnap) => {
-          if (docSnap.exists()) {
+          if (docSnap.exists() && docSnap.data().status !== 'ended') {
              setSessionData(docSnap.data());
              setHiddenPlayers(docSnap.data().hiddenPlayers || {});
           } else {
+             // Luokka on suljettu (esim. toisessa välilehdessä) tai sitä ei ole: takaisin kirjautumiseen.
              setSessionData(null);
+             setSessionCode('');
+             setSessionToken('');
           }
       });
       return () => unsubStatus();
@@ -417,7 +435,11 @@ export default function TeacherDashboard() {
                              : 'Oppilaiden peli jatkuu taustalla. Jos oppilaat eivät saa jatkaa ennen seuraavaa tuntia, parkkeeraa auto ennen poistumista.'}`,
                      confirmText: 'Palaa Päävalikkoon',
                      confirmColor: '#3b82f6',
-                     onConfirm: () => navigate('/lobby')
+                     onConfirm: () => {
+                         // Unohdetaan avain, jottei kuka tahansa samalla koneella pääse paneeliin ilman PIN-koodia.
+                         sessionStorage.removeItem(TEACHER_SESSION_KEY);
+                         navigate('/lobby');
+                     }
                  });
              }} style={{ padding: '0.8rem 1.5rem', background: 'rgba(255, 255, 255, 0.5)', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '14px', color: '#475569', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 4px 10px rgba(0,0,0,0.03)' }} onMouseOver={e=>{e.currentTarget.style.background='white'; e.currentTarget.style.transform='translateY(-2px)'}} onMouseOut={e=>{e.currentTarget.style.background='rgba(255, 255, 255, 0.5)'; e.currentTarget.style.transform='translateY(0)'}}>
                <LogOut size={20} /> Päävalikkoon
