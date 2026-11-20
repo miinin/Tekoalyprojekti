@@ -57,7 +57,7 @@ service cloud.firestore {
       allow create: if false;
       allow update: if teacherAuthed(code)
         && request.resource.data.keys().hasOnly(sessionKeys())
-        && request.resource.data.status in ['active', 'paused', 'ended'];
+        && request.resource.data.status in ['active', 'paused', 'parked', 'ended'];
       allow delete: if false;
 
       match /private/auth {

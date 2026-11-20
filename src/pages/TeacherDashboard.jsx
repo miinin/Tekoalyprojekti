@@ -123,7 +123,10 @@ export default function TeacherDashboard() {
   }, []);
 
   // Sama sääntö kuin oppilaiden ruuduilla: vanhentunut tauko näkyy vapautettuna. `now` päivittyy 10 s välein.
-  const sessionStatus = sessionData && store.isClassPaused(sessionData) ? 'paused' : 'active';
+  // Parkkeerattu luokka ei vapaudu itsestään.
+  const sessionStatus = !sessionData ? 'active'
+      : store.isClassParked(sessionData) ? 'parked'
+      : store.isClassPaused(sessionData) ? 'paused' : 'active';
 
   const isOnline = (p) => {
       const pingTime = p.lastPing?.toMillis?.() || p.lastPing?.seconds * 1000 || p.lastUpdate?.toMillis?.() || p.lastUpdate?.seconds * 1000 || 0;
@@ -270,14 +273,16 @@ export default function TeacherDashboard() {
       });
   };
 
-  const togglePause = async () => {
+  // Käsijarru (vanhenee 3 h kuluttua) ja parkkeeraus (ei vanhene). Kummastakin vapautetaan samalla napilla.
+  const togglePause = () => setClassStatus(sessionStatus === 'active' ? 'paused' : 'active');
+  const toggleParking = () => setClassStatus(sessionStatus === 'parked' ? 'active' : 'parked');
+  const setClassStatus = async (newStatus) => {
       if (!sessionCode || pauseBusy) return;
-      const newStatus = sessionStatus === 'active' ? 'paused' : 'active';
       setPauseBusy(true);
       try {
           // pausedAt kertoo oppilaiden ruuduille, milloin tauko alkoi. Unohdettu tauko vanhenee itsestään.
           await store.teacherBatch(sessionCode, sessionToken, (batch) => {
-              batch.update(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'paused' ? serverTimestamp() : null });
+              batch.update(doc(db, "class_sessions", sessionCode), { status: newStatus, pausedAt: newStatus === 'active' ? null : serverTimestamp() });
           });
       } catch (err) {
           console.error(err);
@@ -547,12 +552,23 @@ export default function TeacherDashboard() {
                       >
                           {sessionStatus === 'active' ? (
                               <><Pause size={24} color="white" strokeWidth={2.5} /> Keskeytä peli luokkatilassa</>
+                          ) : sessionStatus === 'parked' ? (
+                              <><Play size={24} color="white" strokeWidth={2.5} /> Käynnistä auto</>
                           ) : (
                               <><Play size={24} color="white" strokeWidth={2.5} /> Vapauta pelit</>
                           )}
                       </button>
+                      {sessionStatus !== 'parked' && (
+                          <button
+                             onClick={toggleParking}
+                             style={{ marginTop: '0.8rem', background: '#f8fafc', border: '2px solid #cbd5e1', color: '#1e3a8a', padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 'bold', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
+                          >
+                              <span aria-hidden="true" style={{ fontSize: '1.2rem' }}>🅿️</span> Parkkeeraa auto
+                          </button>
+                      )}
                       <p style={{ fontSize: '0.9rem', color: '#64748b', margin: '1rem 0 0 0', lineHeight: 1.5 }}>
                           Aseta oppilaiden peliruudut väliaikaisesti tauolle saadaksesi heidän huomionsa ohjeistukseen. Jos tauko unohtuu päälle, se vapautuu itsestään 3 tunnin kuluttua.
+                          {' '}<strong>Parkkeeraus</strong> ei vapaudu itsestään: peli jatkuu vasta, kun painat <em>Käynnistä auto</em> tai päätät oppitunnin.
                       </p>
                     </div>
 
@@ -567,7 +583,7 @@ export default function TeacherDashboard() {
                             <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
                                 {sessionCode}
                             </div>
-                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)', padding: 0 }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : sessionStatus === 'parked' ? "Käynnistä auto" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)', padding: 0 }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
                                 {sessionStatus === 'active' ? (
                                     <div style={{ display: 'flex', gap: '6px', pointerEvents: 'none' }}>
                                         <div style={{ width: '6px', height: '22px', backgroundColor: 'white', borderRadius: '2px', flexShrink: 0 }} />

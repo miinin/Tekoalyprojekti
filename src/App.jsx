@@ -16,6 +16,7 @@ function GlobalClassroomOverlay() {
   // Opettajan hallintapaneelia ei koskaan pysäytetä, vaikka samassa selaimessa olisi luokkatunnus toisessa välilehdessä
   const isTeacherView = location.pathname.startsWith('/teacher');
   const [isPaused, setIsPaused] = useState(false);
+  const [isParked, setIsParked] = useState(false);
   // Oppilaskohtainen käsijarru ja opettajan merkintä (keltainen reunus, josta opettaja löytää oppilaan luokassa).
   const [isPlayerPaused, setIsPlayerPaused] = useState(false);
   const [isMarked, setIsMarked] = useState(false);
@@ -45,6 +46,7 @@ function GlobalClassroomOverlay() {
      // Lasketaan tauon tila uudelleen myös ilman uutta tietokantaviestiä, jotta vanhentunut tauko vapautuu.
      const applyStatus = () => {
          setIsPaused(store.isClassPaused(lastSession));
+         setIsParked(store.isClassParked(lastSession));
          setIsPlayerPaused(store.isPlayerPaused(lastPlayer));
          setIsMarked(!!lastPlayer?.teacherMarked);
      };
@@ -116,12 +118,14 @@ function GlobalClassroomOverlay() {
         )}
 
         {showOverlay && createPortal(
-          <div ref={overlayRef} role="dialog" aria-modal="true" aria-label="Käsijarru vedetty" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
-              <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>Käsijarru vedetty! 🛑</h1>
+          <div ref={overlayRef} role="dialog" aria-modal="true" aria-label={isParked ? 'Auto parkkeerattu' : 'Käsijarru vedetty'} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.95)', zIndex: 99999, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', color: 'white', backdropFilter: 'blur(10px)' }}>
+              <h1 style={{ fontSize: '4rem', marginBottom: '2rem', color: '#38bdf8', textAlign: 'center' }}>{isParked ? 'Auto parkkeerattu! 🅿️' : 'Käsijarru vedetty! 🛑'}</h1>
               <p style={{ fontSize: '1.8rem', maxWidth: '800px', textAlign: 'center', lineHeight: 1.5 }}>
-                 {isPaused
-                   ? 'Opettaja on asettanut pelin väliaikaisesti tauolle.'
-                   : 'Opettaja on asettanut pelisi väliaikaisesti tauolle.'}<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong>
+                 {isParked
+                   ? <>Opettaja on parkkeerannut auton. Peli jatkuu, kun opettaja käynnistää auton uudelleen.</>
+                   : <>{isPaused
+                       ? 'Opettaja on asettanut pelin väliaikaisesti tauolle.'
+                       : 'Opettaja on asettanut pelisi väliaikaisesti tauolle.'}<br/><br/>Nosta katse ruudusta ja <strong>kuuntele ohjeita tarkasti!</strong></>}
               </p>
               {/* Jos opettaja on kokeillut peliä oppilaana samalla laitteella, käsijarru peittäisi
                   muuten myös opettajan sisäänkäynnin. Hallintapaneeli vaatii silti luokkakoodin ja PIN-koodin. */}

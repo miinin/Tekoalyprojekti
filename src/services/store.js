@@ -683,7 +683,11 @@ export const store = {
   // ehtii kirjautua paneeliin. Oppilaan ruutu ja opettajan paneeli käyttävät samaa sääntöä.
   PAUSE_MAX_MS: 3 * 60 * 60 * 1000,
 
+  // Parkkeeraus on käsijarru, joka ei vanhene: peli jatkuu vasta, kun opettaja käynnistää auton.
+  isClassParked: (session) => session?.status === 'parked',
+
   isClassPaused: (session) => {
+    if (store.isClassParked(session)) return true;
     if (!session || session.status !== 'paused') return false;
     const pausedAt = session.pausedAt?.toMillis?.() ?? (session.pausedAt?.seconds ? session.pausedAt.seconds * 1000 : null);
     // Vanhoissa tauoissa ei ole aikaleimaa. Ne tulkitaan vanhentuneiksi.
