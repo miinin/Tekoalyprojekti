@@ -276,6 +276,13 @@ export default function TeacherDashboard() {
   // Käsijarru (vanhenee 3 h kuluttua) ja parkkeeraus (ei vanhene). Kummastakin vapautetaan samalla napilla.
   const togglePause = () => setClassStatus(sessionStatus === 'active' ? 'paused' : 'active');
   const toggleParking = () => setClassStatus(sessionStatus === 'parked' ? 'active' : 'parked');
+  // Napin päälle hiirellä tuleva ohje: mitä nappi tekee ja miten käsijarru ja parkkeeraus eroavat.
+  const pauseTitle = sessionStatus === 'active'
+      ? 'Käsijarru: pysäyttää kaikkien oppilaiden pelit lyhyeksi ajaksi, esimerkiksi ohjeiden ajaksi. Vapautuu itsestään 3 tunnin kuluttua, jos unohtuu päälle. Jos pelin pitää pysyä pysähdyksissä pidempään, käytä Parkkeeraa auto -nappia.'
+      : sessionStatus === 'parked'
+          ? 'Käynnistä auto: oppilaiden pelit jatkuvat. Parkkeeraus ei vapaudu itsestään, vaan vain tästä napista tai päättämällä oppitunnin.'
+          : 'Vapauta pelit: oppilaiden pelit jatkuvat. Käsijarru vapautuisi muuten itsestään 3 tunnin kuluttua.';
+  const parkingTitle = 'Parkkeeraa auto: pysäyttää kaikkien oppilaiden pelit, kunnes painat Käynnistä auto tai päätät oppitunnin. Toisin kuin käsijarru, parkkeeraus ei vapaudu itsestään 3 tunnin kuluttua.';
   const setClassStatus = async (newStatus) => {
       if (!sessionCode || pauseBusy) return;
       setPauseBusy(true);
@@ -530,6 +537,7 @@ export default function TeacherDashboard() {
                       <h3 style={{ margin: '0 0 1rem 0', color: '#64748b', textTransform: 'uppercase', fontSize: '0.9rem', letterSpacing: '2px', fontWeight: 'bold' }}>Luokan Hallinta</h3>
                       <button 
                          onClick={togglePause}
+                         title={pauseTitle}
                          style={{ 
                             background: sessionStatus === 'active' ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
                             color: 'white',
@@ -561,6 +569,7 @@ export default function TeacherDashboard() {
                       {sessionStatus !== 'parked' && (
                           <button
                              onClick={toggleParking}
+                             title={parkingTitle}
                              style={{ marginTop: '0.8rem', background: '#f8fafc', border: '2px solid #cbd5e1', color: '#1e3a8a', padding: '0.9rem', width: '100%', fontSize: '1.05rem', fontWeight: 'bold', borderRadius: '16px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.6rem' }}
                           >
                               <SquareParking size={22} strokeWidth={2.5} /> Parkkeeraa auto
@@ -583,7 +592,7 @@ export default function TeacherDashboard() {
                             <div style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)', fontWeight: '900', color: '#0369a1', letterSpacing: '4px', fontSize: '1.5rem', fontFamily: 'monospace' }}>
                                 {sessionCode}
                             </div>
-                            <button onClick={togglePause} title={sessionStatus === 'active' ? "Keskeytä luokan peli" : sessionStatus === 'parked' ? "Käynnistä auto" : "Vapauta pelit"} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)', padding: 0 }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
+                            <button onClick={togglePause} title={pauseTitle} style={{ background: sessionStatus === 'active' ? '#10b981' : '#f59e0b', color: 'white', border: 'none', borderRadius: '50%', width: '60px', height: '60px', minWidth: '60px', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 4px 10px rgba(0,0,0,0.15)', transition: 'all 0.2s', transform: 'scale(1)', padding: 0 }} onMouseOver={e=>e.currentTarget.style.transform='scale(1.1)'} onMouseOut={e=>e.currentTarget.style.transform='scale(1)'}>
                                 {sessionStatus === 'active' ? (
                                     <div style={{ display: 'flex', gap: '6px', pointerEvents: 'none' }}>
                                         <div style={{ width: '6px', height: '22px', backgroundColor: 'white', borderRadius: '2px', flexShrink: 0 }} />
