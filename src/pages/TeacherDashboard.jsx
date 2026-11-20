@@ -626,11 +626,11 @@ export default function TeacherDashboard() {
                     </div>
 
                     <div style={{ marginTop: 'auto', paddingTop: '2rem' }}>
-                      <button onClick={endSession} title="Sulkee luokan lopullisesti. Luokkaa ei voi avata uudelleen, ja oppilaat aloittavat uudella oppitunnilla alusta." style={{ background: '#f8fafc', border: '2px solid #fecaca', color: '#dc2626', padding: '0.8rem', width: '100%', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='#fef2f2'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'}}>
+                      <button onClick={endSession} title="Sulkee luokan lopullisesti. Luokkaa ei voi avata uudelleen ja oppilaat aloittavat uudella oppitunnilla alusta." style={{ background: '#f8fafc', border: '2px solid #fecaca', color: '#dc2626', padding: '0.8rem', width: '100%', borderRadius: '16px', fontWeight: 'bold', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', transition: 'all 0.2s' }} onMouseOver={e=>{e.currentTarget.style.background='#fef2f2'}} onMouseOut={e=>{e.currentTarget.style.background='#f8fafc'}}>
                           <AlertTriangle size={18} /> Sulje luokka pysyvästi
                       </button>
                       <p style={{ fontSize: '0.8rem', color: '#b91c1c', margin: '0.5rem 0 0 0', lineHeight: 1.4 }}>
-                          Vain kun koko kurssi on ohi. Luokkaa ei voi enää avata, ja oppilaat aloittavat uudella oppitunnilla alusta.
+                          Vain kun koko kurssi on ohi. Luokkaa ei voi enää avata ja oppilaat aloittavat uudella oppitunnilla alusta.
                       </p>
                     </div>
                         </>
